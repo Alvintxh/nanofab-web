@@ -1818,3 +1818,13 @@ input, select, textarea {
         transition-duration: 0.01ms !important;
     }
 }
+
+.mermaid {
+    text-align: center;
+    margin: 24px 0;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}

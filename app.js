@@ -326,6 +326,7 @@ const App = {
                             throwOnError: false
                         });
                     }
+                    this.renderMermaidDiagrams(contentEl);
                     this.initTextSelection(contentEl);
                     this.initLearningTools();
                 })
@@ -985,6 +986,31 @@ const App = {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    },
+
+    renderMermaidDiagrams(container) {
+        const codeBlocks = container.querySelectorAll('pre code');
+        codeBlocks.forEach(block => {
+            const text = block.textContent.trim();
+            if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram') || text.startsWith('classDiagram')) {
+                const pre = block.parentElement;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid';
+                wrapper.textContent = text;
+                pre.parentNode.replaceChild(wrapper, pre);
+            }
+        });
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'default',
+                securityLevel: 'loose'
+            });
+            mermaid.run({
+                querySelector: '.mermaid'
+            });
+        }
     }
 };
 
