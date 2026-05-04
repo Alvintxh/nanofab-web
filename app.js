@@ -22,6 +22,7 @@ const App = {
         this.loadBehaviorData();
         this.bindEvents();
         this.initBehaviorTracking();
+        this.initAIAssistant();
         this.loadChapters().then(() => {
             this.handleRoute();
         });
