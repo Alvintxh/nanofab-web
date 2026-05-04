@@ -1828,3 +1828,62 @@ input, select, textarea {
     max-width: 100%;
     height: auto;
 }
+
+.ai-api-settings {
+    padding: 8px 16px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.ai-settings-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 4px 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.ai-settings-toggle:hover {
+    color: var(--color-primary);
+}
+
+.ai-settings-panel {
+    padding: 12px 0;
+}
+
+.ai-settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ai-settings-content label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.ai-settings-content input {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    background: var(--color-bg);
+}
+
+.ai-settings-hint {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+.ai-settings-content .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+}

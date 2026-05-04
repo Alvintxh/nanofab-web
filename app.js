@@ -455,11 +455,46 @@ const App = {
     },
 
     async generateExplanation(text) {
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
         const user = this.state.user;
         const level = user?.level || 'beginner';
         const background = user?.background || 'student';
+
+        const apiKey = localStorage.getItem('deepseek_api_key');
+        if (apiKey) {
+            try {
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: `你是一位纳米制造技术专家。用户的学习水平是：${level}，背景是：${background}。请根据用户的背景提供个性化的解释，使用中文回答。`
+                            },
+                            {
+                                role: 'user',
+                                content: `请解释以下纳米制造技术概念："${text}"`
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 1000
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.choices[0].message.content;
+                }
+            } catch (error) {
+                console.error('DeepSeek API error:', error);
+            }
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
         const explanations = {
             beginner: `基于您的初学者背景，这里为您详细解释：<strong>"${text}"</strong><br><br>
@@ -851,7 +886,37 @@ const App = {
             chat.classList.remove('active');
         });
 
-        const sendMessage = () => {
+        const settingsToggle = document.getElementById('ai-settings-toggle');
+        const settingsPanel = document.getElementById('ai-settings-panel');
+        const apiKeyInput = document.getElementById('deepseek-api-key');
+        const saveApiKeyBtn = document.getElementById('save-api-key');
+
+        if (settingsToggle && settingsPanel) {
+            settingsToggle.addEventListener('click', () => {
+                settingsPanel.classList.toggle('hidden');
+            });
+        }
+
+        const savedApiKey = localStorage.getItem('deepseek_api_key');
+        if (apiKeyInput && savedApiKey) {
+            apiKeyInput.value = savedApiKey;
+        }
+
+        if (saveApiKeyBtn && apiKeyInput) {
+            saveApiKeyBtn.addEventListener('click', () => {
+                const key = apiKeyInput.value.trim();
+                if (key) {
+                    localStorage.setItem('deepseek_api_key', key);
+                    alert('API Key 已保存');
+                    if (settingsPanel) settingsPanel.classList.add('hidden');
+                } else {
+                    localStorage.removeItem('deepseek_api_key');
+                    alert('API Key 已清除');
+                }
+            });
+        }
+
+        const sendMessage = async () => {
             const text = input.value.trim();
             if (!text) return;
 
@@ -861,11 +926,14 @@ const App = {
 
             this.showTypingIndicator();
 
-            setTimeout(() => {
+            try {
+                const response = await this.generateAIResponse(text);
                 this.removeTypingIndicator();
-                const response = this.generateAIResponse(text);
                 this.addChatMessage(response, 'assistant');
-            }, 1500);
+            } catch (error) {
+                this.removeTypingIndicator();
+                this.addChatMessage('抱歉，处理你的问题时出现了错误。请稍后重试。', 'assistant');
+            }
         };
 
         send.addEventListener('click', sendMessage);
@@ -931,10 +999,55 @@ const App = {
         if (typing) typing.remove();
     },
 
-    generateAIResponse(userMessage) {
+    async generateAIResponse(userMessage) {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
         const user = this.state.user;
+
+        const apiKey = localStorage.getItem('deepseek_api_key');
+        if (apiKey) {
+            try {
+                const messages = [
+                    {
+                        role: 'system',
+                        content: `你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》这本书。用户的学习水平是：${user?.level || '初学者'}，背景是：${user?.background || '学生'}。请用中文回答，提供准确、专业的解释。`
+                    }
+                ];
+
+                if (chapter) {
+                    messages.push({
+                        role: 'system',
+                        content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+                    });
+                }
+
+                messages.push({
+                    role: 'user',
+                    content: userMessage
+                });
+
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: messages,
+                        temperature: 0.7,
+                        max_tokens: 2000
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.choices[0].message.content;
+                }
+            } catch (error) {
+                console.error('DeepSeek API error:', error);
+            }
+        }
 
         if (lowerMsg.includes('你好') || lowerMsg.includes('hi') || lowerMsg.includes('hello')) {
             return '你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！';
@@ -991,7 +1104,7 @@ const App = {
     renderMermaidDiagrams(container) {
         const codeBlocks = container.querySelectorAll('pre code');
         const diagramsToRender = [];
-        
+
         codeBlocks.forEach(block => {
             const text = block.textContent.trim();
             if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram') || text.startsWith('classDiagram')) {
@@ -1013,14 +1126,18 @@ const App = {
                 theme: 'default',
                 securityLevel: 'loose'
             });
-            
+
             diagramsToRender.forEach((element, index) => {
                 const id = 'mermaid-' + Date.now() + '-' + index;
-                mermaid.render(id, element.textContent).then(result => {
-                    element.innerHTML = result.svg;
-                }).catch(err => {
-                    console.error('Mermaid render error:', err);
-                });
+                try {
+                    mermaid.render(id, element.textContent).then(result => {
+                        element.innerHTML = result.svg;
+                    }).catch(err => {
+                        console.error('Mermaid render error:', err);
+                    });
+                } catch (err) {
+                    console.error('Mermaid render exception:', err);
+                }
             });
         }
     }
