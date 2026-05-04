@@ -455,6 +455,7 @@ const App = {
 
         this.generateExplanation(text).then(explanation => {
             const contentDiv = modal.querySelector('.ai-explanation-content');
+            const formattedExplanation = this.formatAIResponse(explanation);
             contentDiv.innerHTML = `
                 <div class="explanation-result">
                     <div class="explanation-header">
@@ -465,7 +466,7 @@ const App = {
                         </svg>
                         <span>为您定制的解释</span>
                     </div>
-                    <div class="explanation-body">${explanation}</div>
+                    <div class="explanation-body">${formattedExplanation}</div>
                 </div>
             `;
         });
@@ -474,7 +475,7 @@ const App = {
     buildSystemPrompt(user, context) {
         const parts = [];
         
-        parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。');
+        parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。请使用Markdown格式输出，包括标题、列表、粗体等，让内容结构清晰易读。');
         
         if (user) {
             parts.push(`用户学习水平：${user.level || '初学者'}`);
@@ -1302,6 +1303,56 @@ const App = {
                 }
             });
         }
+    },
+
+    formatAIResponse(text) {
+        if (!text) return '';
+        
+        let formatted = text
+            .replace(/\*\*\*(.+?)\*\*\*/g, '<h3>$1</h3>')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')
+            .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+            .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+            .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+            .replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>')
+            .replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>')
+            .replace(/`(.+?)`/g, '<code>$1</code>');
+        
+        const lines = formatted.split('\n');
+        let inList = false;
+        let result = [];
+        
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            
+            if (trimmed.startsWith('<li>')) {
+                if (!inList) {
+                    result.push('<ul>');
+                    inList = true;
+                }
+                result.push(trimmed);
+            } else if (inList && trimmed === '') {
+                result.push('</ul>');
+                inList = false;
+            } else if (trimmed !== '') {
+                if (inList) {
+                    result.push('</ul>');
+                    inList = false;
+                }
+                if (!trimmed.startsWith('<h')) {
+                    result.push(`<p>${trimmed}</p>`);
+                } else {
+                    result.push(trimmed);
+                }
+            }
+        });
+        
+        if (inList) {
+            result.push('</ul>');
+        }
+        
+        return result.join('\n');
     }
 };
 
