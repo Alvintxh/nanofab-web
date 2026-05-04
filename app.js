@@ -340,7 +340,7 @@ const App = {
                         const repoName = '/nanofab-web';
                         contentEl.querySelectorAll('img').forEach(img => {
                             const src = img.getAttribute('src');
-                            if (src && src.includes('/img/')) {
+                            if (src && (src.includes('/img/') || src.includes('../img/'))) {
                                 const filename = src.split('/img/').pop();
                                 const newSrc = repoName + '/img/' + filename;
                                 console.log('Rewriting image path:', src, '->', newSrc);
