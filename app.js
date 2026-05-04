@@ -1307,7 +1307,7 @@ const App = {
 
     formatAIResponse(text) {
         if (!text) return '';
-        
+
         let formatted = text
             .replace(/\*\*\*(.+?)\*\*\*/g, '<h3>$1</h3>')
             .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -1315,17 +1315,15 @@ const App = {
             .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
             .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
             .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-            .replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>')
-            .replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>')
             .replace(/`(.+?)`/g, '<code>$1</code>');
-        
+
         const lines = formatted.split('\n');
         let inList = false;
         let result = [];
-        
+
         lines.forEach(line => {
             const trimmed = line.trim();
-            
+
             if (trimmed.startsWith('<li>')) {
                 if (!inList) {
                     result.push('<ul>');
@@ -1347,11 +1345,11 @@ const App = {
                 }
             }
         });
-        
+
         if (inList) {
             result.push('</ul>');
         }
-        
+
         return result.join('\n');
     }
 };
