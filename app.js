@@ -335,18 +335,6 @@ const App = {
                 .then(html => {
                     contentEl.innerHTML = html;
                     
-                    const basePath = window.location.pathname.replace(/\/$/, '');
-                    const isGitHubPages = window.location.hostname.includes('github.io');
-                    const repoName = isGitHubPages ? '/nanofab-web' : '';
-                    
-                    contentEl.querySelectorAll('img').forEach(img => {
-                        const src = img.getAttribute('src');
-                        if (src && src.startsWith('../../nanofab_knowledge_book_v1/images/')) {
-                            const filename = src.replace('../../nanofab_knowledge_book_v1/images/', '');
-                            img.src = `${repoName}/nanofab_knowledge_book_v1/images/${filename}`;
-                        }
-                    });
-                    
                     if (typeof renderMathInElement !== 'undefined') {
                         renderMathInElement(contentEl, {
                             delimiters: [

@@ -1,0 +1,377 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550" font-family="'Noto Sans SC', 'Helvetica Neue', sans-serif">
+  <defs>
+    <!-- Mirror metallic gradient -->
+    <linearGradient id="mirrorGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d0d8e0"/>
+      <stop offset="40%" stop-color="#a0aab5"/>
+      <stop offset="100%" stop-color="#6a7580"/>
+    </linearGradient>
+    <!-- Collector mirror gradient -->
+    <linearGradient id="collectorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8d0d8"/>
+      <stop offset="50%" stop-color="#8090a0"/>
+      <stop offset="100%" stop-color="#506070"/>
+    </linearGradient>
+    <!-- EUV beam glow -->
+    <filter id="beamGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Soft glow for source -->
+    <radialGradient id="sourceGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8080ff" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#5050c0" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#5050c0" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Wafer gradient -->
+    <linearGradient id="waferGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a6a8a"/>
+      <stop offset="50%" stop-color="#2a4a6a"/>
+      <stop offset="100%" stop-color="#1a3050"/>
+    </linearGradient>
+    <!-- Mo layer -->
+    <linearGradient id="moGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#334455"/>
+      <stop offset="100%" stop-color="#556677"/>
+    </linearGradient>
+    <!-- Si layer -->
+    <linearGradient id="siGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#99aabb"/>
+      <stop offset="100%" stop-color="#bbccdd"/>
+    </linearGradient>
+    <!-- Laser beam gradient -->
+    <linearGradient id="laserGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff3030" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff6060" stop-opacity="0.4"/>
+    </linearGradient>
+    <!-- Arrow marker -->
+    <marker id="arrowEUV" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5050c0"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#ff4040"/>
+    </marker>
+    <!-- Inset EUV arrow -->
+    <marker id="arrowInset" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4 Z" fill="#7070e0"/>
+    </marker>
+  </defs>
+
+  <!-- ========== VACUUM BACKGROUND ========== -->
+  <rect x="5" y="5" width="890" height="540" rx="8" ry="8" fill="#0a1520" stroke="#2a4a6a" stroke-width="1.5"/>
+  <!-- Vacuum label -->
+  <text x="450" y="30" text-anchor="middle" fill="#5a8aaa" font-size="13" font-weight="bold">
+    真空环境 (Vacuum Environment) — 整个光路均为反射式 (All-reflective optical path)
+  </text>
+
+  <!-- Subtle grid pattern for vacuum -->
+  <g opacity="0.04" stroke="#4a8abb">
+    <line x1="50" y1="5" x2="50" y2="545" stroke-width="0.5"/>
+    <line x1="150" y1="5" x2="150" y2="545" stroke-width="0.5"/>
+    <line x1="250" y1="5" x2="250" y2="545" stroke-width="0.5"/>
+    <line x1="350" y1="5" x2="350" y2="545" stroke-width="0.5"/>
+    <line x1="450" y1="5" x2="450" y2="545" stroke-width="0.5"/>
+    <line x1="550" y1="5" x2="550" y2="545" stroke-width="0.5"/>
+    <line x1="650" y1="5" x2="650" y2="545" stroke-width="0.5"/>
+    <line x1="750" y1="5" x2="750" y2="545" stroke-width="0.5"/>
+    <line x1="850" y1="5" x2="850" y2="545" stroke-width="0.5"/>
+    <line x1="5" y1="50" x2="895" y2="50" stroke-width="0.5"/>
+    <line x1="5" y1="150" x2="895" y2="150" stroke-width="0.5"/>
+    <line x1="5" y1="250" x2="895" y2="250" stroke-width="0.5"/>
+    <line x1="5" y1="350" x2="895" y2="350" stroke-width="0.5"/>
+    <line x1="5" y1="450" x2="895" y2="450" stroke-width="0.5"/>
+  </g>
+
+  <!-- ========== 1. LPP SOURCE ========== -->
+  <g transform="translate(70, 180)">
+    <!-- CO2 laser beam coming from top-left -->
+    <line x1="-40" y1="-60" x2="8" y2="0" stroke="#ff4040" stroke-width="3" opacity="0.85" marker-end="url(#arrowRed)"/>
+    <line x1="-42" y1="-58" x2="6" y2="2" stroke="#ff8080" stroke-width="1" opacity="0.4"/>
+    <!-- Laser label -->
+    <text x="-50" y="-65" fill="#ff6060" font-size="9" text-anchor="middle">CO₂ 激光</text>
+    <text x="-50" y="-54" fill="#ff6060" font-size="8" text-anchor="middle">(CO₂ Laser)</text>
+
+    <!-- Tin droplet -->
+    <circle cx="12" cy="5" r="5" fill="#b0b8c0" stroke="#8090a0" stroke-width="0.8"/>
+    <ellipse cx="14" cy="3" rx="1.5" ry="1" fill="#d0d8e0" opacity="0.6"/>
+    <text x="12" y="22" fill="#a0b0c0" font-size="8" text-anchor="middle">Sn 液滴</text>
+    <text x="12" y="31" fill="#7090a0" font-size="7" text-anchor="middle">(Tin droplet)</text>
+
+    <!-- EUV emission glow -->
+    <circle cx="12" cy="5" r="25" fill="url(#sourceGlow)"/>
+
+    <!-- EUV radiation lines emanating -->
+    <g stroke="#5050c0" stroke-width="1.2" opacity="0.7" filter="url(#beamGlow)">
+      <line x1="20" y1="0" x2="45" y2="-10"/>
+      <line x1="22" y1="5" x2="50" y2="5"/>
+      <line x1="20" y1="10" x2="45" y2="20"/>
+      <line x1="18" y1="-8" x2="40" y2="-25"/>
+      <line x1="18" y1="18" x2="40" y2="35"/>
+    </g>
+
+    <!-- Wavelength label -->
+    <rect x="-15" y="40" width="58" height="18" rx="3" fill="#1a2a3a" stroke="#5050c0" stroke-width="0.8"/>
+    <text x="14" y="53" fill="#8080ff" font-size="10" text-anchor="middle" font-weight="bold">λ = 13.5 nm</text>
+  </g>
+
+  <!-- Source section label -->
+  <text x="80" y="115" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">① LPP 光源</text>
+  <text x="80" y="128" fill="#7a9ab0" font-size="9" text-anchor="middle">(Laser-Produced Plasma)</text>
+
+  <!-- ========== 2. COLLECTOR MIRROR ========== -->
+  <g transform="translate(175, 185)">
+    <!-- Ellipsoidal collector - large concave mirror -->
+    <path d="M0,-55 Q35,-55 40,-40 Q48,-15 48,0 Q48,15 40,40 Q35,55 0,55"
+          fill="none" stroke="url(#collectorGrad)" stroke-width="4"/>
+    <!-- Mirror surface highlight -->
+    <path d="M2,-50 Q30,-48 35,-35 Q42,-12 42,0 Q42,12 35,35 Q30,48 2,50"
+          fill="none" stroke="#c8d5e0" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- EUV beam from source to collector -->
+  <g filter="url(#beamGlow)">
+    <line x1="115" y1="170" x2="170" y2="150" stroke="#5050c0" stroke-width="1.5" opacity="0.6"/>
+    <line x1="120" y1="185" x2="175" y2="185" stroke="#5050c0" stroke-width="1.5" opacity="0.6"/>
+    <line x1="115" y1="200" x2="170" y2="220" stroke="#5050c0" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Collector label -->
+  <text x="195" y="115" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">② 收集镜</text>
+  <text x="195" y="128" fill="#7a9ab0" font-size="9" text-anchor="middle">(Collector Mirror)</text>
+
+  <!-- ========== EUV BEAM: Collector to Illumination ========== -->
+  <g filter="url(#beamGlow)">
+    <line x1="223" y1="175" x2="280" y2="140" stroke="#5050c0" stroke-width="2" opacity="0.7" marker-end="url(#arrowEUV)"/>
+  </g>
+
+  <!-- ========== 3. ILLUMINATION OPTICS ========== -->
+  <g transform="translate(305, 100)">
+    <!-- Mirror M1 -->
+    <path d="M-15,20 Q0,0 15,20" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Mirror M2 -->
+    <path d="M25,55 Q40,35 55,55" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Mirror M3 -->
+    <path d="M-5,90 Q10,70 25,90" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+
+    <!-- Beam paths between mirrors -->
+    <g filter="url(#beamGlow)">
+      <line x1="-2" y1="22" x2="38" y2="38" stroke="#5050c0" stroke-width="1.5" opacity="0.6"/>
+      <line x1="42" y1="57" x2="12" y2="72" stroke="#5050c0" stroke-width="1.5" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- Illumination label -->
+  <text x="325" y="75" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">③ 照明光学系统</text>
+  <text x="325" y="88" fill="#7a9ab0" font-size="9" text-anchor="middle">(Illumination Optics)</text>
+
+  <!-- ========== EUV BEAM: Illumination to Mask ========== -->
+  <g filter="url(#beamGlow)">
+    <line x1="315" y1="195" x2="410" y2="225" stroke="#5050c0" stroke-width="2" opacity="0.7" marker-end="url(#arrowEUV)"/>
+  </g>
+
+  <!-- ========== 4. REFLECTIVE MASK ========== -->
+  <g transform="translate(430, 200)">
+    <!-- Mask substrate -->
+    <rect x="-20" y="0" width="50" height="55" rx="2" fill="#1a2a3a" stroke="#5a7a9a" stroke-width="1.2"/>
+    <!-- Reflective surface with pattern features -->
+    <rect x="-18" y="2" width="46" height="3" fill="#8098b0"/>
+    <rect x="-18" y="8" width="15" height="3" fill="#8098b0"/>
+    <rect x="5" y="8" width="10" height="3" fill="#8098b0"/>
+    <rect x="22" y="8" width="6" height="3" fill="#8098b0"/>
+    <rect x="-18" y="14" width="46" height="3" fill="#8098b0"/>
+    <rect x="-18" y="20" width="8" height="3" fill="#8098b0"/>
+    <rect x="-3" y="20" width="20" height="3" fill="#8098b0"/>
+    <rect x="24" y="20" width="4" height="3" fill="#8098b0"/>
+    <rect x="-18" y="26" width="46" height="3" fill="#8098b0"/>
+    <rect x="-18" y="32" width="12" height="3" fill="#8098b0"/>
+    <rect x="0" y="32" width="8" height="3" fill="#8098b0"/>
+    <rect x="14" y="32" width="14" height="3" fill="#8098b0"/>
+    <rect x="-18" y="38" width="46" height="3" fill="#8098b0"/>
+    <!-- Absorbed regions -->
+    <rect x="-18" y="44" width="46" height="9" rx="1" fill="#0f1a25"/>
+
+    <!-- Incident beam arrow -->
+    <line x1="-35" y1="28" x2="-22" y2="28" stroke="#5050c0" stroke-width="2" opacity="0.8" marker-end="url(#arrowEUV)"/>
+    <!-- Reflected patterned beam -->
+    <g filter="url(#beamGlow)">
+      <line x1="5" y1="-5" x2="5" y2="-25" stroke="#5050c0" stroke-width="1.2" opacity="0.5"/>
+      <line x1="15" y1="-5" x2="15" y2="-25" stroke="#5050c0" stroke-width="1.2" opacity="0.5"/>
+      <line x1="-5" y1="-5" x2="-5" y2="-25" stroke="#5050c0" stroke-width="1.2" opacity="0.5"/>
+      <line x1="25" y1="-5" x2="25" y2="-25" stroke="#5050c0" stroke-width="1.2" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- Mask label -->
+  <text x="440" y="275" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">④ 反射式掩模版</text>
+  <text x="440" y="288" fill="#7a9ab0" font-size="9" text-anchor="middle">(Reflective EUV Mask)</text>
+
+  <!-- Note: reflected, not transmitted -->
+  <text x="440" y="302" fill="#607080" font-size="7.5" text-anchor="middle" font-style="italic">反射式, 非透射</text>
+
+  <!-- ========== EUV BEAM: Mask to Projection Optics ========== -->
+  <g filter="url(#beamGlow)">
+    <line x1="445" y1="170" x2="510" y2="120" stroke="#5050c0" stroke-width="2" opacity="0.7" marker-end="url(#arrowEUV)"/>
+  </g>
+
+  <!-- ========== 5. PROJECTION OPTICS (6 mirrors) ========== -->
+  <g transform="translate(560, 80)">
+    <!-- 6 mirrors in folded path -->
+    <!-- M1 - top left -->
+    <path d="M-30,15 Q-15,0 0,15" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- M2 - right -->
+    <path d="M50,40 Q65,25 80,40" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- M3 - left lower -->
+    <path d="M-20,80 Q-5,65 10,80" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- M4 - right lower -->
+    <path d="M55,110 Q70,95 85,110" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- M5 - left bottom -->
+    <path d="M-15,150 Q0,135 15,150" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- M6 - right bottom -->
+    <path d="M50,185 Q65,170 80,185" fill="none" stroke="url(#mirrorGrad)" stroke-width="3.5" stroke-linecap="round"/>
+
+    <!-- Mirror labels -->
+    <text x="-15" y="30" fill="#607888" font-size="7" text-anchor="middle">M1</text>
+    <text x="65" y="55" fill="#607888" font-size="7" text-anchor="middle">M2</text>
+    <text x="-5" y="95" fill="#607888" font-size="7" text-anchor="middle">M3</text>
+    <text x="70" y="125" fill="#607888" font-size="7" text-anchor="middle">M4</text>
+    <text x="0" y="165" fill="#607888" font-size="7" text-anchor="middle">M5</text>
+    <text x="65" y="200" fill="#607888" font-size="7" text-anchor="middle">M6</text>
+
+    <!-- Beam path through 6 mirrors (folded zig-zag) -->
+    <g filter="url(#beamGlow)">
+      <polyline points="-15,17 63,28" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+      <polyline points="67,42 -3,68" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+      <polyline points="-5,82 68,98" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+      <polyline points="72,112 3,138" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+      <polyline points="2,152 62,172" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+      <polyline points="65,187 65,215" stroke="#5050c0" stroke-width="1.3" opacity="0.5" fill="none"/>
+    </g>
+
+    <!-- 4:1 reduction label -->
+    <rect x="15" y="60" width="36" height="16" rx="3" fill="#0f1a25" stroke="#4a6a8a" stroke-width="0.6"/>
+    <text x="33" y="72" fill="#8abadd" font-size="9" text-anchor="middle" font-weight="bold">4:1</text>
+  </g>
+
+  <!-- Projection label -->
+  <text x="620" y="55" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">⑤ 投影光学系统</text>
+  <text x="620" y="68" fill="#7a9ab0" font-size="9" text-anchor="middle">(Projection Optics, 6 mirrors)</text>
+
+  <!-- ========== EUV BEAM: Projection to Wafer ========== -->
+  <g filter="url(#beamGlow)">
+    <line x1="625" y1="300" x2="625" y2="330" stroke="#5050c0" stroke-width="2.5" opacity="0.8" marker-end="url(#arrowEUV)"/>
+  </g>
+
+  <!-- ========== 6. WAFER ========== -->
+  <g transform="translate(595, 340)">
+    <!-- Wafer -->
+    <ellipse cx="30" cy="8" rx="40" ry="10" fill="url(#waferGrad)" stroke="#5a8aaa" stroke-width="1"/>
+    <rect x="-10" y="8" width="80" height="15" fill="url(#waferGrad)" stroke="none"/>
+    <ellipse cx="30" cy="23" rx="40" ry="10" fill="#1a3050" stroke="#5a8aaa" stroke-width="1"/>
+    <!-- Photoresist layer -->
+    <rect x="-8" y="4" width="76" height="5" fill="#3a5a4a" opacity="0.7" rx="1"/>
+    <!-- Exposure area indicator -->
+    <rect x="15" y="3" width="30" height="3" fill="#6060c0" opacity="0.5"/>
+    <!-- Notch -->
+    <circle cx="68" cy="15" r="3" fill="#0a1520"/>
+
+    <!-- Wafer stage indicator -->
+    <rect x="5" y="30" width="50" height="6" rx="1" fill="#1a2535" stroke="#3a5a7a" stroke-width="0.5"/>
+    <rect x="15" y="36" width="30" height="4" rx="1" fill="#1a2535" stroke="#3a5a7a" stroke-width="0.5"/>
+  </g>
+
+  <!-- Wafer label -->
+  <text x="625" y="400" fill="#c0d0e0" font-size="12" text-anchor="middle" font-weight="bold">⑥ 晶圆</text>
+  <text x="625" y="413" fill="#7a9ab0" font-size="9" text-anchor="middle">(Wafer with Photoresist)</text>
+
+  <!-- ========== FLOW ARROWS (stage connections) ========== -->
+  <!-- Dashed flow indicator along bottom -->
+  <g>
+    <line x1="80" y1="310" x2="195" y2="310" stroke="#3a5a7a" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="195" y1="310" x2="325" y2="310" stroke="#3a5a7a" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="325" y1="310" x2="440" y2="310" stroke="#3a5a7a" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="440" y1="310" x2="560" y2="310" stroke="#3a5a7a" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="560" y1="310" x2="625" y2="310" stroke="#3a5a7a" stroke-width="0.8" stroke-dasharray="4,3"/>
+  </g>
+
+  <!-- ========== INSET: Mo/Si MULTILAYER ========== -->
+  <g transform="translate(690, 380)">
+    <!-- Inset border -->
+    <rect x="-5" y="-10" width="200" height="160" rx="5" fill="#0d1825" stroke="#4a7a9a" stroke-width="1.2"/>
+    <!-- Inset title -->
+    <text x="95" y="6" fill="#b0c8dd" font-size="10" text-anchor="middle" font-weight="bold">Mo/Si 多层膜反射镜</text>
+    <text x="95" y="18" fill="#7098b0" font-size="8" text-anchor="middle">(Mo/Si Multilayer Mirror)</text>
+
+    <!-- Substrate -->
+    <rect x="15" y="115" width="100" height="20" rx="2" fill="#2a3a4a" stroke="#4a6a7a" stroke-width="0.8"/>
+    <text x="65" y="129" fill="#7a9aaa" font-size="8" text-anchor="middle">基底 (Substrate)</text>
+
+    <!-- Multilayer stack - alternating Mo/Si from bottom to top -->
+    <!-- Pairs 1-8 (showing representative layers, not all 50) -->
+    <rect x="15" y="108" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="104" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="99" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="95" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="90" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="86" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="81" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="77" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="72" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="68" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="63" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="59" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="54" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="50" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+    <rect x="15" y="45" width="100" height="4" fill="url(#siGrad)" stroke="#8899aa" stroke-width="0.3"/>
+    <rect x="15" y="41" width="100" height="3" fill="url(#moGrad)" stroke="#556677" stroke-width="0.3"/>
+
+    <!-- Dots indicating continuation -->
+    <text x="65" y="38" fill="#8aa0b0" font-size="10" text-anchor="middle">⋮</text>
+    <text x="65" y="30" fill="#7090a0" font-size="7" text-anchor="middle">~50 对 (pairs)</text>
+
+    <!-- Dimension annotations -->
+    <!-- Mo dimension -->
+    <line x1="120" y1="77" x2="125" y2="77" stroke="#aabbcc" stroke-width="0.5"/>
+    <line x1="120" y1="81" x2="125" y2="81" stroke="#aabbcc" stroke-width="0.5"/>
+    <line x1="125" y1="77" x2="125" y2="81" stroke="#aabbcc" stroke-width="0.5"/>
+    <text x="130" y="81" fill="#aabbcc" font-size="6.5">Mo ~2.8 nm</text>
+
+    <!-- Si dimension -->
+    <line x1="120" y1="81" x2="125" y2="81" stroke="#aabbcc" stroke-width="0.5"/>
+    <line x1="120" y1="86" x2="125" y2="86" stroke="#aabbcc" stroke-width="0.5"/>
+    <line x1="125" y1="81" x2="125" y2="86" stroke="#aabbcc" stroke-width="0.5"/>
+    <text x="130" y="86" fill="#aabbcc" font-size="6.5">Si ~4.1 nm</text>
+
+    <!-- Period bracket -->
+    <line x1="122" y1="77" x2="128" y2="77" stroke="#80c0e0" stroke-width="0.5"/>
+    <line x1="122" y1="86" x2="128" y2="86" stroke="#80c0e0" stroke-width="0.5"/>
+    <path d="M128,77 L131,81.5 L128,86" fill="none" stroke="#80c0e0" stroke-width="0.5"/>
+    <text x="135" y="73" fill="#80c0e0" font-size="6.5">周期 d = 6.9 nm</text>
+
+    <!-- EUV beam incoming -->
+    <line x1="5" y1="28" x2="40" y2="48" stroke="#7070e0" stroke-width="1.5" opacity="0.8" marker-end="url(#arrowInset)"/>
+    <!-- EUV beam reflected -->
+    <line x1="40" y1="48" x2="5" y2="68" stroke="#7070e0" stroke-width="1.5" opacity="0.8" marker-end="url(#arrowInset)"/>
+    <!-- Beam labels -->
+    <text x="2" y="25" fill="#7070e0" font-size="7">入射 EUV</text>
+    <text x="2" y="78" fill="#7070e0" font-size="7">反射 EUV</text>
+
+    <!-- Constructive interference note -->
+    <text x="95" y="143" fill="#6a9ab0" font-size="7" text-anchor="middle">布拉格反射, 反射率 ~70%</text>
+    <text x="95" y="152" fill="#5a8a9a" font-size="6.5" text-anchor="middle">(Bragg reflection, ~70% reflectivity)</text>
+  </g>
+
+  <!-- ========== PROMINENT WAVELENGTH LABEL ========== -->
+  <g transform="translate(30, 45)">
+    <rect x="0" y="0" width="95" height="30" rx="4" fill="#0f1a2a" stroke="#5050c0" stroke-width="1.2"/>
+    <text x="48" y="14" fill="#8888ff" font-size="14" text-anchor="middle" font-weight="bold">EUV</text>
+    <text x="48" y="26" fill="#6060cc" font-size="10" text-anchor="middle">λ = 13.5 nm</text>
+  </g>
+
+  <!-- ========== TITLE ========== -->
+  <text x="400" y="530" fill="#90b0c8" font-size="11" text-anchor="middle">
+    极紫外光刻系统 (EUV Lithography System) — 全反射式光路示意图
+  </text>
+</svg>

@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 550" font-family="'Noto Sans SC', 'Helvetica Neue', sans-serif">
+  <defs>
+    <!-- Plasma glow gradient -->
+    <radialGradient id="plasmaGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#4a9eff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4a9eff" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Target copper gradient -->
+    <linearGradient id="copperGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4a878"/>
+      <stop offset="50%" stop-color="#c8956c"/>
+      <stop offset="100%" stop-color="#a07050"/>
+    </linearGradient>
+    <!-- Chamber wall gradient -->
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0e1520"/>
+      <stop offset="100%" stop-color="#1a2332"/>
+    </linearGradient>
+    <!-- Thin film gradient -->
+    <linearGradient id="filmGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4a847"/>
+      <stop offset="100%" stop-color="#b8922e"/>
+    </linearGradient>
+    <!-- Substrate gradient -->
+    <linearGradient id="subGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#99a0a8"/>
+      <stop offset="100%" stop-color="#778088"/>
+    </linearGradient>
+    <!-- Arrow marker -->
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#cc4444"/>
+    </marker>
+    <marker id="arrowGold" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <path d="M8,0 L0,3 L8,6 Z" fill="#d4a847"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="550" fill="#f5f5f0" rx="4"/>
+
+  <!-- Title -->
+  <text x="300" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a2332">直流磁控溅射系统 (DC Magnetron Sputtering System)</text>
+
+  <!-- ============ CHAMBER BODY ============ -->
+  <!-- Chamber outer walls -->
+  <rect x="80" y="45" width="440" height="410" rx="8" fill="url(#wallGrad)" stroke="#0a0f18" stroke-width="2"/>
+  <!-- Chamber interior -->
+  <rect x="100" y="55" width="400" height="390" rx="4" fill="#e8eaed"/>
+
+  <!-- ============ MAGNETS BEHIND TARGET ============ -->
+  <!-- Magnet housing -->
+  <rect x="160" y="62" width="280" height="36" rx="3" fill="#2a3040" stroke="#444" stroke-width="1"/>
+  <!-- Central magnet (N pole facing down) -->
+  <rect x="270" y="66" width="60" height="28" rx="2" fill="#cc4444" stroke="#992222" stroke-width="1"/>
+  <text x="300" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="white">N</text>
+  <!-- Left outer magnet (S pole facing down) -->
+  <rect x="175" y="66" width="70" height="28" rx="2" fill="#4444cc" stroke="#2222aa" stroke-width="1"/>
+  <text x="210" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="white">S</text>
+  <!-- Right outer magnet (S pole facing down) -->
+  <rect x="355" y="66" width="70" height="28" rx="2" fill="#4444cc" stroke="#2222aa" stroke-width="1"/>
+  <text x="390" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="white">S</text>
+
+  <!-- Magnet label -->
+  <text x="545" y="80" text-anchor="end" font-size="9" fill="#333">
+    <tspan x="545" dy="0">永磁体</tspan>
+    <tspan x="545" dy="12">(Magnets)</tspan>
+  </text>
+  <line x1="430" y1="80" x2="530" y2="80" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+  <!-- ============ TARGET (CATHODE) ============ -->
+  <rect x="150" y="98" width="300" height="22" rx="2" fill="url(#copperGrad)" stroke="#8a6040" stroke-width="1.5"/>
+  <!-- Race-track erosion grooves -->
+  <ellipse cx="210" cy="109" rx="30" ry="4" fill="none" stroke="#8a6040" stroke-width="1.5"/>
+  <path d="M182,109 Q210,100 238,109" fill="none" stroke="#705030" stroke-width="1"/>
+  <ellipse cx="390" cy="109" rx="30" ry="4" fill="none" stroke="#8a6040" stroke-width="1.5"/>
+  <path d="M362,109 Q390,100 418,109" fill="none" stroke="#705030" stroke-width="1"/>
+
+  <!-- Target label -->
+  <text x="300" y="114" text-anchor="middle" font-size="10" font-weight="bold" fill="#3a2010">靶材 (Target/Cathode)</text>
+
+  <!-- Race-track erosion annotation -->
+  <text x="86" y="112" font-size="8" fill="#705030" text-anchor="end">
+    <tspan x="96" dy="0">跑道形侵蚀</tspan>
+    <tspan x="96" dy="10">(Race-track</tspan>
+    <tspan x="96" dy="10">erosion)</tspan>
+  </text>
+  <line x1="97" y1="112" x2="180" y2="109" stroke="#8a6040" stroke-width="0.7" stroke-dasharray="2,2"/>
+
+  <!-- ============ MAGNETIC FIELD LINES ============ -->
+  <!-- Left arch -->
+  <path d="M210,120 Q210,145 240,160 Q270,175 300,160 Q330,145 330,120" fill="none" stroke="#50a060" stroke-width="1.3" stroke-dasharray="5,3"/>
+  <!-- Outer left arch -->
+  <path d="M195,120 Q195,165 245,185 Q300,205 355,185 Q405,165 405,120" fill="none" stroke="#50a060" stroke-width="1.3" stroke-dasharray="5,3"/>
+  <!-- Right arch -->
+  <path d="M270,120 Q270,145 300,155 Q330,145 370,160 Q390,165 390,120" fill="none" stroke="#50a060" stroke-width="1.3" stroke-dasharray="5,3"/>
+  <!-- Small inner arches -->
+  <path d="M220,120 Q220,135 250,148 Q280,155 300,148 Q320,135 320,120" fill="none" stroke="#50a060" stroke-width="1" stroke-dasharray="4,3"/>
+  <path d="M280,120 Q280,135 310,148 Q340,155 360,148 Q380,135 380,120" fill="none" stroke="#50a060" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Field line arrows (small triangles on arches) -->
+  <polygon points="248,158 253,155 250,162" fill="#50a060"/>
+  <polygon points="350,158 347,162 345,155" fill="#50a060"/>
+  <polygon points="300,204 296,198 304,198" fill="#50a060"/>
+
+  <!-- Magnetic confinement label -->
+  <text x="505" y="155" text-anchor="end" font-size="8.5" fill="#3a6a40">
+    <tspan x="505" dy="0">磁场约束电子</tspan>
+    <tspan x="505" dy="11">(Magnetic electron</tspan>
+    <tspan x="505" dy="11">confinement)</tspan>
+  </text>
+  <line x1="410" y1="160" x2="490" y2="160" stroke="#50a060" stroke-width="0.7" stroke-dasharray="2,2"/>
+
+  <!-- ============ PLASMA REGION ============ -->
+  <ellipse cx="300" cy="160" rx="120" ry="45" fill="url(#plasmaGlow)"/>
+  <!-- Highlight glow band near target -->
+  <ellipse cx="300" cy="135" rx="100" ry="18" fill="#4a9eff" opacity="0.2"/>
+
+  <!-- Trapped electrons (small dots) -->
+  <circle cx="230" cy="145" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="230" y="143" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="260" cy="160" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="260" y="158" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="310" cy="150" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="310" y="148" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="350" cy="155" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="350" y="153" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="280" cy="140" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="280" y="138" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="330" cy="168" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="330" y="166" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+  <circle cx="370" cy="142" r="2.5" fill="#4a9eff" stroke="#2070d0" stroke-width="0.5"/>
+  <text x="370" y="140" text-anchor="middle" font-size="5" fill="white">e⁻</text>
+
+  <!-- Ar+ ions heading toward target -->
+  <circle cx="220" cy="140" r="4" fill="#ff8844" opacity="0.8"/>
+  <text x="220" y="142" text-anchor="middle" font-size="5.5" fill="white" font-weight="bold">Ar⁺</text>
+  <line x1="220" y1="135" x2="215" y2="122" stroke="#cc4444" stroke-width="1" marker-end="url(#arrowRed)"/>
+
+  <circle cx="270" cy="135" r="4" fill="#ff8844" opacity="0.8"/>
+  <text x="270" y="137" text-anchor="middle" font-size="5.5" fill="white" font-weight="bold">Ar⁺</text>
+  <line x1="270" y1="130" x2="270" y2="122" stroke="#cc4444" stroke-width="1" marker-end="url(#arrowRed)"/>
+
+  <circle cx="340" cy="138" r="4" fill="#ff8844" opacity="0.8"/>
+  <text x="340" y="140" text-anchor="middle" font-size="5.5" fill="white" font-weight="bold">Ar⁺</text>
+  <line x1="340" y1="133" x2="338" y2="122" stroke="#cc4444" stroke-width="1" marker-end="url(#arrowRed)"/>
+
+  <circle cx="390" cy="142" r="4" fill="#ff8844" opacity="0.8"/>
+  <text x="390" y="144" text-anchor="middle" font-size="5.5" fill="white" font-weight="bold">Ar⁺</text>
+  <line x1="390" y1="137" x2="392" y2="122" stroke="#cc4444" stroke-width="1" marker-end="url(#arrowRed)"/>
+
+  <!-- Ar+ bombardment label -->
+  <text x="148" y="148" text-anchor="middle" font-size="8.5" fill="#cc4444">
+    <tspan x="140" dy="0">Ar⁺轰击靶材</tspan>
+    <tspan x="140" dy="11">(Ar⁺ bombardment)</tspan>
+  </text>
+
+  <!-- Plasma label -->
+  <text x="300" y="195" text-anchor="middle" font-size="9" fill="#2060c0" font-weight="bold">Ar等离子体 (Plasma)</text>
+
+  <!-- ============ SPUTTERED ATOMS ============ -->
+  <!-- Atom trajectories from target to substrate -->
+  <circle cx="240" cy="230" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="225" y1="120" x2="240" y2="226" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="280" cy="260" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="290" y1="120" x2="280" y2="256" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="320" cy="280" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="310" y1="120" x2="320" y2="276" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="350" cy="310" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="360" y1="120" x2="350" y2="306" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="260" cy="320" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="250" y1="120" x2="260" y2="316" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="300" cy="350" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="300" y1="120" x2="300" y2="346" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <circle cx="370" cy="250" r="3.5" fill="#d4a847" stroke="#b89030" stroke-width="0.5"/>
+  <line x1="380" y1="120" x2="370" y2="246" stroke="#d4a847" stroke-width="0.7" stroke-dasharray="3,4" opacity="0.6"/>
+
+  <!-- Sputtered atoms label -->
+  <text x="440" y="280" font-size="9" fill="#b89030">
+    <tspan x="420" dy="0">溅射原子</tspan>
+    <tspan x="420" dy="12">(Sputtered Atoms)</tspan>
+  </text>
+
+  <!-- ============ SUBSTRATE AND STAGE ============ -->
+  <!-- Stage/holder -->
+  <rect x="170" y="405" width="260" height="18" rx="3" fill="#666e78" stroke="#555" stroke-width="1"/>
+  <!-- Substrate -->
+  <rect x="195" y="385" width="210" height="20" rx="2" fill="url(#subGrad)" stroke="#667078" stroke-width="1"/>
+  <!-- Thin film on substrate -->
+  <rect x="195" y="380" width="210" height="6" rx="1" fill="url(#filmGrad)" stroke="#b89030" stroke-width="0.5"/>
+
+  <!-- Substrate label -->
+  <text x="300" y="400" text-anchor="middle" font-size="9" fill="#2a3040" font-weight="bold">基底 (Substrate)</text>
+  <!-- Thin film label -->
+  <text x="440" y="382" font-size="8" fill="#b89030">
+    <tspan x="420" dy="0">薄膜 (Thin film)</tspan>
+  </text>
+  <line x1="406" y1="383" x2="418" y2="383" stroke="#b89030" stroke-width="0.5"/>
+
+  <!-- Stage label -->
+  <text x="300" y="418" text-anchor="middle" font-size="8" fill="#ccc">样品台 (Stage)</text>
+
+  <!-- ============ DC POWER SUPPLY ============ -->
+  <!-- Wire from target to top -->
+  <line x1="180" y1="98" x2="180" y2="55" stroke="#cc4444" stroke-width="1.5"/>
+  <line x1="180" y1="55" x2="60" y2="55" stroke="#cc4444" stroke-width="1.5"/>
+  <line x1="60" y1="55" x2="60" y2="300" stroke="#cc4444" stroke-width="1.5"/>
+  <!-- Wire from stage/anode to power supply -->
+  <line x1="300" y1="423" x2="300" y2="445" stroke="#4444cc" stroke-width="1.5"/>
+  <line x1="300" y1="445" x2="40" y2="445" stroke="#4444cc" stroke-width="1.5"/>
+  <line x1="40" y1="445" x2="40" y2="300" stroke="#4444cc" stroke-width="1.5"/>
+
+  <!-- Power supply box -->
+  <rect x="25" y="270" width="50" height="60" rx="4" fill="#2a3040" stroke="#555" stroke-width="1.5"/>
+  <text x="50" y="292" text-anchor="middle" font-size="7.5" fill="#ddd" font-weight="bold">DC</text>
+  <text x="50" y="304" text-anchor="middle" font-size="7" fill="#ddd">电源</text>
+  <text x="50" y="316" text-anchor="middle" font-size="7" fill="#ddd">(Power)</text>
+
+  <!-- Polarity symbols -->
+  <text x="60" y="265" text-anchor="middle" font-size="14" fill="#cc4444" font-weight="bold">-</text>
+  <text x="40" y="348" text-anchor="middle" font-size="11" fill="#4444cc" font-weight="bold">+</text>
+  <!-- Cathode/Anode labels on wires -->
+  <text x="120" y="50" text-anchor="middle" font-size="7.5" fill="#cc4444">阴极 (Cathode) -</text>
+  <text x="200" y="442" font-size="7.5" fill="#4444cc">阳极 (Anode) +</text>
+
+  <!-- ============ GAS INLET ============ -->
+  <!-- Inlet pipe -->
+  <rect x="500" y="340" width="40" height="14" rx="3" fill="#1a2332" stroke="#0a0f18" stroke-width="1"/>
+  <rect x="490" y="342" width="15" height="10" rx="2" fill="#e8eaed"/>
+  <!-- Arrow showing gas flow -->
+  <polygon points="498,347 490,343 490,351" fill="#4a9eff"/>
+  <!-- Inlet label -->
+  <text x="545" y="335" text-anchor="end" font-size="8.5" fill="#1a2332">
+    <tspan x="548" dy="0">Ar气体入口</tspan>
+    <tspan x="548" dy="11">(Ar Gas Inlet)</tspan>
+  </text>
+
+  <!-- Ar atoms entering chamber -->
+  <circle cx="475" cy="347" r="3" fill="#4a9eff" opacity="0.4"/>
+  <circle cx="460" cy="350" r="3" fill="#4a9eff" opacity="0.3"/>
+  <circle cx="445" cy="344" r="3" fill="#4a9eff" opacity="0.2"/>
+
+  <!-- ============ VACUUM PUMP ============ -->
+  <!-- Pump port -->
+  <rect x="500" y="410" width="40" height="14" rx="3" fill="#1a2332" stroke="#0a0f18" stroke-width="1"/>
+  <rect x="490" y="412" width="15" height="10" rx="2" fill="#e8eaed"/>
+  <!-- Arrow showing pump direction (outward) -->
+  <polygon points="530,417 538,413 538,421" fill="#888"/>
+  <!-- Pump label -->
+  <text x="548" y="408" text-anchor="end" font-size="8.5" fill="#1a2332">
+    <tspan x="548" dy="0">真空泵</tspan>
+    <tspan x="548" dy="11">(Vacuum Pump)</tspan>
+  </text>
+
+  <!-- ============ PROCESS ANNOTATIONS ============ -->
+  <!-- Sputtering process flow annotation -->
+  <!-- Step markers -->
+  <g font-size="7.5" fill="#555">
+    <text x="130" y="200">
+      <tspan font-weight="bold" fill="#cc4444">1</tspan>
+      <tspan> Ar电离 (Ionization)</tspan>
+    </text>
+    <text x="130" y="215">
+      <tspan font-weight="bold" fill="#cc4444">2</tspan>
+      <tspan> Ar⁺撞击靶材 (Impact)</tspan>
+    </text>
+    <text x="130" y="230">
+      <tspan font-weight="bold" fill="#cc4444">3</tspan>
+      <tspan> 原子溅出 (Ejection)</tspan>
+    </text>
+    <text x="130" y="245">
+      <tspan font-weight="bold" fill="#cc4444">4</tspan>
+      <tspan> 薄膜沉积 (Deposition)</tspan>
+    </text>
+  </g>
+
+  <!-- ============ LEGEND / FOOTER ============ -->
+  <line x1="100" y1="470" x2="500" y2="470" stroke="#ccc" stroke-width="0.5"/>
+  <g font-size="7.5" fill="#555">
+    <!-- Magnetic field line legend -->
+    <line x1="110" y1="485" x2="140" y2="485" stroke="#50a060" stroke-width="1.2" stroke-dasharray="5,3"/>
+    <text x="145" y="488">磁力线 (B-field lines)</text>
+    <!-- Sputtered atom legend -->
+    <circle cx="270" cy="485" r="3.5" fill="#d4a847"/>
+    <text x="278" y="488">溅射原子 (Sputtered atom)</text>
+    <!-- Electron legend -->
+    <circle cx="420" cy="485" r="2.5" fill="#4a9eff"/>
+    <text x="427" y="488">被约束电子 (Trapped e⁻)</text>
+  </g>
+
+  <!-- Pressure annotation -->
+  <text x="300" y="508" text-anchor="middle" font-size="7.5" fill="#888">工作气压 ~1-10 mTorr | 基底距离 ~50-150 mm | 典型功率 ~100-1000 W</text>
+
+  <!-- Figure caption -->
+  <text x="300" y="530" text-anchor="middle" font-size="9" fill="#444" font-style="italic">图 8.x 直流磁控溅射原理示意图 (Schematic of DC Magnetron Sputtering)</text>
+</svg>

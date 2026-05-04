@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans SC', 'Helvetica Neue', sans-serif">
+  <defs>
+    <style>
+      .panel-title { font-size: 13px; fill: #1a2332; font-weight: 600; }
+      .label-en { font-size: 10px; fill: #556677; }
+      .dim-label { font-size: 10px; fill: #334455; }
+      .arrow-label { font-size: 12px; fill: #c04060; font-weight: 700; }
+    </style>
+    <pattern id="disorderedBCP" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#c0a8b8"/>
+      <circle cx="2" cy="3" r="2" fill="#4070b0" opacity="0.7"/>
+      <circle cx="7" cy="7" r="2" fill="#d06080" opacity="0.7"/>
+      <circle cx="6" cy="1" r="1.3" fill="#d06080" opacity="0.5"/>
+      <circle cx="1" cy="8" r="1.3" fill="#4070b0" opacity="0.5"/>
+      <circle cx="9" cy="4" r="1" fill="#4070b0" opacity="0.4"/>
+      <circle cx="4" cy="9" r="1" fill="#d06080" opacity="0.4"/>
+    </pattern>
+    <marker id="arrowR" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7" fill="#334455"/>
+    </marker>
+    <marker id="arrowL" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <path d="M7,0 L0,3.5 L7,7" fill="#334455"/>
+    </marker>
+    <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+      <path d="M0,0 L4,7 L8,0" fill="#c04060"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" fill="#fafbfc" rx="6"/>
+
+  <!-- Title -->
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1a2332">化学外延定向自组装 (Chemoepitaxy DSA) 工艺流程</text>
+
+  <!-- ════════════════════ PANEL 1 ════════════════════ -->
+  <g transform="translate(15, 44)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="195" height="160" fill="#f4f6f8" rx="4" stroke="#d8dce0" stroke-width="0.6"/>
+
+    <text x="97" y="20" text-anchor="middle" class="panel-title">① 稀疏引导图案</text>
+    <text x="97" y="33" text-anchor="middle" class="label-en">Sparse Guide Pattern</text>
+
+    <!-- Substrate -->
+    <rect x="12" y="65" width="171" height="55" fill="#889098" rx="3"/>
+    <text x="97" y="107" text-anchor="middle" font-size="9" fill="#c8ccd0">基底 Substrate</text>
+
+    <!-- Neutral brush layer -->
+    <rect x="12" y="55" width="171" height="12" fill="#c0c0c0" rx="1.5"/>
+    <text x="97" y="64" text-anchor="middle" font-size="7" fill="#777">中性刷 Neutral Brush</text>
+
+    <!-- Guide stripes (sparse, 3 stripes for 3x multiplication) -->
+    <rect x="30" y="55" width="12" height="12" fill="#1a2332" rx="1"/>
+    <rect x="90" y="55" width="12" height="12" fill="#1a2332" rx="1"/>
+    <rect x="150" y="55" width="12" height="12" fill="#1a2332" rx="1"/>
+
+    <!-- Ls dimension -->
+    <line x1="36" y1="128" x2="96" y2="128" stroke="#334455" stroke-width="0.8" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+    <line x1="36" y1="122" x2="36" y2="134" stroke="#334455" stroke-width="0.5"/>
+    <line x1="96" y1="122" x2="96" y2="134" stroke="#334455" stroke-width="0.5"/>
+    <text x="66" y="145" text-anchor="middle" class="dim-label" font-weight="500">Ls (引导间距)</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <g transform="translate(214, 110)">
+    <polygon points="0,6 12,12 12,0" fill="#aab0b8" transform="rotate(0)"/>
+    <polygon points="6,0 18,6 6,12" fill="#889098"/>
+  </g>
+
+  <!-- ════════════════════ PANEL 2 ════════════════════ -->
+  <g transform="translate(240, 44)">
+    <rect x="0" y="0" width="195" height="160" fill="#f4f6f8" rx="4" stroke="#d8dce0" stroke-width="0.6"/>
+
+    <text x="97" y="20" text-anchor="middle" class="panel-title">② 涂覆嵌段共聚物</text>
+    <text x="97" y="33" text-anchor="middle" class="label-en">Spin-coat BCP</text>
+
+    <!-- Substrate -->
+    <rect x="12" y="80" width="171" height="40" fill="#889098" rx="3"/>
+
+    <!-- Neutral brush -->
+    <rect x="12" y="68" width="171" height="14" fill="#c0c0c0" rx="1.5"/>
+
+    <!-- Guide stripes (underneath, faint) -->
+    <rect x="30" y="68" width="12" height="14" fill="#1a2332" rx="1" opacity="0.3"/>
+    <rect x="90" y="68" width="12" height="14" fill="#1a2332" rx="1" opacity="0.3"/>
+    <rect x="150" y="68" width="12" height="14" fill="#1a2332" rx="1" opacity="0.3"/>
+
+    <!-- Disordered BCP film -->
+    <rect x="12" y="44" width="171" height="28" fill="url(#disorderedBCP)" rx="2" stroke="#a090a0" stroke-width="0.7"/>
+
+    <!-- Label -->
+    <text x="97" y="135" text-anchor="middle" class="dim-label" font-weight="500">PS-b-PMMA 薄膜</text>
+
+    <!-- Legend dots -->
+    <circle cx="55" cy="148" r="4" fill="#4070b0"/>
+    <text x="62" y="151" font-size="8" fill="#556677">PS</text>
+    <circle cx="95" cy="148" r="4" fill="#d06080"/>
+    <text x="102" y="151" font-size="8" fill="#556677">PMMA</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <g transform="translate(439, 110)">
+    <polygon points="6,0 18,6 6,12" fill="#889098"/>
+  </g>
+
+  <!-- ════════════════════ PANEL 3 ════════════════════ -->
+  <g transform="translate(465, 44)">
+    <rect x="0" y="0" width="195" height="160" fill="#f4f6f8" rx="4" stroke="#d8dce0" stroke-width="0.6"/>
+
+    <text x="97" y="20" text-anchor="middle" class="panel-title">③ 退火自组装</text>
+    <text x="97" y="33" text-anchor="middle" class="label-en">Anneal &amp; Self-Assembly</text>
+
+    <!-- Substrate -->
+    <rect x="12" y="80" width="171" height="40" fill="#889098" rx="3"/>
+
+    <!-- Neutral brush -->
+    <rect x="12" y="68" width="171" height="14" fill="#c0c0c0" rx="1.5"/>
+
+    <!-- Guide stripes (underneath lamellae) -->
+    <rect x="18" y="68" width="10" height="14" fill="#1a2332" rx="1"/>
+    <rect x="80" y="68" width="10" height="14" fill="#1a2332" rx="1"/>
+    <rect x="142" y="68" width="10" height="14" fill="#1a2332" rx="1"/>
+
+    <!-- Ordered lamellae: alternating PS/PMMA, 3x density -->
+    <!-- 9 PS + 9 PMMA = 18 stripes across ~171 px, each ~9.5 px -->
+    <rect x="12" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="21.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="31" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="40.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="50" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="59.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="69" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="78.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="88" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="97.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="107" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="116.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="126" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="135.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="145" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="154.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+    <rect x="164" y="44" width="9.5" height="28" fill="#4070b0" rx="0.8"/>
+    <rect x="173.5" y="44" width="9.5" height="28" fill="#d06080" rx="0.8"/>
+
+    <!-- Lo bracket (one BCP period = 2 stripes) -->
+    <line x1="12" y1="126" x2="31" y2="126" stroke="#1a2332" stroke-width="0.7"/>
+    <line x1="12" y1="122" x2="12" y2="130" stroke="#1a2332" stroke-width="0.5"/>
+    <line x1="31" y1="122" x2="31" y2="130" stroke="#1a2332" stroke-width="0.5"/>
+    <text x="21.5" y="139" text-anchor="middle" font-size="9" fill="#1a2332" font-weight="500">Lo</text>
+
+    <!-- Density multiplication label -->
+    <text x="130" y="135" text-anchor="middle" font-size="11" fill="#c04060" font-weight="600">密度倍增 3x</text>
+    <text x="130" y="148" text-anchor="middle" font-size="9" fill="#556677">Density Multiplication</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <g transform="translate(664, 110)">
+    <polygon points="6,0 18,6 6,12" fill="#889098"/>
+  </g>
+
+  <!-- ════════════════════ PANEL 4 ════════════════════ -->
+  <g transform="translate(690, 44)">
+    <rect x="0" y="0" width="195" height="160" fill="#f4f6f8" rx="4" stroke="#d8dce0" stroke-width="0.6"/>
+
+    <text x="97" y="20" text-anchor="middle" class="panel-title">④ 选择性去除PMMA</text>
+    <text x="97" y="33" text-anchor="middle" class="label-en">Selective PMMA Removal (UV/O&#x2083;)</text>
+
+    <!-- Substrate -->
+    <rect x="12" y="80" width="171" height="40" fill="#889098" rx="3"/>
+
+    <!-- Neutral brush -->
+    <rect x="12" y="68" width="171" height="14" fill="#c0c0c0" rx="1.5"/>
+
+    <!-- PS lines only (PMMA removed = gaps), 9 PS lines spaced by 19px -->
+    <rect x="14" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="33" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="52" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="71" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="90" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="109" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="128" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="147" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+    <rect x="166" y="44" width="8" height="28" fill="#4070b0" rx="1"/>
+
+    <!-- Ls/3 dimension -->
+    <line x1="18" y1="126" x2="37" y2="126" stroke="#4070b0" stroke-width="0.7"/>
+    <line x1="18" y1="122" x2="18" y2="130" stroke="#4070b0" stroke-width="0.5"/>
+    <line x1="37" y1="122" x2="37" y2="130" stroke="#4070b0" stroke-width="0.5"/>
+    <text x="27.5" y="139" text-anchor="middle" font-size="9" fill="#4070b0" font-weight="500">Ls/3</text>
+
+    <!-- Label -->
+    <text x="130" y="135" text-anchor="middle" font-size="10" fill="#1a2332" font-weight="500">最终图案</text>
+    <text x="130" y="148" text-anchor="middle" font-size="9" fill="#556677">Final Pattern</text>
+  </g>
+
+  <!-- ════════════════════ BOTTOM: PITCH COMPARISON ════════════════════ -->
+  <rect x="30" y="220" width="840" height="165" fill="#f0f2f5" rx="6" stroke="#d0d4d8" stroke-width="0.8"/>
+
+  <text x="450" y="245" text-anchor="middle" font-size="13" font-weight="600" fill="#1a2332">间距对比 (Pitch Comparison)</text>
+
+  <!-- Lithography pitch visualization -->
+  <g transform="translate(60, 258)">
+    <text x="0" y="14" font-size="11" fill="#1a2332" font-weight="500">光刻分辨率:</text>
+    <text x="88" y="14" font-size="11" fill="#556677">~80 nm pitch</text>
+
+    <!-- Wide pitch bars -->
+    <rect x="220" y="0" width="14" height="22" fill="#1a2332" rx="1.5"/>
+    <rect x="314" y="0" width="14" height="22" fill="#1a2332" rx="1.5"/>
+    <rect x="408" y="0" width="14" height="22" fill="#1a2332" rx="1.5"/>
+    <rect x="502" y="0" width="14" height="22" fill="#1a2332" rx="1.5"/>
+
+    <!-- Ls label -->
+    <line x1="227" y1="30" x2="321" y2="30" stroke="#1a2332" stroke-width="0.8" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+    <line x1="227" y1="26" x2="227" y2="34" stroke="#1a2332" stroke-width="0.5"/>
+    <line x1="321" y1="26" x2="321" y2="34" stroke="#1a2332" stroke-width="0.5"/>
+    <text x="274" y="44" text-anchor="middle" font-size="10" fill="#1a2332" font-weight="500">Ls = 80 nm</text>
+  </g>
+
+  <!-- DSA final pitch visualization -->
+  <g transform="translate(60, 315)">
+    <text x="0" y="14" font-size="11" fill="#1a2332" font-weight="500">DSA最终图案:</text>
+    <text x="95" y="14" font-size="11" fill="#556677">~27 nm pitch</text>
+
+    <!-- Dense pitch bars (3x more, each gap = 94/3 ~31px apart) -->
+    <rect x="220" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="251" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="282" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="313" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="344" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="375" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="406" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="437" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="468" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+    <rect x="499" y="0" width="8" height="22" fill="#4070b0" rx="1"/>
+
+    <!-- Ls/3 label -->
+    <line x1="224" y1="30" x2="255" y2="30" stroke="#4070b0" stroke-width="0.8" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+    <line x1="224" y1="26" x2="224" y2="34" stroke="#4070b0" stroke-width="0.5"/>
+    <line x1="255" y1="26" x2="255" y2="34" stroke="#4070b0" stroke-width="0.5"/>
+    <text x="239" y="44" text-anchor="middle" font-size="10" fill="#4070b0" font-weight="500">Ls/3 = 27 nm</text>
+  </g>
+
+  <!-- 3x density multiplication badge -->
+  <g transform="translate(620, 286)">
+    <rect x="0" y="0" width="180" height="40" rx="20" fill="#c04060" opacity="0.1" stroke="#c04060" stroke-width="1"/>
+    <!-- Arrow down -->
+    <line x1="90" y1="-8" x2="90" y2="0" stroke="#c04060" stroke-width="1.5"/>
+    <line x1="90" y1="40" x2="90" y2="48" stroke="#c04060" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+    <text x="90" y="18" text-anchor="middle" class="arrow-label">3x 密度倍增</text>
+    <text x="90" y="32" text-anchor="middle" font-size="10" fill="#c04060">Density Multiplication</text>
+  </g>
+
+  <!-- Color legend (bottom right) -->
+  <g transform="translate(740, 340)">
+    <rect x="-8" y="-8" width="130" height="45" fill="#fafbfc" rx="3" stroke="#d0d4d8" stroke-width="0.5"/>
+    <rect x="0" y="0" width="10" height="10" fill="#1a2332" rx="1.5"/>
+    <text x="14" y="9" font-size="9" fill="#556677">引导图案 Guide</text>
+    <rect x="0" y="15" width="10" height="10" fill="#4070b0" rx="1.5"/>
+    <text x="14" y="24" font-size="9" fill="#556677">PS 畴</text>
+    <rect x="65" y="0" width="10" height="10" fill="#d06080" rx="1.5"/>
+    <text x="79" y="9" font-size="9" fill="#556677">PMMA 畴</text>
+    <rect x="65" y="15" width="10" height="10" fill="#c0c0c0" rx="1.5"/>
+    <text x="79" y="24" font-size="9" fill="#556677">中性层</text>
+  </g>
+</svg>
