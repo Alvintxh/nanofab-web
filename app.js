@@ -337,11 +337,14 @@ const App = {
                     
                     const isGitHubPages = window.location.hostname.includes('github.io');
                     if (isGitHubPages) {
+                        const repoName = '/nanofab-web';
                         contentEl.querySelectorAll('img').forEach(img => {
                             const src = img.getAttribute('src');
                             if (src && src.includes('/img/')) {
                                 const filename = src.split('/img/').pop();
-                                img.src = '/nanofab-web/img/' + filename;
+                                const newSrc = repoName + '/img/' + filename;
+                                console.log('Rewriting image path:', src, '->', newSrc);
+                                img.src = newSrc;
                             }
                         });
                     }
