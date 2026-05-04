@@ -356,3 +356,507 @@ Georgia Tech EBL设施运营的Elionix ELS-G100是一台100 kV电子束光刻系
 </div>
 
 </div>
+
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>EBL分辨率极限</h4>
+                <p>电子波长不是限制因素（100 eV时仅0.12 nm），实际限制来自像差、散射和抗蚀剂特性。极限分辨率约4-5 nm。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>电子源选择</h4>
+                <p>Schottky场发射阴极（ZrO/W）是EBL系统主流选择，兼具小虚拟源和低噪声稳定性，优于冷场发射源。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>邻近效应校正</h4>
+                <p>前向散射和背散射导致能量沉积扩展。最简单有效的抑制手段：提高束流能量至100 keV，减小抗蚀剂厚度。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>吞吐量瓶颈</h4>
+                <p>EBL根本限制是逐点扫描的低吞吐量。一片8英寸晶圆需数十小时曝光。当前仅服务于掩模制造和研发直写。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">EBL的极限分辨率主要受什么因素限制？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. 电子的德布罗意波长</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. 电子束直径和电子散射</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. 光学衍射极限</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. 抗蚀剂厚度</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EBL的极限分辨率仅受限于电子束直径，已被实验证明可小至1.5 nm。电子波长本身不是限制因素。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。电子波长极短（100 eV时仅0.12 nm），不是限制因素。实际限制来自电子束直径和电子散射。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">电子的德布罗意波长公式为 λ = 1.2/√V (nm)，其中V的单位是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. 伏特 (V)</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. 电子伏特 (eV)</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 千伏 (kV)</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 焦耳 (J)</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！公式中V为电子能量，单位是电子伏特 (eV)。100 eV电子的波长仅为0.12 nm。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。V的单位是电子伏特 (eV)，这是电子能量的常用单位。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">EBL的根本局限是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        <span>A. 分辨率不足</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        <span>B. 低吞吐量</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        <span>C. 需要掩模</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="d">
+                        <span>D. 设备成本过低</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EBL的根本局限是低吞吐量。一片8英寸晶圆需要数十小时才能曝光完成，无法与光学光刻的每小时60片晶圆相比。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。EBL的分辨率是最高的，且不需要掩模（直写）。其根本局限是低吞吐量。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">以下哪种电子源是EBL系统的主流选择？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. 冷场发射 W</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. 热阴极 LaB₆</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. Schottky场发射 ZrO/W</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. 热阴极 W</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！Schottky场发射阴极（ZrO/W）兼具场发射的小虚拟源和热阴极的低噪声稳定性，是当前EBL系统的主流选择。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。冷场发射虽然虚拟源最小，但束流噪声和漂移过大（5-10%，5%/hr），不适合EBL。Schottky场发射是主流选择。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">邻近效应主要由以下哪两种散射引起？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 弹性散射和非弹性散射</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 前向散射和背散射</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 瑞利散射和康普顿散射</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 汤姆逊散射和布拉格散射</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！邻近效应由前向散射（电子在抗蚀剂中展宽）和背散射（穿入基底的电子返回抗蚀剂）引起。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。虽然弹性散射和非弹性散射是电子与材料相互作用的两种机制，但邻近效应具体由前向散射和背散射引起。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">磁透镜可通过高电流产生强聚焦场，因此所有EBL系统都使用磁透镜聚焦电子束，而不使用静电透镜。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！所有EBL系统和电子显微镜都使用磁透镜聚焦电子束，因为磁透镜可通过高电流产生强聚焦场。静电透镜受电压差限制，聚焦能力有限。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。磁透镜确实可通过高电流产生强聚焦场，因此EBL系统普遍使用磁透镜而非静电透镜。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">EBL在以下哪些领域有重要应用？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="a">
+                        <span>A. 光掩模制造</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="b">
+                        <span>B. IC大规模量产</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="c">
+                        <span>C. 量子器件原型制造</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="d">
+                        <span>D. 光子学器件制造</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="acd">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EBL在光掩模制造、量子器件原型和光子学器件制造中有重要应用。但由于低吞吐量，EBL不用于IC大规模量产。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。EBL不用于IC大规模量产（由光学光刻承担），但在掩模制造、量子器件和光子学领域有重要应用。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">与光学光刻相比，EBL的主要优势是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="a">
+                        <span>A. 高吞吐量</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="b">
+                        <span>B. 高分辨率</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="c">
+                        <span>C. 低成本</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="d">
+                        <span>D. 无需真空环境</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EBL是目前分辨率最高的纳米图案化技术，极限分辨率仅受电子束直径限制。但吞吐量低、成本高，且需要真空环境。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。EBL的优势是高分辨率，而非吞吐量或成本。EBL需要高真空环境。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">关于抗蚀剂灵敏度，以下说法正确的是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. 灵敏度越高，分辨率越高</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. 低灵敏度抗蚀剂可抑制二次电子的曝光效应</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. PMMA的灵敏度高于ZEP-520A</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. HSQ的灵敏度最高</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！低灵敏度抗蚀剂可有效抑制二次电子和低能背散射电子的曝光效应，从而提高实际分辨率。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。低灵敏度抗蚀剂可抑制二次电子效应。ZEP-520A灵敏度是PMMA的3倍，HSQ需要更高剂量（~1000-2000 μC/cm²）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">EBL通过电子束直接在抗蚀剂上曝光图案，不需要掩模，属于"直写"技术。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EBL是"直写"（Direct Write）技术，通过电子束直接在抗蚀剂上曝光图案，不需要掩模。这是其与光学光刻的重要区别之一。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。EBL确实是直写技术，不需要掩模。电子束直接在抗蚀剂上扫描曝光图案。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请解释为什么EBL具有最高的分辨率，但却不能用于IC的大规模量产？从分辨率和吞吐量两个角度分析。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>分辨率方面：电子波长极短（100 eV时0.12 nm），且电子束可聚焦至极小直径（1.5 nm）。吞吐量方面：EBL是逐点扫描的直写技术，一片8英寸晶圆需数十小时，而光学光刻每小时可处理60片以上。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">计算分析</span>
+                </div>
+                <p class="exercise-text">使用德布罗意波长公式 λ = 1.2/√V (nm)，分别计算50 keV、100 keV和200 keV电子的波长。观察电子能量与波长的关系，并解释为什么100 keV是EBL的最优工作能量。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的计算过程和答案..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>50 keV: λ = 1.2/√50000 ≈ 0.0054 nm；100 keV: λ = 1.2/√100000 ≈ 0.0038 nm；200 keV: λ = 1.2/√200000 ≈ 0.0027 nm。虽然更高能量波长更短，但超过约120 keV可能损伤硅晶格，且电子柱设计制造极其困难。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">比较PMMA、ZEP-520A和HSQ三种抗蚀剂的特性。如果你需要制造亚10 nm的密集线条图案，并且后续需要进行反应离子刻蚀转移，你会选择哪种抗蚀剂？为什么？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>HSQ是最佳选择。原因：1）HSQ可常规实现亚10 nm线条；2）HSQ经曝光后转化为SiO₂，刻蚀抗性远高于有机抗蚀剂；3）HSQ在亚10 nm尺寸的LER低得多。PMMA虽然分辨率极高，但刻蚀抗性较差；ZEP-520A分辨率略低于HSQ。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -157,3 +157,508 @@ Heidelberg Instruments公司的NanoFrazor系统是目前最成功的SPL商业化
 <li>[Campbell 2008] S.A. Campbell, <em>Fabrication Engineering at the Micro- and Nanoscale</em>, 3rd ed. Oxford University Press, 2008.</li>
 
 </div>
+
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>扫描探针光刻基础</h4>
+                <p>SPL利用STM、AFM等探针显微镜的纳米级精度实现表面图形化，是低成本、高分辨率的替代途径，但吞吐量低、工作面积小。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>主要技术分类</h4>
+                <p>局部阳极氧化、蘸笔纳米光刻（DPN）、热扫描探针光刻（t-SPL）、氢钝化解除光刻（HDL）和力学刮刻。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>DPN原理</h4>
+                <p>AFM针尖充当"笔尖"，分子墨水经由针尖与基底之间的液体弯月面传输到基底表面，实现亚100 nm直接材料沉积。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>吞吐量瓶颈</h4>
+                <p>单探针扫描速度通常为1~100 μm/s，核心瓶颈是吞吐量。大规模并行探针阵列、高速扫描和等离子体辅助是主要解决方向。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">扫描探针光刻（SPL）最核心的优势是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. 高吞吐量，适合大规模量产</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. 低成本、高分辨率的纳米图形加工</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. 可以加工三维体结构</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. 无需真空环境即可工作</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！SPL最吸引人的特点是简单性，使亚100 nm图形加工不再依赖大型昂贵设备。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。SPL的核心优势是低成本和高分辨率，但吞吐量低、加工深度浅。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">以下哪种探针显微镜不要求样品导电，且可在大气和液体环境中操作？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. 扫描隧道显微镜（STM）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. 原子力显微镜（AFM）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 两者都可以</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 两者都不可以</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！AFM通过测量针尖与样品之间的引力或斥力工作，不要求样品导电，适用范围远广于STM。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。STM需要样品导电且通常在高真空下工作，AFM则没有这些限制。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">蘸笔纳米光刻（DPN）中，分子墨水从针尖传输到基底的关键媒介是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        <span>A. 电子束</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        <span>B. 液体弯月面（Meniscus）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        <span>C. 等离子体</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="d">
+                        <span>D. 超声波</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！DPN通过针尖与基底之间形成的液体弯月面将分子墨水传输到基底表面。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。DPN的核心传输机制是液体弯月面，而非电子束或等离子体。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">热扫描探针光刻（t-SPL）中，PPA抗蚀剂的独特反应机制是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. 熔融流动</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. 自放大解聚合，直接升华为小分子挥发物</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. 光交联反应</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. 氧化反应</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！PPA在达到玻璃化转变温度时，聚合物链断裂并立即解拉链为小分子挥发物，而非熔融流动。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。PPA的独特之处在于自放大解聚合反应，直接升华而无需湿法显影。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">局部阳极氧化光刻中，环境湿度对氧化线条宽度的影响是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 湿度越高，线条越窄</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 湿度越高，线条越宽</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 湿度对线条宽度没有影响</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 湿度只影响氧化速度，不影响宽度</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！高湿度不仅增加水分子供给，还形成水膜扩大电场的横向分布范围，产生等效的"散焦"效应，使线条更宽。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。实验表明，61%湿度下的氧化线条宽约90 nm，而14%湿度下仅约22 nm，湿度越高线条越宽。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">在所有SPL技术中，哪种技术的分辨率最高？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="a">
+                        <span>A. 热扫描探针光刻（t-SPL）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="b">
+                        <span>B. 蘸笔纳米光刻（DPN）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="c">
+                        <span>C. 力学刮刻</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="d">
+                        <span>D. 局部阳极氧化</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！力学刮刻在所有SPL技术中分辨率最高，因为固体针尖的几何形状是确定的，不像电场或场发射电子那样存在较大范围的扩展。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。力学刮刻的分辨率最高，因为固体针尖几何形状确定，不存在电场或电子发射的扩展效应。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">与电子束光刻（EBL）相比，t-SPL的一个独特优势是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="a">
+                        <span>A. 更高的吞吐量</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="b">
+                        <span>B. 不涉及带电粒子，可直接在绝缘基底上加工</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="c">
+                        <span>C. 可以实现原子级精度</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="d">
+                        <span>D. 无需真空环境</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！t-SPL不涉及带电粒子，因此不会产生电荷积累问题，可直接在绝缘基底上加工，这是与EBL的重要区别。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。t-SPL的吞吐量仍然很低。其独特优势在于不涉及带电粒子，可直接在绝缘基底上加工。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">氢钝化解除光刻（HDL）的主要限制是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="a">
+                        <span>A. 需要超高真空维持无污染表面</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="b">
+                        <span>B. 分辨率太低</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="c">
+                        <span>C. 无法制造量子器件</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="d">
+                        <span>D. 需要导电样品</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="a">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！HDL需要超高真空维持无污染表面，这限制了其实用性。尽管如此，它已用于制造单电子晶体管、量子比特等前沿器件。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。HDL的主要限制是需要超高真空环境，而非分辨率低（实际上HDL可实现原子级精度）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">光刻分辨率等于显微成像分辨率，因为探针既能成像也能加工。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="false">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！光刻分辨率不等于显微成像分辨率，因为感知原子存在的机制与改变表面结构的机制不同。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。感知原子存在的机制与改变表面结构的机制不同，因此光刻分辨率不等于成像分辨率。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">DPN技术已成功实现大规模商业化量产，成为半导体制造的主流光刻技术。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="false">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！DPN的商业化道路坎坷，NanoInk公司于2013年倒闭。DPN的价值更多在于材料发现和生物微阵列，而非量产光刻。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。DPN并未实现大规模商业化量产，其商业化历程充满挑战，主要应用集中在研究领域。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请比较STM和AFM在扫描探针光刻中的优缺点，并说明为什么AFM型探针目前主导着TBN领域的应用。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>考虑样品导电性要求、工作环境（真空/大气/液体）、针尖-样品相互作用机制、以及AFM悬臂梁可集成的功能（加热、压电激励等）。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">工艺分析</span>
+                </div>
+                <p class="exercise-text">t-SPL使用PPA抗蚀剂可以实现免显影的纳米图形化。请分析这一特性对纳米器件原型制造的优势，并思考PPA抗蚀剂可能的局限性。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>优势方面考虑工艺步骤简化、对准精度提升、无显影剂污染等；局限性考虑材料稳定性、刻蚀选择比、以及是否适用于所有类型的图形转移。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">SPL技术普遍面临吞吐量瓶颈。请分析大规模并行探针阵列方案（如IBM千足虫项目）在提高吞吐量方面的潜力，以及该方案可能面临的技术挑战。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>潜力在于将单探针的微米级扫描扩展为阵列的并行加工；挑战包括探针一致性控制、独立寻址、热管理、以及大面积均匀性等。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

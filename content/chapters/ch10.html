@@ -401,4 +401,507 @@
 
 </div>
 
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>硅单晶生长</h4>
+                <p>CZ法是主流技术，通过拉速和温度控制实现单晶生长。FZ法纯度更高，适用于功率器件。分凝效应影响杂质分布均匀性。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>热氧化与Deal-Grove模型</h4>
+                <p>干氧氧化质量高但速率慢，湿氧氧化速率快但密度低。氧化分为线性区（反应控制）和抛物线区（扩散控制）。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>扩散与离子注入</h4>
+                <p>扩散遵循Fick定律，预沉积为erfc分布，推进为高斯分布。离子注入可精确控制剂量和深度，需抑制沟道效应。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>RTP与退火工艺</h4>
+                <p>RTP通过缩短高温时间降低热预算。TED是注入后退火的关键现象，激活能约为稳态扩散的一半。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">直拉法（CZ法）生长单晶硅时，为消除籽晶中的位错，采用的技术是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. 磁场约束</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. Dash缩颈技术</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. 区熔提纯</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. 中子嬗变掺杂</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！Dash缩颈技术通过快速拉伸形成细颈区域，消除籽晶中的位错。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。Dash缩颈技术用于消除籽晶位错，磁场约束用于降低氧含量。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">根据Deal-Grove模型，当氧化层较厚时，氧化速率主要由什么控制？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. 界面反应速率</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. 氧在氧化层中的扩散</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 气相传输速率</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 硅的熔化潜热</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！厚氧化层处于抛物线区，氧化速率由氧在SiO₂中的扩散控制。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。厚氧化层处于抛物线区，由扩散控制；薄氧化层处于线性区，由界面反应控制。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">湿氧氧化速率高于干氧氧化，但湿氧生长的氧化层密度较低。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！H₂O在SiO₂中的扩散率和溶解度均高于O₂，因此湿氧氧化速率更快，但氧化层密度较低。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。湿氧氧化速率确实更高，但氧化层密度较低，通常用于不承受显著电应力的厚氧化层。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">扩散工艺中，预沉积（Predeposition）阶段的杂质浓度分布遵循什么函数？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. 高斯分布</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. 互补误差函数（erfc）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. 指数分布</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. 均匀分布</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！预沉积阶段表面浓度固定在固溶度，浓度分布为互补误差函数erfc。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。预沉积为erfc分布，推进扩散才是高斯分布。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">离子注入中，当离子速度方向平行于主要晶轴时，可能发生什么效应导致离子深入晶体远超正常射程？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 瞬态增强扩散</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 沟道效应</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 氧化增强扩散</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 分凝效应</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！沟道效应使离子沿晶轴方向深入晶体，需通过偏转注入或预非晶化来抑制。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。沟道效应是离子注入特有的现象，TED是退火过程中的扩散增强现象。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">RTP（快速热处理）系统按加热方式分类，工业主流采用的是哪种类型？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="a">
+                        <span>A. 绝热型（准分子激光）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="b">
+                        <span>B. 热通量型（聚焦激光/电子束）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="c">
+                        <span>C. 等温型（钨卤素灯阵列）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="d">
+                        <span>D. 感应加热型</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！等温型RTP采用钨卤素灯阵列，温度均匀性最好，是工业主流方案。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。等温型（钨卤素灯阵列）因温度均匀性最好而成为工业主流。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">关于瞬态增强扩散（TED），以下说法正确的是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="a">
+                        <span>A. TED的激活能高于稳态扩散</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="b">
+                        <span>B. TED仅发生在高温退火过程中</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="c">
+                        <span>C. TED的激活能约为稳态扩散的一半</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="d">
+                        <span>D. TED可通过提高退火温度完全消除</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！TED的激活能约为稳态扩散的一半，表明点缺陷辅助的扩散机制在低温下更为有效。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。TED激活能约为稳态扩散的一半，常在低温退火时观测到，可通过500-650°C低温预退火减轻。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些方法可以抑制离子注入中的沟道效应？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="a">
+                        <span>A. 偏转注入（倾斜角7°，扭转角30°）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="b">
+                        <span>B. 通过薄屏蔽氧化层注入</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="c">
+                        <span>C. 预非晶化注入</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="d">
+                        <span>D. 提高注入能量</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！偏转注入、屏蔽氧化层和预非晶化都是抑制沟道效应的有效方法。提高注入能量反而可能加剧沟道效应。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。偏转注入、屏蔽氧化层和预非晶化是三种主要抑制方法。提高注入能量不能抑制沟道效应。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">晶圆清洗工艺中，RCA清洗标准流程的第一步（SC-1）主要去除什么污染物？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. 金属离子</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. 有机颗粒和薄膜</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. 原生氧化层</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. 光刻胶残留</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！SC-1（NH₄OH:H₂O₂:H₂O）主要去除有机颗粒和薄膜，SC-2（HCl:H₂O₂:H₂O）主要去除金属离子。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。SC-1主要去除有机颗粒和薄膜，SC-2用于去除金属离子。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">在快速热激活退火中，电活性掺杂浓度可以超过固溶度，因为杂质原子没有足够时间形成非活性团簇。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！RTP的突出优势在于晶片可能未达到热力学平衡，电活性掺杂浓度可超过固溶度。砷在毫秒级退火后激活浓度可达固溶度的10倍。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。RTP的超快退火确实可以实现超固溶度激活，这是其重要优势之一。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请比较CZ法和FZ法生长单晶硅的优缺点，并说明各自适用的应用场景。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>CZ法使用石英坩埚，会引入氧杂质，但成本低、直径大，适合主流CMOS工艺。FZ法无坩埚接触，纯度极高，但直径受限、成本高，适合功率器件和探测器。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">计算分析</span>
+                </div>
+                <p class="exercise-text">根据Deal-Grove模型，在1000°C干氧条件下（A=0.165 μm，B=0.0117 μm²/hr，τ=0.37 hr），计算氧化2小时后的氧化层厚度。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的计算过程和答案..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>使用方程 t_ox² + A·t_ox = B(t + τ)。代入数值：t_ox² + 0.165·t_ox = 0.0117 × (2 + 0.37)。解这个二次方程，取正根。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">思考一下：为什么现代IC制造中离子注入已基本取代热扩散作为掺杂的主要方法？离子注入相比扩散有哪些不可替代的优势？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>离子注入可精确控制剂量和深度，不受固溶度限制，可在低温下进行，能实现复杂掺杂分布。扩散则受温度和时间影响大，难以精确控制浅结。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

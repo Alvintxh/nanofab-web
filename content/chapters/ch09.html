@@ -169,3 +169,508 @@
 </div>
 
 </div>
+
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>自组装五大特征</h4>
+                <p>自发性、分子间力驱动、组分具有流动性、有序结构为平衡态结果、环境条件影响组装结果。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>嵌段共聚物DSA</h4>
+                <p>PS-b-PMMA通过微相分离形成纳米级周期图形，化学外延或形貌外延实现长程有序，分辨率已达3-5 nm节点。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>纳米球光刻</h4>
+                <p>利用自组装纳米球作为沉积掩模或微透镜阵列，可制备三角形点阵或孔阵列，但缺乏灵活性。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>间接纳米制造</h4>
+                <p>侧壁光刻（SADP/SAQP/SAOP）、氧化锐化、粘附光刻等，将膜厚控制转化为横向尺寸控制。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">自组装过程的驱动力主要是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. 外部机械力</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. 热力学和分子间作用力</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. 电磁场力</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. 重力</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！自组装由热力学和分子间作用力（如van der Waals力、氢键）驱动，无需外部图形化工具。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。自组装的主要驱动力是热力学和分子间作用力，而非外部机械力或电磁场。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">烷基硫醇在金表面形成的SAM，其厚度约为多少？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. 10-20 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. 1-2 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 50-100 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 0.1-0.5 nm</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！SAM仅1-2 nm厚，这使其成为纳米级图形转移中的理想超薄抗蚀剂或钝化层。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。烷基硫醇在金表面形成的SAM厚度约为1-2 nm。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">嵌段共聚物（BCP）的微相分离形成的微畴结构，其几何形状仅取决于退火温度。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="false">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！微畴几何形状主要取决于两种嵌段的体积分数，而非退火温度。体积分数决定球形、柱形、层状或螺旋面结构。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。微畴几何形状取决于A嵌段体积分数，而非退火温度。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">纳米球光刻（NSL）单层球掩模形成的点尺寸与球直径D的关系是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. 0.155D</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. 0.233D</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. 0.577D</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. 0.866D</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！单层球掩模的点尺寸为0.233D，点间距为0.577D。双层球掩模可进一步缩小至0.155D。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。单层球掩模点尺寸为0.233D，点间距为0.577D。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">以下哪种DSA技术利用传统光刻制备的沟槽/线条模板引导BCP自组装？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 化学外延（Chemoepitaxy）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 形貌外延（Graphoepitaxy）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 溶剂退火</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 电场诱导</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！形貌外延使用传统光刻制备的低密度拓扑图形（沟槽/线条）作为模板，BCP在图形分隔的区域内自组装。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。形貌外延（Graphoepitaxy）利用拓扑图形模板，而化学外延利用的是表面化学能图案。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">AAO模板的两步阳极化法相比一步法，主要优势是什么？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="a">
+                        <span>A. 可获得更大的孔径</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="b">
+                        <span>B. 总时间缩短至约十分之一</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="c">
+                        <span>C. 无需酸性电解液</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="d">
+                        <span>D. 孔密度提高10倍</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！两步阳极化法利用第一步形成的凹坑作为成核点，大幅加速有序化过程，总时间缩短至一步法的约十分之一。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。两步阳极化法的主要优势是将有序化时间大幅缩短至约十分之一。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">自对准双重图形化（SADP）可将193 nm浸没光刻的38 nm半间距降至多少？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="a">
+                        <span>A. 28.5 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="b">
+                        <span>B. 19 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="c">
+                        <span>C. 9.5 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="d">
+                        <span>D. 5.5 nm</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！SADP将38 nm半间距降至19 nm；SAQP进一步降至9.5 nm；SAOP最终达到5.5 nm。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。SADP将半间距减半至19 nm。9.5 nm是SAQP的结果，5.5 nm是SAOP的结果。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些属于引导自组装的方法？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="a">
+                        <span>A. 表面形貌引导</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="b">
+                        <span>B. 表面能引导</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="c">
+                        <span>C. 静电力和磁力引导</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="d">
+                        <span>D. 热退火引导</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！引导自组装的方法包括表面形貌引导、表面能引导和静电力/磁力引导。热退火是促进BCP微相分离的工艺手段，不是引导方法。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。引导自组装的方法包括表面形貌、表面能和静电力/磁力引导。热退火是促进组装的工艺条件，不属于引导方法。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">氧化锐化技术利用什么原理实现结构减薄？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. 硅热氧化消耗硅，再去除氧化层</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. 电子束直接铣削硅</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. 化学气相沉积在表面增厚</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. 离子注入改变硅晶格</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="a">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！氧化锐化利用硅热氧化"消耗"硅的特性：外层硅转为SiO₂，HF去除氧化层后留下缩小的硅芯。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。氧化锐化利用硅热氧化消耗硅，再通过HF去除氧化层实现结构减薄。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">粘附光刻（Adhesion Lithography）可以在室温下数秒内完成，无需昂贵设备。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！粘附光刻利用粘合胶带剥离实现纳米级间隙，在室温条件下数秒内完成，无需昂贵设备。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。粘附光刻确实可以在室温下快速完成，且无需昂贵设备，这是其核心优势之一。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请解释为什么"自上而下与自下而上的结合"是自组装纳米制造发展的主线。结合SAM、BCP DSA或AAO中的任一例子说明。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>纯自组装只能产生周期阵列，无法制造特定功能结构。例如BCP DSA需要化学外延或形貌外延模板引导，才能形成IC制造所需的精确线/间距或接触孔图形。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">计算分析</span>
+                </div>
+                <p class="exercise-text">已知单层纳米球掩模的点尺寸为0.233D，点间距为0.577D。若使用直径D = 500 nm的PS纳米球，计算：（1）形成的点直径；（2）点阵周期。若改用双层球掩模，点尺寸变为多少？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的计算过程和答案..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>（1）点直径 = 0.233 × 500 = 116.5 nm；（2）周期 = 0.577 × 500 = 288.5 nm。双层球掩模点尺寸 = 0.155 × 500 = 77.5 nm。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">比较侧壁光刻（SADP/SAQP）与BCP DSA两种技术路线在IC制造中的优缺点。你认为哪种技术更适合推进至2 nm及以下节点？为什么？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>侧壁光刻工艺成熟但步骤多、成本高；DSA分辨率高但缺陷控制难、退火时间长。IRDS认为DSA结合高NA EUV有望推进至2 nm节点，但两者可能互补使用。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

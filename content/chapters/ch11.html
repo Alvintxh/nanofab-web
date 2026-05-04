@@ -518,4 +518,508 @@
 
 </div>
 
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>抗蚀剂选型原则</h4>
+                <p>PMMA成本低适合剥离，ZEP520A写入快适合刻蚀，HSQ分辨率最高适合精细掩模，ma-N 2403适合绝缘衬底。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>显影条件优化</h4>
+                <p>PMMA冷显影（≤10°C）可达最高分辨率；HSQ通过TMAH浓度（2.3%-25%）和温度（RT-50°C）调节对比度。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>金属剥离要点</h4>
+                <p>1165加热至50-70°C适用于大多数金属；银必须用丙酮；纳米精度要求样品垂直于蒸发源避免阴影效应。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>刻蚀工艺选择</h4>
+                <p>浅硅刻蚀用ZEP或SiO₂掩模；深硅刻蚀用HSQ掩模+Nano-Bosch工艺；选择比需大于20:1以保证掩模不被过早消耗。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">以下哪种抗蚀剂的曝光剂量最低，写入时间最短？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. PMMA (950k)</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. ZEP520A</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. HSQ</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. ma-N 2403</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！ZEP520A所需曝光剂量约为PMMA的80%，写入时间更短。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。ZEP520A的剂量约为PMMA的80%，是四种抗蚀剂中最低的。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">HSQ曝光后转化为哪种材料？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. Si₃N₄</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. SiO₂</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 多晶硅</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 碳化物</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！HSQ（氢化硅倍半氧烷）EBL曝光后转化为SiO₂，具有优异的等离子体刻蚀抗性。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。HSQ曝光后转化为SiO₂，这是其具有优异刻蚀抗性的原因。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">PMMA标准烘烤条件为180°C热板90秒。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！PMMA标准工艺中，烘烤条件为180°C热板90秒，用于去除溶剂。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。PMMA标准烘烤条件确实是180°C热板90秒。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">以下哪种显影条件可获得PMMA的最高分辨率？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. IPA:H₂O 3:1，室温2分钟</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. MIBK:IPA 1:1，室温2分钟</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. MIBK:IPA 1:3，室温2分钟</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. 冷显影，≤10°C，30秒</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="d">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！冷显影（≤10°C，30秒）可获得PMMA的最高分辨率，主要用于40 nm以下特征尺寸。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。冷显影（≤10°C，30秒）是PMMA最高分辨率的显影条件。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">银的金属剥离应使用哪种溶剂？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 1165（N-甲基吡咯烷酮）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 丙酮</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 甲醇</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 异丙醇</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！1165会完全刻蚀银，银和敏感材料必须使用室温丙酮剥离。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。1165会刻蚀银，必须使用丙酮进行银的剥离。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">HSQ最高对比度工艺的曝光剂量约为多少？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="a">
+                        <span>A. ~1000 μC/cm²</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="b">
+                        <span>B. ~1500 μC/cm²</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="c">
+                        <span>C. ~2000 μC/cm²</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="d">
+                        <span>D. ~3000 μC/cm²</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！HSQ最高对比度工艺需要约2000 μC/cm²的曝光剂量，使用25% TMAH在40-50°C显影。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。HSQ最高对比度工艺的曝光剂量约为2000 μC/cm²。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">深硅刻蚀（深度≥1 μm）应选用哪种抗蚀剂作为掩模？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="a">
+                        <span>A. PMMA</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="b">
+                        <span>B. ZEP520A</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="c">
+                        <span>C. HSQ</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="d">
+                        <span>D. 以上均可</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！深硅刻蚀使用HSQ负性抗蚀剂作为刻蚀掩模，可实现接近90°的侧壁角度和高选择比。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。深硅刻蚀应使用HSQ作为掩模，因其具有优异的刻蚀抗性和高选择比。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些方法可以解决绝缘衬底上的EBL电荷积累问题？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="a">
+                        <span>A. 旋涂导电聚合物层（如ESPACER）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="b">
+                        <span>B. 在抗蚀剂下蒸镀薄金属层（如Al或Cr）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="c">
+                        <span>C. 使用ma-N 2403抗蚀剂</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q8" value="d">
+                        <span>D. 提高加速电压至100 kV</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！三种方法均可解决电荷积累问题：导电聚合物层、薄金属导电层、以及使用适用于绝缘衬底的ma-N 2403抗蚀剂。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。提高加速电压不能解决电荷积累问题。正确答案是导电涂层、薄金属层和ma-N 2403抗蚀剂。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">Nano-Bosch硅深刻蚀工艺的选择比通常要求达到多少？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. 大于5:1</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. 大于10:1</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. 大于20:1</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. 大于50:1</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！Nano-Bosch工艺的选择比通常大于20:1（硅:抗蚀剂），以实现高深宽比刻蚀。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。Nano-Bosch工艺的选择比通常要求大于20:1。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">HSQ的线边缘粗糙度低于PMMA等正性抗蚀剂。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="false">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！HSQ的线边缘粗糙度高于正性抗蚀剂，这是其在最高分辨率应用中的局限性之一。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。HSQ的线边缘粗糙度实际上高于正性抗蚀剂如PMMA。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">工艺设计</span>
+                </div>
+                <p class="exercise-text">假设你需要在硅衬底上制备50 nm周期的纳米点阵，要求侧壁陡直、刻蚀深度约200 nm。请选择合适的抗蚀剂、曝光剂量和显影条件，并说明理由。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>考虑HSQ高对比度工艺（~1500 μC/cm²，25% TMAH，~21°C，30秒），或最高对比度工艺（~2000 μC/cm²，25% TMAH，40-50°C）。HSQ曝光后转化为SiO₂，可直接作为刻蚀掩模。浅硅刻蚀可使用HSQ掩模或SiO₂硬掩模。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">问题诊断</span>
+                </div>
+                <p class="exercise-text">在玻璃衬底上进行EBL曝光时，发现图案出现漂移和变形。分析可能的原因，并给出至少两种解决方案。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的分析..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>玻璃是绝缘衬底，电荷在表面积累会导致束偏转和图案变形。解决方案包括：旋涂导电聚合物层（如ESPACER）、在抗蚀剂下蒸镀薄金属层（5-10 nm Al或Cr）、或使用适用于绝缘衬底的ma-N 2403抗蚀剂。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">工艺优化</span>
+                </div>
+                <p class="exercise-text">比较PMMA和HSQ两种抗蚀剂在剥离工艺和刻蚀工艺中的适用性。分析各自的优缺点，并说明在什么情况下应选择哪种抗蚀剂。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的分析..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>PMMA成本低、易去除（丙酮/1165），适合剥离工艺，但刻蚀抗性较差。HSQ刻蚀抗性优异（转化为SiO₂），适合作为刻蚀掩模，但去除需要HF/BOE，且线边缘粗糙度较高、剂量需求大（~3× PMMA）。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>

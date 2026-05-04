@@ -192,3 +192,515 @@
 <li>[Campbell 2008] S.A. Campbell, <em>Fabrication Engineering at the Micro- and Nanoscale</em>, 3rd ed. Oxford University Press, 2008.</li>
 
 </div>
+
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>FIB与EBL的根本区别</h4>
+                <p>FIB直接溅射或沉积材料，无需光刻胶中间层；EBL需先在抗蚀剂上形成图形，再通过刻蚀/沉积转移。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>三种离子源互补</h4>
+                <p>LMIS（Ga⁺, ~5 nm, 通用加工）、ICP（Xe⁺, ~50 nm, 大电流高速铣削）、GFIS（He⁺/Ne⁺, &lt;1 nm, 极限分辨率）。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>离子溅射特性</h4>
+                <p>穿透深度极浅（50 keV Ga⁺在Si中仅~50 nm），溅射产额在~80°入射角最大，存在再沉积效应。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>FIB核心应用</h4>
+                <p>IC电路编辑、光掩模修复、TEM样品制备、三维纳米结构直写、FIBID/FEBID局部沉积。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">FIB与电子束光刻（EBL）的根本区别在于？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. FIB使用离子而非电子</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. FIB可直接溅射/沉积材料，无需光刻胶中间层</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. FIB分辨率更高</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. FIB加工速度更快</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！FIB可直接在目标材料上操作，跳过光刻胶和图形转移步骤，这是其最核心的优势。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。虽然FIB确实使用离子，但根本区别在于加工机制：FIB直接操作材料，无需光刻胶中间层。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">液态金属离子源（LMIS）的工作原理中，离子发射的关键机制是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. 热蒸发</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. 场蒸发</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. 光电效应</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. 二次电子发射</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！LMIS中尖端电场高达10¹⁰ V/m，金属原子在此强电场下发生场蒸发产生离子发射。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。LMIS的离子发射机制是场蒸发，而非热蒸发或光电效应。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下关于三种FIB离子源的比较，正确的有？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q3" value="a">
+                        <span>A. LMIS束斑最小（~5 nm），但电流范围有限</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q3" value="b">
+                        <span>B. ICP源角强度最高，适合大电流高速铣削</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q3" value="c">
+                        <span>C. GFIS分辨率最高（&lt;1 nm），但溅射效率低</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q3" value="d">
+                        <span>D. 三种源都使用惰性气体离子</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！LMIS使用Ga⁺（非惰性气体），ICP使用Xe⁺等惰性气体，GFIS使用He⁺/Ne⁺。三者各具特色，形成互补。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。LMIS使用Ga⁺（液态金属），不是惰性气体。其他三个选项描述正确。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">Ga⁺ FIB与Xe⁺ FIB相比，以下说法正确的是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        <span>A. Ga⁺束斑更大，但溅射速率更高</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        <span>B. Xe⁺完全消除了镓污染问题，且大电流溅射速率更高</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        <span>C. Ga⁺和Xe⁺的穿透深度相同</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        <span>D. Xe⁺的分辨率优于Ga⁺</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！1 μA的Xe⁺束对硅的溅射去除速率比20 nA的Ga⁺束高80倍，且使用惰性气体完全消除了gallium staining问题。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。Ga⁺束斑更小（~5 nm vs ~50 nm），但Xe⁺在大电流应用中优势明显，且无镓污染。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">气体场离子源（GFIS）的氦离子束可达到的极限分辨率约为？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 5 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 1.5 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 0.25 nm</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 50 nm</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！氦GFIS可产生0.25 nm的极限束斑，能量展宽小于0.5 eV，源亮度比LMIS高三个数量级。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。氦GFIS的极限束斑为0.25 nm。1.5 nm是氖GFIS的分辨率，5 nm是LMIS的分辨率。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些是FIB的典型应用？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q6" value="a">
+                        <span>A. 集成电路电路编辑</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q6" value="b">
+                        <span>B. TEM样品制备</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q6" value="c">
+                        <span>C. 光掩模缺陷修复</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q6" value="d">
+                        <span>D. 三维纳米结构直写</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abcd">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！FIB的核心应用包括IC电路编辑、TEM样品制备、光掩模修复和三维纳米结构直写等。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。以上四项都是FIB的典型应用，FIB是纳米加工领域最灵活的工具之一。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">"Gallium staining"（镓污染）问题主要影响FIB的哪项应用？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="a">
+                        <span>A. TEM样品制备</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="b">
+                        <span>B. 光掩模缺陷修复</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="c">
+                        <span>C. IC电路编辑</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q7" value="d">
+                        <span>D. 纳米结构直写</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！光掩模修复中，注入的Ga⁺改变了玻璃基底的光透过率，修复区需要额外刻蚀去除污染层。这也是EUV掩模转向电子束修复的主要原因。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。镓污染在光掩模修复中最为突出，因为注入的Ga⁺会改变玻璃的光学透过率。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">ICP（电感耦合等离子体）离子源相比LMIS的主要优势是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="a">
+                        <span>A. 更高的分辨率（更小的束斑）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="b">
+                        <span>B. 更大的角强度和电流范围，适合高速铣削</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="c">
+                        <span>C. 可以使用Ga⁺以外的任何金属离子</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="d">
+                        <span>D. 能量展宽更小</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！ICP源的角强度约10 mA/sr，远高于LMIS的~15 μA/sr，在大电流高速铣削应用中占据显著优势。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。ICP源的分辨率（~50 nm）不如LMIS（~5 nm），但其大电流能力是其核心优势。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">关于FIB沉积能力（FIBID），以下说法正确的是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. FIBID只能沉积纯金属材料</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. FIBID沉积的薄膜是纯金属，电阻率与体材料相同</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. FIBID通过分解有机金属前驱气体实现局部沉积，但沉积物含有碳、氧等杂质</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. FIBID无法与溅射过程共存</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！FIBID沉积物通常含有来自有机配体的碳和氧杂质。例如钨沉积物典型成分为W:C:Ga:O = 75:10:10:5，电阻率远高于纯钨。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。FIBID沉积物含有杂质，且沉积与溅射过程共存并相互竞争，只有当沉积速率超过溅射速率时才实现净沉积。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">FIB系统的离子光学柱使用静电透镜和静电偏转器，而非电磁元件，这是因为不同质量的离子在磁场中受到不同大小的力。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="true">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！离子在磁场中的受力与质荷比相关，不同离子偏转不同。因此FIB普遍采用静电透镜和静电偏转器。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。该说法正确。离子质量远大于电子，在磁场中受力与质荷比相关，因此FIB使用静电元件而非电磁元件。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请比较FIB与EBL在加工机制上的根本差异，并说明为什么FIB被称为"纳米加工领域最灵活的工具之一"。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>考虑加工步骤的差异（是否需要光刻胶）、FIB同时具备的三大能力（溅射去除、气体辅助沉积、离子注入），以及直接加工带来的灵活性。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">对比分析</span>
+                </div>
+                <p class="exercise-text">假设您需要在一个硅芯片上进行两种不同的操作：（1）制备一个用于TEM观察的薄片样品；（2）快速铣削一个较大的深槽。请分析应该选择哪种离子源（LMIS Ga⁺、ICP Xe⁺或GFIS He⁺），并说明理由。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的分析..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>TEM样品需要高精度定位和极薄的最终厚度（&lt;100 nm），考虑束斑尺寸和精细抛光能力。大槽铣削需要高溅射速率，考虑电流和溅射产额。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">FIB在IC电路编辑中可以"溅射断开错误连线、沉积新的导电路径"。思考一下：为什么随着IC技术推进到FinFET和GAA架构，电路编辑面临更大挑战？FIB需要如何调整？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>考虑三维晶体管结构对加工精度的要求、更薄的敏感介质层对辐照损伤的敏感性，以及为什么需要更低的落地能量和束流。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

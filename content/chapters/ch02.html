@@ -305,3 +305,516 @@
 </div>
 
 </div>
+
+<div class="learning-tools">
+    <div class="tool-tabs">
+        <button class="tool-tab active" data-tab="key-points">要点卡片</button>
+        <button class="tool-tab" data-tab="quiz">小测试</button>
+        <button class="tool-tab" data-tab="exercise">思考练习</button>
+    </div>
+
+    <div class="tool-content" id="key-points-content">
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h4>Rayleigh准则</h4>
+                <p>分辨率 R = k₁λ/NA，焦深 DOF = k₂λ/NA²。增大NA提高分辨率但减小DOF，构成基本矛盾。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>光源演进路线</h4>
+                <p>g线(436nm) → i线(365nm) → KrF(248nm) → ArF(193nm) → EUV(13.5nm)，波长跨越30倍以上。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h4>分辨率增强技术</h4>
+                <p>OAI（最简单广泛）、PSM（衰减型最常用）、OPC/SRAF（已成标准）、ILT（2019年全芯片应用）。</p>
+            </div>
+            <div class="key-point-card">
+                <div class="key-point-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>浸没式与EUV</h4>
+                <p>水浸没(n=1.44)将NA提升至1.35；EUV采用13.5nm波长和Mo-Si多层反射镜，2019年投入7nm量产。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="quiz-content">
+        <div class="quiz-container">
+            <div class="quiz-question" data-question="1">
+                <div class="question-header">
+                    <span class="question-number">Q1</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">根据Rayleigh准则，以下哪个公式正确描述了光学光刻的分辨率极限？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. R = k₁ × NA / λ</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. R = k₁ × λ / NA</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. R = k₁ × λ × NA</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        <span>D. R = λ / (k₁ × NA)</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！分辨率公式为 R = k₁λ/NA，其中k₁为工艺因子，λ为波长，NA为数值孔径。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。正确的Rayleigh准则公式是 R = k₁λ/NA，分辨率与波长成正比，与数值孔径成反比。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <div class="question-header">
+                    <span class="question-number">Q2</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">光学光刻光源演进的正确时间顺序是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. g线 → i线 → ArF → KrF → EUV</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. g线 → i线 → KrF → ArF → EUV</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. i线 → g线 → KrF → ArF → EUV</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        <span>D. g线 → KrF → i线 → ArF → EUV</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！光源演进顺序为：汞灯g线(436nm) → i线(365nm) → KrF(248nm) → ArF(193nm) → EUV(13.5nm)。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。正确顺序是g线 → i线 → KrF → ArF → EUV。KrF(248nm)在ArF(193nm)之前使用。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <div class="question-header">
+                    <span class="question-number">Q3</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">关于正性光刻胶和负性光刻胶，以下说法正确的是？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        <span>A. 正性光刻胶曝光后交联，负性光刻胶曝光后链断裂</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        <span>B. 正性光刻胶曝光后链断裂，负性光刻胶曝光后交联</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        <span>C. 两者曝光后都发生链断裂</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="d">
+                        <span>D. 两者曝光后都发生交联</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！正性光刻胶曝光后长链断裂为短链，显影后曝光区被去除；负性光刻胶曝光后短链交联形成长链，曝光区保留。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。正性胶曝光后链断裂，负性胶曝光后交联。这是两者的根本区别。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="4">
+                <div class="question-header">
+                    <span class="question-number">Q4</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些属于分辨率增强技术（RET）？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q4" value="a">
+                        <span>A. 离轴照明（OAI）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q4" value="b">
+                        <span>B. 相移掩模（PSM）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q4" value="c">
+                        <span>C. 光学邻近校正（OPC）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q4" value="d">
+                        <span>D. 浸没式光刻</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！OAI、PSM和OPC都是分辨率增强技术。浸没式光刻通过增大NA提高分辨率，属于光学系统改进而非RET。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。RET包括OAI、PSM、OPC/SRAF和ILT等。浸没式光刻属于光学系统层面的改进，通过液体增大NA。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="5">
+                <div class="question-header">
+                    <span class="question-number">Q5</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">浸没式光刻使用水作为浸没液，其折射率约为1.44。这主要实现了什么效果？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="a">
+                        <span>A. 缩短了照明波长</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="b">
+                        <span>B. 增大了有效数值孔径（NA）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="c">
+                        <span>C. 降低了k₁因子</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q5" value="d">
+                        <span>D. 增大了焦深（DOF）</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！浸没式光刻通过将介质折射率n从空气(n=1)替换为水(n=1.44)，使有效NA = n·sinθ可以超过1，最高达到1.35。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。浸没式光刻的核心原理是增大有效NA。NA = n·sinθ，水的n=1.44使NA可超过1。波长并未改变，DOF实际上会减小。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="6">
+                <div class="question-header">
+                    <span class="question-number">Q6</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">关于EUV光刻，以下哪项描述是正确的？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="a">
+                        <span>A. EUV使用折射光学元件和透射式掩模</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="b">
+                        <span>B. EUV波长为193 nm，使用ArF准分子激光</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="c">
+                        <span>C. EUV采用Mo-Si多层反射镜和反射式掩模，在真空中工作</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q6" value="d">
+                        <span>D. EUV光刻胶可以直接使用传统的化学放大胶（CAR）</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！EUV在13.5 nm波长工作，传统折射光学完全失效，系统全部采用反射光学（Mo-Si多层膜）和反射式掩模，成像在真空环境中进行。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。EUV采用全反射光学系统和反射式掩模。193nm是ArF准分子激光的波长。传统CAR在EUV波长吸收不足，需要新型金属氧化物光刻胶。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="7">
+                <div class="question-header">
+                    <span class="question-number">Q7</span>
+                    <span class="question-type">多选题</span>
+                </div>
+                <p class="question-text">以下哪些属于多重图案化方法？（多选）</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="a">
+                        <span>A. LELE（Litho-Etch-Litho-Etch）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="b">
+                        <span>B. SADP（Self-Aligned Double Patterning）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="c">
+                        <span>C. LFLE（Litho-Freeze-Litho-Etch）</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="checkbox" name="q7" value="d">
+                        <span>D. OPC（光学邻近校正）</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="abc">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！LELE、SADP和LFLE都是多重图案化方法。OPC是分辨率增强技术，不属于多重图案化。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。LELE、SADP和LFLE都是多重图案化方法，通过多次曝光或侧墙技术将图案密度加倍。OPC是掩模修正技术。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="8">
+                <div class="question-header">
+                    <span class="question-number">Q8</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">根据焦深公式 DOF = k₂λ/NA²，当数值孔径NA增大时，焦深如何变化？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="a">
+                        <span>A. 焦深增大</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="b">
+                        <span>B. 焦深减小</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="c">
+                        <span>C. 焦深不变</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q8" value="d">
+                        <span>D. 焦深先增大后减小</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="b">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！DOF与NA²成反比，增大NA会显著减小焦深。这是光学光刻中的基本矛盾：提高分辨率会牺牲焦深。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。DOF = k₂λ/NA²，NA在分母且是平方关系，增大NA会使焦深急剧减小。这是分辨率与焦深之间的基本权衡。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="9">
+                <div class="question-header">
+                    <span class="question-number">Q9</span>
+                    <span class="question-type">单选题</span>
+                </div>
+                <p class="question-text">光学光刻与电子束光刻（EBL）相比，以下哪项是光学光刻的主要优势？</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="a">
+                        <span>A. 分辨率更高</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="b">
+                        <span>B. 无需掩模即可直写</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="c">
+                        <span>C. 高吞吐量，适合大规模量产</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q9" value="d">
+                        <span>D. 可以制造非周期性图案</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="c">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！光学光刻是并行图案化过程，掩模中所有特征同时成像，具有高吞吐量，是大规模IC制造的核心技术。EBL是逐点扫描的低吞吐量工艺。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。光学光刻的主要优势是高吞吐量适合量产。EBL的分辨率实际上更高，且可以直写无需掩模，但吞吐量极低。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="10">
+                <div class="question-header">
+                    <span class="question-number">Q10</span>
+                    <span class="question-type">判断题</span>
+                </div>
+                <p class="question-text">k₁因子的理论极限为0.25，且通过各种分辨率增强技术无法突破这一极限。</p>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="true">
+                        <span>正确</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q10" value="false">
+                        <span>错误</span>
+                    </label>
+                </div>
+                <div class="quiz-feedback hidden" data-correct="false">
+                    <div class="feedback-correct">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        正确！虽然k₁的理论极限是0.25，但通过多重图案化等技术，光学光刻已经突破了这一极限。八重图案化已实现6.25 nm半节距，对应k₁远低于0.25。
+                    </div>
+                    <div class="feedback-incorrect">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        不正确。k₁=0.25是理论极限，但实际已通过多重图案化等技术突破。八重图案化可制造6.25 nm半节距，远超0.25极限对应的理论值。
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-summary hidden">
+                <div class="summary-score">
+                    <span class="score-number">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="summary-text">测试完成！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-content hidden" id="exercise-content">
+        <div class="exercise-container">
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 1</span>
+                    <span class="exercise-tag">概念理解</span>
+                </div>
+                <p class="exercise-text">请解释为什么光学光刻中增大数值孔径（NA）会提高分辨率但同时会减小焦深（DOF），并说明这在晶圆制造中会带来什么实际问题。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>分辨率 R = k₁λ/NA，焦深 DOF = k₂λ/NA²。增大NA使R减小（分辨率提高），但DOF与NA²成反比而急剧减小。晶圆表面不可能完全平坦，DOF不足会导致不同位置的CD超出±10%容差。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 2</span>
+                    <span class="exercise-tag">计算分析</span>
+                </div>
+                <p class="exercise-text">假设使用193 nm浸没式光刻，水的折射率n=1.44，透镜半角θ满足sinθ=0.93。计算：（1）有效NA；（2）若k₁=0.25，最小可分辨半节距是多少？（3）与干式光刻（n=1）相比，分辨率提升了多少倍？</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的计算过程和答案..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>（1）NA = n·sinθ = 1.44 × 0.93 ≈ 1.34；（2）hp = 0.25 × 193 / 1.34 ≈ 36 nm；（3）干式NA = 1 × 0.93 = 0.93，分辨率提升倍数 = 1.34/0.93 ≈ 1.44倍。
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <div class="exercise-header">
+                    <span class="exercise-number">练习 3</span>
+                    <span class="exercise-tag">应用思考</span>
+                </div>
+                <p class="exercise-text">思考一下：为什么157 nm光学光刻最终未能实现产业化，而193 nm浸没式光刻+EUV的组合成为了主流路线？从技术和经济两个角度分析。</p>
+                <textarea class="exercise-input" placeholder="在这里写下您的思考..."></textarea>
+                <button class="btn btn-secondary exercise-hint-btn">查看提示</button>
+                <div class="exercise-hint hidden">
+                    <strong>提示：</strong>技术方面：157 nm面临透镜材料（熔融石英高吸收）、掩模保护膜（无法承受辐射）和光刻胶（过度吸收）三大障碍。经济方面：193 nm浸没技术成熟后，继续开发157 nm的投入产出比不如直接转向EUV。EUV虽然设备昂贵，但一步到位解决了更长远的需求。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
