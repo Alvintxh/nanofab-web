@@ -817,6 +817,161 @@ const App = {
                 summary.querySelector('.score-number').textContent = correctCount;
             }
         }
+    },
+
+    initAIAssistant() {
+        const toggle = document.getElementById('ai-assistant-toggle');
+        const chat = document.getElementById('ai-assistant-chat');
+        const close = document.querySelector('.ai-chat-close');
+        const input = document.getElementById('ai-chat-input');
+        const send = document.getElementById('ai-chat-send');
+        const messages = document.getElementById('ai-chat-messages');
+
+        if (!toggle || !chat) return;
+
+        toggle.addEventListener('click', () => {
+            chat.classList.toggle('active');
+        });
+
+        close.addEventListener('click', () => {
+            chat.classList.remove('active');
+        });
+
+        const sendMessage = () => {
+            const text = input.value.trim();
+            if (!text) return;
+
+            this.addChatMessage(text, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+
+            this.showTypingIndicator();
+
+            setTimeout(() => {
+                this.removeTypingIndicator();
+                const response = this.generateAIResponse(text);
+                this.addChatMessage(response, 'assistant');
+            }, 1500);
+        };
+
+        send.addEventListener('click', sendMessage);
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+        });
+    },
+
+    addChatMessage(text, role) {
+        const messages = document.getElementById('ai-chat-messages');
+        if (!messages) return;
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `ai-message ai-message-${role}`;
+
+        const avatarSvg = role === 'user'
+            ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
+
+        messageDiv.innerHTML = `
+            <div class="ai-message-avatar">${avatarSvg}</div>
+            <div class="ai-message-content"><p>${this.escapeHtml(text)}</p></div>
+        `;
+
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+    },
+
+    showTypingIndicator() {
+        const messages = document.getElementById('ai-chat-messages');
+        if (!messages) return;
+
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'ai-message ai-message-assistant ai-typing';
+        typingDiv.innerHTML = `
+            <div class="ai-message-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div class="ai-typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        `;
+        messages.appendChild(typingDiv);
+        messages.scrollTop = messages.scrollHeight;
+    },
+
+    removeTypingIndicator() {
+        const typing = document.querySelector('.ai-typing');
+        if (typing) typing.remove();
+    },
+
+    generateAIResponse(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const chapter = this.state.currentChapter;
+        const user = this.state.user;
+
+        if (lowerMsg.includes('你好') || lowerMsg.includes('hi') || lowerMsg.includes('hello')) {
+            return '你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！';
+        }
+
+        if (lowerMsg.includes('测试') || lowerMsg.includes('quiz') || lowerMsg.includes('题目')) {
+            return '每个章节结束后都有小测试，包含10道题目。你可以通过点击"小测试"标签来查看和完成这些题目。';
+        }
+
+        if (lowerMsg.includes('进度') || lowerMsg.includes('完成')) {
+            const completed = this.state.completedChapters.size;
+            return `你目前已完成 ${completed} / 12 个章节。继续加油！`;
+        }
+
+        if (chapter) {
+            if (lowerMsg.includes('本章') || lowerMsg.includes('这章') || lowerMsg.includes('章节')) {
+                return `你当前正在学习「${chapter.title}」。这一章主要讲解${chapter.description}。有什么具体的问题吗？`;
+            }
+
+            if (lowerMsg.includes('不懂') || lowerMsg.includes('不明白') || lowerMsg.includes('解释')) {
+                return `关于「${chapter.title}」的内容，我可以帮你解释。请告诉我具体是哪个概念或术语让你困惑？`;
+            }
+        }
+
+        if (lowerMsg.includes('纳米制造') || lowerMsg.includes('nanofab')) {
+            return '纳米制造是制造特征尺寸在100纳米以下的结构和器件的技术总称。它包括自上而下（如光刻、刻蚀）和自下而上（如自组装）两大类方法。你想了解哪方面的更多细节？';
+        }
+
+        if (lowerMsg.includes('光刻') || lowerMsg.includes('lithography')) {
+            return '光刻是纳米制造的核心技术，通过将掩模图案转移到光刻胶上形成图形。主要类型包括光学光刻、电子束光刻、离子束光刻等。你想了解哪种光刻技术？';
+        }
+
+        if (lowerMsg.includes('刻蚀') || lowerMsg.includes('etch')) {
+            return '刻蚀是将光刻胶图案转移到基底材料中的关键工艺。主要分为湿法刻蚀（化学溶液）和干法刻蚀（等离子体）。干法刻蚀中的RIE和ICP是最常用的技术。';
+        }
+
+        if (lowerMsg.includes('沉积') || lowerMsg.includes('deposition')) {
+            return '薄膜沉积是在基底表面生长薄膜材料的技术。主要方法包括物理气相沉积（PVD，如溅射、蒸发）和化学气相沉积（CVD，如PECVD、LPCVD）。ALD可以实现原子层级的厚度控制。';
+        }
+
+        if (user && user.level === 'beginner') {
+            return '我理解你的问题。作为初学者，建议你先掌握基本概念，然后再深入技术细节。你可以先阅读要点卡片，完成小测试来检验理解程度。有什么具体概念需要我详细解释吗？';
+        }
+
+        return '这是一个很好的问题！基于当前章节的内容，建议你可以：\n1. 回顾本章的要点卡片\n2. 尝试完成小测试检验理解\n3. 如果还有疑问，可以高亮具体文本获取AI解释\n\n你能告诉我更具体的问题吗？这样我可以给你更准确的回答。';
+    },
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 };
 

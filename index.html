@@ -284,6 +284,57 @@
         </div>
     </div>
 
+    <div id="ai-assistant" class="ai-assistant">
+        <button id="ai-assistant-toggle" class="ai-assistant-toggle" aria-label="AI小助手">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+        </button>
+        <div class="ai-assistant-chat" id="ai-assistant-chat">
+            <div class="ai-chat-header">
+                <div class="ai-chat-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>AI 学习助手</span>
+                </div>
+                <button class="ai-chat-close" aria-label="关闭">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="ai-chat-messages" id="ai-chat-messages">
+                <div class="ai-message ai-message-assistant">
+                    <div class="ai-message-avatar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div class="ai-message-content">
+                        <p>你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input-area">
+                <textarea id="ai-chat-input" placeholder="输入你的问题..." rows="1"></textarea>
+                <button id="ai-chat-send" class="ai-chat-send" aria-label="发送">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
