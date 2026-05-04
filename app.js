@@ -339,8 +339,9 @@ const App = {
                     if (isGitHubPages) {
                         contentEl.querySelectorAll('img').forEach(img => {
                             const src = img.getAttribute('src');
-                            if (src && src.startsWith('../../img/')) {
-                                img.src = '/nanofab-web/img/' + src.replace('../../img/', '');
+                            if (src && src.includes('/img/')) {
+                                const filename = src.split('/img/').pop();
+                                img.src = '/nanofab-web/img/' + filename;
                             }
                         });
                     }
