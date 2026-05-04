@@ -34,7 +34,7 @@
 
 <p><strong>掺杂与分凝。</strong> 通过向熔体中加入精确质量的掺杂剂原子来控制晶片电阻率。但杂质在液固界面发生分凝效应，分凝系数 k 定义为：</p>
 
-<p>$$k = \frac{C<em>s}{C</em>l}$$</p>
+<p>$$k = \frac{C_s}{C_l}$$</p>
 
 <table>
   <thead>
@@ -51,7 +51,7 @@
 
 <p>假设熔体充分混合，固体中杂质浓度随凝固比例X变化为：</p>
 
-<p>$$C<em>s = kC</em>0(1-X)^{k-1}$$</p>
+<p>$$C_s = kC_0(1-X)^{k-1}$$</p>
 
 <p>实际上由于坩埚壁热梯度引起自然对流形成循环胞（Recirculation Cells），熔体并非完全均匀混合。考虑液固界面处的边界层效应，有效分凝系数修正为：</p>
 
@@ -113,23 +113,23 @@
 
 <p>硅在分子氧中的热氧化反应为：</p>
 
-<p>$$Si(固) + O<em>2(气) → SiO</em>2$$</p>
+<p>$$\\text{Si(固)} + \\text{O}_2\\text{(气)} \\rightarrow \\text{SiO}_2$$</p>
 
 <p>此过程称为干氧氧化（Dry Oxidation）。Deal-Grove模型适用于预测厚度大于约300 Å的热氧化层生长。</p>
 
 <p>模型考虑三个氧通量的平衡：</p>
 
-<li><strong>气相传输通量 J₁：</strong> 氧从气体主体通过边界层扩散至氧化层表面，J₁ = h<em>g(C</em>g - C_s)</li>
-<li><strong>氧化层内扩散通量 J₂：</strong> 氧穿过已生长氧化层的扩散，J₂ = D<em>{O₂}(C</em>o - C<em>i)/t</em>{ox}</li>
-<li><strong>界面反应通量 J₃：</strong> 氧在Si-SiO₂界面的化学反应，J₃ = k<em>s·C</em>i</li>
+<li><strong>气相传输通量 J₁：</strong> 氧从气体主体通过边界层扩散至氧化层表面，$J_1 = h_g(C_g - C_s)$</li>
+<li><strong>氧化层内扩散通量 J₂：</strong> 氧穿过已生长氧化层的扩散，$J_2 = D_{O_2}(C_o - C_i)/t_{ox}$</li>
+<li><strong>界面反应通量 J₃：</strong> 氧在Si-SiO₂界面的化学反应，$J_3 = k_s \\cdot C_i$</li>
 
-<p>稳态下三者相等。结合Henry定律（C<em>o = Hp</em>g），解方程可得氧化层厚度随时间的关系：</p>
+<p>稳态下三者相等。结合Henry定律（$C_o = Hp_g$），解方程可得氧化层厚度随时间的关系：</p>
 
-<p>$$t<em>{ox}^2 + At</em>{ox} = B(t + τ)$$</p>
+<p>$$t_{ox}^2 + At_{ox} = B(t + τ)$$</p>
 
 <p>其中：</p>
 
-<p>$$A = 2D\left(\frac{1}{k<em>s} + \frac{1}{h}\right), \quad B = \frac{2DHp</em>g}{N<em>1}, \quad τ = \frac{t</em>0^2 + At_0}{B}$$</p>
+<p>$$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \quad B = \frac{2DHp_g}{N_1}, \quad τ = \frac{t_0^2 + At_0}{B}$$</p>
 
 <p>N₁为SiO₂中每单位体积的氧分子数（干氧化时为2.2×10²² cm⁻³）。τ参数补偿初始氧化层厚度t₀的效应。</p>
 
@@ -211,23 +211,23 @@
 
 <p>$$C(z,t) = C_s \cdot \text{erfc}\left(\frac{z}{2\sqrt{Dt}}\right)$$</p>
 
-<p>总剂量随时间增加：$Q<em>T = \frac{2}{\sqrt{\pi}}C</em>s\sqrt{Dt}$</p>
+<p>总剂量随时间增加：$Q_T = \frac{2}{\sqrt{\pi}}C_s\sqrt{Dt}$</p>
 
 <p><strong>推进扩散（Drive-in）。</strong> 初始剂量Q_T固定，表面封闭，解为高斯分布：</p>
 
 <p>$$C(z,t) = \frac{Q_T}{\sqrt{\pi Dt}} \exp\left(-\frac{z^2}{4Dt}\right)$$</p>
 
-<p>表面浓度随时间降低：$C<em>s = Q</em>T / \sqrt{\pi Dt}$</p>
+<p>表面浓度随时间降低：$C_s = Q_T / \sqrt{\pi Dt}$</p>
 
-<p>经典工艺流程为先做预沉积引入杂质，再做推进扩散形成所需结深。推进近似的前提是$\sqrt{Dt}<em>{predep} \ll \sqrt{Dt}</em>{drive-in}$。</p>
+<p>经典工艺流程为先做预沉积引入杂质，再做推进扩散形成所需结深。推进近似的前提是$\sqrt{Dt}_{predep} \ll \sqrt{Dt}_{drive-in}$。</p>
 
 <h3>10.4.3 扩散系数</h3>
 
-<p>扩散系数遵循Arrhenius关系：$D = D<em>0 e^{-E</em>a/kT}$</p>
+<p>扩散系数遵循Arrhenius关系：$D = D_0 e^{-E_a/kT}$</p>
 
 <p>Fair的空位模型将总扩散系数表示为各电荷态空位贡献的叠加：</p>
 
-<p>$$D = D^o + D^- \frac{n}{n<em>i} + D^{=}\left(\frac{n}{n</em>i}\right)^2 + D^+ \frac{p}{n_i} + \cdots$$</p>
+<p>$$D = D^o + D^- \frac{n}{n_i} + D^{=}\left(\frac{n}{n_i}\right)^2 + D^+ \frac{p}{n_i} + \cdots$$</p>
 
 <p><strong>硅中常见掺杂剂的本征扩散系数：</strong></p>
 
@@ -269,9 +269,9 @@
 
 <p>杂质浓度近似为高斯分布：</p>
 
-<p>$$N(x) = \frac{\Phi}{\sqrt{2\pi}\Delta R<em>p} \exp\left(-\frac{(x-R</em>p)^2}{2\Delta R_p^2}\right)$$</p>
+<p>$$N(x) = \frac{\Phi}{\sqrt{2\pi}\Delta R_p} \exp\left(-\frac{(x-R_p)^2}{2\Delta R_p^2}\right)$$</p>
 
-<p>其中R<em>p为投影射程，ΔR</em>p为标准偏差（歧离, Straggle），Φ为注入剂量。</p>
+<p>其中$R_p$为投影射程，$\Delta R_p$为标准偏差（歧离, Straggle），$\Phi$为注入剂量。</p>
 
 <p><strong>硅中常见杂质的注入参数（100 keV）：</strong></p>
 
@@ -287,7 +287,7 @@
   </tbody>
 </table>
 
-<p>射程估算公式：$\Delta R<em>p \approx \frac{2}{3}R</em>p \frac{\sqrt{M<em>i M</em>t}}{M<em>i + M</em>t}$</p>
+<p>射程估算公式：$\Delta R_p \approx \frac{2}{3}R_p \frac{\sqrt{M_i M_t}}{M_i + M_t}$</p>
 
 
 
@@ -295,7 +295,7 @@
 
 <p>当离子速度方向平行于主要晶轴时，可能发生沟道效应（Channeling），导致部分离子深入晶体远超正常射程。临界角：</p>
 
-<p>$$\psi<em>c = 9.73° \sqrt{\frac{Z</em>i Z_t}{E \cdot d}}$$</p>
+<p>$$\psi_c = 9.73° \sqrt{\frac{Z_i Z_t}{E \cdot d}}$$</p>
 
 <p>其中E为入射能量（keV），d为沿离子方向的原子间距（Å）。例如100 keV硼注入(100)硅的临界角约6°。</p>
 
