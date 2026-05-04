@@ -819,7 +819,9 @@ const App = {
                     </svg>
                 </span>
             `;
-            header.addEventListener('click', () => {
+            header.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 partEl.classList.toggle('expanded');
             });
 
