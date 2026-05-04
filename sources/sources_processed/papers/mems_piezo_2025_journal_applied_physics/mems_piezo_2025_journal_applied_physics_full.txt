@@ -1,0 +1,2958 @@
+# mems_piezo_2025_journal_applied_physics
+# Extracted from: mems_piezo_2025_journal_applied_physics.pdf
+# Total PDF pages: 23
+# Page numbering: offset=0 (book_page = pdf_page - 0 + 1)
+# ============================================================
+
+
+[Page 1]
+
+View
+Online 
+Export
+Citation
+REVIEW ARTICLE |  JANUARY 13 2025
+Piezoelectric thin films and their applications in MEMS: A
+review
+Jinpeng Liu 
+ ; Hua Tan  
+ ; Xinyi Zhou; Weigang Ma; Chuanmin Wang; Nguyen-Minh-An Tran;
+Wenlong Lu 
+ ; Feng Chen  
+ ; Junya Wang ; Haibo Zhang  
+J. Appl. Phys. 137, 020702 (2025)
+https://doi.org/10.1063/5.0244749
+ 04 April 2026 18:35:41
+
+[Page 2]
+Piezoelectric thin films and their applications in
+MEMS: A review
+Cite as: J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+View Online
+Export Citation
+CrossMark
+Submitted: 21 October 2024 · Accepted: 24 December 2024 ·
+Published Online: 13 January 2025
+Jinpeng Liu,1,2,3
+Hua Tan,1,2,3,a)
+Xinyi Zhou,1,2,3 Weigang Ma,1,2,3 Chuanmin Wang,1,2,3 Nguyen-Minh-An Tran,4
+Wenlong Lu,1
+Feng Chen,5,a)
+Junya Wang,1,6,a) and Haibo Zhang1,2,4,5,6,a)
+AFFILIATIONS
+1School of Mechanical Science & Engineering, Huazhong University of Science and Technology, Wuhan 430074,
+People’s Republic of China
+2School of Materials Science and Engineering, State Key Laboratory of Material Processing and Die & Mould Technology,
+Huazhong University of Science and Technology, Wuhan 430074, People’s Republic of China
+3Guangdong HUST Industrial Technology Research Institute, Dongguan 523808, People’s Republic of China
+4Faculty of Chemical Engineering, Industrial University of Ho Chi Minh City, Ho Chi Minh City 71420, Vietnam
+5Anhui Province Key Laboratory of Low-Energy Quantum Materials and Devices, High Magnetic Field Laboratory, HFIPS, Chinese
+Academy of Sciences, Hefei, Anhui 230031, China
+6Optics Valley Laboratory, Huazhong University of Science and Technology, Hubei 430074, People’s Republic of China
+a)Authors to whom correspondence should be addressed: hua_tan@hust.edu.cn; wangjy_mse@hust.edu.cn; and
+hbzhang@hust.edu.cn. Tel.: +86-27-87544307.
+ABSTRACT
+With the increasing demand for devices in miniaturization, accuracy, and low power consumption, developing microdevices in the form of
+piezoelectric thin films is significant for microelectromechanical systems (MEMS) applications. Piezoelectric thin films offer advantages of
+miniaturization and low power consumption, holding immense potential in MEMS, especially with advancements in micro-nanomanufac-
+turing technologies. In this review, we highlighted the compelling piezoelectric properties and summarized the latest research progress of
+thin films, with an emphasis on recent advances in piezoelectric MEMS. We mainly introduced the recent developments on different types
+of piezoelectric MEMS (piezo-MEMS), along with the descriptions of piezoelectric effects, film preparation, film properties, and device indi-
+cators. We have emphasized the comparison of MEMS with different piezoelectric materials and methods for improving devices. The recent
+achievements of piezoelectric thin films in MEMS applications and the future development of MEMS applications are also reviewed.
+© 2025 Author(s). All article content, except where otherwise noted, is licensed under a Creative Commons Attribution (CC BY) license
+(https://creativecommons.org/licenses/by/4.0/). https://doi.org/10.1063/5.0244749
+I. INTRODUCTION
+In recent years, the rapid development of the Fifth Generation
+Mobile Networks (5G) and the Internet of Things (IoT) relies
+heavily on a plethora of miniaturized, low-cost, and low-power
+devices, such as sensors and actuators. To meet the growing
+demand for enhanced functionalities of microsensors and actuators,
+there is a strong need for novel microdevices beyond traditional
+Micro-Electro-Mechanical Systems (MEMS). Integrating functional
+materials into MEMS devices has proven effective. Among various
+functional materials, piezoelectric materials stand out as one of the
+most suitable options. Even at the microscopic scale, piezoelectric
+materials exhibit exceptional energy conversion efficiency between
+mechanical and electrical energy.
+Piezoelectric thin films have emerged as pivotal components
+in the realm of Micro-Electro-Mechanical Systems (MEMS) due to
+their unique ability to convert mechanical energy into electrical
+signals and vice versa. These thin films, typically composed of
+materials like lead zirconate titanate (PZT) and aluminum nitride
+(AlN), exhibit the piezoelectric effect, where they generate electric
+charge in response to mechanical stress. In MEMS applications,
+this property enables precise actuation and sensing capabilities,
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-1
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 3]
+making piezoelectric thin films indispensable for devices such as
+sensors,1 actuators,2 and energy harvesters.3 Their nanoscale thick-
+ness allows for seamless integration into MEMS structures, offer-
+ing enhanced sensitivity and response in various applications,
+ranging from pressure sensors and accelerometers to energy-
+efficient micro-actuators. The synergy between piezoelectric thin
+films and MEMS technology continues to drive innovation,
+enabling the development of compact, high-performance devices
+with diverse functionalities in fields like healthcare, aerospace,
+and consumer electronics.
+This review provides a brief introduction and overview of
+various preparation techniques for different piezoelectric thin films
+used in MEMS, MEMS processing procedures, and thin film testing
+methods. The second section covers various techniques for fabricat-
+ing piezoelectric thin films, photolithography and etching pro-
+cesses, as well as encapsulation and testing methods. Additionally,
+it delves into several classic applications of MEMS devices in the
+realms of actuators, energy harvesters, and sensors. Due to the vast
+interdisciplinary nature of piezoelectric MEMS, we have chosen to
+focus on introducing recent years’ most popular and widely applied
+MEMS devices primarily based on thin-film processes from the
+perspectives of materials and applications. Subsequently, we will
+present MEMS acoustic sensors utilizing piezoelectric thin films,
+with piezoelectric micro-mechanical ultrasonic transducers and
+piezoelectric microphones as the main representative devices.
+Following that, different materials will be sequentially introduced
+to analyze and compare the design principles and output perfor-
+mance of piezoelectric MEMS energy harvesters. Given the rapid
+advancement in optical and imaging technologies, an analysis and
+comparison of piezoelectric MEMS actuators for micro-mirror
+devices will be conducted. Finally, the status quo of piezoelectric
+MEMS devices was summarized, highlighting key challenges that
+need resolution to enable practical application devices and outlin-
+ing future prospects.
+II. MEMS PROCESSING OF PIEZOELECTRIC THIN FILMS
+There are three approaches to realize piezoelectric MEMS
+devices: (i) depositing piezoelectric thin films on silicon substrates
+with appropriate insulating and device layers, followed by surface
+micromachining to achieve microfabricated transducer devices
+(additive approach). (ii) Micromachining bulk piezoelectric materi-
+als such as single crystals and piezoelectric ceramics to alter the
+shape and structure of the bulk material for microfabricated trans-
+ducer devices (subtractive approach). (iii) Integrating silicon-based
+microstructures onto bulk piezoelectric or silicon substrates using
+wafer bonding techniques (integrative approach). A comparison
+based on MEMS dimensions, piezoelectric properties, and integra-
+tion techniques is shown in Fig. 1. Piezoelectric thin films with
+thickness ranging from 100 nm to several tens of micrometers
+exhibit piezoelectric performance close to that of corresponding
+bulk materials. Figure 1 illustrates that thin films have significant
+advantages over the other two approaches in terms of integrated
+production and overall performance. Therefore, Secs. II A–II C will
+focus on the processing of thin films in MEMS. Thin film MEMS
+processing can be roughly categorized as thin film preparation,
+etching, and packaging testing.
+A. Piezoelectric thin film deposition
+Piezoelectric thin films can be deposited using various tech-
+niques such as sputtering, chemical solution methods, and atomic
+layer deposition. Generally, all of these methods involve three main
+steps: (i) the prepared thin film structure can be categorized as
+single-crystalline, randomly polycrystalline, or highly oriented poly-
+crystalline. (ii) The deposition of the thin film requires a corre-
+sponding substrate [e.g., Si (100), MgO, SrTiO3(100), mica, nickel
+sheet, Al2O3]. (iii) The temperature for thin film deposition and
+annealing. Based on how atomic or molecular substances are gener-
+ated and brought to the substrate, these methods can be broadly
+classified into chemical methods (e.g., chemical vapor deposition,
+sol–gel techniques, etc.) or physical methods (e.g., sputtering,
+molecular beam epitaxy, and pulsed laser deposition). Several
+methods have been explored for each piezoelectric material of
+interest, each with varying degrees of success and advantages.
+Currently, one of the most critical challenges in the commercializa-
+tion of MEMS is how to achieve large-scale, large-area production
+of thin films while ensuring high yield of the thin film products.
+FIG. 1. (a) Three approaches toward fabricating piezoelectric MEMS devices. (b) Comparison of thin films, ceramics, and single crystals in microfabrication.
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-2
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 4]
+Sol–gel methods and magnetron sputtering provide the latest
+research findings in this regard. The sol–gel method commonly
+uses
+metal-organic
+salts
+or
+metal
+nitrates
+as
+solute
+and
+2-methoxyethanol ether and acetic acid as solvents, and is often
+used to prepare metal precursor solutions. Forming of thin films
+involves drying, pyrolysis, and annealing, with evaporation of
+organic compound and crystallization. Liu and coworkers4–6
+employed the sol–gel method to fabricate lead-free SrTiO3 and
+BaTiO3-based thin films, which exhibited excellent ferroelectric
+properties at low and medium temperatures. The sol–gel method is
+considered to be optimal for processing wafers because it is low-
+priced and industrially scalable than other physical deposition
+methods. The sol–gel method can prepare facile and industrially
+scalable polycrystalline films of around 2 μm, and demonstrated
+excellent piezoelectric properties.7–10 In 2022, Yi et al. developed a
+fabrication technique that allows the deposition of the film over an
+entire 4-in. with good uniformity, and it can be applicable for the
+fabrication of large-area films. The chemical solution technique has
+a reasonable thickness homogeneity and complex composition uni-
+formity (the thickness fluctuation is within 8% and the concentra-
+tions of target elements are almost identical from five measuring
+points as shown in Fig. 2), and it enables the use of MEMS in the
+future.11
+Thin films are deposited using the process of magnetron sput-
+tering, which involves bombarding particles with an effective
+plasma in a vacuum and magnetic field environment. The thin
+films by magnetron sputtering have a better crystal structure and
+fewer flaws. The more demanding piezoelectric qualities of the
+piezo-MEMS are met by this preparation method, which works
+with both polycrystalline and monocrystalline materials. The high
+piezoelectric performance of Pb(Zr, Ti)O3 (PZT) thin films grown
+by magnetron sputtering within a wide thickness range, including
+among
+densely,
+extensively,
+and
+physically
+derived.12
+Chen
+et al.13,14 successfully fabricated high-quality, fatigue-resistant PZT
+thin films using a magnetron sputtering technique. In 2022,
+Shibata et al. achieved mass-producible 8-in. potassium sodium
+niobate (KNN) wafers using magnetron sputtering, exhibiting
+excellent thickness uniformity of ±3.5% and a very high e31 value
+of 13.5 C/m2.15
+In the preparation of piezoelectric thin films for application in
+MEMS, key parameters include: (i) film thickness, where the criti-
+cal aspect for achieving effective piezoelectric conversion lies in
+depositing the piezoelectric material at thicknesses ranging from 1
+to 10 μm to several tens of micrometers, to approximate the piezo-
+electric
+performance
+of
+corresponding
+bulk
+materials.
+(ii)
+Deposition temperature, with the lowest integration temperature on
+silicon substrates being 450 °C; lower deposition temperatures facil-
+itate better integration and compatibility with complementary
+metal-oxide-semiconductor
+(CMOS)
+devices.
+(iii)
+Deposition
+methods, as the method of preparation directly impacts production
+costs. (iv) Electrical and piezoelectric properties of the thin film
+material. These numerous factors directly influence the quality of
+the thin film and the product yield. Table I summarizes the most
+critical techniques and typical characteristics of piezoelectric thin
+films of interest in MEMS devices.
+B. Etching thin films
+The etching technique typically employs wet etching and dry
+etching. A graphic method with affordable alternatives, strong
+selectivity, and somewhat quick etching rates is wet etching, but it
+is characterized by low precision in etching microstructures, espe-
+cially for wet etching of PZT thin films with the low precision of
+etching and fluoride residues. Wang and co-workers25 applied a
+wet etching technique for PZT to enhance the functionality of
+scanning mirrors. Wet etching is frequently employed in MEMS
+and optoelectronic devices; because it is only isotropic, it cannot
+precisely regulate the etching of the device shape below 2μm. Most
+well-known piezoelectric materials can undergo wet etching in
+strong acids and bases. For instance, quartz crystals have been
+found to dissolve rapidly in NaOH and KOH solutions.26,27
+Typically,
+the
+etching
+rate
+depends
+on
+the
+crystallographic
+FIG. 2. (a) The thickness distribution curve for the five selected sample points. The inset provides the coordinates (A, B, C, D, and E) of these points on the 4-in. Si
+wafer. (b) depicts the atomic percentages of target elements (O, Bi, Ti, Ba, Fe, and Sr) at points A, B, C, D, and E (Reprinted with permission from ACS Appl. Mater.
+Interfaces 14, 18 (2022). Copyright 2022, American Chemical Society.).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-3
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 5]
+direction; hence, it is often inherently anisotropic. The extent of
+etching is often related to the quality and properties of the thin
+film material; for example, compared to epitaxial films, polycrystal-
+line AlN films are more susceptible to hot phosphoric acid corro-
+sion.28 Chen et al.29 used 10% KOH as an etchant at 50 °C with a
+200 nm Ti mask layer. Doll et al.30 utilized Ti as a top electrode
+mask for AlN etching, employing 25% TMAH as the etchant.
+Clearly, wet etching is more favorable for AlN etching. The etching
+rate in ZnO depends on the crystal orientation of ZnO.31
+Controlled etching of ZnO requires the use of weak acids with
+appropriate ion levels. Various acids and bases such as HCl,
+H2SO4, HBr, HF, HNO3, and H3PO4 are used for patterning ZnO
+films. PZT substrates are also susceptible to erosion by strong
+acidic and alkaline solutions. PZT can be considered a compound
+of PbO, ZrO2, and TiO2, which is why etching of PZT films
+requires etchants containing multiple components. Wet etching has
+become an effective and popular technology in MEMS due to its
+high etching rate, low cost, low surface damage, and high
+selectivity.32–34 There is currently no effective wet etching method
+for KNN films, as KNN remains stable in both acidic and alkaline
+environments.
+Ion beam etching is a sort of dry etching that can be used to
+precisely etch ultra-thin films on materials that are challenging to
+etch chemically. Any known substance can be etched using it as
+well. Ion beam etching has anisotropy, which exists in a high aspect
+ratio of directionality and high resolution. As a result, it is also uti-
+lized to process the microstructure of PZT ferroelectric thin films,
+but the outstanding limitation of the method is high cost and
+damage to thin films caused by high temperatures. When selecting
+gas species for plasma etching, the primary consideration depends
+on the formation of volatile byproducts as part of the decomposi-
+tion of the metal oxide being etched. Typically, in dry etching of
+AlN, chlorine gas is used as the etching gas, with Ti/Cr used as the
+mask layer and top electrode. Yang et al.35 reported a dry etching
+method using Cl2/BCl3/Ar at 700 W power and 0.5 Pa pressure.
+They employed SiO2 as the mask layer and Pt as the bottom elec-
+trode acting as an etch stop layer. The selectivity of AlN/Pt was 3:1.
+Although dry etching is highly anisotropic and can produce vertical
+profiles, it is not preferred as highly reactive Cl2 plasma exhibits
+lower etching selectivity between materials and may potentially
+cause damage through ion bombardment. For patterning PZT thin
+films, dry etching techniques are commonly used. It generates pat-
+terns with minimal undercutting. However, due to differences in
+the sputtering efficiency of Pb, Zr, and Ti, it is challenging to
+achieve satisfactory PZT patterns. To address the limitation of dry
+etching in effectively patterning satisfactory features, a method
+involving a mixture of various plasma gases is chosen to enhance
+the etching depth. A comparison of wet and dry etching character-
+istics for different piezoelectric thin film materials is presented in
+Table II.
+C. Packaging of MEMS
+MEMS packaging technology mainly includes three levels:
+wafer-level, device-level, and system-level. (i) Wafer-level packaging
+technology aims to protect chips or other core components,
+TABLE I. The most important techniques and typical characteristics of the piezoelectric thin films of interest in MEMS devices.
+Materials
+Deposition method
+Film thickness
+Substrate temp. (°C)
+Piezoelectric properties
+PZT/Pt/Ti/SiO2/Si1
+Sol–gel
+∼2.2 μm
+650
+e31 ∼–12.5 ± 0.3 C/m2
+PZT/Pt/Ti/SiO2/Si16
+Sol–gel
+∼20 μm
+650
+d31 ∼−80 pC/N
+PZT/LaNiO3/Pt/Ti/SiO2/Si17
+Sputtering
+∼2 μm
+350
+e31 ∼–11.6 C/m2
+AlxSc1−xN/Pt/Ti/SiO2/Si18
+Sputtering
+∼1 μm
+350
+d31 ∼30 pC/N
+AlN/Pt/Ti/SiO2/Si19
+MOCVD
+300 nm
+500
+d33 ∼5.3 pm/V
+KNN/ Pt/Ti/SiO2/Si15
+Sputtering
+∼2 μm
+700
+e31 ∼–13.5 C/m2
+KNN/SrRuO3/SrTiO3
+20
+Sputtering
+∼1 μm
+700
+d33 ∼36 pm/V
+KNN/Pt/Ti/SiO2/Si21
+PLD
+100 nm
+650
+e31 ∼–5.6 C/m2
+ZnO/Pt/Ti/SiO2/Si22
+Sputtering
+∼2 μm
+400
+…
+ZnO/Mo/Si23
+PLD
+800 nm
+500
+d33 ∼49.7 pm/V
+ZnO/Ag/Si24
+Sputtering
+∼1 μm
+650–950
+d33 ∼2.62 pm/V
+TABLE II. Comparison of wet and dry etching characteristics for different piezoelec-
+tric thin film materials.
+Materials
+Etching
+method
+Etchant/gas
+Etch rate
+(nm/min)
+Reference
+AlN
+Wet
+25% TMAH
+22
+36
+Wet
+25% TMAH
+600
+37
+Wet
+10% KOH
+…
+29
+Dry
+Cl2/BCl3/Ar
+77.5
+34
+ZnO
+Wet
+20% NH4Cl
+190–400
+38
+Wet
+10% KOH
+…
+37
+Dry
+C2H6/H2/Ar
+20–25
+39
+PZT
+Wet
+BHF/HCl/NH4Cl/
+H2O
+16
+31
+Wet
+HNO3/BHF/H2O
+3300
+40
+Wet
+BHF/CH3COOH/
+HNO3/HCl/NH4Cl/
+EDTA/H2O
+200
+31
+Dry
+SF6
+65
+41
+KNN
+Wet
+…
+…
+…
+Dry
+Ar/C4F8
+140
+42
+Dry
+Ar/C4F8
+370
+43
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-4
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 6]
+prevent plastic deformation or fracture, safeguard the system’s
+signal conversion circuits, and provide necessary electrical and
+mechanical isolation for certain components. Many MEMS devices
+require chip bonding to create electrodes and compact chambers.
+(ii) Device-level packaging technology involves protecting vulnera-
+ble or circuit-sensitive devices with enclosures such as tube shells,
+and providing interfaces for active sensors or actuator portions
+through pins or other I/O ports to enable electrical interconnection
+with the external environment. (iii) Multi-chip packaging technol-
+ogy involves assembling modules where two or more bare chips or
+chip-scale packaged (CSP) ICs are mounted on a substrate to form
+an electronic system or subsystem. The MEMS packaging process
+typically includes: (i) bonding chips to the substrate, (ii) establish-
+ing electrical connections between chips and packaging leads using
+gold wires or copper wires, and (iii) sealing the package.
+Packaging determines the reliability and cost of MEMS
+devices, which is the key to practicality and commercialization.
+However, the dependability and long-term stability of MEMS
+devices can be severely impacted by residual stresses induced
+during the packaging process, which can lead to shifts in the
+output signals of MEMS devices. As a result, achieving excellent
+performance and stability of MEMS devices requires decreasing
+package stress.44–48 According to studies, the most significant cause
+of stress in chip-scale packaging is the chip bonding procedure. In
+particular, large package stresses are produced by the silicon
+MEMS device substrate’s material coefficient of thermal expansion
+(CTE) mismatch with the package substrate. For resonant devices
+or pressure-sensitive devices, such as MEMS resonators, accelerom-
+eters, and gyroscopes, which undergo geometrical deformation as a
+result of package stresses, the device’s resonant frequency can
+change,
+causing
+inaccuracies
+in
+the
+sensor’s
+output
+signal.
+Therefore, there is need for modifying the package architectural
+technique and bonding materials to reduce encapsulation stress.
+Authors such as Braeuer et al. have demonstrated the viability of
+the reactive bonding approach using extremely thin multilayer
+films of Ti/a-Si and Al/Pd. A candidate for further research in reac-
+tive bonding, such as for MEMS packaging, is the highly energetic
+Al/Pd system.49 Lee et al. employed a glass–silicon anodic bonding
+technique in an innovative vacuum packaging process, which sig-
+nificantly improved the yield of vacuum packages. Notably, no
+vacuum degradation was observed even after 1000 h of testing.50
+The development of new packaging materials, which should be
+dedicated to the creation of universally beneficial low-stress
+bonding materials and packaging substrate materials that perfectly
+match the CTE of the MEMS materials, is the main strategy for
+reducing encapsulation stress in the future. The second strategy is
+the continued optimization of the encapsulation structure.
+III. PIEZOELECTRIC EFFECT AND PIEZOELECTRIC
+COEFFICIENT TEST OF THIN FILMS
+A. Piezoelectric effect and coefficient
+“The piezoelectric effect” describes the process whereby elec-
+trostatic charges develop on the surface of piezoelectric materials
+when they are exposed to a specific external force, creating a poten-
+tial difference on the material’s surface. On the other hand, the
+inverse
+piezoelectric
+effect
+describes
+the
+application
+of
+an
+alternating electric field to a piezoelectric material, resulting in the
+mechanical deformation of the material. The piezoelectric coeffi-
+cient is one of the important physically significant parameters of
+the film devices.
+In objects with uniform characteristics at the dimensional
+scale, the parameters required for the piezoelectric effect are the
+strain tensor xi, the stress tensor σi, the electric field Ei, and the dis-
+placement field Di vector. Piezoelectricity implies a linear relation-
+ship between the D field and strain/stress,
+Di ¼
+X
+k
+dikσk or Di ¼
+X
+k
+eikxk:
+(3:1)
+dik and eik are both piezoelectric charge coefficients. The
+inverse piezoelectric coefficients generate mechanical responses
+induced by applied electric fields,
+xi ¼
+X
+k
+dkiEk or σi ¼ 
+X
+k
+ekiEk:
+(3:2)
+In thin films, mechanical boundary conditions differ from
+unbounded bulk materials, as strains are typically known in-plane
+while the film is stress-free out-of-plane at the substrate interface.
+Upon applying an electric field, strains in-plane remain zero
+(x1 = x2 = 0), generating in-plane stresses and out-of-plane strains.
+The constitutive equation, utilizing complex tensors and the d coef-
+ficient, is now expressed as
+x1 ¼ sE
+11 þ sE
+12
+
+
+σ1 þ d31E3 and x2 ¼ 2sE
+13σ1 þ d33E3:
+(3:3)
+The piezoelectric thin film coefficients can be determined
+based on Eq. (3.3), yielding the derived in-plane stress, i.e., the
+effective e31,f = −σ1/E3. The effective d33,f = x2/E3. By combining
+the aforementioned Eqs. (3.2) and (3.3), the derivation leads to the
+calculation formula for the equivalent piezoelectric coefficient,
+expressed as
+e31,f ¼
+d31
+sE
+11 þ sE
+12
+and d33,f ¼ d33 
+2sE
+13
+sE
+11 þ sE
+12
+d31:
+(3:4)
+B. Piezoelectric coefficient test of thin films
+Traditionally, piezoelectric thin film measurement techniques
+were divided into two categories: direct measurement and indirect
+measurement. The former relies on directly detecting the displace-
+ment caused by the applied electric field or the charge generated by
+applying a load, from which d33 or e31 can be extracted. The latter
+method utilizes piezoelectric effects such as bulk acoustic waves or
+surface acoustic waves to analyze the relationship between mechan-
+ical properties (stress and strain) and electrical properties (voltage
+or charge). Particular emphasis is placed on the laser Doppler
+vibration
+measurement
+method
+in
+direct
+measurement
+approaches.51 While this method can only measure the transverse
+piezoelectric coefficient, it has a unique advantage of very high sen-
+sitivity and reliable data. Measurements are conducted under con-
+ditions close to those of the actual sensor or actuator usage
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-5
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 7]
+environment. One drawback of this technique is that it assumes
+zero strain along the z axis (S3), which may not be the case.
+Therefore, the relevant data for MEMS device fabrication can be
+referenced using this approach.
+The laser Doppler vibration measurement method is a rela-
+tively mature method for measuring piezoelectric coefficients of the
+inverse
+piezoelectric
+effect.
+Because
+the
+laser
+interferometry
+method has an extra-high resolution in displacement (<10−3 nm),
+the piezoelectric coefficient of ultra-thin films can be evaluated
+with good accuracy. After the application of a polarization voltage,
+the piezoelectric thin films will generate micro-range displacements
+in the film growth direction.
+Testing the effective piezoelectric coefficient of a film by an
+e31.f cantilever beam bending with an alternating electric field is
+another more frequently used test method. The thin film sample
+is made into a long cantilever beam that is fixed at one end. An
+alternating electric field is then applied to the cantilever beam,
+causing it to bend due to the transverse piezoelectric effect. The
+displacement at the other end can then be measured using a laser
+Doppler vibrometer.52 The lateral piezoelectric properties were
+measured by monitoring the tip displacement of the thin film
+cantilever beam under an alternating electric field. The PZT layer
+was polarized using a bias voltage, and the tip displacement of
+the cantilever caused by a unipolar sinusoidal scanning voltage
+between low and high voltages was recorded, as illustrated in
+Fig. 3. The transverse piezoelectric coefficient formula is as
+follows:
+e31:f ¼ 
+h2
+s Es
+3 1  νs
+ð
+ÞL2V δ,
+(3:5)
+where hs, Es, νs, L, V, and δ are the thickness of the substrate,
+Young’s modulus, Poisson’s ratio, length of the piezoelectric
+active part of the cantilever beam, applied voltage, and free end
+displacement, respectively. Table III presents the parameters of
+commonly used substrate materials. Using PZT as an example,
+the greatest external alternating electric field that can be applied
+to the PZT films occurs at 20 V, producing a piezoelectric coeffi-
+cient of roughly −14 C/cm2.53
+IV. DEVELOPMENT AND APPLICATION TRENDS OF
+PIEZOELECTRIC MEMS
+Piezoelectric thin films have garnered significant attention in
+the field of MEMS due to their unique properties and versatile
+applications. One of the notable applications lies in sensors, where
+these films are employed to create highly responsive sensors for
+measuring parameters like pressure, acceleration, and temperature.
+Tens of millions of small-sized, low-power, high-precision MEMS
+microsensors play an important role as the integrated components
+FIG. 3. Experimental set-up of the e31.f piezoelectric test.
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-6
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 8]
+of the sensing network at the perception level of the Internet of
+Things (IoT) system.62–64 The micro-pressure sensor is a common
+type of piezoelectric MEMS sensor, which is designed using a can-
+tilever beam structure with a positive piezoelectric effect. When
+pressure is applied to the elastic thin film at the bottom of the
+silicon substrate, the film undergoes elastic deformation under
+external forces, causing the cantilever beam on the front of the
+silicon substrate to deform and causing bending deformation of the
+piezoelectric thin film. According to the piezoelectric properties of
+ferroelectric materials, when subjected to external forces, charges
+will form on the surface. After being amplified and impedance
+transformed by charge amplifiers and measuring circuits, the
+charges will be converted into electrical output proportional to the
+external force applied, achieving sensing function.64
+From 2005 to 2023, the application of piezoelectric MEMS
+technology has seen significant advancements across various
+devices such as gyroscopes,65 inkjet print heads,66 BAW filters,67
+autofocus actuators,68 PMUT ultrasound transducers,69 and energy
+harvesters,70 as shown in Fig. 4. Looking ahead, the field is poised
+to continue progressing toward nanotechnology and material inno-
+vations, multifunctionality (simultaneous sensing, actuation, and
+energy conversion capabilities), integration, miniaturization, and
+the development of self-powering systems. These developments can
+generally be categorized into three classes: actuators, energy har-
+vesters, and sensors, as illustrated in Fig. 5. From this perspective, it
+is evident that with the advancement of microfabrication tech-
+niques and market demands, piezoelectric materials have shifted
+from bulk-type to thin-film-type. Piezoelectric thin film devices
+have evolved from simple and single devices to integration, refine-
+ment, and complexity.
+V. ACOUSTIC SENSORS OF PIEZOELECTRIC THIN
+FILMS
+Piezoelectric MEMS sensors reflect changes in the measured
+amplitude, intensity, or concentration by detecting variations in
+resonant signals and piezoelectric currents. Sensors based on piezo-
+electric materials offer two main advantages: (i) they do not require
+input power and (ii) they provide a wide dynamic range. This
+chapter describes thin-film-based piezoelectric acoustic sensors:
+piezoelectric
+microphones
+and
+Piezoelectric
+Micromachined
+Ultrasound Transducers (PMUTs). Piezoelectric MEMS sensors
+fabricated using thin-film technology are commonly applied in
+TABLE III. The Young’s modulus and Poisson’s ratio for common substrates.
+Substrate
+hs
+Es (GPa)
+νs
+Reference
+Si (100)
+4 μm
+130
+0.278
+54
+Si (111)
+…
+270 ± 25
+0.188 ± 0.005
+55
+c-Al2O3 (0001)
+1 μm
+261–490
+0.2–0.25
+56
+3C–SiC (100)
+40–500 nm
+437
+0.318
+57
+3C–SiC (111)
+40–500 nm
+415
+0.328
+57
+MgO (100)
+375 nm
+240 ± 40
+0.17–0.21
+59
+MgO (111)
+375 nm
+257 ± 13
+0.17–0.21
+58
+Flexible mica
+10 μm
+262
+0.2–0.3
+60
+Stainless steel
+600 nm
+180.5
+0.27–0.30
+61
+FIG. 4. The development trend of piezoelectric MEMS devices over time.
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-7
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 9]
+high sensitivity and wireless functionality for acoustic sensors.
+PMUTs are utilized for applications such as ranging, medical ultra-
+sound imaging, and biometric identification. Piezoelectric micro-
+phones find applications in monitoring, military uses, underwater
+acoustics, and cochlear implants.
+A. Piezoelectric micromachined ultrasonic transducer
+(PMUT)
+PMUT is also a common type of piezoelectric MEMS micro-
+sensors. When operating in receive mode, the PMUT is used to
+detect ultrasonic waves. When the ultrasonic signal acts on the
+transducer, under the action of the piezoelectric effect, transverse
+stress perpendicular to the direction of acoustic wave incident is
+generated inside the piezoelectric film, which drives the film to
+vibrate up and down, and the internal charge changes, and the
+upper and lower surfaces of the film will generate charge signals
+with different polarity, which are extracted by the upper and lower
+electrodes of the film to achieve the conversion of mechanical
+energy to electrical energy. The change of charge signal is extracted
+by the upper and lower electrodes of the film to achieve the conver-
+sion of mechanical energy to electrical energy; the PMUT is a
+sensor at this time,71 as shown in Fig. 6.
+FIG. 5. Three types of piezoelectric MEMS: actuator, energy collector, and sensor related parameters and applications.
+FIG. 6. Schematic view of a piezoelectric micromachined ultrasonic transducer (PMUT).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-8
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 10]
+From a materials perspective, PZT is a widely used piezoelec-
+tric material applied in PMUTs. Due to its very high piezoelectric
+coefficient (|e31,f| ∼12 C/m2), PZT is ideal for transmitter applica-
+tions. However, the high dielectric constant of PZT (ε33,f ∼1200)
+makes it unsuitable for use as a receiver. In 1990, Udayakumar
+et al.72 employed sol–gel-deposited PZT thin films for bending
+wave applications. Subsequently, in 1996, Muralt et al.73 demon-
+strated the effects of PZT thin films deposited by magnetron sput-
+tering on the membrane structure and electrical parameters of
+PMUTs. AlN is a complementary metal-oxide-semiconductor
+(CMOS)-compatible material that allows for cost-effective mass
+production. Its lower ε33,f makes AlN well-suited for PMUT receiv-
+ers. Shelton et al.74 first proposed the use of aluminum nitride
+(AlN) thin films as an active layer in PMUTs, thereby creating
+PMUT arrays compatible with CMOS technology. Furthermore, the
+toxicity of lead restricts its use in medical-related applications,
+making the development of lead-free PMUTs significant. KNN
+materials exhibit piezoelectric performance comparable to PZT
+while remaining environmentally friendly. In 2022, Huang et al.75
+successfully fabricated PMUT devices based on KNN thin films on
+2-in. SOI wafers, pioneering the use of environmentally friendly
+lead-free ferroelectric materials in PMUTs. These devices achieved
+a super high transmittance sensitivity of 1250 nm/V at 66.2 kHz,
+surpassing most commercially available PZT-based PMUTs.
+From an application perspective, piezoelectric thin-film ultra-
+sound imaging offers advantages over traditional ultrasonic trans-
+ducers (e.g., bulk piezoelectric ceramics) due to its low acoustic
+impedance, enabling good coupling with air and liquids without
+the need for additional matching layers. The ultrasound imaging
+capabilities of PMUTs have become a hot topic. Bernstein et al.76
+fabricated PZT thin film PMUT arrays using sol–gel deposition for
+underwater ultrasound imaging. Yamashita et al.77 demonstrated
+airborne 3D imaging using sol–gel-derived thin film PZT-PMUT
+for the first time. Recently, PMUTs have been widely applied in
+low-cost, portable medical imaging and non-destructive testing of
+complex microstructures. Dausch et al.78 demonstrated real-time
+intracardiac scanning using PZT-PMUT fabricated via sol–gel dep-
+osition, showcasing primary in vivo medical ultrasound imaging
+applications. Wang et al.79 proposed an application of an 18 MHz
+PZT-based PMUT with a polydimethylsiloxane (PDMS) waveguide
+for imaging. Ji et al.80 demonstrated the imaging capability of
+PMUTs with PZT/Si membrane structures for solid defect detec-
+tion. Lu et al. developed a short-range AlN-PMUT high-resolution
+ultrasound imaging system with a focused beam of 90 μm in diam-
+eter.81 On the other hand, ultrasound fingerprint sensing offers sig-
+nificant advantages, such as being less affected by wet or
+contaminated fingers. In 2010, Liu and co-workers82 introduced a
+handwriting input system using PZT-based PMUTs. Tang et al.83
+reported an ultrasound fingerprint sensor composed of 110 × 56
+matrix elements using AlN PMUTs with a spacing of 43 μm. A pol-
+ydimethylsiloxane (PDMS) coupling layer was placed on the ultra-
+sound
+sensor
+chip
+for
+acoustic
+impedance
+matching.
+The
+fingerprint’s surface and internal structures were scanned to
+provide images of the epidermis and dermis, respectively. In 2020,
+there was another demonstration involving a PZT-PMUT array
+showcasing ultrasound imaging based on polydimethylsiloxane,
+applied in fingerprint sensors for mobile devices.84
+PMUTs have been widely employed for flow measurements in
+various scenarios involving gases, water, oil, and blood. Their
+advantages lie in their ability to perform non-destructive testing
+and detect complex channel structures. In gas measurement appli-
+cations, Chen et al.85 developed a high-precision airflow volume
+flowmeter using a time-of-flight-based PMUT array. Two 10 × 10
+arrays of multiple AlN PMUTs with a resonant frequency of
+980 kHz alternately transmit and receive ultrasonic signals.
+For liquid measurements, an AlN-PMUT array installed exter-
+nally on tube walls, isolated from the measured liquid, utilized
+phase detection based on continuous wave excitation to achieve
+flow rate measurements ranging from 0.515 to 3.40 l/min.86 In
+blood flow measurement applications, Ding et al.87 have developed
+a 3.7 MHz PMUT system based on piezoelectric AlN thin films for
+wearable blood flow measurements using pulse wave Doppler
+(PWD) ultrasound. According to the Doppler effect, both the
+average Doppler frequency and Doppler power spectral density
+exhibit linear changes relative to blood flow rate.
+B. Piezoelectric microphones
+MEMS piezoelectric microphones are a class of miniature
+devices that combine acoustic sensors with pressure-sensitive dia-
+phragms and dedicated integrated circuits (ASICs), manufactured
+on silicon wafers to sense sound and audio. Compared to tradi-
+tional electret condenser microphones, MEMS piezoelectric micro-
+phones offer higher performance density, compatibility with
+micrometer-scale circuits, temperature stability, low power con-
+sumption, low losses, and lower vibration sensitivity. With the
+development of miniaturization, wearable, portable devices, and
+thin-film technologies, the application of MEMS piezoelectric
+microphones has garnered widespread attention.
+From a materials perspective, the piezoelectric coefficient of
+zinc oxide (ZnO) is approximately −5 pC/N, indicating that
+ZnO-based acoustic sensors are more sensitive and are becoming
+popular materials for the design of acoustic sensors and acousto-
+electric devices. Royer et al.88 first realized a ZnO piezoelectric
+microphone, achieving a sensitivity of 0.25 mV/Pa on a 30 μm
+thick ZnO film. Ali et al.89 designed a ZnO thin-film piezoelectric
+silicon microelectromechanical system (MEMS) acoustic sensor,
+achieving high sound pressure levels of up to ∼180 dB. Increasing
+the decibels and operating bandwidth is a method to enhance the
+performance of sound sensors. Arora et al.90 achieved enhanced
+sensitivity by depositing piezoelectric ZnO thin films using sputter-
+ing techniques. They utilized pressure compensation channels in
+MEMS for pressure compensation, achieving different sound pres-
+sure levels (SPLs) ranging from 120 to 180 dB. Sang et al.91 also
+reported a device that can function as both a microphone and a
+microspeaker. It features a 0.5 μm thick ZnO piezoelectric film
+made using chemical vapor deposition. The measured microphone
+sensitivity is quite stable in the low-frequency range, at 30 mV/Pa,
+rising to 200 mV/Pa at the lowest resonant frequency of 890 Hz.
+Aluminum nitride (AlN) possesses high dielectric constant,
+resistivity, piezoelectricity, thermal conductivity, and chemical
+stability, offering better chemical and thermal stability compared to
+ZnO films. Williams et al.92 designed an AlN microphone capable
+of measuring a sensitivity of −39 μV/Pa, a minimum detectable
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-9
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 11]
+pressure of 40.4 dB, and a resonant frequency of 129.5 kHz.
+Segovia-Fernandez et al.93 reported a single-chip AlN MEMS-
+CMOS microphone for high sensitivity, low power applications.
+The piezoelectric microphone is formed by a 1 μm thick AlN layer
+and a 1 μm thick SiO2 layer. The average sensitivity is 0.68 mV/Pa,
+resonant frequency is 11.2 kHz, and the background noise is
+0.03 μV/Hz.
+For PZT thin film materials with high piezoelectric coeffi-
+cients, Zhang et al.94 proposed a piezoelectric microphone based
+on PZT-coated silicon cantilevers. The cantilever consists of a
+Pt/PZT/Pt/Ti/SiO2/Si3N4/SiO2/Si multilayer structure. The sensitiv-
+ity of the microphone fabricated was measured using a standard
+microphone, resulting in 40 mV/Pa. Recently, Chen et al.95
+designed a single-crystal PZT thin film applied to a microphone,
+where the designed silicon cantilever significantly improves the
+signal-to-noise ratio. Compared to a reference microphone with a
+triangular PZT/Si piezoelectric chip cantilever, the proposed design
+showed an improved signal-to-noise ratio of 9.8 dB.
+From an application perspective, piezoelectric microphones
+can be utilized for locating carrier rockets and detecting aircraft
+noise to restrict aircraft noise emissions. Horowitz co-workers96
+were the first to use PZT thin-film microphones for aerodynamic
+acoustics measurement applications. Williams et al.92 designed an
+AlN microphone to aid in identifying aircraft noise sources and/or
+evaluating the effectiveness of noise reduction technologies. In the
+field of biomedical monitoring, they are used to monitor various
+biological signals, such as the respiratory sounds of patients with
+sleep apnea and chest sounds in neonatal care units. Surface acous-
+tic wave interdigital transducer (SAW-IDT) sensors are developed
+for measurement, typically using air-coupled microphones and/or
+lightweight accelerometers attached to the skin.97 MEMS-based pie-
+zoelectric microphones are suitable for wearable health monitoring
+devices, smart hearing aids, and implantable medical devices.
+Piezoelectric microphones can be applied as cochlear implants
+(CIs) in biomedical systems. Zargarpour and Zarifi et al.98 designed
+a piezoelectric microelectromechanical microphone for implantable
+hearing aid applications using AlN as the material. They designed
+it based on the simulation of cochlear structures for hearing aids
+and other medical devices. Zhao et al.99 designed a biocompatible
+cochlear implant for long-term in vivo studies in guinea pigs using
+AlN thin films. Another interesting application area for hydropho-
+bic microphones is pipeline leak detection, ensuring automatic
+monitoring of pipeline pressure even in remote locations to guaran-
+tee rapid detection and correction.100
+C. Strategies for improving acoustic sensors of thin
+films
+In addition to the impact of piezoelectric film deposition tech-
+niques and process parameters on the performance of thin-film
+acoustic sensors, the structural design of acoustic sensors also influ-
+ences key performance parameters of acoustic devices such as sen-
+sitivity,
+resonant
+frequency,
+frequency
+response,
+piezoelectric
+coefficient, etc. The structure of piezoelectric microphones can be
+divided into diaphragm and cantilever structures. Lee et al.101
+introduced the concept of a cantilever beam for audio micro-
+phones. By replacing ZnO with PZT as the piezoelectric layer in
+the cantilever structure, the sensitivity of the cantilever beam
+microphone was increased from 30 to 40 mV/Pa. Cantilever beam
+microphones exhibit high sensitivity due to their higher deflection.
+However, the advantages of diaphragm structures are also evident,
+as they provide more stable sensor frequency and sensitivity com-
+pared to cantilever beam structures. Rahaman et al.102 developed a
+diaphragm-oriented
+microphone
+based
+on
+AlN,
+with
+a
+signal-to-noise ratio of 31.35 dB at a frequency of 1 kHz and across
+the entire audio frequency range. Sensitivity was enhanced by using
+cantilevers with nitride films to reduce residual tensile stress on the
+transducer membrane. A wider operating frequency range and
+higher sensitivity are two important factors determining the quality
+of MEMS microphones. Wang et al.103 presented a piezoelectric
+MEMS microphone with a cantilever diaphragm and partial
+removal of PZT, which increased bandwidth (BW) without sacrific-
+ing the signal-to-noise ratio (SNR). The proposed design showed a
+3 dB increase in sensitivity after applying a 10 V bias on the PZT.
+Table IV compares the relevant parameters of acoustic sensors
+using different piezoelectric materials.
+VI. ENERGY HARVESTERS OF PIEZOELECTRIC THIN
+FILMS
+With the flourishing development of various devices and func-
+tional systems in the Internet of Things (IoT), distributed and self-
+sustaining power sources have become a bottleneck limiting further
+advancements in 5G and IoT. In comparison to traditional power
+sources such as batteries, which are large, heavy, require frequent
+replacement after depletion, have low power capacity, and poor com-
+patibility with current miniaturized devices, energy harvesting tech-
+nologies provide a promising solution for achieving self-sustaining
+devices and systems. MEMS-based piezoelectric thin-film energy
+harvesters offer small form factors, convenient configurations,
+compatibility with microfabrication processes, power output in the
+microwatt range, and low losses. They can be applied in wearable
+devices,
+implantable
+biomedical
+devices,
+self-powered
+energy
+systems, and devices for indoor and outdoor use in the future.
+Piezoelectric
+MEMS
+energy
+harvesters
+demonstrate
+significant
+potential for integration with miniaturized IoT devices and systems.
+This section discusses the current status of MEMS-scale energy har-
+vesters based on different piezoelectric films manufactured solely
+using micro-mechanical techniques, focusing on devices prepared
+through thin-film deposition.
+A. PZT thin film-based energy harvesters
+The
+piezoelectric
+MEMS
+energy
+harvester
+represents
+a
+compact and cost-effective micro-generator poised to replace elec-
+trochemical batteries in capturing vibrations within the μW–mW
+range for low-power autonomous sensors and micro-devices. For
+piezoelectric MEMS energy harvesters, cantilever beams have
+become a popular structure due to their high output performance
+and simple configuration. These cantilever beam energy harvesters
+can be configured to operate in d31 mode (with vertical induced
+stress) or d33 mode (with parallel induced stress) through different
+electrode layouts, such as top-bottom electrodes or interdigitated
+electrodes, as shown in Fig. 7. Energy harvesters based on PZT thin
+films were first reported by Jeon et al.111 The proposed PZT
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-10
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 12]
+cantilever beams operated in d33 mode, demonstrating 1 μW of
+power at a resonant frequency of 13.9 kHz and peak acceleration of
+approximately 10.9 g. Shen et al.112 developed a MEMS energy har-
+vesting cantilever beam based on PZT thin films deposited using
+the sol–gel method. The fabricated device featured an integrated
+silicon proof mass, with a peak output voltage of 160 mV and a
+maximum power of 2.15 μW. To enhance the piezoelectric perfor-
+mance and growth mechanism of PZT thin films prepared using
+the sol–gel method, Park et al.113 utilized a PbTiO3 seed layer as an
+intermediate layer between the PZT thin films. By employing inter-
+digitated electrodes, the PZT thin films exhibited a d33 piezoelectric
+constant of 50 pC N−1. The energy harvester could generate 1.1 μW
+of output power for a 2.2 MΩ load at a resonant frequency of
+528 Hz and a low acceleration level of 0.39 g.
+Other authors have investigated the use of physical deposition
+processes to prepare polycrystalline, epitaxial PZT thin films.
+Isarakorn et al.114 studied the performance of PZT-based micro-
+generators manufactured using the prepared process. Cantilever
+beams based on epitaxial PZT thin films grown by MBE with a
+thickness of 0.5 μm generated output power, exhibiting current and
+voltage of 4.8 μA/g and 0.27 V/g, respectively, at a resonant fre-
+quency of 2.3 kHz for optimal resistive load. Kweon et al.115 depos-
+ited PZT thin films using magnetron sputtering and achieved an
+output power density of 301.5 μW−1/(cm2 g2) at the resonant fre-
+quency and an acceleration of 3 m−1 s−2. Deposition of PZT thin
+films on various flexible and inexpensive metal substrates signifi-
+cantly enhances the performance of PZT energy harvesters. Harada
+et al.116 deposited a 3 μm thick PZT film on a 30 μm thick ferritic
+stainless steel (FSS) foil using RF magnetron sputtering and fabri-
+cated PEH devices. The maximum effective output power of a
+single PZT thin film piezoelectric energy harvester (PEH) device
+was 6 μW at a resonant frequency of 11 Hz and an acceleration of
+2 m/s2. Lin et al.117 reported the fabrication of MEMS energy har-
+vesters with PZT thin films integrated on silicon and stainless steel
+substrates using aerosol deposition. Devices on stainless steel sub-
+strates exhibited a maximum output power of 34 μW at 1.5 g accel-
+eration and 202 Hz vibration frequency, with an output voltage of
+1.8 V rms. Kim et al.118 proposed an energy harvesting device made
+from epitaxial PZT thin films grown on a silicon substrate. This
+device achieved a high output power of 40.93 μW at a resonant fre-
+quency of 373 Hz under an acceleration of 11 m/s2.
+B. Lead-free thin film-based energy harvesters
+This study focuses on the development of high-performance
+harvesters based on lead-free films to replace lead-containing mate-
+rials and devices. Minh et al.119 introduced a harvester that depos-
+ited a 2 μm thick KNN film using sputtering technology, achieving
+a generated output power of 731 nW at a resonant frequency of
+1.5 kHz and an acceleration of 10 m/s2. Won et al.120 proposed a
+MEMS energy harvester utilizing a 1 μm thick Mn-doped KNN
+film prepared through a chemical solution deposition process. The
+addition of a small amount of Mn in the KNN film proved highly
+effective in reducing leakage current density, exhibiting maximum
+power output, power density of 3.62 μW, and 1800 μW/cm3 at a
+resonant frequency of 132 Hz.
+Energy harvesters based on AlN have been widely reported.
+Sharma et al.121 developed an AlN harvester on an SOI wafer that
+generated a total power of 54 nW at a working frequency of 114 Hz
+TABLE IV. Comparison of the relevant parameters of acoustic sensors using different piezoelectric materials.
+Piezo-layer
+Method
+Sensitivity
+Dynamic range (dB)
+Bandwidth
+Type
+Reference
+ZnO
+LPCVD
+116.4 μV/Pa
+120–200
+…
+Square diaphragm
+104
+ZnO
+LPCVD
+…
+>92.12
+10 Hz–40 kHz
+Circular diaphragm
+105
+ZnO
+Sputtering
+136.53 μV/Pa
+120–180
+35.2 Hz–15 kHz
+Square diaphragm
+89
+ZnO
+Sputtering
+320.1 μV/Pa
+120–180
+30 Hz–8 kHz
+Square diaphragm
+106
+AlN
+LPCVD
+…
+60–100
+100 Hz–15 kHz
+Circular diaphragm
+107
+AlN
+Sputtering
+39 mV/Pa
+40–171.6
+69 Hz–20 kHz
+Circular diaphragm
+106
+AlN
+Sputtering
+5.45 mV/Pa
+31.35
+20 Hz–20 kHz
+Rectangular shape
+102
+AlN
+…
+0.68 mV/Pa
+…
+20 Hz-12 kHz
+Circular diaphragm
+93
+PZT
+Sol–gel
+97.9–920 nV/Pa
+…
+…
+Circular diaphragm
+108
+PZT
+Sol–gel
+490 μV/Pa
+34
+6.4 kHz
+Circular diaphragm
+109
+PZT
+Sol–gel
+0.61 mV/Pa
+…
+…
+Rectangular shape
+110
+FIG. 7. (a) The vertical view shows the IDE’s mode devices (b) the cross-
+section of d31 mode and (c) d33 mode. Arrows and σ represent polarization
+direction and strain, respectively.
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-11
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 13]
+under low acceleration of 24 mg. The resonant frequencies were
+34.78 μW at 186 and 572 Hz. The AlN thin film prepared by mag-
+netron sputtering exhibited good compatibility with CMOS, highly
+c-axis-oriented microcrystals, and uniform polarity distribution.
+Algeiri et al.122 synthesized a flexible and biocompatible energy
+harvester by sputtering AlN thin films onto a polymer thin sub-
+strate. The piezoelectric coefficient was 4.93 ± 0.09 pm/V, with an
+optimal power generation of 1.57 μW achieved by enhancing the pie-
+zoelectric performance of the sputtered AlN thin film through
+doping. Frach and co-workers123 developed AlScN thin films using
+magnetron sputtering, where the output power increased to 140 μW
+as the thickness ranged from 10 to 50 μm. Van Minh et al.124 made
+the first attempt to apply high-pressure Ta-doped AlN thin films
+to vibration-driven micro energy harvesters. The micro energy
+harvester based on Ta-AlN demonstrated a power density of
+13.7 mW g−2 cm−3. Liu et al.125 investigated a method to enhance
+the power of collectors based on trapezoidal cantilever beams by
+using high-performance Sc0.2Al0.8N/AlN composite thin films and
+introducing symmetric angles on both sides of the beams. The
+maximum power density of the ScAlN/AlN-based trapezoid with
+corners (TWC) cantilever collector was approximately twice that of
+the AlN-based collector, reaching 2.054 mW g−2 cm−3 at a frequency
+of 330.25 Hz.
+C. Strategies for improving energy harvesters
+Expanding the operating bandwidth and increasing power
+generation are effective approaches to address piezoelectric energy
+harvesters.
+To
+reliably
+harvest
+ambient
+energy,
+the
+device’s
+bandwidth should be sufficiently wide to accommodate variations
+in the vibration source frequencies. To widen the bandwidth,
+Chun et al.126 implemented a configuration of six trapezoidal PZT
+cantilever arrays, providing a maximum power of 16 μW within a
+frequency range of 9 Hz (127 to 136 Hz) under an excitation of
+0.7 g. Liu et al.127 fabricated a novel S-shaped piezoelectric PZT
+cantilever beam for scavenging vibration energy at low frequencies
+of 30 Hz and low accelerations of 0.4 g. The operating bandwidth of
+the piezoelectric PZT cantilever beam was extended from 3.4 to
+11.1 Hz. Liu et al.128 proposed a MEMS piezoelectric energy
+harvester
+with
+a wide operating
+frequency
+range,
+achieving
+up-conversion of the piezoelectric energy harvester when low-
+frequency piezoelectric cantilever beams impact and scrape past
+high-frequency piezoelectric cantilever beams. The operating fre-
+quency range was 33 to 43 Hz for an input acceleration of 0.6 g,
+yielding output voltage and power up to 95 mV and 94 nW, respec-
+tively. Tao et al.129 integrated a ZnO thin film deposited by magne-
+tron sputtering into a two-degree-of-freedom (2DOF) MEMS
+piezoelectric vibration energy harvester, adjusting the mass ratio
+and frequency ratio of the resonant system to obtain two closely
+spaced but distinct peaks. At an excitation acceleration of 0.5 g, two
+close resonant peaks were achieved at 403.8 and 489.9 Hz,
+with output voltages of 10 and 15 mV, respectively. Feng et al.130
+proposed a PZT thick-film energy harvester based on internal
+resonance effects, achieving a maximum power output of 424.6 μW
+at
+190 Hz
+and
+108.8 μW
+at
+365 Hz
+under
+an
+excitation
+acceleration of 2 g.
+To collect energy at low frequencies and low accelerations,
+providing
+sufficient power
+density for practical applications,
+increasing power generation primarily involves developing alterna-
+tive device designs in terms of shape and geometric configurations.
+Takei et al.131 developed and characterized PZT-based MEMS can-
+tilever beams on SOI wafers, achieving a maximum output power
+of 0.21 μW at a vibration of 0.5 m/s2 and 25.1 Hz when the
+mass-to-length ratio of the proof mass to the cantilever beam was
+1.5. Rezaeisaray et al.132 proposed a multi-degree-of-freedom micro
+energy harvester based on AlN, obtaining a maximum open-circuit
+voltage of 1 V and power output of 136 nW at 97 Hz under an exci-
+tation of 0.2 g. Lu et al.133 introduced a tunable flexure as an effec-
+tive strategy for designing multi-directional piezoelectric vibration
+energy harvesters, demonstrating enhanced energy harvesting capa-
+bilities compared to traditional single-axis collectors.
+Table V summarizes the selection of MEMS energy harvesters
+based on high power density piezoelectric thin films, emphasizing
+the pertinent indicators for energy harvesters using various piezo-
+electric thin film materials, which include their resonance fre-
+quency, effective area of the cantilever beam, effective volume of
+the cantilever beam, acceleration, harvested power, power density,
+and other related parameter metrics.
+VII. OPTICAL APPLICATION OF PIEZOELECTRIC THIN
+FILM ACTUATORS
+Micro-opto-electro-mechanical systems (MOEMS) refer to the
+integration of optical, microelectronic, and mechanical components
+TABLE V. Comparison of MEMS energy harvesters’ performances.
+Reference
+Materials
+Frequency
+(Hz)
+Beam area
+(mm2)
+Volume
+(mm3)
+Acceleration
+(m/s2)
+Power
+(μW)
+Power density
+Lee134
+Polycrystal PZT
+256
+4.5
+0,43
+2.5
+2.76
+6.42 μW/mm3
+Durou135
+Polycrystal PZT
+76
+9.45
+1.89
+0.2
+13.9
+7.35 μW/mm3
+Kim118
+Epitaxial PZT
+373
+30
+…
+11
+40.39
+108.3 μW/cm2/g2
+Andosca136
+Polycrystal AlN
+58
+65.32
+14.16
+0.5
+32
+2.26 μW/mm3
+Dow137
+Polycrystal AlN
+572
+27.28
+12.76
+2
+34.78
+2.72 μW/mm3
+Liu125
+Polycrystal Sc- AlN
+330
+8.02
+35
+0.2–1
+72
+20.54 μW/cm2/g2
+Kanno138
+Polycrystal KNN
+1036
+56.1
+0.168
+1
+1.1
+6.54 μW/mm3
+S S Won120
+Polycrystal KNN
+132
+5
+2
+1
+3.62
+1.81 μW/mm3
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-12
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 14]
+into a microsystem to achieve sensing and control functions.
+Recently, MEMS micro-mirrors and optical modulators have
+become some of the most popular and hottest optical MEMS
+devices.
+A. MEMS mirror
+MEMS micro-mirrors find applications primarily in industrial
+solutions, quality of life enhancement, and medical and healthcare
+fields. Applications include automated quality monitoring, 3D laser
+radar, industrial process monitoring, medical imaging, and minia-
+ture endoscopes. Today’s MEMS micro-mirrors have reached new
+heights in size and driving methods. Differentiating MEMS
+micro-mirrors by driving principles, there are mainly four types:
+electrostatic drive, electromagnetic drive, electrothermal drive, and
+piezoelectric drive. Among these, the first two technologies are
+more
+mature
+and
+widely
+applied.
+For
+instance,
+in
+Texas
+Instruments’ DLP, the MEMS micro-mirror array uses an electro-
+static drive mode and dominates the projection field. Bosch’s latest
+interactive laser projection microscanner, the BML050, employs
+MEMS micro-mirrors with electromagnetic drive principles, while
+Hamamatsu’s MEMS micro-mirror S12237-03P and MEMS micro-
+mirrors produced in collaboration between STMicroelectronics and
+MicroVision in the United States use electromagnetic drive princi-
+ples. MEMSCAP and MicroOLED’s MEMS micro-mirrors utilize
+electrothermal drive principles. Shanghai Maikai Technology Co
+Ltd. has developed resonant piezoelectric MEMS micro-mirrors
+based on the proprietary intellectual property as shown in Fig. 8.
+Table VI illustrates the enterprises involved in large-scale produc-
+tion of micro-mirrors and the advantages and disadvantages of the
+FIG. 8. Four types of actuated micro-mirror products.
+TABLE VI. Characteristics of the four different drives.
+Driving method
+Drive principle
+Drive
+voltage
+Drive
+Resonant
+frequency
+Scanning
+range
+Power
+wastage
+Electrostatic drive
+Flat plate/comb type capacitors generate
+electrostatic force
+High
+Little
+High
+Little
+Low
+Electromagnetic
+drive
+Permanent magnets and drive current
+generate an electromagnetic drive
+Low
+Strong
+High
+Strong
+Low
+Electrothermal
+drive
+Differential thermal expansion from heated
+drive structures
+Low
+Moderate
+Low
+Strong
+Moderate
+Piezoelectric drive
+Inverse piezoelectric effect
+High
+Strong
+High
+Little
+Low
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-13
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 15]
+four driving methods. Table VI indicates that piezoelectric drive
+holds significant potential for the future. Compared to other
+driving methods like electrothermal, electrostatic, and electromag-
+netic drives, piezoelectric driving offers unique advantages includ-
+ing rapid response, high stability, low driving voltage, and low
+power consumption.
+In the manufacturing and sizing of piezoelectric actuators, two
+approaches can be distinguished: (i) traditional machining methods
+involve bonding ceramic blocks/single crystals to optical compo-
+nents using resin adhesives. External circuitry is then soldered onto
+the ceramic blocks coated with electrodes. Devices produced in this
+manner are characterized by large dimensions, stable driving force,
+and high costs. (ii) Silicon-based microfabrication techniques are
+combined with thin film deposition. Devices manufactured using
+this method are characterized by miniaturization, short response
+times, and low costs, making them suitable for precision optical
+components. This section mainly focuses on piezoelectric scanning
+mirrors and deformable mirrors (DMs) primarily based on piezo-
+electric thin films.
+The development and deployment of Adaptive Optics (AO)
+are related to the challenge of reliable microdevices for compensat-
+ing laser beam aberrations.139–141 Wavefront correctors are crucial
+components of any AO system. The rapid advancement of
+piezoelectric-driven AO technology has played a significant role in
+fields such as astronomical imaging, visual sciences, and high-
+energy lasers. The purpose of a Piezoelectric DM is to correct
+shape errors associated with component manufacturing or atmo-
+spheric distortions.
+A special application of integrating PZT thin films with
+control electronics is in the adjustable optical components of the
+next-generation x-ray telescopes. To enhance the collecting area of
+the telescope while achieving high angular resolution, a significant
+amount of electrically connected control electronics is required.
+However, the current incompatibility between PZT-based MEMS and
+existing CMOS arises from the fact that the crystallization temperature
+of PZT is often >500 °C, causing dopant distribution in integrated cir-
+cuits to become mobile and aluminum contacts to potentially oxidize
+at such temperatures. Additionally, passivation of electronic devices
+typically introduces hydrogen, thereby compromising the performance
+of piezoelectric devices. Wallace et al.142 developed a piezoelectric
+deformable mirror that integrates ZnO control electronics with PZT,
+ensuring good compatibility. Other researchers have focused on
+improving DM pixel performance based on the strain and hysteresis
+of PZT. Huisman et al.143 utilized the large hysteresis in piezoelectric
+actuators combined with pixel layout in a DM based on Pb(Nb, Zr,
+Ti)O3 (PNZT) thin films to overcome typical issues such as pixel
+drift, manufacturing, and reliability when considering high pixel
+counts and pixel densities in DMs. MEMS piezoelectric DMs can be
+classified based on the distribution of backside electrode and piezo-
+electric unit modules into: (i) trapezoidal distributed and (ii) hexago-
+nal distributed. This mainstream distribution is designed to ensure
+that the mirror does not fracture under deformation stress. AlN-based
+piezoelectric thin films can be deposited at low temperatures without
+requiring additional polarization treatments, promoting excellent
+CMOS compatibility, and can be easily patterned using Cl2-based dry
+etching methods. Bi-directional linear and non-hysteretic driving,
+along with good optical aberrations, is achieved. Zhang et al.144 pro-
+posed a variable mirror based on AlN trapezoidal distribution.
+Within a driving voltage range of 100 V, the AlN DM can achieve a
+maximum peak-to-valley (PV) defocus of 19.81 μm and a maximum
+PV spherical aberration of 7.63 μm. DMs can also be applied to
+retinal sensors to achieve stable optical images through optical aberra-
+tion correction.145,146 Table VII illustrates a comparison of different
+piezoelectric
+deformable
+mirror
+materials
+and
+manufacturing
+methods. Thin film-manufactured DMs are more cost-effective com-
+pared to ceramic ones. However, the resolution parameters of thin
+film DMs need further optimization, with increasing actuator density
+being one of the important research directions. Actuator density in
+DMs can be increased by adding more actuator arrays without reduc-
+ing the size of the actuators.
+Piezoelectric scanning mirrors are commonly used in areas
+such as projection displays and micro-scanners. Based on their
+operation modes, piezoelectric scanning mirrors can be classified
+into resonant and quasistatic (non-resonant) types. The dynamic
+response and natural resonant frequency of piezoelectric scanning
+mirrors are influenced by factors such as manufacturing methods
+and mirror size; larger mirror sizes result in higher rotational
+inertia and lower resonant frequencies. Structurally, they can be
+categorized as single-axis scanning 1D MEMS micro-mirrors and
+dual-axis scanning 2D MEMS micro-mirrors. 1D MEMS micro-
+mirrors typically operate in resonant mode, applying periodic
+driving forces to the mirror surface, exciting the mirror to undergo
+TABLE VII. Characteristics of piezoelectric DM.
+Materials
+Combination method
+Number of
+matrices
+Device size
+Resonant
+frequency (kHz)
+Driving
+voltage
+Amplitude
+(PV)
+PZT ceramics141
+Compress welding
+components
+10 × 10
+4 × 4 × 15 mm
+7.5
+300 V
+4.1–4.3 μm
+PZT ceramics147
+Laser ablation and
+micro welding
+37
+π × 152 × 1.6 mm
+13.2
+…
+1.4–4.7 μm
+PZT-5H ceramics148
+Optical adhesive
+85
+…
+8
+150 V
+37.5–150 μm
+PZT- thin films142
+Sol–gel
+5 × 5
+4 in.
+…
+1–5 V
+1.5 μm no lag
+AlN- thin films144
+Sputtering
+25
+…
+…
+100–300 V
+2.5–19.81 μm
+Unimorph PZT149
+Epoxy resin bonding
+19
+π × 202 × 0.15 mm
+…
+50 V
+11 μm
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-14
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 16]
+forced resonant motion near its natural frequency, thereby achiev-
+ing periodic deflection of the mirror surface. Wang et al.150–152
+developed an angle estimation algorithm based on the Unscented
+Kalman Filter (UKF) to enhance the accuracy of angle measure-
+ments in laser radar (LiDAR) systems across various scanning
+modes. Gu-Stoppel et al.153 designed single-axis resonantly driven
+microscanners with diameters of 1.2 and 1 mm, achieving large
+angular deflections of 73.2° mm and 40° mm at high frequencies of
+27 and 60 kHz, respectively. Single-pole rectangular signals with
+amplitudes of 15 and 10 V have been utilized for driving.
+Micro-mirrors operating in this mode are often employed to
+provide multi-degree field-of-view laser radar for automotive
+applications. Pensala et al.154 developed AlN piezoelectric MEMS
+scanning mirrors for laser beam scanning in automotive applica-
+tions. The chip size is 6.75 × 6.75 × 2 mm3, with a scanning fre-
+quency of 1.6 kHz. Tilt angles of +/−15° were achieved with a low
+driving voltage of ∼2 Vpp. For 2D MEMS micro-mirrors, scanning
+can be performed in two directions. Depending on the different
+two-axis scanning modes, adjustment of the frequency range and
+alteration of the scanning path can be achieved. Piot et al.155 fabri-
+cated
+dual-axis
+MEMS
+reflectors
+based
+on
+unconventional
+Ba-doped PZT piezoelectric thin films produced using pulsed laser
+deposition. The mirror exhibits three resonant modes: a low-
+frequency bending mode at 490 Hz and two high-frequency
+torsional modes at 9 and 25 kHz. Optical scan angles of 15.5° and
+6° were measured for the slow and fast axes, respectively, under
+excitation of 2 and 5 Vpp.
+From an application perspective, LiDAR utilizes the principles
+of optical detection and ranging for dynamic distance measure-
+ments. Laser radar is commonly employed in autonomous vehicles,
+automated guided vehicles, drones, agricultural robots, and agricul-
+tural aircraft for plant growth detection. Ye et al.156 proposed a
+dual-axis MEMS scanning mirror compatible with 5 V ultra-low
+voltage drive. To achieve low voltage and low power consumption,
+they
+designed,
+modeled,
+manufactured,
+and
+characterized
+a
+mechanical lever dual-axis MEMS scanning mirror driven by PZT
+thin films. At a total driving voltage of 4.2 Vpp and total power of
+16 mW, the dual-axis scanning angles of this MEMS scanning
+mirror are 41.9° × 40.3°. The effective mirror diameter is 2 mm,
+and the operating frequencies for the two axes are 947.51 and
+1464.66 Hz, respectively. Laser scanners emphasize resonance fre-
+quency with θopt⋅D-product, i.e., the scan line count and pixel
+count, and are applied in AR near-eye displays, 3D imaging, and
+interactive augmented reality displays. Urey et al.157 designed a
+high-gain perspective screen based on a reflective micro-lens array
+(MLA). The device consists of two cascaded frames made of silicon
+with
+a
+thickness
+of
+125 μm,
+driven
+by
+PZT
+thin
+films.
+Microprojectors utilizing
+the Dual
+Screen
+Projection
+System
+(DSPS) principle are applied for projection on portable devices
+such as mobile phones or computer screens. Shih et al.158 success-
+fully developed the DSPS, achieving the functionality of simultane-
+ous dual-screen display. This research also addresses the issue faced
+by many individuals who may need to view projections from porta-
+ble devices on a single small screen, which not only strains the eyes
+but also degrades image quality due to viewer congestion. The
+operating frequencies are 7.168 and 9.126 kHz. The DSPS matches
+10 Vpp and 1 VDC voltages and successfully projects 45° dual
+oblique lines, dual rectangles, and dual circular images when driven
+simultaneously in the fast axis mode and slow axis mode.
+Additionally, micro-mirrors find numerous applications in
+medical diagnostics and measurements. Authors such as Naono et al.
+devised a large-angle scanning mirror driven by niobium-doped PZT
+thin film, suitable for rapid scanning imaging in medical endo-
+scopes.159 Furthermore, MEMS mirrors have found numerous appli-
+cations in laser measurements. For instance, Yang et al. combined
+MEMS micro-vibration reflection mirrors with stripe projection pro-
+filometry, producing high-resolution laser stripe patterns projected
+onto micro-scale components for 3D measurements.160
+Table VIII compares important parameters of MEMS piezo-
+electric scanning mirrors, including their structures, materials,
+driving power sources, and resonant frequencies. In practical appli-
+cations, most scanning mirrors can achieve large angular deflec-
+tions. Therefore, although the rotation angles of some piezoelectric
+MEMS scanning mirrors can reach several tens of degrees, the
+actual operational performance is still insufficient to meet the
+requirements of industrial devices due to limitations imposed by
+their resonant frequencies. In this regard, apart from achieving
+device functionality, in practical applications, their driving voltage
+and power inevitably need to be improved through optimizations
+of piezoelectric materials, structural enhancements, array integra-
+tion, and other means.
+B. Optical modulator
+Another form of optical modulator utilizes microwave gener-
+ated by piezoelectric MEMS acoustic or mechanical resonators to
+modulate the propagating light. Such devices could become core
+components for future classical and quantum hybrid signal pro-
+cessing, networking, and computing. The high piezoelectric and
+electro-optic coupling properties of LiNbO3 provide the modulator
+with higher microwave-to-optical conversion efficiency. Therefore,
+Shao et al.163 utilized driven piezoelectric acoustic resonators fabri-
+cated on suspended thin-film LiNbO3 to modulate light propagat-
+ing
+in
+Mach-Zehnder
+interferometers
+(MZIs)
+and
+racetrack
+cavities. In contrast to high-bandwidth electro-optic modulators
+demonstrated by Cai et al.164 for broadband communication
+systems, emphasizing optical signal modulation in high-Q resona-
+tors holds great potential for on-chip stimulated Brillouin scattering
+(SBS) applications and broadband frequency comb generation. AlN
+has also been validated as a low-loss high-quality optical material
+in the telecom domain for C and L bands. Due to its crystal struc-
+ture and corresponding elastic optical coefficients, it provides a
+good platform for developing a new class of modulators based on
+strain-induced modulation. Ghosh et al.165 employed an AlN-based
+MEMS-based electro-optic modulator (EOM). Optical modulation
+was observed at the device resonant frequency of 843 MHz. This
+device can be used for signal modulation in radiofrequency pho-
+tonics systems. Based on piezoelectric AlScN thin films deposited
+on an insulator-on-silicon platform, the device proposed by
+Huang et al.166 exhibits impressive acousto-optic coupling perfor-
+mance over a short interaction length of 210 μm, comparable to a
+surface acoustic wave transducer. The measured modulation effi-
+ciency improved from −21.5 to −12.5 dB, with a center frequency
+of 3.044 GHz and an RF drive power of 18.6 dBm (dBm, decibel
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-15
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 17]
+milliwatt). This acousto-optic device enables broadband acousto-
+optic modulation and narrowband microwave photon filtering.
+Optical links for medical implants are explored as an attractive
+option mainly because they offer a pathway to ultra-compact wire-
+less implant systems. Existing optical communication devices are
+incompatible with CMOS. Edmunds et al.167 proposed a high-Q
+CMOS-compatible electro-optic modulator (EOM) that establishes
+an optical data uplink to implants. The modulator acts as a
+pF-level capacitor, requiring no bias voltage, and operates at CMOS
+voltages as low as 0.5 V. This enables a pathway for millimeter and
+sub-millimeter wireless implants for biosensing applications.
+Optical metasurfaces (OMSs) stand as novel optical modula-
+tors capable of unprecedented manipulation of light’s phase, ampli-
+tude, and polarization. The advancement of micro-nano processing
+technology has further propelled the potential applications of OMS
+in display, imaging, sensing, anti-counterfeiting, and light field reg-
+ulation. MEMS-based mechanical control of metasurfaces repre-
+sents one of the research directions in dynamically tunable OMS.
+By varying the voltage applied to MEMS, the angle of cantilevers
+can be adjusted to achieve distinct optical responses, primarily reg-
+ulating the phase, amplitude, and polarization of light. Regarding
+optical phase modulation, the MEMS-OMS platform offers a
+compact and efficient alternative to bulky and energy-intensive
+refractive (curved) lenses and stepper motors. Dirdal et al.168 devel-
+oped a MEMS-adjustable dielectric metasurface lens driven by PZT
+films, achieving large displacements at low voltages in a compact
+form. This metasurface zoom lens could substitute traditional
+lenses in personalized medical diagnostics, drone-based sensing
+and imaging (e.g., environmental monitoring), and wearable
+devices (e.g., augmented reality glasses, smartwatches, mobile
+phones).
+Regarding optical amplitude modulation, Meng et al.169 inte-
+grated PZT film piezoelectric MEMS with gap surface plasmon
+(GSP)-based optical metasurfaces, creating a piezoelectric-driven
+dynamic MEMS-OMS platform for efficient, broadband, and fast
+reflective 2D wavefront shaping. This platform provides a flexible
+solution for complex dynamic two-dimensional wavefront opera-
+tions, suitable for reconfigurable and adaptive optical networks and
+systems. Regarding polarization control, the Meng et al.170 team
+combined plasmonic OMS with carefully designed anisotropic
+subunits and thin-film piezoelectric MEMS mirrors, achieving high
+polarization conversion efficiency (around 75%), broadband opera-
+tion (approximately 100 nm near an 800 nm working wavelength),
+rapid response (<0.4 ms), and comprehensive birefringence control.
+This achievement facilitates complete electrical control of light
+polarization, paving new pathways for further integration and mini-
+aturization of optical networks and systems. OMS-based polariza-
+tion applications extend to information encryption and image
+anti-counterfeiting. Deng et al.171 demonstrated a MEMS-OMS-
+based dynamic linear polarizer (DLP) with an electrically con-
+trolled extinction ratio, allowing rapid and reversible adjustments
+by combining anisotropic plasmonic OMS with thin-film piezoelec-
+tric MEMS mirrors. This design enables adaptive photonic systems
+for advanced applications in optical image encryption and display
+fields.
+VIII. PIEZOELECTRIC MEMS RESONATORS
+In the era of 5 G/IoT, the emergence of a large number of con-
+sumer electronics products with wireless and mobile communica-
+tion capabilities has increased the demand for RF front-end
+components. Piezoelectric MEMS resonators, as the main building
+blocks of the RF front-end (filters and oscillators), play a crucial
+role in frequency control and precise timing. The filter industry has
+traditionally been divided into two main technological paths:
+surface acoustic wave filters for lower frequency bands and bulk
+acoustic wave filters for higher frequency bands. To meet the
+requirements of 5G applications for frequencies below 6 GHz and
+to provide RF filters with wider absolute bandwidth and relative
+bandwidth, research progress on resonators, particularly focusing
+on improvements in thin film materials and structures, is discussed
+in this section.
+From a material perspective, PZT exhibits high piezoelectric
+coefficients and large dielectric constants, with its physical con-
+stants being an active function of the applied DC electric field. The
+large piezoelectric coefficient allows for the design of resonators
+and filters with low terminal impedances, helping to minimize
+impedance mismatch losses in the system. Pulskamp et al.172 dem-
+onstrated significant improvements in out-of-band suppression
+(>35 dB) with PZT-based RF MEMS resonators, consistent with
+TABLE VIII. Characteristics of MEMS mirrors piezoelectric thin films.
+Materials
+Structure
+Combination
+method
+Rotation
+angle (°)
+Resonant
+frequency (kHz)
+Driving
+voltage
+Vibration mode
+AlN- thin
+films161
+Main axle overhangs and
+secondary axle overhangs
+Sputtering
+6–10
+20–140
+40 V
+Tilt/tilt resonance motion
+PZT- thin
+films153
+Torsion bar
+Sol–gel
+40–73.2
+27–60
+10–15 V
+Sympathetic vibration
+AlN- thin
+films154
+Two single-axis 2D scans
+Sputtering
+15–30
+1.6
+2 Vpp
+High-amplitude wobbling
+mode
+PZT- thin
+films155
+Slow and fast axes
+PLD
+6–15.5
+9–25
+2–5 Vpp
+Low-frequency bending,
+high-frequency bending
+AlN- thin
+films162
+Suspended from two
+L-shaped cantilever beams
+Sputtering
+30–60
+22.13–63.25
+30–50 V
+Sympathetic vibration
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-16
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 18]
+theory. By utilizing the tunable ferroelectric properties of PZT
+silicon resonators through high-field DC bias, a high suppression
+(∼117 dB)
+parallel
+resonance
+mode
+was
+demonstrated.
+Chandrahalim et al.173 fabricated piezoelectric transducer high
+overtone WEm resonators with or without a silicon device layer on
+the same wafer using the same mask, based on PZT. This technol-
+ogy will enable PZT transducer resonators, filters, and oscillators to
+cover the low-frequency GSM frequency range. AlN is commonly
+used in wireless communication modules, with this wurtzite-
+structured piezoelectric material possessing high phase velocity
+(∼10 km/s), high stiffness coefficient (340–400 GPa), relatively low
+dielectric constants (9–11), and strong polarity. AlN has been uti-
+lized to realize various types of piezoelectric materials, ranging
+from flexural mode resonators for low-frequency applications to
+contour mode resonators for very high frequency (VHF) to super
+high frequency (SHF) operation, as well as thin-film bulk acoustic
+wave resonators (FBARs) suitable for GHz frequency applications.
+Lin et al.174 altered the reflection edge structure of AlN Lamb wave
+resonators from the traditional flat design to double-convex. Most
+of the acoustic vibration energy is confined within the resonator
+with double-convex edges. Research on LiNbO3 (LN) has been
+flourishing over the past decade due to its large electromechanical
+coupling coefficient and frequency scalability within the GHz
+range. With LN’s impressive characteristics, it has been widely used
+to realize low-loss filters and multiplexers, aiding in reducing
+power consumption in RF front-end systems and potentially
+addressing high data transmission/reception issues. Lu et al.175 pro-
+posed a first-order antisymmetric (A1) mode resonator in a 128°
+Y-cut LN thin film, with a high piezoelectric coupling coefficient
+(k2) of up to 46.4% and a maximum quality factor (Q) of 598 at
+3.2 GHz.
+The two most important parameters of MEMS resonator char-
+acteristics are (i) effective electromechanical coupling coefficient
+(k2
+eff) and (ii) quality factor (Q). Introducing other materials into
+the resonator is also an effective way to enhance the device’s elec-
+tromechanical performance. Qian et al.176 utilized graphene thin
+films as massless top electrodes for AlN NEMS resonators, driven
+by platinum bottom interdigital transducer (IDT) electrodes. This
+unique combination led to improved k2
+eff and higher resonant fre-
+quencies (enhanced by 14%-66%). On the other hand, the Q value
+of the resonator is primarily limited by anchor losses caused by
+mechanical energy leakage and interface losses due to uneven stress
+distribution between the metal electrode layer and the piezoelectric
+thin film, which can be enhanced by optimizing the structure.
+Wang et al.177 adopted a unique approach to enhance the Q value
+by placing cylindrical air holes (micro-cavities) in a square array
+between the device IDTs, forming a Phononic Crystal (PnC) reso-
+nator to store mechanical energy within the micro-cavities.
+Sun et al.178 designed a grid-shaped diamond electrode array to
+excite two-dimensional Lamb waves (along orthogonal directions)
+in the AlN layer. By optimizing the device structure and introduc-
+ing new piezoelectric materials and different thin film materials as
+structural layers, the performance parameters of the resonator can
+be effectively enhanced. Table IX summarizes the key performance
+metrics of various piezoelectric thin-film resonators.
+IX. SUMMARY AND PERSPECTIVES
+With the rapid advancement of the fifth-generation mobile
+networks (5G) and the Internet of Things (IoT), the escalating
+demand for a multitude of downsized, cost-effective, and low-
+power sensors and actuators urgently necessitates new microdevices
+MEMS surpassing traditional micro-electro-mechanical systems.
+Integrating functional materials into MEMS devices has proven to
+be effective. Presently, MEMS devices have evolved toward integra-
+tion and miniaturization (e.g., PMUT integrated arrays), multifunc-
+tionality (developing piezoelectric thin films with multifunctional
+properties enabling simultaneous sensing, actuation, and energy
+conversion), self-powering systems (e.g., wearable gloves, shoes, and
+clothing serving as functional detection systems), nanotechnology,
+and material innovations (manufacturing more efficient piezoelec-
+tric thin films to enhance their performance and stability).
+However, MEMS devices still exhibit shortcomings. First,
+many piezoelectric devices have excessively narrow operating band-
+widths (e.g., numerous energy harvesters have narrow operating
+frequencies, operating either below or above the natural environ-
+mental frequency for acceleration and power). Second, there are
+issues with the compatibility of piezoelectric materials and device
+substrates (e.g., poor compatibility of PZT with silicon-based sub-
+strates). Lastly, the immaturity of thin-film material processes, espe-
+cially in lead-free material systems with complex compositions,
+presents challenges such as low reproducibility and poor film uni-
+formity, requiring resolution.
+This paper reviews the current research status of MEMS based
+on piezoelectric thin films, emphasizing device miniaturization and
+thin-film process technology development. It outlines piezoelectric
+thin film materials for MEMS, including PZT, AlN, KNN, ZnO
+piezoelectric materials. Additionally, it lists various devices such as
+TABLE IX. Performance comparison for different piezoelectric thin-film resonators.
+Material
+Resonance frequency (MHz)
+Q
+k2eff (%)
+Mode
+Reference
+PZT- thin film
+10.6
+2663
+0.48
+Cylindrical mode resonator
+179
+AlScN- thin film
+185
+23 200
+0.02
+Thickness-Lamé
+180
+AlN- thin film
+8800
+1100
+0.3
+Lanb wave
+181
+AlN- thin film
+58.55
+58 276
+…
+Lamb + width extension
+182
+LN - thin film
+40
+3900
+3.8
+Quasi SHo
+183
+LN - thin film
+90.9
+2600
+17
+SHo
+184
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-17
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 19]
+PMUTs, energy harvesters, and micro-mirrors used in medical
+imaging, acoustic velocity measurement, optical modulation, radar,
+and wireless communications to provide reference for the prepara-
+tion of piezoelectric thin film MEMS devices.
+ACKNOWLEDGMENTS
+The authors gratefully acknowledge the support provided by
+the National Key R&D Program of China (No. 2022YFB3204000),
+National Natural Science Foundation of China (Nos. 52372109 and
+52202133), the Guangdong Basic and Applied Basic Research
+Foundation (No. 2023A1515010373), the Dongguan Innovative
+Research Team Program (No. 2020607101007), Natural Science
+Foundation of Hubei Province, China (Grant No. 2022CFA031),
+the Innovation Project of Optics Valley Laboratory (Grant No.
+OVL2023ZD001), the Dongguan Key Research & Development
+Program, China (No. 20221200300032), and also acknowledge
+financial support from the Bualuang ASEAN Chair Professor
+Research Grant.
+AUTHOR DECLARATIONS
+Conflict of Interest
+The author has no conflicts to disclose.
+Author Contributions
+Jinpeng Liu: Writing – original draft (equal). Hua Tan: Writing –
+review & editing (equal). Xinyi Zhou: Methodology (equal).
+Weigang
+Ma:
+Methodology
+(equal);
+Supervision
+(equal).
+Chuanmin Wang: Methodology (equal); Supervision (equal).
+Nguyen-Minh-An
+Tran:
+Supervision
+(equal).
+Wenlong
+Lu:
+Supervision (equal). Feng Chen: Supervision (equal). Junya Wang:
+Conceptualization (equal); Investigation (equal). Haibo Zhang:
+Conceptualization (equal); Investigation (equal).
+DATA AVAILABILITY
+The data that support the findings of this study are available
+from the corresponding authors upon reasonable request.
+REFERENCES
+1S. Xiong, H. Kawada, H. Yamanaka, and T. Matsushima, “Piezoelectric proper-
+ties of PZT films prepared by the sol–gel method and their application in
+MEMS,” Thin Solid Films 516, 5309–5312 (2008).
+2X. Gao, J. Yang, J. Wu, X. Xin, Z. Li, X. Yuan, X. Shen, and S. Dong,
+“Piezoelectric actuators and motors: Materials, designs, and applications,” Adv.
+Mater. Technol. 5, 1900716 (2020).
+3M. T. Todaro, F. Guido, V. Mastronardi, D. Desmaele, G. Epifani, L. Algieri,
+and M. De Vittorio, “Piezoelectric MEMS vibrational energy harvesters:
+Advances and outlook,” Microelectron. Eng. 183–184, 23–36 (2017).
+4H. Zhu, C. Liu, J. Liu, H. Cheng, and J. Ouyang, “Crystalline texture analyses of
+sputtered BiFeO3 thick films on Si with a large polarization,” Ceram. Int. 48,
+3254–3260 (2022).
+5J. Liu, Y. Wang, H. Zhu, H. Luo, X. Zhai, Y. Huan, J. Yan, K. Wang, C. Liu,
+H. Cheng et al., “Synergically improved energy storage performance and stability
+in sol–gel processed BaTiO3/(Pb,La,Ca)TiO3/BaTiO3 tri-layer films with a crys-
+talline engineered sandwich structure,” J. Adv. Ceram. 12, 2300–2314 (2023).
+6J. Liu, Y. Wang, X. Zhai, Y. Xue, L. Hao, H. Zhu, C. Liu, H. Cheng, and
+J. Ouyang, “Energy storage properties of sol–gel-processed SrTiO3 films,”
+Materials 16, 31 (2022).
+7W. Zhu, Z. Wang, C. Zhao, O. K. Tan, and H. H. Hng, “Low temperature pro-
+cessing of nanocrystalline lead zirconate titanate (PZT) thick films and ceramics
+by a modified sol–gel route,” Jpn. J. Appl. Phys. 41, 6969–6975 (2002).
+8R. Seveno, P. Limousin, D. Averty, J.-L. Chartier, R. Le Bihan, and
+H. W. Gundel, “Preparation of multi-coating PZT thick films by sol-gel method
+onto stainless steel substrates,” J. Eur. Ceram. Soc. 20, 2025–2028 (2000).
+9S. H. Hu, X. J. Meng, G. S. Wang, J. L. Sun, and D. X. Li, “Preparation and
+characterization of multi-coating PZT thick films by sol–gel process,” J. Cryst.
+Growth 264, 307–311 (2004).
+10X. M. Donglin, Y. Zeng, and L. Churong, “Fabrication and electrical properties
+of lead zirconate titanate thick films by the new sol–gel method,” Mater. Sci.
+Eng. B87, 160–163 (2001).
+11J. Yi, L. Liu, L. Shu, Y. Huang, and J. F. Li, “Outstanding ferroelectricity in sol
+−gel-derived polycrystalline BiFeO3 films within a wide thickness range,” ACS
+Appl. Mater. Interfaces 14, 21696–21704 (2022).
+12K. Tsuchiya, T. Kitagawa, and E. Nakamachi, “Development of RF magnetron
+sputtering method to fabricate PZT thin film actuator,” Precis. Eng. 27(3),
+258–264 (2003).
+13F. Chen, Q. Z. Liu, H. F. Wang, F. H. Zhang, and W. Wu, “Polarization switch-
+ing and fatigue in Pb(Zr0.52Ti0.48)O3 films sandwiched by oxide electrodes with
+different carrier types,” Appl. Phys. Lett. 90, 192907 (2007).
+14F. Chen, R. Schafranek, A. Wachau, S. Zhukov, J. Glaum, T. Granzow, H. von
+Seggern, and A. Klein, “Barrier heights, polarization switching, and electrical
+fatigue in Pb(Zr,Ti)O3 ceramics with different electrodes,” J. Appl. Phys. 108,
+104106 (2010).
+15K. Shibata, K. Watanabe, T. Kuroda, and T. Osada, “KNN lead-free piezoelec-
+tric films grown by sputtering,” Appl. Phys. Lett. 121(9), 092901 (2022).
+16D. A. Barrow, T. E. Petroff, R. P. Tandon, and M. Sayer, “Characterization of
+thick lead zirconate titanate films fabricated using a new sol gel based process,”
+J. Appl. Phys. 81(2), 876–881 (1997).
+17Y. Wang, J. Ouyang, H. Cheng, Y. Shi, T. Nishikado, and I. Kanno, “High per-
+formance LaNiO3-buffered, (001)-oriented PZT piezoelectric films integrated on
+(111) Si,” Appl. Phys. Lett. 121(18), 182902 (2022).
+18M. Wang, H. Bo, A. Wang, Z. Cheng, S. Li, W. Zou, J. He, and X. Ma,
+“High-quality c-axis oriented Al(Sc)N thin films prepared by magnetron sputter-
+ing,” Thin Solid Films 781, 140000 (2023).
+19K. Tonisch, V. Cimalla, C. Foerster, H. Romanus, O. Ambacher, and
+D. Dontsov, “Piezoelectric properties of polycrystalline AlN thin films for
+MEMS application,” Sens. Actuators, A 132(2), 658–663 (2006).
+20T. Li, G. Wang, K. Li, G. Du, Y. Chen, Z. Zhou, D. Rémiens, and X. Dong,
+“Electrical properties of lead-free KNN films on SRO/STO by RF magnetron
+sputtering,” Ceram. Int. 40(1), 1195–1198 (2014).
+21M. D. Nguyen, M. Dekkers, E. P. Houwman, H. T. Vu, H. N. Vu, and
+G. Rijnders, “Lead-free (K0.5Na0.5)NbO3 thin films by pulsed laser deposition
+driving MEMS-based piezoelectric cantilevers,” Mater. Lett. 164, 413–416
+(2016).
+22W. L. Dang, Y. Q. Fu, J. K. Luo, A. J. Flewitt, and W. I. Milne, “Deposition
+and characterization of sputtered ZnO films,” Superlattices Microstruct. 42(1–6),
+89–93 (2007).
+23W. Qin, T. Li, Y. Li, J. Qiu, X. Ma, X. Chen, X. Hu, and W. Zhang, “A high
+power ZnO thin film piezoelectric generator,” Appl. Surf. Sci. 364, 670–675
+(2016).
+24P. C. Lee, Y. L. Hsiao, J. Dutta, R. C. Wang, S.-W. Tseng, and C.-P. Liu,
+“Development of porous ZnO thin films for enhancing piezoelectric nanogenera-
+tors and force sensors,” Nano Energy 82, 105702 (2021).
+25X. Ding, H. Guo, Z. Qu, X. Wei, J. Wang, and Z. You, “An efficient and
+noticeable wet etching method for PZT and its application in scanning mirrors,”
+Sens. Actuators, A 379, 115987 (2024).
+26J. K. Vondeling, “Fluoride-based etchants for quartz Chapman and Hall Ltd,”
+J. Mater. Sci. 18, 304–314 (1983).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-18
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 20]
+27J. S. Danel and G. Delapierre, “Quartz a material for microdevices,”
+J. Micromech. Microeng. 1, 187–198 (1991).
+28D. Zhuang and J. H. Edgar, “Wet etching of GaN, AlN, and SiC: A review,”
+Mater. Sci. Eng., R 48(1), 1–46 (2005).
+29D. Chen, J. Wang, D. Xu, and Y. Zhang, “The influence of the AlN film
+texture on the wet chemical etching,” Microelectron. J. 40, 15–19 (2009).
+30J. C. Doll, B. C. Petzold, B. Ninan, R. Mullapudi, and B. L. Pruitt, “Aluminum
+nitride
+on
+titanium
+for
+CMOS
+compatible
+piezoelectric
+transducers,”
+J. Micromech. Microeng. 20, 025008 (2010).
+31R. A. Miller and J. J. Bernstein, “A novel wet etch for patterning lead
+zirconate-titanate (PZT) thin-films,” Integr. Ferroelectr. 29, 225–231 (2000).
+32S. Ezhilvalavan, Z. Zhang, J. Loh, and J. Y. Ying, “Microfabrication of PZT
+force sensors for minimally invasive surgical tools,” J. Phys.: Conf. Ser. 34,
+979–984 (2006).
+33K. Zheng, J. Lu, and J. Chu, “A novel wet etching process of Pb(Zr,Ti)O3 thin
+films for applications in microelectromechanical system,” Jpn. J. Appl. Phys.
+43(6S), 3934 (2004).
+34C. G. Ching, P. K. Ooi, S. S. Ng, M. A. Ahmad, Z. Hassan, H. Abu Hassan,
+and M. J. Abdullah, “Fabrication of porous ZnO via electrochemical etching
+using 10wt% potassium hydroxide solution,” Mater. Sci. Semicond. Process. 16,
+70–76 (2013).
+35J. Yang, C. Si, G. Han, M. Zhang, L. Ma, Y. Zhao, and J. Ning, “Researching
+the aluminum nitride etching process for application in MEMS resonators,”
+Micromachines 6, 281–290 (2015).
+36S. Saravanan, E. Berenschot, G. Krijnen, and M. Elwenspoek, “A novel
+surface micromachining process to fabricate AlN unimorph suspensions and
+its application for RF resonators,” Sens. Actuators, A 130–131, 340–345
+(2006).
+37S. Marauska, T. Dankwort, H. J. Quenzer, and B. Wagner, “Sputtered thin film
+piezoelectric aluminium nitride as a functional MEMS material and CMOS com-
+patible process integration,” Proc. Eng. 25, 1341–1344 (2011).
+38W. K. Jae and S. K. Eun, “Fine ZnO patterning with controlled sidewall-etch
+front slope,” J. Microelectromech. Syst. 14, 603–609 (2005).
+39W. Lim, L. Voss, R. Khanna, B. P. Gila, D. P. Norton, S. J. Pearton, and F. Ren,
+“Comparison of CH4/H2 and C2H6/H2 inductively coupled plasma etching of
+ZnO,” Appl. Surf. Sci. 253, 1269–1273 (2006).
+40L. Che, E. Halvorsen, and X. Chen, “An optimized one-step wet etching
+process of Pb(Zr0.52Ti0.48)O3 thin films for microelectromechanical system appli-
+cations,” J. Micromech. Microeng. 21, 67–74 (2011).
+41G. McLane, R. Polcawich, J. Pulskamp, B. Piekarski, M. Dubey, E. Zakar,
+J. Conrad, R. Piekarz, M. Ervin, and M. Wood, “Reactive ion etching of sol-gel
+deposited lead zirconate titanate (pzt) thin films in SF6 plasmas,” Integr.
+Ferroelectr. 37, 67–74 (2001).
+42F. Kurokawa, R. Yokokawa, H. Kotera, F. Horikiri, K. Shibata, T. Mishima,
+M. Sato, and I. Kanno, “Micro fabrication of lead-free (K,Na)NbO3 piezoelectric
+thin films by dry etching,” Micro Nano Lett. 7, 1223–1225 (2012).
+43F. Horikiri, K. Shibata, K. Suenaga, K. Watanabe, A. Nomoto, T. Mishima,
+F. Kurokawa, and I. Kanno, “Dry etching of lead-free (K,Na)NbO3 piezoelectric
+films by Ar/C4F8 plasma,” Jpn. J. Appl. Phys. 51, 076202 (2012).
+44T. Tekin, “Review of packaging of optoelectronic, photonic, and MEMS com-
+ponents,” IEEE J. Sel. Top. Quantum Electron. 17, 704–719 (2011).
+45Y. Hao, W. Yuan, J. Xie, Q. Shen, and H. Chang, “Design and verification of a
+structure for isolating packaging stress in SOI MEMS devices,” IEEE Sens. J. 17,
+1246–1254 (2017).
+46A. C. Fischer, F. Forsberg, M. Lapisa, S. J. Bleiker, G. Stemme, N. Roxhed, and
+F. Niklaus, “Integrating MEMS and ICs,” Microsyst. Nanoeng. 1, 5 (2015).
+47T. H. Fedynyshyn, C. Brubaker, R. Islam, H. Luesebrink, Proc. SPIE 4690,
+270–276 (2002).
+48M. Esashi, “Wafer level packaging of MEMS,” J. Micromech. Microeng. 18,
+073001 (2008).
+49J. Braeuer, J. Besser, M. Wiemer, and T. Gessner, “A novel technique for
+MEMS packaging: Reactive bonding with integrated material systems,” Sens.
+Actuators, A 188, 212–219 (2012).
+50B. Lee, S. Seok, and K. Chun, “A study on wafer level vacuum packaging for
+MEMS devices,” J. Micromech. Microeng. 13, 663–669 (2003).
+51Y. Wang, H. Cheng, J. Yan, N. Chen, P. Yan, and J. Ouyang, “Nonlinear elec-
+tric field dependence of the transverse piezoelectric response in a (001) ferroelec-
+tric film,” Scr. Mater. 189, 84–88 (2020).
+52I. Kanno, H. Kotera, and K. Wasa, “Measurement of transverse piezoelectric
+properties of PZT thin films,” Sens. Actuators, A 107, 68–74 (2003).
+53K. Tonisch, V. Cimalla, C. Foerster, D. Dontsov, and O. Ambacher,
+“Piezoelectric properties of thin AlN layers for MEMS application determined by
+piezoresponse force microscopy,’ Phys. Status Solidi C 3, 2274–2277 (2006).
+54N. Ledermann, P. Muralt, J. Baborowski, S. Gentil, K. Mukati, M. Cantoni,
+A. Seifert, and N. Setter, “(1 0 0)-textured, piezoelectric Pb(Zrx, Ti1−x)O3 thin
+films for MEMS integration, deposition and properties,” Sens. Actuators, A 105,
+162–170 (2003).
+55M. A. Moram, Z. H. Barber, C. J. Humphreys, T. B. Joyce, and P. R. Chalker,
+“Young’s
+modulus,
+Poisson’s
+ratio,
+and
+residual
+stress
+and
+strain
+in
+(111)-oriented scandium nitride thin films on silicon,” J. Appl. Phys. 100,
+023514 (2006).
+56Y. Lu, M. Reusch, N. Kurz, A. Ding, T. Christoph, M. Prescher, L. Kirste,
+O. Ambacher, and A. Žukauskaitė, “Elastic modulus and coefficient of thermal
+expansion of piezoelectric Al1−xScxN (up to x = 0.41) thin films,” APL Mater. 6,
+076105 (2018).
+57B. Hähnlein, J. Kovac, and J. Pezoldt, “Size effect of the silicon carbide
+Young’s modulus,” Phys. Status Solidi A 214, 1600390 (2017).
+58B. D. Ozsdolay, C. P. Mulligan, M. Guerette, L. Huang, and D. Gall, “Epitaxial
+growth
+and
+properties
+of
+cubic
+WN
+on
+MgO(001),
+MgO(111),
+and
+Al2O3(0001),” Thin Solid Films 590, 276–283 (2015).
+59M. Munawar Chaudhri, “Some concerns about the current interpretation and
+analyses of indentation unloading P–h curves highlighted with Young’s modulus
+studies of single crystals of MgO (100),” J. Appl. Phys. 124(9), 095107 (2018).
+60R. Xu, X. Zhang, D. Zhang, J. Liu, J. Lu, R. Zhao, Y. Ji, F. Qian, H. Wang, and
+J. Fan, “High stability of flexible perovskite transparent conductive oxide film via
+van der Waals heteroepitaxy,” J. Alloys Compd. 890, 161897 (2022).
+61B. Boubeker, M. Talea, P. Goudeau, C. Coupeau, and J. Grilhe, “On the Young
+modulus of 304 l stainless steel thin films,” Mater. Charact. 45(1), 33–37 (2000).
+62J. Iannacci, “RF-MEMS technology as an enabler of 5G: Low-loss ohmic
+switch tested up to 110 GHz,” Sens. Actuators, A 279, 624–629 (2018).
+63X. Le, Q. Shi, P. Vachon, E. J. Ng, and C. Lee, “Piezoelectric MEMS-evolution
+from sensing technology to diversified applications in the 5G/internet of things
+(IoT) era,” J. Micromech. Microeng. 32, 014005 (2021).
+64C. G. Hindrichsen, R. Lou-Møller, K. Hansen, and E. V. Thomsen,
+“Advantages of PZT thick film for MEMS sensors,” Sens. Actuators, A 163, 9–14
+(2010).
+65D. Piyabongkarn, R. Rajamani, and M. Greminger, “The development of a
+MEMS gyroscope for absolute angle measurement,” IEEE Trans. Control Syst.
+Technol. 13, 185–195 (2005).
+66H. Wijshoff, “The dynamics of the piezo inkjet printhead operation,” Phys.
+Rep. 491, 77–177 (2010).
+67H. P. Loebl, M. Klee, C. Metzmacher, W. Brand, R. Milsom, and P. Lok,
+“Piezoelectric thin AlN films for bulk acoustic wave (BAW) resonators,” Mater.
+Chem. Phys. 79, 143–146 (2003).
+68H. P. Ko, H. Jeong, and B. Koc, “Piezoelectric actuator for mobile auto focus
+camera applications,” J. Electroceram. 23, 530–535 (2009).
+69J.-H. Lee, I.-J. Cho, K. Ko, E.-S. Yoon, H.-H. Park, and T. S. Kim, “Flexible
+piezoelectric micromachined ultrasonic transducer (PMUT) for application in
+brain stimulation,” Microsyst. Technol. 23, 2321–2328 (2017).
+70S. Park, Y. Kim, H. Jung, J.-Y. Park, N. Lee, and Y. Seo, “Energy harvesting
+efficiency of piezoelectric polymer film with graphene and metal electrodes,” Sci.
+Rep. 7, 17290 (2017).
+71H.
+Nazemi,
+J.
+Antony
+Balasingam,
+S.
+Swaminathan,
+K.
+Ambrose,
+M. U. Nathani, T. Ahmadi, Y. Babu Lopez, and A. Emadi, “Mass sensors based
+on capacitive and piezoelectric micromachined ultrasonic transducers—CMUT
+and PMUT,” Sensors 20, 2010 (2020).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-19
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 21]
+72K. R. Udayakumar, S. F. Bart, A. M. Flynn, J. Chen, L. S. Tavrow, L. E. Cross,
+R. A. Brooks, and D. J. Ehrlich, “Ferroelectric thin film ultrasonic micromotors,”
+in Proceedings of the IEEE Micro Electro Mechanical Systems (IEEE, 1991),
+pp. 109–113.
+73P. Muralt, A. Kholkin, M. Kohli, and T. Maeder, “Piezoelectric actuation of
+PZT thin-film diaphragms at static and resonant conditions,” Sens. Actuators, A
+53, 398–404 (1996).
+74S. Shelton and M. L. Chan, “CMOS-compatible AlN piezoelectric microma-
+chined ultrasonic transducers,” in IEEE International Ultrasonics Symposium
+(IEEE, 2009).
+75Y. Huang, L. Shu, F. Hu, L. Liu, Z. Zhou, Y.-Y.-S. Cheng, S. Zhang, W. Li,
+Q. Li, H. Wang, Z. Dong, L. Wei, C. Luo, and J. Li, “Implementing (K,Na)
+NbO3-based lead-free ferroelectric films to piezoelectric micromachined ultra-
+sonic transducers,” Nano Energy 103, 107761 (2022).
+76J. J. Bernstein, S. L. Finberg, K. Houston, L. C. Niles, H. D. Chen, L. E. Cross,
+K. K. Li, and K. Udayakumar, “Micromachined high frequency ferroelectric
+sonar
+transducers,”
+IEEE
+Transactions
+on
+Ultrasonics，
+Ferroelectrics,
+Frequency Control 44, 960–969 (1997).
+77K. Yamashita, L. Chansomphou, H. Murakami, and M. Okuyama, “Ultrasonic
+micro array sensors using piezoelectric thin films and resonant frequency
+tuning,” Sens. Actuators, A 114, 147–153 (2004).
+78D. E. Dausch, K. H. Gilchrist, J. B. Carlson, S. D. Hall, J. B. Castellucci, and
+O. T. von Ramm, “In vivo real-time 3-D intracardiac echo using PMUT arrays,’
+IEEE Trans. Ultrason. Ferroelectr. Freq. Control 61, 1754–1764 (2014).
+79X. Wang, L. H. W. Liu, S. Song, W. Xu, Q. Cheng, A. Riaud, and J.-Y. Ren,
+“Development of PZT-based 18 MHz 2D PMUT array with PDMS waveguide,”
+in IEEE International Ultrasonics Symposium (IUS) (IEEE, 2020), pp. 7–11.
+80W. Ji, L. Liu, Z. Xing, D. Zhang, Y. Wang, L. Chen, Y. Chen, X. Sun, and
+Y. Du, “Total-focus ultrasonic imaging of defects in solids using a PZT piezoelec-
+tric
+micromachined
+ultrasonic
+transducer
+array,”
+IEEE
+Trans.
+Ultrason.
+Ferroelectr. Freq. Control 68, 1380–1386 (2021).
+81Y. P. Lu, H. Y. Tang, S. Fung, B. E. Boser, and D. A. Horsley, “Short-range and
+high-resolution ultrasound imaging using an 8 MHz aluminum nitride PMUT
+array,” in 2015 28th IEEE International Conference on Micro Electro Mechanical
+Systems (MEMS) (IEEE, 2015), Vol. 28, pp. 40–143.
+82W. J. Liao, T. L. Ren, Y. Yang, X. M. Kong, Y. P. Zhu, L. G. Wang, Y. F. Wang,
+G. J. Miao, and L. T. Liu, “PMUT array design for a handwriting input system,”
+in 2010 IEEE 23rd International Conference on Micro Electro Mechanical Systems
+(MEMS) (IEEE, 2010), pp. 639–642.
+83H.-Y. Tang, Y. Lu, X. Jiang, E. J. Ng, J. M. Tsai, D. A. Horsley, and B. E. Boser,
+“3-D ultrasonic fingerprint sensor-on-a-chip,” IEEE J. Solid-State Circuits 51,
+2522–2533 (2016).
+84D. E. Dausch, K. H. Gilchrist, J. R. Carlson, J. B. Castellucci, D. R. Chou, and
+O. T. von Ramm, “Improved pulse-echo imaging performance for flexure-mode
+PMUT arrays,” in IEEE International Ultrasonics Symposium (IEEE, 2010), pp.
+11–14, P23.
+85X. Y. Chen, C. W. Liu, D. F. Yang, X. Liu, L. Hu, and J. Xie, “Highly accurate
+airflow volumetric flowmeters via PMUTs arrays based on transit time,”
+J. Microelectromech. Syst. 28, 707–716 (2019).
+86K. Zhu, X. Chen, M. Qu, D. Yang, L. Hu, and J. Xie, “Non-contact ultrasonic
+flow measurement for small pipes based on AlN piezoelectric micromachined
+ultrasonic transducer arrays,” J. Microelectromech. Syst. 30, 480–487 (2021).
+87H. Ding, D. F. Yang, J. H. Xu, X. Y. Chen, X. H. Le, Y. Wang, L. W. Lin, and
+J. Xie, “Pulsed wave Doppler ultrasound using 3.7 Mhz PMUTS toward wearable
+blood flow measurements,” in 2020 33rd IEEE International Conference on Micro
+Electro Mechanical Systems (MEMS) (IEEE, 2020), pp. 400–403.
+88M. Royer, J. O. Holmen, M. A. Wurm, O. S. Aadland, and M. Glenn, “ZnO on
+Si integrated acoustic sensor,” Sens. Actuators 4, 357–362 (1983).
+89W. R. Ali and M. Prasad, “Piezoelectric based MEMS acoustic sensor for wide
+frequency applications,” IEEE Sens. J. 21, 27352–27360 (2021).
+90A. Arora, V. K. Dwivedi, P. J. George, K. Sreenivas, and V. Gupta, “Zinc oxide
+thin film-based MEMS acoustic sensor with tunnel for pressure compensation,”
+Sens. Actuators, A 141, 256–261 (2008).
+91S. C. Ko, Y. C. Kim, S. S. Lee, S. H. Choi, and S. R. Kim, “Micromachined pie-
+zoelectric membrane acoustic device,” Sens. Actuators, A 103, 130–134 (2003).
+92M. D. Williams, B. A. Griffin, T. N. Reagan, J. R. Underbrink, and M. Sheplak,
+“An AlN MEMS piezoelectric microphone for aeroacoustic applications,”
+J. Microelectromech. Syst. 21, 270–283 (2012).
+93J. Segovia-Fernandez, S. Sonmezoglu, S. T. Block, Y. Kusano, J. M. Tsai,
+R. Amirtharajah, and D. A. Horsley, “Monolithic piezoelectric aluminum nitride
+mems-cmos microphone,” in 2017 19th International Conference on Solid-State
+Sensors,
+Actuators
+and
+Microsystems
+(TRANSDUCERS)
+(IEEE,
+2017),
+pp. 414–417.
+94L.-T. Zhang, T.-L. Ren, J.-S. Liu, L.-T. Liu, and Z.-J. Li, “Fabrication of a canti-
+lever structure for piezoelectric microphone,” Jpn. J. Appl. Phys. 41, 7158–7159
+(2002).
+95Y.-C. Chen, S.-C. Lo, S. Wang, Y.-J. Wang, M. Wu, and W. Fang, “On the
+PZT/Si unimorph cantilever design for the signal-to-noise ratio enhancement of
+piezoelectric MEMS microphone,” J. Micromech. Microeng. 31, 105003 (2021).
+96B. Stephen, T. N. Horowitz, L. N. Cattafesta, and S. Mark, “Design and charac-
+terization of a micromachined piezoelectric microphone,” in 11th AIAA/CEAS
+Aeroacoustics Conference (AIAA, 2005).
+97M. Zanartu, J. C. Ho, S. S. Kraman, H. Pasterkamp, J. E. Huber, and
+G. R. Wodicka, “Air-borne and tissue-borne sensitivities of bioacoustic sensors
+used on the skin surface,” IEEE Trans. Biomed. Eng. 56, 443–451 (2009).
+98N. Zargarpour and M. H. Zarifi, “A piezoelectric micro-electromechanical
+microphone for implantable hearing aid applications,” Microsyst. Technol. 21,
+893–902 (2015).
+99C. Zhao, K. E. Knisely, D. J. Colesa, B. E. Pfingst, Y. Raphael, and K. Grosh,
+“Voltage
+readout
+from
+a
+piezoelectric
+intracochlear
+acoustic
+transducer
+implanted in a living Guinea pig,” Sci. Rep. 9, 3711 (2019).
+100D. K. Kharat, S. Mitra, S. Akhtar, and V. Kumar, “Polymeric piezoelectric
+transducers for hydrophone applications,” Def. Sci. J. 57, 7–22 (2007).
+101S. S. Lee, R. P. Ried, and R. M. White, “Piezoelectric cantilever microphone
+and microspeaker,” J. Microelectromech. Syst. 5, 238–242 (1996).
+102A. Rahaman, A. Ishfaque, H. Jung, and B. Kim, “Bio-inspired rectangular
+shaped piezoelectric MEMS directional microphone,” IEEE Sens. J. 19, 88–96
+(2019).
+103S.-D. Wang, Y.-C. Chen, S.-C. Lo, Y.-J. Wang, M. Wu, and W. Fang, “On the
+performance enhancement of cantilever diaphragm piezoelectric microphone,”
+in 2021 IEEE Sensors (IEEE, 2021), pp. 1–4.
+104W. R. Ali and M. Prasad, “Design and fabrication of microtunnel and
+Si-diaphragm for ZnO based MEMS acoustic sensor for high SPL and low fre-
+quency application,” Microsyst. Technol. 21, 1249–1255 (2014).
+105Y. K. Tang, Y. F. Wang, L. R. Zhao, A. Shkel, and E. S. Kim, “Micromachined
+piezoelectric ultrasonic transducer based on dome-shaped diaphragm supported
+by flat square diaphragm,”in 2016 IEEE 29th International Conference on Micro
+Electro Mechanical Systems (MEMS) (IEEE, 2016), pp. 1110–1113.
+106M. Prasad and V. K. Khanna, “Development of MEMS acoustic sensor with
+microtunnel for high SPL measurement,” IEEE Trans. Ind. Electron. 69,
+3142–3150 (2022).
+107H. C. Cho, S. C. Ur, M. S. Yoon, and S. H. Yi, “Dependence of material prop-
+erties on piezoelectric microspeakers with AlN thin film,” in 2008 3rd IEEE
+International Conference on Nano/Micro Engineered and Molecular Systems
+(IEEE, 2008), pp. 637–640.
+108R. G. Polcawich, M. Scanlon, J. Pulskamp, J. Clarkson, J. Conrad,
+D. Washington, R. Piekarz, S. Trolier-McKinstry, and M. Dubey, “Design and
+fabrication of a lead zirconate titanate (PZT) thin film acoustic sensor,” Integr.
+Ferroelectr. 54, 595–606 (2003).
+109H.-Y. Huang, T. H. Hsu, H.-Y. Lin, Yi Chiu, J.-C. Chiou, and W. Fang, “A
+photovoltaic
+PN-junction
+vertical
+comb-drive
+micro-actuator,”
+in
+TRANSDUCERS 2009–2009 International Solid-State Sensors, Actuators and
+Microsystems Conference (IEEE, 2009).
+110M. L. Kuntzman, J. Lee Gloria, N. N. Hewa-Kasakarage, D. Kim, and
+N. A. Hall, “Micromachined piezoelectric microphones with in-plane directiv-
+ity,” Appl. Phys. Lett. 102, 054109 (2013).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-20
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 22]
+111Y. B. Jeon, R. Sood, J. Jeong, and S. G. Kim, “MEMS power generator with
+transverse mode thin film PZT,” Sens. Actuators, A 122, 16–22 (2005).
+112D. Shen, J.-H. Park, J. Ajitsaria, S.-Y. Choe, H. C. Wikle, and D.-J. Kim, “The
+design, fabrication and evaluation of a MEMS PZT cantilever with an integrated
+Si proof mass for vibration energy harvesting,” J. Micromech. Microeng. 18,
+055017 (2008).
+113J. C. Park, J. Y. Park, and Y.-P. Lee, “Modeling and characterization of piezo-
+electric d33-mode MEMS energy harvester,” J. Microelectromech. Syst. 19,
+1215–1222 (2010).
+114D. Isarakorn, D. Briand, P. Janphuang, A. Sambri, S. Gariglio, J. M. Triscone,
+F. Guy, J. W. Reiner, C. H. Ahn, and N. F. de Rooij, “The realization and perfor-
+mance of vibration energy harvesting MEMS devices based on an epitaxial piezo-
+electric thin film,” Smart Mater. Struct. 20, 025015 (2011).
+115S. H. Kweon, E. J. Kim, G. Tan, and I. Kanno, “Compositional modification
+of epitaxial Pb(Zr,Ti)O3 thin films for high-performance piezoelectric energy
+harvesters,” Adv. Mater. Interfaces 11, 2300634 (2024).
+116R. Harada, N. Iwamoto, S.-H. Kweon, T. Umegaki, and I. Kanno, “Finger
+flexion power generators made of piezoelectric lead zirconate titanate thin films
+on stainless steel foils,” Sens. Actuators, A 322, 112617 (2021).
+117S. C. Lin and W. J. Wu, “Fabrication of PZT MEMS energy harvester based
+on silicon and stainless-steel substrates utilizing an aerosol deposition method,”
+J. Micromech. Microeng. 23, 125028 (2013).
+118E. J. Kim, S. H. Kweon, S. Nahm, Y. Sato, G. Tan, and I. Kanno, “High output
+performance of piezoelectric energy harvesters using epitaxial Pb(Zr, Ti)O3 thin
+film grown on Si substrate,” Appl. Phys. Lett. 121, 161901 (2022).
+119L. V. Minh, M. Hara, F. Horikiri, K. Shibata, T. Mishima, and H. Kuwano,
+“Bulk micromachined energy harvesters employing (K,Na)NbO3 thin film,”
+J. Micromech. Microeng. 23, 035029 (2013).
+120S. S. Won, J. Lee, V. Venugopal, D.-J. Kim, J. Lee, I. W. Kim, A. I. Kingon,
+and S.-H. Kim, “Lead-free Mn-doped (K0.5,Na0.5)NbO3 piezoelectric thin films
+for MEMS-based vibrational energy harvester applications,” Appl. Phys. Lett.
+108, 232908 (2016).
+121A. Sharma, O. Z. Olszewski, J. Torres, A. Mathewson, and R. Houlihan,
+“Fabrication, simulation and characterisation of MEMS piezoelectric vibration
+energy harvester for low frequency,” Proc. Eng. 120, 645–650 (2015).
+122L.
+Algieri,
+M.
+T.
+Todaro,
+F.
+Guido,
+V.
+Mastronardi,
+D. Desmaële,
+A. Qualtieri, C. Giannini, T. Sibillano, and M. De Vittorio, “Flexible piezoelectric
+energy-harvesting exploiting biocompatible AlN thin films grown onto spin-
+coated polyimide layers,” ACS Appl. Mater. Interfaces 10, 5203–5212 (2018).
+123T. George, A. K. Dutta, M. S. Islam, P. Frach, S. Barth, H. Bartzsch, and
+D. Gloess, Proc. SPIE 10194, 1019401 (2017).
+124L. Van Minh and H. Kuwano, “Piezoelectric tantalum aluminum nitride films
+for vibrational micro energy harvesters,” in 2021 IEEE 34th International Conference
+on Micro Electro Mechanical Systems (MEMS) (IEEE, 2021), pp. 242–245.
+125Y. Liu, B. Hu, Y. Cai, J. Zhou, W. Liu, A. Tovstopyat, G. Wu, and C. Sun,
+“Design and performance of ScAlN/AlN trapezoidal cantilever-based MEMS pie-
+zoelectric energy harvesters,” IEEE Trans. Electron Devices 68, 2971–2976
+(2021).
+126I. Chun, H.-W. Lee, and K.-H. Kwon, “Micro electro-mechanical system pie-
+zoelectric
+cantilever
+array
+for
+a
+broadband
+vibration
+energy
+harvester,”
+J. Nanosci. Nanotechnol. 14, 9253–9257 (2014).
+127H. Liu, C. Lee, T. Kobayashi, C. J. Tay, and C. Quan, “A new S-shaped
+MEMS PZT cantilever for energy harvesting from low frequency vibrations
+below 30 Hz,” Microsyst. Technol. 18, 497–506 (2012).
+128H. Liu, C. J. Tay, C. Quan, T. Kobayashi, and C. Lee, “A scrape-through pie-
+zoelectric MEMS energy harvester with frequency broadband and up-conversion
+behaviors,” Microsyst. Technol. 17, 1747–1754 (2011).
+129K. Tao, H. Yi, L. Tang, J. Wu, P. Wang, N. Wang, L. Hu, Y. Fu, J. Miao, and
+H. Chang, “Piezoelectric ZnO thin films for 2DOF MEMS vibrational energy
+harvesting,” Surf. Coat. Technol. 359, 289–295 (2019).
+130X. Feng, M. Huang, H. Liu, and L. Sun, “A dual-cantilever based MEMS PZT
+thick-film energy harvester with enhanced internal resonance performance,”
+Appl. Phys. Lett. 122, 073902 (2023).
+131R. Takei, H. Okada, N. Makimoto, T. Itoh, and T. Kobayashi, “Simulation of
+an ultralow-power power management circuit for MEMS cantilever piezoelectric
+vibration energy harvesters,” Jpn. J. Appl. Phys. 55, 10TA06 (2016).
+132M. Rezaeisaray, M. E. Gowini, D. Sameoto, D. Raboud, and W. Moussa,
+“Low frequency piezoelectric energy harvesting at multi vibration mode shapes,”
+Sens. Actuators, A 228, 104–111 (2015).
+133K. Lu, R. Hu, X. Wang, and Z. Deng, “Multi-directional and ultra-low fre-
+quency energy harvester utilizing tunable buckled piezoelectric film,” Mech. Syst.
+Signal Process. 210, 111137 (2024).
+134B. Lee, S. Lin, W. Wu, X. Wang, P. Chang, and C. Lee, “Piezoelectric MEMS
+generators fabricated with an aerosol deposition PZT thin film,” J. Micromech.
+Microeng. 19, 065014 (2009).
+135H. Durou, G. A. Ardilla-Rodriguez, A. Ramond, X. Dollat, C. Rossi, and
+D. Esteve, “Improved pulse-echo imaging performance for flexure-mode PMUT
+arrays Leuven Belgium,” in IEEE International Ultrasonics Symposium (IEEE,
+2010).
+136R. Andosca, T. G. McDonald, V. Genova, S. Rosenberg, J. Keating,
+C. Benedixen, and J. Wu, “Experimental and theoretical studies on MEMS piezo-
+electric vibrational energy harvesters with mass loading,” Sens. Actuators, A 178,
+76–87 (2012).
+137A. B. Alamin Dow, A. Bittner, U. Schmid, and N. P. Kherani, “Design, fabri-
+cation and testing of a piezoelectric energy microgenerator,” Microsyst. Technol.
+20, 1035–1040 (2014).
+138I. Kanno, T. Ichida, K. Adachi, H. Kotera, K. Shibata, and T. Mishima,
+“Power-generation performance of lead-free (K,Na)NbO3 piezoelectric thin-film
+energy harvesters,” Sens. Actuators, A 179, 132–136 (2012).
+139V. Toporovsky, V. Samarkin, A. Kudryashov, I. Galaktionov, A. Panich, and
+A. Malykhin, “Investigation of PZT materials for reliable piezostack deformable
+mirror with modular design,” Micromachines 14, 2004 (2023).
+140R. A. Windhorst, R. A. Cameron, R. J. Brissenden, M. S. Elvis, G. Fabbiano,
+P. Gorenstein, P. B. Reid, D. A. Schwartz, M. W. Bautz, E. Figueroa-Feliciano,
+R. Petre, N. E. White, and W. W. Zhang, “Generation-X: An x-ray observatory
+designed to observe first light objects,” New Astron. Rev. 50, 121–126 (2006).
+141K.
+Buffo,
+C.
+T.
+DeRoo,
+P.
+Reid,
+V.
+Kradinov,
+V.
+Marquez,
+S. Trolier-McKinstry, N. Bishop, T. N. Jackson, Q. Tran, and H. Liang, Proc.
+SPIE 12679, 266–284 (2023).
+142M. L. Wallace, J. I. Ramirez, R. Allured, Z. Prieskorn, V. Marquez,
+D. N. Burrows, P. Reid, T. N. Jackson, and S. Trolier-McKinstry, “Integrated elec-
+tronics for control of large-area piezoelectric arrays for adjustable optics,” Sens.
+Actuators, A 276, 304–311 (2018).
+143R. Huisman, M. P. Bruijn, S. Damerio, M. Eggens, S. N. R. Kazmi,
+A. E. M. Schmerbauch, H. Smit, M. A. Vasquez-Beltran, E. van der Veer, and
+M. Acuautla, “High pixel number deformable mirror concept utilizing piezoelec-
+tric hysteresis for stable shape configurations,” J. Astron. Telesc., Instrum., Syst.
+7(2), 029002 (2021).
+144J. Zhang, X. Zhang, Y. Wang, T. Lv, and H. Yu, “AlN-based piezoelectric
+MEMS deformable mirror,” Opt. Lett. 48, 4777–4780 (2023).
+145Q. Hao, F. Fan, X. Cheng, D. Wang, and Y. Jiang, “Optical stabilization
+system based on deformable mirrors for retina-like sensors,” Appl. Opt. 55,
+5623–5629 (2016).
+146D. A. Horsley, H. Park, S. P. Laut, and J. S. Werner, Proc. SPIE 5688,
+133–144 (2005).
+147V. Toporovsky, A. Kudryashov, A. Skvortsov, A. Rukosuev, V. Samarkin, and
+I. Galaktionov, “State-of-the-art technologies in piezoelectric deformable mirror
+design,” Photonics 9, 321 (2022).
+148B. Li and D. Tian, “Comparative analysis of the effect of cutting piezoelectric
+ceramics on optically oriented compensation capability,” Photonics 10, 1136
+(2023).
+149X. Han, J. Ma, K. Bao, Y. Cui, and J. Chu, “Piezoelectric deformable mirror
+driven by unimorph actuator arrays on multi-spatial layers,” Opt. Express 31,
+13374–13383 (2023).
+150J. Wang, G. Zhang, and Z. You, “Design rules for dense and rapid lissajous
+scanning,” Microsyst. Nanoeng. 6, 101 (2020).
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-21
+© Author(s) 2025
+ 04 April 2026 18:35:41
+
+[Page 23]
+151J. Wang, G. Zhang, and Z. You, “Improved sampling scheme for LiDAR in
+Lissajous scanning mode,” Microsyst. Nanoeng. 8, 64 (2022).
+152J. Wang, G. Zhang, and Z. You, “UKF-based MEMS micromirror angle esti-
+mation for LiDAR,” J. Micromech. Microeng. 29, 035005 (2019).
+153S. Gu-Stoppel, J. Janes, H. J. Quenzer, C. Eisermann, F. Heinrich, and
+W. Benecke, “High frequency 1D piezoelectric resonant microscanners with
+large displacements,” Proc. Eng. 87, 1593–1596 (2014).
+154T. Pensala, J. Kyynäräinen, J. Dekker, S. Gorelick, P. Pekko, T. Pernu,
+O.
+Ylivaara,
+F.
+Gao,
+D.
+Morits,
+and
+J.
+Kiihamäki,
+“Wobbling
+mode
+AlN-piezo-MEMS mirror enabling 360-degree field of view LIDAR for automo-
+tive applications,” in 2019 IEEE International Ultrasonics Symposium (IUS)
+(IEEE, 2019), pp. 1977–1980.
+155A. Piot, J. Pribosek, and M. Moridi, “Dual-axis resonant scanning MEMS
+mirror with pulsed-laser-deposited barium-doped PZT,” in 2021 IEEE 34th
+International Conference on Micro Electro Mechanical Systems (MEMS) (IEEE
+2021), pp. 89–92.
+156L. Ye, G. Zhang, and Z. You, “5 V compatible two-axis PZT driven MEMS
+scanning mirror with mechanical leverage structure for miniature LiDAR appli-
+cation,” Sensors 17, 521 (2017).
+157H. Urey, S. Holmstrom, U. Baran, K. Aksit, M. K. Hedili, and O. Eldes,
+“MEMS scanners and emerging 3D and interactive augmented reality display
+applications,” in 2013 Transducers & Eurosensors XXVII: The 17th International
+Conference on Solid-State Sensors, Actuators and Microsystems (IEEE, 2013).
+158M. T. Shih, S. C. Shen, S. J. Chang, and H. J. Huan, “A novel dual screen pro-
+jection system using balance-type micromirror with piezoelectric actuator,” in
+2011
+16th
+International
+Solid-State
+Sensors,
+Actuators
+and
+Microsystems
+Conference (IEEE, 2011).
+159T. Naono, T. Fujii, M. Esashi, and S. Tanaka, “A large-scan-angle piezoelec-
+tric
+MEMS
+optical
+scanner
+actuated
+by
+a
+Nb-doped
+PZT
+thin
+film,”
+J. Micromech. Microeng. 24, 015010 (2014).
+160G. Yang and Y. Wang, “High resolution laser fringe pattern projection based
+on MEMS micro-vibration mirror scanning for 3D measurement,” Opt. Laser
+Technol. 142, 107189 (2021).
+161P. Janin, D. Uttamchandani, and R. Bauer, “On-chip frequency tuning of fast
+resonant MEMS scanner,” J. Microelectromech. Syst. 31, 977–983 (2022).
+162J. Shao, Q. Li, C. Feng, W. Li, and H. Yu, “Aln based piezoelectric micromir-
+ror,” Opt. Lett. 43, 987–990 (2018).
+163L. Shao, M. Yu, S. Maity, N. Sinclair, L. Zheng, C. Chia, A. Shams-Ansari,
+C. Wang, M. Zhang, K. Lai, and M. Lončar, “Microwave-to-optical conversion
+using lithium niobate thin-film acoustic resonators,” Optica 6, 1498–1505
+(2019).
+164L. Cai, A. Mahmoud, M. Khan, M. Mahmoud, T. Mukherjee, J. Bain, and
+G. Piazza, “Acousto-optical modulation of thin film lithium niobate waveguide
+devices,” Photonics Res. 7, 1003–1013 (2019).
+165S. Ghosh and G. Piazza, “Elasto-optic modulator integrated in high frequency
+piezoelectric mems resonator,” in 2016 IEEE 29th International Conference on
+Micro Electro Mechanical Systems (MEMS) (IEEE, 2016), pp. 9–12.
+166C. Huang, H. Shi, L. Yu, K. Wang, M. Cheng, Q. Huang, W. Jiao, and J. Sun,
+“Acousto-optic modulation in silicon waveguides based on piezoelectric alumi-
+num scandium nitride film,” Adv. Opt. Mater. 10, 2102334 (2022).
+167J. L. Edmunds, S. Sonmezoglu, and M. M. Maharbiz, “Piezoelectric-based
+optical modulator for miniaturized wireless medical implants,” Opt. Express 30,
+43664–43677 (2022).
+168C. A. Dirdal, P. C. V. Thrane, F. T. Dullo, J. Gjessing, A. Summanwar, and
+J. Tschudi, “MEMS-tunable dielectric metasurface lens using thin-film PZT for
+large displacements at low voltages,” Opt. Lett. 47, 1049–1052 (2022).
+169C. Meng, P. C. V. Thrane, F. Ding, J. Gjessing, M. Thomaschewski, C. Wu,
+C. Dirdal, and S. I. Bozhevolnyi, “Dynamic piezoelectric MEMS-based optical
+metasurfaces,” Sci. Adv. 7, eabg5639 (2021).
+170C. Meng, P. C. V. Thrane, F. Ding, and S. I. Bozhevolnyi, “Full-range birefrin-
+gence control with piezoelectric MEMS-based metasurfaces,” Nat. Commun. 13,
+2071 (2022).
+171Y. Deng, C. Meng, P. C. V. Thrane, S. Im Sande, S. I. Bozhevolnyi, and
+F. Ding, “MEMS-integrated metasurfaces for dynamic linear polarizers,” Optica
+11, 326–332 (2024).
+172J. S. Pulskamp, S. S. Bedair, R. G. Polcawich, D. Judy, and S. A. Bhave,
+“Ferroelectric PZT RF MEMS resonators,” in 2011 Joint Conference of the IEEE
+International Frequency Control and the European Frequency and Time Forum
+(FCS) Proceedings (IEEE, 2011), pp. 353–358.
+173H. Chandrahalim, S. A. Bhave, R. G. Polcawich, J. S. Pulskamp, and R. Kaul,
+“PZT transduction of high-overtone contour-mode resonators,” IEEE Trans.
+Ultrason. Ferroelectr. Freq. Control 57, 2035–2041 (2010).
+174C.-M. Lin, Y.-J. Lai, J.-C. Hsu, Y.-Y. Chen, D. G. Senesky, and A. P. Pisano,
+“High-Q aluminum nitride lamb wave resonators with biconvex edges,” Appl.
+Phys. Lett. 99, 143501 (2011).
+175R. Lu, Y. Yang, S. Link, and S. Gong, “A1 resonators in 128° Y-cut lithium
+niobate with electromechanical coupling of 46.4%,” J. Microelectromech. Syst.
+29, 313–319 (2020).
+176Z. Qian, F. Liu, Y. Hui, S. Kar, and M. Rinaldi, “Graphene as a massless elec-
+trode for ultrahigh-frequency piezoelectric nanoelectromechanical systems,”
+Nano Lett. 15, 4599–4604 (2015).
+177N. Wang, F.-L. Hsiao, J. M. Tsai, M. Palaniapan, D.-L. Kwong, and C. Lee,
+“Numerical and experimental study on silicon microresonators based on pho-
+nonic crystal slabs with reduced central-hole radii,” J. Micromech. Microeng. 23,
+065030 (2013).
+178C. Sun, B. W. Soon, Y. Zhu, N. Wang, S. P. H. Loke, X. Mu, J. Tao, and
+A. Y. Gu, “Methods for improving electromechanical coupling coefficient in two
+dimensional electric field excited AlN lamb wave resonators,” Appl. Phys. Lett.
+106, 253502 (2015).
+179R. Q. Rudy, J. S. Pulskamp, S. S. Bedair, M. G. Breen, J. M. Puder, and
+R. G. Polcawich, “Low-loss gold-laced PZT-on-silicon resonator with reduced
+parasitics,” in 2016 IEEE 29th International Conference on Micro Electro
+Mechanical Systems (MEMS) (IEEE, 2016).
+180S.
+Shahraini,
+H.
+Mansoorzare,
+A.
+Mahigir,
+and
+R.
+Abdolvand,
+“Thickness-lamé
+thin-film
+piezoelectric-on-silicon
+resonators,”
+J. Microelectromech. Syst. 29(3), 296–305 (2020).
+181G. F. Chen and M. Rinaldi, “High-Q X band aluminum nitride combined
+overtone resonators,” in 2019 Joint Conference of the IEEE International
+Frequency Control Symposium and European Frequency and Time Forum (EFTF/
+IFC) (IEEE, 2019).
+182G. Pillai and S.-S. Li, “Quality factor boosting of bulk acoustic wave resona-
+tors based on a two dimensional array of high-Q resonant tanks,” Appl. Phys.
+Lett. 116(16), 163502 (2020).
+183G. W. Fang, G. Pillai, M. H. Li, C. Y. Liu, and S. S. Li, “A VHF temperature
+compensated lithium niobate-on-oxide resonator with Q > 3900 for low phase
+noise oscillators,” in 2018 IEEE Micro Electro Mechanical Systems (MEMS)
+(IEEE, 2018), pp. 723–726.
+184C. Y. Chen, S. S. Li, M. H. Li, A. M. Gao, R. C. Lu, and S. B. Gong,
+“Q-enhanced lithium niobate SH0 resonators with optimized acoustic boundar-
+ies,” in 2019 Joint Conference of the IEEE International Frequency Control
+Symposium and European Frequency and Time Forum (EFTF/IFC) (IEEE, 2019),
+pp. 1–4.
+Journal of
+Applied Physics
+REVIEW
+pubs.aip.org/aip/jap
+J. Appl. Phys. 137, 020702 (2025); doi: 10.1063/5.0244749
+137, 020702-22
+© Author(s) 2025
+ 04 April 2026 18:35:41

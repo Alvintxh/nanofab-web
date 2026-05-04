@@ -1,0 +1,44 @@
+# Table of Contents: nil_review_2025_lin
+
+Introduction ... page 3
+  The basic types of NIL ... page 4
+    Thermal nanoimprinting (T-NIL) ... page 4
+    UV nanoimprinting ... page 4
+  NIL mold ... page 5
+    NIL by hard mold ... page 5
+    NIL by composite mold ... page 5
+    Working stamp ... page 6
+    Recent advancements in NIL molds ... page 6
+  NIL resist ... page 7
+    Inkjet dispensing strategy ... page 7
+  Imprinting method ... page 8
+    Plate-to-plate imprinting ... page 8
+    Step-and-repeat imprinting ... page 9
+    Roller-based nanoimprinting ... page 9
+  Challenges in NIL ... page 10
+    Residual layer ... page 10
+    Defectivity ... page 10
+    Alignment and overlay control ... page 11
+Nanoimprinting for high-volume manufacturing ... page 11
+  Nanoimprinitng in semiconductor manufacturing ... page 12
+    Semiconductor-graded NIL tool ... page 13
+    Semiconductor manufacturing status ... page 14
+  Patterned magnetic nanostructures for hard disk drives ... page 14
+  Flat optics ... page 14
+  Diffractive nanograting for augmented reality ... page 17
+  Wafer-level optics and wafer stacking ... page 18
+  Display ... page 18
+  Optoelectronic devices ... page 20
+  NIL for fiber optics ... page 20
+  Biomedical applications ... page 20
+Research development in academia ... page 21
+  High-quality factor optical devices ... page 21
+  Molding-induced molecular alignment ... page 21
+  Pressing for strain engineering ... page 22
+  Different types of NIL ... page 22
+    Polymer fiber imprinting ... page 22
+    Laser nanoimprinting ... page 22
+    Ultrasound imprinting ... page 23
+    Electrochemical nanoimprinting ... page 24
+Conclusion ... page 24
+References ... page 24

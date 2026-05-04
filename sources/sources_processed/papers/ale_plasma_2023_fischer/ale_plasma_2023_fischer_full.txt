@@ -1,0 +1,1272 @@
+# ale_plasma_2023_fischer
+# Extracted from: ale_plasma_2023_fischer.pdf
+# Total PDF pages: 12
+# Page numbering: offset=0 (book_page = pdf_page - 0 + 1)
+# ============================================================
+
+
+[Page 1]
+
+View
+Online 
+Export
+Citation
+PERSPECTIVE |  AUGUST 16 2023
+Plasma application in atomic layer etching 
+ 
+Special Collection: Plasma Sources for Advanced Semiconductor Applications
+Andreas Fischer  
+ ; Thorsten Lill 
+Phys. Plasmas 30, 080601 (2023)
+https://doi.org/10.1063/5.0158785
+Articles You May Be Interested In
+A brief perspective on fluid mechanics research
+Physics of Fluids (August 2025)
+A perspective on the microscopic pressure (stress) tensor: History, current understanding, and future
+challenges
+J. Chem. Phys. (January 2023)
+ 04 April 2026 18:16:19
+
+[Page 2]
+Plasma application in atomic layer etching
+Cite as: Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+Submitted: 17 May 2023 . Accepted: 13 July 2023 .
+Published Online: 16 August 2023
+Andreas Fischera)
+and Thorsten Lill
+AFFILIATIONS
+Clarycon Nanotechnology Research, 4429 Kai Ikena Dr., Kalaheo Hawaii 96741, USA
+Note: This paper is part of the Special Topic: Plasma Sources for Advanced Semiconductor Applications.
+a)Author to whom correspondence should be addressed: andreas.ﬁscher@claryconresearch.com
+ABSTRACT
+Atomic layer etching (ALE) has emerged as a promising technique for the precise and controlled removal of materials in nanoscale devices.
+ALE processes have gained signiﬁcant attention due to their ability to achieve high material selectivity, etch uniformity, and atomic-scale res-
+olution. This article provides a perspective of the important role of plasma in ALE including thermal ALE for nanometer-scale device
+manufacturing. Advantages as well as challenges of ALE are discussed in contrast to classic reactive ion etching. A tally-up of known plasma-
+based ALE processes is listed, and novel thermal ALE processes are described that are based on the so-called ligand addition mechanism. We
+explain the potential of using plasma for increasing wafer throughput in a manufacturing environment, its use when it comes to anisotropy
+tuning, the beneﬁts in enabling a wider range of pre-cursors in thermal ALE, and the advantages it may bring for thermal ALE of crystalline
+materials. The beneﬁts and challenges of different plasma sources in ALE are discussed, and an outlook for future development is provided.
+Finally, applications of plasma for productivity reasons such as particle avoidance and process stability are outlined.
+Published under an exclusive license by AIP Publishing. https://doi.org/10.1063/5.0158785
+I. INTRODUCTION
+Shrinking chip feature sizes and the emergence of new device
+architectures have traditionally required the development of new wafer
+processing regimes that were enabled through the deployment of new
+processing equipment.
+Since the beginning of the reactive ion etch (RIE) era in device
+fabrication some sixty years ago, tremendous effort has been put into
+decoupling various process parameters. For example, ion energy and
+plasma density needed to be controlled nearly orthogonally for certain
+etch applications. This was done by designing etch chambers with two
+independent radio frequency (RF) sources, for instance, an inductive
+source at the chamber top for plasma density control and a capacitive
+“source” tied to the substrate that can control the ion energy to the
+wafer. These additional “control knobs” typically result in very expen-
+sive wafer etch chambers with high maintenance costs. They also
+demand an advanced skill level from an operator for its mastery.
+Despite the successful “decoupling” of certain processing param-
+eters in classical continuous plasma etching, many limitations of the
+etch process continue to exist. Some of them stem from the conﬁnes
+of transport-related phenomena with respect to the delivery of reac-
+tants to the wafer surface as well as the removal of by-products. These
+restrictions extend to all length scales of wafer processing, from wafer
+size (center-to-edge) to the nanoscale of the actual devices. They can
+even impact performance matching within a tool ﬂeet in a wafer fab.
+Other constrains stem from the strong correlation of certain etch
+results with temperature. For example, depending on the process
+chemistry, wafer center-to-edge control of critical feature dimensions
+to less than 1 nm necessitated the development of temperature control
+means across this area of less than 1 K.
+The emergence of three-dimensional device structures in recent
+years is currently spawning the development of new deposition and
+etch techniques that allow for a precise addition and removal of materi-
+als on an atomic scale. One of these emerging techniques is atomic layer
+etching (ALE) which is particularly useful for fabricating complex 3D
+nanostructures in high-performance microelectronic devices. This new
+technology has two principal implementations: a class where the entire
+processes is based on thermal reactions and a second class that is mak-
+ing use of plasma, typically a high-frequency plasma, in at least part of
+the process. The former has been coined thermal or isotropic ALE,
+whereas the latter is referred to as plasma-based or directional ALE.
+The two ALE embodiments show a number of similarities but
+exhibit some important differences. Directional ALE uses a ﬂux of
+accelerated ions or radicals to etch in a speciﬁc direction, while ther-
+mal isotropic ALE uses a chemical reaction between the device surface
+and a gas to etch uniformly in all directions. In addition, plasma-based
+ALE typically removes more material per cycle than thermal isotropic
+ALE, but the former is less precise and can cause more unintentional
+damage in the surrounding areas.
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-1
+Published under an exclusive license by AIP Publishing
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+ 04 April 2026 18:16:19
+
+[Page 3]
+II. DEFINITION OF ATOMIC LAYER ETCHING
+Atomic layer etching has been deﬁned as a wafer processing tech-
+nique in which alternating process steps, at least one of them being
+self-limited, allow for the processing of wafer substrates with atomic
+scale precision. In many instances, atomic layer etching consists of a
+modiﬁcation step, in which the top layer of a substrate is altered by a
+chemical in a way that bonds to its next-nearest neighbor beneath it
+are either weakened or broken. In a subsequent removal step, acceler-
+ated ions and/or chemical species react with the previously modiﬁed
+surface layer resulting in the formation of volatile by-products that can
+be removed.1
+The ﬁrst report on ALE was published in Yoder’s US patent
+4756794 entitled “Atomic Layer Etching” in 1988. It describes the
+etching of crystalline diamond using nitrogen dioxide and a plasma
+comprised of hydrogen and a noble gas.2 Relationships and compari-
+sons between both atomic layer deposition and etching (ALD and
+ALE) have been reported in 2015 by Faraz et al.3
+In contrast to classical reactive ion etching in which concurrent
+ﬂuxes of many different reactants and by-products to the substrate
+surface may make the control of the entire etch chemistry a challenge,
+the ability to divide the etch process into separate self-limited steps
+with relatively low chemical complexity is one of the great advantages
+of ALE. As a result, the etch process can be tailored for a speciﬁc layer
+without touching other materials on the wafer. The result is superior
+etch selectivity. The self-limiting character of at least one ALE step
+leads to a sizable simpliﬁcation in uniformity control across a wafer
+and provides relative independence of the etch performance from
+aspect ratio constraints and feature size loading.
+The ﬁrst industrial implementation of ALE used ions in the sec-
+ond, so-called removal step. This type of ALE is called directional ALE
+because ions are accelerated toward the wafer surface, which results in
+a preferred direction of the etch front propagation. The approach
+lends itself for the formation of conventional devices with primarily
+horizontally oriented ﬁlms. For example, silicon can be removed layer
+by layer with a beam of neutral chlorine that modiﬁes the top of
+the silicon surface during a ﬁrst process step. This step is isotropic.
+It is followed by a low-energy argon ion plasma which then removes
+the modiﬁed layer creating a clean silicon surface.4–6 The second step
+is anisotropic as the argon ions are driven in normal direction to the
+substrate by the accelerating voltage of a plasma sheath. A schematic
+representation of the process can be seen in Fig. 1.
+The evolution of chip manufacturing to nanometer-scale feature
+sizes, advanced three-dimensional device architectures, and the intro-
+duction of new materials necessitate the development of new process-
+ing techniques. Should these techniques be viable for industrial
+application in device manufacturing they must offer a variety of bene-
+ﬁts that would be difﬁcult to achieve by conventional processing meth-
+ods such as reactive ion etching. Outlined below are a number of
+advantages atomic layer etching is associated with. They are followed
+by a list of challenges ALE is facing should it be adopted for high-
+volume device manufacturing.
+III. ADVANTAGES OF ALE OVER CLASSICAL RIE
+1. Thermal as well as ion-enhanced ALE greatly increase the num-
+ber of etchable materials compared to RIE. In principle, this is
+caused by a reduction of the by-product desorption temperature
+in the removal step via reaction with a second chemical. The
+reaction by-products can be volatilized at temperatures still low
+enough for incoming reactants in the modiﬁcation step to chem-
+isorb to the surface. For example, materials such as Al2O3 can be
+etched via ligand-exchange based thermal ALE, a feat impossible
+to perform in RIE processes due to the elevated melting point of
+its reaction end product AlF3 of 1291 C. A summary of a set of
+etchable materials is given further below.
+2. Thermal ALE processes are isotropic etches. The absence of
+directionality enables the etch front to advance laterally in device
+structures. The need for it becomes particularly clear when con-
+sidering modern 3D device architectures such as 3D NAND or
+future 3D DRAM. Etch fronts need to be able to reach into hard-
+to-get areas hidden outside line of sight or recess materials on
+side walls uniformly.7 Plasma-based ALE processes can be near-
+isotropic if the energy of the impinging ions is kept to a
+FIG. 1. Generic ALE process (a) and classic ion assisted ALE process for etching of silicon (b). Reprinted with permission from Kanarik et al., J. Vac. Sci. Technol., A 33,
+020802 (2015). Copyright 2015 Author(s), licensed under a Creative Commons License.1
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-2
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 4]
+minimum (low sheath voltage) or if a remote plasma source is
+utilized.
+3. Transport-related phenomena such as across-wafer uniformity
+and aspect ratio dependent etching rates can be mitigated and
+the etch chemistry can be simpliﬁed in atomic layer etching due
+to its two-step character and by allowing at least one of the ALE
+steps to be operated in saturation mode.
+In ALE, etch chemistries characteristically consist of a single
+reactant per process step that is not further dissociated into a
+“soup” of ions and radicals as is the case in RIE.8 Furthermore,
+the interaction of this single reactant with the etching ﬁlm is lim-
+ited to a monolayer. Even if parts of the substrate (center/edge of
+the wafer or top/bottom in a device) complete the etching of a
+monolayer ﬁrst, no additional removal of material occurs until
+the next ALE cycle. This self-limitation assures high etch unifor-
+mity thereby eliminating the need for expensive decoupling or
+“uniformity control” knobs in etch reactor designs.
+4. Thermal ALE is a process based on thermal energy entirely.
+Plasma-enhanced ALE processes utilize ion energies at the sub-
+strate of only a few tens of electronvolts—energies below the
+sputter threshold of the material to be etched. This low-energy
+environment reduces the risk for unwanted damage to other
+parts of the device structure, especially to an underlayer, allowing
+for the etch front to be controlled at the atomic scale thereby
+achieving the highest control in removal.
+5. Another critical parameter for any etch process is the etch rate
+selectivity to other materials such as the mask or other exposed
+materials in the device itself. Due to the high reactivity of ions
+and radicals from an RIE plasma, achieving high selectivities
+between materials requires careful chemistry selection and pro-
+cess tuning for reaching best results.
+In ALE, etch selectivities can be very high between materials due
+to the use of “targeted” chemistry and due to the absence of ener-
+getic ions and radicals. An example of etch selectivity between a
+variety of materials is shown in Fig. 2. In this thermal ALE pro-
+cess, high-k oxides were exposed to 1000 ALE cycles and
+removed. The amount of material removed from other materials
+in the test structure which were exposed equally to the chemistry
+was immeasurably small.
+The etch selectivities in Fig. 2 between the two high-k materials
+and SiN/SiO2 as well as TiN are at least 1000:1 due to the
+immeasurably small etch rate of the latter three. It should be
+noted that the good etch resistance of TiN can be compromised
+and etch selectivity to that material be reduced by the presence
+of small amounts of oxygen stemming from leaks in the chamber
+hardware from the outside. As was pointed out by Chen and Lu,
+Jung et al., and Tompkins,10–12 TiN reacts thermally with oxygen
+at higher temperatures forming TiO2, titanium oxide. It is well
+established that TiO2 reacts spontaneously with hydrogen ﬂuo-
+ride, the reactant used in a large number of ALE modiﬁcation
+steps. In other words, the TiN etch resistance to these types of
+ALE precursors could be compromised should the reactor be
+designed with insufﬁcient vacuum integrity.
+6. A ﬁnal advantageous aspect of ALE lies in its low electrical and
+UV light-based damage risk. This low risk particularly applies to
+the thermal type of ALE. In plasma-enhanced ALE, electrical
+charging and UV exposure may still occur but would be orders
+of magnitude lower than in some high-power, high-voltage RIE
+processes in which sheath voltages can reach hundreds of volts
+or more potentially leading to severe device damage or even
+wafer arcing with the destruction of some of the chamber hard-
+ware if plasma ignition, step transitions or the plasma extinction
+are not designed and controlled carefully.
+IV. CHALLENGES OF ALE COMPARED TO RIE
+1. The level of control on an atomic scale exerted by ALE bears a
+simultaneous downside that relates to the etching rates. Many mod-
+ern devices today still have dimensions that are tens of nanometers
+in size. Etch processes with monolayer-by-monolayer removal even
+with ALE cycle times of 10 s would require several hours to com-
+plete, an outcome that is incompatible with wafer throughput
+requirements in most high-volume manufacturing settings. Thus,
+ALE processes are currently limited to etch depths below a few tens
+of nanometers.
+Etch rates per cycle (EPCs) and thereby wafer throughput can be
+boosted by high dosing during each of the process steps and by
+increasing the substrate temperature.13 Additionally, the use of
+plasma increases the reactivity of a molecule thereby lowering
+the time necessary for an ALE step. Plasma may be applied to
+either ALE step if it is compatible with the chemistry and etch
+results on the wafer.
+Fundamentally, throughput could be increased by designing
+ALE-speciﬁc process chambers with ultra small gas volumes that
+have high gas ﬂows and pumping speeds to reduce the above-
+wafer gas residence time into the single millisecond range thereby
+bringing the per-step cycle time into the sub-second range.
+2. Wafer throughput constraints generate a tradeoff with the self-
+limiting character of ALE reactions as sufﬁcient time may not be
+available for a surface to reach chemical saturation. As a conse-
+quence, undesirable wafer center-to-edge etch uniformity or
+device top-to-bottom issues as well as feature size loading effects
+may start to appear.
+3. Stemming from the thermal character of the chemistry of the etch
+steps, many ALE processes must be run at elevated temperatures,
+FIG. 2. Example of etch selectivity in thermal ALE at 250 C. Materials are SiN (1),
+HfO2 (2), SiO2 (3), TiN (4), Al2O3 (5). No measurable removal in SiN, SiO2, and
+TiN was detected after 1000 ALE cycles.9
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-3
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 5]
+in some cases well above 200 C. This high-temperature environ-
+ment may be incompatible with some modern devices as it pro-
+motes the creation of atomic-level defects. High temperature also
+increases diffusion rates of atoms across material interfaces.
+Interfacial diffusion may lead to device performance deterioration
+or even failure if it is permitted to proceed too far. In addition,
+high temperatures may introduce parasitic chemical reactions pro-
+ducing unwanted etch outcomes.
+4. The temperature dependence of the EPC introduces wafer level
+uniformity deltas should the substrate holder (Electro-static
+chuck or pedestal) exhibit a non-uniform temperature proﬁle.14
+If process pressures in the millitorr range are chosen in a pedes-
+tal tool, pedestal-to-wafer heat transfer challenges especially at
+the wafer edge may results in lowered EPCs in that area.
+5. The selectivity between like materials may become low as their reac-
+tivity with etchants may be similar. For example, Abdulagatov
+et al.15 have shown that Si0.15Ge0.85 can be etched thermally with a
+selectivity of 10:1 with respect to Si and Si3N4 since the Ge contents
+in the utilized alloy were high, thus making the material dissimilar
+to the Si. It should be obvious to the reader that lower Ge concen-
+tration in the alloy will liken it more to the Si, thereby dropping the
+selectivity and it will reach one in the limit when no Ge is present.
+6. Reaction by-products from the wafer surface or vapor-phase
+reaction products from both ALE steps or by-products from the
+ALE pre-cursors with leaked air may deposit on chamber walls
+and the rest of the hardware. Many of these materials are non-
+volatile at the lower chamber wall temperature and will build up
+over time. This can lead to process drift or to the formation of
+particles, both undesirable results regarding productivity. In situ
+plasma clean, described in more detail in Sec. VII, or regular wet
+cleaning with an opened chamber may be the only solution to
+this challenge.
+7. Last but not least, many of the pre-cursors used in ALE are very
+reactive. While this quality is desired, and even necessary to make
+the reactions that enable the etch process possible, it requires close
+attention when it comes to the handling, utilization at an etch tool
+or the storage of these chemicals, respectively. Almost all of them
+are toxic and ﬂammable or even pyrophoric and must be handled
+with utmost care. Their novelty in the industry and the resulting
+scarcity makes them extremely expensive commodities which
+requires sizable funding in R&D style settings. These problems
+will vanish with greater acceptance of ALE and the volume use of
+these chemicals as the latter will drive down costs. Currently, how-
+ever, costs are an issue to be considered.
+V. DIRECTIONAL PLASMA-BASED ALE
+In plasma-based ALE processes, at least one of the process steps
+will be performed with plasma-assisted activation. Agarwal et al.
+described plasma-based ALE in terms of the formation of a
+“passivation” layer that enables the underlying material of the sub-
+strate to be etched with lower activation energy compared to the case
+when no passivation took place. The ensuing subtraction of this pas-
+sivated layer from the substrate can be administered by carefully con-
+trolling the energy of the impinging non-reactive ions. This can be
+achieved by setting the substrate plasma sheath voltage to a level below
+physical sputtering. If this is done correctly, the process is self-limiting
+and classiﬁes as ALE.16
+Plasma-based ALE processes can be differentiated into at least
+four categories depending on the character of their modiﬁcation step:1
+(a) chemisorption, (b) deposition, (c) conversion, and (d) extraction.
+An example of directional ALE during which the substrate surface is
+modiﬁed by chemisorption is classical Si ALE with chlorine chemi-
+sorption in the modiﬁcation step followed by a gentle Ar-ion bom-
+bardment in the removal step.5 Metzler et al. proved the viability of a
+deposition-based modiﬁcation step for a SiO2 ALE process. A C4F8-
+based ﬂuoro-carbon layer is ﬁrst deposited onto the substrate and a
+chemical reaction is instigated via Ar-ion bombardment. Said reaction
+will drive the removal of the top layer of the ﬁlm.17 The etching of
+GaN or AlGaN via a two-plasma step process can be interpreted as a
+conversion reaction. Reported by Ohba et al., a chlorine plasma con-
+verts the nitride into a chloride ﬁrst, releasing nitrogen. In a second
+step, a low-energy Ar plasma removes the modiﬁed top surface.18
+Matsuura’s et al. work on Si3N4 etching is an example of directional
+ALE using extraction during the modiﬁcation step. In their work, a
+hydrogen plasma subtracted nitrogen from the ﬁlm in a ﬁrst step leav-
+ing behind a Si monolayer. In a second, low-energy H2/Ar plasma
+step, the remaining Si layer was removed.19 An illustration of all four
+plasma-based ALE processes is given in Fig. 3.
+Application examples of all four types of plasma-based ALE are
+shown in Table I. It should be noted that the content of this table rep-
+resents examples of published processes and is by no means a compre-
+hensive list of all plasma-based ALE reactions. The table shows that a
+wide range of plasma sources and technologies were used.
+The classic embodiment of directional ALE is etching of silicon
+by using chlorine chemisorption in the modiﬁcation step followed by
+the removal of silicon chloride products with low-energy argon ions.
+Chlorination was demonstrated with chlorine gas without plasma by
+Athavale and Economou, Park et al., and Oh et al.52–55 This technique
+is also called thermal chlorination.1 Removal was accomplished by an
+argon neutral beam with an energy of 50 eV per atom53–55 or argon
+ions with kinetic energies between 70 and 90 eV that were generated
+by an ICP plasma.56 Park et al. reported that the etched thickness per
+cycle was nearly insensitive to the ion energy in the range between 70
+and 90 eV.56 This region is called ALE window. Thermal chlorination
+completely eliminates etching of silicon in the modiﬁcation step at typ-
+ical wafer temperatures which can be seen as a beneﬁt in some applica-
+tions. In this case, the amount of silicon etched per cycle is close to
+one monolayer. Park et al. measured an EPC of 0.14 nm.54
+Plasma can be used to speed up chlorination via highly reactive
+chlorine radicals.16 Plasma chlorination affects deeper layers in the
+ﬁlm leading to EPCs greater than one monolayer. Tan et al. reported
+an EPC of 1.4 nm for silicon ALE with ICP plasma chlorination and
+60–80 eV argon ion removal.57
+Some of the EPC increase can be attributed to a silicon loss dur-
+ing the plasma modiﬁcation step as the activated chlorine reacts spon-
+taneously with the silicon. Kanarik et al. proposed a metric called
+synergy to measure parasitic material losses due to chemical etching in
+the modiﬁcation step and bulk material sputtering in the removal step.
+The synergy diminishes as these parasitic losses increase. They
+reported a synergy of 90% for silicon ALE with alternating chlorine
+and argon plasmas.58
+The archetypical example for directional ALE with deposition
+modiﬁcation is the etching of SiO2 with alternating C4F8 and Ar plas-
+mas.17,48 The polymerizing gas C4F8 may be replaced by CHF3.45–47
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-4
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 6]
+The ion energy in the deposition step is typically optimized to achieve
+deposition at the bottom of high aspect ratio features. Higher aspect
+ratios require larger ion energies. The risk of material loss in this step
+is low because the plasma chemistry is tailored to operate in deposition
+mode. During the removal step, the ions must penetrate the carbon
+and ﬂuorine containing reactive layers to stimulate etching at the
+interface with the SiO2. Therefore, the ion energies used in this
+embodiment of ALE are higher than for classic ALE, typically between
+50 and 100 eV. Capacitively coupled plasmas are used in this process
+to allow for better control of the polymer composition thanks to lower
+plasma densities and a reduced degree of dissociation of ions.
+Both types of directional ALE require precise control of very low
+ion energies and need high ion ﬂux densities in the removal step.
+The ion energy must also be reduced as much as possible when
+using plasma for surface modiﬁcation via chemisorption. Here, high-
+pressure operation is one solution.57
+Furthermore, the width of the ion energy distribution function
+(IEDF) of a plasma with an RF-powered wafer pedestal depends
+among other things on the applied RF power and frequency. Bias fre-
+quencies between 13 and 27 MHz appear favorable for directional
+ALE. Lower frequencies produce wide ion energy distributions, while
+higher frequencies are not effective for ion acceleration. Non-
+sinusoidal or so-called tailored waveforms can produce nearly mono-
+energetic IEDF’s.59 Pulses of DC voltages achieve a similar effect.
+Whether these more complicated approaches are needed depends on
+the speciﬁc cases and the ALE window. If the ALE window is below
+50–60 eV, conventional bias power with 13 MHz should provide a suf-
+ﬁciently narrow IEDF.
+An interesting modiﬁcation of classic ALE operates in a high
+energy/short exposure regime.60,61 ALE was demonstrated for ion
+energies as high as 1000 eV when the removal step time was reduced
+to 0.2 s. Bias pulsing provides better control of the removal step time.
+For this type of high-energy ALE, a bias power which utilizes a tailored
+waveform may provide a narrow IEDF.
+Remote plasmas allow for a gentle surface modiﬁcation, but they
+may create challenges due to larger reactor volumes and due to the
+added complexity of implementing bias power in the removal step.
+VI. THERMAL ALE
+Like plasma-based ALE processes, its thermal counterpart can be
+divided into different classes that involve specialized modiﬁcation and
+removal steps. These classes have been categorized previously by
+George62 and Fischer et al.,63 and the latter also provides a tally-up of
+all known thermal ALE processes at the time with their corresponding
+target materials for etching.
+More recent work by Lii-Rosales et al. identiﬁed TMA, SiCl4, and
+TiCl4 as well as a set of silanes, SiCl2(CH3)2, SiCl(CH3)2H, and
+Si(CH3)4 as new ligand exchange precursors for etching the ﬂuorides
+of Ga, In, Zn, Zr, Hf, and Sn.14,64 Etch results of all materials and pre-
+cursors are shown in Table II.
+Another new and exciting part of thermal ALE relates to the pro-
+cess of ligand addition (in contrast to the well-established ligand
+FIG. 3. Comparison of the four plasma-based ALE processes by modiﬁcation step. In the extraction case d), the original material is heterogeneous with one compound being
+removed (subtracted) during the modiﬁcation step. The remaining constituent is volatilized during the removal step. Reprinted with permission from Kanarik et al., J. Vac. Sci.
+Technol., A 33, 020802 (2015). Copyright 2015 Author(s), licensed under a Creative Commons License.1
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-5
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 7]
+exchange mechanism). This process was ﬁrst reported by Lii-Rosales
+et al.65 and involved the use of P(CH3)3, tri-methyl phosphine, on
+chlorinated Ni, Pd, and Pt. They showed that all three metals could be
+etched without plasma involvement.
+Partridge et al. demonstrated that after conversion to chlorides
+via thermal exposure to SO2Cl2, the group of metal oxides involving
+CoO, ZnO, Fe2O3, and NiO could be etched via ligand addition by
+tetramethylethylene-diamine (TMEDA).66
+TABLE I. Application examples of plasma-based ALE processes.
+Etched
+material
+Plasma
+step 1
+Plasma
+step 2
+Thermal
+step
+Plasma source
+Lead,
+reference
+Al2O3
+Ar
+BCl3
+ICP with neutralizer grid
+Min et al.20
+CF4/H2
+Ar
+ICP
+Kuzmenko et al.21
+SF6
+TMA
+Not speciﬁed
+Chittock et al.22
+AlGaN
+Ar
+BCL3/Cl2
+Pulsed ICP, 50–150 V CCP bias to substrate
+Ohba et al.18
+Cl2
+Ar
+ICP (700 W)/0–100 V CCP bias to substrate
+Fukumizu et al.23
+AlN
+CF4/H2
+Ar
+ICP
+Kuzmenko et al.21
+SF6
+TMA
+Remote plasma
+Wang et al.24
+AlInAs
+Ar
+Cl2
+ECR: MW (Cl2), MW þ RF (bias) (Ar)
+Ko and Pang25
+BeO
+Ar
+BCL3
+ICP with neutralizer grid
+Min26
+Cr
+O2, Cl2
+Cl2, Ar
+ICP with neutralizer grid
+Park et al.27
+GaAs
+Ar
+Cl2
+Electron beam, ECR, dc bias to substrate,
+Ar ion beam
+Meguro et al.,28
+Aoyagi et al.,29 Ishii et al.30
+GaInAs
+Ar
+Cl2
+ECR: MW for Cl2, MW þ RF (bias) for Ar step
+Ko and Pang25
+GaN
+Ar
+BCL3/Cl2
+Pulsed ICP, 50–150 V CCP bias to substrate
+Ohba et al.18
+Ge
+Ar
+Cl2 Cl2
+ECR, ECR
+Sugiyama et al.,31
+Matsuura et al.32
+HfO2
+CF4/H2
+Ar
+ICP
+Kuzmenko et al.21
+Ar
+Ar/Cl2/BCL3
+ICP for Ar/Cl2/BCl3, CCP for Ar
+Marneffe et al.33
+InP
+Ar
+Cl2
+ECR: MW (Cl2), MW þ RF (bias) (Ar)
+Ko and Pang25
+MoS2
+Ar
+Cl2
+Cl radicals, Ar ion beam
+Lin et al.34
+Si
+Ar
+Cl2 or F2, CL2,
+Cl2
+Cl/F remote plasma, Ar ion beam, ECR, ECR
+Sakaue et al.,4
+Matsuura et al.,5
+Suzue et al.6
+He
+Cl2
+Yun et al.35
+Ar
+NF3/CF4 þ O2
+NF3/CF4 þ O2 remote plasma, Ar ion beam
+Sakaue et al.36
+Si3N4
+Ar
+C4F8/CHF3
+ICP for dep, 20–35 eV CCP for etch
+Li et al.37
+Ar
+CH3F
+ECR
+Ishii et al.38
+Ar
+CHF3
+ICP helicoil
+Kim et al.39
+H2
+NF3 or SF6
+CCP to substrate
+Sherpa and Ranjan40
+H2
+Ar/H2
+ECR
+Matsuura et al.19
+SiGe
+O2
+CF4/C4F8
+ICP (Unspeciﬁed by Li et al.41), no bias
+Li et al.41
+Ar
+Cl2
+ECR
+Matsuura et al.32
+SiO2
+Ar
+Ar/C4F8
+ICP, CCP for substrate bias
+Metzler et al.,17 Gasvoda et al.42
+O2
+C4F8
+CCP (60 MHz)
+Tsutsumi et al.43
+C4F8/Ar
+Ar
+ICP(?) for C4F8/Ar, biased for Ar
+Gasvoda et al.44
+Ar
+Ar/CHF3,C4F8
+CHF3
+ICP, CCP for substrate bias, ICP
+Metzler et al.,45 Dallorto et al.46
+CHF3
+O2/Ar
+ICP and CCP for biasing
+Koh et al.47
+C4F8
+Ar
+ICP
+Kaler et al.48
+TiO2
+O2
+C4F8
+Imamura et al.49
+W
+NF3
+O2
+ICP helicoil with triple grid
+Kim et al.50
+ZnO
+O2
+Hacac
+ICP
+Mameli et al.51
+ZrO2
+Ar
+Ar/Cl2/BCL3
+ICP for Ar/Cl2/BCl3, CCP for Ar
+Marneffe et al.33
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-6
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 8]
+Finally, Murdzek et al. demonstrated Co ALE after direct chlori-
+nation of metallic cobalt with SO2Cl2 followed by ligand addition with
+TMEDA or P(CH3)3, respectively.67 ALE on Ni using the same chlori-
+nation reactant to modify the metal and P(CH3)3 for removal via
+ligand addition was demonstrated as well.68
+A summary of all known ligand addition-based thermal ALE
+processes is given in Table III.
+It should be understood that ligand addition represents a new
+approach to mono-layer processing and its applications will certainly
+extend to ALE where the surface is ﬂuorinated or chlorinated by a
+plasma.
+When it comes to high-volume manufacturing, the costs per
+device on a wafer (costs per bit for a memory application) must be
+kept low to maintain proﬁtability for a chip maker. Part of the costs
+are determined by how fast wafers can move thru processing tools.
+Thus, especially in atomic layer etching, where monolayer processing
+is a fundamental challenge for achieving high etch rates, throughput
+maximization is a requirement.
+As was pointed out earlier, plasma enhancement can be used in
+otherwise thermal ALE processes to increase reaction rates by using
+ions instead of neutrals for a reaction. Because their reactivity is greatly
+increased, dosing times in a given ALE step can be reduced. Figure 4
+depicts a comparison of ﬂuorine concentration in an Al2O3 ﬁlm when
+either thermal or plasma assisted ﬂuorination was applied.
+The ﬂuorine content is signiﬁcantly higher at low temperatures
+when plasma was used to ﬂuorinate. This effect can be exploited to
+shorten the ﬂuorination time and increase overall throughput.
+Another application of plasma enhancement may be associated
+with crystalline materials. For thermal ALE, it has been established by
+Murdzek et al. that materials such as HfO2, ZrO2, HfZrO2, and Al2O3
+have lower EPCs when they are in their crystalline form compared to
+their amorphous counterparts.70,71 Fluorination reactants that were
+more aggressive than HF such as SiF4 or XeF2 were used and etch rates
+for both amorphous and crystalline ﬁlms increased according to the
+following ordering: HF < SF4 < XeF2 in correspondence with the
+standard free energies of ﬂuorination for the three ﬂuorine donors but
+had a marginal effect on increasing etching of the crystalline ﬁlms
+especially with longer cycling and when dimethyl aluminumchloride
+was used during the ligand exchange reaction.
+The differences in etch rates between amorphous and crystalline
+ﬁlms may be caused by the greater degree of ﬂuorination. More ﬂuori-
+nated sites in the amorphous ﬁlms provide a larger number of reaction
+spots in the subsequent ligand-exchange reaction. Also, the amor-
+phous ﬁlms have a lower density and may be able to better accommo-
+date the large volume expansion upon ﬂuorination.70 Furthermore,
+crystalline ﬁlms had been produced from amorphous ﬁlms via anneal-
+ing at elevated temperatures (up to 1000 C) which would have greatly
+reduced the number of available bonds at the ﬁlms’ surfaces. Using
+plasma-assisted ﬂuorination on crystalline ﬁlms should produce
+TABLE II. Etch/no-etch summary for a set of metal ﬂuorides using TMA, TiCl4 and
+the set of silanes as pre-cursors. Numbers inside the cells correspond to the onset
+temperatures of etching for each case. No etching was observed for any of the metal
+ﬂuorides with tetramethyl silane Si(CH3)4 and for AlF3 with SiCl4. Data taken from
+Refs. 14 and 64.
+Etched
+material
+Al
+(CH3)3
+TiCl4
+SiCl4
+SiCl2
+(CH3)2
+SiCl
+(CH3)2H
+Si
+(CH3)4
+AlF3
+18 C
+No
+HfF4
+450 C
+No
+InF3
+300 C
+No
+SnF4
+125C
+120 C
+No
+GaF3
+250 C
+285 C
+275 C
+240 C
+No
+ZnF2
+325 C
+280 C
+275 C
+No
+ZrF4
+425 C
+375 C
+340 C
+No
+TABLE III. Summary of known ligand addition reactions related to thermal ALE.
+Numbers shown represent the onset temperatures for etching. Data taken from Ref.
+65–68.
+Etched
+material
+Modification
+step
+P(CH3)3
+TMEDA
+NiCl2
+21 C
+PdCl2
+85 C
+PtCl2
+90 C
+CoO
+SO2Cl2
+<250 C
+ZnO
+SO2Cl2
+<250 C
+Fe2O3
+SO2Cl2
+<250 C
+NiO
+SO2Cl2
+<250 C
+TiO2
+SO2Cl2
+No
+Cr2O3
+SO2Cl2
+No
+MnO2
+SO2Cl2
+No
+V2O5
+SO2Cl2
+Spontanuous with
+SO2Cl2 at 250 C
+CuO
+SO2Cl2
+Co
+SO2Cl2
+75 C
+175 C
+Ni
+SO2Cl2
+75 C
+FIG. 4. Fluorine concentration at the surface of Al2O3 after ﬂuorination with NF3
+gas and plasma as a function of substrate temperature. Open circles correspond to
+thermal ﬂuorination, solid circles are with an in situ ICP plasma. Reprinted with per-
+mission from Fischer et al., J. Vac. Sci. Technol., A 38, 022603 (2020).69 Copyright
+2020 American Vacuum Society.
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-7
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 9]
+surfaces with opened bonds again because even low-energy ions that
+are impinging onto the surface would have the ability to break existing
+surface bonds easily.
+Johnson et al. reported on the use of plasma to boost the etch
+rate in crystalline GaN.72 At 250 C substrate temperature, the EPC
+for a crystalline GaN ﬁlm was increased by more than fourfold from
+0.65 A˚/cycle for a pure thermal ALE process to 2.85 A˚/cycle when an
+NF3 plasma was used for ﬂuorination.72
+When etching crystalline AlN, Johnson et al. reported on another
+beneﬁt of using plasma that relates to its ability to reset a surface
+should reaction by-products accumulate on it. They had illustrated a
+sizable EPC increase from 0.36 to 1.96 A˚/cycle when a hydrogen
+plasma or 0.36 to 0.66 A˚/cycle when an argon plasma was applied after
+each of the thermal ALE cycles, respectively.73 Etch chemistry con-
+sisted of HF for ﬂuorination and Sn(acac)2 for ligand exchange. Either
+plasma was believed to play a role in removing acac residues that
+would otherwise stay behind during the reaction and accumulate lead-
+ing to an impediment for the ﬂuorination during following ALE
+cycles.
+A similar “surface reset” plasma use was reported by Fischer
+et al. in which a hydrogen plasma ﬂash cleaned the substrate surface
+after each ALE cycle from residual tin compounds. Without the
+plasma ﬂash, etching would cease within ten cycles and tin would
+accumulate.74 Theses ﬁndings are shown in Fig. 5.
+An oxygen plasma was used by Mameli et al. in isotropic ALE of
+ZnO with acetylacetone. During the acetylacetone etching reaction
+that is assumed to produce Zn(acac)2, carbon containing species
+adsorbed on the ZnO surface are suggested to cause the self-limiting
+behavior. An oxygen plasma step reset the surface for the next ALE
+cycle.51
+Plasma may also play an important role in enabling a larger
+number of reactants to become viable for either the surface modiﬁca-
+tion or material removal steps during an ALE cycle. In a paper by
+Wang et al., an EPC of 1.9 A˚/cycle was achieved with amorphous AlN
+at 300 C when an SF6 plasma was applied for ﬂuorination and TMA
+for ligand exchange.24 As SF6 is very stable in its molecular form it
+would normally not be suitable to ﬂuorinate nitrides or oxides. With
+plasma, however, this reactant becomes a feasible alternative for ﬂuori-
+nation. Other halogen containing gases could be used in plasma-
+assisted modiﬁcation steps such as CF4, SCl6, or NF3, respectively.
+Furthermore, remote plasma sources open the path for ALE on
+metals such as tungsten as shown by Johnson and George75 and Xie
+et al.,76,77 molybdenum,78 and copper79 and others by utilizing ozone
+to oxidize the surface followed by a thermal ligand exchange step. For
+Si3N4 ALE, a remote ozone plasma has been used to perform ALE via
+a conversion step to SiO2 followed by thermal HF ﬂuorination and
+ligand exchange with TMA.80
+In the plasma-enhanced version of ALE, adjustable ion energy at
+the substrate will open the possibility for tuning the degree of anisot-
+ropy continuously. This can be done by adjusting the bias power or
+bias voltage to the electrode holding the wafer. The anisotropy can be
+adjusted between zero and one continuously depending on the bias
+level at the substrate electrode. Correlation details between bias voltage
+and anisotropy have been reported previously by Fischer et al.81
+Finally, plasma may be used to remove unwanted halogens from
+the ﬁlm surface or grain boundaries in a de-halogenation step. This
+step would be performed post ALE and may involve a remote plasma.
+VII. CHAMBER WALL CONTROL
+As ALE processes rely on constant chemical conditions for
+wafer-to-wafer consistency as well as for long-term and tool-to-tool
+process repeatability, a consistently clean chamber hardware has to be
+guaranteed. One challenge in ALE processes arises from the deposition
+of reaction by-products on chamber walls, pump ports, optical win-
+dows, and other parts of the exposed chamber hardware. In addition
+to process drift, these deposits may pose an increasing threat of par-
+ticles and contamination as wafer processing continues. They may also
+impact the lifetime of certain chamber components such as chamber
+valves or pumps. Hence, regular in situ removal of said deposits is a
+key for meeting critical productivity requirements.
+Microwave (MW) and radio frequency (RF) plasmas are viable
+solutions for removing thick coatings off chamber walls. Ion bombard-
+ment is an inherent feature of an RF-plasma; direct exposure of the
+chamber parts that need to be cleaned is, therefore, required. For
+many chamber designs, however, this may become a challenge as
+some of their parts are hidden from a direct exposure to a plasma
+source. An incomplete clean with subsequent formation of particles
+which end up on the wafer may be the result. Microwave plasmas, on
+the other hand, have an advantage over their RF counterpart as they
+can reach inaccessible chamber hardware and clean it. Hence,
+microwave-assisted plasma cleans may be more effective over RF plas-
+mas should reactants be required to travel a tortuous path to reach
+dirty hardware surfaces.
+An additional beneﬁt when using a MW plasma for chamber
+cleaning is the low rate of surface erosion caused by the absence of an
+ion-accelerating plasma sheath. Radicals reaching the contaminated
+parts will react with the contaminated surface chemically without the
+transfer of kinetic momentum and the associated risk of surface sput-
+tering. Exposed areas cleaning ﬁrst remain safe from further attack
+unlike with RF plasma where sputtering can alter or damage the surfa-
+ces over time. Over-etch is safe to perform with MW plasmas due to
+the chemical nature of the cleaning.
+FIG. 5. Change in Al2O3 thickness as measured by spectral ellipsometry for a CF4/
+O2 ﬂuorine plasma þ Sn(acac)2 vapor process (open circles, dashed line) and for
+a NF3 plasma þ Sn(acac)2 vapor þ H2 plasma process (full circles, solid line). The
+inset shows a TEM of the ﬁlm stack for the former process condition. The Sn ﬁlm is
+clearly visible.74
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-8
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 10]
+Materials such as silicon dioxide, silicon nitride, and low-k mate-
+rials would typically be removed with a ﬂuorine-containing feed gas
+such as NF3; organic materials can better be removed with ozone.
+VIII. DISCUSSION OF PREFERRED TYPES OF PLASMA
+SOURCES
+As ALE evolves, the focus will shift more and more to the overall
+processing costs. This will drive a wider adoption of plasmas. As men-
+tioned above, even in thermal ALE, plasmas are useful for throughput
+enhancement as they enable deeper modiﬁed layers (see Fig. 4).
+High-density plasma sources such as ICP or ECR sources, respec-
+tively, are widely used for classical directional ALE. They are charac-
+terized by their ability to maintain low ion energy, typically in the
+range of 20 eV which is the self-bias of these plasmas. If some level of
+anisotropy is required then controlled bias can be added to the wafer
+with a second RF source.
+Source pulsing is an option to reduce ion energies below self-
+bias.82 However, source pulsing of chlorine plasmas, especially at very
+low source powers, can suffer from inductive-to-capacitive mode tran-
+sitions due to thermal dissociative attachment reactions with Cl2 dur-
+ing the afterglow. These attachment reactions can reduce the pre-pulse
+electron densities.83
+Reﬂected powers have a larger magnitude and longer duration
+when electronegative gases are pulsed.83 Source, matching network,
+pulsing frequency, and duty cycle must be optimized to accelerate the
+transition to the inductive mode.
+Another solution is pulsing the source between a high and a low
+state where the low state remains in the inductive mode.83
+CCP sources have been utilized for deposition ALE in which a
+polymer ﬁlm is ﬁrst deposited onto the substrate in the deposition step
+followed by a low ion energy beam in the removal step.17,43,45 The
+motivation for such an approach seems to have been derived from the
+corresponding continuous RIE processes (Cl2 etching of silicon and
+CxFy etching of SiO2 and SiN).
+A CCP reactor in which the substrate is excluded from the RF
+path (RF power would come from an electrode residing at the cham-
+ber top) would be able to produce ion energies to the wafer close to
+the ﬂoating potential of the plasma. This will assure etch anisotropies
+that are comparable to ICP or ECR plasmas. A CCP source, however,
+would allow for much narrower chamber gaps than would be possible
+with ICP systems. A narrower chamber gap translates to faster ALE
+cycle time and better throughput. Ultra-low ion energies in a narrow-
+gap CCP reactor open the possibilities for a wide range of non-
+polymerizing halogen chemistries as a small reactor volume enables a
+fast gas exchange. This is a challenge for ICP-based ALE chambers
+due to ion ﬂux uniformity concerns. An alternative solution is the
+development of novel narrow-gap ICP reactors. The development of
+narrow gap ECR technology appears out of reach.
+In conclusion, the motivation for using ICP and ECR sources for
+classical and CCP sources for deposition ALE was based on the corre-
+sponding continuous RIE processes. ICP sources are widely used for
+RIE of silicon with chlorine-based chemistries, while CCP sources are
+the technology of choice for etching of SiO2 and SiN with CxFy.
+Whether these choices will stand the test of time remains to be seen.
+Finally, remote plasma sources will play a big role in applications
+that involve the cleaning of the chamber hardware.
+IX. SUMMARY
+With the rapid advancement of semiconductor manufacturing
+toward producing devices with single-nanometer feature sizes and the
+emergence of new architectures such as 3D designs, chip manufactur-
+ing technologies need to be developed to allow for process control at
+an unprecedented level of precision and repeatability. As increasingly
+sophisticated control knobs in conventional RIE etchers have become
+very complex and costly, alternative etch technologies that can leap-
+frog the cost curve need to be implemented.
+Such alternatives at the atomic level consist in atomic layer etch-
+ing with its two principal types—thermal and plasma-based. A variety
+of tradeoffs in RIE such as the one between plasma density and ion
+energy can be addressed by ALE. ALE offers a pathway of “great sim-
+pliﬁcation” when it comes to the understanding and control of the
+etch chemistry. In addition, by counting etch cycles, etch precision can
+be increased greatly. Plasma-based ALE can increase the etch rates sig-
+niﬁcantly but has a limit in regard of the isotropy of the etch.
+Small above-wafer volumes should be used when designing ALE
+chambers. This feature allows to reduce the gas residence time above
+the wafer into the single millisecond range which would still be sufﬁ-
+cient for chemisorption of reactants and desorption of byproducts to
+take place but would allow processes to be designed in the single-
+second range per ALE cycle.84 Therefore, ALE wafer throughputs
+could be created that match conventional RIE etches.
+The vacuum integrity of ALE chambers should be increased sig-
+niﬁcantly to reduce the reaction rate of air (oxygen) with reactive pre-
+cursors such as AlCl(CH3)2. An alternative may exist in bleeding a
+small amount of an O2 gettering gas into the ALE reactor at a ﬂow rate
+that will approximate the stochiometric atmospheric leak rate of the
+chamber hardware. That way, low-rate oxidation of sensitive device
+materials such as TiN can be avoided and by-product deposits from
+reactions between leaked O2 and certain ALE pre-cursors can be
+reduced.
+Plasma-based ALE processes with low ion energy (ICP, ECR, or
+remote) can be utilized for anisotropy tuning if they are combined
+with a tunable bias source. Biasing the plasma during the modiﬁcation
+step may also extend the affected modiﬁcation depth to beyond one
+monolayer which has a supportive effect on wafer throughput. The
+development of narrow gap reactors with these high-density plasma
+sources remains, however, a challenge. Alternatively, narrow gap CCP
+reactors with well-controlled low-energy ions should be investigated.
+Particularly, plasma-based ALE greatly increases the number of
+materials that can be removed in an etch process. These materials are
+inaccessible to RIE due to the nonexistence of volatilizable etch by-
+products. Materials include metals such as Pt, Pa, Fe, Cu, and W in
+their elemental form. Furthermore, plasma increases the number of
+available reactants that can be used in the modiﬁcation step. SF6, that
+would be hard to utilize in purely thermal ALE processes, is an
+example.
+Finally, nonvolatile etch by-products can be removed from
+chamber hardware with plasma-based processes using MW technol-
+ogy and, in some cases, RF.
+Atomic layer etching has come a long way from its humble
+beginnings in the late eighties to the rich ﬁeld of etch chemistries
+which exists today. New processes and, with it, the ability to etch new
+materials are discovered rapidly. Thermal as well as plasma-based
+ALE stand at the threshold of being widely accepted in semiconductor
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-9
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 11]
+manufacturing as vital add-ons to the existing choices of etch technol-
+ogies. Both represent a necessary addition to modern device design at
+the nanometer level.
+AUTHOR DECLARATIONS
+Conflict of Interest
+The authors have no conﬂicts to disclose.
+Author Contributions
+Andreas Fischer: Conceptualization (equal); Formal analysis (equal);
+Investigation (equal); Validation (equal); Writing – original draft
+(lead);
+Writing
+–
+review
+&
+editing
+(equal).
+Thorsten
+Lill:
+Conceptualization (equal); Data curation (equal); Formal analysis
+(lead); Investigation (equal); Validation (equal); Writing – original
+draft (supporting); Writing – review & editing (equal).
+DATA AVAILABILITY
+The data that support the ﬁndings of this study are available
+within the article and the articles listed in the references section below.
+REFERENCES
+1K. J. Kanarik, T. Lill, E. A. Hudson, S. Sriraman, S. Tan, J. Marks, V. Vahedi,
+and R. A. Gottscho, J. Vac. Sci. Technol., A 33, 020802 (2015).
+2M. Yoder, U.S. patent 4756794A (12 July 1988).
+3T. Faraz, F. Roozeboom, H. C. M. Knoops, and W. M. M. Kessels, ECS J. Solid
+State Sci. Technol. 4, N5023 (2015).
+4H. Sakaue, K. Asami, T. Ichihara, S. Ishizuka, K. Kawamura, and Y. Horiike,
+MRS Online Proc. Libr. 222, 195–206 (1991).
+5T. Matsuura, J. Murota, Y. Sawada, and T. Ohmi, Appl. Phys. Lett. 63, 2803
+(1993).
+6K. Suzue, T. Matsuura, J. Murota, Y. Sawada, and T. Ohmi, Appl. Surf. Sci.
+82–83, 422–427 (1994).
+7A. Fischer, A. Routzahn, S. Wen, and T. Lill, J. Vac. Sci. Technol., A 38,
+042601 (2020).
+8T. Lill, V. Vahedi, and R. Gottscho, “Etching of semiconductor devices,” in
+Materials Science and Technology (Wiley, Weinheim, 2019).
+9A. Fischer, A. Routzahn, and T. Lill, “Characterization of isotropic thermal
+ALE of oxide ﬁlms and nanometer-size structures,” in 66-th AVS Symposium,
+Columbus, OH, 2019.
+10H.-Y. Chen and F.-H. Lu, J. Vac. Sci. Technol., A 23(4), 1006 (2005).
+11J. H. Jung, H. Oh, and B. Shong, Coatings 13(2), 387 (2023).
+12H. G. Tompkins, J. Appl. Phys. 70, 3876 (1991).
+13A. Fischer, A. Routzahn, R. J. Gasvoda, J. Sims, and T. Lill, J. Vac. Sci. Technol.,
+A 40, 022603 (2022).
+14A. Lii-Rosales, A. S. Cavanagh, A. Fischer, T. Lill, and S. M. George, Chem.
+Mater. 33, 7719–7730 (2021).
+15A. Abdulagatov, V. Sharma, J. A. Murdzek, A. S. Cavanagh, and S. M. George,
+J. Vac. Sci. Technol., A 39, 022602 (2021).
+16A. Agarwal and M. J. Kushner, J. Vac. Sci. Technol., A 27, 37 (2009).
+17D. Metzler, R. L. Bruce, S. Engelmann, E. A. Joseph, and G. S. Oehrlein, J. Vac.
+Sci. Technol., A 32(1–4), 020603 (2014).
+18T. Ohba, W. Yang, S. Tan, K. J. Kanarik, and K. Nojiri, Jpn. J. Appl. Phys.,
+Part 1 56, 06HB06 (2017).
+19T. Matsuura, Y. Honda, and J. Murota, Appl. Phys. Lett 74(23), 3573 (1999).
+20K. S. Min, S. H. Kang, J. K. Kim, Y. I. Jhon, M. S. Jhon, and G. Y. Yeom,
+Microelectron. Eng. 110, 457–460 (2013).
+21V. Kuzmenko, Y. Lebedinskij, A. Miakonkikh, and K. Rudenko, Vacuum 207,
+111585 (2023).
+22N. J. Chittock, M. F. J. Vos, T. Faraz, W. M. M. Kessels, H. C. M. Knoop, and
+A. J. M. Mackus, Appl. Phys. Lett. 117, 162107 (2020).
+23H. Fukumizu, M. Sekine, M. Hori, K. Kanomaru, and T. Kikuchi, J. Vac. Sci.
+Technol., A 37(2), 021002 (2019).
+24H. Wang, A. Hossain, D. Catherall, and A. J. Minnich, arXiv:2209.00150 (2023).
+25K. K. Ko and S. W. Pang, J. Vac. Sci. Technol., B 11(6), 2275 (1993).
+26K. S. Min, S. H. Kang, J. K. Kim, J. H. Yum, Y. I. Jhon, T. W. Hudnall, C. W.
+Bialawski, S. K. Banerjee, G. Bersuker, M. S. Jhon, and G. Y. Yeom,
+Microelectron. Eng. 114, 121–125 (2014).
+27J. W. Park, D. S. Kim, W. O. Lee, J. E. Kim, and G. Y. Yeom, Nanotechnology
+30, 085303 (2019).
+28T. Meguro, M. Ishii, H. Kodama, M. Hamagaki, T. Hara, Y. Yamamoto, and Y.
+Aoyagi, Jpn. J. Appl. Phys., Part 1 29, 2216 (1990).
+29Y. Aoyagi, K. Shinmura, K. Kawasaki, T. Tanaka, K. Gamo, S. Namba, and I.
+Nakamoto, Appl. Phys. Lett. 60, 968 (1992).
+30M. Ishii, T. Meguro, H. Kodama, Y. Yamamoto, and Y. Aoyagi, Jpn. J. Appl.
+Phys., Part 1 31, 2212 (1992).
+31T. Sugiyama, T. Matsuura, and J. Murota, Appl. Surf. Sci. 112, 187–190 (1997).
+32T. Matsuura, T. Sugiyama, and J. Murota, Surf. Sci. 402–404, 202–205 (1998).
+33J.-F. de Marneffe, D. Marinov, A. Goodyear, P.-J. Wyndaele, N. S. J.
+Braithwaite, S. Kundu, I. Asselberghs, M. Cooke, and S. De Gendt, J. Vac. Sci.
+Technol., A 40, 042602 (2022).
+34T. Z. Lin, B. T. Kang, M. H. Jeon, C. Huffman, J. H. Jeon, S. J. Lee, W. Han, J.
+Y. Lee, S. H. Lee, G. Y. Yeom, and K. N. Kim, ACS Appl. Mater. Interfaces
+7(29), 15892–15897 (2015).
+35H. J. Yun, T. H. Kim, C. B. Shin, C.-K. Kim, J.-H. Min, and S. H. Moon,
+Korean J. Chem. Eng. 24, 670–673 (2007).
+36H. Sakaue, S. Iseda, K. Asami, J. Yamamoto, M. Hirose, and Y. Horiike, Jpn. J.
+Appl. Phys., Part 1 29, 2648 (1990).
+37C. Li, D. Metzler, C. S. Lai, E. A. Hudson, and G. S. Oehrlein, J. Vac. Sci.
+Technol., A 34, 041307 (2016).
+38Y. Ishii, K. Okuma, T. Saldana, K. Maeda, N. Negishi, and J. Manos, Jpn. J.
+Appl. Phys., Part 1 56, 06HB07 (2017).
+39W.-H. Kim, D. Sung, S. Oh, J. Woo, S. Lim, H. Lee, and S. F. Bent, J. Vac. Sci.
+Technol., A 36, 01B104 (2018).
+40S. D. Sherpa and A. Ranjan, J. Vac. Sci. Technol., A 35, 01A102 (2017).
+41J. Li, Y. Li, N. Zhou, G. Wang, Q. Zhang, A. Du, Y. Zhang, J. Gao, Z. Kong, H.
+Lin, J. Xiang, C. Li, X. Yin, Y. Li, X. Wang, H. Yang, X. Ma, J. Han, J. Zhang, T.
+Hu, T. Yang, J. Li, H. Yin, H. Zhu, W. Wang, and H. H. Radamson, Materials
+13(3), 771 (2020).
+42R. J. Gasvoda, A. W. van de Steeg, R. Bhowmick, E. A. Hudson, and S.
+Agarwal, Appl. Mater. Interfaces 9(36), 31067–31075 (2017).
+43T. Tsutsumi, H. Kondo, M. Hori, M. Zaitsu, A. Kobayashi, T. Nozawa, and N.
+Kobayashi, J. Vac. Sci. Technol., A 35, 01A103 (2017).
+44R. J. Gasvoda, Z. Zhang, E. A. Hudson, and S. Agarwal, J. Vac. Sci. Technol., A
+39, 040401 (2021).
+45D. Metzler, C. Li, S. Engelmann, R. L. Bruce, E. A. Joseph, and G. S. Oehrlein,
+J. Vac. Sci. Technol., A 34, 01B101 (2016).
+46S. Dallorto, A. Goodyear, M. Cooke, J. E. Szornel, C. Ward, C. Kastl, A.
+Schwartzberg, I. W. Rangelow, and S. Cabrini, Plasma Proc. Polym. 16(9),
+e1900051 (2019).
+47K. Koh, Y. Kim, C.-K. Kim, and H. Chae, J. Vac. Sci. Technol., A 36, 01B106
+(2018).
+48S. S. Kaler, Q. Lou, V. M. Donnelly, and D. J. Economou, J. Phys. D 50, 234001
+(2017).
+49T. Imamura, I. Sakai, H. Hayashi, M. Sekine, and M. Hori, Jpn. J. Appl. Phys.,
+Part 1 60, 036001 (2021).
+50D. S. Kim, J. E. Kim, W. O. Lee, J. W. Park, Y. J. Gill, B. H. Jeong, and G. Y.
+Yeom, Plasma Proc. Polym. 16(9), e1900081 (2019).
+51A. Mameli, M. A. Verheijen, A. J. M. Mackus, W. M. M. Kessels, and F.
+Roozeboom, ACS Appl. Mater. Interfaces 10(44), 38588–38595 (2018).
+52S. D. Athavale and D. J. Economou, J. Vac. Sci. Technol., B 14, 3702–3705
+(1996).
+53S. D. Park, D. H. Lee, and G. Y. Yeom, Electrochem. Solid-State Lett. 8,
+C106–C109 (2005).
+54S. D. Park, C. K. Oh, D. H. Lee, and G. Y. Yeom, Electrochem. Solid-State Lett.
+8, C177–C179 (2005).
+55C. K. Oh, S. D. Park, H. C. Lee, J. W. Bae, and G. Y. Yeom, Electrochem. Solid-
+State Lett. 10, H94–H97 (2007).
+56S. D. Park, K. S. Min, B. Y. Yoon, D. H. Lee, and G. Y. Yeom, Jpn. J. Appl.
+Phys., Part 1 44, 389–393 (2005).
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-10
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19
+
+[Page 12]
+57S. Tan, W. Yang, K. J. Kanarik, T. Lill, V. Vahedi, J. Marks, and R. A. Gottscho,
+ECS J. Sol. State Sci. Technol. 4(6), N5010–N5012 (2015).
+58K. J. Kanarik, S. Tan, W. Yang, T. Kim, T. Lill, A. Kabansky, E. A. Hudson, T.
+Ohba, K. Nojiri, J. Yu, R. Wise, I. L. Berry, Y. Pan, J. Marks, and R. A.
+Gottscho, J. Vac. Sci. Technol., A 35(1–7), 05C302 (2017).
+59X. V. Qin, Y.-H. Ting, and A. E. Wendt, Plasma Sources Sci. Technol. 19(1–8),
+065014 (2010).
+60S. Tan, W. Yang, K. J. Kanarik, Y. Fan, M. Brouri, T. Lill, Y. Pan, and R. A.
+Gottscha, in ALE Workshop, Bellevue, WA, 2019.
+61K. J. Kanarik, S. Tan, W. Yang, I. L. Berry, Y. Pan, and R. A. Gottscho, J. Vac.
+Sci. Technol., A 39, 010401 (2021).
+62S. M. George, Acc. Chem. Res. 53, 1151–1160 (2020).
+63A. Fischer, A. Routzahn, S. M. George, and T. Lill, J. Vac. Sci. Technol., A 39,
+030801 (2021).
+64A. Lii-Rosales, V. L. Johnson, A. S. Cavanagh, A. Fischer, T. Lill, S. Sharma,
+and S. M. George, Chem. Mater. 34, 8641–8653 (2022).
+65A. Lii-Rosales, V. L. Johnson, S. Sharma, A. Fischer, T. Lill, and S. M. George,
+J. Phys. Chem. C 126, 8287–8295 (2022).
+66J. L. Partridge, J. A. Murdzek, V. L. Johnson, A. S. Cavanagh, A. Fischer, T. Lill,
+S. Sharma, and S. M. George, Chem. Mater. 35, 2058–2068 (2022).
+67J. A. Murdzek, A. Lii-Rosales, and S. M. George, J. Vac. Sci. Technol., A 41,
+032603 (2023).
+68J. A. Murdzek, A. Lii-Rosales, and S. M. George, Chem. Mater. 33, 9174–9183
+(2021).
+69A. Fischer, A. Routzahn, Y. Lee, T. Lill, and S. M. George, J. Vac. Sci. Technol., A
+38, 022603 (2020).
+70J. A. Murdzek and S. M. George, J. Vac. Sci. Technol., A 38, 022608 (2020).
+71J. A. Murdzek, A. Rajeshekhar, R. S. Makala, and S. M. George, J. Vac. Sci.
+Technol., A 39, 042602 (2021).
+72N. R. Johnson, J. K. Hite, M. A. Mastro, C. R. Eddy, Jr., and S. M. George,
+Appl. Phys. Lett. 114, 243103 (2019).
+73N. R. Johnson, H. Sun, K. Sharma, and S. M. George, J. Vac. Sci. Technol., A
+34, 050603 (2016).
+74A. Fischer, R. Janek, J. Boniface, T. Lill, K. J. Kanarik, Y. Pan, V. Vahedi, and R.
+A. Gottscho, Proc. SPIE 10149, 101490H (2017).
+75N. R. Johnson and S. M. George, ACS Appl. Mater. Interfaces 9, 34435
+(2017).
+76W. Xie, P. C. Lemaire, and G. N. Parsons, ACS Appl. Mater. Interfaces 10,
+9147 (2018).
+77W. Xie and G. N. Parson, J. Vac. Sci. Technol., A 38, 022605 (2020).
+78A. Fischer, A. L. Routzahn, T. B. Lill, and S. Varadarajan, U.S. Patent
+Application No. 17/905104 (2023).
+79E. Mohimi, X. I. Chu, B. B. Trinh, S. Babar, G. S. Girolami, and J. R. Abelson,
+ECS J. Solid State Sci. Technol. 7, 491 (2018).
+80A. I. Abdulagatov and S. M. George, J. Vac. Sci. Technol., A 38, 022607 (2020).
+81A. Fischer, T. Lill, and R. Janek, “Control of directionality in atomic layer
+etching,” U.S. Patent 10,559,475 B2 (2020).
+82O. Zabeida and L. Martinu, J. Appl. Phys. 85, 6366–6372 (1999).
+83T. Piskin, Y. Qian, P. Pribyl, W. Gekelman, and M. J. Kushner, J. Appl. Phys.
+133, 173302 (2023).
+84A. Fischer, D. Mui, A. Routzahn, R. Gasvoda, J. Sims, and T. Lill, J. Vac. Sci.
+Technol., A 41, 012601 (2023).
+Physics of Plasmas
+PERSPECTIVE
+pubs.aip.org/aip/pop
+Phys. Plasmas 30, 080601 (2023); doi: 10.1063/5.0158785
+30, 080601-11
+Published under an exclusive license by AIP Publishing
+ 04 April 2026 18:16:19

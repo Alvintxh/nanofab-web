@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 700" font-family="'Noto Sans SC', sans-serif">
+  <defs>
+    <!-- Gradient for column body -->
+    <linearGradient id="columnGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f1620"/>
+      <stop offset="30%" stop-color="#1a2332"/>
+      <stop offset="70%" stop-color="#1a2332"/>
+      <stop offset="100%" stop-color="#0f1620"/>
+    </linearGradient>
+    <!-- Gradient for coils -->
+    <linearGradient id="coilGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a07050"/>
+      <stop offset="50%" stop-color="#c8956c"/>
+      <stop offset="100%" stop-color="#a07050"/>
+    </linearGradient>
+    <!-- Glow for beam -->
+    <filter id="beamGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Subtle shadow for column -->
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="450" height="700" fill="#f5f5f0"/>
+
+  <!-- Title -->
+  <text x="225" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a2332">电子束光刻柱截面示意图</text>
+  <text x="225" y="44" text-anchor="middle" font-size="10" fill="#445566">EBL Column Cross-Section Schematic</text>
+
+  <!-- ==================== COLUMN BODY ==================== -->
+  <!-- Main column outer shell -->
+  <rect x="155" y="55" width="140" height="580" rx="8" fill="url(#columnGrad)" filter="url(#shadow)"/>
+
+  <!-- ==================== 1. SCHOTTKY EMITTER ==================== -->
+  <!-- Suppressor housing -->
+  <rect x="185" y="60" width="80" height="40" rx="4" fill="#2a3a4e" stroke="#3a4a5e" stroke-width="1"/>
+  <!-- Suppressor electrode -->
+  <rect x="195" y="68" width="60" height="10" rx="2" fill="#667788"/>
+  <!-- Heating filament (V-shape) -->
+  <line x1="210" y1="82" x2="225" y2="95" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="240" y1="82" x2="225" y2="95" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Emitter tip -->
+  <circle cx="225" cy="97" r="3" fill="#daa520"/>
+  <!-- Label left -->
+  <line x1="150" y1="80" x2="183" y2="80" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="145" y="75" text-anchor="end" font-size="9" fill="#1a2332" font-weight="bold">肖特基发射极</text>
+  <text x="145" y="87" text-anchor="end" font-size="7.5" fill="#445566">(Schottky Emitter)</text>
+
+  <!-- ==================== 2. GUN LENS ==================== -->
+  <!-- Left coil -->
+  <rect x="155" y="115" width="25" height="30" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <!-- Coil windings left -->
+  <line x1="160" y1="120" x2="175" y2="120" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="124" x2="175" y2="124" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="128" x2="175" y2="128" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="132" x2="175" y2="132" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="136" x2="175" y2="136" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="140" x2="175" y2="140" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Right coil -->
+  <rect x="270" y="115" width="25" height="30" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="275" y1="120" x2="290" y2="120" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="124" x2="290" y2="124" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="128" x2="290" y2="128" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="132" x2="290" y2="132" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="136" x2="290" y2="136" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="140" x2="290" y2="140" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Pole pieces -->
+  <rect x="180" y="125" width="15" height="10" fill="#667788"/>
+  <rect x="255" y="125" width="15" height="10" fill="#667788"/>
+  <!-- Label right -->
+  <line x1="297" y1="130" x2="310" y2="130" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="315" y="126" text-anchor="start" font-size="9" fill="#1a2332" font-weight="bold">枪透镜</text>
+  <text x="315" y="138" text-anchor="start" font-size="7.5" fill="#445566">(Gun Lens)</text>
+
+  <!-- ==================== 3. BEAM-LIMITING APERTURE ==================== -->
+  <!-- Aperture plate -->
+  <rect x="170" y="170" width="110" height="12" rx="1" fill="#667788" stroke="#556677" stroke-width="0.8"/>
+  <!-- Aperture opening -->
+  <rect x="218" y="170" width="14" height="12" fill="#1a2332"/>
+  <!-- Label left -->
+  <line x1="150" y1="176" x2="168" y2="176" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="145" y="172" text-anchor="end" font-size="9" fill="#1a2332" font-weight="bold">限束光阑</text>
+  <text x="145" y="184" text-anchor="end" font-size="7.5" fill="#445566">(Aperture)</text>
+
+  <!-- ==================== 4. CONDENSER LENS ==================== -->
+  <!-- Left coil -->
+  <rect x="155" y="205" width="25" height="40" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="160" y1="211" x2="175" y2="211" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="216" x2="175" y2="216" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="221" x2="175" y2="221" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="226" x2="175" y2="226" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="231" x2="175" y2="231" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="236" x2="175" y2="236" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="241" x2="175" y2="241" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Right coil -->
+  <rect x="270" y="205" width="25" height="40" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="275" y1="211" x2="290" y2="211" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="216" x2="290" y2="216" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="221" x2="290" y2="221" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="226" x2="290" y2="226" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="231" x2="290" y2="231" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="236" x2="290" y2="236" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="241" x2="290" y2="241" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Pole pieces -->
+  <rect x="180" y="218" width="15" height="14" fill="#667788"/>
+  <rect x="255" y="218" width="15" height="14" fill="#667788"/>
+  <!-- Label right -->
+  <line x1="297" y1="225" x2="310" y2="225" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="315" y="221" text-anchor="start" font-size="9" fill="#1a2332" font-weight="bold">聚光镜</text>
+  <text x="315" y="233" text-anchor="start" font-size="7.5" fill="#445566">(Condenser)</text>
+
+  <!-- ==================== 5. BEAM BLANKER ==================== -->
+  <!-- Blanker plates -->
+  <rect x="195" y="275" width="8" height="25" rx="1" fill="#667788" stroke="#556677" stroke-width="0.5"/>
+  <rect x="247" y="275" width="8" height="25" rx="1" fill="#667788" stroke="#556677" stroke-width="0.5"/>
+  <!-- Voltage symbol -->
+  <text x="203" y="270" text-anchor="middle" font-size="7" fill="#c8956c">+</text>
+  <text x="247" y="270" text-anchor="middle" font-size="7" fill="#c8956c">-</text>
+  <!-- Label left -->
+  <line x1="150" y1="288" x2="193" y2="288" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="145" y="283" text-anchor="end" font-size="9" fill="#1a2332" font-weight="bold">束流消隐器</text>
+  <text x="145" y="295" text-anchor="end" font-size="7.5" fill="#445566">(Blanker)</text>
+
+  <!-- ==================== 6. DEFLECTION COILS ==================== -->
+  <!-- Main deflection - outer coils -->
+  <rect x="155" y="330" width="25" height="35" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="160" y1="336" x2="175" y2="336" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="341" x2="175" y2="341" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="346" x2="175" y2="346" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="351" x2="175" y2="351" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="356" x2="175" y2="356" stroke="#a07050" stroke-width="0.5"/>
+  <rect x="270" y="330" width="25" height="35" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="275" y1="336" x2="290" y2="336" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="341" x2="290" y2="341" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="346" x2="290" y2="346" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="351" x2="290" y2="351" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="356" x2="290" y2="356" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Sub-field deflection - inner coils -->
+  <rect x="185" y="375" width="18" height="25" rx="2" fill="#d4a87c" stroke="#8a6540" stroke-width="0.5"/>
+  <line x1="189" y1="380" x2="199" y2="380" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="189" y1="384" x2="199" y2="384" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="189" y1="388" x2="199" y2="388" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="189" y1="392" x2="199" y2="392" stroke="#a07050" stroke-width="0.5"/>
+  <rect x="247" y="375" width="18" height="25" rx="2" fill="#d4a87c" stroke="#8a6540" stroke-width="0.5"/>
+  <line x1="251" y1="380" x2="261" y2="380" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="251" y1="384" x2="261" y2="384" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="251" y1="388" x2="261" y2="388" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="251" y1="392" x2="261" y2="392" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Label right -->
+  <line x1="297" y1="348" x2="310" y2="348" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="315" y="340" text-anchor="start" font-size="9" fill="#1a2332" font-weight="bold">偏转线圈</text>
+  <text x="315" y="352" text-anchor="start" font-size="7.5" fill="#445566">(Deflection)</text>
+  <!-- Sub-field label -->
+  <line x1="267" y1="388" x2="310" y2="388" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="315" y="384" text-anchor="start" font-size="7.5" fill="#667788">子场偏转</text>
+  <text x="315" y="394" text-anchor="start" font-size="6.5" fill="#889999">(Sub-field)</text>
+
+  <!-- ==================== 7. OBJECTIVE LENS ==================== -->
+  <!-- Large coil assembly -->
+  <rect x="155" y="420" width="25" height="55" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="160" y1="427" x2="175" y2="427" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="432" x2="175" y2="432" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="437" x2="175" y2="437" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="442" x2="175" y2="442" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="447" x2="175" y2="447" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="452" x2="175" y2="452" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="457" x2="175" y2="457" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="462" x2="175" y2="462" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="160" y1="467" x2="175" y2="467" stroke="#a07050" stroke-width="0.5"/>
+  <rect x="270" y="420" width="25" height="55" rx="3" fill="url(#coilGrad)" stroke="#8a6540" stroke-width="0.8"/>
+  <line x1="275" y1="427" x2="290" y2="427" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="432" x2="290" y2="432" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="437" x2="290" y2="437" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="442" x2="290" y2="442" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="447" x2="290" y2="447" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="452" x2="290" y2="452" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="457" x2="290" y2="457" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="462" x2="290" y2="462" stroke="#a07050" stroke-width="0.5"/>
+  <line x1="275" y1="467" x2="290" y2="467" stroke="#a07050" stroke-width="0.5"/>
+  <!-- Pole pieces (tapered) -->
+  <polygon points="180,435 195,445 195,450 180,460" fill="#667788"/>
+  <polygon points="270,435 255,445 255,450 270,460" fill="#667788"/>
+  <!-- Label left -->
+  <line x1="150" y1="448" x2="178" y2="448" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="145" y="443" text-anchor="end" font-size="9" fill="#1a2332" font-weight="bold">物镜</text>
+  <text x="145" y="455" text-anchor="end" font-size="7.5" fill="#445566">(Objective)</text>
+
+  <!-- Column bottom plate -->
+  <rect x="170" y="480" width="110" height="8" rx="1" fill="#667788" stroke="#556677" stroke-width="0.5"/>
+  <!-- Small exit aperture -->
+  <rect x="220" y="480" width="10" height="8" fill="#1a2332"/>
+
+  <!-- ==================== ELECTRON BEAM PATH ==================== -->
+  <!-- Diverging from source -->
+  <line x1="225" y1="97" x2="218" y2="170" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <line x1="225" y1="97" x2="232" y2="170" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <!-- Through aperture, converging slightly -->
+  <line x1="218" y1="182" x2="220" y2="275" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <line x1="232" y1="182" x2="230" y2="275" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <!-- Through blanker -->
+  <line x1="220" y1="300" x2="222" y2="330" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <line x1="230" y1="300" x2="228" y2="330" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <!-- Through deflection -->
+  <line x1="222" y1="330" x2="223" y2="420" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <line x1="228" y1="330" x2="227" y2="420" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <!-- Through objective - strong convergence to focus -->
+  <line x1="223" y1="420" x2="225" y2="488" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <line x1="227" y1="420" x2="225" y2="488" stroke="#50c878" stroke-width="1.5" opacity="0.7" filter="url(#beamGlow)"/>
+  <!-- Final convergence to sample -->
+  <line x1="215" y1="490" x2="225" y2="560" stroke="#50c878" stroke-width="1.8" opacity="0.8" filter="url(#beamGlow)"/>
+  <line x1="235" y1="490" x2="225" y2="560" stroke="#50c878" stroke-width="1.8" opacity="0.8" filter="url(#beamGlow)"/>
+  <!-- Central beam axis (thin dashed) -->
+  <line x1="225" y1="97" x2="225" y2="560" stroke="#50c878" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.4"/>
+  <!-- Focus spot -->
+  <circle cx="225" cy="560" r="2.5" fill="#50c878" opacity="0.9"/>
+  <circle cx="225" cy="560" r="5" fill="none" stroke="#50c878" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- ==================== 8. SAMPLE ==================== -->
+  <!-- Sample/substrate -->
+  <rect x="170" y="555" width="110" height="12" rx="1" fill="#8899aa" stroke="#667788" stroke-width="1"/>
+  <!-- Resist layer -->
+  <rect x="170" y="553" width="110" height="4" rx="0.5" fill="#aabbcc" opacity="0.7"/>
+  <!-- Stage base -->
+  <rect x="150" y="570" width="150" height="15" rx="2" fill="#445566" stroke="#334455" stroke-width="1"/>
+  <rect x="140" y="585" width="170" height="8" rx="2" fill="#334455"/>
+  <!-- Label right -->
+  <line x1="297" y1="563" x2="310" y2="563" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text x="315" y="559" text-anchor="start" font-size="9" fill="#1a2332" font-weight="bold">样品</text>
+  <text x="315" y="571" text-anchor="start" font-size="7.5" fill="#445566">(Sample)</text>
+
+  <!-- ==================== ANNOTATIONS ==================== -->
+  <!-- Working Distance (WD) annotation -->
+  <!-- WD arrow line -->
+  <line x1="135" y1="488" x2="135" y2="555" stroke="#1a2332" stroke-width="0.8"/>
+  <!-- WD arrow heads -->
+  <polygon points="132,490 135,488 138,490" fill="#1a2332"/>
+  <polygon points="132,553 135,555 138,553" fill="#1a2332"/>
+  <text x="133" y="525" text-anchor="end" font-size="8" fill="#1a2332" font-weight="bold">WD</text>
+
+  <!-- Convergence semi-angle alpha -->
+  <!-- Arc for alpha -->
+  <path d="M 220,540 A 20,20 0 0,1 225,530" fill="none" stroke="#c8956c" stroke-width="1"/>
+  <text x="208" y="538" text-anchor="end" font-size="9" fill="#c8956c" font-style="italic">α</text>
+  <!-- Alpha label -->
+  <text x="208" y="550" text-anchor="end" font-size="7" fill="#667788">半角/Semi-angle</text>
+
+  <!-- ==================== LEGEND ==================== -->
+  <rect x="30" y="620" width="390" height="65" rx="4" fill="#eeeee8" stroke="#ccccbb" stroke-width="0.5"/>
+  <text x="225" y="637" text-anchor="middle" font-size="8" fill="#667788">图例 / Legend</text>
+  <!-- Column body -->
+  <rect x="50" y="645" width="20" height="10" rx="1" fill="#1a2332"/>
+  <text x="75" y="654" font-size="7.5" fill="#445566">柱体 Column</text>
+  <!-- Coils -->
+  <rect x="145" y="645" width="20" height="10" rx="1" fill="#c8956c"/>
+  <text x="170" y="654" font-size="7.5" fill="#445566">线圈 Coils</text>
+  <!-- Beam -->
+  <line x1="240" y1="645" x2="260" y2="655" stroke="#50c878" stroke-width="2"/>
+  <text x="265" y="654" font-size="7.5" fill="#445566">电子束 e-Beam</text>
+  <!-- Aperture -->
+  <rect x="340" y="645" width="20" height="10" rx="1" fill="#667788"/>
+  <text x="365" y="654" font-size="7.5" fill="#445566">光阑 Aperture</text>
+  <!-- Beam energy note -->
+  <text x="225" y="672" text-anchor="middle" font-size="7" fill="#889999">典型加速电压: 1-100 kV | Typical accelerating voltage: 1-100 kV</text>
+</svg>

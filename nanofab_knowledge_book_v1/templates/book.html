@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+    <style>{{ css_content | safe }}</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+    <div class="cover-dots"></div>
+    <div class="cover-content">
+        <div class="cover-tag">{{ author }}</div>
+        <div class="book-title">{{ title }}</div>
+        <div class="cover-divider"></div>
+        <div class="book-subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="cover-bottom">
+        <div class="author">{{ author }}</div>
+    </div>
+    <div class="cover-corner cover-corner-tl"></div>
+    <div class="cover-corner cover-corner-br"></div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+    <h2>目录</h2>
+    {% for part in parts %}
+    <div class="toc-part">{{ part.title }}</div>
+    {% for chapter in part.chapters %}
+    <div class="toc-chapter">
+        <a href="#{{ chapter.id }}">{{ chapter.title }}</a>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+
+<!-- Front Matter -->
+{% if front_matter %}
+<div class="front-matter">
+    {{ front_matter | safe }}
+</div>
+{% endif %}
+
+<!-- Content -->
+{% for part in parts %}
+<div class="part-title">
+    <span class="part-number">{{ part.number }}</span>
+    {{ part.title }}
+</div>
+
+{% for chapter in part.chapters %}
+<div class="chapter" id="{{ chapter.id }}">
+    {{ chapter.content | safe }}
+</div>
+{% endfor %}
+{% endfor %}
+
+<!-- Back Matter -->
+{% if back_matter %}
+<div class="back-matter">
+    {{ back_matter | safe }}
+</div>
+{% endif %}
+
+{% if mermaid_fallback %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'loose',
+    });
+</script>
+{% endif %}
+
+
+</body>
+</html>

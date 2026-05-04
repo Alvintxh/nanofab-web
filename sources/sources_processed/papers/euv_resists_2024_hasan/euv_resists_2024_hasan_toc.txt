@@ -1,0 +1,37 @@
+# Table of Contents: euv_resists_2024_hasan
+
+Introduction  ... page 1
+Metal-Oxide-Based Photoresist Chemistry  ... page 4
+  Zinc-Based Inorganic Photoresist Mechanism  ... page 4
+  Tin–Oxygen Inorganic Photoresist Mechanism  ... page 5
+  IVB Group Inorganic Photoresist Mechanism  ... page 6
+  Absorptivity Comparison under EUV  ... page 7
+Metal-Oxide-Based Photoresist Synthesis Techniques  ... page 9
+  Novel Synthesis Techniques for Metal Oxides and EUV Lithography Applications  ... page 9
+    Atomic Layer Deposition (ALD)  ... page 9
+    Non-Aqueous Sol–Gel  ... page 12
+  Novel Inorganic Metal-Oxide-Based Photoresists and Synthesis Processes  ... page 15
+    Zinc-Based Inorganic Photoresists  ... page 15
+    Tin–Oxygen Inorganic Photoresists  ... page 17
+    IVB Group Inorganic-Based Photoresists  ... page 18
+Characterization Techniques for Metal-Oxide-Based Photoresists  ... page 20
+  Spectroscopic Analysis  ... page 20
+  Microscopic Analysis  ... page 21
+Performance Evaluation of Metal-Oxide-Based Photoresists  ... page 21
+  LWR Results and Spectroscopic Analyses of Zinc-Based Photoresist  ... page 21
+  Topographical and Chemical Analysis of Tin–Oxygen Inorganic Photoresists  ... page 22
+  Analysis of IV B Group Inorganic-Based Photoresists  ... page 24
+Applications and Future Prospects  ... page 25
+  Zinc-Based Inorganic Photoresist in Nanofabrication and 3D Printing  ... page 25
+    Zinc-Based Photoresist for High-Resolution EUVL and Nanofabrication  ... page 25
+    Zinc-Based Photoresist for 3D Printing  ... page 26
+  Tin–Oxygen Cluster Inorganic Photoresist for High-Resolution Lithography  ... page 26
+  IVB Group Inorganic-Based Photoresist  ... page 28
+    Zirconium Hafnium Oxide Thin Film as CMOS-Compatible Pyroelectric Infrared Sensor  ... page 28
+    Zirconium Oxide for Ultrahigh-Speed Printing  ... page 28
+  Market Opportunities and Commercial Prospects  ... page 29
+    International Market  ... page 29
+    Commercial Prospect  ... page 29
+  Future Prospects  ... page 30
+Conclusions  ... page 30
+References ... page 31

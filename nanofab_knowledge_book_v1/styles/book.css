@@ -1,0 +1,804 @@
+/* ============================================
+   Book Stylesheet — Academic Textbook (Chinese/CJK)
+   纳米制造技术：原理、工艺与实践
+   ============================================ */
+
+/* === Font Setup (CJK) === */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+/* === Page Setup (Print) === */
+@page {
+    size: 185mm 260mm;  /* 16开 (16mo) Chinese standard */
+    margin: 25mm 20mm 30mm 20mm;
+
+    @bottom-center {
+        content: counter(page);
+        font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9pt;
+        color: #666;
+    }
+}
+
+@page :first {
+    margin-top: 0;
+    @bottom-center { content: none; }
+}
+
+@page :left {
+    margin-left: 25mm;
+    margin-right: 18mm;
+    @bottom-left {
+        content: counter(page);
+        font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9pt;
+        color: #666;
+    }
+    @bottom-center { content: none; }
+}
+
+@page :right {
+    margin-left: 18mm;
+    margin-right: 25mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9pt;
+        color: #666;
+    }
+    @bottom-center { content: none; }
+}
+
+/* === Base Typography === */
+:root {
+    --color-primary: #1a1a2e;
+    --color-accent: #004EA1;       /* ShanghaiTech blue */
+    --color-accent-light: #1384E2; /* ShanghaiTech interactive blue */
+    --color-highlight: #9D0A12;    /* ShanghaiTech red */
+    --color-green: #2e7d32;
+    --color-bg-light: #f5f7fa;
+    --color-bg-warm: #fafaf5;
+    --color-border: #d0d5dd;
+    --font-body: 'Noto Serif SC', 'Songti SC', 'SimSun', Georgia, serif;
+    --font-heading: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 10.5pt;
+    line-height: 1.8;
+    color: var(--color-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* === Headings === */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-primary);
+    page-break-after: avoid;
+}
+
+/* Part Title */
+.part-title {
+    page-break-before: always;
+    text-align: center;
+    padding: 80mm 0 40mm 0;
+    font-family: var(--font-heading);
+    font-size: 26pt;
+    font-weight: 700;
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+    margin-bottom: 20mm;
+}
+
+.part-title .part-number {
+    display: block;
+    font-size: 13pt;
+    color: #888;
+    letter-spacing: 4pt;
+    text-transform: uppercase;
+    margin-bottom: 10mm;
+    font-weight: 400;
+}
+
+/* Chapter Title */
+.chapter {
+    page-break-before: always;
+}
+
+.chapter h2 {
+    font-size: 20pt;
+    margin-bottom: 4mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid var(--color-accent);
+    color: var(--color-accent);
+}
+
+.chapter h2 .chapter-number {
+    display: block;
+    font-size: 11pt;
+    color: var(--color-accent-light);
+    font-weight: 500;
+    margin-bottom: 2mm;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 14pt;
+    margin: 8mm 0 3mm 0;
+    color: var(--color-accent);
+}
+
+h4 {
+    font-size: 12pt;
+    margin: 5mm 0 2mm 0;
+    color: #333;
+}
+
+/* === Paragraphs (CJK) === */
+p {
+    margin-bottom: 2.5mm;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+p:first-child,
+.case-study p,
+.pro-tip p,
+.myth-buster p,
+.chapter-summary p,
+li p {
+    text-indent: 0;
+}
+
+/* === Visual Elements === */
+
+/* Case Study / Example Box */
+.case-study {
+    background: var(--color-bg-light);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 5mm;
+    margin: 5mm 0;
+    page-break-inside: avoid;
+}
+
+.case-study .case-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 11pt;
+    color: var(--color-primary);
+    margin-bottom: 2mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.case-study .case-title::before {
+    content: '示例 | ';
+    color: var(--color-accent);
+}
+
+.case-numbers {
+    display: flex;
+    gap: 4mm;
+    margin: 3mm 0;
+    flex-wrap: wrap;
+}
+
+.case-number-item {
+    background: white;
+    border-radius: 4px;
+    padding: 2mm 4mm;
+    text-align: center;
+    flex: 1;
+    min-width: 25mm;
+    border: 1px solid #e0e0e0;
+}
+
+.case-number-value {
+    font-family: var(--font-heading);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--color-accent);
+    display: block;
+}
+
+.case-number-label {
+    font-size: 8pt;
+    color: #888;
+}
+
+/* Note Box (replaces Pro Tip) */
+.pro-tip {
+    background: #eef4ee;
+    border-left: 4px solid var(--color-green);
+    border-radius: 0 4px 4px 0;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    page-break-inside: avoid;
+}
+
+.pro-tip .tip-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 10pt;
+    color: var(--color-green);
+    margin-bottom: 2mm;
+}
+
+.pro-tip .tip-title::before {
+    content: '注 | ';
+}
+
+.pro-tip p {
+    font-size: 9.5pt;
+}
+
+/* Caution Box (replaces Myth Buster) */
+.myth-buster {
+    background: #fdf4f0;
+    border-left: 4px solid var(--color-highlight);
+    border-radius: 0 4px 4px 0;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    page-break-inside: avoid;
+}
+
+.myth-buster .myth-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 10pt;
+    color: var(--color-highlight);
+    margin-bottom: 2mm;
+}
+
+.myth-buster .myth-title::before {
+    content: '注意 | ';
+}
+
+.myth-claim {
+    font-style: italic;
+    color: #A30B19;
+    padding: 2mm 0;
+    font-size: 10pt;
+}
+
+.myth-claim::before {
+    content: '常见误区：';
+    font-weight: 700;
+}
+
+.myth-truth {
+    color: var(--color-green);
+    padding: 2mm 0;
+    font-size: 10pt;
+}
+
+.myth-truth::before {
+    content: '实际情况：';
+    font-weight: 700;
+}
+
+/* Chapter Summary */
+.chapter-summary {
+    background: var(--color-bg-light);
+    border: 1.5px solid var(--color-accent);
+    border-radius: 4px;
+    padding: 6mm;
+    margin: 8mm 0;
+    page-break-inside: avoid;
+}
+
+.chapter-summary .summary-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12pt;
+    color: var(--color-accent);
+    margin-bottom: 4mm;
+    text-align: center;
+}
+
+.chapter-summary .summary-title::before {
+    content: '本章要点 | ';
+}
+
+/* Comparison Box */
+.comparison-box {
+    display: flex;
+    gap: 0;
+    margin: 5mm 0;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    page-break-inside: avoid;
+}
+
+.comparison-box .left-side {
+    flex: 1;
+    background: #f5f0f0;
+    padding: 4mm 5mm;
+    border-right: 1px solid var(--color-border);
+}
+
+.comparison-box .right-side {
+    flex: 1;
+    background: #f0f3f7;
+    padding: 4mm 5mm;
+}
+
+.comparison-box .side-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 10pt;
+    margin-bottom: 2mm;
+    text-align: center;
+}
+
+.comparison-box ul {
+    list-style: none;
+    padding: 0;
+    font-size: 9.5pt;
+    line-height: 1.7;
+}
+
+.comparison-box li {
+    padding: 1mm 0;
+}
+
+.comparison-box li::before {
+    content: '- ';
+    color: #999;
+}
+
+/* === Tables === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5mm 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+}
+
+caption {
+    font-family: var(--font-heading);
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #444;
+    text-align: left;
+    margin-bottom: 2mm;
+    caption-side: top;
+}
+
+thead {
+    background: var(--color-accent);
+    color: white;
+}
+
+th {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 2.5mm 3mm;
+    text-align: left;
+}
+
+td {
+    padding: 2mm 3mm;
+    border-bottom: 1px solid var(--color-border);
+}
+
+tr:nth-child(even) {
+    background: var(--color-bg-light);
+}
+
+/* === Figure Captions === */
+figure {
+    margin: 5mm 0;
+    text-align: center;
+    page-break-inside: avoid;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-family: var(--font-heading);
+    font-size: 9pt;
+    color: #555;
+    margin-top: 2mm;
+    text-align: center;
+    font-style: italic;
+}
+
+/* === Mermaid Diagrams === */
+.mermaid-diagram {
+    text-align: center;
+    margin: 6mm 0;
+    page-break-inside: avoid;
+    overflow-x: auto;
+}
+
+.mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+pre.mermaid {
+    background: transparent;
+    color: inherit;
+    border: 1px dashed #ccc;
+    text-align: center;
+}
+
+/* === Code Blocks === */
+pre {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 4mm;
+    margin: 4mm 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    line-height: 1.5;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    background: #f0f0f0;
+    padding: 0.5mm 1.5mm;
+    border-radius: 2px;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* === Blockquotes === */
+blockquote {
+    border-left: 3px solid var(--color-accent);
+    margin: 4mm 0;
+    padding: 2mm 5mm;
+    background: var(--color-bg-warm);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: #555;
+}
+
+blockquote p {
+    text-indent: 0;
+}
+
+/* === Lists === */
+ul, ol {
+    margin: 3mm 0;
+    padding-left: 6mm;
+}
+
+li {
+    margin-bottom: 1.5mm;
+    line-height: 1.7;
+}
+
+/* === Cover Page === */
+.cover {
+    page-break-after: always;
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(160deg, #0a0e1e 0%, #18267D 40%, #004EA1 100%);
+    overflow: hidden;
+    padding: 0;
+    margin: -25mm -20mm -30mm -20mm;
+    color: white;
+}
+
+.cover-dots {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 14mm 14mm;
+    background-position: 7mm 7mm;
+}
+
+.cover-content {
+    position: absolute;
+    top: 50%;
+    left: 25mm;
+    right: 25mm;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 2;
+}
+
+.cover-tag {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: #5a9fd4;
+    letter-spacing: 2pt;
+    margin-bottom: 6mm;
+    opacity: 0.8;
+}
+
+.cover .book-title {
+    font-family: var(--font-heading);
+    font-size: 34pt;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 0;
+    letter-spacing: 0.5pt;
+}
+
+.cover-divider {
+    width: 50mm;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #5a9fd4, #8abde0, transparent);
+    margin: 5mm auto;
+}
+
+.cover .book-subtitle {
+    font-family: var(--font-heading);
+    font-size: 13pt;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.cover-bottom {
+    position: absolute;
+    bottom: 20mm;
+    left: 25mm;
+    right: 25mm;
+    z-index: 2;
+    text-align: center;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding-top: 5mm;
+}
+
+.cover .author {
+    font-family: var(--font-heading);
+    font-size: 10pt;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1pt;
+    margin: 0;
+}
+
+.cover-corner {
+    position: absolute;
+    width: 20mm;
+    height: 20mm;
+}
+
+.cover-corner-tl {
+    top: 14mm; left: 14mm;
+    border-top: 1.5px solid rgba(90,159,212,0.4);
+    border-left: 1.5px solid rgba(90,159,212,0.4);
+}
+
+.cover-corner-br {
+    bottom: 14mm; right: 14mm;
+    border-bottom: 1.5px solid rgba(138,189,224,0.3);
+    border-right: 1.5px solid rgba(138,189,224,0.3);
+}
+
+/* Table of Contents */
+.toc {
+    page-break-after: always;
+}
+
+.toc h2 {
+    text-align: center;
+    border-bottom: none;
+    margin-bottom: 8mm;
+    color: var(--color-accent);
+}
+
+.toc-part {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 11pt;
+    color: var(--color-accent);
+    margin: 5mm 0 2mm 0;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+}
+
+.toc-chapter {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5mm 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 10pt;
+}
+
+.toc-chapter a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* === Citations === */
+.fn-ref {
+    font-size: 0.7em;
+    line-height: 0;
+    vertical-align: super;
+}
+
+.fn-ref a {
+    color: var(--color-accent-light);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.fn-ref a:hover {
+    text-decoration: underline;
+}
+
+.chapter-footnotes {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #ccc;
+    page-break-before: avoid;
+}
+
+.footnotes-title {
+    font-family: var(--font-heading);
+    font-size: 0.85em;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 0.5em;
+}
+
+.footnotes-list {
+    font-size: 0.78em;
+    color: #666;
+    line-height: 1.6;
+    padding-left: 1.5em;
+}
+
+.footnotes-list li {
+    margin-bottom: 0.2em;
+    word-break: break-all;
+}
+
+.footnotes-list a {
+    color: var(--color-accent-light);
+    text-decoration: none;
+}
+
+.footnotes-list a:hover {
+    text-decoration: underline;
+}
+
+.fn-back {
+    font-size: 0.85em;
+    margin-left: 0.3em;
+    color: #999 !important;
+}
+
+/* PDF source link in footnotes */
+.fn-pdf-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed #999;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.fn-pdf-link:hover {
+    color: var(--color-accent-light);
+    border-bottom-color: var(--color-accent-light);
+}
+
+.fn-pdf-link::after {
+    content: ' 📄';
+    font-size: 0.85em;
+    opacity: 0.5;
+}
+
+.fn-pdf-link:hover::after {
+    opacity: 1;
+}
+
+/* === Screen-only Styles === */
+@media screen {
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .chapter {
+        page-break-before: auto;
+        border-top: 2px solid var(--color-accent);
+        padding-top: 30px;
+        margin-top: 40px;
+    }
+
+    .part-title {
+        page-break-before: auto;
+        padding: 60px 0 30px 0;
+    }
+}
+
+/* === Print Utilities === */
+.page-break {
+    page-break-before: always;
+}
+
+.no-break {
+    page-break-inside: avoid;
+}
+
+/* === Scientific Figures === */
+.figure {
+    margin: 1.5em auto;
+    text-align: center;
+    page-break-inside: avoid;
+    max-width: 100%;
+}
+
+.figure img,
+.figure svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.figure-caption {
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+    font-size: 9pt;
+    color: #555;
+    margin-top: 0.6em;
+    text-indent: 0;
+    line-height: 1.5;
+}
+
+.figure-caption .figure-label {
+    font-weight: 700;
+    color: #004EA1;
+}
+
+.figure-caption .figure-source {
+    font-size: 8pt;
+    color: #888;
+    display: block;
+    margin-top: 0.2em;
+}
+
+/* === Key Insight Highlight === */
+.key-insight {
+    background: linear-gradient(to bottom, transparent 60%, rgba(157, 10, 18, 0.10) 60%);
+    padding: 0 2px;
+    font-weight: 500;
+}
+
+/* Block-level Insight */
+.insight-block {
+    border-left: 3px solid #9D0A12;
+    background: rgba(157, 10, 18, 0.04);
+    padding: 3mm 5mm;
+    margin: 4mm 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+}
+
+.insight-block p {
+    text-indent: 0;
+    color: #333;
+}

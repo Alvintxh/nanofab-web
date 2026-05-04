@@ -1,0 +1,24 @@
+# Table of Contents: hybrid_bonding_2025_moore_more
+
+Cu–Cu hybrid bonding technology: from physical mechanisms to system integration for 3D ICs ... page 1
+  Abstract ... page 1
+  1 Introduction ... page 1
+  2 Traditional bonding faces dual challenges ... page 3
+  3 The type of process and physical mechanism ... page 6
+    3.1 DBI (direct bond interconnect) hybrid bonding ... page 6
+    3.2 SAB (surface-activated bonding)-based hybrid bonding ... page 7
+    3.3 Cu–Cu bonding physical mechanisms ... page 8
+  4 Integration technology ... page 10
+    4.1 Low-temperature passivation bonding technology ... page 10
+    4.2 Low-temperature CuSiO2 hybrid bonding technology ... page 12
+    4.3 Wafer-level structure GaNSi heterogeneous integration ... page 13
+    4.4 Other integration technologies ... page 14
+  5 Breakthroughs in hybrid bonding technology ... page 14
+  6 Current application domains ... page 16
+    6.1 Application fields ... page 16
+      6.1.1 High-bandwidth memory (HBM) ... page 16
+      6.1.2 3D chip integration ... page 16
+      6.1.3 CMOS image sensors ... page 16
+  7 Conclusions ... page 18
+  Acknowledgements  ... page 18
+  References ... page 19

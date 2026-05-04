@@ -1,0 +1,521 @@
+<div class="chapter-content">
+<h1>第十一章：工艺配方手册</h1>
+
+<h2>11.1 概述</h2>
+
+<p>本章汇编电子束光刻（Electron Beam Lithography, EBL）相关的工艺配方，涵盖抗蚀剂涂覆、曝光参数、显影条件、金属剥离和刻蚀工艺。所有配方基于Georgia Tech电子束光刻设施的实测数据，以Elionix ELS-G100（100 kV）系统为平台。工艺参数经过实验验证，可直接用于纳米结构加工。</p>
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>本章提供的参数为参考起点。实际工艺需根据具体设备、环境条件和衬底材料进行优化。建议先在测试样品上验证参数后再用于正式器件加工。
+</div>
+
+<h2>11.2 EBL系统规格</h2>
+
+<p>Elionix ELS-G100系统的关键参数：</p>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>规格</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>束斑直径</td><td>1.8 nm（高斯束）</td></tr>
+    <tr><td>加速电压</td><td>25, 50, 100 kV 可选</td></tr>
+    <tr><td>束流范围</td><td>20 pA 至 100 nA</td></tr>
+    <tr><td>扫描速度</td><td>100 MHz</td></tr>
+    <tr><td>电子源</td><td>ZrO/W热场发射</td></tr>
+    <tr><td>最小线宽</td><td>6 nm</td></tr>
+    <tr><td>场拼接精度</td><td>15 nm（100 μm场）</td></tr>
+    <tr><td>套刻精度</td><td>20 nm（100 μm场）</td></tr>
+    <tr><td>最大晶片尺寸</td><td>8英寸</td></tr>
+    <tr><td>最小样品尺寸</td><td>毫米级碎片</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.3 抗蚀剂材料选型</h2>
+
+<h3>11.3.1 正性抗蚀剂</h3>
+
+<h4>PMMA（950k分子量）</h4>
+
+<p>PMMA（聚甲基丙烯酸甲酯, Polymethyl Methacrylate）是最经典的电子束抗蚀剂，具有优异的分辨率和易于去除的特性，价格低廉，首选用于剥离工艺。</p>
+
+<h4>ZEP520A</h4>
+
+<p><span class="key-insight">ZEP520A所需曝光剂量比PMMA低约20%，写入时间更短。等离子体刻蚀抗性约为PMMA的2倍。但成本超过PMMA的25倍。</span></p>
+
+<h3>11.3.2 负性抗蚀剂</h3>
+
+<h4>HSQ（氢化硅倍半氧烷, Hydrogen Silsesquioxane）</h4>
+
+<p>HSQ为无机负性抗蚀剂，EBL曝光后转化为SiO₂。具有优异的等离子体刻蚀抗性和对硅的选择性。<span class="key-insight">已实现6.5 nm孤立线和40 nm周期上10 nm点阵的记录。</span>但所需剂量约为PMMA的3倍，线边缘粗糙度较高。</p>
+
+<h4>ma-N 2403</h4>
+
+<p>负性聚合物抗蚀剂，适用于玻璃衬底上的剥离工艺。可用有机溶剂去除，无需HF基刻蚀液。具备深紫外曝光能力。分辨率低于HSQ，部分衬底上存在附着力问题。</p>
+
+<h3>11.3.3 抗蚀剂对比总表</h3>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>PMMA (950k)</th><th>ZEP520A</th><th>HSQ</th><th>ma-N 2403</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>极性</td><td>正性</td><td>正性</td><td>负性</td><td>负性</td></tr>
+    <tr><td>相对剂量</td><td>1× (基准)</td><td>~0.8×</td><td>~3×</td><td>—</td></tr>
+    <tr><td>刻蚀抗性</td><td>基准</td><td>~2× PMMA</td><td>优异(SiO₂)</td><td>—</td></tr>
+    <tr><td>分辨率</td><td>优</td><td>优</td><td>最佳(6.5 nm)</td><td>低于HSQ</td></tr>
+    <tr><td>成本</td><td>低</td><td>>25× PMMA</td><td>高</td><td>中等</td></tr>
+    <tr><td>去除方式</td><td>丙酮/1165</td><td>有机溶剂</td><td>HF/BOE</td><td>有机溶剂</td></tr>
+    <tr><td>最佳应用</td><td>剥离</td><td>快速写入, 刻蚀</td><td>最高分辨率, 刻蚀掩模</td><td>玻璃衬底剥离</td></tr>
+    <tr><td>烘烤条件</td><td>180°C, 90 s</td><td>见设备手册</td><td>80-250°C(取决于工艺)</td><td>见设备手册</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.4 PMMA工艺配方</h2>
+
+<h3>配方11-1：PMMA标准工艺</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PMMA (950k MW) 标准工艺
+ 适用：一般纳米图形化，金属剥离
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<p><strong>步骤1：旋涂</strong></p>
+<li>旋涂PMMA，60秒</li>
+<li>转速按照旋涂曲线（Spin Speed Curve）查表确定膜厚</li>
+
+<p><strong>步骤2：烘烤</strong></p>
+<li>180°C热板，90秒</li>
+
+<p><strong>步骤3：曝光</strong></p>
+<li>参照剂量敏感曲线（Dose Sensitivity Curve）设定曝光剂量</li>
+
+<p><strong>步骤4：显影</strong></p>
+<li>浸泡显影2分钟</li>
+
+<p><strong>步骤5：冲洗</strong></p>
+<li>异丙醇（IPA）冲洗30秒</li>
+
+<p><strong>步骤6：吹干</strong></p>
+<li>氮气吹干</li>
+
+
+
+<h3>配方11-2：PMMA显影条件选择</h3>
+
+<table>
+  <thead>
+    <tr><th>显影液</th><th>配比</th><th>显影时间</th><th>分辨率等级</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>IPA:H₂O</td><td>3:1</td><td>2 min</td><td>标准</td><td>易获取，溶剂用量少</td></tr>
+    <tr><td>MIBK:IPA</td><td>1:1</td><td>2 min</td><td>标准</td><td>传统配方</td></tr>
+    <tr><td>MIBK:IPA</td><td>1:3</td><td>2 min</td><td>高</td><td>需增大曝光剂量</td></tr>
+    <tr><td>冷显影</td><td>任意配比</td><td>30 s</td><td>最高</td><td>将显影液冷却至10°C以下，增大剂量</td></tr>
+  </tbody>
+</table>
+
+
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>提高分辨率的方法包括缩短显影时间（可缩至约30秒并相应增大曝光剂量）和采用冷显影。冷显影将温度从室温（约19°C）降至10°C以下，主要用于40 nm以下特征尺寸。大多数应用使用室温标准显影即可满足需求。
+</div>
+
+<h3>配方11-3：PMMA去除</h3>
+
+<table>
+  <thead>
+    <tr><th>步骤</th><th>方法</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>浸泡在丙酮或1165（N-甲基吡咯烷酮）中</td></tr>
+    <tr><td>2</td><td>O₂等离子体处理</td></tr>
+    <tr><td>3</td><td>食人鱼液（Piranha）清洗</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.5 HSQ工艺配方</h2>
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>HSQ对涂覆与曝光之间的时间间隔敏感。涂覆后应尽快曝光以获得最佳结果。EBL曝光后HSQ转化为二氧化硅。
+</div>
+
+<h3>配方11-4：HSQ低对比度工艺（快速）</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HSQ 工艺 1：低对比度，快速
+ 适用：一般刻蚀掩模，工艺窗口较大
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>数值</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>涂覆后烘烤</td><td>250°C，2分钟</td></tr>
+    <tr><td>曝光剂量</td><td>~1000 μC/cm²</td></tr>
+    <tr><td>显影液</td><td>2.3% TMAH (MF-319)</td></tr>
+    <tr><td>显影时间</td><td>70秒，室温</td></tr>
+    <tr><td>冲洗</td><td>流动DI水约60秒</td></tr>
+  </tbody>
+</table>
+
+<h3>配方11-5：HSQ高对比度工艺（中等剂量）</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HSQ 工艺 2：高对比度，中等剂量
+ 适用：精细结构，需要陡直侧壁
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>数值</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>涂覆后烘烤</td><td>不烘烤，或80°C，4分钟</td></tr>
+    <tr><td>曝光剂量</td><td>~1500 μC/cm²</td></tr>
+    <tr><td>显影液</td><td>25% TMAH</td></tr>
+    <tr><td>显影时间</td><td>30秒，约21°C</td></tr>
+    <tr><td>冲洗</td><td>流动DI水约60秒</td></tr>
+  </tbody>
+</table>
+
+<h3>配方11-6：HSQ最高对比度工艺（高剂量）</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HSQ 工艺 3：最高对比度，高剂量
+ 适用：最高分辨率结构（<10 nm）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>数值</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>涂覆后烘烤</td><td>不烘烤，或80°C，4分钟</td></tr>
+    <tr><td>曝光剂量</td><td>~2000 μC/cm²</td></tr>
+    <tr><td>显影液</td><td>25% TMAH，40-50°C</td></tr>
+    <tr><td>显影时间</td><td>30秒</td></tr>
+    <tr><td>冲洗</td><td>流动DI水约60秒</td></tr>
+  </tbody>
+</table>
+
+
+
+<p><strong>HSQ对比度工艺选择要点：</strong></p>
+<li>更高对比度工艺需要更大剂量和更长写入时间</li>
+<li><span class="key-insight">更高对比度提供更陡直的侧壁和更宽的工艺窗口</span></li>
+<li>HSQ的线边缘粗糙度高于正性抗蚀剂</li>
+
+<h3>配方11-7：HSQ去除</h3>
+
+<p>HSQ曝光后转化为SiO₂，用HF或缓冲氧化物刻蚀液（Buffered Oxide Etch, BOE）去除。</p>
+
+<table>
+  <thead>
+    <tr><th>材料</th><th>HF刻蚀速率</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>热氧化SiO₂</td><td>~100 nm/min</td></tr>
+    <tr><td>PECVD氧化物</td><td>~490 nm/min</td></tr>
+    <tr><td>曝光后HSQ</td><td>远快于热氧化物</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.6 曝光剂量参考</h2>
+
+<h3>11.6.1 剂量汇总</h3>
+
+<table>
+  <thead>
+    <tr><th>抗蚀剂</th><th>显影液</th><th>浓度/配比</th><th>温度</th><th>时间</th><th>剂量(μC/cm²)</th><th>对比度</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>PMMA</td><td>IPA:H₂O</td><td>3:1</td><td>RT</td><td>2 min</td><td>参照曲线</td><td>标准</td></tr>
+    <tr><td>PMMA</td><td>MIBK:IPA</td><td>1:1</td><td>RT</td><td>2 min</td><td>参照曲线</td><td>标准</td></tr>
+    <tr><td>PMMA</td><td>MIBK:IPA</td><td>1:3</td><td>RT</td><td>2 min</td><td>较高</td><td>高</td></tr>
+    <tr><td>PMMA</td><td>冷显影</td><td>任意</td><td>≤10°C</td><td>30 s</td><td>更高</td><td>最高</td></tr>
+    <tr><td>HSQ</td><td>TMAH(MF-319)</td><td>2.3%</td><td>RT</td><td>70 s</td><td>~1000</td><td>低</td></tr>
+    <tr><td>HSQ</td><td>TMAH</td><td>25%</td><td>~21°C</td><td>30 s</td><td>~1500</td><td>高</td></tr>
+    <tr><td>HSQ</td><td>TMAH</td><td>25%</td><td>40-50°C</td><td>30 s</td><td>~2000</td><td>最高</td></tr>
+  </tbody>
+</table>
+
+
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>ZEP520A所需曝光剂量约为PMMA的80%，写入时间更短。但其成本为PMMA的25倍以上，适用于需要快速写入且对刻蚀抗性有要求的场合。
+</div>
+
+<h2>11.7 金属剥离工艺</h2>
+
+<h3>11.7.1 剥离原理</h3>
+
+<p>剥离工艺（Liftoff）利用抗蚀剂作为模板层，先将金属蒸镀至表面，然后用溶剂去除抗蚀剂层，抗蚀剂之上的金属随之剥离，留下开口区域的图形化金属。</p>
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>纳米精度剥离要求样品尽可能垂直于蒸发源坩埚，以获得最直接的视线角度。偏离法线方向会产生阴影效应，导致纳米尺度图形偏离设计规格。
+</div>
+
+<h3>配方11-8：1165溶剂剥离法</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 金属剥离 方法1：1165溶剂
+ 适用：大多数金属（银除外）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<table>
+  <thead>
+    <tr><th>步骤</th><th>操作</th><th>参数</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>加热1165至目标温度</td><td>50-70°C（用温度计验证液温）</td></tr>
+    <tr><td>2</td><td>浸泡样品</td><td>约2小时（典型）</td></tr>
+    <tr><td>3</td><td>可选：短暂超声处理</td><td>5秒以上</td></tr>
+    <tr><td>4</td><td>依次冲洗</td><td>丙酮 → 甲醇 → 异丙醇</td></tr>
+  </tbody>
+</table>
+
+<h3>配方11-9：丙酮剥离法</h3>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 金属剥离 方法2：丙酮
+ 适用：银、敏感材料
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<table>
+  <thead>
+    <tr><th>步骤</th><th>操作</th><th>参数</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>丙酮浸泡</td><td>数分钟至数天（取决于图案密度）</td></tr>
+    <tr><td>2</td><td>用丙酮挤瓶冲洗</td><td>去除松动金属碎片</td></tr>
+    <tr><td>3</td><td>将样品浮在新鲜丙酮中超声清洗</td><td>5-15分钟</td></tr>
+    <tr><td>4</td><td>依次冲洗</td><td>丙酮 → 甲醇 → 异丙醇</td></tr>
+  </tbody>
+</table>
+
+
+
+<h3>11.7.2 特定材料注意事项</h3>
+
+<table>
+  <thead>
+    <tr><th>材料</th><th>注意事项</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>铜（纳米尺度）</td><td>铬作为附着层优于钛</td></tr>
+    <tr><td>银</td><td>1165溶剂会完全刻蚀银，必须使用室温丙酮剥离</td></tr>
+    <tr><td>金</td><td>在1165中长时间浸泡可能产生严重线边缘粗糙度</td></tr>
+    <tr><td>敏感材料</td><td>丙酮可能更合适</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.8 刻蚀工艺配方</h2>
+
+<h3>11.8.1 硅刻蚀</h3>
+
+<h4>配方11-10：浅硅刻蚀（深度<1 μm）</h4>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 浅硅刻蚀
+ 适用：表面微纳结构
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<li>可使用ZEP520A掩模或SiO₂硬掩模</li>
+<li>实现光滑侧壁</li>
+<li>PMMA和ZEP520均可作为刻蚀掩模（需参照对比分析数据）</li>
+
+
+
+<h4>配方11-11：深硅刻蚀（深度≥1 μm）</h4>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 深硅刻蚀
+ 适用：高深宽比结构
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<li>使用HSQ负性抗蚀剂作为刻蚀掩模</li>
+<li>可实现接近90°的侧壁角度</li>
+<li>适用于高深宽比结构</li>
+
+<h4>配方11-12：Nano-Bosch工艺</h4>
+
+<pre><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ Nano-Bosch硅深刻蚀
+ 适用：纳米尺度高深宽比硅刻蚀
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code></pre>
+
+<li>选择比通常大于20:1（硅:抗蚀剂）</li>
+<li>实现高深宽比刻蚀</li>
+<li>有适用于不同特征尺寸和深度的变体</li>
+
+
+
+<h3>11.8.2 SiO₂刻蚀</h3>
+
+<p>两种主要设备平台：</p>
+<li><strong>STS AOE（Advanced Oxide Etcher）：</strong> 专用氧化物刻蚀</li>
+<li><strong>PT ICP（Inductively Coupled Plasma）：</strong> 感应耦合等离子体刻蚀</li>
+
+
+
+<h3>11.8.3 化合物半导体刻蚀</h3>
+
+<li><strong>InSb：</strong> 已有纳米尺度图案化工艺的文档记录</li>
+
+
+
+<h2>11.9 防静电涂层</h2>
+
+<p><span class="key-insight">在绝缘衬底（如玻璃、石英、未掺杂氧化物）上进行EBL时，电荷在表面积累会导致束偏转和图案变形。</span>解决方法包括：</p>
+
+<li>在抗蚀剂上旋涂导电聚合物层（如ESPACER或水溶性导电涂层），曝光前涂覆，曝光后用水冲洗去除</li>
+<li>在抗蚀剂下蒸镀薄金属层（如5-10 nm Al或Cr），作为导电通路</li>
+<li>使用ma-N 2403等适用于绝缘衬底的抗蚀剂</li>
+
+
+
+<h2>11.10 膜厚测量</h2>
+
+<h3>配方11-13：反射率测量</h3>
+
+<p>使用Nanospec反射率仪（Reflectometer）测量抗蚀剂厚度。测量原理基于薄膜反射光强度分析，需预先已知折射率（来自供应商或椭偏仪测量）。</p>
+
+<p><strong>标定配方：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>材料</th><th>配方编号</th><th>描述</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ZEP520A</td><td>019</td><td>ZEP on Silicon，10×放大</td></tr>
+    <tr><td>PMMA</td><td>037</td><td>PMMA on silicon</td></tr>
+    <tr><td>HSQ</td><td>048</td><td>Thin HSQ on Si</td></tr>
+    <tr><td>ma-N 2403</td><td>130</td><td>ma-N 2403 on Silicon</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.11 常见问题与解决方案</h2>
+
+<h3>11.11.1 曝光相关问题</h3>
+
+<table>
+  <thead>
+    <tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>剂量不足，图案显影不完全</td><td>剂量过低或显影时间过短</td><td>增大曝光剂量或延长显影时间</td></tr>
+    <tr><td>过度曝光，图案宽度增大</td><td>剂量过高</td><td>降低曝光剂量</td></tr>
+    <tr><td>图案漂移或变形</td><td>衬底充电</td><td>使用导电涂层或导电衬底</td></tr>
+    <tr><td>场拼接错位</td><td>场校正不佳</td><td>重新进行场校正和聚焦</td></tr>
+  </tbody>
+</table>
+
+<h3>11.11.2 显影相关问题</h3>
+
+<table>
+  <thead>
+    <tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>残胶（Scum）</td><td>显影不充分</td><td>延长显影时间或提高显影液浓度</td></tr>
+    <tr><td>图案塌陷</td><td>高深宽比结构中的毛细力</td><td>使用临界点干燥或低表面张力冲洗液</td></tr>
+    <tr><td>分辨率不足</td><td>显影条件不佳</td><td>改用MIBK:IPA 1:3或冷显影</td></tr>
+  </tbody>
+</table>
+
+<h3>11.11.3 剥离相关问题</h3>
+
+<table>
+  <thead>
+    <tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>金属撕裂或残留</td><td>抗蚀剂侧壁不够陡或金属过厚</td><td>使用双层抗蚀剂体系（如LOR/PMMA），减小金属厚度</td></tr>
+    <tr><td>金属线边缘粗糙</td><td>溶剂/材料不兼容</td><td>换用合适溶剂（见材料注意事项）</td></tr>
+    <tr><td>剥离不完全</td><td>抗蚀剂难以溶解</td><td>加热溶剂，延长浸泡时间，辅以超声</td></tr>
+  </tbody>
+</table>
+
+<h3>11.11.4 刻蚀相关问题</h3>
+
+<table>
+  <thead>
+    <tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>掩模过早消耗</td><td>选择比不足</td><td>换用HSQ掩模或SiO₂硬掩模</td></tr>
+    <tr><td>侧壁不够垂直</td><td>工艺参数不佳</td><td>调整气体比例和功率参数</td></tr>
+    <tr><td>底部残留（Micromasking）</td><td>再沉积物遮挡</td><td>优化工艺气体或增加聚合物清除步骤</td></tr>
+  </tbody>
+</table>
+
+<h2>11.12 工艺流程总览</h2>
+
+<pre><code>graph TD
+    A[设计版图<br>GDS/CAD] --> B[选择抗蚀剂<br>正性/负性]
+    B --> C[旋涂<br>控制膜厚]
+    C --> D[烘烤<br>去除溶剂]
+    D --> E[EBL曝光<br>设定剂量/加速电压]
+    E --> F[显影<br>选择显影液和条件]
+    F --> G{后续工艺}
+    G -->|剥离| H[金属蒸镀<br>控制角度和厚度]
+    H --> I[溶剂剥离<br>1165或丙酮]
+    G -->|刻蚀| J[干法刻蚀<br>RIE/ICP]
+    J --> K[去除掩模<br>HF或溶剂]
+    I --> L[最终器件]
+    K --> L</code></pre>
+
+<h2>11.13 软件工具</h2>
+
+<h3>商业软件</h3>
+<li><strong>AutoCAD：</strong> 通用CAD设计</li>
+<li><strong>GenISys BEAMER/TRACER：</strong> 专用EBL设计和邻近效应校正</li>
+
+<h3>免费/开源软件</h3>
+
+<table>
+  <thead>
+    <tr><th>软件</th><th>功能</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>KLayout</td><td>免费GDSII编辑器</td></tr>
+    <tr><td>urpec</td><td>邻近效应校正（University of Rochester）</td></tr>
+    <tr><td>Win X-Ray</td><td>免费Monte Carlo电子轨迹模拟</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>11.14 本章小结</h2>
+
+<div class="chapter-summary">
+
+本章提供了EBL纳米加工的完整工艺配方参考：
+
+1. **抗蚀剂选型：** PMMA适合剥离和一般图案化，成本最低。ZEP520A适合需要快速写入的场合。HSQ适合最高分辨率和刻蚀掩模应用。ma-N 2403适合绝缘衬底。
+
+2. **显影优化：** PMMA标准显影使用IPA:H₂O 3:1或MIBK:IPA 1:1，高分辨率使用MIBK:IPA 1:3或冷显影。HSQ通过调节TMAH浓度和温度控制对比度和分辨率。
+
+3. **金属剥离：** 首选1165加热至50-70°C。银和敏感材料必须使用丙酮。纳米精度要求样品垂直于蒸发源。
+
+4. **刻蚀工艺：** 浅硅刻蚀使用ZEP或SiO₂掩模，深硅刻蚀使用HSQ掩模和Nano-Bosch工艺（选择比>20:1）。
+
+5. **问题诊断：** 电荷积累导致图案变形是绝缘衬底上EBL的主要挑战，需使用导电涂层解决。
+
+</div>
+
+</div>

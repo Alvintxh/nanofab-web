@@ -1,0 +1,404 @@
+<div class="chapter-content">
+<h1>第十章：半导体衬底与热处理工艺</h1>
+
+<h2>10.1 概述</h2>
+
+<p>集成电路和纳米器件的制造始于半导体衬底（Semiconductor Substrate）。衬底的纯度、晶体完美性和掺杂控制直接决定了其上所有器件的性能极限。本章系统阐述单晶硅衬底的生长方法、杂质引入与再分布的物理机制、热氧化生长二氧化硅、离子注入以及快速热处理工艺。这些单元工艺共同构成了现代半导体制造的热处理基础。</p>
+
+<h2>10.2 硅单晶生长</h2>
+
+<h3>10.2.1 直拉法</h3>
+
+<p>直拉法（Czochralski Method, CZ）是生产单晶硅片的主流技术。工艺以电子级多晶硅为原料，其纯度经蒸馏精炼可达99.999999999%（11N）。多晶硅装入熔融石英坩埚（Fused Silica Crucible），在真空腔体内充入氩气保护气氛后，坩埚加热至约1500°C使硅完全熔化。</p>
+
+<p>生长过程的关键步骤：</p>
+
+<li>将精心取向的籽晶（Seed Crystal，直径约0.5 cm，长约10 cm）降入硅熔体表面</li>
+<li>通过Dash缩颈技术快速拉伸形成细颈区域，消除籽晶中的位错</li>
+<li>降低熔体温度并减缓拉速，使晶体扩肩至目标直径</li>
+<li>利用光学探测器反馈控制拉速和炉温，维持恒定直径</li>
+
+<p>现代CZ硅锭直径超过300 mm，长度达1至2米。</p>
+
+<p><strong>热平衡与最大拉速。</strong> 在液固界面处，能量守恒要求固体一侧传导的热量减去液体一侧传入的热量等于凝固释放的潜热（硅的熔化潜热约340 cal/g）。由此可推导最大拉速：</p>
+
+<table>
+  <thead>
+    <tr><th>$$V_{max} = \frac{k_s}{ρL} \cdot \frac{dT}{dx}\bigg</th><th>_s$$</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<p>典型硅CZ生长的温度梯度约100°C/cm。为减小熔体中温度梯度，晶锭和坩埚在生长过程中反向旋转。</p>
+
+<p><strong>掺杂与分凝。</strong> 通过向熔体中加入精确质量的掺杂剂原子来控制晶片电阻率。但杂质在液固界面发生分凝效应，分凝系数 k 定义为：</p>
+
+<p>$$k = \frac{C<em>s}{C</em>l}$$</p>
+
+<table>
+  <thead>
+    <tr><th>杂质元素</th><th>Al</th><th>As</th><th>B</th><th>O</th><th>P</th><th>Sb</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>分凝系数k</td><td>0.002</td><td>0.3</td><td>0.8</td><td>0.25*</td><td>0.35</td><td>0.023</td></tr>
+  </tbody>
+</table>
+
+<p>*氧的分凝系数存在争议，有文献报道接近1.0的数值。</p>
+
+
+
+<p>假设熔体充分混合，固体中杂质浓度随凝固比例X变化为：</p>
+
+<p>$$C<em>s = kC</em>0(1-X)^{k-1}$$</p>
+
+<p>实际上由于坩埚壁热梯度引起自然对流形成循环胞（Recirculation Cells），熔体并非完全均匀混合。考虑液固界面处的边界层效应，有效分凝系数修正为：</p>
+
+<p>$$k_e = \frac{k}{k + (1-k)e^{-Vδ/D}}$$</p>
+
+<p><strong>氧控制与磁场拉晶。</strong> 由于熔融石英坩埚在1500°C下释放大量氧进入硅熔体，超过95%的溶解氧以SiO形式从熔体表面逸出，其余氧被掺入生长晶体。为降低氧含量，可采用磁场约束直拉法（Magnetic Czochralski, MCZ）。磁场通过洛伦兹力改变离子化杂质在熔体中的运动轨迹，减少杂质掺入晶体。典型磁场强度约0.3 T，可将氧浓度降至2 ppm。</p>
+
+<h3>10.2.2 区熔法</h3>
+
+<p>区熔法（Float Zone Method, FZ）适用于需要极高纯度硅的场合。<span class="key-insight">FZ硅的载流子浓度可低至10¹¹ cm⁻³，远低于CZ硅。</span></p>
+
+<p>FZ法的核心特征是熔化部分完全由固体部分支撑，无需坩埚。高纯多晶硅棒固定在卡盘上，射频线圈沿棒长方向缓慢移动。线圈产生的电磁场在硅棒中感应涡流，通过焦耳热使最近区域局部熔化。整套装置可置于真空系统或惰性气体保护环境中。</p>
+
+<p>FZ硅的掺杂方法包括四种：</p>
+
+<table>
+  <thead>
+    <tr><th>掺杂方法</th><th>原理</th><th>适用杂质</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>芯棒掺杂（Core Doping）</td><td>以掺杂多晶硅棒为起始材料</td><td>B（扩散率高，不易蒸发）</td></tr>
+    <tr><td>丸粒掺杂（Pill Doping）</td><td>在棒顶部钻孔填入掺杂剂</td><td>Ga, In（分凝系数小）</td></tr>
+    <tr><td>气相掺杂（Gas Doping）</td><td>注入PH₃, AsCl₃, BCl₃等气体</td><td>P, As, B</td></tr>
+    <tr><td>中子嬗变掺杂（NTD）</td><td>³⁰Si(n,γ)→³¹Si→³¹P+β</td><td>P（轻n型掺杂）</td></tr>
+  </tbody>
+</table>
+
+<p>中子嬗变掺杂利用硅中约3.1%的³⁰Si同位素，在中子辐照下转变为磷，实现极其均匀的轻度n型掺杂。缺点是无法制备p型硅。</p>
+
+<h3>10.2.3 晶向选择与晶片规格</h3>
+
+<p>晶锭生长完成后需经过一系列加工步骤制备晶片。电阻率和晶体完美性检测之后，切去头尾，机械修整至目标直径。对150 mm及以下晶片，沿晶锭全长磨制定位平面（Flat）标识晶向和掺杂类型；较大晶片则采用切口（Notch）标识。</p>
+
+<p>主要的硅晶向选择依据：</p>
+
+<li><strong>(100)晶向：</strong> CMOS工艺首选。Si/SiO₂界面态密度最低，氧化速率各向异性有利于LOCOS工艺</li>
+<li><strong>(111)晶向：</strong> 双极型器件使用。沿此方向的外延生长质量较好</li>
+
+<table>
+  <thead>
+    <tr><th>参数</th><th>典型规格（先进硅片）</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>直径</td><td>300 mm</td></tr>
+    <tr><td>厚度</td><td>625 或 675 μm</td></tr>
+    <tr><td>弓形度</td><td>≤10 μm</td></tr>
+    <tr><td>全局平坦度</td><td>≤3 μm</td></tr>
+    <tr><td>电阻率</td><td>按指定 ±3%</td></tr>
+    <tr><td>氧浓度</td><td>1.5×10¹⁷ cm⁻³</td></tr>
+    <tr><td>金属污染（体内）</td><td><0.001 ppb</td></tr>
+  </tbody>
+</table>
+
+
+
+<h2>10.3 热氧化</h2>
+
+<h3>10.3.1 Deal-Grove模型</h3>
+
+<p>硅在分子氧中的热氧化反应为：</p>
+
+<p>$$Si(固) + O<em>2(气) → SiO</em>2$$</p>
+
+<p>此过程称为干氧氧化（Dry Oxidation）。Deal-Grove模型适用于预测厚度大于约300 Å的热氧化层生长。</p>
+
+<p>模型考虑三个氧通量的平衡：</p>
+
+<li><strong>气相传输通量 J₁：</strong> 氧从气体主体通过边界层扩散至氧化层表面，J₁ = h<em>g(C</em>g - C_s)</li>
+<li><strong>氧化层内扩散通量 J₂：</strong> 氧穿过已生长氧化层的扩散，J₂ = D<em>{O₂}(C</em>o - C<em>i)/t</em>{ox}</li>
+<li><strong>界面反应通量 J₃：</strong> 氧在Si-SiO₂界面的化学反应，J₃ = k<em>s·C</em>i</li>
+
+<p>稳态下三者相等。结合Henry定律（C<em>o = Hp</em>g），解方程可得氧化层厚度随时间的关系：</p>
+
+<p>$$t<em>{ox}^2 + At</em>{ox} = B(t + τ)$$</p>
+
+<p>其中：</p>
+
+<p>$$A = 2D\left(\frac{1}{k<em>s} + \frac{1}{h}\right), \quad B = \frac{2DHp</em>g}{N<em>1}, \quad τ = \frac{t</em>0^2 + At_0}{B}$$</p>
+
+<p>N₁为SiO₂中每单位体积的氧分子数（干氧化时为2.2×10²² cm⁻³）。τ参数补偿初始氧化层厚度t₀的效应。</p>
+
+<div class="pro-tip">
+<strong>工艺要点：</strong>氧化消耗的硅厚度约为最终氧化层厚度的44%。化学反应发生在Si-SiO₂界面处，因为氧在SiO₂中的扩散率远高于硅在SiO₂中的扩散率。因此热氧化产生的界面未暴露于大气环境，相对纯净。
+</div>
+
+<h3>10.3.2 线性和抛物线速率系数</h3>
+
+<p>Deal-Grove方程有两个重要极限形式：</p>
+
+<li><strong>薄氧化层（线性区）：</strong> t_ox ≈ (B/A)(t + τ)，氧化速率由界面反应控制</li>
+<li><strong>厚氧化层（抛物线区）：</strong> t_ox² ≈ B(t + τ)，氧化速率由扩散控制</li>
+
+<p>B/A称为线性速率系数，B称为抛物线速率系数。</p>
+
+<p><strong>干氧氧化参数：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>温度(°C)</th><th>A(μm)</th><th>B(μm²/hr)</th><th>τ(hr)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>800</td><td>0.370</td><td>0.0011</td><td>9</td></tr>
+    <tr><td>920</td><td>0.235</td><td>0.0049</td><td>1.4</td></tr>
+    <tr><td>1000</td><td>0.165</td><td>0.0117</td><td>0.37</td></tr>
+    <tr><td>1100</td><td>0.090</td><td>0.027</td><td>0.076</td></tr>
+    <tr><td>1200</td><td>0.040</td><td>0.045</td><td>0.027</td></tr>
+  </tbody>
+</table>
+
+<p><strong>湿氧氧化参数（640 torr H₂O）：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>温度(°C)</th><th>A(μm)</th><th>B(μm²/hr)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>920</td><td>0.50</td><td>0.203</td></tr>
+    <tr><td>1000</td><td>0.226</td><td>0.287</td></tr>
+    <tr><td>1100</td><td>0.11</td><td>0.510</td></tr>
+    <tr><td>1200</td><td>0.05</td><td>0.720</td></tr>
+  </tbody>
+</table>
+
+
+
+<p><span class="key-insight">湿氧氧化速率远高于干氧氧化，原因在于H₂O在SiO₂中的扩散率高于O₂，且H₂O的溶解度（Henry常数）远大于O₂。</span>但湿氧生长的氧化层密度较低，通常用于不承受显著电应力的厚氧化层。</p>
+
+<p><strong>氯气添加。</strong> 在干氧中添加1-3%的氯（通常以HCl形式），可使重金属杂质形成挥发性氯化物而被清除。加3% HCl可使线性速率系数增加一倍。氯气氧化还改善了Si/SiO₂界面质量。</p>
+
+<h3>10.3.3 薄氧化层的初始增强</h3>
+
+<p>Deal-Grove模型在氧化层厚度低于几百埃时预测值偏低。实验观测表明，极薄氧化层的氧化速率比模型预测值高4倍以上。Deal-Grove方程中的τ参数可部分补偿这一偏差，但准确描述超薄氧化层生长需要额外的修正模型。</p>
+
+<h3>10.3.4 晶向与掺杂效应</h3>
+
+<p><strong>(111)硅的氧化速率高于(100)硅。</strong> 这反映在线性速率系数B/A的差异中，因为界面反应速率取决于可用键的面密度。抛物线速率系数B与晶向无关，因为氧在非晶SiO₂中的扩散不依赖于衬底取向。</p>
+
+<p>重掺杂会增加氧化速率。高浓度n型掺杂（如磷、砷）显著增加线性速率系数。</p>
+
+<h2>10.4 扩散</h2>
+
+<h3>10.4.1 Fick定律</h3>
+
+<p>扩散是杂质原子在浓度梯度驱动下通过随机热运动产生的净迁移。Fick第一定律描述扩散通量：</p>
+
+<p>$$J = -D\frac{\partial C(x,t)}{\partial x}$$</p>
+
+<p>Fick第二定律给出浓度随时间和位置的变化：</p>
+
+<p>$$\frac{\partial C(z,t)}{\partial t} = D\frac{\partial^2 C(z,t)}{\partial z^2}$$</p>
+
+<p>此方程在位置上二阶、时间上一阶，需要至少两个独立边界条件求解。</p>
+
+<h3>10.4.2 预沉积与推进扩散</h3>
+
+<p><strong>预沉积扩散（Predeposition）。</strong> 表面浓度固定在固溶度C_s，解为互补误差函数：</p>
+
+<p>$$C(z,t) = C_s \cdot \text{erfc}\left(\frac{z}{2\sqrt{Dt}}\right)$$</p>
+
+<p>总剂量随时间增加：$Q<em>T = \frac{2}{\sqrt{\pi}}C</em>s\sqrt{Dt}$</p>
+
+<p><strong>推进扩散（Drive-in）。</strong> 初始剂量Q_T固定，表面封闭，解为高斯分布：</p>
+
+<p>$$C(z,t) = \frac{Q_T}{\sqrt{\pi Dt}} \exp\left(-\frac{z^2}{4Dt}\right)$$</p>
+
+<p>表面浓度随时间降低：$C<em>s = Q</em>T / \sqrt{\pi Dt}$</p>
+
+<p>经典工艺流程为先做预沉积引入杂质，再做推进扩散形成所需结深。推进近似的前提是$\sqrt{Dt}<em>{predep} \ll \sqrt{Dt}</em>{drive-in}$。</p>
+
+<h3>10.4.3 扩散系数</h3>
+
+<p>扩散系数遵循Arrhenius关系：$D = D<em>0 e^{-E</em>a/kT}$</p>
+
+<p>Fair的空位模型将总扩散系数表示为各电荷态空位贡献的叠加：</p>
+
+<p>$$D = D^o + D^- \frac{n}{n<em>i} + D^{=}\left(\frac{n}{n</em>i}\right)^2 + D^+ \frac{p}{n_i} + \cdots$$</p>
+
+<p><strong>硅中常见掺杂剂的本征扩散系数：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>杂质</th><th>类型</th><th>D₀(cm²/s)</th><th>E_a(eV)</th><th>D⁻₀(cm²/s)</th><th>E⁻_a(eV)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>As in Si</td><td>施主</td><td>0.066</td><td>3.44</td><td>12.0</td><td>4.05</td></tr>
+    <tr><td>P in Si</td><td>施主</td><td>3.9</td><td>3.66</td><td>4.4</td><td>4.0</td></tr>
+    <tr><td>Sb in Si</td><td>施主</td><td>0.21</td><td>3.65</td><td>15.0</td><td>4.08</td></tr>
+    <tr><td>B in Si</td><td>受主</td><td>0.037</td><td>3.46</td><td>—</td><td>—</td></tr>
+    <tr><td>B in Si</td><td>受主（D⁺）</td><td>—</td><td>—</td><td>0.41*</td><td>3.46*</td></tr>
+  </tbody>
+</table>
+
+<p>*硼的增强扩散通过正电荷空位D⁺项描述。</p>
+
+
+
+<p><strong>扩散机制分类。</strong> 替位杂质（P, B, As, Sb等）通过空位交换或间隙体机制扩散。硼和磷同时通过两种机制扩散，具体哪种占主导取决于工艺条件。砷主要通过空位机制扩散。氧化增强扩散（Oxidation-Enhanced Diffusion, OED）使硼和磷的扩散率增大，而砷的扩散率因氧化减小。</p>
+
+<h3>10.4.4 SiO₂中的扩散</h3>
+
+<p>SiO₂中杂质扩散在深亚微米器件中至关重要。当重掺杂多晶硅栅极中的硼穿过厚度仅2 nm的栅氧化层时（硼穿透效应），将偏移器件阈值电压。<span class="key-insight">氮化处理可有效阻止硼在SiO₂中的扩散，因为氮阻断了硼从四配位硅到三配位硼的键重排。</span></p>
+
+<h2>10.5 离子注入</h2>
+
+<h3>10.5.1 注入系统与基本原理</h3>
+
+<p>离子注入（Ion Implantation）将高能离子直接打入晶片，精确控制杂质的剂量和深度分布，是现代IC制造中掺杂的主要方法。典型系统包含离子源、质量分析磁铁、加速管和终端站。</p>
+
+<p>离子进入固体后通过两种机制损失能量：</p>
+
+<li><strong>电子阻止Se：</strong> 类似粘滞阻力，$S_e \propto \sqrt{E}$，为连续过程</li>
+<li><strong>核阻止Sn：</strong> 离散碰撞事件，低能时随能量增大，高能时因碰撞时间缩短而减小</li>
+
+<h3>10.5.2 投影射程与歧离</h3>
+
+<p>杂质浓度近似为高斯分布：</p>
+
+<p>$$N(x) = \frac{\Phi}{\sqrt{2\pi}\Delta R<em>p} \exp\left(-\frac{(x-R</em>p)^2}{2\Delta R_p^2}\right)$$</p>
+
+<p>其中R<em>p为投影射程，ΔR</em>p为标准偏差（歧离, Straggle），Φ为注入剂量。</p>
+
+<p><strong>硅中常见杂质的注入参数（100 keV）：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>杂质</th><th>R_p(Å)</th><th>ΔR_p(Å)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>B</td><td>~3000</td><td>~700</td></tr>
+    <tr><td>P</td><td>~1200</td><td>~450</td></tr>
+    <tr><td>As</td><td>~600</td><td>~200</td></tr>
+    <tr><td>Sb</td><td>~400</td><td>~150</td></tr>
+  </tbody>
+</table>
+
+<p>射程估算公式：$\Delta R<em>p \approx \frac{2}{3}R</em>p \frac{\sqrt{M<em>i M</em>t}}{M<em>i + M</em>t}$</p>
+
+
+
+<h3>10.5.3 沟道效应</h3>
+
+<p>当离子速度方向平行于主要晶轴时，可能发生沟道效应（Channeling），导致部分离子深入晶体远超正常射程。临界角：</p>
+
+<p>$$\psi<em>c = 9.73° \sqrt{\frac{Z</em>i Z_t}{E \cdot d}}$$</p>
+
+<p>其中E为入射能量（keV），d为沿离子方向的原子间距（Å）。例如100 keV硼注入(100)硅的临界角约6°。</p>
+
+<p><strong>抑制沟道效应的方法：</strong></p>
+<li>偏转注入：典型倾斜角7°，扭转角30°</li>
+<li>通过薄屏蔽氧化层注入使离子速度随机化</li>
+<li>预非晶化（Preamorphization）：先用Si, F或Ar高剂量注入破坏晶格</li>
+
+
+
+<h3>10.5.4 注入损伤</h3>
+
+<p>高能离子与晶格原子碰撞产生大量位移原子。当注入剂量超过临界非晶化剂量时，硅表层转变为非晶态。注入后必须通过退火修复损伤并激活杂质（使注入原子占据替位位置）。</p>
+
+<h2>10.6 退火工艺</h2>
+
+<h3>10.6.1 炉退火与快速热处理</h3>
+
+<p><strong>传统炉退火（Furnace Annealing）</strong> 为批量工艺，晶片从边缘向内加热。为避免因温度梯度过大导致翘曲，升降温速率受限，即使目标退火时间很短，长温度斜坡也会带来显著扩散。</p>
+
+<p><strong>快速热处理（Rapid Thermal Processing, RTP）</strong> 是一系列单片热处理工艺的总称，通过缩短高温停留时间来降低热预算（Thermal Budget）。RTP最初开发用于注入退火，现已扩展至氧化、CVD和外延生长。</p>
+
+<p>RTP系统按加热方式分为三类：</p>
+
+<table>
+  <thead>
+    <tr><th>类型</th><th>热源</th><th>特点</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>绝热型</td><td>准分子激光宽束</td><td>仅加热表面几微米，时间最短</td></tr>
+    <tr><td>热通量型</td><td>聚焦激光/电子束扫描</td><td>横向温度非均匀性大</td></tr>
+    <tr><td>等温型</td><td>钨卤素灯阵列</td><td>温度均匀性最好，工业主流</td></tr>
+  </tbody>
+</table>
+
+<p>现代RTP系统采用多区加热（Multizone Heating）设计，独立控制不同区域灯功率，补偿晶片边缘散热增大的效应。200 mm晶片通常需要100个以上1 kW灯泡。</p>
+
+<h3>10.6.2 瞬态增强扩散</h3>
+
+<p>低温退火注入晶片时，观测到的结深远大于简单扩散理论预测值。硼在硅中的扩散增强可达1000倍。增强的原因在于注入产生的高浓度空位和自间隙体尚未湮灭，这些过剩点缺陷加速了杂质扩散。此效应称为瞬态增强扩散（Transient Enhanced Diffusion, TED）。</p>
+
+<p><strong>TED与稳态扩散的激活能对比：</strong></p>
+
+<table>
+  <thead>
+    <tr><th>杂质</th><th>稳态激活能(eV)</th><th>瞬态激活能(eV)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>B</td><td>3.5</td><td>1.8</td></tr>
+    <tr><td>As</td><td>3.4</td><td>1.8</td></tr>
+    <tr><td>P</td><td>3.6</td><td>2.2</td></tr>
+  </tbody>
+</table>
+
+<p><span class="key-insight">TED的激活能约为稳态扩散的一半，表明点缺陷辅助的扩散机制在低温下更为有效。</span>为减轻TED，常在激活退火前先进行500-650°C的低温退火步骤，湮灭过剩点缺陷。</p>
+
+<h3>10.6.3 快速热激活</h3>
+
+<p>RTP的突出优势在于晶片可能未达到热力学平衡。<span class="key-insight">这意味着电活性掺杂浓度实际上可以超过固溶度。砷在毫秒级退火后激活浓度可达约3×10²¹ cm⁻³，约为其固溶度的10倍，因为砷原子没有足够时间形成团簇（Cluster）并凝结为非活性缺陷。</span></p>
+
+<p>RTP退火后硼的尾部低浓度区域可能未完全激活，导致电学结深浅于化学结深。未激活的杂质被认为形成了非活性的硼-间隙体对（Boron Interstitial Pairs）。</p>
+
+<h3>10.6.4 快速热氧化</h3>
+
+<p>快速热氧化（Rapid Thermal Oxidation, RTO）允许在高温下进行短时间氧化，同时保持良好的固定电荷和界面态密度。传统方法通过降温减慢氧化速率来生长超薄栅氧化层，但低温生长的氧化层电学质量下降。RTO克服了这一矛盾。</p>
+
+<h2>10.7 SOI衬底</h2>
+
+<h3>10.7.1 SIMOX技术</h3>
+
+<p>注氧隔离（Separation by IMplanted OXygen, SIMOX）由Izumi等人于1978年首次报道。SIMOX通过高能高剂量氧离子注入硅片，再经高温退火形成埋层SiO₂。其优势包括增强抗辐射能力、提高电路速度和增大封装密度。</p>
+
+<p>典型SIMOX工艺流程：</p>
+
+<pre><code>graph LR
+    A[硅片] --> B[高能O⁺注入<br>~10¹⁸ cm⁻²]
+    B --> C[高温退火<br>1300-1350°C<br>数小时]
+    C --> D[SOI结构<br>顶层Si/埋层SiO₂/衬底Si]</code></pre>
+
+<p>SIMOX面临的主要问题包括注入过程引入的重金属杂质污染和颗粒缺陷。典型SIMOX注入剂量比常规源漏注入高约三个数量级，对注入机的洁净度提出严格要求。已有SIMOX SRAM（256K）和BiCMOS器件的报道，少数载流子寿命约10⁻⁷秒。</p>
+
+<h3>10.7.2 键合SOI与Smart Cut</h3>
+
+<p>Smart Cut技术结合了氢离子注入和晶片键合。先向一片硅片注入氢离子形成微气泡层，将其与另一片硅片（带有氧化层）键合，然后在氢注入层处剥离，最终抛光获得高质量SOI衬底。此技术较SIMOX具有更好的顶层硅厚度均匀性和更低的缺陷密度。</p>
+
+<h2>10.8 本章小结</h2>
+
+<div class="chapter-summary">
+
+本章涵盖了半导体衬底与热处理工艺的核心内容：
+
+1. **晶体生长：** CZ法是商用硅片的主流技术，通过拉速和温度控制实现单晶生长。FZ法提供更高纯度硅，适用于功率器件和探测器衬底。分凝效应影响杂质沿晶锭方向的分布均匀性。
+
+2. **热氧化：** Deal-Grove模型准确描述了300 Å以上热氧化层的生长动力学。氧化分为反应速率控制的线性区和扩散控制的抛物线区。湿氧氧化速率远高于干氧，但氧化层密度较低。
+
+3. **扩散：** Fick定律描述杂质在浓度梯度下的再分布。预沉积（erfc分布）和推进（高斯分布）是两种基本扩散模式。高浓度掺杂时扩散系数与浓度相关，需数值求解。
+
+4. **离子注入：** 提供精确的剂量和深度控制。投影射程和歧离可通过LSS表或Monte Carlo模拟获得。沟道效应通过偏转注入和预非晶化来抑制。
+
+5. **退火工艺：** RTP通过缩短高温时间降低热预算。TED是注入后退火中需特别关注的现象，其激活能约为稳态扩散的一半。超快退火可实现超固溶度激活。
+
+6. **SOI衬底：** SIMOX和Smart Cut为两种主要SOI制备技术，在高速、低功耗和抗辐射器件中具有重要应用。
+
+</div>
+
+</div>

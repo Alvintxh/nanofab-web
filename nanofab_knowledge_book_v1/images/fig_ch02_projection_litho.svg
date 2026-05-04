@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" width="500" height="700" font-family="'Noto Sans SC', 'Helvetica Neue', sans-serif">
+  <defs>
+    <!-- Lens gradient -->
+    <linearGradient id="lensGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6ba3c2"/>
+      <stop offset="15%" stop-color="#a8d0e8"/>
+      <stop offset="50%" stop-color="#c4e2f2"/>
+      <stop offset="85%" stop-color="#a8d0e8"/>
+      <stop offset="100%" stop-color="#6ba3c2"/>
+    </linearGradient>
+    <!-- Light source glow -->
+    <radialGradient id="sourceGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#c8b8ff" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#7b68ee" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#7b68ee" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Wafer gradient -->
+    <linearGradient id="waferGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a0a8b0"/>
+      <stop offset="100%" stop-color="#78808a"/>
+    </linearGradient>
+    <!-- Arrow marker -->
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#444"/>
+    </marker>
+    <marker id="arrowL" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <path d="M8,0 L0,3 L8,6 Z" fill="#444"/>
+    </marker>
+    <marker id="arrowD" markerWidth="6" markerHeight="8" refX="3" refY="8" orient="auto">
+      <path d="M0,0 L3,8 L6,0 Z" fill="#7b68ee"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="700" fill="#fafbfc"/>
+
+  <!-- Title -->
+  <text x="250" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a2a3a">投影光刻系统 (Projection Lithography System)</text>
+
+  <!-- ============ LIGHT SOURCE ============ -->
+  <!-- Glow effect -->
+  <ellipse cx="250" cy="62" rx="40" ry="18" fill="url(#sourceGlow)"/>
+  <!-- Source body -->
+  <rect x="220" y="48" width="60" height="28" rx="6" fill="#5a4abf" stroke="#3d2d99" stroke-width="1.5"/>
+  <text x="250" y="67" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">UV</text>
+  <!-- Source label -->
+  <text x="250" y="43" text-anchor="middle" font-size="10" fill="#333" font-weight="600">光源 (Light Source)</text>
+  <!-- Wavelength options -->
+  <text x="370" y="52" font-size="7.5" fill="#555">g-line: 436 nm</text>
+  <text x="370" y="62" font-size="7.5" fill="#555">i-line: 365 nm</text>
+  <text x="370" y="72" font-size="7.5" fill="#555">KrF: 248 nm</text>
+  <text x="370" y="82" font-size="7.5" fill="#555" font-weight="600">ArF: 193 nm</text>
+  <!-- Bracket for wavelengths -->
+  <path d="M365,48 L362,48 L362,82 L365,82" stroke="#888" stroke-width="0.8" fill="none"/>
+  <text x="358" y="68" text-anchor="end" font-size="7.5" fill="#888">λ</text>
+
+  <!-- ============ LIGHT RAYS: Source to Condenser ============ -->
+  <line x1="235" y1="76" x2="210" y2="115" stroke="#7b68ee" stroke-width="1.2" opacity="0.7"/>
+  <line x1="250" y1="76" x2="250" y2="115" stroke="#7b68ee" stroke-width="1.2" opacity="0.7"/>
+  <line x1="265" y1="76" x2="290" y2="115" stroke="#7b68ee" stroke-width="1.2" opacity="0.7"/>
+
+  <!-- ============ ILLUMINATOR / CONDENSER ============ -->
+  <text x="250" y="108" text-anchor="middle" font-size="10" fill="#333" font-weight="600">照明光学系统 (Illuminator)</text>
+  <!-- Condenser lens 1 -->
+  <ellipse cx="250" cy="125" rx="50" ry="8" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+  <!-- Condenser lens 2 -->
+  <ellipse cx="250" cy="145" rx="45" ry="7" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+
+  <!-- ============ LIGHT RAYS: Condenser to Mask ============ -->
+  <line x1="210" y1="133" x2="180" y2="195" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <line x1="250" y1="152" x2="250" y2="195" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <line x1="290" y1="133" x2="320" y2="195" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <!-- Additional rays -->
+  <line x1="225" y1="133" x2="205" y2="195" stroke="#7b68ee" stroke-width="0.8" opacity="0.4"/>
+  <line x1="275" y1="133" x2="295" y2="195" stroke="#7b68ee" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ============ RETICLE / MASK ============ -->
+  <text x="250" y="188" text-anchor="middle" font-size="10" fill="#333" font-weight="600">掩模版 (Reticle)</text>
+  <!-- Mask substrate -->
+  <rect x="160" y="195" width="180" height="14" rx="1" fill="#2a3a4a" stroke="#1a2a3a" stroke-width="1"/>
+  <!-- Mask pattern: line/space pattern (4x scale) -->
+  <!-- Clear windows in the mask (transmissive areas) -->
+  <rect x="200" y="195" width="16" height="14" fill="#c8b8ff" opacity="0.6"/>
+  <rect x="232" y="195" width="16" height="14" fill="#c8b8ff" opacity="0.6"/>
+  <rect x="264" y="195" width="16" height="14" fill="#c8b8ff" opacity="0.6"/>
+  <!-- Pattern labels on mask -->
+  <text x="250" y="225" text-anchor="middle" font-size="7" fill="#666" font-style="italic">4× pattern (线/间距)</text>
+
+  <!-- Mask pattern dimension annotation -->
+  <line x1="200" y1="217" x2="280" y2="217" stroke="#444" stroke-width="0.6" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+  <text x="240" y="216" text-anchor="middle" font-size="6.5" fill="#444">W</text>
+
+  <!-- ============ LIGHT RAYS: Mask to Projection Lens (diverging through pattern) ============ -->
+  <!-- Rays through the clear areas -->
+  <line x1="208" y1="209" x2="220" y2="270" stroke="#7b68ee" stroke-width="1" opacity="0.5"/>
+  <line x1="240" y1="209" x2="245" y2="270" stroke="#7b68ee" stroke-width="1" opacity="0.5"/>
+  <line x1="272" y1="209" x2="280" y2="270" stroke="#7b68ee" stroke-width="1" opacity="0.5"/>
+  <!-- Center ray -->
+  <line x1="250" y1="209" x2="250" y2="270" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- ============ PROJECTION LENS SYSTEM ============ -->
+  <text x="250" y="265" text-anchor="middle" font-size="10" fill="#333" font-weight="600">投影物镜 (Projection Lens)</text>
+  <!-- Multiple lens elements -->
+  <ellipse cx="250" cy="280" rx="55" ry="9" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+  <ellipse cx="250" cy="310" rx="50" ry="8" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+  <ellipse cx="250" cy="340" rx="45" ry="7" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+  <ellipse cx="250" cy="370" rx="40" ry="7" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+  <ellipse cx="250" cy="400" rx="35" ry="6" fill="url(#lensGrad)" stroke="#5a8ea8" stroke-width="1.5"/>
+
+  <!-- Lens housing outline -->
+  <path d="M190,275 L190,408 M310,275 L310,408" stroke="#8ab0c8" stroke-width="0.6" stroke-dasharray="3,3" opacity="0.5"/>
+
+  <!-- 4:1 label -->
+  <text x="135" y="345" text-anchor="middle" font-size="11" fill="#c44" font-weight="bold">4:1</text>
+  <text x="135" y="358" text-anchor="middle" font-size="8" fill="#c44">缩小</text>
+  <text x="135" y="368" text-anchor="middle" font-size="7" fill="#888">(reduction)</text>
+  <!-- Arrow showing demagnification -->
+  <path d="M152,280 L152,400" stroke="#c44" stroke-width="1" marker-end="url(#arrowD)" fill="none"/>
+  <path d="M152,280 L148,288 M152,280 L156,288" stroke="#c44" stroke-width="1"/>
+
+  <!-- ============ LIGHT RAYS: Through projection lens (converging) ============ -->
+  <!-- Rays converge as they pass through the lens system -->
+  <line x1="220" y1="289" x2="235" y2="318" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="280" y1="289" x2="265" y2="318" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="235" y1="318" x2="240" y2="347" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="265" y1="318" x2="260" y2="347" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="240" y1="347" x2="243" y2="377" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="260" y1="347" x2="257" y2="377" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="243" y1="377" x2="245" y2="406" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <line x1="257" y1="377" x2="255" y2="406" stroke="#7b68ee" stroke-width="0.9" opacity="0.5"/>
+  <!-- Center ray -->
+  <line x1="250" y1="289" x2="250" y2="406" stroke="#7b68ee" stroke-width="1" opacity="0.6"/>
+
+  <!-- ============ LIGHT RAYS: Lens to Wafer (converging cone) ============ -->
+  <!-- Cone of light forming the NA angle -->
+  <line x1="225" y1="406" x2="246" y2="470" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <line x1="275" y1="406" x2="254" y2="470" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <line x1="250" y1="406" x2="250" y2="470" stroke="#7b68ee" stroke-width="1.2" opacity="0.6"/>
+  <line x1="235" y1="406" x2="248" y2="470" stroke="#7b68ee" stroke-width="0.8" opacity="0.4"/>
+  <line x1="265" y1="406" x2="252" y2="470" stroke="#7b68ee" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ============ NA ANNOTATION ============ -->
+  <!-- Angle theta arc -->
+  <path d="M250,445 L250,410" stroke="#d44" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <path d="M250,435 Q258,430 265,418" stroke="#d44" stroke-width="1" fill="none"/>
+  <text x="270" y="430" font-size="9" fill="#d44" font-weight="bold">θ</text>
+  <!-- NA label -->
+  <text x="315" y="440" font-size="9" fill="#d44" font-weight="600">数值孔径 NA</text>
+  <text x="315" y="452" font-size="8" fill="#d44">NA = n·sin θ</text>
+  <!-- Connecting line -->
+  <line x1="268" y1="432" x2="312" y2="438" stroke="#d44" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+  <!-- ============ WAFER ============ -->
+  <text x="250" y="465" text-anchor="middle" font-size="10" fill="#333" font-weight="600">晶圆 (Wafer)</text>
+  <!-- Wafer body -->
+  <rect x="180" y="470" width="140" height="16" rx="2" fill="url(#waferGrad)" stroke="#5a6a7a" stroke-width="1.2"/>
+  <!-- Photoresist layer -->
+  <rect x="180" y="470" width="140" height="4" rx="1" fill="#e8c848" opacity="0.7"/>
+  <text x="325" y="478" font-size="6.5" fill="#888">光刻胶 (resist)</text>
+
+  <!-- Reduced pattern on wafer (1/4 of mask pattern) -->
+  <rect x="237" y="474" width="4" height="8" fill="#7b68ee" opacity="0.5"/>
+  <rect x="245" y="474" width="4" height="8" fill="#7b68ee" opacity="0.5"/>
+  <rect x="253" y="474" width="4" height="8" fill="#7b68ee" opacity="0.5"/>
+
+  <!-- Wafer pattern dimension annotation -->
+  <line x1="237" y1="494" x2="257" y2="494" stroke="#444" stroke-width="0.6" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+  <text x="247" y="493" text-anchor="middle" font-size="6.5" fill="#444">W/4</text>
+
+  <!-- Stage -->
+  <rect x="160" y="490" width="180" height="10" rx="2" fill="#c0c8d0" stroke="#8898a8" stroke-width="1"/>
+  <text x="250" y="498" text-anchor="middle" font-size="6.5" fill="#555">工件台 (Stage)</text>
+
+  <!-- ============ EQUATIONS BOX ============ -->
+  <rect x="30" y="530" width="440" height="90" rx="6" fill="#f0f2f5" stroke="#c0c8d0" stroke-width="1"/>
+  <text x="250" y="550" text-anchor="middle" font-size="11" fill="#1a2a3a" font-weight="bold">关键方程 (Key Equations)</text>
+
+  <!-- Resolution equation -->
+  <text x="135" y="575" text-anchor="middle" font-size="12" fill="#2a3a4a" font-weight="600">分辨率 Resolution:</text>
+  <text x="135" y="598" text-anchor="middle" font-size="14" fill="#5a4abf" font-weight="bold" font-style="italic">R = k</text>
+  <text x="163" y="602" text-anchor="middle" font-size="9" fill="#5a4abf" font-weight="bold">1</text>
+  <text x="173" y="598" text-anchor="middle" font-size="14" fill="#5a4abf" font-weight="bold" font-style="italic">· λ / NA</text>
+
+  <!-- DOF equation -->
+  <text x="365" y="575" text-anchor="middle" font-size="12" fill="#2a3a4a" font-weight="600">焦深 DOF:</text>
+  <text x="345" y="598" text-anchor="middle" font-size="14" fill="#5a4abf" font-weight="bold" font-style="italic">DOF = k</text>
+  <text x="385" y="602" text-anchor="middle" font-size="9" fill="#5a4abf" font-weight="bold">2</text>
+  <text x="400" y="598" text-anchor="middle" font-size="14" fill="#5a4abf" font-weight="bold" font-style="italic">· λ / NA²</text>
+
+  <!-- Separator -->
+  <line x1="250" y1="560" x2="250" y2="615" stroke="#c0c8d0" stroke-width="0.8"/>
+
+  <!-- ============ DEMAGNIFICATION VISUAL COMPARISON ============ -->
+  <!-- Dashed lines connecting mask pattern to wafer pattern to show 4:1 -->
+  <line x1="200" y1="209" x2="237" y2="470" stroke="#c44" stroke-width="0.6" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="280" y1="209" x2="257" y2="470" stroke="#c44" stroke-width="0.6" stroke-dasharray="4,4" opacity="0.4"/>
+
+  <!-- ============ OPTICAL AXIS ============ -->
+  <line x1="250" y1="35" x2="250" y2="510" stroke="#aab" stroke-width="0.4" stroke-dasharray="1,4" opacity="0.4"/>
+
+  <!-- Footer citation -->
+  <text x="250" y="640" text-anchor="middle" font-size="7" fill="#999">[Cui 2025] [Campbell 2008] Projection Optical Lithography Schematic</text>
+  <text x="250" y="652" text-anchor="middle" font-size="6.5" fill="#aaa">k₁ ≈ 0.25–0.8 (process dependent) | k₂ ≈ 0.5–1.0 | typical NA: 0.5–1.35 (immersion)</text>
+</svg>

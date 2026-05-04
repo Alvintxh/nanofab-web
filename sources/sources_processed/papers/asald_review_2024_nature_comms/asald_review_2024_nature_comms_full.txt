@@ -1,0 +1,1402 @@
+# asald_review_2024_nature_comms
+# Extracted from: asald_review_2024_nature_comms.pdf
+# Total PDF pages: 11
+# Page numbering: from PDF page labels
+# ============================================================
+
+
+[Page 1]
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Area-selective atomic layer deposition on 2D
+monolayer lateral superlattices
+Jeongwon Park
+1,12, Seung Jae Kwak
+2,12, Sumin Kang1,12, Saeyoung Oh3,
+Bongki Shin4, Gichang Noh
+1,5, Tae Soo Kim1, Changhwan Kim6,
+Hyeonbin Park1,7, Seung Hoon Oh7, Woojin Kang2, Namwook Hur6,
+Hyun-Jun Chai1, Minsoo Kang1, Seongdae Kwon1, Jaehyun Lee1, Yongjoon Lee8,
+Eoram Moon1, Chuqiao Shi
+4, Jun Lou
+4, Won Bo Lee
+2, Joon Young Kwak
+9,
+Heejun Yang
+8,10, Taek-Mo Chung7, Taeyong Eom
+7, Joonki Suh
+3,6,
+Yimo Han
+4, Hu Young Jeong
+3, YongJoo Kim
+11
+& Kibum Kang
+1,8
+The advanced patterning process is the basis of integration technology to
+realize the development of next-generation high-speed, low-power con-
+sumption devices. Recently, area-selective atomic layer deposition (AS-ALD),
+which allows the direct deposition of target materials on the desired area using
+a deposition barrier, has emerged as an alternative patterning process. How-
+ever, the AS-ALD process remains challenging to use for the improvement of
+patterning resolution and selectivity. In this study, we report a superlattice-
+based AS-ALD (SAS-ALD) process using a two-dimensional (2D) MoS2-MoSe2
+lateral superlattice as a pre-deﬁning template. We achieved a minimum half
+pitch size of a sub-10 nm scale for the resulting AS-ALD on the 2D superlattice
+template by controlling the duration time of chemical vapor deposition (CVD)
+precursors. SAS-ALD introduces a mechanism that enables selectivity through
+the adsorption and diffusion processes of ALD precursors, distinctly different
+from conventional AS-ALD method. This technique facilitates selective
+deposition even on small pattern sizes and is compatible with the use of highly
+reactive precursors like trimethyl aluminum. Moreover, it allows for the
+selective deposition of a variety of materials, including Al2O3, HfO2, Ru, Te, and
+Sb2Se3.
+Area-selective atomic layer deposition (AS-ALD) induces material
+deposition on the desired area by pre-deﬁning a surface with different
+chemical activities1–5. The general procedure in preparing the pre-
+deﬁned template for the conventional AS-ALD (CAS-ALD) is patterning
+a chemically inert barrier material using a top-down approach, which
+can prevent the chemisorption and subsequent reaction of ALD pre-
+cursors on the substrates, leading to selective deposition on areas in
+which the barrier is absent1–3 (see Supplementary Note 1 for more
+details).
+Interestingly, we observed AS-ALD on a two-dimensional (2D)
+MoS2-MoSe2 lateral superlattice as a patterning template. The 2D
+superlattice-based AS-ALD (SAS-ALD) is fundamentally different from
+the CAS-ALD. First, the length scale of the pattern fabricated by SAS-
+ALD can potentially overcome the fundamental resolution limit in the
+CAS-ALD. In the growth of 2D van der Waals materials, such as MoS2
+and graphene, lateral growth can occur as a result of the nature of the
+crystal structure6–10. With this phenomenon, the lateral superlattice of
+2D transition metal dichalcogenides (TMDs) has been demonstrated
+by supplying the precursors sequentially in the chemical vapor
+deposition (CVD) process11–13, in which the width of superlattice can be
+controlled precisely with duration time of the precursors. Therefore,
+the
+2D
+superlattice
+offers
+an
+ultra-high-resolution
+pre-deﬁned
+Received: 9 November 2023
+Accepted: 22 February 2024
+Check for updates
+A full list of afﬁliations appears at the end of the paper.
+e-mail: cjyjee@korea.ac.kr; kibumkang@kaist.ac.kr
+Nature Communications|   (2024) 15:2138 
+1
+1234567890():,;
+1234567890():,;
+
+[Page 2]
+template for selective deposition, and the resulting pattern is not
+limited to optical diffraction and can be improved further to the
+atomic scale. Second, the mechanism of SAS-ALD is distinct from that
+of CAS-ALD. While CAS-ALD is mainly governed by chemisorption and
+reaction1–4, physisorption of precursors on the surface of the barrier
+material is hard to completely avoid, as some undesired depositions
+happen due to intermolecular interactions such as London, Debye, and
+Keesom forces1–3,14. Furthermore, small and reactive precursors such as
+trimethyl aluminum (TMA) can penetrate barrier materials, making it
+difﬁcult to achieve highly selective deposition15–20. By contrast, in SAS-
+ALD, chemical reaction between the precursor and substrate is pre-
+vented on both surfaces of MoS2 (blocking area) and MoSe2 (deposi-
+tion area); this is due to the crystal structure of MoS2 and MoSe2, in
+which the chemically unsaturated dangling bond does not exist, thus
+providing a chemically inert surface for ALD14,21–24. Instead of chemi-
+sorption, the selective deposition on the 2D superlattice originates
+from the physisorption and diffusion of ALD precursors. Therefore, in
+SAS-ALD, even when using highly reactive ALD precursors, remarkable
+selectivity can be achieved, and selective deposition is valid in very
+narrow patterns. In this report, we analyzed the mechanism of SAS-
+ALD which is mainly caused by physisorption difference and diffusion
+of precursors.
+Results
+Superlattice-based AS-ALD
+Figure 1 shows the entire process of SAS-ALD, which consists of a CVD
+step for lateral superlattice growth (fabrication of the AS-ALD tem-
+plate) and a following ALD step for selective deposition on the
+superlattice. Figure 1a schematically explains the growth of a mono-
+layer MoS2 (yellow)-MoSe2 (red) lateral superlattice through the CVD
+process, supplying diethyl sulﬁde (DES) and dimethyl selenide (DMSe)
+alternatively in gas-phase (see Methods for the details). Figure 1b
+shows a representative scanning electron microscopy (SEM) image of
+the lateral superlattice, which has the MoS2 region (dark gray) and the
+MoSe2 region (light gray). By controlling the ﬂow of gas-phase pre-
+cursors, we can make a superlattice with varying pitch sizes within a
+single ﬂake (Supplementary Fig. 1a–c). Each MoS2 and MoSe2 region
+can have widths ranging from 10 nm to hundreds of nm. More detailed
+characterizations of each region can be found in Supplementary Fig. 1d
+and Supplementary Note 2. Figure 1c schematically shows that the
+target material is selectively deposited on the MoSe2 region but not on
+the MoS2 region after the conventional ALD process. We used the AS-
+ALD target materials, such as Al2O3, HfO2, Ru, Sb2Se3, and Te (Fig. 1c,
+blue), as shown in Supplementary Fig. 2. Figure 1d is a representative
+SEM image taken after Al2O3 deposition by thermal ALD on the MoS2-
+MoSe2 lateral superlattice. The white areas are selectively deposited
+Al2O3 on MoSe2, and the black areas are MoS2 with nothing on them.
+Below, we describe the line pattern control (Fig. 2), initial deposition
+site of SAS-ALD (Fig. 3), and mechanism of SAS-ALD (Fig. 4).
+Characterization and controllability of SAS-ALD
+Figure 2a shows the atomic force microscopy (AFM) images of the
+structure in which Al2O3 is selectively deposited on the MoS2-MoSe2
+lateral superlattice grown on a Si/SiO2 (300 nm) substrate. We use
+TMA and H2O as ALD precursors, and the deposition temperature is
+170 °C (see “Methods” for the details). Through three-dimensional til-
+ted and top view images (Fig. 2a; top, middle), we conﬁrmed that Al2O3
+is selectively deposited with a 70 nm width and a 120 nm pitch size. The
+height proﬁle (Fig. 2a; bottom) shows that the Al2O3 thickness is about
+10 nm. The structure can also be identiﬁed with a tilted SEM image
+(Supplementary Fig. 3a). Figure 2b shows a cross-section high-angle-
+annular-dark-ﬁeld
+scanning
+transmission
+electron
+microscopy
+(HAADF-STEM) image of the structure, which is similar to thatshown in
+Fig. 2a but with a narrower width (~ 25 nm). Al2O3 is periodically and
+selectively deposited on the monolayer MoS2-MoSe2 lateral super-
+lattice. A cross-section energy dispersive X-ray spectroscopy (EDS)
+a
+b
+c
+d
+MoSe2
+MoS2
+Al2O3, Ru, Sb2Se3, Te, etc.
+Before
+ALD
+After
+ALD
+MoSe2
+MoS2
+Al2O3 on MoSe2
+MoS2
+ALD
+Fig. 1 | Superlattice-based area-selective atomic layer deposition (SAS-ALD)
+process. Schematic (a) and scanning electron microscopy (SEM) image (b) of the
+monolayer MoS2-MoSe2 lateral superlattice by chemical vapor deposition (CVD)
+process with diethyl sulﬁde (DES) and dimethyl selenide (DMSe). c Schematic for
+SAS-ALD on MoSe2 region of lateral superlattice. The deposited materials can be
+Al2O3, HfO2, Ru, Sb2Se3, and Te. d SEM image after Al2O3 SAS-ALD on the MoS2-
+MoSe2 lateral superlattice. Scale bar for (b) and (d), 1 μm.
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+2
+
+[Page 3]
+mapping image in Fig. 2c shows that aluminum atoms are detected on
+a selenium rich-region (right, MoSe2) but not on a sulfur-rich region
+(left, MoS2), which indicates that Al2O3 is selectively deposited on the
+MoSe2 region only. Additionally, the interface between Al2O3 and
+MoSe2 is clean, and the aluminum oxide exhibits valid bandgap values
+(see Supplementary Note 8).
+Because of lateral growth, a crystallographic phenomenon
+exhibited by 2D materials, our SAS-ALD technique allows nanoscale
+control over the width of the patterning template (lateral superlattice)
+by adjusting the duration time of the gas-phase chalcogen precursors.
+Figure 2d–h shows line pattern controllability by adjusting the width of
+the superlattice. It is possible to form a uniform line pattern of Al2O3
+spanning a few micrometers (Fig. 2d) and control the width and pitch
+size of the patterns (Fig. 2e–h). Figures 2e and 2f have the same pitch
+size (~57 nm) but different width sizes of Al2O3, 15 nm in Fig. 2e and
+48 nm in Fig. 2f. Figures 2g and 2h have the same width size of Al2O3
+(~ 45 nm) but different pitch sizes, 155 nm in Fig. 2g and 70 nm in
+Fig. 2h. In addition, Supplementary Fig. 3d shows patterns with the
+same pitch size (~96 nm) but with reversed width/space ratios (1:2 and
+2:1). Supplementary Fig. 3e describes various width/space ratios ran-
+ging from 0.25 to 13. The minimum pitch size of the Al2O3 pattern is
+19.7 nm (width ~ 16 nm), as shown in Supplementary Fig. 3f. Further-
+more, in SAS-ALD, selectivity is maintained up to 15 nm of Al2O3
+thickness (Supplementary Fig. 3b). From the above data, SAS-ALD can
+control various line patterns of target material with uniformity and
+high selectivity. The line patterns in SAS-ALD can be controlled
+diversely within a single ﬂake (Fig. 2a–h), but the orientation between
+ﬂakes is not aligned. Typically, as shown in Fig. 2i, lateral superlattices
+grown on a Si/SiO2 substrate have different directions, resulting in
+randomly oriented Al2O3 line patterns, as conﬁrmed in the Fast Fourier
+Transform (FFT) image. In contrast, when utilizing a c-plane sapphire
+substrate, which facilitates the epitaxial growth of TMDs, the orienta-
+tions of lateral superlattice ﬂakes can be aligned, allowing for direc-
+tional alignment of Al2O3 line patterns, as seen in Fig. 2j. Figure 2k
+presents AFM analysis for Fig. 2j, showing the selective deposition of
+1 nm Al2O3 on the epitaxial lateral superlattice ﬁlm. Lastly, the Al2O3
+SAS-ALD is possible not only for the MoS2-MoSe2 lateral superlattice
+mentioned above but also for a WS2-WSe2 lateral superlattice. The
+WS2-WSe2 superlattice was conﬁrmed through Raman spectroscopy
+and SEM images (Supplementary Fig. 19a–c), and the Al2O3 was
+selectively deposited on the WSe2 regions (Supplementary Fig. 19d).
+Throughout Figs. 1, 2, we provide experimental evidence con-
+ﬁrming the selective ALD occurring speciﬁcally on the MoSe2 region
+within the MoS2-MoSe2 lateral superlattice. This phenomenon of
+selectivity occurring on the basal planes of a 2D material with a non-
+dangling bond is totally different from the CAS-ALD, in which selec-
+tivity arises from the chemical reaction of the surface. In order to
+examine the mechanism of SAS-ALD, we analyzed the initial nucleation
+sites where deposition primarily occurs (Fig. 3) and performed rele-
+vant simulations (Fig. 4).
+100 nm
+20 nm
+Al
+Se
+S
+O
+Mo
+c
+300 nm
+d
+MoS2
+MoSe2
+Al2O3
+b
+20 nm
+SiO2
+0
+nm
+nm
+0
+5
+10
+100
+200
+300
+400
+500
+0
+60
+120
+180
+nm
+100 nm
+Height (nm)
+11
+0
+a
+0
+100
+200
+300
+400
+500
+0
+2
+4
+6
+8
+10
+Height (nm)
+Distance (nm)
+e
+100 nm
+200 nm
+200 nm
+Height (nm)
+10
+0
+1
+0
+Height (nm)
+Distance (nm)
+0
+200
+400
+2 μm
+Crystalline sapphire substrate
+Aligned
+2 μm
+Amorphous SiO2 substrate
+FFT
+Random
+2 μm
+i
+k
+f
+g
+h
+j
+Fig. 2 | Characterization of Al2O3 SAS-ALD on MoS2-MoSe2 lateral superlattice.
+a Atomic force microscopy (AFM) images of the structure after Al2O3 ALD on the
+monolayer lateral superlattice, which are displayed in a 3D tilted view (top), top
+view (middle), and height proﬁle (bottom). Cross-section high-angle-annular-dark-
+ﬁeld scanning transmission electron microscopy (HAADF-STEM) (b) and energy
+dispersive X-ray spectroscopy (EDS) mapping (c) images of the SAS-ALD structure,
+which show periodic and selective deposition of Al2O3. SEM images of uniform line
+pattern (d) and patterns with various width-space scales (e-h). SEM images of Al2O3
+SAS-ALD on amorphous Si/SiO2 (i) and c-plane sapphire (j) substrate. The inset
+images are the Fast Fourier Transform (FFT) data. k AFM image of SAS-ALD
+structure with epitaxial lateral superlattice. The below graph shows the height
+proﬁle of white dotted line in the AFM image.
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+3
+
+[Page 4]
+Initial nucleation sites in SAS-ALD
+Figure 3h schematically represents a SAS-ALD process comprised of
+before ALD, initial nucleation, and after merging steps. Before ALD,
+periodic ripple structure forms within the MoSe2 region of the lateral
+superlattice, as shown in Supplementary Fig. 1e. Figure 3a shows a SEM
+image of a lateral superlattice with 15 Al2O3 ALD cycles, in which the
+light gray region shows Al2O3 deposited on MoSe2 and the dark region
+shows MoS2 without any deposition. Initial nucleation of Al2O3 forms
+islands, with each island nucleating periodically in the x-direction
+(under 20 nm in periodicity). When 60 ALD cycles are performed, the
+Al2O3 islands fully merge, forming a continuous line, as shown in
+Fig. 3b. Interestingly, Al2O3 not only selectively deposits on the MoSe2
+region, but also exhibits preferential and periodic deposition at spe-
+ciﬁc sites within the MoSe2. Supplementary Fig. 4a–d show the SAS-
+ALD process in a lateral superlattice with a relatively wider MoSe2
+width. In this case, as shown in Supplementary Fig. 4a, large buckle
+structures of a few nanometers periodically form within the MoSe2
+region. In addition, in Supplementary Fig. 4b, periodic Al2O3 deposi-
+tion similar to Fig. 3a can be observed. A detailed explanation of the
+periodic deposition of Al2O3 is provided in Supplementary Note 3.
+The periodic deposition observed in Fig. 3a and Supplementary
+Fig. 4b closely resemble the periodicity of ripples and buckles in the
+lateral superlattice. To understand the inﬂuence of these structures,
+we conducted Molecular Dynamics (MD) simulations and 4D STEM
+measurements. Figures 3c and 3d show the z-directional height and
+strain mapping of the superlattice in MD simulation. In the z-height
+mapping (Fig. 3c), while the MoS2 region remains relatively ﬂat, the
+MoSe2 region is found to form repetitive ripples to relieve the
+compressive strain that results from coherent bonding with MoS2,
+which has a smaller lattice constant21. This ripple structure can be
+measured by AFM in Supplementary Fig. 1e. Importantly, in the
+strain mapping (Fig. 3d), a periodic compressive-tensile lattice strain
+exists in the MoSe2 region, aligning with the ripple structure. The
+strain in Supplementary Fig. 5a shows the average atomic strain
+100 nm
+After merging
+Initial nucleation
+Al2O3 on MoSe2
+MoS2
+x
+y
+200 nm
+MoSe2
+MoS2
+y
+y
+x
+x
+Lattice constant (Å)
+3.10
+3.15
+3.20
+3.25
+3.30
+200 nm
+x
+y
+Z-height
+40 nm
+MoSe2
+MoS2
+30Å
+– 30Å
+0
+Strain (xx)
+40 nm
+MoSe2
+MoS2
+Strain (yy)
+40 nm
+MoSe2
+MoS2
+Strain (%)
+5
+0
+– 5
+x
+y
+x
+y
+100 nm
+a
+b
+c
+d
+e
+Before ALD
+After merging
+Initial nucleation
+Al2O3
+MoSe2 Ripple
+MoS2
+e
+S
+o
+M
+nia
+rts
+o
+r
+e
+Z
+–
+t
+al
+F
+2 Crest – Tensile strain
+MoSe2 Valley – Compressive strain
+g
+h
+Strain (%)
+-4
+Normalized density
+-2
+0
+2
+4
+Compressive-strained 
+MoSe2
+Tensile-strained 
+MoSe2
+MoS2 density
+MoSe2 density
+Non-strained MoS2
+f
+MoS2
+TMA
+Fig. 3 | Periodic deposition of Al2O3 on MoSe2 region in SAS-ALD. SEM images of
+initial nucleation step with 15 ALD cycles (a), and after merging step with 60 ALD
+cycles (b) on MoS2-MoSe2 lateral superlattice. Periodic Al2O3 deposition (bright
+region) can be seen in (a). c, d Molecular dynamics (MD) simulation mapping
+images of the MoS2-MoSe2 lateral superlattice. The dotted lines are boundaries
+between MoS2 and MoSe2 regions. Z-height (c) and strain (d) periodically change in
+MoSe2 region. e Lattice constant mapping data of the lateral superlattice by
+electron microscope pixel array detector (EMPAD) 4D STEM. f The xx and yy
+averaged strain density plot of the lateral superlattice cell in MD simulation. Yellow
+(red) region is MoS2 (MoSe2) density. g Schematics of three surfaces in the lateral
+superlattice; non-strained MoS2, tensile-strained MoSe2 crest, and compressive-
+strained MoSe2 valley. The molecules on the surfaces are trimethyl aluminum
+(TMA). h Schematics for process of SAS-ALD. Initial nucleation of Al2O3 periodically
+occurs in MoSe2 region, and the Al2O3 islands are merged.
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+4
+
+[Page 5]
+tensor on S and Se atoms. The Se atoms near the crest of ripples are
+under tensile strain, whereas Se atoms near the valley are under
+compressive strain. The density plot for population of the xx and yy
+average strain is described in Fig. 3f. From the density plot, we ﬁnd
+that most strains on the MoS2 (yellow) are released, whereas the
+MoSe2 (red) gets both compressive and tensile strains. More infor-
+mation about strain mapping by MD simulation is provided in Sup-
+plementary Note 4. In addition, the STEM data of lattice constant
+mapping in Fig. 3e provide a rational explanation for the formation
+of the repetitive strain. In the x-directional lattice constant mapping
+of Fig. 3e, white vertical line regions exist within MoSe2, indicating
+the presence of periodic compressive strain sites (reduction in the
+lattice constant) in MoSe2. Based on the MD simulations and STEM
+measurements, the MoS2-MoSe2 lateral superlattice can be divided
+into three regions as shown in Fig. 3g: non-strained MoS2, tensile-
+strained MoSe2 crest, and compressive-strained MoSe2 valley. Fur-
+thermore, the periodic initial deposition on MoSe2 in SAS-ALD is
+closely related to this repetitive strain in the MoSe2 region.
+Mechanism of SAS-ALD
+To begin with, we examine the possible interactions and behaviors of
+ALD precursors in the lateral superlattice, prior to investigating the
+relation between the SAS-ALD process and periodic strain in the MoSe2
+region. Figure 4a schematically illustrates four representative pro-
+cesses (adsorption, diffusion, desorption, and dissociative reaction) of
+the ALD precursor (TMA) on the TMD. In CAS-ALD, a speciﬁc reaction
+can be considered as the key to selectivity, where the reaction rate
+between the ALD precursors and substrate is faster in deposition
+region than barrier region. However, our lateral superlattice, unlike
+conventional ALD substrates, lacks dangling bonds on the surface,
+rendering it chemically inert to direct reactions. Consequently, direct
+reactions are not expected to be the primary factor inﬂuencing
+selectivity. Indeed, we observe that the direct dissociative reaction of
+TMA to the TMD surface is highly endothermic on both areas of the
+superlattice surface (1.59 eV in MoS2, 2.03 eV in MoSe2, see Supple-
+mentary Table 1). In the reaction of H2O, the energies are more
+unstable (5.09 eV in MoS2, 5.22 eV in MoSe2). Additionally, the
+(i) Diffusion of adsorbed TMAs
+(ii) TMA reacts with H2O
+(iii) Intermediates encounter at basin
+(iv) Growth & Nucleation at basin
+Se-Se spacing
+TMA
+H2O
+CH4
+Al-O intermediate
+Al2O3
+Diffusion
+Adsorption
+TMA
+MoS2
+Desorption
+Reaction
+100 nm
+100 nm
+100 nm
+100 nm
+T = 200℃
+i
+T = 170℃
+T = 140℃
+T = 110℃
+100 nm
+400 nm
+W ~ 90nm
+W ~ 400nm
+Small W
+Large W
+j
+5
+.
+2
+5
+.
+2
+-
+Strain (%)
+10 nm
+3.6Ő1011
+9Ő1011
+Diff. rate (s-1)
+104.5
+105.5
+Desorp. rate (s-1)
+2Ő10-7
+1.2Ő10-6
+Norm. occupation
+4.3Ő10-8
+6Ő10-8
+Norm. occupation
+1Ő10-4
+8Ő10-4
+Norm. collision
+MoS2
+MoSe2
+Crest
+Valley
+Strain mapping
+Diffusion rate
+Fast
+diffusion
+Slow
+diffusion
+Desorption rate
+High
+desorption
+Low
+desorption
+10 nm
+10 nm
+10 nm
+10 nm
+10 nm
+Occupation (ads-des)
+Short
+residence
+Occupation (diff)
+High
+collision
+Low
+collision
+Collision heatmap
+Long
+residence
+Short
+residence
+Long
+residence
+Adsorption energy (eV)
+-0.66
+0.22
+Diffusion barrier (eV)
+Strain (%)
+-4
+MoS2 Eads
+MoSe2 Eads
+MoS2 Ediff
+MoSe2 Ediff
+Compressed MoSe2
+Non-strained MoS2
+Tensile MoSe2
+0.20
+0.18
+0.16
+0.14
+0.12
+0.10
+0.08
+-0.68
+-0.70
+-0.72
+-0.74
+-0.76
+-3
+-2
+-1
+0
+1
+2
+c
+a
+b
+k
+d
+e
+f
+g
+h
+Fig. 4 | SAS-ALD mechanism. a Schematics of TMA behaviors on 2D surface;
+adsorption, diffusion, desorption, and reaction. b Adsorption energy (green) and
+diffusion barrier (purple) plot of TMA molecule on MoS2 (ﬁlled dot) and MoSe2
+(empty dot) surface with varying strain. Red, yellow, and gray dotted lines mean
+compressive-strained MoSe2, non-strained MoS2, and tensile-strained MoSe2,
+respectively. Visualizations of strain (c), diffusion rate (d), desorption rate (e),
+occupation with adsorption-desorption mode (f), occupation with diffusion mode
+(g), and collision (h) of TMA on MoS2-MoSe2 lateral superlattice cell at T = 443 K
+obtained by kinetic Monte Carlo (kMC) simulation. The red (blue) square and circle
+regions are MoSe2 valley (crest) regions. SEM images of Al2O3 SAS-ALD with
+changing ALD temperature (i) and width scale of MoS2 region (j). k Schematics of
+diffusion effect in SAS-ALD mechanism.
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+5
+
+[Page 6]
+substantially higher endothermic reaction energy on MoSe2 than on
+MoS2 presents a contradiction to our SAS-ALD results.
+Given these points, the inﬂuence of defects in the superlattice
+must also be examined. Defects in TMDs can disrupt the surface
+inactivity of ALD precursors, therefore requiring consideration of this
+factor as well. In our case, the CVD-grown TMDs inevitably contain
+defect sites, primarily chalcogen vacancies, as shown in the HAADF-
+STEM images in Supplementary Fig. 1d. However, we observe that the
+density of defects does not exhibit periodicity in the MoSe2 region,
+suggesting that defects are not the primary factors controlling selec-
+tive deposition (Supplementary Note 2). Nevertheless, as defect sites
+can inﬂuence nucleation behavior, we included chalcogen vacancy
+sites in our investigation. Supplementary Table 1 provides a list of
+possible processes for ALD on the superlattice, along with the lowest
+energy conﬁgurations obtained for each process. We found that TMAs
+adsorb to the chalcogen top sites with adsorption energies of −0.67
+and −0.66 eV on MoSe2 and MoS2 surfaces, respectively. On chalcogen
+vacancies, the binding is signiﬁcantly weakened, measuring −0.48 eV
+for both TMD surfaces. This indicates that vacancies do not exhibit a
+stronger afﬁnity for TMA adsorption. The adsorption of H2O is rela-
+tively weak compared to TMA on the chalcogen top sites (−0.15 eV on
+MoS2 and MoSe2) and the chalcogen defect sites (−0.25 eV on Vs and
+−0.30 on VSe). However, we found that H2O adsorption on pre-
+adsorbed TMA exhibits stronger adsorption energies (−0.43 eV on
+MoSe2 and MoS2, see Supplementary Fig. 11). Additionally, the con-
+secutive reaction of the TMA-H2O complex shows a small activation
+energy (~ 0.34 eV) and a highly endothermic reaction energy
+(~ −0.94 eV), implying rapid reaction once such a complex form. This
+means that the H2O will follow the adsorption selectivity of TMA, not
+determining selective deposition itself. In terms of dissociative reac-
+tions between ALD precursors and chalcogen vacancy sites, the reac-
+tion energy of TMA is 1.09 eV on VS and 1.38 eV on VSe (Supplementary
+Table 1). In the case of H2O, the reaction energy is 1.22 eV on VS and
+1.29 eV on VSe. All of the dissociative reactions exhibit a very high
+energy level (1 ~ 2 eV), making them hard to occur easily. Importantly,
+even the dissociative reaction of ALD precursors at chalcogen vacancy
+sites is more favorable in MoS2 region than MoSe2 region, which
+contradicts our SAS-ALD results. Therefore, considering the distribu-
+tion of defects and the adsorption and reaction energies of the ALD
+precursors at the chalcogen vacancy sites, we can rule out the possi-
+bility that defects induce selective deposition in SAS-ALD. More
+detailed explanation of defect and reaction effects is provided in
+Supplementary Note 5.
+In contrast to CAS-ALD, the reactions of ALD precursors on the
+substrate or any defect sites are not the origin of the selectivity in SAS-
+ALD. Therefore, we need to analyze other behaviors of the precursors
+(Fig. 4a), and the ﬁrst one is adsorption. In Fig. 3, we conﬁrmed that the
+SAS-ALD is signiﬁcantly associated with the periodic strain in the
+MoSe2 region. We thus analyze the adsorption energy of TMA with
+respect to TMD’s lattice straining through DFT calculations. The green
+square dots in Fig. 4b represent the adsorption energy of TMA mole-
+cules as a function of strain on MoS2 (ﬁlled square) and MoSe2 (empty
+square). In both MoS2 and MoSe2, the adsorption energy of TMA sta-
+bilizes with increasing compressive strain. Supplementary Fig. 9 illus-
+trates the TMA adsorption energy on TMD surface with respect to the
+direction of strain, conﬁrming the stability of adsorption with com-
+pressive strain. When considering the three areas in Fig. 3g (MoS2 ﬂat,
+MoSe2 crest, and MoSe2 valley), the adsorption energy of TMA in the
+compressed MoSe2 valley region (red dotted square in Fig. 4b) is more
+than 60 meV stable than the other two areas. In addition, in the MoSe2
+valley, the adsorption energy of TMA can be further stabilized with
+curvature. Supplementary Fig. 10 shows the variation of TMA
+adsorption energy in MoSe2 planar and concave cell, conﬁrming a
+decrease in adsorption energy in the concave valley. In other words, it
+can be observed that TMAs bind more strongly to the sites in the
+compressively strained MoSe2 valley than in other regions of the lateral
+superlattice. This phenomenon is attributed to the fact that the
+interaction of TMA with the TMD is dominantly the van der Waals
+interaction, with denser/concave surfaces producing stronger inter-
+action. As such, the trends in adsorption energies holds for other AS-
+ALD materials, with the adsorption of the precursors being most stable
+in the compressed MoSe2 valley region (Supplementary Figs. 12 and 13.
+See more details in Supplementary Note 6).
+Through the above data, it was found that the TMA adsorption
+energy is lowest in the compressed MoSe2 valley region. However,
+relying solely on adsorption energy to explain the high selectivity of
+SAS-ALD may not provide a complete picture. As shown in Supple-
+mentary Fig. 15, when ALD is performed on a single MoS2 or MoSe2
+surface, the coverage of Al2O3 is higher on MoSe2 than MoS2 due to the
+difference in TMA adsorption energy. However, Al2O3 clearly deposits
+on the single MoS2 ﬂake. To explain the high selectivity of SAS-ALD,
+additional analysis of TMA diffusion was conducted. The purple tri-
+angle dot in Fig. 4b shows the TMA diffusion barrier on MoS2 (ﬁlled
+triangle) and MoSe2 (empty triangle) surface as obtained by Nudged
+Elastic Band (NEB) calculations. Similar to adsorption energy, the dif-
+fusion barrier of TMA tends to decrease with compressive strain on the
+TMD surface, and among the three regions in Fig. 3g, the compressed
+MoSe2 valley shows the lowest diffusion barrier of TMA ( ~ 0.09 eV, red
+dotted triangle in Fig. 4b). In other words, TMA is expected to have the
+most stable adsorption and also the lowest diffusion barrier in the
+MoSe2 valley area, making the statistical presence of precursors higher
+in this region.
+While it is apparent that DFT-calculated energies are in good
+agreement with experimental observations, one may point out that the
+changes in adsorption and diffusion energies are relatively small.
+However, even minor energetic differences can have profound impli-
+cations when examining kinetics on larger spatial and temporal scales.
+To quantify the extent of these differences, we implemented a
+straightforward kinetic Monte Carlo (kMC) simulation where TMAs
+adsorb/desorb, and diffuse on a small lateral superlattice generated via
+molecular dynamics. Figure 4c shows the xx, yy, and zz strain tensor
+average mapping of our simulation cell, showing periodic strain dis-
+tributions in the MoSe2 regions. The red square region represents the
+MoSe2 valley under compressive strain (orange). The cell conﬁguration
+and z-coordinate (z-height mapping) for the lateral superlattice can be
+seen in Supplementary Fig. 16a and b. Employing linear regression, we
+derived estimates for the diffusion (Fig. 4d) and desorption (Fig. 4e)
+rates of TMA across all surface sites on the lateral superlattice cell at
+T = 443 K. Surprisingly, asobserved in Fig. 4d, the diffusion rate of TMA
+is highest in the MoSe2 valley (red circle), approximately three times
+faster than in the MoSe2 crest (blue circle). In Fig. 4e, the desorption
+rate of TMA is the slowest in the MoSe2 valley (red circle), with the
+MoS2 region exhibiting desorption roughly ten times faster than the
+MoSe2 region. Supplementary Fig. 16c–e provide diffusion and deso-
+rption rates, as well as rate constants at T = 383, 413, 443, and 474 K. It
+can be observed that as the temperature increases, both diffusion and
+desorption rates generally become faster. Nevertheless, at all tem-
+peratures, it is evident that TMA diffusion is fastest and desorption is
+slowest in the MoSe2 valley area, suggesting a strong direct indication
+that TMA is more abundant and likely to collide more frequently in the
+MoSe2 valley region. Using our estimated rate constants, we con-
+ducted kMC simulations of a TMA pulse. Figure 4f and Fig. 4g present
+occupation heatmaps at T = 443 K, the normalized residence time of
+TMA molecules at speciﬁc sites by total simulation time. Figure 4f
+represents the adsorption-desorption mode, while Fig. 4g is the
+diffusion-only mode for TMA. Importantly, both of these occupation
+mappings conﬁrm the long residence of TMA in the MoSe2 valley area
+(red circle). In addition to TMA occupation, we also examined the
+frequency of collisions between TMA molecules at T = 443 K (Fig. 4h).
+The collision heatmap visualizes the number of TMA collisions
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+6
+
+[Page 7]
+occurring at each site during simulation, normalized by the total col-
+lision number. Since the diffusion of TMA molecules on the TMD
+surface is very rapid, the collision frequency of TMA can also serve as a
+good estimate of nucleation in SAS-ALD, given the structural simila-
+rities between the TMAs and the reactive single Al(OH)n(CH3)3-n
+intermediates. As evident in Fig. 4h, the MoSe2 valley region experi-
+ences the highest frequency of TMA collisions. In summary, the MoSe2
+valley region is predicted to have the highest TMA presence in terms of
+adsorption, diffusion, and desorption. Based on this calculation, the
+kMC simulations show the longest TMA residence and highest collision
+rate on the compressed MoSe2 valley area.
+The control experiments also provide evidence of the signiﬁcant
+roles played by TMA’s adsorption and diffusion in the SAS-ALD pro-
+cess. Figure 4i shows SEM images depicting the trends in Al2O3 AS-ALD
+with varying ALD temperatures. When the temperature is relatively
+high (200 and 170 °C), undesired deposition does not occur on the
+MoS2 region (black area). However, as the temperature decreases (140
+and 110 °C), Al2O3 deposition occurs on the MoS2 region as well. In
+other words, when the temperature is low, the selectivity in SAS-ALD
+diminishes. This phenomenon is expected to occur because as the
+temperature decreases, the distance that TMAs can move is reduced,
+resulting in many TMA molecules being present on the MoS2 region as
+well. In particular, as the temperature decreases, the coverage of TMA
+on the whole superlattice cell increases (Supplementary Fig. 17) and
+the collision rate of TMA on the cell also increases (Supplementary
+Fig. 18). This suggests that while TMA diffusion is quite fast, at lower
+temperatures, a signiﬁcant number of TMA molecules exist on the
+MoS2 region and form nucleation before desorbing or reaching the
+MoSe2 valley area, where more nucleates will be present. As a result, at
+lower ALD temperatures, the higher presence of TMA on the MoS2
+region, along with an increased frequency of collisions, leads to many
+undesired depositions. Such an explanation is also backed by the fact
+that the MoS2 width also shows strong correlation to undesired
+deposition. The MoS2 width is considered the distance over which
+TMA should diffuse for AS-ALD, and as the width of MoS2 increases,
+more TMAs fail to arrive at the MoSe2 valley, leading to increased
+undesired deposition on MoS2 region, as shown in Fig. 4j.
+Our ﬁndings conﬁrm that the SAS-ALD mechanism can be repre-
+sented by a complex interplay of various interactions, such as
+adsorption, diffusion, and desorption of ALD precursors on 2D TMD
+surfaces, with the compressed MoSe2 valley region identiﬁed as the
+primary site for deposition, as shown in Fig. 3h. The selectivity inherent
+in SAS-ALD cannot be attributed to reactions between TMA and the 2D
+TMD surfaces or to the presence of chalcogen vacancy sites (Supple-
+mentary Note 5). Instead, the selectivity is originated by the energeti-
+cally most stable adsorption (Fig. 4b) and the slowest desorption rates
+(Fig. 4e) in the MoSe2 valley region, leading to the highest con-
+centration of TMA. With respect to diffusion, the MoSe2 valley presents
+the lowest surface diffusion barrier for TMA, as shown in Fig. 4b,
+corresponding with the fastest diffusion rates in this region, as
+depicted in Fig. 4d. The kMC simulations support this, suggesting that
+TMA’s residence time is longest in the MoSe2 valley, as detailed in
+Figs. 4f and 4g, and collisions are most frequent in this area, as indi-
+cated in Fig. 4h. This evidence highlights AS-ALD mechanism within
+SAS-ALD, wherein diffusion plays a crucial role, as represented sche-
+matically in Fig. 4k.
+Discussion
+In conclusion, we have discovered AS-ALD process on the 2D lateral
+superlattice surfaces, which is predominantly governed by the
+adsorption and diffusion of ALD precursors. This distinctive selective
+deposition mechanism shows promise for application across a variety
+of materials, including Al2O3, HfO2, Ru, Sb2Se3, and Te. Additionally, by
+employing the lateral growth attributes of the superlattice as a selec-
+tive deposition template, we have successfully minimized the pattern
+size to a half-pitch of 10 nm and anticipate the potential to scale down.
+We also suggest that the combination of 2D superlattices with AS-ALD
+materials opens the way for fabricating intricate 2D/3D nanoscale
+electrical devices that were previously challenging to produce. For
+instance, TMD nanoribbon device can be easily fabricated with SAS-
+ALD structures (see Supplementary Note 9). Also, when using AS-ALD
+materials as gate oxide or metal contact for the underlying 2D semi-
+conductors, our 2D/3D structures can be implemented in advanced 2D
+devices such as short-channel device. To achieve this, it is necessary to
+conﬁrm and improve the characteristics of AS-ALD materials.
+Methods
+Chemical vapor deposition (CVD) of 2D monolayer lateral
+superlattice
+The monolayer MoS2-MoSe2 lateral superlattice was grown in a home-
+made horizontal hot-wall quartz tube, with MoO3 powder (99.95%, Alfa
+Aesar), diethyl sulﬁde (DES, Sigma Aldrich), and dimethyl selenide
+(DMSe, Alfa Aesar) as CVD precursors. The mixture powder of MoO3
+and KCl (Sigma Aldrich) was located near Si/SiO2 (300 nm) substrate,
+and chalcogen precursors (DES, DMSe) were injected in gas-phase for
+the width control of lateral superlattice. The ﬂow rate was controlled
+by the mass ﬂow controller (MFC). The growth temperature was
+650–700 °C, the growth time was 30–60 min, and the pressure is
+about 1 torr. After reaching the target temperature, chalcogen pre-
+cursors were injected alternatively using MFC, carried out in four
+steps. In the MoS2 growth step, Ar/DES (110/10 sccm) was injected with
+a duration time (Supplementary Fig. 1a, tS) of 10–300 s depending on
+the target MoS2 width. In the MoS2 purging step, the chalcogen ﬂow
+was turned off for 2–8 s (Supplementary Fig. 1a, tS,pur). In the MoSe2
+growth step, Ar/DMSe/H2 (110/10/2 sccm) was injected with a duration
+time (Supplementary Fig. 1a, tSe) of 10–300 s depending on the target
+MoSe2 width. In the MoSe2 purging step, the chalcogen ﬂow was
+turned off for 2–8 s (Supplementary Fig. 1a, tSe,pur). These four steps
+make up one cycle, and the number of cycles was set to the total
+growth time divided by a single cycle time. The width of MoS2 and
+MoSe2 can be controlled between ten to hundreds nm scale as shown
+by the examples of Supplementary Fig. 1b, c. For the epitaxial growth
+of the lateral superlattice, c-plane sapphire substrates were used, and
+the growth conditions were similar to those mentioned above. The
+monolayer WS2-WSe2 lateral superlattice was grown by metal organic
+chemical vapor deposition (MOCVD) with tungsten hexacarbonyl,
+DES, DMSe, sodium propionate, and oxygen. The growth temperature
+was 700–730 °C, the growth time was 2 h, and the pressure is under 0.1
+torr. The chalcogen precursors (DES and DMSe) were alternatively
+injected into the chamber, similar to the MoS2-MoSe2 case, with a
+constant ﬂow of tungsten hexacarbonyl.
+Atomic layer deposition (ALD) condition for superlattice-
+based AS-ALD
+The conventional thermal ALD was used to deposit oxides (Al2O3,
+HfO2). Al2O3 was deposited at 170 °C. Trimethyl aluminum (TMA) was
+used as an Al source, and H2O was used as an oxygen source. Pulse
+times of TMA and H2O were 0.2 s, and purge times were 10 s via Ar gas
+ﬂow of 100 sccm. HfO2 was deposited at 170 °C. Tetrakis (dimethyla-
+mido) hafnium (IV) was used as a Hf precursor and H2O was used as an
+oxygen source. Pulse time of Hf precursor and H2O was 1.1 s and 0.1 s,
+respectively, and purge time was 17 s via N2 gas ﬂow of 150 sccm. Ru
+was grown using Ru(C7H9)(C7H7O) and O2 as the Ru source and the
+reactant, respectively25. 500 sccm of Ar was used as both Ru precursor
+carrier gas and purge gas, and O2 ﬂow rate was ﬁxed at 500 sccm. The
+substrate temperature was maintained at 200 °C. 200 cycles of Ru ALD
+sequence including the following four steps, Ru injection (70 s), Ru
+purge (5 s), O2 injection (10 s), and O2 purge (5 s) were conducted.
+Sb2Se3 was deposited at the substrate temperature of 70 °C. The pre-
+cursors of Sb and Se were Sb(OC2H5)3 and [(CH3)3Si]2Se, respectively,
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+7
+
+[Page 8]
+and the precursors were carried into the process chamber with
+50 sccm of Ar gas. 200 sccm of Ar gas was used as purge gas and the
+substrate temperature was maintained at 70 °C. Sb2Se3 was formed by
+repeating 50 cycles of the following steps, Sb injection (2 s), Sb purge
+(5 s), Se injection (2 s), and Se purge (10 s). Te was deposited at 70 °C
+by using two precursors; BTMS-Te and Te(OEt)4, held at 40 and 50 °C,
+respectively. Each precursor, contained in a bubbler-type canister, was
+delivered with 50 sccm of Ar carrier gas.
+Characterization
+The monolayer MoS2-MoSe2 lateral superlattice and AS-ALD structure
+were measured using ﬁeld-emission SEM (FE-SEM, Hitachi S-4800).
+The surface morphology of the superlattices was conﬁrmed by AFM
+(NX10, Park systems) via contact and non-contact mode. In the contact
+mode, to prevent sample damage, we applied a very small force (~ 1 nN)
+at a low speed (~2 Hz). The TEM analysis was conducted in two dif-
+ferent views. For plan view sample preparation, we placed the quan-
+tifoil grid upside down such that the holey carbon ﬁlm surface was
+attached to the superlattice ﬂakes on a Si/SiO2 (300 nm) substrate.
+Then, a PDMS piece was placed on top of the grid and pressed down
+with an appropriate amount of force. Using a pipet, a drop of DI water
+was cast under the PDMS piece, then the ﬂake was detached from the
+Si/SiO2 (300 nm) substrate. For cross-section view sample preparation,
+the cross-sectional TEM samples were prepared using a focused ion
+beam (FIB, FEI Helios Nano Lab 450HP and Hitachi Triple Beam
+NX2000). TEM images and EDS spectrum were taken by a FEI Titan3 G2
+60–300 at an accelerating voltage of 200 kV for the cross-section view
+specimen and 80 kV for the plan view specimen. The optical properties
+of the lateral superlattices were analyzed by confocal Raman spec-
+troscopy (LabRAM ARAMIS) equipped with Ar ion continuous wave
+laser with 514.5 nm wavelength. The bandgap of aluminum oxide and
+superlattice ﬁlm were measured by UV-VIS spectrophotometer
+(Lambda 1050).
+EMPAD 4D STEM
+On top of monolayer MoS2-MoSe2 superlattice, A4 PMMA was spin-
+coated at 3000 RPM for 1 min. The edges of the substrate were scraped
+with a razor blade to expose the substrate surface, allowing for faster
+etching. The substrate was then ﬂoated onto a sodium hydroxide
+solution with a volume ratio of NaOH:H2O = 1:10. After being etched off
+by the solution, the PMMA ﬁlm with the superlattice ﬂakes was sepa-
+rated from the substrate. The ﬁlm was transferred to de-ionized (DI)
+water and cleaned three to four times to remove any residual solution,
+then ﬁshed out with a piece of copper sheet and air-dried. The desired
+region was cut off and loaded on the SiN grid window using a sharp
+tungsten probe mounted in a micromanipulator. To remove PMMA,
+the SiN grid was annealed in a CVD tube furnace at 150 sccm with a
+mixture gas of 90 % N2 and 10 % H2. The temperature was raised to
+400 °C, maintained at 400 °C for 1 h, and then cooled to room tem-
+perature. All 4D-STEM datasets were taken in the Thermo Scientiﬁc
+Titan Themis using an electron microscope pixel array detector
+(EMPAD)26. We used 300 kV and 80 kV for narrow junction and wide
+junction, respectively. A 0.5 mrad convergence angle was used for
+both junctions recording every points’ diffraction patterns. All the
+mappings were acquired by utilizing the center of mass calculations.
+Our previous work contains more experimental details27.
+MD simulation, DFT calculation, and kMC simulation
+All DFT calculations were performed using VASP (Vienna Ab-Initio
+Software Package) with the projector augmented wave method, using
+PBE functional for exchange-correlation28–30. Plane-wave cutoff energy
+of 520 eV was used for all calculations. Surface calculations were per-
+formed with Monkhorst-Pack sampling of kpoints (3×3×1) with a cell of
+30 Å in the z-axis for vacuum spacing, and relaxed until the force acting
+on each atom was under 0.02 eV/Å31. For all molecules and larger cells
+for adsorption of bigger ligands, gamma kpoint (1×1×1) was used. The
+effect of van der Waals force was considered using the D3 method with
+Becke-Jonson damping32,33. For the calculation of reaction and diffu-
+sion barriers, the CI-NEB method was used, optimizing the transition
+state until all forces on the TS are less than 0.02 eV/ Å34,35. The MLNEB
+and DyNEB algorithms were used for efﬁcient calculation36,37.
+DFT calculation of curved TMD surfaces matching that of the
+experimental length scale is computationally demanding, we simulate
+subsets of the 2D surface for relaxation. We ﬁrst generate a periodic
+55 × 1 MoSe2 corresponding to a wavelength of 182 Å in the x-axis,
+similar to the average wavelength of ripples found in MD simulations.
+We then compress the cell with varying x, y lattice compression (0, −2,
+−4, −6 %) and give sinusoidal amplitudes in the z-direction (0, 9, 12, 15,
+18, and 21 Å).From this initial structure, we take a 14 × 1 MoSe2 strip and
+apply vacuum in the x and z-direction, which generates Mo-edge and
+Se-edge at each x-ends. For realistic relaxation of the atoms at the
+middle of the TMD surface which retains the enforced lattice strain, at
+this stage, we ﬁx the Mo atoms at the edges to their initial position and
+optimize the geometry. From all lattice compression, we take the most
+stable cases to again take a subset of 9 repeating MoSe2 units at the
+center ([0,0], [−2,9], [−4,18], [−6,18], where the numbers in each square
+bracket denote the imposed lattice compression and the given initial
+amplitude, respectively), and enlarge the cell in the y-axis by 3 to
+obtain the ﬁnal 9×3 MoSe2 surfaces. On these surfaces, atoms of two
+MoSe2 units from both x-ends are ﬁxed to the initial conﬁguration, and
+the adsorption energy of TMA was calculated. At the edges, two
+repeating units of MoSe2 were clamped to their original positions
+before the cell was further relaxed. All vacuum has been set to be larger
+than 15 Å. K-points were set to be 1 × 5 × 1 and 1 × 3 × 1 for 14 × 1 MoSe2
+strip and 9×3 MoSe2 strip respectively. Molecular dynamics simulation
+was carried out using LAMMPS (ver. 17 Feb 2022), using modiﬁed
+Stillinger-Weber potentials developed for 2D TMDs38,39. To simulate
+strain arising from lattice mismatch in the lateral superlattice, we
+construct monolayer lateral MoS2-MoSe2 structures. Given that no
+substrate was included in the simulation, the monolayer was able to
+deform freely, potentially leading to conformations divergent from
+experimental observations. In order to minimize such deformations
+while retaining the effects of lattice mismatch, after energy mini-
+mization of the cell with the conjugate gradient method, NPT simula-
+tions were performed at a low temperature of 4.2 K and 1 bar pressure
+in x and y direction for 100 ps, as had been suggested to exclude the
+intervention of thermal deformation and drifting40,41. Although the low
+temperature inevitably excludes the effects of thermal expansion,
+prior computational studies have indicated that the difference in
+lattice expansion between MoS2 and MoSe2 is negligible (less than
+0.04 %) even at elevated temperatures of 500 K, thereby implying a
+minimal impact on strain properties42. The choice of temperature and
+timescale resulted in ripples with wavelength in the range of ~170 nm,
+which is consistent with experimental observations on the 1:1 size
+matched periodic slab with repetitive stripes of 40 nm and 100 nm
+MoSe2 and MoS2. Ovito was used for atomic strain analysis and
+visualization43. To obtain strain tensors, planar, unrelaxed cells with
+cell sizes corresponding to that of pure and energy-minimized MoSe2
+and MoS2 were used as reference structures.
+To set up the kinetic Monte-Carlo simulation, we recalculate
+adsorption energies and corresponding structures’ vibrational fre-
+quencies of TMA adsorption on the p(5×5) TMD surfaces, with 3 × 3 × 1
+kpoints, to obtain Gibbs free energies of adsorption and diffusion. The
+Gibbs free energies for adsorbates were obtained with the hindered
+translator/hindered rotor model, while the ideal gas model was used
+for the gas phase TMA as implemented in the Atomic Simulation
+Environment package (ASE)43,44. To estimate the adsorption energy
+and the hopping barrier at surface sites with arbitrary local strain, we
+use linear regression on our calculated data of four different strains on
+MoSe2 and MoS2. As calculation of values at the boundaries in the
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+8
+
+[Page 9]
+superlattice is costly, we use average of the two ﬁtted model (MoSe2
+and MoS2).
+For the calculation of rates, we follow the methods of outlined in
+Weckman et al.45. The adsorption rates for on arbitrary surface site can
+be calculated using the kinetic gas theory;
+kads,i = Pσ T,θ
+ð
+ÞAi=
+ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+2πmkbT
+
+
+q
+ð1Þ
+Where P,σ,Ai,m,kb and T are the pressure, surface area of a site,
+sticking probability, mass, Boltzmann constant, and temperature,
+respectively. As we do not consider coverage in our rate model, we set
+the σ to unity.
+The desorption rate is inversely proportional to the adsorption
+rate through Gibbs free energy of adsorption.
+ΔGads = kads,i=kdes,i
+ð2Þ
+Thus, we can obtain the desorption rates for a particular site given
+an estimate of ΔGads.
+The diffusion rate of TMA can be obtained from the following
+equation46.
+kdif f ,ij = f dif f ,TST
+i,j
+T
+ð Þ kBT=h
+
+
+exp ΔEdif f
+0,i,j =kBT
+
+
+ð3Þ
+and
+f dif f ,TST
+i,j
+T
+ð Þ = qvib
+TS,i,j=qvib
+i
+ð4Þ
+where h,ΔEdif f
+0i,j ,qvib
+TS,i,j and qvib
+i
+are the Planck constant and the zero-
+point energy corrected diffusion barrier from site i to j, and partition
+function at the transition state or site i, respectively. Generally, the pre-
+factor to the equation can be set to constant for diffusion, as they give
+negligible differences compared to the exponential term47, and we set
+this to 1×1013.
+Using the obtained reaction rates, we conduct lattice kinetic
+Monte-Carlo
+simulation
+using
+the
+Bortz-Kalos-Lebowitz
+(BKL)
+algorithm48. In execution of the code, we run an adsorption and des-
+orption only simulation for 300000 steps (corresponding to ~25 ms)
+to equilibrate the surface coverage. Then we run 700000 steps con-
+sidering only the ﬁrst-neighbor hop diffusion reactions, where we
+measure the adsorbate collision frequencies. For more information on
+the model setup, refer to Supplementary Note 7.
+Device fabrication
+The MoSe2 NRFET was fabricated using Al2O3 SAS-ALD structure on a
+Si/SiO2 (90 nm) substrate, which is used as a global back gate. The
+source and the drain electrodes were patterned by electron-beam
+lithography, and the contact metal of Cr/Au (10/40 nm) was deposited
+by electron-beam evaporator. Subsequently, the MoSe2 nanoribbon
+was deﬁned using the reactive ion etching (RIE) process (Ar plasma,
+1 min) on the SAS-ALD structure, where the Al2O3 serves as a hard mask
+for dry etching. For Al2O3 encapsulation layer, ALD process was fol-
+lowed to deposit 30 nm Al2O3 at 150 °C. Electrical characterization was
+performed using Keithley 4200A-SCS parameter analyzer.
+Data availability
+The Source Data underlying the ﬁgures of this study are available with
+the paper. All raw data generated during the current study are available
+from the corresponding authors upon request. Source data are pro-
+vided with this paper.
+Code availability
+The code and the baseline simulation cell used for our custom lattice
+kinetic Monte Carlo simulation is available in zenodo data repository49
+under accession code https://doi.org/10.5281/zenodo.10682150.
+References
+1.
+Bobb-Semple, D., Nardi, K. L., Draeger, N., Hausmann, D. M. & Bent,
+S. F. Area-selective atomic layer deposition assisted by self-
+assembled monolayers: a comparison of Cu, Co, W, and Ru. Chem.
+Mater. 31, 1635–1645 (2019).
+2.
+Parsons, G. N. & Clark, R. D. Area-selective deposition: funda-
+mentals, applications, and future outlook. Chem. Mater. 32,
+4920–4953 (2020).
+3.
+Mackus, A. J. M., Merkx, M. J. M. & Kessels, W. M. M. From the
+bottom-up: Toward area-selective atomic layer deposition withhigh
+selectivity. Chem. Mater. 31, 2–12 (2019).
+4.
+Cao, K., Cai, J. & Chen, R. Inherently selective atomic layer
+deposition and applications. Chem. Mater. 32, 2195–2207 (2020).
+5.
+Kim, K. et al. Selective metal deposition at graphene line defects by
+atomic layer deposition. Nat. Commun. 5, 4781 (2014).
+6.
+Kang, K. et al. High-mobility three-atom-thick semiconducting ﬁlms
+with wafer-scale homogeneity. Nature 520, 656–660 (2015).
+7.
+Li, T. et al. Epitaxial growth of wafer-scale molybdenum disulﬁde
+semiconductor single crystals on sapphire. Nat. Nanotechnol. 16,
+1201–1207 (2021).
+8.
+Zhang, Z. et al. Endoepitaxial growth of monolayer mosaic hetero-
+structures. Nat. Nanotechnol. 17, 493–499 (2022).
+9.
+Li, X., Cai, W., Colombo, L. & Ruoff, R. S. Evolution of graphene
+growth on Ni and Cu by carbon isotope labeling. Nano Lett 9,
+4268–4272 (2009).
+10.
+Ling, X. et al. Parallel stitching of 2D materials. Adv. Mater. 28,
+2322–2329 (2016).
+11.
+Xie, S. et al. Coherent, atomically thin transition-metal dichalco-
+genide superlattices with engineered strain. Science 359, 1131–1136
+(2018).
+12.
+Sahoo, P. K., Memaran, S., Xin, Y., Balicas, L. & Gutierrez, H. R. One-
+pot growth of two-dimensional lateral heterostructures via
+sequential edge-epitaxy. Nature 553, 63–67 (2018).
+13.
+Duan, X. et al. Lateral epitaxial growth of two-dimensional layered
+semiconductor heterojunctions. Nat. Nanotechnol. 9, 1024–1030
+(2014).
+14.
+Zhang, H. et al. Nucleation and growth mechanisms of Al2O3 atomic
+layerdeposition on synthetic polycrystalline MoS2. J. Chem. Phys.
+146, 052810 (2017).
+15.
+Oh, I.-K., Sandoval, T. E., Liu, T.-L., Richey, N. E. & Bent, S. F. Role of
+precursor choice on area-selective atomic layer deposition. Chem.
+Mater. 33, 3926–3935 (2021).
+16.
+Seo, S. et al. Reaction mechanism of area-selective atomic layer
+deposition for Al2O3 nanopatterns. ACS Appl. Mater. Interfaces 9,
+41607–41617 (2017).
+17.
+Xu, W. et al. Functionalization of the SiO2 surface with aminosilanes
+to enable area-selective atomic layer deposition of Al2O3. Langmuir
+38, 652–660 (2022).
+18.
+Kim, H. G. et al. Effects of Al precursors on deposition selectivity of
+atomic layer deposition of Al2O3 using ethanethiol inhibitor. Chem.
+Mater. 32, 8921–8929 (2020).
+19.
+Khan, R. et al. Area-aelective atomic layer deposition using Si pre-
+cursors as inhibitors. Chem. Mater. 30, 7603–7610 (2018).
+20. Sampson, M. D., Emery, J. D., Pellin, M. J. & Martinson, A. B. F.
+Inhibiting metal oxide atomic layer deposition: beyond zinc oxide.
+ACS Appl. Mater. Interfaces 9, 33429–33436 (2017).
+21.
+Park, T. et al. Atomic layer deposition of Al2O3 on MoS2, WS2, WSe2,
+and h-BN: surface coverage and adsorption energy. RSC Adv 7,
+884–889 (2017).
+22. McDonnell, S. et al. HfO2 on MoS2 by atomic layer deposition:
+adsorption mechanisms and thickness scalability. ACS Nano 7,
+10354–10361 (2013).
+23. Vervuurt, R. H. J., Kessels, W. M. M. E. & Bol, A. A. Atomic layer
+deposition for graphene device integration. Adv. Mater. Interfaces
+4, 1700232 (2017).
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+9
+
+[Page 10]
+24. Lee, H. B., Baeck, S. H., Jaramillo, T. F. & Bent, S. F. Growth of Pt
+nanowires by atomic layer deposition on highly ordered pyrolytic
+graphite. Nano Lett 13, 457–463 (2013).
+25. Oh, S. H. et al. Atomic layer deposition of Ru thin ﬁlm using a newly
+synthesized precursor with open-coordinated ligands. Adv. Mater.
+Interfaces 10, 2202445 (2023).
+26. Tate, M. W. et al. High dynamic range pixel array detector for
+scanning transmission electron microscopy. Micros. Microanal. 22,
+237–249 (2016).
+27.
+Han, Y. et al. Strain mapping of two-dimensional heterostructures
+with subpicometer precision. Nano Lett 18, 3746–3751 (2018).
+28. Kresse, G. & Furthmüller, J. Efﬁciency of ab-initio total energy cal-
+culations for metals and semiconductors using a plane-wave basis
+set. Comput. Mater. Sci. 6, 15–50 (1996).
+29. Kresse, G. & Furthmuller, J. Efﬁcient iterative schemes for ab initio
+total-energy calculations using a plane-wave basis set. Phys. Rev. B
+Condens. Matter 54, 11169–11186 (1996).
+30. Perdew, J. P., Burke, K. & Ernzerhof, M. Generalized gradient
+approximation made simple. Phys. Rev. Lett. 77, 3865–3868 (1996).
+31.
+Monkhorst, H. J. & Pack, J. D. Special points for Brillouin-zone
+integrations. Phys. Rev. B 13, 5188–5192 (1976).
+32. Grimme, S., Antony, J., Ehrlich, S. & Krieg, H. A consistent and
+accurate ab initio parametrization of density functional dispersion
+correction (DFT-D) for the 94 elements H-Pu. J. Chem. Phys. 132,
+154104 (2010).
+33. Grimme, S., Ehrlich, S. & Goerigk, L. Effect of the damping function
+in dispersion corrected density functional theory. J. Comput. Chem
+32, 1456–1465 (2011).
+34. Henkelman, G., Uberuaga, B. P. & Jónsson, H. A climbing image
+nudged elastic band method for ﬁnding saddle points and mini-
+mum energy paths. J. Chem. Phys. 113, 9901–9904 (2000).
+35. Henkelman, G. & Jónsson, H. Improved tangent estimate in the
+nudged elastic band method for ﬁnding minimum energy paths
+and saddle points. J. Chem. Phys. 113, 9978–9985 (2000).
+36. Lindgren, P., Kastlunger, G. & Peterson, A. A. Scaled and dynamic
+optimizations of nudged elastic bands. J. Chem. Theory Comput. 15,
+5787–5793 (2019).
+37. Garrido Torres, J. A., Jennings, P. C., Hansen, M. H., Boes, J. R. &
+Bligaard, T. Low-Scaling Algorithm for Nudged Elastic Band Cal-
+culations Using a Surrogate Machine Learning Model. Phys. Rev.
+Lett. 122, 156001 (2019).
+38. Thompson, A. P. et al. LAMMPS - a ﬂexible simulation tool for
+particle-based materials modeling at the atomic, meso, and con-
+tinuum scales. Comput. Phys. Commun. 271, 108171 (2022).
+39. Stillinger, F. H. & Weber, T. A. Computer simulation of local order in
+condensed phases of silicon. Phys. Rev. B Condens. Matter 31,
+5262–5271 (1985).
+40. Jiang, J. W. Parametrization of Stillinger-Weber potential based on
+valence force ﬁeld model: application to single-layer MoS2 and
+black phosphorus. Nanotechnology 26, 315706 (2015).
+41.
+Jiang, J.-W. Misﬁt strain-induced buckling for transition-metal
+dichalcogenide lateral heterostructures: a molecular dynamics
+study. Acta Mechanica Solida Sinica 32, 17–28 (2018).
+42. Çakır, D., François, M. P. & Sevik, C. Mechanical and thermal prop-
+erties of h-MX2 (M = Cr, Mo, W; X = O, S, Se, Te) monolayers: A
+comparative study. Appl. Phys. Lett. 104, 203110 (2014).
+43. Bahn, S. R. & Jacobsen, K. W. An object-oriented scripting interface
+to a legacy electronic structure code. Comput. Sci. Eng. 4,
+56–66 (2002).
+44. Larsen, A. H. et al. The atomic simulation environment—a Python
+library for working with atoms. J. Phys.: Condens. Matter 29,
+273002 (2017).
+45. Weckman, T. & Laasonen, K. First principles study of the atomic
+layer deposition of alumina by TMA–H2O-process. Phys. Chem.
+Chem. Phys. 17, 17322–17334 (2015).
+46. Andersen, M., Panosetti, C. & Reuter, K. A practical guide to surface
+kinetic Monte Carlo simulations. Front. Chem. 7, 202 (2019).
+47. Sholl, D. Calculating rates of chemical processes using transition
+state theory. in Density Functional Theory 131–161 (Wiley). https://
+doi.org/10.1002/9780470447710.ch6 (2009).
+48. Bortz, A. B., Kalos, M. H. & Lebowitz, J. L. A new algorithm for Monte
+Carlo simulation of Ising spin system. J. Comput. Phys. 17,
+10–18 (1975).
+49. Park, J. et al. Area-selective atomic layer deposition on 2D monolayer
+lateral superlattices [code], SJayKwak/superlatticekMC: super-
+latticekMC.v1.0.0, https://doi.org/10.5281/zenodo.10682151, (2024).
+Acknowledgements
+This research was primarily supported by National R&D Program through
+the National Research Foundation of Korea (NRF) funded by Ministry of
+Science and ICT (2022M3H4A1A01013228). Additional funding was
+provided by the National R&D Program through the National Research
+Foundation of Korea (NRF) funded by Ministry of Science and ICT
+(2022M3H4A1A01010325, 2020M3D1A1110659, 2020R1C1C1011219,
+2021M3H4A6A01041234, 2021M3F3A2A01037738,
+2022M3F3A2A01072215, RS-2023-00258309, and 2021M3D1A20-
+45614). B.S. and Y.H. acknowledge the support from Welch Foundation
+(C-2065-20210327).
+Author contributions
+K.K and J.P conceived the project. J.P performed lateral superlattice
+growth by CVD, epitaxial growth, oxide AS-ALD, SEM, and AFM mea-
+surements. Y.K, S.-J.K, W. K and W.-B.L analyzed the mechanism by MD,
+DFT, and kMC simulation. S.Kang made NRFET device and analyzed
+electrical properties. H.-Y.J and S.O performed the TEM, STEM, EDS
+measurements, and Y.H, B.S, C.S, and J.Lou performed 4D EMPAD STEM
+measurements. G.N and J.-Y.K performed HfO2 ALD. J.S, C.K, and N.H
+performed Te ALD. T.E, T.-M.C, H.P, and S.-H.O performed Sb2Se3, Ru
+ALD. H.Y and Y.L analyzed AFM measurements. T.-S.K assisted in CVD
+setup and discussion. H.-J.C assisted in ALD process. J.Lee analyzed
+optical property by UV-VIS. M.K assisted in AFM measurements. S.Kwon
+and E.M provided constructive suggestions. K.K and Y.K supervised this
+project. All authors contributed to the writing of the manuscript.
+Competing interests
+The authors declare no competing interests.
+Additional information
+Supplementary information The online version contains
+supplementary material available at
+https://doi.org/10.1038/s41467-024-46293-w.
+Correspondence and requests for materials should be addressed to
+YongJoo Kim or Kibum Kang.
+Peer review information : Nature Communications thanks Rong Chen
+and the other, anonymous, reviewer for their contribution to the peer
+review of this work. A peer review ﬁle is available.
+Reprints and permissions information is available at
+http://www.nature.com/reprints
+Publisher’s note Springer Nature remains neutral with regard to jur-
+isdictional claims in published maps and institutional afﬁliations.
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+10
+
+[Page 11]
+Open Access This article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons licence, and indicate if
+changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless
+indicated otherwise in a credit line to the material. If material is not
+included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted
+use, you will need to obtain permission directly from the copyright
+holder. To view a copy of this licence, visit http://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2024
+1Department of Materials Science and Engineering, Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Republic of Korea. 2School of
+Chemical and Biological Engineering and Institute of Chemical Processes, Seoul National University (SNU), Seoul, Republic of Korea. 3Graduate School of
+Semiconductor Materials and Devices Engineering, Ulsan National Institute of Science and Technology (UNIST), Ulsan, Republic of Korea. 4Department of
+Materials Science and NanoEngineering, Rice University, Houston, TX, USA. 5Center for Neuromorphic Engineering, Korea Institute Science and Technology
+(KIST), Seoul, Republic of Korea. 6Department of Materials Science and Engineering, Ulsan National Institute of Science and Technology (UNIST),
+Ulsan, Republic of Korea. 7Division of Advanced Materials, Korea Research Institute of Chemical Technology (KRICT), Daejeon, Republic of Korea. 8Graduate
+School of Semiconductor Technology, Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Republic of Korea. 9Department of Electronic
+and Electrical Engineering, Ewha Womans University, Seoul,Republic of Korea. 10Department of Physics, Korea Advanced Institute of Science and Technology
+(KAIST), Daejeon, Republic of Korea. 11Department of Materials Science and Engineering, Korea University, Seoul, Republic of Korea. 12These authors
+contributed equally: Jeongwon Park, Seung Jae Kwak, Sumin Kang.
+e-mail: cjyjee@korea.ac.kr; kibumkang@kaist.ac.kr
+Article
+https://doi.org/10.1038/s41467-024-46293-w
+Nature Communications|   (2024) 15:2138 
+11

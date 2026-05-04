@@ -1,0 +1,3333 @@
+# nil_review_2025_lin
+# Extracted from: nil_review_2025_lin.pdf
+# Total PDF pages: 29
+# Page numbering: from PDF page labels
+# ============================================================
+
+
+[Page 1]
+30 years of nanoimprint: development, 
+momentum and prospects
+30 years of nanoimprint: development, 
+momentum and prospects
+30 years of nanoimprint: development, 
+momentum and prospects
+Wei-Kuan Lin, L. Jay Guo*
+https://doi.org/10.29026/oet.2025.250001
+
+[Page 2]
+30 years of nanoimprint: development, momentum and prospects
+Wei-Kuan Lin and L. Jay Guo
+Citation: Lin W-K, Guo LJ. 30 years of nanoimprint: development, momentum and prospects. Opto-Electronic Technology
+1, 250001(2025).
+https://doi.org/10.29026/oet.2025.250001
+Received: 12 May 2025; Accepted: 23 June 2025; Published online: 29 June 2025
+Related articles
+Fast source mask co-optimization method for high-NA EUV lithography
+Ziqi Li, Lisong Dong, Xu Ma, Yayi Wei
+Opto-Electronic Advances    2024, 7(4): 230235        doi: 10.29026/oea.2024.230235
+OptoGPT: A foundation model for inverse design in optical multilayer thin film structures
+Taigao Ma, Haozhu Wang, L. Jay Guo
+Opto-Electronic Advances    2024, 7(7): 240062        doi: 10.29026/oea.2024.240062
+More related articles in Opto-Electronic Journals Group website  
+ OE_Journal
+ @OptoElectronAdv
+
+[Page 3]
+DOI: 10.29026/oet.2025.250001     |     CSTR: 32419.14.oet.2025.250001
+Open Access
+30 years of nanoimprint: development, momentum and prospects
+Wei-Kuan Lin and L. Jay Guo*
+ 
+Abstract: 2025  marks  the  30th  anniversary  of  nanoimprint  lithography  (NIL).  Since  its  inception  in  1995,  and
+through global efforts over the past three decades, nanoimprint has emerged as the primary alternative to extreme
+ultraviolet (EUV) lithography for deep-nanoscale silicon (Si) electronics. Numerous semiconductor companies have
+recognized NIL's manufacturing quality and are actively being evaluated for the production of the most advanced
+semiconductor devices. Nanoimprinting's potential extends beyond silicon chip fabrication and wafer-scale applica-
+tions.  With  its  high  throughput  and  3D  patterning  capabilities,  NIL  is  becoming  a  key  technology  for  fabricating
+emerging devices, such as flat optics and augmented reality glasses. This review summarizes the key developments
+and applications of nanoimprint lithography, with a particular focus on the latest industry advancements in nano-Si
+device manufacturing and nanophotonics applications.
+Keywords: nanoimprinting; manufacturing; high-volume production; semiconductor
+ 
+ Introduction
+Nanoimprint  lithography  (NIL)  was  first  introduced  by
+Chou et al.1,2 to provide a cost-effective solution for high-
+resolution  nanopatterning  across  a  wide  range  of  applica-
+tions,  such  as  fabricating  nanoscale single-domain
+magnets3.  In  his  seminal  work1,2,  Chou  employed  a
+patterned hard mold with 25 nm feature size to mechani-
+cally press onto a substrate coated with a thin PMMA layer
+at  elevated  temperatures.  This  process  demonstrated,  for
+the  first  time,  that  mechanical  molding  could  reliably
+produce features at the nanometer scale, orders of magni-
+tude smaller than what was previously considered possible
+in plastic molding. This breakthrough fundamentally chal-
+lenged the prevailing assumptions about the limitations of
+mechanical  patterning.  Another  critical  finding  from  this
+early  work  was  that  the  mold  protrusions  could  nearly
+displace all the polymer resist, leading to a near-zero resid-
+ual  layer  thickness.  This  phenomenon  is  essential  for
+achieving high-resolution nanostructures.
+Following  these  foundational  advances,  Chou’s  group
+conducted  a  comprehensive  series  of  studies  that  laid  the
+groundwork  for  the  development  and  industrialization  of
+NIL. Key contributions included: demonstrating sub-10 nm
+imprinting resolution for metal contact structures4,5, identi-
+fying  key  process  parameters,  particularly  the  mold–
+resist interface4,6, characterizing mold durability and pattern
+fidelity for large-scale production7, exploring NIL’s unique
+features, such as imprinting on non-planar surfaces, direct
+3D  patterning8,  and  multilayer  structuring9,  developing
+new  NIL  systems,  such  as  roller-based  imprinters10,  and
+establishing  the  first  NIL-focused  commercial  enterprise.
+Chou’s team also demonstrated a broad range of NIL appli-
+cations,  including  high-storage  disks3,11,12,  the  first  silicon
+nanoelectronic  devices13,  sub-wavelength  optical  compo-
+nents14,  organic  thin-film  transistors15,  and  nanofluidic
+devices16,  showcasing  NIL’s  versatility  and  transformative
+potential.
+Later, Haisma et al.17 (mold lithography) and Colburn et
+al.18 (step  and  flash  imprinting)  developed  UV  nanoim-
+printing  lithography,  respectively,  by  using  slightly  differ-
+ent  implementation  methods  and  addressing  the  high-
+temperature requirements of thermal imprinting. In 1998,
+the roller-based NIL was proposed to reduce the required
+force and achieve uniform imprinting10. The work inspired
+the later development of high-throughput yet low-cost solu-
+tions for continuous nanopatterning10,19. In 1999 and 2000,
+Lebib et al. and Heidari et al. demonstrated the larger-scale
+patterning  capability  at  the  4-inch  and  6-inch  wafer-level
+with  sub-100  nm  resolution  respectively20,21.  In  2003,
+nanoimprinting  technology  was  first  selected  for  Interna-
+tional Technology Roadmap for Semiconductors (ITRS) for
+patterning 32-nm and beyond technology nodes22. In 2004,
+ 
+Received: 12 May 2025
+Accepted: 23 June 2025
+Published online: 29 June 2025
+ 
+Department of Electrical Engineering and Computer Science, University of Michigan, Ann Arbor 48109 , USA.
+*Correspondence: LJ Guo, E-mail: guo@umich.edu
+Review
+www.oejournal.org/oet
+July 2025, Vol. 1, No. 1
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+
+[Page 4]
+Molecular  Imprint  Inc.  launched  the  first  step-and-repeat
+nanoimprinting  tools  that  patterned  an  entire  wafer  by
+using a small stamp on a field-to-field basis23. This idea was
+then used to make and replicate a large working template to
+decrease  the  cost  of  molds8.  The  composite  mold  strategy
+was  also  developed  in  the  2000s.  It  incorporates  a  rigid
+patterned layer supported by a flexible or soft intermediate
+layer and a backing substrate to ensure conformal contact
+over  the  entire  imprinting  area24,25.  With  this  design,  low
+defect  rates  and  high-fidelity  imprinting  with  sub-50  nm
+resolution can be simultaneously achieved. As a result, the
+composite  mold  approach  has  been  widely  adopted  for
+imprinting  processes  that  target  moderate  resolution  and
+high quality24. In 2023, Canon launched the first-ever semi-
+conductor-grade  nanoimprinting  tools  that  match  the
+industry's  demanding  requirements,  advancing  nanoim-
+printing lithography to a new era.
+As the NIL technology matures, several applications have
+been  demonstrated.  Some  hard  disk  companies  have
+applied the concept of NIL to develop patterned magnetic
+nanostructures to expand the disk density beyond 1 Tb/in2
+by  creating  magnetic  nanostructures  with  small  feature
+sizes (<20 nm) and tight pitch spacings (< 30 nm)26,27. High-
+resolution polymer OLED was fabricated by using NIL in
+200228. Since 2010, NIL has also been used to manufacture
+wafer-level  micro-optics  to  fabricate  compact  optical
+modules  for  mobile  device  applications  at  a  high  volume.
+The high throughput and large-scale features are also used
+for display or panel-sized nanopatterning applications. It is
+also  widely  used  in  research  for  microfluidic  devices  and
+biomedical applications. As new applications, such as next-
+generation gene sequencing, augmented reality, flat-optics,
+semiconductor  devices,  and  several  others  emerged  after
+2020,  NIL  has  finally  found  its  niche.  These  new  applica-
+tions  require  the  technology  to  be  high-resolution,  large-
+area, and have tight process control, which perfectly caters
+to NIL’s advantage, making NIL irreplaceable. It is expected
+that these applications will maintain a high growth rate in
+the following years and can finally benefit from the devel-
+opments of NIL.
+In  this  review,  we  will  first  introduce  the  essential
+elements  of  nanoimprinting  lithography  and  identify  the
+key  innovations  of  NIL  over  the  past  30  years.  We  will
+discuss the long-standing issues of nanoimprinting and the
+general solutions for the challenges. In the 2nd part of the
+manuscript, we will focus on the current application of NIL
+in industrial manufacturing. Examples and manufacturing
+standards  will  be  present.  The  last  part  will  discuss  the
+current trends and direction in the academic research area.
+This work serves as a review of the technological advance-
+ments  in  NIL,  with  a  focus  on  the  more  recent  develop-
+ments, especially those from the industry. These represent
+the views of the authors, who do not intend to report the
+history of NIL. The readers are referred to many outstand-
+ing reviews published previously.
+ The basic types of NIL
+ Thermal nanoimprinting (T-NIL)
+Thermal nanoimprinting is the first kind of nanoimprint-
+ing lithography1. The working principle of thermal imprint-
+ing  is  shown  in Fig. 1(a).  It  starts  with  patterning  a  mold
+with the inverse tone of the final structure. Many types of
+thermoplastic  materials,  such  as  polystyrene,  PMMA,  and
+polycarbonate, can be used as NIL resist. After the resist is
+spin-coated onto a substrate, the mold is then pressed into
+the resist material at 50–80 °C above the resist's glass transi-
+tion temperature (Tg) for a few minutes to allow the highly
+viscous polymer to flow and fill the voids between the mold
+and the substrate. Then, the substrate is cooled and sepa-
+rated from the master mold29.
+Theoretically, as long as the materials can be heated up to
+a  glassy  state  with  sufficient  mobility  under  a  reasonable
+temperature and pressure, materials can be patterned using
+thermal  nanoimprinting  lithography.  The  direct  benefit  is
+that  nanostructures  can  be  patterned  on  widely  accessible
+materials at a meager cost, allowing users to achieve versa-
+tile  functionalities  by  incorporating  different  functional
+materials  into  the  nanostructures.  It  also  allows  direct
+molding of integrated photonic devices in a single step, e.g.,
+imprinted  polymer  microring  resonators30−34.  Thermal
+nanoimprinting can also be used to pattern sheets of mate-
+rials directly, such as thermoplastic and nanocellulose films,
+without coating an additional layer of imprinting resist.
+Even though the thermoplastic becomes flowable under
+high  temperatures  and  pressure  in  T-NIL,  the  polymer's
+viscosity  usually  remains  high,  resulting  in  a  prolonged
+imprinting  time.  Additionally,  these  thermoplastic  resists
+tend to stick to the mold, which seriously affects the fidelity
+and  quality  of  the  pattern  definition.  Surfactants  for  easy
+mold releasing can be incorporated into resist formulation.
+ UV nanoimprinting
+Soon after the first demonstration of thermal NIL, the ultra-
+violet  NIL  (UV-NIL)  process  was  developed  by  using
+photo-curable  resin  instead  of  thermoplastic  materials  to
+avoid  high-temperature  heating  procedures18.  The  overall
+process  procedure  is  illustrated  in Fig. 1(b).  UV-nanoim-
+printing  starts  by  coating/dropping  UV-curable  precursor
+resins  on  the  substrate  and  then  pressing  the  mold  with
+pressure.  Since  the  UV  resin  is  intrinsically  fluid-like,  the
+imprinting can be carried out at ambient temperature, thus
+improving  process  throughput.  After  applying  pressure
+with sufficient time to force the resist flow into the voids on
+the  mold,  UV  light  triggers  the  cross-linking  of  the  UV
+resist to form a stable nanostructure. Finally, the mold and
+the imprinted substrate are separated. The low imprinting
+temperature  property  also  allows  UV-NIL  to  be  imple-
+mented on other substrates, such as plastic films. However,
+UV shrinkage of the resins is one of the concerns that can
+cause pattern distortion and demolding difficulties.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 2 of 27)
+
+[Page 5]
+ NIL mold
+NIL  produces  a  replica  of  the  imprinting  mold,  including
+the edge roughness of the patterns on the mold36. Therefore,
+the  master  mold  must  be  fabricated  with  high-resolution
+technology  to  ensure  its  quality.  The  roughness  of  the
+etched pattern surface can potentially cause an increase of
+frictional  force  between  the  mold  and  resist,  leading  to
+pattern breakage during the demolding process. In general,
+the intense inductively coupled plasma (ICP) power and the
+Bosch process with scallop structures can significantly cause
+roughness and should be avoided.
+When  designing  the  mold  patterns,  the  layout  effect
+needs  to  be  considered.  Even  though  nanoimprinting
+lithography  is  not  limited  by  optical  diffraction,  the  final
+imprinting quality can still be affected by the pattern layout.
+Loading effect or high aspect ratio structures can result in
+non-uniform resist issues and void defects37. Several tech-
+nologies, such as inkjet dispensing, have been dedicated to
+solving  these  issues38.  Having  a  low  surface  energy  of  the
+mold is also crucial to the pattern fidelity during demold-
+ing. The resist can stick to the mold and cause permanent
+defect issues. Surface energy reduction can be achieved by
+coating a fluorosilane-based self-assembled monolayer with
+solvent or vapor incubation39.
+ NIL by hard mold
+The  mold  of  NIL  can  be  generally  categorized  into  two
+major types based on mold stiffness: the hard mold and the
+soft  mold,  suited  for  different  applications40−42.  The  hard
+mold materials are typically silicon, dielectric materials, and
+metals with high Young’s modulus43. The hard mold's high
+toughness and high strength prevent the mold from defor-
+mation during the high-pressure imprinting process. Most
+high-resolution applications, such as semiconductor device
+imprinting,  use  this  method  to  achieve  higher  pattern
+fidelity44−47. Figure 2(a) shows that sub-10 nm contact holes
+are faithfully imprinted using hard mold NIL and form an
+Au  contact  after  metal  evaporation  and  the  resist  liftoff
+process5.
+On the other hand, hard mold imprinting can pose chal-
+lenging issues. First, non-uniform pressure can arise from
+the  thickness  variation  of  the  substrate/mold,  causing
+imprinting defects or even mold/wafer breakage. The use of
+pressurized  air  to  imprint  is  of  particular  significance  in
+ensuring uniform pressure in a situation like this47. Second,
+providing  the  conformal  contact  between  mold  and
+substrate is difficult. The presence of particles, non-flat or
+non-parallel  surfaces,  or  even  air  trapped  between  the
+supporting plate can lead to non-conformal contact, result-
+ing in imprinting defects47.
+ NIL by composite mold
+Soft NIL has been developed to circumvent the disadvan-
+tages of hard mold NIL with slightly compromised pattern
+fidelity.  The  soft  nanoimprinting  utilized  high-flexibility
+materials,  such  as  polydimethylsiloxane  (PDMS)48,49 and
+perfluoro-polyethers  (PFPE)50,51,  as  the  imprinting  mold.
+The high flexibility and low surface energy feature allow the
+mold  to  deform  slightly  with  the  presence  of  particles  or
+residual  contaminants,  providing  better  contact  between
+the  mold  and  the  substrate.  Due  to  the  benefits,  the  soft-
+NIL can be easily implemented under less restricted condi-
+tions. It has a higher dust tolerance than hard mold NIL.
+Moreover,  soft  NIL  can  be  incorporated  into  the  roller-
+based imprinting system for high throughput applications
+due to its flexible features52. Another essential feature of soft
+NIL is that it can be applied to a curved surface to expand
+its applicability, which is impossible by traditional NIL or
+challenging to achieve by photolithography53.
+One significant challenge of using soft molds for pattern-
+ing is mold distortion during the imprinting process, limit-
+ing  the  achievable  resolution,  aspect  ratio,  and  pattern
+density36. This issue can be lessened using a composite mold
+strategy54,  where  thin  high-modulus  materials  (such  as
+polyurethane  acrylate  resin54 or  high-modulus  PDMS55)
+with  surface  relief  structures  grafted  on  top  of  the  low-
+modulus  materials  and  flexible  carriers,  such  as  regular
+PDMS, thin glasses, or PET films. This strategy combines
+the advantages of the high-resolution property of the rigid
+mold NIL, derived from the high-toughness patterned layer,
+with  the  conformal  feature  of  the  soft  and  flexible  stamp
+substrate. As shown in Fig. 2(b), a composite mold consist-
+ing  of  rigid  features  on  a  flexible  PDMS  support  can
+successfully achieve sub-15 nm resolution on a flat substrate
+and  faithfully  duplicate  gratings  structure  with  200  nm
+pitch on a cylindrical surface of a single mode optical fiber
+with  a  125  μm  diameter25,54.  Another  implementation  of
+composite  mold  is  the  so-called  substrate  conformal
+imprinting lithography (SCIL), where a deformable cushion
+layer is formed between the rigid nanopatterned layer and
+the  stiff  support  plate,  providing  out-of-plane  flexibility,
+ 
+NIL (Chou)
+S-FIL (Willson)
+UV
+a
+b
+Fig. 1 | Basic imprinting type of nanoimprinting lithography. (a) Thermal
+NIL  developed  by  Chou.  (b)  UV-imprinting/step-flash  imprinting  devel-
+oped  by  Willson.  Figure  reproduced  with  permission  from  ref.35,  IOP
+Publishing.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 3 of 27)
+
+[Page 6]
+while retaining in-plane stiffness to preserve pattern fidelity
+and  alignment  precision. Figure 2(c) demonstrates  that
+high-quality,  high-resolution  patterning  can  still  be
+achieved  despite  dust  particles  by  using  this  SCIL.  The
+composite mold strategy is widely used for high through-
+put  and  large-scale  applications,  such  as  wafer-level
+imprinting  and  roller-based  imprinting.  The  composite
+mold  strategy  has  become  one  standard  solution  for
+modern nanoimprinting technology.
+ Working stamp
+The primary concern in NIL is the high cost of the imprint-
+ing mold and its limited lifetime. Fabricating an enormous
+mold with a 300 mm wafer size through electron beam (E-
+beam)  writing  is  costly  and  impractical.  In  addition,
+because the molds directly interact with the resist and the
+substrates,  they  are  susceptible  to  damage.  As  the  most
+expensive element in the NIL system, the short life span of
+the  mold  can  significantly  increase  the  cost  of  ownership
+and potentially raise quality concerns about the process.
+To  address  the  issues,  the  working  stamp  strategy  is
+developed, in which a working stamp is duplicated from the
+master  mold  and  is  used  to  perform  the  actual
+imprinting56,57. Using a cm-sized master mold prepared by
+E-beam writing and performing the step-and-repeat imprin-
+ting on a large substrate, a large working stamp with wafer-
+scale or even larger size with panel size can be replicated.
+The  working  stamp  method  can  also  increase  the  life-
+time of the master mold to reduce the cost further. In most
+cases,  the  master  mold  can  only  perform  several  hundred
+times  of  imprinting  before  considerable  degradation.
+However,  by  using  the  working  templates,  the  lifetime  of
+the master mold can be extended by several orders. As an
+example,  in  semiconductor  manufacturing,  the  E-beam
+master mold can make >100 replicas, and each replica can
+pattern  >1000  wafers,  leading  to  an  equivalent  master
+template life of >100,000 wafers, close to the lifetime of the
+reticles in traditional photolithography44. In metalens appli-
+cations, the use of a working stamp also extended the life-
+time of the master mold by 15−20×, allowing the fabrica-
+tion  of  >10,000  replicated  wafers  by  using  one  master
+mold58. The working stamp idea is now widely adopted in
+academics  and  industry,  even  for  the  most  advanced
+processes.  Various  working  stamps  have  been  developed,
+such  as  soft-working  stamps58,  hard-working  stamps44,
+large-size  working  stamps,  and  water-soluble  working
+stamps59 for  different  applications.  Dedicated  tools  have
+been produced for working mold replications60,61.
+ Recent advancements in NIL molds
+In  addition  to  the  molds  mentioned  above,  several  other
+types of molds—such as super-resolution imprinting molds,
+high-durability  working  stamps,  and  natural  molds —are
+also being actively developed. Typically, the feature sizes on
+these  molds  must  match  the  desired  pattern  dimensions,
+making the fabrication of molds with ultra-fine structures
+particularly  challenging.  However,  it  has  been  shown  that
+special treatments, such as heat treatment62 or mechanical
+pressing63,  can  effectively  reduce  the  feature  sizes  on
+imprinting molds, enabling the generation of even smaller
+structures64. For example, Pina-Hernandez demonstrated in
+reference62 that the imprinting feature size could be reduced
+from 55 nm to 10 nm after two shrinking cycles by using
+silsesquioxane imprint resist material65.
+Most  of  the  aforementioned  working  stamps  are  made
+from  polymer  materials.  While  they  offer  high  flexibility,
+ 
+a
+Mold
+NIL imprint
+Surface
+treatment
+i
+UV cure
+ImprinƟng on a curved surface
+Releasing hybrid mold
+Fiber
+UV exposure
+ElasƟc support
+Cleaved facet
+Rigid paƩern layer
+O2 plasma
+5 nm
+5 nm
+5 nm
+500 nm
+Composite stamp
+10 nm
+Au contacts
+b
+c
+ii
+ii
+i
+iii
+Fig. 2 | Different types of molds in NIL. (a) Hard mold is used for high-resolution patterning. (b) Flexible composite mold can be used for imprinting on a
+curved surface. (b-i) The imprinting process. (b-ii) The flexible composite mold. (b-iii) The imprinted grating structures on the optical fiber. (c) The substrate
+conformal nanoimprinting lithography can provide high-resolution conformal imprinting by using the composite mold. (c-i) The composite mold. (c-ii) The
+conformal imprinting over particle contaminants. Figure reproduced with permission from: (a) ref.5, AIP Publishing; (b) ref.25, American Chemical Society;
+(c) ref.24, under a Creative Commons Attribution License.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 4 of 27)
+
+[Page 7]
+their low melting point and low modulus limit their suit-
+ability for T-NIL and lead to durability issues. To overcome
+this limitation, durable crystalline working templates have
+been developed by imprinting UV-curable resin mixed with
+nanoparticles —such  as  ZrO₂  and  TiO₂ —followed  by
+annealing66,67. These hard molds exhibit high pattern fidelity
+over more than 100,000 molding cycles without delamina-
+tion or breakage.
+Besides artificially making the imprinting templates, the
+molds can also made from natural nanostructures, such as
+cicada wings68 and collagen fibers69, to fabricate biomimetic
+structures at low cost. These biomimetic patterns have pro-
+ven effective in preventing bacterial adhesion, enhancing cell
+coupling,  and  supporting  tissue  engineering  applications.
+ NIL resist
+Nanoimprinting  resist  is  another  critical  element  of  NIL
+that  directly  interacts  with  the  mold  and  is  patterned  in
+nanoscales. Depending on the functionality, the imprinting
+resist can be used as a reactive ion etching (RIE) mask to
+transfer  the  pattern  to  the  underlying  layer  (NIL  +  RIE
+method) or directly used as the functional structures for the
+products (direct NIL method), such as polymer microlens
+and  grating,  as  shown  in Fig. 3(a)70,71.  Excellent  etching
+properties  are  desired  to  achieve  better  pattern  transfer
+when used as an etching mask. The residual layer thickness
+control  and  the  ashing  completeness  can  also  be  critical.
+When used directly as part of the final device, the proper-
+ties  of  the  imprinting  resist,  including  refractive  index,
+conductivity,  and  optical  transparency,  will  directly  influ-
+ence the functionality of the final structure.
+To achieve high-quality imprinting, several factors need
+to  be  considered72.  First,  the  NIL  resist  should  be  highly
+deformable  under  applied  pressure  and  have  sufficient
+mechanical  strength  and  good  mold-releasing  properties.
+Second,  the  adhesive  force  between  the  resist  and  the
+substrate must be greater than the frictional force between
+the resist and the mold. In this regard, adhesive promotion
+coating  is  sometimes  necessary  to  form  a  stable  bond
+between the resist and the desired substrate. The imprint-
+ing  resists  are  considered  the  most  critical  elements  for
+imprinting  systems,  and  most  of  the  NIL  foundries  have
+their associated imprinting resist optimized for the tool and
+process. Various resists have also been developed for appli-
+cations,  such  as  thermally  curable  polymer71,73,  particle-
+containing resin, fast-curing resist74, etc.
+With the direct patterning feature, NIL can process mate-
+rials that are difficult to pattern by traditional optical lithog-
+raphy,  including  polymers,  metals,  and  nanomaterials73,75.
+Intriguing devices can be built with a combination of func-
+tional  polymers  and  nanoimprinting.  Lin  et  al.  demon-
+strated  the  highly  sensitive  ultrasound  sensor  by  thermal
+imprinting  optoelastic  polymers  to  form  microring
+resonators,  as  shown  in Fig. 3(b-i)54.  Much  progress  has
+been made since then. Lin et al. used soft NIL and a dama-
+scene process to fabricate all-polymer high Q-factor micror-
+ing resonators, with images shown in Fig. 3(b-ii)54. Such a
+damascene  structure  can  allow  the  backfill  of  functional
+materials  for  more  diverse  applications54,76.  Lin  et  al.  used
+thermal  imprinting  to  form  a  template  and  ink-printing
+electro-optic polymers to make a polymer E-O modulator77.
+The light-emitting conjugated polymer was used as a gain
+medium  and  was  shaped  into  a  laser  cavity  to  form
+nanolasers78.  Ferroelectric  polymers  were  also  utilized  to
+achieve non-volatile, low-voltage memory effects79.
+The  development  of  non-organic  nanoimprinting  resist
+is active in both academia and industry. One of the motiva-
+tions  is  to  support  emerging  photonic  applications  and
+overcome  the  low  refractive  index  limitation  of  polymer
+materials,  thereby  achieving  versatile  functionalities  for
+applications such as augmented reality and flat optics. One
+common  strategy  is  to  incorporate  high  refractive  index
+metal  or  metal-oxide  nanoparticles,  such  as  TiO280 and
+ZrO281 particles,  into  the  polymer  resist  to  form  a  hybrid
+composite  resin.  Based  on  the  formulation,  the  hybrid
+composite resin can be spin-coated or inkjet-cast onto the
+substrate  and  be  used  for  either  T-NIL  or  UV-NIL.  After
+imprinting,  thermal  annealing  can  be  applied  to  further
+solidify the structure. The drawback of the method is that
+the refractive index is still limited due to non-full crystal-
+lization  in  this  scheme82.  In  addition,  the  presence  of  NP
+results in a non-smooth structural surface, causing strong
+scattering80. A slight shrinking of the final structure can also
+be observed.
+Sol-gel synthesis is another commonly used method for
+incorporating  metal,  inorganic,  and  metal  oxide  materials
+into nanoimprinting structures83. In this method, a sol-gel
+solution with a precursor is first prepared and stabilized in
+the alcohol solvent. Then, a controlled amount of water is
+added to initiate the formation of the colloidal solution. The
+solution is then spin-coated and pressed with the patterned
+soft  mold  at  an  elevated  temperature  to  perform  thermal
+imprinting, drying, and crystallization. Since the solidified
+sol-gel material may create stress on the mold, it is neces-
+sary to use the soft mold. Elevating to a higher temperature
+may  be  required  to  trigger  shrinkage  to  facilitate  the
+demolding process. Kim et al. demonstrated that by imprin-
+ting  TiO2 sol-gel  solution  followed  by  thermal  annealing
+with different temperatures, the material phase of patterned
+TiO2 and  the  refractive  index  can  be  tuned82.  It  is  worth
+noting that the sol-gel-based method can result in substan-
+tial structure shrinkage (~30%) after the structure is thor-
+oughly dried. It is also possible to combine the nanoparticle
+method and the sol-gel methods to form the new compos-
+ite.  It  has  been  proven  that  a  high  percentage  of  NP  can
+substantially reduce shrinkage, as shown in Fig. 3(c)80.
+ Inkjet dispensing strategy
+Spin coating can uniformly coat a resist layer on a substrate.
+However, the material utilization is very low, with only 2%
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 5 of 27)
+
+[Page 8]
+of the resist remaining on the substrate after the spinning84.
+Moreover, the non-uniform residual layer can happen after
+imprinting,  degrading  the  pattern  density.  The  inkjet
+dispensing  method  with  a  drop-on-demand  strategy  is
+developed  to  solve  these  issues. Figure 3(d) shows  the
+comparison with these two methods84. In the inkjet dispens-
+ing method, the resist distribution can be adjusted based on
+the structures and the pattern density to compensate for the
+resist  loading  effect,  achieving  a  uniform  residual  layer
+across the entire imprinted region. Additionally, the resist
+filling  time  can  be  reduced  by  modifying  the  distribution
+pattern,  such  as  breaking  larger  features  into  segmented
+patterns to enhance filling speed45.
+Despite its advantages, the inkjet dispensing process can
+be time-consuming and requires specialized materials and
+tools. The resist must have low viscosity at room tempera-
+ture and be compatible with an inkjet printhead. The dedi-
+cated  inkjet  dispensing  setup  requires  precise  machine
+controls,  including  printing  position,  dispensing  volume,
+filtering,  and  particle  management.  Due  to  the  high  costs
+and  complex  setup,  inkjet  dispensing  is  mainly  used  to
+produce  high-value  devices  requiring  precise  process
+controls, such as metalenses, augmented reality waveguides,
+and semiconductor devices86,87. This inkjet dispensing tech-
+nology  has  been  integrated  into  high-end  imprinting
+systems86,87.
+ Imprinting method
+ Plate-to-plate imprinting
+Plate-to-plate imprinting is the first demonstrated nanoim-
+printing method, as Fig. 4(a-i) illustrates88. In this method,
+the  mold  and  imprinted  substrate  are  of  comparable  size
+and are pressed together by two flat, rigid plates, followed
+by UV curing or thermal embossing. This technique does
+not  impose  many  restrictions  on  resist  dispensing  and  is
+compatible with solid and soft molds, offering high process
+compatibility  and  flexibility.  Plate-to-plate  imprinting  can
+be implemented on a small scale for proof-of-concept stud-
+ies. It can also be used to imprint an entire 300 mm wafer or
+more  extensive  panel-size  substrate  for  manufacturing
+purposes89. Additionally, it can be integrated with an align-
+ment system to ensure < 1 µm overlay error. Plate-to-plate
+imprinting  is  widely  used  in  the  industry  to  manufacture
+wafer-level optical elements, such as lens arrays, followed by
+wafer  stacking  to  form  compact  optical  modules90.  Many
+advanced  tools  with  high-volume  manufacturing  records
+are already available89,91.
+Despite  the  simple  operation,  full  wafer  plate-to-plate
+nanoimprint  lithography  has  a  few  significant  disadvan-
+tages. First, directly fabricating a 12" or even larger template
+through E-beam writing can be costly. Therefore, the step-
+and-repeat  method  is  typically  required  to  make  a  large
+working template. Second, as the imprinting size increases,
+ 
+a
+Imprint resist
+i NIL+RIE
+ii Direct NIL
+NP/sol-gel resist
+i Spin coaƟng
+ii Inkjet coaƟng
+i
+ii
+High RI material
+Glass substrate
+High Rl material
+Glass substrate
+Glass substrate
+Substrate
+PDMS
+100/0 NP/Sol -As imprinted
+100/0 NP/Sol-500 °C
+°C
+°C
+500 nm
+500 nm
+500 nm
+500 nm
+500 nm
+500 nm
+80/20 NP/Sol-500 °C
+0/100 NP/Sol-500 °C
+80/20 NP/Sol -As imprinted
+0/100 NP/Sol -As imprinted
+SoŌ mold
+h-PDMS
+UV and pressure
+UV resin
+Dispensing
+of resist
+High speed
+rotaƟon
+On-demand inkjet system
+Image
+signal
+Ink
+Nozzle
+Ink droplet
+Heat or
+piezo element
+Solvent
+evaporaƟon
+Solvent
+evaporaƟon
+UV resin
+TiO2NP
+Glass substrate
+1 μm
+3 μm
+c
+d
+b
+Fig. 3 | Imprinting resist in NIL. (a-i) Imprinting resist as the etching mask (NIL+RIE). (a-ii) Imprinting resist as the functional structure (direct NIL). (b-i) Poly-
+mer microring resonator (MRR) fabricated by direct NIL. (b-ii) Polymer microring resonator fabricated by damascene NIL process. (c) Images of fabricated
+nanogratings using NIL with inorganic resist composed of different percentages of sol-gel solution and nanoparticles. (d) Different types of resist dispens-
+ing  methods.  Figure  reproduced  with  permission  from:  (a-i)  ref.85,  SPIE;  (a-ii)  ref.70,  (b-i)  ref.54,  (b-ii)  ref.54,  under  a  Creative  Commons  licences;
+(c) ref.80, American Chemical Society; (d) ref.84, under a Creative Commons licences.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 6 of 27)
+
+[Page 9]
+NIL  becomes  more  susceptible  to  defects,  including
+repeated defects from foreign particles and random defects
+from air bubbles44. Ensuring uniform temperature and pres-
+sure  control  over  the  imprinting  area  is  also  challenging.
+The large contact area also requires larger forces to provide
+a suitable imprint pressure, which may exceed 20 kN over
+an 8-inch wafer52. To address this issue, soft molds are typi-
+cally used in most modern imprinters for the whole wafer
+plate-to-plate  imprinting.  Third,  the  alignment  to  the
+underlying layer on the full wafer scale can be tricky since
+parasitic overlay errors increase with the field size44. Fourth,
+the full wafer plate-to-plate imprinting is not a continuous
+process,  where  the  mold  needs  to  be  lifted  and  placed
+during each cycle, limiting the imprinting throughput.
+ Step-and-repeat imprinting
+Instead of using a large mold to pattern the entire wafer, the
+step-and-repeat imprint lithography utilizes a smaller tem-
+plate that contains only a few dies to pattern the large wafer
+by  imprinting  it  multiple  times,  as  shown  in Fig. 4(a-ii).
+This method significantly reduced the cost of preparing the
+mold. Moreover, a smaller area imprinting is usually easier
+and
+ allows
+ for
+ better
+ defectivity
+ and
+ overlay
+management94,95. The disadvantage is the lower throughput,
+which requires multiple imprinting to cover a large wafer
+fully.  The  step-and-repeat  method  has  been  extensively
+used for working stamp preparation, where a large working
+stamp can be obtained by imprinting multiple times on the
+same wafer94.
+Inkjet dispensing step-and-repeat imprint lithography is
+a notable advancement. It combines the advantages of both
+the  step-and-repeat  (smaller  master  mold,  better  quality
+control)  and  the  inkjet  dispensing  method  (thin  and
+uniform  residual  layer),  allowing  NIL  to  achieve  <  3  nm
+overlay error and tight process control suitable for the most
+critical  applications96.  However,  it  comes  with  a  more
+complicated  system  than  plate-to-plate  imprinting.  To
+enhance  the  throughput,  multi-field  dispensing,  resist
+distribution  optimization,  and  resist  surface  energy  engi-
+neering are being implemented.
+ Roller-based nanoimprinting
+Roller-based nanoimprinting is another widely used imprin-
+ting method, which starts with a continuous coating of the
+substrate with imprinting resist and then pressing the mold-
+ing roller against the substrate for pattern formation10,52,97.
+The resist is cured using heat or UV exposure before it is
+finally  detached  from  the  mold  on  the  other  side  of  the
+imprint roller. The main advantage of roller-based imprint-
+ing is that it can achieve continuous imprinting by rotating
+the roller without the pressing and lifting process, boosting
+the  throughput19,98.  In  addition,  the  contact  area  between
+the mold and the substrate is smaller, making it easier for
+imprinting control. The roller-based imprinting system can
+be  further  categorized  into  roll-to-plate  and  roll-to-roll
+nanoimprinting, as shown in Fig. 4(b, c)88,98. In roll-to-plate
+imprinting, the substrate is flat and is placed right in con-
+tact with the imprinting cylinder. As the roller rotates and
+the substrate moves forward with a corresponding speed, the
+pattern on the roller can be transferred onto the substrate
+coated with resist through the UV-NIL or the T-NIL with
+continuity. As for the roll-to-roll NIL process, an imprinting
+ 
+a
+b
+d
+c
+CoaƟng
+i Plate-to-plate
+Roll-to-plate
+Roll-to-roll
+ii Step-and-repeat imprinƟng
+200/300 mm master
+150 mm master
+S&R imprinƟng
+e
+Fig. 4 | (a-i)  Schematic  diagram  of  plate-to-plate  imprinting.  (a-ii)  Step-and-repeat  imprinting.  (b)  Roll-to-plate  imprinting.  (c)  Roll-to-roll  imprinting.
+(d) Pictures of the roll-to-plate imprinting setup and the imprinted structures. Figure reproduced with permission from: (a-i, b, c) ref.88, SPIE; (a-ii) ref.92,
+SPIE; (d) ref.88, 93, American Chemical Society.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 7 of 27)
+
+[Page 10]
+roller with a patterned surface is used to imprint onto a flexi-
+ble substrate on a supporting roller instead of a flat plate in
+roll-to-plate  NIL  processes,  as  shown  in Fig. 4(c, d).  The
+entire  process  is  based  on  the  roll-to-roll  manufacturing
+concept, which has the advantages of high throughput and
+provides  an  up-and-coming  solution  for  industrial-scale
+applications.  It  was  reported  that  gratings  of  70  nm  lines
+were  achieved  using  UV  roll-to-roll  NIL,  with  an  imprint
+speed up to approximately 1,400 mm/min52.
+Despite  the  advantages,  there  are  several  challenges  in
+roller-based nanoimprinting. First, the mold is not flat, and
+the  pattern  needs  to  be  engraved  on  a  cylindrical  surface,
+incompatible with the traditional E-beam writing method.
+The easiest way is to use a flexible mold to wrap around the
+roller with sufficient flexibility, such as polyethylene tereph-
+thalate (PET) with polyurethane structures or electroplated
+Ni shim as a durable mold for large volume manufacturing.
+Second,  the  imprinting  resist  is  usually  thick,  and  the
+uniformity is difficult to control. To solve this problem, the
+inkjet  dispensing  method  can  be  applied  to  allow  better
+residual  layer  control98.  Other  concerns  include  the  mold
+separation at the end of the imprinting process. The rela-
+tive movement of mold to the imprinted patterns can cause
+a shear force during the demolding process and, therefore,
+is subject to pattern collapse defects for tall and high aspect
+ratio structures.
+ Challenges in NIL
+ Residual layer
+Residual  layers  can  pose  significant  issues  for  NIL,  espe-
+cially for critical dimension (CD) control and optical appli-
+cations86.  When  the  imprinted  structure  is  used  as  the
+pattern transfer layer, the residual layer must be removed
+via  plasma  etching,  which  usually  causes  CD  drift99.  The
+final residual layer must be well controlled to achieve better
+process control. Minimizing the residual layer is crucial for
+photonic  devices  like  AR  waveguides,  metalenses,  and
+photonic  integrated  circuits54,88.  The  performance  of  the
+optical  devices,  including  conversion  efficiency,  viewing
+angles, and quality factor, is highly contingent on the thick-
+ness of the residual layer and requires close attention.
+One  strategy  for  minimizing  the  residual  layer  is  using
+the inkjet dispensing method, where the distribution of the
+resist droplets can be precisely calculated to avoid excessive
+resists that result in a thick residual layer86. As presented in
+ref.100,  when  imprinting  patterns  with  varying  fill  factors,
+such as slanted gratings with a nonlinear depth profile, the
+resulting residual layer thickness is usually thick and non-
+uniform.  The  measured  residual  layer  thickness  ranges
+from 308 nm to 377 nm. On the other hand, by using inkjet
+coating to create customized NIL polymer layers, the range
+of the residual layer can be decreased to 47 nm to 60 nm.
+Other  strategies,  such  as  self-assembly  through  heating76,
+and  the  tape-assisted  method  to  selectively  peel  off  the
+residual layer without affecting the imprinted structures are
+also  actively  explored101.  Additionally,  residual  layer-free
+imprinting  was  reported  by  using  fast  thermal-curable
+PDMS102. Making the structural height much greater than
+the  residual  layer  for  optical  devices  can  relieve  perfor-
+mance degradation and potentially impart other concerns.
+In  some  unique  designs,  the  residual  layer  is  used  as  an
+anti-reflection layer59.
+ Defectivity
+The high defect density is one of the significant obstacles to
+NIL  for  advanced  applications.  It  can  be  divided  into
+repeated  defects  and  randomly  distributed  in  the  NIL
+process44,103. Repeated defects arise from mold errors due to
+mold  damages  or  fabrication  imperfections,  leading  to  a
+repeatable error in each imprinting. Randomly distributed
+defects  are  not  repeatable  regarding  location  and  mostly
+happen  during  resist  filling  or  demolding.  To  tackle  the
+repeated  defect  issue,  operating  NIL  in  a  clean  environ-
+ment  is  necessary  to  prevent  particles  from  falling  on  the
+surface. Resist filtering is needed to avoid the presence of
+crystallization and solid pellets in the resist solution.
+Random  defects  can  be  further  separated  based  on  the
+defect morphologies and mechanisms, as shown in Fig. 5(a)
+and Fig. 5(b), respectively44,95,103. i) shows the feature distor-
+tion  defects  due  to  local  shear  stresses,  resulting  in  the
+misalignment of the nanopillars. ii) demonstrates the cohe-
+sive failure defects with local structural breakage or pattern
+stripping from the demolding process. This occurs because
+of the weak adhesion force to the substrate. iii) features the
+collapse defects that are caused by low resist modulus, high
+aspect ratio pillars, or minimal spacing between pillars; iv)
+illustrates  large-scale  shear  defects  that  are  caused  by  fast
+and  uncontrolled  separation  step,  resulting  in  non-local
+resist delamination; v) shows incomplete filling defects that
+arise because of insufficient imprinting time or low mobil-
+ity  of  the  resists,  and  vi)  depicts  surface  contamination
+voids defect with local dewetting spots, which is believed to
+be caused by airborne organic vapors that adsorb onto the
+adhesion layer44.
+Efforts  have  been  made  to  study  and  alleviate  random
+defect issues. Generally, the aspect ratio cannot be too high
+to  avoid  feature  collapse.  The  imprinting  resist  should
+maintain  high  mechanical  strength  and  adhesion  to  the
+substrate.  Controlled  motion  is  necessary  during  the
+demolding  process95.  The  imprinting  time  must  be  set
+appropriately to ensure complete filling without sacrificing
+throughput.  Imprinting  conditions,  such  as  purging  gas,
+could  also  be  essential  in  controlling  void  defects104.  As
+described in ref.95, the defectivity can be greatly reduced by
+optimizing  the  resist  material  and  proper  imprinting
+control  for  the  semiconductor  memory  applications.  By
+simply  improving  the  material  strength,  including  the
+tensile modulus, and reducing particulates in the resist, the
+defect density can be reduced by more than two orders of
+magnitude. By finely controlling the separation process and
+performing resist filtration system, the defect density can be
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 8 of 27)
+
+[Page 11]
+decreased by another order. By storing wafers in a nitrogen
+environment prior to printing and by adding carbon filtra-
+tion  systems,  the  defect  density  can  be  further  brought
+down by 60%.
+ Alignment and overlay control
+The precise alignment of the current layer to the previously
+patterned ones is essential for making more advanced struc-
+tures105,106.  However,  due  to  the  configuration  difference,
+the alignment method used in optical lithography cannot be
+applied to NIL, and a new alignment process must be devel-
+oped. In the most advanced applications, the overlay error
+must be less than 3 nm to ensure the correct final device
+functionality and circuit connection for modern semicon-
+ductor manufacturing96. To satisfy this need, the high-order
+distortion, such as magnification errors resulting from the
+shape  differences  between  the  mold  and  the  desired
+imprinting pattern, must be adjusted to minimize the over-
+lay errors further.
+ Nanoimprinting for high-volume
+manufacturing
+After  30  years  of  development,  NIL  has  been  used  for
+manufacturing  in  various  areas,  such  as  semiconductors,
+augmented  reality,  biomedicines,  displays,  and  optoelec-
+tronic  devices.  Compared  with  traditional  photolithogra-
+phy utilized for mass production, it can achieve high-reso-
+lution patterning with a simple implementation setup. The
+CMOS-compatible  feature  also  allows  NIL  to  work  with
+other  well-developed  patterning  technologies,  such  as  dry
+etching and lift-off processes. In addition, it can be manu-
+factured at a large scale by using roller-based imprinting for
+relatively
+ low-cost
+ yet
+ high-volume
+ manufacturing
+purposes. It can be realized on a non-flat surface, catering
+to  special  needs  for  specific  applications.  The  defectivity
+issue of NIL is one of the manufacturing concerns. These
+defect types have been studied and addressed in the past 30
+years. Many applications have recognized NIL's quality and
+have been adopted in manufacturing.
+As  advanced  applications  such  as  semiconductors  and
+meta-optics continue to push into the sub-50 nm and even
+sub-10  nm  regime,  high-resolution  lithography  has
+emerged as one of the primary bottlenecks in manufactur-
+ing. Among the available technologies, NIL, electron beam
+(E-beam)  lithography,  and  extreme  ultraviolet  (EUV)
+lithography are currently the only viable candidates capable
+of  meeting  these  demanding  resolution  requirements.
+While EUV lithography has been successfully implemented
+in leading-edge integrated circuit (IC) production, it comes
+with  significant  limitations.  The  high  cost  of  ownership,
+driven
+ by
+ the
+ need
+ for
+ complex
+ and
+ expensive
+systems —including  high-power  light  sources,  multilayer
+reflective mirrors, and vacuum chambers—remains a criti-
+cal challenge. Additionally, EUV's energy consumption is a
+major  concern.  According  to  ref.87,107,108,  the  power
+consumption of EUV is 10× higher than the NIL and 2× the
+cost per wafer in the patterning of 15 nm devices for semi-
+conductor manufacturing109. In contrast, E-beam lithogra-
+phy  offers  excellent  resolution  but  suffers  from  extremely
+low throughput due to its serial patterning method, where
+patterns are written point by point. This makes it more suit-
+able for mask-making or research-scale prototyping rather
+than  high-volume  manufacturing.  These  limitations  high-
+light  the  growing  need  for  alternative  lithographic
+approaches, such as NIL, which promises high resolution,
+lower  energy  consumption,  and  greater  cost-efficiency  for
+certain advanced applications.
+ 
+a
+b
+i
+iii
+v
+vi
+iv
+b
+100 nm
+200 nm
+10 μm
+10 μm
+500 nm
+ii
+i
+iii
+v
+vi
+iv
+ii
+Fig. 5 | Defect images (a) and the mechanism (b) of common defect modes in the NIL. (i) Feature distortion, (ii) adhesive failure, (iii) feature collapse,
+(iv) large-scale shear defects, (v) incomplete filling, and (vi) surface contamination void defects. Figure reproduced with permission from ref.44, under a
+Creative Commons licences.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 9 of 27)
+
+[Page 12]
+ Nanoimprinitng in semiconductor manufacturing
+Semiconductor  manufacturing  is  a  highly  complex  and
+sophisticated  process  that  demands  exceptional  stability
+and precision. For NIL to be viable in silicon IC production,
+several  critical  requirements  must  be  met:  i)  imprinting
+resolution  finer  than  the  critical  dimension  of  the  struc-
+tures; ii) overlay error meeting the required error budget of
+the application relative to the minimum half-pitch; iii) low
+process  defectivity  to  ensure  an  acceptable  defect  density
+based  on  the  applications;  iv)  high  throughput  with  >
+80−100 wafers/hr for a 300 mm wafer to ensure an accept-
+able run rate and a competitive cost of ownership of the tools.
+In  the  early  2000s,  several  semiconductor  companies
+attempted to adopt NIL for semiconductor manufacturing
+due to its exceptional resolution. However, as the technol-
+ogy  was  not  mature  enough,  the  defectivity,  overlay,  and
+throughput  were  far  behind  the  semiconductor  manufac-
+turing  requirements  and  were  not  considered  a  concrete
+solution for advanced semiconductor manufacturing. After
+decades of development, nanoimprinting suppliers, such as
+Canon  Inc.,  have  made  significant  progress  in  improving
+the  NIL  system  and  greatly  enhancing  the  NIL  quality  to
+meet  the  stringent  requirements  of  the  semiconductor
+industry. In 2023, Canon Inc. announced their first semi-
+conductor-graded  nanoimprinting  tool  (FPA-1200NZ2C,
+Fig. 6(a-i)) for 12" wafer patterning and has shipped the tool
+ 
+a
+b
+d
+e
+c
+i
+i
+i
+i
+ii Litho1
+OpƟcal
+litho.
+NIL
+NIL
+Trench
+Via
+Etch1
+Error
+Etch1
+Etch2
+Litho2
+ii
+ii
+iii
+HODC/
+Spread cam
+TIM scope
+Conjugate plane
+MulƟ-funcƟonal
+relay opƟcs
+Illuminator
+for UV exposure
+Mask
+Thick RLT
+Wide CD
+Thin RLT
+Narrow CD
+Wafer stage
+Wafer
+Etching condiƟon #1
+100 nm
+100 nm
+Etching condiƟon #2
+Post
+NIL
+22.0
+21.5
+21.0
+20.5
+SOC CD (nm)
+20.0
+19.5
+19.0
+18.5
+14
+16
+18
+RLT (nm)
+20
+22
+22.0
+21.5
+21.0
+20.5
+SOC CD (nm)
+20.0
+19.5
+19.0
+18.5
+14
+16
+18
+RLT (nm)
+20
+22
+Post
+RLT
+etch
+Post
+SOC
+etch
+Detect principal
+Alignment illuminator
+mulƟ-wavelength LDs
+Moiré signal
+Mask
+Wafer
+Array of
+piezo actuators
+Laser
+HODC
+No correcƟon
+Mag. actuator
+CorrecƟon by piezo actuators
+CorrecƟon by heat
+expansion
+Large error
+Residual error
+Minimal error
+Mask
+shape
+Shot
+shape
+Mag. actuator
++ HODC
+DMD
+Wafer
+Mask mark
+Wafer mark
+−1st order
+diﬀraƟon angle
+−1st order
+diﬀraƟon angle
+ii
+i
+ii
+Applied force
+Imprint head
+Cavity pressure
+Template
+Mesa
+Wafer
+Droplet
+Wafer edge
+Wafer structure
+iii
+INLINE
+StaƟon B1
+StaƟon B2
+StaƟon A1
+FOUP opener
+SMIF-POD approach path
+StaƟon A2
+2017 Canon corporaƟon
+FPA-1200 NZ2C
+Water feeder
+2830 mm
+6600 mm
+SMIF-INX
+Console panel
+4600 mm
+Fig. 6 | The  first-ever  semiconductor-graded  nanoimprinting  tool  FPA-1200NZ2C  by  Canon  Inc.  (a-i)  The  appearance  of  the  imprinting  tool.  (a-ii)  The
+imprinting mold. (a-iii) The 12" wafer patterned by FPA-1200NZ2C. (b-i) The alignment detection scheme. (b-ii) Misalignment can be measured by detect-
+ing the 1st-order Moire fringe. (b-iii) Higher-order distortion can be compensated by pressing the stamp and applying laser heating to the wafer. (c-i) The
+template is bowed to produce a parabolic contact with the imprinting resist. (c-ii) The sequential images of the separation process. (d-i) The NIL imprinting
+and pattern transfer process schematic diagram. (d-ii) The etching condition and residual layer thickness (RLT) can effectively influence the CD of the
+underlying SOC layer. (e-i) The semiconductor interconnect layer in the semiconductor back-end-of-line process. (e-ii) The comparison of the damascene
+process by optical lithography and NIL. Figure reproduced with permission from: (a, c-i) ref.44, under a Creative Commons licences; (b) ref.96, (c-ii) ref.95,
+(d) ref.99, (e) ref.110, SPIE.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 10 of 27)
+
+[Page 13]
+to the foundry customers in 2024. According to ref.87,109, the
+tool  has  satisfied  the  20  nm  3D  NAND  requirements  for
+both  resolution  and  overlay  requirements,  and  the  high-
+volume manufacturing is under evaluation.
+ Semiconductor-graded NIL tool
+The FPA-1200NZ2C is the first semiconductor-graded tool
+that  meets  the  industry's  requirements.  It  is  a  UV,  inkjet
+coating  based  step-and-repeat  imprinter  targeted  to  work
+on 12" wafer manufacturing. The master stamp is made by
+Dai-Nippon Printing through E-beam writing on a 6" wafer
+(Fig. 6(a-ii))44.  The  working  stamp  strategy  is  applied  to
+extend  the  lifetime  of  the  master  mold.  The  nominal
+imprinting linewidth is 14 nm, corresponding to 5 nm-node
+for the advanced logic semiconductors, and is expected to
+be  able  to  pattern  with  a  minimum  linewidth  of  10  nm,
+corresponding to 2 nm-node. The patterning field size is 26
+mm × 33 mm, matching the typical field size of the optical
+lithography as shown in Fig. 6(a-iii)44. It is compatible with
+the 12" semiconductor wafer with imprinting throughput of
+20 wafers/station and 80 wafers/tool. The nominal overlay
+accuracy is < 3 nm109. The reported average defect density of
+the tool by using the device-like patterned mask with 20 nm
+half-pitch  line  spacing  is  0.03  defects/cm2 87.  This  section
+will  briefly  overview  how  the  first  semiconductor-graded
+NIL was built and how improvements are made.
+The alignment detection scheme of the FPA-1200NZ2C
+system  is  based  on  the  interference  effect  where  the
+imprinting mold and the alignment mark on the substrate
+form special Moire fringes under a specific illumination set-
+ting with multiple wavelengths, as illustrated in Fig. 6(b-i)105.
+By detecting the first-order interference pattern through the
+mask, mold misalignment can be detected with sensitivity
+down to 1 nm in accuracy. As for the alignment process, the
+coarse alignment with ~500 nm precision is done before the
+contact  of  the  mold  and  the  substrate44.  After  contact,
+adjustments are applied to fine-tune the rotation and lateral
+alignment. The high-order distortion error compensation is
+then  done  using  two  different  approaches  unique  to  NIL.
+The magnification actuation system uses multiple actuators
+that  apply  force  to  deform  the  mold  for  a  better  overlay.
+The distortion errors are also remedied by the high order
+distortion  control  (HODC),  where  the  DMD  mirrors  are
+used  to  impart  a  laser  to  introduce  localized  heat  on  the
+substrate to cause deformation on the field-to-field basis, as
+shown in Fig. 6(b-ii). Other methods, such as mold tilting
+and force management, are also applied to avoid distortion
+errors96,105. So far, the average + 3 sigma matched machine
+overlay with ASML ArFi scanner was 2.4 nm and 2.2 nm in
+x and y.  For  the  single  machine  overlay  measurements
+(NZ2C to NZ2C), the average + 3 sigma in x and y was 1.8
+nm and 1.5 nm, meeting the requirement for the 3D NAND
+flash market87.
+The defectivity reduction of FPA-1200NZ2C is done by
+reducing  the  repeated  and  random  defects5,78.  Ceramic
+materials with unique treatments, such as polishing, coat-
+ing, and heating, are used as chamber material to lessen the
+particles generated by the tool and prevent sidewall degra-
+dation95,103. Other tool parts, such as gas nozzles, undergo
+mechanical and chemical polishing to flatten the surface. A
+high-filtration air curtain system is adopted to blow puri-
+fied gas from the moving stage across the imprinting area to
+prevent particles from falling above the wafers6,7. Addition-
+ally, to prevent particles from being attracted to the imprint
+mask  by  the  accumulated  electrostatic  charge  during  the
+demolding process, an electrostatic cleaning plate is used to
+compensate for the electrostatic potential generated on the
+imprint  mask103.  By  applying  these  methods,  the  average
+repeat  defect  for  each  cycle  has  decreased  dramatically
+from  10  pcs/wafer  in  2013  down  to  0.003  pcs/wafer  in
+2024109,111.
+The  dominant  random  defects  are  the  non-fill  defects
+and the feature collapse. The non-fill defects can be mini-
+mized by ensuring sufficient imprinting time and avoiding
+trapping  the  air  between  the  mold  and  substrate.  As
+depicted in Fig. 6(c-i), micrometer-scale parabolic deforma-
+tion  of  the  template  is  generated  by  following  a  similar
+method  in  ref.46 to  create  a  convex  contact  surface  to  the
+resist  drops  during  imprinting,  resulting  in  a  contiguous
+liquid  film  from  the  discrete  drops  without  forming
+bubbles.  The  aspect  ratio  of  the  structure  is  limited  to
+<2.5∶1 to avoid cohesive failure and pattern damage. The
+separation process is also well controlled to ensure a consis-
+tent  speed  during  the  process. Figure 6(c-ii) shows  the
+authentic images of the separation process, demonstrating a
+uniform and symmetric separation front throughout 0.30 s95.
+In  all  cases,  random  defectivity  was  less  than  0.03
+defects/cm2 and,  for  many  instances,  was  well  under  0.01
+defects/cm2 87,109.
+The low throughput of the step-and-repeat nanoimprint-
+ing is always a problem95. FPA-1200NZ2C uses strategies to
+address  this  issue,  including  improving  the  imprinting
+material  wetting  property,  reducing  the  material  filling
+time, improving the dispensing system, involving an inno-
+vative dispensing system, etc. The wetting property for the
+imprinting  resist  is  engineered  to  be  high  so  the  material
+can spread and complete the resist filling quickly. Adjust-
+ing  the  resist  dispensing  system  and  reducing  the  single
+drop  volume  from  1.5  pL  to  1.0  pL  also  decreases  the
+required  resist  filling  time45.  Sparse  patterns  tend  to  fill
+more slowly because of the considerable distance between
+resist drops. This problem can be addressed by filling the
+area  with  dummy  patterns.  Over  the  years,  sophisticated
+algorithms have been developed to search for the optimum
+drop volume and resist pattern to minimize the filling time
+and  potential  defects.  When  performing  nanoimprinting,
+ambient  gas  can  be  trapped  at  the  interface  between  the
+resist and the mold, forming micro-scaled bubbles. To facil-
+itate  the  dissipation  of  bubbles,  a  gas  permeable  spin-on-
+carbon  (GP-SOC)  is  used  in  the  resist  stack,  which  can
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 11 of 27)
+
+[Page 14]
+quickly take up the gas, resulting in a shorter spread time.
+Changing the ambient gas from He to CO2 in the imprint-
+ing  system  was  theoretically  and  experimentally  proven
+effective to expedite the dissolving process.
+The outstanding achievement of the FPA-1200NZ2C also
+comes  from  the  establishment  of  a  nanoimprinting  eco-
+system87,109,112.  As  an  example,  the  defect  control  of  NIL
+relies on the defect inspection system to accurately identify
+the defect failure modes and the source of failures113. The
+repeated defects during the imprinting can be quickly iden-
+tified using an in situ mold inspection system. Implement-
+ing a master mold cleaning station can further reduce the
+defect density. It is also known that the resulting patterns
+transferred to the underlying layer depend on the nanoim-
+printed structures, residual layer thickness, descum method,
+and UV-curing dosage, as shown in Fig. 6(d). These factors
+are required to be well characterized and can be invaluable
+process  knobs  for  critical  dimension  control99.  The  wafer
+flatness also plays a vital role in the imprinting quality. The
+improvement also relies on the improvement of planariza-
+tion.  Furthermore,  similar  to  that  in  the  current
+photolithography, a design rule needs to be established so
+that  the  engineers  can  design  the  layout  accordingly  to
+avoid potential failures from happening.
+ Semiconductor manufacturing status
+The preliminary test data of NIL has met the standard for
+3D NAND and DRAM applications in terms of defectivity,
+overlay,  and  resolution87,109.  Several  companies,  including
+Kioxia110,  Toshiba114 and  SK  Hynix115,  have  been  actively
+studying the feasibility of using nanoimprinting to pattern
+3D NAND structures. Micron, one of the DRAM manufac-
+turing companies, recently also announced the initiative to
+integrate  nanoimprinting  into  its  DRAM  production
+processes, aiming to reduce production costs and enhance
+efficiency116. As for logic devices, Canon Inc. is dedicated to
+developing  NIL  technology  for  the  back-end-of-the-line
+process at 12 nm half pitches and below for the metal inter-
+connect process87,109. Due to the 3D patterning feature, NIL
+is  expected  to  significantly  simplify  the  dual  damascene
+process  for  via-and-trench  structure  from  several  pattern-
+ing  steps  and  etching  down  to  single  patterning  and  one
+etching, providing a 40% less cost reduction, as shown in
+Fig. 6(e)110. Using NIL also intrinsically minimizes the over-
+lay errors and the optical proximity correction issue due to
+the one-step process83.
+Even though NIL shows excellent potential for semicon-
+ductor  applications,  most  of  the  reported  works  on  NIL
+processes in semiconductor fabrication are still in the early
+path-finding  phase,  primarily  aiming  to  evaluate  NIL's
+process capability and compatibility. Therefore, continuous
+efforts are still needed to improve the tool and the process
+control. Cross-module cooperation is also necessary to opti-
+mize the process. For example, the 3D damascene pattern-
+ing shows that the thinner imprinting resist can reduce the
+imprinting  bubble  defects117.  However,  this  relies  on  the
+subsequent etching step to compromise for the thin resist. It
+is  also  worth  noting  that  nanoimprinting  will  not  wholly
+replace  optical  lithography  but  only  substitute  specific
+layers that show advantages by NIL.
+ Patterned magnetic nanostructures for hard disk drives
+Conventional  hard  disk  drives  rely  on  granular  recording
+media to store the information, but they increasingly suffer
+from data loss due to thermal fluctuations as grain size is
+reduced to achieve higher recording densities3. To address
+this  limitation,  the  patterned  magnetic  nanostructures
+(PMN)  approach  has  been  proposed,  in  which  a  continu-
+ous  magnetic  layer  is  divided  into  an  array  of  discrete
+magnetic dots—each representing a single bit. This strategy
+enables
+ ultra-high-density
+ storage
+ and
+ significantly
+improves  thermal  stability.  However,  the  key  challenge  in
+realizing PMNs lies in fabricating these nanoscale dots with
+feature sizes around 10 nm and at densities exceeding 100
+Gdot/in², all at a scalable and cost-effective manufacturing
+level11.
+To  tackle  this  issue,  the  research  team  led  by  Stephen
+Chou pioneered T-NIL to offer ultra-high resolution, high
+throughput,  and  low-cost  fabrication  of  nanostructures12.
+By using NIL, the team demonstrated a disc with a storage
+density  of  400  Gbit/in²,  nearly  three  orders  of  magnitude
+higher  than  that  of  commercial  disks  and  with  10  nm
+features  and  40  nm  periodicity12,118.  Recognizing  NIL’s
+promise  in  data  storage,  several  companies  have  initiated
+efforts to adapt NIL for commercial devices. For instance,
+Seagate Research Center has employed UV-NIL with inkjet
+coating  to  achieve  dot  patterning  densities  exceeding  2
+Tb/in², using features as small as 18 nm26. Toshiba has also
+demonstrated  a  2.5  Tb/in²  bit-patterned  media  system
+using a self-assembly method combined with UV-NIL27.
+Despite  these  advancements,  significant  challenges
+remain.  Mass-manufacturing  of  lithographically  defined
+patterns requires precise control of pattern placement and
+tight tolerances across multiple disks to ensure consistency
+and  functionality.  Fabricating  the  NIL  master  mold  with
+ultra-small  feature  sizes  and  high  density  is  particularly
+demanding. Additionally, the pattern transfer process to the
+magnetic materials often involves etching, where maintain-
+ing size uniformity and structural fidelity becomes increas-
+ingly  difficult  as  dimensions  shrink26.  These  technical
+hurdles must be overcome to fully realize the potential of
+NIL-based PMNs in next-generation data storage.
+ Flat optics
+Metalens has been one of the most exciting photonic tech-
+nologies in recent years and is another leading force behind
+the  development  of  nanoimprinting  lithography.  While
+metalens are small, they can behave like traditional geomet-
+ric  lenses.  They  can  potentially  replace  the  thick  optical
+stacks in mobile phones, smart glasses, or even automotive
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 12 of 27)
+
+[Page 15]
+devices  to  realize  multiple  functionalities,  such  as  facial
+recognition,  dot  projection  for  3D  sensing,  image  projec-
+tion for lidar, image magnification, eye tracking, and ToF
+measurement119.
+As shown in Fig. 7(a-i), the metalens comprise arrays of
+nanopillars  with  <  100  nm  feature  size  and  high  aspect
+ratio. When light passes through the meta-atoms with deep
+sub-wavelength  feature  sizes,  light  will  experience  a
+propagation  phase  shift,  altering  the  field  distribution.
+Precise  light  manipulation,  such  as  light  focusing,  can  be
+achieved by carefully engineering the structure and spacing
+of  the  pillars.  The  fabrication  of  metalens  must  satisfy
+ 
+a
+b
+c
+d
+i
+i
+i
+i
+ii
+iii
+Anneal
+Residual layer
+500 nm
+500 nm
+ii
+iii
+iii
+Mold
+0%
+80%
+D=350 nm
+D=400 nm
+ii
+ii
+iii
+iv
+Si3N4
+a-Si
+Nb2O5
+Low eﬃciency
+High eﬃciency
+2 μm
+2 μm
+500 nm
+500 nm
+500 nm
+Width
+Width
+z
+y
+x
+z
+y
+x
+Length
+Length
+100 O: Measured eﬃciency
+Conversion eﬃciency (%)
+80
+60
+40
+20
+0 0
+5
+10
+15
+Thickness (nm)
+20
+25
+30
+Thickness
+Period
+Resin
+2.1
+2.0
+1.9
+RefracƟve index
+1.8
+1.7
+1.6
+1.5400 500 600
+Wavelength (nm)
+700 800
+2.0
+(80, 1.94)
+(60, 1.84)
+(40, 1.72)
+(20, 1.60)
+(0, 1.53)
+1.9
+RefracƟve index
+1.8
+1.7
+1.6
+1.50
+20
+40
+TiO2 weight raƟo (%)
+60
+80
+Height
+Height
+ImprinƟng
+Demolding
+3.0
+2.5
+RefracƟve index
+2.0
+1.5
+400
+500
+600
+Wavelength (nm)
+700
+800 °C
+600 °C
+400 °C
+200 °C
+Thermal anneal
+TiO2
+Period
+NPC
+SiO2
+SiO2
+Soure: TEL
+Fig. 7 | NIL for metalens manufacturing. (a) Metalens are made using the NIL + RIE method. (b-d) Metalens are produced by using the direct NIL process.
+(a-i) SEM images of the metalens made by different high-index materials. (a-ii) The comparison of images captured by metalens with high/ low diffraction
+efficiencies.  The  image  of  low-efficiency  metalens  shows  a  bright  dot  defect.  (a-iii)  The  smallest  camera  modules  using  metalens  produced  by  NILT.
+(a-iv) The magnified image of a pumpkin seed was taken by an iPhone and installed with an image magnifier metalens by Moxtek. (b-i) The meta-element
+formed by imprinting UV-curable resin mixed with nanoparticles. (b-ii) The refractive index can be tuned using different TiO2 weight ratios. (b-iii) The
+surface roughness increases as the particle weight ratio increases. (c-i) The meta-element formed by UV-NIL followed by TiO2 deposition. (c-ii) The metal-
+ens conversion efficiency increases as the deposited thickness of TiO2 film rises. (c-iii) This method can be fabricated at a large scale. (d-i) The sol-gel
+imprinting process will be done with the post-annealing step. (d-ii) Higher annealing temperature results in higher refractive index due to the change of the
+crystal state. (d-iii) The nanopillars' shrinkage must be considered when designing the metalens. The residual layer is of a negligible thickness. Figure repro-
+duced with permission from: (a-i) ref.87, 121–122, SPIE; (a-ii, a-iii) ref.121, (a-iv) ref.123, SPIE; (b) ref.70, under a Creative Commons licences; (c) ref.124, Springer
+Nature; (d) ref.82, under a Creative Commons licences.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 13 of 27)
+
+[Page 16]
+several requirements to attain efficient and tight focusing by
+the  metalens.  First,  the  patterning  resolution  needs  to  be
+high with tight variation control. As discussed in ref.120, a 5
+nm  variation  in  the  nanopillars  with  100  nm  width  can
+result  in  a  >20%  focus  efficiency  loss,  which  can  lead  to
+imaging artifacts such as “bright spots”, as illustrated in Fig.
+7(a-ii)121. Second, the pillar must be tall enough to complete
+a 2π phase control. It is typically greater than 500 nm for
+visible wavelength, and taller structures may be needed for
+longer  wavelength.  Third,  the  meta-structure  composition
+requires high refractive index materials with low optical loss
+for
+ better
+ imaging
+ conversion
+ controllability.
+ The
+commonly  used  materials  are  amorphous  silicon  (a-Si),
+Si3N4 for the NIR wavelength, Si3N4, TiO2, and Nb2O5 for
+the  visible  wavelength,  and  ZrO281 for  the  UV  region.
+Fourthly, metalens with an area > 1 cm2 are usually desired
+for better imaging quality and applicability.
+The  high  resolution,  high  throughput,  curved-surface
+compatible, and low-cost properties make nanoimprinting
+lithography one of the major technologies for manufactur-
+ing  metalenses.  Both  the  NIL  +  RIE  and  the  direct  NIL
+methods  can  be  used  for  mass  production  with  different
+advantages. The benefit of the NIL + RIE method is its high
+compatibility  with  the  imprinting  system  that  has  been
+readily  developed  for  the  semiconductor  industry.  High
+patterning quality can be achieved. The main drawback is
+the  requirement  of  high  aspect  ratio  etching.  Since  the
+pattern  density  across  the  whole  metasurface  can  vary
+significantly,  the  loading  effect  can  greatly  influence  the
+etching profile and depth. In this regard, there are typically
+complete  design  rules  for  metasurfaces  design  to  avoid
+layout issues. The residual layer thickness variation due to
+the varying filling factor across the lens area must also be
+considered. The deposition and etching of the thick (> 500
+nm) high-index materials are usually time-consuming and
+require  a  dedicated  method  that  may  limit  the  process
+flexibility.
+±
+±
+Several companies have verified the manufacturability of
+the metalens by using the NIL + RIE method. NIL technol-
+ogy  (NILT)  utilizes  plate-to-plate  NIL  on  a  full  wafer
+followed by dry etching to fabricate the 500 nm height a-Si-
+based meta-optical elements with excellent process control,
+as shown in Fig. 7(a-i)125. The three-sigma process variation
+of  the  fabricated  meta-atoms  with  varying  sizes  on  the
+lateral  dimensions  is  5  nm.  As  for  the z-dimension,  the
+height variation is  1 nm within the 2 mm field size and 
+10 nm for an entire 100 mm substrate. This tight process
+control  enables  the  fabricated  metalens  to  have  a  high
+focusing  efficiency  of  >  80%  and  a  slight  variation  of  <
+1.5%126.  Recently,  NILT  has  launched  a  series  of  compact
+metalens  modules  targeting  different  applications.  The
+small form factor of the imaging modules can significantly
+benefit the wearable devices, as shown in Fig. 7(a-iii).
+Moxtek  is  the  first  company  to  commercialize  metal-
+enses  for  visible  wavelengths.  As  shown  in Fig. 7(a-i)122,
+their metalenses consist of Nb2O5 nanopillars with a high
+aspect ratio (> 12), tight peak-to-peak spacing (minimum =
+70  nm),  and  a  pillar  height  of  820  nm.  The  NIL  process
+involves soft conformal imprinting lithography on a 200-mm
+glass  wafer,  followed  by  dry  etching122,123.  The  produced
+metalenses exhibit an average of 86% focusing efficiency at
+the  532  nm  wavelength  and  demonstrate  high  wafer-to-
+wafer  consistency  across  multiple  wafers  (83%–90%)122.
+Additionally, the metalenses outperform geometrical lenses
+in  terms  of  MTF  when  tested  with  green  and  red  light.
+Recently, Moxtek launched products such as mobile phone
+magnification  lenses  and  expanded  its  metalens  foundry
+market.  An  example  image  captured  with  the  magnifica-
+tion lens on an iPhone is displayed in Fig. 7(a-iv)123.
+On  the  other  hand,  the  direct  NIL  method  can  pattern
+the imprinting materials into the final desired meta-struc-
+tures  without  deposition  and  RIE  steps127.  One  primary
+challenge is finding a suitable resist for imprinting, which
+must have a high refractive index (n>2.0) and low optical
+loss. Additionally, the structure must be physically stable to
+prevent drastic dimensional changes and strong enough to
+withstand  the  demolding  process  for  tall  structures.
+Recently, several advancements have been made to address
+issues regarding high scalability. Yoon et al. employed soft
+mold  NIL  to  print  metalenses  functioning  in  the  near-
+infrared region by mixing silicon nanoparticles with ther-
+mally printable resin to enhance the refractive index of the
+nanostructures128.  Similarly,  Einck  et  al.  and  Yoon  et  al.
+enhanced the refractive index of NIL resists by incorporat-
+ing TiO2 nanoparticles with UV-curable resin and success-
+fully imprinted a meta-lens working in the visible spectrum,
+as  illustrated  in Fig. 7(b)58,70.  Gong  et  al.  utilized  the
+commercially  available  resists  composed  of  polysiloxane
+matrix  and  TiO2 nanoparticles  to  fabricate  metalenses
+working  in  the  visible  light  range  for  anti-counterfeiting
+applications129. The use of polysiloxane instead of acrylate
+as  the  matrix  provides  low  surface  tension  and  better
+demolding  properties,  rendering  imprinting  patterns  with
+aspect ratios exceeding 10∶1. Kim et al. reported the fabri-
+cation  of  centimeter-scale  meta-lenses  on  a  12-inch  wafer
+by depositing a thin layer of TiO2 to compensate for the low
+refractive index of the resin, as shown in Fig. 7(c)124. Kim et
+al. used thermal annealing to modify the crystallization of
+the sol-gel structure, further increasing the refractive index
+beyond 2.5, as seen in Fig. 7(d)82. Common issues related to
+high-index materials include poor control over nanoparti-
+cle surface chemistry and size, leading to inadequate disper-
+sion and larger particle aggregates that result in light scat-
+tering and haze. The shrinkage ratio of solvent-based resin
+is approximately 15% and needs to be minimized83. Other
+methods, such as patterning regular UV-resists followed by
+metal  deposition,  were  also  used  to  fabricate  plasmonic
+metasurfaces  for  structural  color  and  holographic  encryp-
+tion130.  These  plasmonic  metasurfaces  can  also  be  imple-
+mented on a curved surface at a large scale131.
+Metalens through direct NIL is also actively developed in
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 14 of 27)
+
+[Page 17]
+industries to prepare for high-volume manufacturing. For
+example, Myrias Optics manufactures metalens by imprint-
+ing  the  TiO2 composite  resins  described  in  ref.58,80,132,133.
+SolNIL is also actively developing a high-index imprinting
+solution for sol-gel-based metalens nanoimprinting83.
+ Diffractive nanograting for augmented reality
+The  augmented  reality  (AR)  glasses  are  another  driving
+force behind NIL development, as illustrated in Fig. 8(a-i)134.
+In these AR glasses, a compact optical system is needed to
+convey light from distant displays to the user’s eyes92,135. A
+widespread  implementation  is  the  diffractive  waveguide
+system that uses high index substrate as the optical waveg-
+uide and the surface-relief gratings (SRG) structured on the
+substrate  to  diffract  the  light  to  couple  in,  expand,  and
+outcouple from the source, as depicted in Fig. 8(a-ii). The
+typical SRGs include slanted and blazed gratings with ~100
+nm feature sizes, tilted fins, and repeating periods of several
+hundred nanometers, as shown in Fig. 8(c)136. To provide a
+comfortable view, the area of the SRGs generally falls within
+the range of several square centimeters to accommodate the
+human eye boxes.
+The key performance attributes of the diffractive waveg-
+uides  include  image  contrast,  luminosity  uniformity,  and
+field of view137,138. The material of the waveguide substrate
+and the grating structure plays a crucial role. As illustrated
+in Fig. 8(b-i)139, high refractive index materials for both the
+waveguide  and  the  grating  structure  strongly  correlate  to
+the display's field of view. The transparency of the waveg-
+uide material is equally important. Fig. 8(b-ii)134 shows that
+using  low-transparency  material  for  the  waveguide  can
+reduce image contrast compared to using highly transpar-
+ent  waveguide  materials.  Additional  factors  must  also  be
+optimized, such as corner sharpness and side wall smooth-
+ness. Although the feature size for the nanograting is not as
+small as that in the metasurfaces, the process tolerance may
+be  even  tighter  because  light  must  propagate  through  the
+waveguide over a long distance. For instance, according to
+ 
+i
+i
+ii
+ii
+Roll-to-plate
+Low haze
+High haze
+Plate-to-plate
+70
+65
+FOV horizontal
+FOV diagonal
+60
+55
+50
+FOV (°)
+45
+40
+35
+30
+25
+1.5
+1.6
+1.7
+RefracƟve index (nd)
+1.8
+1.9
+2.0
+n=1.5
+H=337 nm
+W=170 nm
+P=350 nm
+Θ=36°
+H=130 nm
+P=400 nm
+Θ=64°.27°
+n=1.89
+Solvent free resin
+Solvent-based resin
+300 nm
+500 nm
+300 nm
+500 nm
+Ion beam etching
+Before etch
+StaƟc, Angled RIBE
+20°
+30°
+45°
+60°
+a
+b
+c
+e
+f
+d
+Fig. 8 | Nanoimprinting lithography for AR diffractive waveguide manufacturing. (a) Images of the Magic Leap AR glasses (a-i) and the light propagation
+within the AR glass (a-ii). (b) The refractive index and the transparency of the resin can influence the field of view (b-i) and the image contrast (b-ii). (c) The
+SEM images of the fabricated gratings with the standard resin (left) and the high index resin with nanoparticle fillers (right). The images show high resem-
+blance and low shrinkage. (d) The AR diffractive waveguides fabricated by roll-to-plate imprinting with high throughput. (e) The SEM images of the fabri-
+cated gratings by roll-to-plate imprinting using solvent-free and solvent-based resin. (f) The etching method to fabricate the 3D slanted gratings. Figure
+reproduced from: (a-i) ref.134, SPIE; (a-ii) Digilens, (b-i) ref.139; (b-ii) ref.134, SPIE; (c) ref.136, (d, e) ref.88, (f) ref.142, SPIE.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 15 of 27)
+
+[Page 18]
+current  industrial  standards,  the  manufacturing  tolerance
+for  the  grating  period  is  on  the  scale  of  a  few  tens  of
+picometers. For the tilted angle of the grating, it is on the
+scale of a few tens of arcseconds137.
+Multiple  companies  are  working  on  manufacturing  AR
+glass  through  direct  NIL.  Imprinting  materials  with  high
+refractive  indices,  low  haze  (0.1%),  high  transparency
+(95%), and low shrinkage are under active development for
+AR  diffractive  waveguide  applications140,141. Figure 8(c)
+shows  the  fabricated  SRG  structures  using  plate-to-plate
+NIL with an inkjet dispensing function136. The grating fabri-
+cated  using  nanoparticle-doped  high-index  composite
+resins  shows  similar  results  to  those  produced  using  UV
+resin. Despite the presence of the nanoparticles, the grating
+structures  and  the  edges  are  still  clearly  defined104.  The
+residual  layer  is  also  thin,  with  ~30  nm.  The  diffractive
+waveguides  are  also  manufactured  through  roll-to-plate
+NIL88,137. Figure 8(d) shows a panel with 1100 mm × 1300
+mm and 480 sets of waveguides in minutes using Morpho-
+tonic's roll-to-plate method88. The measured process varia-
+tion of the fabricated grating periods is 20 pm, and the stan-
+dard deviation of the relative orientation is 5 sec with tight
+process control. Despite the high throughput advantage, the
+thick residual layer (4.6 μm) is one of the concerns for the
+roll-to-plate imprinting, as illustrated in Fig. 8(e). This can
+be  improved  using  lower  viscosity  solvent-based  resin  or
+optimizing  the  resist  dispensing  strategy.  Pure  polymer
+materials with a refractive index of 1.8 are also available on
+the  market,  providing  high  transparency  in  the  visible
+wavelength143. NIL + RIE methods are also used to manu-
+facture  waveguide  grating  structures.  By  using  the  angled
+reactive ion beam etcher to etch the high index substrate, as
+shown  in Fig. 8(f)142,  3D  SRG  can  also  be  achieved.  The
+benefit  of  the  NIL  +  RIE  method  is  that  it  can  be  more
+compatible  with  high-index  substrates  such  as  SiC.
+However,  it  requires  delicate  tools  and  will  limit  the
+throughput144.
+Magic Leap is one of the pioneering companies that has
+successfully launched its AR glasses (Magic Leap 2) prod-
+ucts, manufactured by NIL, as shown in Fig. 8(a-i). Magic
+Leap utilizes the inkjet dispensing method, combined with
+the roll-to-plate imprinting tool, to achieve high-through-
+put  fabrication  of  SRGs  with  thin  residual  layers  (10-20
+nm). It also optimizes its imprinting tools to achieve double
+patterning on both sides of the waveguide glass. It uses up
+to 32 distinct depths for diffractive optical element design
+to  achieve  the  desired  functionalities.  By  optimizing  the
+design and fabrication process, Magic Leap can achieve >90%
+yield with >2.0 process capability index, marking an excep-
+tional process control and high uniformity of their roller-
+based  NIL  system.  The  resulting  Magic  Leap  AR  glasses
+demonstrate a 7× improvement in eye box efficiency and a
+2× increase in outcoupling area compared with its previous
+version134.
+ Wafer-level optics and wafer stacking
+Manufacturing wafer-level optics for optical modules, such
+as LiDAR, face-ID, and image sensors, is another essential
+application for nanoimprinting lithography145,146. The basic
+idea is to use nanoimprinting to fabricate individual optical
+elements, such as optical diffusers, microlens, and diffrac-
+tive  optical  elements,  at  the  wafer  level.  These  fabricated
+wafers are then aligned and bonded through UV bonding,
+forming  a  wafer  stack.  The  wafer  stack  is  then  packaged
+with other elements, such as CMOS sensors and lasers, and
+finally  is  diced  into  individual  devices.  Due  to  the  small
+form  factors  and  lower  cost-to-performance  ratios,  wafer-
+level  3D  sensors  and  imaging  systems  have  been  widely
+used in automobile devices. Wafer-level UV imprinting of
+micro-optical  components  has  become  the  first  high-
+volume  manufacturing  application  of  nanoimprinting
+lithography since its introduction in 1995147.
+Microlens  array  is  one  of  the  most  widely  used  wafer-
+level optics elements, as shown in Fig. 9(a, b-i) . High-qual-
+ity, reliable, low-roughness microlens fabricated by UV-NIL
+technology  have  been  commercialized  using  tailored  UV
+resins for various applications148. The microlens array can
+be  bonded  with  the  CMOS  sensors  with  high  alignment
+accuracy to focus the incident light onto the active area of
+each sensing pixel, effectively enhancing the camera sensi-
+tivity. Diffractive optical elements and optical diffusers are
+widely  used  elements  for  beam  shaping,  as  shown  in
+Fig. 9(a, b-ii).  By  properly  designing  the  structure,  the
+output  light  can  be  altered  into  different  shapes,  such  as
+discrete 3D point clouds, uniform top-hat beams, or a non-
+glare  uniform  illumination.  Because  the  light  conversion
+efficiency  and  the  diffracted  angle  are  highly  related  to
+structures of the diffractive elements, the NIL can provide
+unique  advantages  of  3D  patterning  and  a  better  perfor-
+mance. By incorporating the diffractive elements with opti-
+cal elements, such as laser, spacer, wire-grid polarizer, and
+filter,  a  compact  optical  module  can  be  obtained  for  3D
+sensing, lidar, and ToF sensors149.
+Recently,  NIL  has  been  extended  to  the  wafer-level  Si
+photonics  packaging150,151.  As  shown  in Fig. 9(c-i),  a  3D
+polymer  waveguide,  a  turning  mirror  (M1),  and  a  curved
+mirror  (M2)  are  fabricated  through  UV-NIL  followed  by
+metal deposition. The mirrors are used to direct the inci-
+dent  light  to  focus  on  the  polymer  waveguide.  The
+imprinted  polymer  waveguides  are  3D  tapered  from  a
+cross-section of 11 μm × 11 μm to 5 μm × 2 μm and serve as
+mode  converters  to  convert  the  large  input  beam  into  a
+smaller size to match the mode of the Si waveguide. The 3D
+tapered polymer waveguide is aligned along the underlying
+Si  waveguide  with  sub-μm  precision  to  facilitate  the  light
+transfer from the polymer waveguides to the Silicon ones, as
+depicted in Fig. 9(c-ii).
+ Display
+Nanoimprinting lithography is used in display manufactur-
+ing. One famous example is the moth-eye-like structure, a
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 16 of 27)
+
+[Page 19]
+ 
+a
+b
+c
+i OpƟcal receiver
+v Light guide
+i Microlens array
+iii Moth eye structure
+vi LED prism structure
+i
+M1
+M2
+Waveguide
+Imprinted
+waveguide
+Si channel
+Silicon channel
+ITPB waveguide
+ii
+vii Honeycomb structure
+viii DFB laser
+iv Al nanowires
+v Lighguide coupler
+200 μm
+1.87 μm
+2.88 μm
+2.00 μm
+200 μm
+50 μm
+10 μm
+8 μm
+M1
+“3” “2”
+“1”
+M2
+Waveguide
+200
+Al
+SiO2
+100 nm
+500 nm
+ii DiﬀracƟve opƟcal element
+ii Wide-angle opƟcal diﬀuser
+Light
+direcƟon
+LEDs
+vi LED PSS
+vii Photo-voltaic
+ITO
+SUNLIGH
+MgF2
+p-type Electrode
+SiO2
+InP
+p-InGaAsP
+p-InP
+InGaAsP
+AR ﬁlm
+n-InGaAsP
+GraƟng
+(opƟcal diﬀracƟon)
+n-type Electrode
+ITO
+ITO
+SnOx
+SnOx
+MgF2 ARC
+DeposiƟon
+ImprinƟng
+HONEYCOMB
+SnOx
+C60
+Perovskite
+PFN
+PTAA
+ITO
+GLASS
+viii DFB laser
+Lens imprint
+1
+2
+3
+4
+1
+1
+2
+2
+3
+4
+Spacer wafer
+Glass wafer to sensor
+Finished lens wafer stack
+ii OpƟcal transmiƩer
+Fanout
+Incident light
+TransmiƩance of
+99% or more
+TM
+TE
+E
+E
+ScaƩering and reﬂecƟon
+TransmiƩance of 90%
+No MOSMITETM
+With MOSMITETM
+Lightsource
+iii AnƟ-reﬂecƟon coaƟng
+iv Wire-grid polarizer
+240 nm ITO
+200 nmp-GaN
+460 nm MQWs
+3 μm n-GaN
+1 μm GaN
+430 μm Sapphire
+Fig. 9 | NIL for micro-, nano-optical device manufacturing. (a) The schematic, and (b) the representative structures of these applications. These applica-
+tions include (a-i) optical receiver modules, (a-ii) optical emission modules, (a-iii) anti-reflection coating, (a-iv) wire grid polarizers, (a-v) light guides, (a-vi) LED
+patterned sapphire substrates, (a-vii) photo-voltaics, and (a-viii) DFB lasers. (c) NIL for wafer-level Si photonics packaging. (c-i) Nanoimprinted polymer
+waveguide and two reflective mirrors (M1 and M2). (c-ii) The polymer waveguide is imprinted on top of the Si waveguide with sub-μm alignment accuracy.
+Figure reproduced with permission from: (a-i, b-i) ref.148, SPIE; (a-ii, b-ii) NILT websites; (a-iii, b-iii) Mitsubishi Chemical Group152; (a-iv, b-iv) Moxtek153;
+(a-v, b-v) ref.154–155, Springer Nature; (a-vi, b-vi) ref.90, under a Creative Commons licences; (a-viii, b-viii) Scivax156; (c) ref.118.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 17 of 27)
+
+[Page 20]
+bio-inspired  structure  containing  dense  pillars  with
+100−200  nm  feature  sizes,  as  shown  in Fig. 9(a, b-iii) 152.
+The moth’s eye structure can be used as anti-reflection coat-
+ing,  substantially  suppressing  the  light  reflection  from  a
+glass surface from 8.0%-10.0% down to less than 0.5% with
+a broadband working wavelength. In addition, the unique
+structure also repels water, resulting in an anti-fogging and
+anti-water  surface.  These  structures  are  now  used  in
+display,  automotive,  and  exhibition  windows  and  are
+mass-produced
+ by
+ plate-to-plate
+ and
+ roller-based
+imprinting152,157. Nanoimprinting  is  also  used  to  make  the
+aluminum wire grid polarizer, where linear aluminum lines
+with 50−100 nm pitches and 100 nm height are formed on a
+transparent  substrate,  as  shown  in Fig. 9(a, b-iv)153.  The
+wire grid polarizer can be manufactured through the roll-
+to-plate or plate-to-plate method by patterning the etching
+mask  and  then  etching  the  aluminum  nanowires  or  by
+imprinting the polymer nanowires and then depositing the
+aluminum  materials158.  Since  the  wire  grid  polarizers  are
+reflection-based,  they  can  avoid  optical  loss  compared  to
+other absorption-based polarizers and show broader work-
+ing  wavelengths.  They  are  used  in  high-brightness  liquid
+crystal  displays.  It  can  also  be  integrated  with  wafer-level
+optics  and  bond  with  other  optical  elements  for  complex
+imaging  applications159.  Nanoimprinting  is  also  used  to
+fabricate structured light guide devices to create uniform illu-
+mination  in  the  display  technology.  As  shown  in
+Fig. 9(a, b-v)154,155, when the LED light enters the waveguide
+through the edge, the light will be trapped inside the waveg-
+uide until encountering the output coupling structures that
+are  imprinted  on  the  surface  and  emitting  toward  the
+display.  These  outcoupling  structures  are  typically  binary
+diffraction gratings, prism-like mirrors with 3−5 μm feature
+sizes.  A  thin  and  uniform-brightness  display  can  be
+achieved by appropriately arranging the density and distri-
+bution of the structures. This structured light guide device
+has been adopted to illuminate displays, such as liquid crys-
+tal (LCD) based tablets and electronic ink readers160.
+ Optoelectronic devices
+Nanoimprinting is used in optoelectronic devices, such as
+light-emitting  diodes,  photovoltaic  solar  panels,  and
+distributed feedback lasers. It has been shown that using a
+patterned sapphire substrate (PSS) for the GaN LED fabri-
+cation can substantially enhance light extraction efficiency
+(>30%), facilitate the epitaxial growth of the GaN LED, and
+enhance the yield161, as shown in Fig. 9(a, b-vi)90. However,
+the  sapphire  substrates' rough  and  warpage  nature  make
+them difficult to pattern through traditional photolithogra-
+phy. These challenges can be significantly relieved by using
+full  wafer-scale  plate-to-plate  imprinting  with  flexible
+molds followed by dry etching. Nowadays, NIL tools dedi-
+cated  to  patterning  the  PSS  have  been  available  and  are
+gradually adopted in the LED manufacturing industry. NIL
+has emerged as a practical method to enhance the perfor-
+mance  of  photovoltaic  devices.  UV-NIL  has  been  used  to
+replicate  periodic  light-trapping  geometries,  such  as  pyra-
+mids, gratings, and meshes, on the front or rear electrodes
+of the thin-film photovoltaics to increase the effective path
+length  of  light  through  the  active  area  to  enhance  the
+absorption and conversion efficiency of sunlight to electric-
+ity, as shown in Fig. 9(a, b-vii) . The high throughput nature
+of  NIL  can  be  an  ideal  tool  for  large-area  photovoltaic
+devices. In addition to effectively increasing the absorption
+path  length,  NIL  can  control  molecular  orientation/crys-
+tallinity and enhance the deposition yield161. Nanoimprint-
+ing  is  also  used  to  pattern  the  grating  structure  of  the
+distributed feedback (DFB) laser, where the grating struc-
+ture determines the feedback strength and the optical loss,
+as shown in Fig. 9(a, b-viii)156. Recently, IQE announced the
+adoption  of  using  NIL  to  fabricate  the  periodic  grating
+structures  with  ~500  nm  period  and  low  roughness  and
+high quality in the DFB lasers162.
+ NIL for fiber optics
+Besides  patterning  planar  structures  on  a  large  scale,  NIL
+can create delicate patterns on tiny fiber tips (~10 μm for
+the core diameter) with high efficiency and cost-effective-
+ness. To pattern nanostructures on the fiber tips, an optical
+fiber is immersed in the UV-curable resin and aligned with
+the working mold through a piezo stage. After alignment,
+UV  light  was  then  coupled  to  the  fiber  to  cure  the  resin,
+followed  by  a  demolding  process163,164.  This  method  can
+quickly transfer patterns such as campanile probes for near-
+field  super-resolution  imaging165,  Fresnel  lens  for  light
+focusing166,  top  hat  beam  shaper,  and  vortex  phase  plates
+onto the optical fibers without dedicated tools, such as ion-
+beam  milling,  2-photon  polymerization,  laser  processing,
+etc.  This  fiber-based  nanoimprinted  technology  is  now
+being developed in preparation for volume production167,168.
+ Biomedical applications
+In addition to photonics and semiconductors, the applica-
+tion of NIL in the broader field of biomedical applications is
+growing  rapidly,  especially  in  gene  sequencing169.  In
+sequencing-by-synthesis  (SBS)  platforms,  NIL  repro-
+ducibly  stamps  arrays  of  uniform  nanowells  (≈100  nm
+diameter) into glass or polymer substrates, creating discrete
+reaction  chambers  for  bridge-amplified  DNA  clusters.
+During  sequencing,  fluorescently  labeled  nucleotides  are
+incorporated one base at a time into each well, and high-
+resolution  optical  imaging  records  each  incorporation
+event.  NIL  also  underpins  the  fabrication  of  solid-state
+nanopore  sensors:  it  patterns  20–50  nm  apertures  in  thin
+membranes, which can be thermally or chemically shrunk
+to  single-digit–nanometer  pores.  When  an  electric  poten-
+tial drives single-stranded DNA through these pores, each
+nucleotide  produces  a  characteristic  blockade  of  the  ionic
+current; real-time analysis of these current fluctuations then
+reveals  the  underlying  DNA  sequence.  Several  biomedical
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 18 of 27)
+
+[Page 21]
+companies, such as Illumina, have adopted NIL to manu-
+facture DNA sequencing tools.
+NIL  is  also  useful  for  drug  delivery  applications,  where
+nanoparticles with specific shapes and sizes can be precisely
+engineered. By using a precursor solution containing cross-
+linkable  polymers  and  biomaterials  in  combination  with
+predefined  molds,  highly  monodisperse,  enzymatically
+responsive  nanoparticles  as  small  as  50  nm  can  be
+fabricated170. NIL can also be used for immunoassay chips
+and nanofluidic chips for biosensing and analysis171,172. As
+an example, by precisely controlling the cross-section of the
+nanofluidic channels from 300 nm × 700 nm to 75 nm ×
+120  nm,  the  stretching  state  of  DNA  flowing  through  the
+nanochannels  can  be  modulated173.  In  tissue  engineering,
+NIL  is  being  explored  to  create  biomimetic  surfaces  that
+guide  cell  growth  and  behavior174,175.  Other  applications,
+including  direct  protein  patterning  at  the  nanoscale,  have
+also been demonstrated176.
+ Research development in academia
+Besides industry and manufacturing dedicated to optimiz-
+ing the imprinting system and process for volume produc-
+tion,  academics  are  more  focused  on  exploring  new
+nanoimprinting  applications  and  leveraging  NIL's  advan-
+tages to improve the capability. Thanks to the fewer mate-
+rial  constraints  of  NIL,  many  materials  can  be  patterned
+with  NIL,  and  new  properties  can  be  found.  In  addition,
+since NIL usually involves heating and pressing steps, func-
+tionality  can  be  different.  Researchers  are  also  actively
+investigating  methods  to  solve  the  intrinsic  challenges  of
+NIL,  such  as  residual  layer  issues  and  demolding-induced
+defects. Variations of NIL, such as ultrasound-assisted NIL,
+are also leveraged to make NIL broadly applicable in differ-
+ent areas.
+ High-quality factor optical devices
+One  significant  advantage  of  NIL  is  the  low  lithography-
+induced edge roughness, which makes it suitable for fabri-
+cating high-quality integrated photonic devices. In the opti-
+cal waveguides, the optical scattering induced by the waveg-
+uide  roughness  is  the  dominant  factor  that  causes  light
+dissipation.  The  waveguide  roughness  can  be  generally
+separated  into  line  edge  and  sidewall  surface  roughness.
+The  former  usually  occurs  during  the  lithography  step,
+where  the  dosage  fluctuation  or  insufficient  resolution  of
+the  lithography  are  the  major  contributors.  The  latter
+usually  results  from  the  etching  process,  causing  a  non-
+smooth sidewall. Even though the feature size of the optical
+waveguides is only a few hundred nanometers, the perfor-
+mance of the photonic integrated circuits is sensitive to the
+nm-scaled  roughness.  NIL  can  substantially  avoid  the
+roughness issue because the fabrication of the NIL mold is
+typically based on the E-beam writing, where the lithogra-
+phy-induced roughness can be minimized. In addition, NIL
+mold is typically fabricated on standard materials, such as Si
+or SiO2, with mature etching technologies.
+Using thermal imprinting with a highly smooth Si-mold,
+Lin  et  al.  fabricated  polymer  microring  resonators  with  a
+quality  factor  >  1.5  million  on  the  thin  polystyrene  films
+(n= 1.58) on a full wafer scale54. Compared with other poly-
+mer  devices,  the  quality  factor  is  1−2  orders  higher  when
+using NIL. Nanoimprinting can also fabricate high-quality
+factor  devices  through  NIL  +  RIE  methods.  Liu  et  al.
+demonstrated that using the pattern transfer layer, the Q-
+factor can reach higher than 10,000,000 for SiN microring
+resonators.  The  fabricated  devices  have  been  used  for
+nonlinear  optics  to  generate  a  high-quality  frequency
+comb177.  The  NIL  can  also  be  used  for  high Q-factor  3D
+devices.  Ofer  et  al.  used  direct  laser  writing  to  pattern  a
+master  mold  of  micro-resonator  in  3D,  followed  by  dual
+soft NIL with PDMS and SU8 curable resin to transfer the
+pattern into the sol-gel materials178. To reduce the surface
+roughness inherited from the direct laser writing, a thermal
+reflow  step  was  performed  in  the  middle  of  the  dual
+imprinting to smoothen the defects, as shown in Fig. 10(a-i).
+The  thermal  reflow  technique  boosted  the  measured Q-
+factor  from  110,000  to  over  3,000,000,  as  illustrated  in
+Fig. 10(a-ii). This work demonstrates the high Q-factor 3D
+nanophotonics devices by using simple apparatus.
+ Molding-induced molecular alignment
+NIL provides a unique manner to control chain alignment
+and crystal orientation in semi-crystalline polymers. Cox et
+al. and Aryal et al. demonstrated the capability of control-
+ling  the  3D  chain  alignment  of  the  conjugated  polymer
+poly(3-hexylthiophene)  (P3HT)  by  using  T-NIL75,179.
+During  the  imprinting  process,  polymer  chains  tend  to
+align along the polymer ﬂow direction. The P3HT molecu-
+lar chains rotate during the high-temperature process and
+turn toward the hydrophobic sidewalls of the mold due to
+the interaction of the hydrophobic mold surfaces, as shown
+in Fig. 10(b-i)179. By using different mold structures, such as
+1D nanograting and nanopillars, the polymer chain can be
+effectively modulated and aligned, as shown in Fig. 10(b-ii).
+Since the polymer backbone is related to the carrier trans-
+port property, this capability has recently been engineered
+to  improve  the  performance  of  solar  cells  and  field  effect
+transistors (FET).
+Hu et al. demonstrated the capability of modulating the
+orientation  of  ferroelectric  polymer  crystals  when  using
+properly designed molds for T-NIL180. After imprinting, the
+orientation of the chain axis that the dipole moment rotates
+about  on  application  of  a  vertical  electric  field  is  aligned
+parallelly to the substrate with high uniformity, leading to a
+low-voltage  operation.  The  preferential  orientation  of  the
+crystals  in  the  ferroelectric  nanocells  greatly  enhances  the
+performance of the ferroelectric polymer memory devices,
+enabling  them  to  compete  against  more  expensive  tech-
+nologies such as flash memories.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 19 of 27)
+
+[Page 22]
+ Pressing for strain engineering
+Strain  engineering  is  a  promising  method  to  modulate
+material properties and device performance, such as carrier
+mobility,  conductivity,  and  band  gap  modulation180.  The
+nanoimprinting process, which involves pressing and heat-
+ing,  can  effectively  engineer  materials  with  nanoscale
+resolution. Wang et al. demonstrated that by stamping the
+mold  with  periodic  gratings  onto  the  substrates  with  Te
+nanowires, a periodic strain field can be induced, altering
+the optical properties of the Te nanowires, as illustrated in
+Fig. 10(c-i)181.  The  observed  Raman  spectra  reveal  the
+strong  lattice  vibration  response  under  the  corresponding
+strain conditions, suggesting the potential of 1D Te as a pro-
+mising candidate for deformable optoelectronics and wear-
+able sensors, as illustrated in Fig. 10(c-ii) and Fig. 10(c-iii).
+Sun et al. demonstrated the capability of strain engineering
+in  2D  materials  at  low  cost180.  Continuous  tuning  of  the
+strain  magnitude  and  generating  various  strain  distribu-
+tions of 2D materials were successfully achieved and evalu-
+ated by scanning Raman spectroscopy. This strain engineer-
+ing  method  is  compatible  with  standard  semiconductor
+fabrication  processes,  providing  prospects  for  advances  in
+broad nanoelectronic and optoelectronic devices.
+ Different types of NIL
+ Polymer fiber imprinting
+Most nanoimprinting technologies are implemented on flat
+or semi-flat substrates. Recently, a directly imprinting ther-
+mal drawing (DITD) technique demonstrated the capabil-
+ity  of  patterning  on  the  entire  fiber  surface  with  a  ten-
+nanometer  resolution  and  a  large  scale,  as  shown  in-
+Fig. 11(a)182.  In  this  process,  a  polymer  preform  (PVDF)
+was fed into a furnace to elongate the preform into a thin
+fiber.  It  is  then  passed  through  a  pair  of  rollers  with  the
+desired  surface  structure  to  transfer  the  pattern  from  the
+mold onto the fiber with high resolution. It is a continuous
+process  that  enables  large-scale,  high-resolution  polymer
+imprinting, such as grating structures. The plasmonic effect
+can  be  observed  by  depositing  a  thin  gold  film  on  the
+imprinted  nanorod  structures  on  the  fiber,  which  is
+expected to be useful for biosensing applications. The tech-
+nique also shows compatibility to pattern other functional
+fibers  and  can  be  used  for  self-powered  wearable  multi-
+point touch sensors.
+ Laser nanoimprinting
+Nanoimprinting  can  also  directly  pattern  hard  materials,
+such as crystalline Si and metal with nanometer resolution.
+ 
+Before annealing
+AŌer annealing
+#1
+#2
+1.2
+1.0
+0.8
+0.6
+0.4
+635
+636
+Wavelength (nm)
+Free spectral
+range
+Free spectral
+range
+Normalized transmiƫon (arb.u.)
+Transmit t ion (arb.u.)
+Q=3 020 000
+Q=473 000
+Q=113 000
+No reﬂow
+37 °C DSS-NIL
+40 °C DSS-NIL
+TheoreƟcal ﬁt
+−6
+−4
+−2
+0
+2
+4
+6
+Oﬀset frequency from resonance [GHz]
+Side wall
+Nano-cavity
+Side wall
+Grat ing direct ion
+NanograƟng
+Nanopillar
+P3HT pillars
+200 nm
+200 nm
+NanoimprinƟng
+150 °C heat
+3 μm
+A1 Raman intensity
+1 μm
+8.0E+3
+6.5E+3
+5.0E+3
+3.5E+3
+2.0E+3
+2.5
+2.0
+1.5
+1.0
+0.5
+0.8
+1.2
+1.6
+2.0
+2.4
+A1 mode
+Linear ﬁƫng
+Locall strain on 1D Te (%)
+a
+b
+c
+i
+i
+i
+ii
+ii
+iii
+ii
+Fig. 10 | NIL imprinting in the research area. (a-i) SEM images of the 3D micro-resonator fabricated by NIL. By applying annealing, the defects on the
+surface  can  be  reduced.  (a-ii)  the  measured  spectrum  under  different  annealing  conditions.  (b-i)  NIL  is  used  for  polymer  molecular  chain  alignment.
+(b-ii) By using different molding structures, polymer molecular chain direction can be modulated. (c-i) Strain engineering is done by using T-NIL. (c-ii) The
+induced strain can be seen using Raman spectroscopy. (c-iii) The Raman shift is proportional to the local strain. Figure reproduced with permission from:
+(a) ref.178, under a Creative Commons licences; (b) ref.179, American Chemical Society; (c) ref.181, under a Creative Commons licences.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 20 of 27)
+
+[Page 23]
+Chou  et  al.  demonstrated  the  laser-assisted  direct  imprint
+(LADI) method to pattern Si with sub-10 nm resolution183.
+In this method, a single XeCl excimer laser pulse was used
+to melt a thin surface layer of silicon. Subsequently, a mold
+made of quartz was embossed into the low-viscosity molten
+Si liquid layer and was separated after Si was solidified. The
+low viscosity Si features render the intriguing characteris-
+tics of LADI—sub-10 nm resolution, sub-250 ns processing
+time, and excellent imprint of large, isolated patterns. Gao
+et  al.  utilized  laser  shock  imprinting  (LSI)  to  achieve
+high-resolution and smooth crystalline metal patterning, as
+shown  in Fig. 11(b)184.  In  this  method,  a  high-power  ns-
+pulsed laser was used to irradiate an ablation coating layer,
+which  sublimated  and  generated  a  shock  wave  with  high
+pressure  (0.85−1.83  GPa)  to  compress  metal  sheets  into  a
+nano-patterned  silicon  mold  conformably.  LSI  doesn’t
+suffer from the metal grain effect, and the patterning reso-
+lution can thus be high (< 30 nm). Figure 11(b-ii) shows the
+silver  nanopyramid  nanostructures  fabricated  by  LSI.  The
+sharp  tips  of  the  nanopyramids  resulting  from  the  high
+fabrication  resolution  of  LSI  are  directly  related  to  the
+device's performance on Surface-enhanced Raman scatter-
+ing (SERS). LSI is also suitable for patterning hard metals,
+such as Ti, with a melting temperature of 1668 °C, as shown
+in Fig. 11(b-iii).
+ Ultrasound imprinting
+Ultrasound imprinting is another method to pattern hard
+ 
+Unpa erned
+preform
+Pa erned
+ﬁber
+50 μm
+Pa erned
+roller
+Furnace
+31 cm
+33 cm
+50 μm
+50 μm
+50 μm
+Au
+grain
+Mold
+Imprint ﬁlm
+Ag2s
+Ag2s
+Solid-state super-ionic
+electrochemical nanoimprin ng
+Ag
+Ti
+5 μm
+400 nm
+ii
+ii
+iii
+3 μm
+Laser
+pulse
+Glass
+Metal layer
+Si mold
+Lubricant layer
+Graphite ableƟon layer
+Si mold
+Metal
+Glass
+Crystalline
+smooth
+nanostructures
+a
+b
+c
+d
+i
+i
+ii
+i
+Fig. 11 | Different variations of NIL. (a) NIL for high throughput polymer fiber patterning. (b) Laser nanoimprinting. (c) Ultrasonic nanoimprinting. (d) Elec-
+trochemical imprinting. Figure reproduced with permission from: (a) ref.182, (b) ref.184, (c) ref. 185, under a Creative Commons licences; (d) ref.186, American
+Chemical Society.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 21 of 27)
+
+[Page 24]
+material,  like  crystalline  metal,  at  room  temperature  with
+nano-scaled resolution185. The working principle is demon-
+strated  in Fig. 11(c-i).  Like  a  jackhammer,  the  ultrasound
+imprinting method uses a high-frequency ultrasonic strike
+with  the  nanostructured  mold  to  deform  the  materials,
+allowing the user to make nanostructures out of almost all
+solid materials regardless of their melting points, chemical
+reactivity, and ductility.
+With ultrasound nanoimprinting, vertically aligned metal
+nanowires  (Au,  Ag,  Sn,  and  Cu)  with  varying  lengths
+(100  nm-10  μm)  and  diameters  (30  nm-300  nm)  can  be
+obtained within 1 minute. The length of the nanowires can
+be  tuned  by  adjusting  the  imprinting  force  and  vibration
+amplitude. At the same time, the diameter is determined by
+the  imprinting  mold.  Ultrasound  nanoimprinting  also
+allows  for  the  fabrication  of  heterojunction  nanowires
+composed of different materials with different properties, as
+shown in Fig. 11(c-ii). A nanowire array with Sn-Au junc-
+tions  can  be  made  regardless  of  a  significant  difference
+between the melting points. Metal and plastic heterojunc-
+tion was also demonstrated. As a demonstration, the fabri-
+cated nanorods containing Ag-alumina-Ag heterojunctions
+were used as a SERS platform for quorum sensing.
+ Electrochemical nanoimprinting
+Unlike the previously listed methods focusing on physically
+pressing  and  molding,  electrochemical  imprinting  uses
+chemical  reactions  to  achieve  patterning.  This  method
+allows the direct patterning of rigid materials, such as semi-
+conductor  materials  or  metals. Figure 11(d-i)186 illustrates
+the  working  principle  of  electrochemical  imprinting.  A
+patterned  stamp  made  of  a  superionic  conductor  with  a
+mobile  cation  is  pressed  into  contact  with  the  metallic
+substrate with pressure. After applying an electrical bias to
+the  system,  an  electrochemical  reaction  is  triggered  and
+oxidizes  the  silver  atoms  on  the  substrate,  progressively
+forming  inverse  features  on  the  substrate.  This  method
+allows the pattern of 200 nm circles, as shown in Fig. 11(d-ii).
+Similar  ideas  can  be  used  to  pattern  the  semiconductor
+materials187.  When  pressing  a  patterned  polymer  mold
+coated with Pt thin film against an n-GaAs wafer with pres-
+sure, an intrinsic electric field is formed at the Pt/n-GaAs
+interface due to the difference in their work functions, trig-
+gering  the  redox-catalyzed  dissolution  of n-GaAs  without
+any external energy modulation.
+ Conclusion
+Nanoimprint  lithography  (NIL)  has  made  tremendous
+progress over the past 30 years. Its advantages—high reso-
+lution, high throughput, complex 3D structuring, and one-
+step patterning—make it a unique technology suitable for
+various applications. NIL is currently under active evalua-
+tion by advanced semiconductor manufacturing foundries,
+capitalizing on its high resolution and low cost of owner-
+ship.  The  3D  capability  also  reduces  the  process  steps
+required  for  manufacturing  metal  interconnect  layers  in
+semiconductor production. NIL is crucial in emerging opti-
+cal applications like flat optics and augmented reality (AR)
+glasses.  Its  high-resolution  capability  enables  the  fabrica-
+tion of high-efficiency metalenses, which have already been
+successfully commercialized. Furthermore, the 3D pattern-
+ing  feature  makes  NIL  an  ideal  solution  for  the  mass
+production of diffractive waveguides in AR glasses. NIL is
+also widely utilized in wafer-level optics, display technolo-
+gies, optoelectronics, and biomedical applications. Notably,
+applications  such  as  nanopatterning  on  curved  surfaces
+benefit from NIL's flexible mold properties.
+The long-standing defect issues in NIL have been signifi-
+cantly  mitigated  over  the  past  three  decades.  Repeated
+defects,  primarily  caused  by  mold  damage  from  foreign
+particles,  which  resulted  in  continuous  imprinting  defects
+at the same locations, have been addressed. Methods such
+as  air  filtration,  soft  mold  imprinting,  and  using  working
+stamps  have  been  widely  implemented  to  prevent  these
+recurring defects. Random defects, typically arising from air
+trapping and non-conformal contact between the mold and
+substrate, have been minimized through strategies like high
+surface-energy  resist,  substrate  conformal  imprinting,  and
+air  cushions  for  pressing.  Specialized  companies  in  mold
+fabrication,  resist  development,  imprinting  tools,  simula-
+tion  toolboxes,  defect  detection,  and  application-related
+intellectual property have established a comprehensive NIL
+ecosystem.
+In addition to its manufacturing advantages, NIL holds
+significant research value. It enables the patterning of vari-
+ous  materials,  including  polymers,  dielectric  sol-gel  solu-
+tions,  composite  metals,  and  crystalline  metals,  providing
+versatile functionalities. NIL also allows the modulation of
+polymer molecular chain alignment using different molds,
+enhancing device performance. The pressing process in NIL
+can be employed to engineer strain during nanopatterning,
+which aids in improving carrier mobility. Additionally, NIL
+is ideal for manufacturing high-Q-factor optical devices due
+to  its  high  resolution  and  low  lithography-induced  edge
+roughness.
+Looking ahead, many opportunities lie ahead for NIL. As
+the industry matures, the cost of ownership is expected to
+decrease  further.  The  continued  maturation  of  NIL  will
+attract more attention and resources, further expanding the
+application of NIL.
+References 
+ Chou SY, Krauss PR, Renstrom PJ. Imprint of sub‐25 nm vias
+and trenches in polymers. Appl Phys Lett 67, 3114–3116 (1995).
+1.
+ Chou SY, Krauss PR, Renstrom PJ. Imprint Lithography with 25-
+nanometer resolution. Science 272, 85–87 (1996).
+2.
+ Chou SY, Krauss PR, Kong LS. Nanolithographically defined mag-
+netic structures and quantum magnetic disk (invited). J Appl Phys
+79, 6101–6106 (1996).
+3.
+ Chou SY, Krauss PR, Zhang W et al. Sub-10 nm imprint lithogra-
+phy and applications. J Vac Sci Technol B 15, 2897–2904 (1997).
+4.
+ Austin MD, Ge HX, Wu W et al. Fabrication of 5nm linewidth and
+5.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 22 of 27)
+
+[Page 25]
+14nm  pitch  features  by  nanoimprint  lithography. Appl  Phys  Lett
+84, 5299–5301 (2004).
+ Chou SY, Krauss PR. Imprint lithography with sub-10 nm feature
+size and high throughput. Microelectron Eng 35, 237–240 (1997).
+6.
+ Chou  SY,  Krauss  PR,  Renstrom  PJ. Nanoimprint  lithography. J
+Vac Sci Technol B 14, 4129–4133 (1996).
+7.
+ Li MT, Chen L, Chou SY. Direct three-dimensional patterning us-
+ing nanoimprint lithography. Appl Phys Lett 78, 3322–3324 (2001).
+8.
+ Sun XY, Zhuang L, Zhang W et al. Multilayer resist methods for
+nanoimprint lithography on nonflat surfaces. J Vac Sci Technol B
+16, 3922–3925 (1998).
+9.
+ Tan H, Gilbertson A, Chou SY et al. Roller nanoimprint lithogra-
+phy. J Vac Sci Technol B 16, 3926–3928 (1998).
+10.
+ Chou  SY. Patterned  magnetic  nanostructures  and  quantized
+magnetic disks. Proc IEEE 85, 652–671 (1997).
+11.
+ Krauss PR, Chou SY. Nano-compact disks with 400 Gbit/in2 stor-
+age density fabricated using nanoimprint lithography and read with
+proximal probe. Appl Phys Lett 71, 3174–3176 (1997).
+12.
+ Guo LJ, Krauss PR, Chou SY. Nanoscale silicon field effect tran-
+sistors  fabricated  using  imprint  lithography. Appl  Phys  Lett 71,
+1881–1883 (1997).
+13.
+ Wang J, Schablitsky S, Yu ZN et al. Fabrication of a new broad-
+band waveguide polarizer with a double-layer 190 nm period met-
+al-gratings using nanoimprint lithography. J Vac Sci Technol B 17,
+2957–2960 (1999).
+14.
+ Austin MD, Chou SY. Fabrication of 70 nm channel length poly-
+mer organic thin-film transistors using nanoimprint lithography. Ap-
+pl Phys Lett 81, 4431–4433 (2002).
+15.
+ Cao  H,  Yu  ZN,  Wang  J  et  al. Fabrication  of  10  nm  enclosed
+nanofluidic channels. Appl Phys Lett 81, 174–176 (2002).
+16.
+ Haisma J, Verheijen M, van den Heuvel K et al. Mold‐assisted
+nanolithography: a process for reliable pattern replication. J Vac
+Sci Technol B 14, 4124–4128 (1996).
+17.
+ Colburn M, Johnson SC, Stewart MD et al. Step and flash imprint
+lithography:  a  new  approach  to  high-resolution  patterning. Proc
+SPIE 3676, 379–389 (1999).
+18.
+ Ahn SH, Guo LJ. High-speed roll-to-roll nanoimprint lithography on
+flexible plastic substrates. Adv Mater 20, 2044–2049 (2008).
+19.
+ Lebib A, Chen Y, Bourneix J et al. Nanoimprint lithography for a
+large  area  pattern  replication. Microelectron  Eng 46, 319–322
+(1999).
+20.
+ Heidari B, Maximov I, Montelius L. Nanoimprint lithography at the
+6 in. wafer scale. J Vac Sci Technol B 18, 3557–3560 (2000).
+21.
+ LaPedus M. Nano-imprint lithography added to ITRS roadmap –
+EE| Times.
+https://www.eetimes.com/nano-imprint-lithography-added-to-itrs-
+roadmap/.
+22.
+ McMackin  I,  Choi  J,  Schumaker  P  et  al. Step  and  repeat  UV
+nanoimprint  lithography  tools  and  processes. Proc  SPIE 5374,
+222–231 (2004).
+23.
+ Verschuuren MA, Megens M, Ni YF et al. Large area nanoimprint
+by substrate conformal imprint lithography (SCIL). Adv Opt Tech-
+nol 6, 243–264 (2017).
+24.
+ Li ZW, Gu YN, Wang L et al. Hybrid nanoimprint-soft lithography
+with sub-15 nm resolution. Nano Lett 9, 2306–2310 (2009).
+25.
+ Yang  XM,  Xu  Y,  Seiler  C  et  al. Toward  1  Tdot/in.2 nanoimprint
+lithography  for  magnetic  bit-patterned  media:  opportunities  and
+challenges. J Vac Sci Technol B 26, 2604–2610 (2008).
+26.
+ Ootera  Y,  Yuzawa  A,  Shimada  T  et  al. Nanoimprint  process  for
+2.5Tb/in2 bit  patterned  media  fabricated  by  self-assembling
+method. Proc SPIE 7970, 79700K (2011).
+27.
+ Cheng  X,  Hong  Y,  Kanicki  J  et  al. High-resolution  organic  poly-
+mer light-emitting pixels fabricated by imprinting technique. J Vac
+28.
+Sci Technol B 20, 2877–2880 (2002).
+ Unno N, Mäkelä T. Thermal nanoimprint lithography—a review of
+the  process,  mold  fabrication,  and  material. Nanomaterials 13,
+2031 (2023).
+29.
+ Chao CY, Fung W, Guo LJ. Polymer microring resonators for bio-
+chemical sensing applications. IEEE J Sel Top Quantum Electron
+12, 134–142 (2006).
+30.
+ Guo JP, Shaw MJ, Vawter GA et al. High-Q microring resonator
+for biochemical sensors. Proc SPIE 5728, 83–92 (2005).
+31.
+ Chao  CY,  Guo  LJ. Polymer  microring  resonators  fabricated  by
+nanoimprint  technique. J  Vac  Sci  Technol  B 20, 2862–2866
+(2002).
+32.
+ Tu X, Chen SL, Song CL et al. Ultrahigh Q polymer microring res-
+onators  for  biosensing  applications. IEEE  Photonics  J 11,
+4200110 (2019).
+33.
+ Chen SL. Optical microring resonators for photoacoustic imaging
+and detection (University of Michigan, Ann Arbor, 2012).
+34.
+ Guo LJ. Recent progress in nanoimprint technology and its appli-
+cations. J Phys D Appl Phys 37, R123–R141 (2004).
+35.
+ Kwon B, Kim JH. Importance of molds for nanoimprint lithography:
+hard, soft, and hybrid molds. J Nanosci 2016, 6571297 (2016).
+36.
+ Zhang C, Subbaraman H, Li QC et al. Printed photonic elements:
+nanoimprinting  and  beyond. J  Mater  Chem  C 4, 5133–5153
+(2016).
+37.
+ Cheng X, Guo LJ. One-step lithography for various size patterns
+with a hybrid mask-mold. Microelectron Eng 71, 288–293 (2004).
+38.
+ Guo  LJ. Nanoimprint  lithography:  methods  and  material  require-
+ments. Adv Mater 19, 495–513 (2007).
+39.
+ Pelloquin S, Augé S, Sharshavina K et al. Soft mold nanoImprint
+lithography:  a  versatile  tool  for  sub-wavelength  grating  applica-
+tions. In Proceedings of 2017 Symposium on Design, Test, Inte-
+gration  and  Packaging  of  MEMS/MOEMS (IEEE,  2017).  doi:
+10.1109/DTIP.2017.7984454.
+40.
+ Bhingardive V, Menahem L, Schvartzman M. Soft thermal nanoim-
+print  lithography  using  a  nanocomposite  mold. Nano  Res 11,
+2705–2714 (2018).
+41.
+ Pandey  A,  Tzadka  S,  Yehuda  D  et  al. Soft  thermal  nanoimprint
+with a 10 nm feature size. Soft Matter 15, 2897–2904 (2019).
+42.
+ Barcelo S, Li ZY. Nanoimprint lithography for nanodevice fabrica-
+tion. Nano Converg 3, 21 (2016).
+43.
+ Sreenivasan SV. Nanoimprint lithography steppers for volume fab-
+rication  of  leading-edge  semiconductor  integrated  circuits. Mi-
+crosyst Nanoeng 3, 17075 (2017).
+44.
+ Zhang W, Fletcher B, Thompson E et al. High throughput Jet and
+Flash Imprint Lithography for semiconductor memory applications.
+Proc SPIE 9777, 97770A (2016).
+45.
+ Wu W, Tong WM, Bartman J et al. Sub-10 nm nanoimprint lithog-
+raphy by wafer bowing. Nano Lett 8, 3865–3869 (2008).
+46.
+ Gao H, Tan H, Zhang W et al. Air cushion press for excellent uni-
+formity,  high  yield,  and  fast  nanoimprint  across  a  100  mm  field.
+Nano Lett 6, 2438–2441 (2006).
+47.
+ Li  H,  Dong  BQ,  Zhang  X  et  al. Disposable  ultrasound-sensing
+chronic  cranial  window  by  soft  nanoimprinting  lithography. Nat
+Commun 10, 4277 (2019).
+48.
+ Zhang Y, Feng WJ, Zhu WK et al. Universal color retrofit to poly-
+mer-based radiative cooling materials. ACS Appl Mater Interfaces
+15, 21008–21015 (2023).
+49.
+ Con C, Zhang J, Jahed Z et al. Thermal nanoimprint lithography
+using fluoropolymer mold. Microelectron Eng 98, 246–249 (2012).
+50.
+ Williams  SS,  Retterer  S,  Lopez  R  et  al. High-resolution  PFPE-
+based molding techniques for nanofabrication of high-pattern den-
+sity,  Sub-20  nm  features:  a  fundamental  materials  approach.
+Nano Lett 10, 1421–1428 (2010).
+51.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 23 of 27)
+
+[Page 26]
+ Kooy N, Mohamed K, Pin LT et al. A review of roll-to-roll nanoim-
+print lithography. Nanoscale Res Lett 9, 320 (2014).
+52.
+ Haslinger MJ, Moharana AR, Mühlberger M. Antireflective moth-
+eye  structures  on  curved  surfaces  fabricated  by  nanoimprint
+lithography. Proc SPIE 11177, 111770K (2019).
+53.
+ Lin  WK,  Liu  S,  Lee  S  et  al. High Q-factor  polymer  microring
+resonators  realized  by  versatile  damascene  soft  nanoimprinting
+lithography. Adv Funct Mater 34, 2312229 (2024).
+54.
+ Pina-Hernandez  C,  Kim  JS,  Guo  LJ  et  al. High-throughput  and
+etch-selective  nanoimprinting  and  stamping  based  on  fast-ther-
+mal-curing  poly(dimethylsiloxane)s. Adv  Mater 19, 1222–1227
+(2007).
+55.
+ Thanner C, Eibelhuber M. UV nanoimprint lithography: geometri-
+cal impact on filling properties of nanoscale patterns. Nanomateri-
+als 11, 822 (2021).
+56.
+ Selinidis KS, Brooks CB, Doyle GF et al. Mask replication using jet
+and flash imprint lithography. J Micro/Nanolithogr MEMS MOEMS
+10, 043005 (2011).
+57.
+ Einck VJ, Torfeh M, McClung A et al. Scalable nanoimprint lithog-
+raphy process for manufacturing visible metasurfaces composed
+of  high  aspect  ratio  TiO2 meta-atoms. ACS  Photonics 8,
+2400–2409 (2021).
+58.
+ Choi H, Kim J, Kim W et al. Realization of high aspect ratio metal-
+enses  by  facile  nanoimprint  lithography  using  water-soluble
+stamps. PhotoniX 4, 18 (2023).
+59.
+ Obducat. SINDRE® Integra.
+https://www.obducat.com/products-foundry-services/sindre-2/.
+60.
+ EVG. EVG®770 NT.
+https://www.evgroup.com/products/nanoimprint-lithography/uv-nil-
+smartnil/evg770-nt.
+61.
+ Pina-Hernandez  C,  Fu  PF,  Guo  LJ. Ultrasmall  structure  fabrica-
+tion via a  facile  size  modification  of  nanoimprinted  functional
+silsesquioxane features. ACS Nano 5, 923–931 (2011).
+62.
+ Miebori  T,  Unno  N,  Taniguchi  J. Super  resolution  technique  for
+sub-100  nm  nanoimprint  mold  via  mechanical  deformation
+method. Microelectron Eng 123, 38–42 (2014).
+63.
+ Lee SH, Jang B, Guo LJ. Large-scale mold preparation for R2R
+systems by a novel mold replication and global shrinking process.
+In Proceedings  of  the  2021  International  Conference  on  Micro-
+and Nano-Devices Enabled by R2R Manufacturing (2021).
+64.
+ Pina-Hernandez  C,  Guo  LJ,  Fu  PF. High-resolution  functional
+epoxysilsesquioxane-based  patterning  layers  for  large-area
+nanoimprinting. ACS Nano 4, 4776–4784 (2010).
+65.
+ Dundar Arisoy F, Czolkos I, Johansson A et al. Low-cost, durable
+master  molds  for  thermal-NIL,  UV-NIL,  and  injection  molding.
+Nanotechnology 31, 015302 (2020).
+66.
+ Ma PS, Xu Z, Wang M et al. Fast fabrication of TiO2 hard stamps
+for nanoimprint lithography. Mater Res Bull 90, 253–259 (2017).
+67.
+ Zhang GM, Zhang J, Xie GY et al. Cicada wings: a stamp from na-
+ture for nanoimprint lithography. Small 2, 1440–1443 (2006).
+68.
+ Nowduri B, Schulte S, Decker D et al. Biomimetic nanostructures
+fabricated  by  nanoimprint  lithography  for  improved  cell-coupling.
+Adv Funct Mater 30, 2004227 (2020).
+69.
+ Yoon G, Kim K, Huh D et al. Single-step manufacturing of hierar-
+chical  dielectric  metalens  in  the  visible. Nat  Commun 11, 2268
+(2020).
+70.
+ Zhang JZ, Hu X, Zhang J et al. A fast thermal-curing nanoimprint
+resist based on cationic polymerizable epoxysiloxane. Nanoscale
+Res Lett 7, 380 (2012).
+71.
+ Schuster C, Reuther F, Kolander A et al. mr-NIL 6000LT–Epoxy-
+based  curing  resist  for  combined  thermal  and  UV  nanoimprint
+lithography below 50 °C. Microelectron Eng 86, 722–725 (2009).
+72.
+ Yu CC, Chen HL. Nanoimprint technology for patterning function-
+73.
+al materials and its applications. Microelectron Eng 132, 98–119
+(2015).
+ Ready-to-use  Formulations  for  Thermal  &  Photo  (UV)  Nanoim-
+print Lithography (NIL).
+74.
+ Cox LM, Martinez AM, Blevins AK et al. Nanoimprint lithography:
+emergent  materials  and  methods  of  actuation. Nano  Today 31,
+100838 (2020).
+75.
+ Das  Gupta  T,  Martin-Monier  L,  Yan  W  et  al. Self-assembly  of
+nanostructured glass metasurfaces via templated fluid instabilities.
+Nat Nanotechnol 14, 320–327 (2019).
+76.
+ Lin  XH,  Ling  T,  Subbaraman  H  et  al. Ultraviolet  imprinting  and
+aligned  ink-jet  printing  for  multilayer  patterning  of  electro-optic
+polymer modulators. Opt Lett 38, 1597–1599 (2013).
+77.
+ Wang Y, Tsiminis G, Kanibolotsky AL et al. Nanoimprinted poly-
+mer lasers with threshold below 100 W/cm2 using mixed-order dis-
+tributed  feedback  resonators. Opt  Express 21, 14362–14367
+(2013).
+78.
+ Hu ZJ, Tian MW, Nysten B et al. Regular arrays of highly ordered
+ferroelectric  polymer  nanostructures  for  non-volatile  low-voltage
+memories. Nat Mater 8, 62–67 (2009).
+79.
+ Kothari R, Beaulieu MR, Hendricks NR et al. Direct patterning of
+robust  one-dimensional,  two-dimensional,  and  three-dimensional
+crystalline  metal  oxide  nanostructures  using  imprint  lithography
+and  nanoparticle  dispersion  inks. Chem  Mater 29, 3908–3918
+(2017).
+80.
+ Kim J, Kim W, Oh DK et al. One-step printable platform for high-
+efficiency metasurfaces down to the deep-ultraviolet region. Light
+Sci Appl 12, 68 (2023).
+81.
+ Kim J, Kim W, Choi M et al. Amorphous to crystalline transition in
+nanoimprinted sol–gel titanium oxide metasurfaces. Adv Mater 36,
+2405378 (2024).
+82.
+ Modaresialam M, Chehadi Z, Bottein T et al. Nanoimprint lithogra-
+phy  processing  of  inorganic-based  materials. Chem  Mater 33,
+5464–5482 (2021).
+83.
+ Rimböck J, Schuster P, Vsetecka L et al. UV nanoimprint lithogra-
+phy—impact of coating techniques on pattern quality. Nanomanu-
+facturing 4, 69–80 (2024).
+84.
+ Williams BR, Pierce J, Black K et al. Process repeatability in vol-
+ume manufacturing of nanostructures utilizing nanoimprint lithog-
+raphy. Proc SPIE 11467, 114670D (2020).
+85.
+ Achleitner  T,  Rimböck  J,  Vsetecka  L  et  al. Inkjet  coating  com-
+bined with nanoimprinting for complex 3D patterns with progres-
+sive  height  increase  and  low  residual  layer. Proc  SPIE 12956,
+1295608 (2024).
+86.
+ Ifuku T, Yonekawa M, Nakagawa K et al. Nanoimprint lithography
+performance  advances  for  new  application  spaces. Proc  SPIE
+12956, 1295603 (2024).
+87.
+ Ballottin  M,  Jansen  N,  Scheidegger  A  et  al. Practical  considera-
+tions for large-area nanoimprinted augmented reality waveguides.
+Proc SPIE 12957, 129570J (2024).
+88.
+ EVG. EVG®7200 LA.
+https://www.evgroup.com/products/nanoimprint-lithography/uv-nil-
+smartnil/evg-7200-la.
+89.
+ Lan  HB.  Large-area  nanoimprint  lithography  and  applications.  In
+Thirumalai  J. Micro/Nanolithography - A  Heuristic  Aspect  on  the
+Enduring  Technology (IntechOpen,  2017).  doi: 10.5772/INTE-
+CHOPEN.72860.
+90.
+ Obducat. Obducat´s product portfolio.
+https://www.obducat.com/products-foundry-services/product-port-
+folio/.
+91.
+ Thanner C, Dudus A, Treiblmayr D et al. Nanoimprint lithography
+for  augmented  reality  waveguide  manufacturing. Proc  SPIE
+11310, 1131010 (2020).
+92.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 24 of 27)
+
+[Page 27]
+ Ahn SH, Guo LJ. Large-area roll-to-roll and roll-to-plate Nanoim-
+print  Lithography:  a  step  toward  high-throughput  application  of
+continuous nanoimprinting. ACS Nano 3, 2304–2310 (2009).
+93.
+ Thanner  C,  Bichler  A,  Feichtlbauer  F  et  al.  Step  and  repeat  im-
+print lithography for wafer scale mastering of micro-and nanostruc-
+tures. In Proceedings of 2022 International Semiconductor Confer-
+ence 69–72 (IEEE, 2022).
+94.
+ Ye ZM, Luo K, Irving JW et al. Defect reduction for semiconductor
+memory applications using jet and flash imprint lithography. Proc
+SPIE 8680, 86800C (2013).
+95.
+ Yamamoto  K,  Wada  H,  Suzaki  Y  et  al. Nanoimprint  lithography
+methods  for  achieving  sub-3  nm  overlay. Proc  SPIE 11855,
+1185509 (2021).
+96.
+ Chen IT, Schappell E, Zhang XL et al. Continuous roll-to-roll pat-
+terning  of  three-dimensional  periodic  nanostructures. Microsyst
+Nanoeng 6, 22 (2020).
+97.
+ Ahn  SH,  Miller  M,  Yang  SQ  et  al. High  volume  nanoscale  roll-
+based imprinting using jet and flash imprint lithography. Proc SPIE
+9049, 90490G (2014).
+98.
+ Ogusu M, Ishida M, Tamura M et al. Nanoimprint edge placement
+error elements and control. Proc SPIE 12054, 1205405 (2022).
+99.
+ Schuster P, Rimböck J, Vsetecka L et al. Inkjet coating combined
+with nanoimprinting for complex 3D patterns with nonlinear height
+and low residual layer. Proc SPIE 13414, 134140E (2025).
+100.
+ Park  Y,  Kim  J,  Yang  Y  et  al. Tape-assisted  residual  layer-free
+one-step  nanoimprinting  of  high-index  hybrid  polymer  for  optical
+loss-suppressed metasurfaces. Adv Sci 12, 2409371 (2025).
+101.
+ Pina-Hernandez C, Kim JS, Fu PF et al. Nonresidual layer imprint-
+ing and new replication capabilities demonstrated for fast thermal
+curable  polydimethysiloxanes. J  Vac  Sci  Technol  B 25, 2402–
+2406 (2007).
+102.
+ Nakayama T, Yonekawa M, Matsuoka Y et al. Improved defectivi-
+ty  and  particle  control  for  nanoimprint  lithography  high-volume
+semiconductor manufacturing. Proc SPIE 10144, 1014407 (2017).
+103.
+ Ito T, Zhang W, Liu WJ. Reduction of non-fill defects in nanoim-
+print lithography. Jpn J Appl Phys 63, 050804 (2024).
+104.
+ Takabayashi  Y,  Iwanaga  T,  Hiura  M  et  al. Nanoimprint  system
+alignment and overlay improvement for high volume semiconduc-
+tor manufacturing. Proc SPIE 10958, 109580B (2019).
+105.
+ Jin H, Qi YJ. Review of overlay error and controlling methods in
+alignment  system  for  advanced  lithography. Proc  SPIE 12478,
+1247843 (2022).
+106.
+ Torii H, Hiura M, Takabayashi Y et al. Nanoimprint lithography: to-
+day and tomorrow. Proc SPIE 12054, 1205403 (2022).
+107.
+ Canon Global. FPA-1200NZ2C.
+https://global.canon/en/product/indtech/semicon/fpa1200nz2c.
+html.
+108.
+ Maruyama N, Sato K, Suzaki Y et al. Advances and applications
+in nanoimprint lithography. Proc SPIE 12497, 124970D (2023).
+109.
+ Takeuchi  N,  Hasegawa  G,  Komukai  T  et  al. Fabrication  of  dual
+damascene  structure  with  nanoimprint  lithography  and  dry-etch-
+ing. Proc SPIE 12497, 124970E (2023).
+110.
+ Traub  MC,  Longsine  W,  Truskett  VN. Advances  in  nanoimprint
+lithography. Annu Rev Chem Biomol Eng 7, 583–604 (2016).
+111.
+ Tanaka H, Maruyama N, Hiura M et al. Establishing a nanoimprint
+lithography ecosystem. Proc SPIE 12751, 127510D (2023).
+112.
+ Ifuku T, Hiura M, Takabayashi Y et al. Nanoimprint performance
+improvements for high volume semiconductor device manufactur-
+ing. Proc SPIE 12293, 122930E (2022).
+113.
+ Kono T, Hatano M, Tokue H et al. Half-pitch 14 nm direct pattern-
+ing  with  nanoimprint  lithography. Proc  SPIE 10958, 109580H
+(2019).
+114.
+ Kobayashi S, Yamashita K, Tsuda H et al. Design for nanoimprint
+115.
+lithography: hot spot modification through total NIL process simu-
+lation. Proc SPIE 10584, 105840R (2018).
+ Techovedas. Micron supports canon nano-semiconductor printing
+for DRAM; threatening ASML monopoly.
+https://techovedas.com/micron-supports-canon-nano-semiconduc-
+tor-printing-for-dram-threatening-asml-monopoly/.
+116.
+ Mitsuyasu M, Takeuchi N, Hirose M et al. Preliminary qualification
+of 3D nanoimprint process for dual damascene wiring. Proc SPIE
+PC12956, PC129560G (2024). doi: 10.1117/12.3010093.
+117.
+ Chou SY. Nanoimprint technology for patterned magnetic nanos-
+tructures: novel techniques for characterizing and preparing sam-
+ples  nanomagnetism —application  and  characterization.  In
+Kronmüller H, Parkin S. Handbook of Magnetism and Advanced
+Magnetic  Materials (Wiley,  Hoboken,  2007).  doi: 10.1002/
+9780470022184.HMM324.
+118.
+ Marigo L, Quaade U, Schmidlin M. Flat optics for compact integra-
+tion and high performances. Proc SPIE 12402, 1240209 (2023).
+119.
+ Patoux A, Agez G, Girard C et al. Challenges in nanofabrication
+for efficient optical metasurfaces. Sci Rep 11, 5620 (2021).
+120.
+ Mattinson F, Quaade U, Johansen VE et al. Latest advancements
+at NILT on flat metalens based camera modules in near infrared.
+Proc SPIE 12217, 1221707 (2022).
+121.
+ Williams BR, Bacon-Brown D, George M et al. Progress in com-
+mercializing visible wavelength metalenses. Proc SPIE PC13109,
+PC1310911 (2024). doi: 10.1117/12.3028131.
+122.
+ Williams  BR,  Bacon-Brown  D,  George  MCC  et  al.  NIL  enabled
+mass  production  of  visible  meta-optics. Proc  SPIE PC12898,
+PC128980U (2024). doi: 10.1117/12.3008763.
+123.
+ Kim J, Seong J, Kim W et al. Scalable manufacturing of high-in-
+dex atomic layer–polymer hybrid metasurfaces for metaphotonics
+in the visible. Nat Mater 22, 474–481 (2023).
+124.
+ Quaade  U,  Egede  Johansen  V,  Llinas  JM  et  al.  Highly  efficient
+metalenses for imaging applications at infrared wavelengths. Proc
+SPIE PC12010, PC1201012 (2022). doi: 10.1117/12.2624414.
+125.
+ Bilenberg  B.  Meta  optical  elements  produced  by  nanoimprint
+lithography. Proc  SPIE PC12054,  PC120540W  (2022).  doi:
+10.1117/12.2617835.
+126.
+ Yang WH, Zhou JX, Tsai DP et al. Advanced manufacturing of di-
+electric meta-devices. Photonics Insights 3, R04 (2024).
+127.
+ Yoon G, Kim K, Kim SU et al. Printable nanocomposite metalens
+for  high-contrast  near-infrared  imaging. ACS  Nano 15, 698–706
+(2021).
+128.
+ Gong JT, Xiong LX, Pu MB et al. Visible meta-displays for anti-
+counterfeiting  with  printable  dielectric  metasurfaces. Adv  Sci 11,
+2308687 (2024).
+129.
+ Gong  JT,  Xiong  LX,  Zhang  F  et  al. Integrated  quad-color
+nanoprinting  and  tri-channel  holographic  encryption  meta-marks
+with  printable  metasurfaces. Laser  Photonics  Rev 19, 2401045
+(2025).
+130.
+ Gong  JT,  Xiong  XL,  Pu  MB  et  al. High-throughput  fabrication  of
+curved plasmonic metasurfaces for switchable beam focusing and
+thermal infrared cloaking. Adv Opt Mater 11, 2300608 (2023).
+131.
+ Jung DE, Howell IR, Einck VJ et al. Refractive index tuning of all-
+inorganic  TiO2 nanocrystal-based  films  and  high  aspect  ratio
+nanostructures  using  atomic  layer  deposition:  implications  for
+high-throughput fabrication of metalenses. ACS Appl Nano Mater
+6, 2009–2019 (2023).
+132.
+ Eon Jung D, Einck VJ, Dawicki A et al. Full wafer scale manufac-
+turing  of  directly  printed  TiO2 metalenses  at  visible  wavelengths
+with outstanding focusing efficiencies. Adv Mater 2500327 (2025)
+doi: 10.1002/ADMA.202500327.
+133.
+ Carden S. High performance at scale: unlocking waveguide pro-
+duction for AR. Proc SPIE 12450, 1245012 (2023).
+134.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 25 of 27)
+
+[Page 28]
+ Ding YQ, Yang Q, Li YNQ et al. Waveguide-based augmented re-
+ality displays: perspectives and challenges. eLight 3, 24 (2023).
+135.
+ Achleitner  T,  Rimböck  J,  Vsetecka  L  et  al.  Inkjet  coating  com-
+bined with nanoimprinting for complex 3D patterns with progres-
+sive  height  increase  and  low  residual  layer. Proc  SPIE 12956,
+1295608 (2024). doi: 10.1117/12.3009889.
+136.
+ Steiner S, Jotz M, Bachhuber F et al. Enabling mass manufactur-
+ing  of  industry-standard  optical  waveguide  combiners. J  Opt  Mi-
+crosyst 3, 033502 (2023).
+137.
+ Kress  BC. Optical  waveguide  combiners  for  AR  headsets:  fea-
+tures and limitations. Proc SPIE 11062, 110620J (2019).
+138.
+ Photonics  Spectra.  Full-immersion  AR:  the  path  to  consumer-
+friendly devices.
+https://www.photonics.com/Articles/Full-Immersion_AR_
+The_Path_to_Consumer-Friendly/a65320.
+139.
+ Tadros NJ, Krieg A, Cade J et al. PixNIL high index nanocompos-
+ite materials with improved processability for large volume manu-
+facturing. Proc SPIE 12913, 1291305 (2024).
+140.
+ McCoy JA, Verschuuren MA, Miles DM et al. X-ray verification of
+sol-gel resist shrinkage in substrate-conformal imprint lithography
+for  a  replicated  blazed  reflection  grating. OSA  Continuum 3,
+3141–3156 (2020).
+141.
+ Souri M, Ip V, Falmbigl M et al. Reactive ion beam etch of highly
+uniform slanted gratings for augmented reality applications. Proc
+SPIE PC12913, PC129130M (2024). doi: 10.1117/12.3001026.
+142.
+ Pina-Hernandez C, Yamada K, Legacy A et al. Ultra-high refrac-
+tive index materials for patterning diffractive optical elements with
+nanoimprint lithography. Proc SPIE 12449, 1244905 (2023).
+143.
+ Lan S. Wafer level nano-optics solution for AR glasses. Proc SPIE
+12914, 1291416 (2024).
+144.
+ EVG.  Wafer-level  micro-optics  fabrication  by  lens  molding  using
+UV-curable polymers.
+https://www.evgroup.com/fileadmin/media/downloads/2023/
+White_Paper-EVG-DELO_Wafer-level_micro-optics-fabrication.
+pdf.
+145.
+ Dannberg P, Wippermann F, Brückner A et al. Wafer-level hybrid
+integration  of  complex  micro-optical  modules. Micromachines 5,
+325–340 (2014).
+146.
+ Photonics  Spectra.  High-precision  wafer-level  optics  fabrication
+and integration.
+https://www.photonics.com/Articles/High-Precision_Wafer-
+Level_Optics_Fabrication_and/a45233.
+147.
+ Brehm M, Ertl C, Pilottek I et al. UV curing materials for wafer lev-
+el optics. Proc SPIE 11292, 112920I (2020).
+148.
+ Nakamura T, Yang Z, Ogawa D et al. “Better than DOE optics” so-
+lution in ToF sensors for wearable XR device. Proc SPIE 12449,
+1244911 (2023).
+149.
+ Israel A, Ulfan F, Pascar L et al. Photonic plug for scalable silicon
+photonics packaging. Proc SPIE 11286, 1128607 (2020).
+150.
+ PIC Magazine News. Wafer-level nanoimprint technology for inno-
+vative packaging.
+https://picmagazine.net/article/115752/Wafer-level_nanoimprint_
+technology_for_innovative_packaging_.
+151.
+ Mitsubishi  Chemical  Group.  Moth  eye-type  antireflective  film
+MOSMITETM.
+https://www.m-chemical.co.jp/en/products/departments/mcc/indus-
+trial-medical/product/1201267_8054.html.
+152.
+ SCIVAX.  White  paper  :  wire  grid  polarizers  using  nanoimprint
+lithography.
+https://www.scivax.com/wp-content/uploads/2022/05/WGP_White-
+Paper_English.pdf.
+153.
+ Schleunitz A, Schift H. Fabrication of 3D nanoimprint stamps with
+continuous  reliefs  using  dose-modulated  electron  beam  lithogra-
+154.
+phy and thermal reflow. J Micromech Microeng 20, 095002 (2010).
+ Schift H. Nanoimprint lithography: 2D or not 2D? A review. Appl
+Phys A 121, 415–435 (2015).
+155.
+ SCIVAX. DFB laser diode.
+https://www.scivax.com/en/application/dfb/.
+156.
+ Mitsubishi  Chemical  Group.  Allowing  over  99%  of  light  to  pass
+through, making it virtually invisible. MOSMITETM is a new materi-
+al used for art and automotive displays.
+https://www.mcgc.com/english/kaiteki_solution_center/oursolution/
+15.html.
+157.
+ Ahn SH, Yang SQ, Miller M et al. High-performance wire-grid po-
+larizers  using  jet  and  FlashTM imprint  lithography. J  Micro/Nano-
+lithogr MEMS MOEMS 12, 031104 (2013).
+158.
+ See the PossibilitiesTM. Pixelated wire-grid polarizers.
+https://moxtek.com/optics-product/pixelated-polarizers/.
+159.
+ Hruska J. Amazon sheds new light on Kindle Paperwhite display.
+https://www.extremetech.com/electronics/137158-amazon-sheds-
+new-light-on-kindle-paperwhite-display.
+160.
+ Lee YC, Ni CH, Chen CY. Enhancing light extraction mechanisms
+of GaN-based light-emitting diodes through the integration of im-
+printing  microstructures,  patterned  sapphire  substrates,  and  sur-
+face roughness. Opt Express 18, A489–A498 (2010).
+161.
+ Overton  G.  IQE  nanoimprint  lithography  technology  tapped  for
+DFB laser production.
+https://www.laserfocusworld.com/lasers-sources/article/
+16571676/iqe-nanoimprint-lithography-technology-tapped-for-dfb-
+laser-production.
+162.
+ Xiong  YF,  Xu  F. Multifunctional  integration  on  optical  fiber  tips:
+challenges and opportunities. Adv Photonics 2, 064001 (2020).
+163.
+ Kostovski G, Stoddart PR, Mitchell A. The optical fiber tip: an in-
+herently  light-coupled  microscopic  platform  for  micro- and  nan-
+otechnologies. Adv Mater 26, 3798–3820 (2014).
+164.
+ Calafiore G, Koshelev A, Darlington TP et al. Campanile near-field
+probes  fabricated  by  nanoimprint  lithography  on  the  facet  of  an
+optical fiber. Sci Rep 7, 1651 (2017).
+165.
+ Koshelev A, Calafiore G, Piña-Hernandez C et al. High refractive
+index  Fresnel  lens  on  a  fiber  fabricated  by  nanoimprint  lithogra-
+phy for immersion applications. Opt Lett 41, 3423–3426 (2016).
+166.
+ HighRI Optics, Inc. Wavefront manipulation.
+https://highrioptics.com/applications-and-industries/wavefront-ma-
+nipulation/.
+167.
+ HighRI Optics, Inc. Super-resolution imaging.
+https://highrioptics.com/applications-and-industries/super-resolu-
+tion-imaging/.
+168.
+ Choi J, Lee CC, Park S. Scalable fabrication of sub-10 nm poly-
+mer nanopores for DNA analysis. Microsyst Nanoeng 5, 12 (2019).
+169.
+ Fu XX, Cai JX, Zhang X et al. Top-down fabrication of shape-con-
+trolled,  monodisperse  nanoparticles  for  biomedical  applications.
+Adv Drug Deliv Rev 132, 169–187 (2018).
+170.
+ Chen JH, Zhou YL, Wang DH et al. UV-nanoimprint lithography as
+a tool to develop flexible microfluidic devices for electrochemical
+detection. Lab Chip 15, 3086–3094 (2015).
+171.
+ Tegenfeldt JO, Prinz C, Cao H et al. Micro- and nanofluidics for
+DNA analysis. Anal Bioanal Chem 378, 1678–1692 (2004).
+172.
+ Guo  LJ,  Cheng  X,  Chou  CF. Fabrication  of  size-controllable
+nanofluidic channels by nanoimprinting and its application for DNA
+stretching. Nano Lett 4, 69–73 (2004).
+173.
+ Zandi Shafagh R, Shen JX, Youhanna S et al. Facile nanoimprint-
+ing  of  robust  high-aspect-ratio  nanostructures  for  human  cell
+biomechanics. ACS Appl Bio Mater 3, 8757–8767 (2020).
+174.
+ Cheng LJ, Kao MT, Meyhöfer E et al. Highly efficient guiding of
+microtubule transport with imprinted CYTOP nanotracks. Small 1,
+409–414 (2005).
+175.
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 26 of 27)
+
+[Page 29]
+ Hoff JD, Cheng LJ, Meyhöfer E et al. Nanoscale protein pattern-
+ing by imprint lithography. Nano Lett 4, 853–857 (2004).
+176.
+ Liu S, Lin WK, Zhang Y et al. Wafer-scale fabrication of ultra-low
+loss Si3N4 photonic integrated chips through nanoimprint lithogra-
+phy. Adv Funct Mater 7, 622–626 (2013).
+177.
+ Bar-On O, Brenner P, Siegle T et al. High quality 3D photonics us-
+ing nano imprint lithography of fast sol-gel materials. Sci Rep 8,
+7833 (2018).
+178.
+ Aryal  M,  Trivedi  K,  Hu  WC. Nano-confinement  induced  chain
+alignment  in  ordered  P3HT  nanostructures  defined  by  nanoim-
+print lithography. ACS Nano 3, 3085–3090 (2009).
+179.
+ Sun CY, Zhong JW, Gan ZF et al. Nanoimprint-induced strain en-
+gineering of two-dimensional materials. Microsyst Nanoeng 10, 49
+(2024).
+180.
+ Wang YX, Jin SY, Wang QX et al. Parallel nanoimprint forming of
+one-dimensional chiral semiconductor for strain-engineered optical
+properties. Nano-Micro Lett 12, 160 (2020).
+181.
+ Wang  Z,  Wu  TT,  Wang  ZX  et  al. Designer  patterned  functional
+fibers  via  direct  imprinting  in  thermal  drawing. Nat  Commun 11,
+3842 (2020).
+182.
+ Chou SY, Keimel C, Gu J. Ultrafast and direct imprint of nanos-
+tructures in silicon. Nature 417, 835–837 (2002).
+183.
+ Gao H, Hu YW, Xuan Y et al. Large-scale nanoshaping of ultra-
+smooth
+ 3D
+ crystalline
+ metallic
+ structures. 
+Science 
+346,
+1352–1356 (2014).
+184.
+ Ge  JY,  Ding  B,  Hou  S  et  al. Rapid  fabrication  of  complex
+nanostructures using room-temperature ultrasonic nanoimprinting.
+185.
+Nat Commun 12, 3146 (2021).
+ Hsu KH, Schultz PL, Ferreira PM et al. Electrochemical nanoim-
+printing with solid-state superionic stamps. Nano Lett 7, 446–451
+(2007).
+186.
+ Zhang  J,  Zhang  L,  Han  LH  et  al. Electrochemical  nanoimprint
+lithography:  when  nanoimprint  lithography  meets  metal  assisted
+chemical etching. Nanoscale 9, 7476–7482 (2017).
+187.
+Acknowledgements
+The authors would like to thank the National Science Foundation for the partial
+support  (NSF-2213684),  and  LJG  acknowledges  an  Emmett  Leith  Collegiate
+Professorship for this writing.
+Competing interests
+ L. Jay Guo serves as an Editor for the Journal, and no other author has reported
+any competing interests.
+Open  Access This  article  is  licensed  under  a  Creative
+Commons  Attribution  4.0  International  License,  which
+permits use, sharing, adaptation, distribution and repro-
+duction in any medium or format, as long as you give appropriate credit to the
+original  author(s)  and  the  source,  provide  a  link  to  the  Creative  Commons
+license, and indicate if changes were made. To view a copy of this license, visit
+http://creativecommons.org/licenses/by/4.0/
+©The Author(s) 2025.
+Published by Editorial Office of Opto-Electronic Technology, Institute of Optics
+and Electronics, Chinese Academy of Sciences.
+ 
+ 
+Scan for Article PDF
+Lin W-K et al. Opto-Electron Technol 1, 250001 (2025)
+https://doi.org/10.29026/oet.2025.250001
+250001 (Page 27 of 27)

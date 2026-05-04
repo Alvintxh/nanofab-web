@@ -1,0 +1,281 @@
+# Table of Contents: teresa_2020
+
+PRELIMS.pdf ... page 1
+  Preface ... page 17
+  Acknowledgements ... page 18
+  Editor biography ... page 19
+     José Maria De Teresa ... page 19
+  List of contributors ... page 20
+CH001.pdf ... page 1
+  Chapter 1 Introduction to nanolithography techniques and their applications ... page 22
+    1.1 Key concepts in nanolithography ... page 22
+      1.1.1 Top-down versus self-assembly and self-organization processes ... page 22
+      1.1.2 Resolution, cost, throughput and complexity ... page 26
+    1.2 Nanolithography techniques using resists ... page 27
+      1.2.1 Optical lithography (OL) ... page 27
+      1.2.2 Electron beam lithography (EBL) ... page 28
+      1.2.3 Nanoimprint lithography (NIL) ... page 29
+    1.3 Direct nanolithography techniques ... page 30
+      1.3.1 Focused ion beam (FIB) ... page 30
+      1.3.2 Focused electron/ion beam induced deposition (FEBID and FIBID) ... page 31
+      1.3.3 Scanning probe lithography (SPL) ... page 32
+    1.4 Other nanolithography techniques and hybrid approaches ... page 34
+      1.4.1 Stencil lithography ... page 34
+      1.4.2 Nanosphere/colloidal lithography ... page 35
+      1.4.3 Hybrid approaches ... page 35
+    1.5 Comparison of nanolithography techniques ... page 38
+    1.6 Applications of nanolithography techniques ... page 40
+      1.6.1 Classical applications ... page 40
+      1.6.2 Interdisciplinary applications ... page 41
+      1.6.3 Emergent and future applications ... page 42
+    1.7 End-of-chapter summary ... page 42
+    1.8 Students’ corner ... page 44
+     Acknowledgements ... page 44
+     References ... page 44
+CH002.pdf ... page 1
+  Chapter 2 Optical lithography ... page 50
+    2.1 Concept of optical lithography ... page 50
+    2.2 Optical lithography using optical masks ... page 51
+      2.2.1 Optical lithography exposure modes and their resolution ... page 51
+      2.2.2 Photo-resists ... page 59
+      2.2.3 Extreme ultraviolet (EUV) optical lithography ... page 62
+    2.3 Maskless optical lithography ... page 68
+      2.3.1 Direct laser lithography ... page 68
+      2.3.2 Two-photon lithography ... page 72
+    2.4 Directed self-assembly (DSA) ... page 76
+      2.4.1 Principles of DSA of block copolymers ... page 77
+      2.4.2 Strategies for alignment of block copolymers ... page 79
+      2.4.3 Applications ... page 82
+    2.5 End-of-chapter summary ... page 82
+    2.6 Student’s corner ... page 83
+     References ... page 84
+CH003.pdf ... page 1
+  Chapter 3 Electron beam lithography and its use on 2D materials ... page 90
+    3.1 Introduction ... page 90
+    3.2 Fundamentals of EBL ... page 92
+      3.2.1 Chamber and electron column ... page 92
+      3.2.2 Basic and lift-off EBL processes ... page 96
+      3.2.3 Resolution ... page 98
+      3.2.4 Scan modes, writing field, DAC, stitching, beam stability ... page 100
+      3.2.5 Resists ... page 101
+      3.2.6 Cross-linking problem ... page 102
+    3.3 Steps for a successful EBL process ... page 103
+      3.3.1 Spin coating ... page 104
+      3.3.2 EBL on a bare wafer (WA&#62;WF) ... page 105
+      3.3.3 EBL in a wafer with alignment markers (WA<WF) ... page 108
+      3.3.4 Two different resists: polymethylmethacrylate (PMMA) versus higher resolution hydrogen silsesquioxane (HSQ) ... page 110
+    3.4 ICP-RIE and E-beam evaporation ... page 111
+      3.4.1 ICP-RIE ... page 111
+      3.4.2 E-beam metal evaporation ... page 113
+    3.5 EBL applied to 2D materials ... page 114
+      3.5.1 Hall bars in graphene heterostructures ... page 115
+      3.5.2 Quantum point contacts defined by cryo-etching ... page 122
+      3.5.3 Dual-gated graphene FETs ... page 124
+      3.5.4 Hall bars in other 2D materials ... page 125
+    3.6 General applications and new developments in EBL technique ... page 128
+    3.7 End-of-chapter summary ... page 131
+    3.8 Student’s corner ... page 131
+     Acknowledgements ... page 134
+     References ... page 134
+CH004.pdf ... page 1
+  Chapter 4 Focused electron beam induced deposition ... page 139
+    4.1 Introduction ... page 139
+    4.2 Principles of FEBID ... page 140
+      4.2.1 Electron–matter interaction ... page 142
+      4.2.2 Monte Carlo method towards FEBID simulations ... page 144
+      4.2.3 Single precursor species model ... page 145
+      4.2.4 General features of FEBID precursors, growth parameters and applications ... page 147
+    4.3 FEBID precursors and deposited materials ... page 149
+      4.3.1 Precursors and properties of as-grown materials ... page 150
+      4.3.2 Improving properties ... page 152
+    4.4 Applications ... page 157
+    4.5 Additional FEBID strategies and novel developments ... page 160
+    4.6 End-of-chapter summary ... page 165
+    4.7 Student’s corner ... page 165
+     Acknowledgements ... page 165
+     References ... page 166
+CH005.pdf ... page 1
+  Chapter 5 Focused ion beam induced processing ... page 178
+    5.1 Introduction ... page 178
+    5.2 The instrument ... page 179
+      5.2.1 Historical development ... page 179
+      5.2.2 Ion sources ... page 181
+      5.2.3 Ion column ... page 183
+      5.2.4 Gas injection system ... page 184
+      5.2.5 Process chamber and electron/ion detectors ... page 185
+      5.2.6 Additional modules ... page 187
+    5.3 Basics of FIB processing ... page 187
+      5.3.1 Ion–solid interactions ... page 188
+      5.3.2 Operating the beam ... page 191
+    5.4 Milling and materials modification ... page 194
+      5.4.1 Milling ... page 194
+      5.4.2 FIB irradiation for materials modification ... page 199
+    5.5 Focused ion beam induced deposition ... page 203
+      5.5.1 Fundamentals ... page 203
+      5.5.2 Applications of FIBID ... page 207
+    5.6 Other applications of focused ion beams ... page 219
+      5.6.1 FIB-based imaging ... page 219
+      5.6.2 FIB-based tomography ... page 220
+      5.6.3 Secondary-ion mass spectrometry ... page 222
+      5.6.4 Current developments and future challenges ... page 223
+    5.7 End-of-chapter summary ... page 223
+    5.8 Students’ corner ... page 224
+     Acknowledgements ... page 224
+     List of acronyms ... page 225
+     References ... page 225
+CH006.pdf ... page 1
+  Chapter 6 Scanning probe lithography ... page 236
+    6.1 Introduction: from atomic-scale modifications to scanning probe lithography ... page 236
+    6.2 Oxidation SPL ... page 237
+      6.2.1 Key aspects of o-SPL ... page 238
+      6.2.2 Nanolithography ... page 240
+      6.2.3 Beyond oxidation processes ... page 241
+    6.3 Thermal SPL ... page 242
+      6.3.1 Key aspects of t-SPL ... page 242
+      6.3.2 Nanolithography ... page 243
+    6.4 Deposition SPL ... page 245
+      6.4.1 Key aspects of deposition SPL ... page 245
+      6.4.2 Nanolithography ... page 247
+    6.5 Other SPL methods ... page 247
+    6.6 End-of-chapter summary ... page 248
+    6.7 Student’s corner ... page 249
+     Acknowledgments ... page 250
+     References ... page 250
+CH007.pdf ... page 1
+  Chapter 7 Soft thermal nanoimprint and hybrid processes to produce complex structures ... page 258
+    7.1 Fundamentals of nanoimprint processes ... page 258
+      7.1.1 Introduction ... page 258
+      7.1.2 Basic nanoimprint processes and variants ... page 259
+    7.2 Soft thermal nanoimprint lithography (soft T-NIL) ... page 263
+      7.2.1 Thermoplastic polymers for soft T-NIL ... page 263
+      7.2.2 Molds for soft T-NIL ... page 263
+    7.3 Complex structures by soft thermal nanoimprint and hybrid processes ... page 272
+      7.3.1 Introduction ... page 272
+      7.3.2 High-aspect ratio imprinting ... page 273
+      7.3.3 Multilevel hierarchical complex nanoimprinting ... page 279
+    7.4 End-of-chapter summary ... page 285
+    7.5 Student’s corner ... page 285
+     References ... page 286
+CH008.pdf ... page 1
+  Chapter 8 Stencil lithography ... page 291
+    8.1 Introduction ... page 291
+      8.1.1 Brief history of stencil in micropatterning ... page 293
+      8.1.2 Why is stencil lithography interesting? ... page 293
+      8.1.3 Why is stencil lithography challenging? ... page 294
+    8.2 Fabrication of stencil membranes ... page 295
+      8.2.1 Membrane material ... page 295
+      8.2.2 Fabrication steps ... page 295
+      8.2.3 Membrane reinforcement ... page 296
+    8.3 Challenges of stencil lithography ... page 297
+      8.3.1 Blurring ... page 297
+      8.3.2 Shadowing ... page 301
+      8.3.3 Clogging ... page 303
+      8.3.4 Cracking and bending ... page 304
+    8.4 Design considerations ... page 305
+      8.4.1 Process as collimated as possible ... page 305
+      8.4.2 Thin but robust membranes ... page 306
+      8.4.3 Durable material (both mechanically and chemically) ... page 306
+      8.4.4 Surface treatment ... page 306
+      8.4.5 Reducing gap ... page 306
+    8.5 Alignment ... page 307
+    8.6 Dynamic stencil ... page 308
+    8.7 Applications ... page 310
+    8.8 End of chapter summary ... page 310
+    8.9 Student’s corner ... page 310
+     Acknowledgements ... page 311
+     References ... page 311
+CH009.pdf ... page 1
+  Chapter 9 Ice lithography ... page 316
+    9.1 Introduction and historical perspective ... page 316
+    9.2 Fundamentals ... page 317
+      9.2.1 Energetic electrons ... page 317
+      9.2.2 Ices, condensed gases in vacuum ... page 318
+      9.2.3 Electron–ice interactions ... page 323
+      9.2.4 Summary ... page 327
+    9.3 Lithography using electrons and ices ... page 327
+      9.3.1 Ice lithography process ... page 327
+      9.3.2 Ice lithography resist ... page 328
+      9.3.3 Ice lithography instrument ... page 330
+    9.4 Applications ... page 333
+      9.4.1 Nanofabrication on 3D structures ... page 333
+      9.4.2 Nanofabrication on fragile structures ... page 334
+      9.4.3 Rapid prototyping ... page 335
+      9.4.4 High-resolution patterning ... page 336
+    9.5 Future research, opportunities and challenges ... page 336
+      9.5.1 Fundamental science research ... page 336
+      9.5.2 Icetronics research ... page 338
+      9.5.3 Applications ... page 339
+    9.6 End-of-chapter summary ... page 340
+    9.7 Student’s corner ... page 340
+     References ... page 340
+CH010.pdf ... page 1
+  Chapter 10 Magnetic nanopatterning via thermal scanning probe lithography ... page 343
+    10.1 Introduction ... page 343
+    10.2 Thermally-assisted magnetic scanning probe lithography ... page 344
+      10.2.1 Concept ... page 345
+      10.2.2 Patterning magnetic domains, domain walls and solitons ... page 346
+      10.2.3 Writing spin textures in synthetic antiferromagnets ... page 349
+      10.2.4 Features and capabilities of tam-SPL ... page 351
+    10.3 Nanopatterned spin textures for magnonics ... page 353
+      10.3.1 Controlling the spin-wave excitation and propagation with magnetic domains ... page 353
+      10.3.2 Nanoscale spin-wave circuits based on spin textures ... page 356
+      10.3.3 Optically inspired nanomagnonics in synthetic antiferromagnets ... page 359
+    10.4 End-of-chapter summary ... page 362
+    10.5 Student’s corner ... page 364
+     Acknowledgements ... page 364
+     References ... page 364
+CH011.pdf ... page 1
+  Chapter 11 Nanofabrication of three-dimensional magnetic structures ... page 368
+    11.1 Introduction ... page 368
+      11.1.1 3D magnetic nanostructures for the future ... page 368
+    11.2 Overview of nanofabrication techniques for magnetism ... page 370
+    11.3 Direct-write techniques for 3D nanofabrication of magnetic materials ... page 371
+    11.4 Focused electron beam induced deposition ... page 373
+      11.4.1 FEBID for magnetism ... page 373
+      11.4.2 FEBID fundamentals ... page 374
+      11.4.3 FEBID resolution ... page 375
+      11.4.4 FEBID theory, modelling and practical recommendations ... page 376
+      11.4.5 FEBID: 3D nanopatterning algorithms ... page 380
+      11.4.6 FEBID and thin film deposition: hybrid approach for 3D nanopatterning ... page 381
+    11.5 Two-photon lithography ... page 382
+      11.5.1 Two-photon lithography for 3D nanomagnetism ... page 382
+      11.5.2 Examples of scaffold lithography using two-photon lithography ... page 384
+    11.6 Electrodeposition of 3D materials ... page 387
+      11.6.1 Electrodeposition for 3D nanomagnetism ... page 387
+      11.6.2 Electrodeposition of nanowires ... page 388
+      11.6.3 Nanostructured multilayered nanowires ... page 391
+      11.6.4 Electrodeposition of complex structures ... page 393
+    11.7 End-of-chapter summary ... page 394
+    11.8 Student’s corner ... page 395
+     References ... page 396
+CH012.pdf ... page 1
+  Chapter 12 FEBIP for functional nanolithography of 2D nanomaterials ... page 406
+    12.1 Introduction ... page 406
+    12.2 Atomic manipulation of 2D nanomaterials ... page 407
+      12.2.1 Defect engineering of 2D nanomaterials ... page 407
+      12.2.2 Directing matter: atomic forging with in situ imaging and material manipulations ... page 412
+    12.3 Directed surface and interface modification of graphene-based nanomaterials using focused electron beam and precursor molecules ... page 413
+      12.3.1 Graphene oxide ... page 414
+      12.3.2 Other members of graphene-based nanomaterials ... page 415
+    12.4 Focused electron beam induced etching (FEBIE) of 2D nanomaterials ... page 419
+    12.5 Applications of the FEBIP techniques to 2D nanomaterial-based electronic devices ... page 423
+      12.5.1 Nanoscale welding ... page 423
+      12.5.2 Reconfigurable graphene doping ... page 424
+      12.5.3 Tuning MoS2-based nanoelectronic devices ... page 426
+    12.6 End-of-chapter summary ... page 428
+    12.7 Student’s corner ... page 428
+     Acknowledgements ... page 429
+     References ... page 429
+APP1.pdf ... page 1
+  Chapter   ... page 432
+     Chapter 1 Introduction to nanolithography techniques and their applications ... page 432
+     Chapter 2 Optical lithography ... page 432
+     Chapter 3 Electron beam lithography ... page 437
+     Chapter 4 Focused electron beam induced deposition ... page 439
+     Chapter 5 Focused ion beam induced processing ... page 441
+     Chapter 6 Scanning probe lithography ... page 443
+     Chapter 7 Soft thermal nanoimprint and hybrid processes to produce complex structures ... page 445
+     Chapter 8 Stencil lithography ... page 447
+     Chapter 9 Ice lithography ... page 448
+     Chapter 10 Magnetic nanopatterning via thermal scanning probe lithography ... page 449
+     Chapter 11 Nanofabrication of three-dimensional magnetic structures ... page 450

@@ -1,0 +1,360 @@
+# Table of Contents: campbell_2008
+
+Front Matter ... page 1
+Preface ... page 3
+Table of Contents ... page 5
+Part I. Overview and Materials ... page 12
+1. An Introduction to Microelectronic Fabrication ... page 13
+  1.1 Microelectronic Technologies: A Simple Example ... page 15
+  1.2 Unit Processes and Technologies ... page 17
+  1.3 A Roadmap for the Course ... page 18
+  1.4 Summary ... page 19
+Part I. Overview and Materials ... page 20
+1. An Introduction to Microelectronic Fabrication ... page 21
+  1.1 Microelectronic Technologies: A Simple Example ... page 23
+  1.2 Unit Processes and Technologies ... page 25
+  1.3 A Roadmap for the Course ... page 26
+  1.4 Summary ... page 27
+2. Semiconductor Substrates ... page 28
+  2.1 Phase Diagrams and Solid Solubility° ... page 28
+  2.2 Crystallography and Crystal Structure° ... page 32
+  2.3 Crystal Defects ... page 34
+  2.4 Czochralski Growth ... page 40
+  2.5 Bridgman Growth of GaAs ... page 48
+  2.6 Float Zone Growth ... page 50
+  2.7 Wafer Preparation and Specifications ... page 51
+  2.8 Summary and Future Trends ... page 53
+  Problems ... page 53
+  References ... page 54
+Part II. Unit Processes 1: Hot Processing and Ion Implantation ... page 58
+3. Diffusion ... page 59
+  3.1 Fick's Diffusion Equation in One Dimension ... page 59
+  3.2 Atomistic Models of Diffusion ... page 61
+  3.3 Analytic Solutions of Fick's Law ... page 66
+  3.4 Diffusion Coefficients for Common Dopants ... page 69
+  3.5 Analysis of Diffused Profiles ... page 72
+  3.6 Diffusion in SiO_2 ... page 78
+  3.7 Simulations of Diffusion Profiles ... page 80
+  3.8 Summary ... page 85
+  Problems ... page 85
+  References ... page 87
+Part II. Unit Processes 1: Hot Processing and Ion Implantation ... page 90
+3. Diffusion ... page 91
+  3.1 Fick's Diffusion Equation in One Dimension ... page 91
+  3.2 Atomistic Models of Diffusion ... page 93
+  3.3 Analytic Solutions of Fick's Law ... page 98
+  3.4 Diffusion Coefficients for Common Dopants ... page 101
+  3.5 Analysis of Diffused Profiles ... page 104
+  3.6 Diffusion in SiO_2 ... page 110
+  3.7 Simulations of Diffusion Profiles ... page 112
+  3.8 Summary ... page 117
+  Problems ... page 117
+  References ... page 119
+4. Thermal Oxidation ... page 122
+  4.1 The Deal-Grove Model of Oxidation ... page 122
+  4.2 The Linear and Parabolic Rate Coefficients ... page 125
+  4.3 The Initial Oxidation Regime ... page 129
+  4.4 The Structure of SiO_2 ... page 131
+  4.5 Oxide Characterization ... page 132
+  4.6 The Effects of Dopants during Oxidation and Polysilicon Oxidation ... page 139
+  4.7 Silicon Oxynitrides ... page 142
+  4.8 Alternative Gate Insulators^+ ... page 143
+  4.9 Oxidation Systems ... page 145
+  4.10 Numeric Oxidations^+ ... page 147
+  4.11 Summary ... page 149
+  Problems ... page 149
+  References ... page 151
+5. Ion Implantation ... page 155
+  5.1 Idealized Ion Implantation Systems ... page 156
+  5.2 Coulomb Scattering° ... page 161
+  5.3 Vertical Projected Range ... page 162
+  5.4 Channeling and Lateral Projected Range ... page 168
+  5.5 Implantation Damage ... page 170
+  5.6 Shallow Junction Formation^+ ... page 174
+  5.7 Buried Dielectrics^+ ... page 176
+  5.8 Ion Implantation Systems: Problems and Concerns ... page 178
+  5.9 Numerical Implanted Profiles^+ ... page 180
+  5.10 Summary ... page 182
+  Problems ... page 182
+  References ... page 184
+6. Rapid Thermal Processing ... page 188
+  6.1 Gray Body Radiation, Heat Exchange, and Optical Absorption° ... page 189
+  6.2 High Intensity Optical Sources and Chamber Design ... page 192
+  6.3 Temperature Measurement ... page 195
+  6.4 Thermoplastic Stress° ... page 199
+  6.5 Rapid Thermal Activation of Impurities ... page 200
+  6.6 Rapid Thermal Processing of Dielectrics ... page 202
+  6.7 Silicidation and Contact Formation ... page 203
+  6.8 Alternative Rapid Thermal Processing Systems ... page 204
+  6.9 Summary ... page 205
+  Problems ... page 205
+  References ... page 206
+Part III. Unit Processes 2: Pattern Transfer ... page 211
+7. Optical Lithography ... page 213
+  7.1 Lithography Overview ... page 213
+  7.2 Diffraction° ... page 217
+  7.3 The Modulation Transfer Function and Optical Exposures ... page 220
+  7.4 Source Systems and Spatial Coherence ... page 223
+  7.5 Contact/Proximity Printers ... page 227
+  7.6 Projection Printers ... page 231
+  7.7 Advanced Mask Concepts^+ ... page 237
+  7.8 Surface Reflections and Standing Waves ... page 240
+  7.9 Alignment ... page 242
+  7.10 Summary ... page 243
+  Problems ... page 243
+  References ... page 244
+Part III. Unit Processes 2: Pattern Transfer ... page 247
+7. Optical Lithography ... page 249
+  7.1 Lithography Overview ... page 249
+  7.2 Diffraction° ... page 253
+  7.3 The Modulation Transfer Function and Optical Exposures ... page 256
+  7.4 Source Systems and Spatial Coherence ... page 259
+  7.5 Contact/Proximity Printers ... page 263
+  7.6 Projection Printers ... page 267
+  7.7 Advanced Mask Concepts^+ ... page 273
+  7.8 Surface Reflections and Standing Waves ... page 276
+  7.9 Alignment ... page 278
+  7.10 Summary ... page 279
+  Problems ... page 279
+  References ... page 280
+8. Photoresists ... page 283
+  8.1 Photoresist Types ... page 283
+  8.2 Organic Materials and Polymers° ... page 284
+  8.3 Typical Reactions of DQN Positive Photoresist ... page 286
+  8.4 Contrast Curves ... page 288
+  8.5 The Critical Modulation Transfer Function ... page 291
+  8.6 Applying and Developing Photoresist ... page 291
+  8.7 Second-Order Exposure Effects ... page 295
+  8.8 Advanced Photoresists and Photoresist Processes^+ ... page 299
+  8.9 Summary ... page 303
+  Problems ... page 303
+  References ... page 305
+9. Nonoptical Lithographic Techniques^+ ... page 308
+  9.1 Interactions of High Energy Beams with Matter° ... page 309
+  9.2 Direct-Write Electron Beam Lithography Systems ... page 311
+  9.3 Direct-Write Electron Beam Lithography: Summary and Outlook ... page 317
+  9.4 X-ray Sources° ... page 319
+  9.5 Proximity X-ray Exposure Systems ... page 322
+  9.6 Membrane Masks ... page 324
+  9.7 Projection X-ray Lithography ... page 326
+  9.8 Projection Electron Beam Lithography SCALPEL ... page 328
+  9.9 E-beam and X-ray Resists ... page 329
+  9.10 Radiation Damage in MOS Devices ... page 331
+  9.11 Soft Lithography and Nanoimprint Lithography ... page 333
+  9.12 Summary ... page 336
+  Problems ... page 336
+  References ... page 337
+10. Vacuum Science and Plasmas ... page 343
+  10.1 The Kinetic Theory of Gases° ... page 343
+  10.2 Gas Flow and Conductance ... page 346
+  10.3 Pressure Ranges and Vacuum Pumps ... page 349
+  10.4 Vacuum Seals and Pressure Measurement ... page 355
+  10.5 The DC Glow Discharge° ... page 357
+  10.6 RF Discharges ... page 359
+  10.7 High Density Plasmas ... page 361
+  10.8 Summary ... page 364
+  Problems ... page 364
+  References ... page 366
+11. Etching ... page 367
+  11.1 Wet Etching ... page 368
+  11.2 Chemical Mechanical Polishing ... page 373
+  11.3 Basic Regimes of Plasma Etching ... page 375
+  11.4 High Pressure Plasma Etching ... page 376
+  11.5 Ion Milling ... page 384
+  11.6 Reactive Ion Etching ... page 387
+  11.7 Damage in Reactive Ion Etching^+ ... page 391
+  11.8 High Density Plasma HDP Etching ... page 392
+  11.9 Liftoff ... page 394
+  11.10 Summary ... page 395
+  Problems ... page 396
+  References ... page 397
+Part IV. Unit Processes 3: Thin Films ... page 404
+12. Physical Deposition: Evaporation and Sputtering ... page 406
+  12.1 Phase Diagrams: Sublimation and Evaporation° ... page 407
+  12.2 Deposition Rates ... page 408
+  12.3 Step Coverage ... page 412
+  12.4 Evaporator Systems: Crucible Heating Techniques ... page 414
+  12.5 Multicomponent Films ... page 417
+  12.6 An Introduction to Sputtering ... page 418
+  12.7 Physics of Sputtering° ... page 419
+  12.8 Deposition Rate: Sputter Yield ... page 420
+  12.9 High Density Plasma Sputtering ... page 422
+  12.10 Morphology and Step Coverage ... page 424
+  12.11 Sputtering Methods ... page 428
+  12.12 Sputtering of Specific Materials ... page 429
+  12.13 Stress in Deposited Layers ... page 432
+  12.14 Summary ... page 433
+  Problems ... page 433
+  References ... page 435
+Part IV. Unit Processes 3: Thin Films ... page 439
+12. Physical Deposition: Evaporation and Sputtering ... page 441
+  12.1 Phase Diagrams: Sublimation and Evaporation° ... page 442
+  12.2 Deposition Rates ... page 443
+  12.3 Step Coverage ... page 447
+  12.4 Evaporator Systems: Crucible Heating Techniques ... page 449
+  12.5 Multicomponent Films ... page 452
+  12.6 An Introduction to Sputtering ... page 453
+  12.7 Physics of Sputtering° ... page 454
+  12.8 Deposition Rate: Sputter Yield ... page 455
+  12.9 High Density Plasma Sputtering ... page 457
+  12.10 Morphology and Step Coverage ... page 459
+  12.11 Sputtering Methods ... page 463
+  12.12 Sputtering of Specific Materials ... page 464
+  12.13 Stress in Deposited Layers ... page 467
+  12.14 Summary ... page 468
+  Problems ... page 468
+  References ... page 470
+13. Chemical Vapor Deposition ... page 474
+  13.1 A Simple CVD System for the Deposition of Silicon ... page 474
+  13.2 Chemical Equilibrium and the Law of Mass Action° ... page 476
+  13.3 Gas Flow and Boundary Layers° ... page 479
+  13.4 Evaluation of the Simple CVD System ... page 484
+  13.5 Atmospheric CVD of Dielectrics ... page 485
+  13.6 Low Pressure CVD of Dielectrics and Semiconductors in Hot Wall Systems ... page 486
+  13.7 Plasma-Enhanced CVD of Dielectrics ... page 491
+  13.8 Metal CVD^+ ... page 495
+  13.9 Atomic Layer Deposition ... page 498
+  13.10 Electroplating Copper ... page 500
+  13.11 Summary ... page 502
+  Problems ... page 502
+  References ... page 503
+14. Epitaxial Growth ... page 509
+  14.1 Wafer Cleaning and Native Oxide Removal ... page 510
+  14.2 The Thermodynamics of Vapor Phase Growth ... page 514
+  14.3 Surface Reactions ... page 518
+  14.4 Dopant Incorporation ... page 519
+  14.5 Defects in Epitaxial Growth ... page 520
+  14.6 Selective Growth^+ ... page 523
+  14.7 Halide Transport GaAs Vapor Phase Epitaxy ... page 523
+  14.8 Incommensurate and Strained Layer Heteroepitaxy ... page 524
+  14.9 Metal Organic Chemical Vapor Deposition MOCVD ... page 527
+  14.10 Advanced Silicon Vapor Phase Epitaxial Growth Techniques ... page 532
+  14.11 Molecular Beam Epitaxy Technology ... page 535
+  14.12 BCF Theory^+ ... page 540
+  14.13 Gas Source MBE and Chemical Beam Epitaxy^+ ... page 545
+  14.14 Summary ... page 546
+  Problems ... page 546
+  References ... page 547
+Part V. Process Integration ... page 553
+15. Device Isolation, Contacts, and Metallization ... page 555
+  15.1 Junction and Oxide Isolation ... page 555
+  15.2 LOCOS Methods ... page 558
+  15.3 Trench Isolation ... page 561
+  15.4 Silicon-on-Insulator Isolation Techniques ... page 564
+  15.5 Semi-Insulating Substrates ... page 565
+  15.6 Schottky Contacts ... page 567
+  15.7 Implanted Ohmic Contacts ... page 571
+  15.8 Alloyed Contacts ... page 574
+  15.9 Multilevel Metallization ... page 575
+  15.10 Planarization and Advanced Interconnect ... page 580
+  15.11 Summary ... page 585
+  Problems ... page 586
+  References ... page 587
+Part V. Process Integration ... page 593
+15. Device Isolation, Contacts, and Metallization ... page 595
+  15.1 Junction and Oxide Isolation ... page 595
+  15.2 LOCOS Methods ... page 598
+  15.3 Trench Isolation ... page 601
+  15.4 Silicon-on-Insulator Isolation Techniques ... page 604
+  15.5 Semi-Insulating Substrates ... page 605
+  15.6 Schottky Contacts ... page 607
+  15.7 Implanted Ohmic Contacts ... page 611
+  15.8 Alloyed Contacts ... page 614
+  15.9 Multilevel Metallization ... page 615
+  15.10 Planarization and Advanced Interconnect ... page 620
+  15.11 Summary ... page 625
+  Problems ... page 626
+  References ... page 627
+16. CMOS Technologies ... page 633
+  16.1 Basic Long-Channel Device Behavior ... page 633
+  16.2 Early MOS Technologies ... page 635
+  16.3 The Basic 3-mu m Technology ... page 636
+  16.4 Device Scaling ... page 641
+  16.5 Hot Carrier Effects and Drain Engineering ... page 648
+  16.6 Latchup ... page 651
+  16.7 Shallow Source/Drains and Tailored Channel Doping ... page 654
+  16.8 The Universal Curve and Advanced CMOS ... page 656
+  16.9 Summary ... page 658
+  Problems ... page 659
+  References ... page 661
+17. Other Transistor Technologies ... page 667
+  17.1 Basic MESFET Operation ... page 667
+  17.2 Basic MESFET Technology ... page 668
+  17.3 Digital Technologies ... page 669
+  17.4 MMIC Technologies ... page 673
+  17.5 MODFETs ... page 676
+  17.6 Review of Bipolar Devices: Ideal and Quasi-Ideal Behavior ... page 677
+  17.7 Performance of BJTs ... page 679
+  17.8 Early Bipolar Processes ... page 681
+  17.9 Advanced Bipolar Processes ... page 684
+  17.10 BiCMOS ... page 691
+  17.11 Thin Film Transistors ... page 694
+  17.12 Summary ... page 696
+  Problems ... page 697
+  References ... page 699
+18. Optoelectronic Technologies ... page 705
+  18.1 Optoelectronic Devices Overview ... page 705
+  18.2 Direct-Gap Inorganic LEDs ... page 707
+  18.3 Polymer/Organic Light-Emitting Diodes ... page 709
+  18.4 Lasers ... page 711
+  18.5 Summary ... page 712
+  References ... page 712
+19. MEMS ... page 713
+  19.1 Fundamentals of Mechanics ... page 714
+  19.2 Stress in Thin Films ... page 716
+  19.3 Mechanical-to-Electrical Transduction ... page 717
+  19.4 Mechanics of Common MEMS Devices ... page 721
+  19.5 Bulk Micromachining Etching Techniques ... page 725
+  19.6 Bulk Micromachining Process Flow ... page 733
+  19.7 Surface Micromachining Basics ... page 737
+  19.8 Surface Micromachining Process Flow ... page 741
+  19.9 MEMS Actuators ... page 744
+  19.10 High Aspect Ratio Microsystems Technology HARMST ... page 749
+  19.11 Summary ... page 751
+  Problems ... page 751
+  References ... page 753
+20. Integrated Circuit Manufacturing ... page 757
+  20.1 Yield Prediction and Yield Tracking ... page 758
+  20.2 Particle Control ... page 763
+  20.3 Statistical Process Control ... page 765
+  20.4 Full Factorial Experiments and ANOVA ... page 767
+  20.5 Design of Experiments ... page 770
+  20.6 Computer-Integrated Manufacturing ... page 773
+  20.7 Summary ... page 775
+  Problems ... page 776
+  References ... page 776
+Appendices ... page 778
+  Appendix I: Acronyms and Common Symbols ... page 778
+  Appendix II: Properties of Selected Semiconductor Materials ... page 784
+  Appendix III: Physical Constants ... page 785
+  Appendix IV: Conversion Factors ... page 787
+  Appendix V: Some Properties of the Error Function ... page 790
+  Appendix VI: F Values ... page 794
+Index ... page 796
+  A ... page 796
+  B ... page 797
+  C ... page 798
+  D ... page 801
+  E ... page 803
+  F ... page 804
+  G ... page 806
+  H ... page 807
+  I ... page 808
+  J ... page 809
+  K ... page 809
+  L ... page 809
+  M ... page 810
+  N ... page 812
+  O ... page 812
+  P ... page 813
+  Q ... page 815
+  R ... page 816
+  S ... page 817
+  T ... page 821
+  U ... page 822
+  V ... page 822
+  W ... page 823
+  X ... page 824
+  Y ... page 824
+  Z ... page 824
+Periodic Table of the Elements and Element Atomic Weights ... page 825

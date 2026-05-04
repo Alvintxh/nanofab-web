@@ -1,0 +1,36 @@
+# Table of Contents: dsa_review_2025_cheng
+
+Introduction  ... page 1
+DSA Process Flow Introduction  ... page 3
+  Graphoepitaxy Method  ... page 4
+  Chemoepitaxy Method  ... page 4
+    LiNe Flow  ... page 4
+    SMART Flow  ... page 5
+    Underlayer Surface Treatment Flow  ... page 6
+Materials for DSA Lithography  ... page 7
+  Underlayer (UL) and Neutral Layer (NL) Materials  ... page 7
+    Underlayers (ULs)  ... page 7
+    Neutral Layers (NLs)  ... page 7
+  Brush and Pinning Materials  ... page 8
+  BCP Material  ... page 8
+Pattern Transfer Techniques  ... page 9
+  Dry Etching  ... page 9
+  Wet Etching  ... page 9
+DSA Simulation  ... page 10
+  Core of DSA Simulation Technologies  ... page 10
+    SCFT: The Precise Predictor of BCP Phase Behavior  ... page 10
+    MD: The Dynamic Observer of the Microscopic World  ... page 10
+    DFT: Quantum Insights for Polymer Design  ... page 10
+  Existing Challenges and Countermeasures  ... page 11
+    Strategies to Overcome Computational Challenges in DSA Simulations  ... page 11
+    Integrated Simulation of Multiple Domains  ... page 11
+DSA Industrial Application  ... page 13
+  Pattern Rectification (Roughness Improvement)  ... page 13
+  Pitch Multiplication for Hexagonal Hole  ... page 13
+  LCDU and PPE Improvement  ... page 14
+DSA Challenges  ... page 14
+  BCP Material Complexity  ... page 14
+  DSA Defect Formation and Control  ... page 15
+  DSA Metrology Challenges and Solutions  ... page 15
+Conclusions and Outlook  ... page 16
+References ... page 16

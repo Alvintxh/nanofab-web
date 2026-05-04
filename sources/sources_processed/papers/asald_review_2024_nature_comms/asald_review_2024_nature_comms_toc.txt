@@ -1,0 +1,23 @@
+# Table of Contents: asald_review_2024_nature_comms
+
+Area-selective atomic layer deposition on 2D monolayer lateral superlattices ... page 1
+  Results ... page 2
+    Superlattice-basedAS-ALD ... page 2
+    Characterization and controllability of SAS-ALD ... page 2
+    Initial nucleation sites in SAS-ALD ... page 4
+    Mechanism of SAS-ALD ... page 5
+  Discussion ... page 7
+  Methods ... page 7
+    Chemical vapor deposition (CVD) of 2D monolayer lateral superlattice ... page 7
+    Atomic layer deposition (ALD) condition for superlattice-basedAS-ALD ... page 7
+    Characterization ... page 8
+    EMPAD 4DSTEM ... page 8
+    MD simulation, DFT calculation, and kMC simulation ... page 8
+    Device fabrication ... page 9
+  Data availability ... page 9
+  Code availability ... page 9
+  References ... page 9
+  Acknowledgements ... page 10
+  Author contributions ... page 10
+  Competing interests ... page 10
+  Additional information ... page 10

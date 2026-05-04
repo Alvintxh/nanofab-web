@@ -1,0 +1,1029 @@
+# dsa_review_2025_cheng
+# Extracted from: dsa_review_2025_cheng.pdf
+# Total PDF pages: 19
+# Page numbering: offset=0 (book_page = pdf_page - 0 + 1)
+# ============================================================
+
+
+[Page 1]
+Academic Editors: Sikun Li and
+Yayi Wei
+Received: 30 April 2025
+Revised: 18 May 2025
+Accepted: 23 May 2025
+Published: 31 May 2025
+Citation:
+Cheng, X.; Liang, D.; Jiang,
+M.; Sha, Y.; Liu, X.; Liu, J.; Cao, Q.; Shi,
+J. Review of Directed Self-Assembly
+Material, Processing, and Application
+in Advanced Lithography and
+Patterning. Micromachines 2025, 16,
+667. https://doi.org/10.3390/
+mi16060667
+Copyright: © 2025 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license
+(https://creativecommons.org/
+licenses/by/4.0/).
+Review
+Review of Directed Self-Assembly Material, Processing, and
+Application in Advanced Lithography and Patterning
+Xiuyan Cheng, Di Liang, Miao Jiang *, Yufei Sha, Xiaonan Liu, Jinlai Liu, Qingchen Cao and Jiangliu Shi
+Beijing Superstring Academy of Memory Technology, Beijing 100176, China; xiuyan.cheng@bjsamt.org.cn (X.C.);
+di.liang@bjsamt.org.cn (D.L.); yufei.sha@bjsamt.org.cn (Y.S.); xiaonan.liu@bjsamt.org.cn (X.L.);
+jinlai.liu@bjsamt.org.cn (J.L.); qingchen.cao@bjsamt.org.cn (Q.C.); jiangliu.shi@bjsamt.org.cn (J.S.)
+* Correspondence: miao.jiang@bjsamt.org.cn
+Abstract: Directed self-assembly (DSA) lithography, a cutting-edge technology based
+on the self-assembly of block copolymers (BCPs), has received significant attention in
+recent years. Combining DSA with established lithography technologies, such as extreme
+ultraviolet (EUV), deep ultraviolet (DUV), electron beam lithography, and nanoimprint
+lithography, significantly enhances the resolution of target patterns and device density.
+Currently, there are two commonly used methods in DSA: graphoepitaxy, employing
+lithographically defined topographic templates to guide BCP assembly, and chemoepitaxy,
+utilizing chemically patterned surfaces with precisely controlled interfacial energies to
+direct nanoscale phase segregation. Through novel DSA lithography technology, nanoscale
+patterns with smaller feature sizes and higher densities can be obtained, realizing the
+miniaturization of hole and line patterns and pitch multiplication and improving the
+roughness and local critical dimension uniformity (LCDU). It is gradually becoming one of
+the most promising and advanced lithography techniques. DSA lithography technology
+has been applied in logic, memory, and optoelectronic device fabrications.
+Keywords: DSA; advanced lithography technology; BCPs
+1. Introduction
+The semiconductor industry’s relentless scaling roadmap now confronts critical bot-
+tlenecks as conventional photolithography struggles with fundamental resolution limits
+and prohibitive cost scaling. With feature sizes now penetrating the sub-10 nm regime, the
+limitations of optical diffraction and escalating costs associated with advanced lithographic
+techniques threaten the continuation of Moore’s Law. EUV lithography, while enabling
+7 nm node production, faces commercialization challenges, such as tool costs exceeding
+$150 million and complex vacuum system requirements [1]. Concurrently, multi-patterning
+techniques, while improving resolution, have increased mask counts from 40 layers at
+28 nm to over 100 layers at 5 nm nodes, increasing lithography’s cost contribution from
+18% to 42% of total wafer fabrication budgets [2]. Physical constraints compound these
+economic pressures: 193 nm argon fluoride (ArF) immersion lithography approaches its
+38 nm Rayleigh resolution limit, while line-edge roughness (LER) remains above 1 nm,
+despite sophisticated resolution enhancement technologies (RETs) like optical proximity
+correction [3]. These dual challenges of technical and economic pressures have acceler-
+ated the development of next-generation patterning technologies, among which DSA has
+emerged as a particularly promising candidate [4]. The combination of DSA and DUV
+realizes line/space and contact hole multiplication. The International Roadmap for De-
+vices and Systems (IRDS) identifies DSA, in combination with EUV, as a next-generation
+Micromachines 2025, 16, 667
+https://doi.org/10.3390/mi16060667
+
+[Page 2]
+Micromachines 2025, 16, 667
+2 of 19
+advanced patterning technique [5]. The synergy of DSA with EUV enables sub-10 nm
+resolution enhancement, defect rectification, and improved roughness while reducing EUV
+dose requirements by 30–50% through self-aligned pattern multiplication. EUV-defined
+chemical templates guide DSA to achieve atomic-scale CDU, overcoming the photoresist
+stochastic limitations of standalone EUV.
+At its core, DSA represents a fundamental transformation from conventional top-
+down patterning to bottom-up nanostructure formation, using the inherent self-assembly
+properties of BCPs. BCPs are architecturally precise macromolecules consisting of two
+or more chemically distinct polymer blocks covalently bonded together. When thermally
+annealed, BCPs undergo microphase separation driven by the Flory–Huggins interaction
+parameter (χ) that quantifies the incompatibility between polymer blocks. For instance,
+the widely studied polystyrene-block-poly(methyl methacrylate) (PS-b-PMMA) system
+separates into periodic nanodomains, with dimensions directly controlled by the degree
+of polymerization (N) and χ value, enabling a sub-5 nm feature size through high-χ
+BCPs [6]. Computational modeling plays a pivotal role in optimizing these self-assembly
+processes, as demonstrated by Gueorguiev’s studies, where density functional theory (DFT)
+calculations predicted the stability and electronic properties of self-assembled silicon–metal
+nanowires [7]. Similarly, molecular dynamics simulations and phase-field modeling can
+guide the design of BCP systems by predicting equilibrium morphologies, defect formation
+energetics, and interfacial interactions, bridging molecular-scale insights with macroscale
+pattern fidelity. The self-assembly process follows the energy minimization principle,
+where interfacial energy between polymer blocks competes with entropy loss from chain
+stretching, resulting in predictable nanoscale architectures.
+Graphoepitaxy and chemoepitaxy methods are the two main process strategies for
+DSA. In physically defined graphoepitaxial processes, phase separation is induced by
+the selective affinity of one polymer block toward the sidewalls, which act as guiding
+templates. Meanwhile, the substrates of the confined geometry must exhibit neutral
+interactions with both blocks (Figure 1) [8]. The critical innovation distinguishing DSA from
+conventional self-assembly lies in the introduction of chemoepitaxy, a guidance mechanism
+that imposes long-range order on the otherwise stochastic self-assembly process [9]. This is
+achieved through pre-patterning substrates with precisely defined chemical or topographic
+confinements at dimensions larger than the inherent BCP periodicity (L0) [10]. These
+guiding patterns create alternating surface chemistries that direct the orientation of BCP
+domains. For example, a substrate patterned with alternating hydrophobic and hydrophilic
+domains can align PS-b-PMMA domains such that the PS block (higher hydrophobicity)
+preferentially adheres to hydrophobic regions, while PMMA domains occupy hydrophilic
+areas [11]. This synergistic combination of thermodynamic self-assembly and external
+guidance enables defect densities 2–3 orders of magnitude lower than purely stochastic
+self-assembly, with a demonstrated critical dimension uniformity (CDU) of 0.5 nm (3σ) on
+300 mm wafers [12]. Advanced guidance schemes further use ternary blends incorporating
+homopolymers to enhance pattern fidelity and pattern placement error challenges in
+complex architectures [13].
+The self-assembly capability emerges from the dynamic nature of BCP reassembly dur-
+ing annealing. Recent advances in mesoscale modeling, informed by the density functional
+theory (DFT), have further elucidated how interfacial energetics and diffusion kinetics
+govern nanostructure formation. For instance, Filho et al. demonstrated a DFT-fed phase-
+field model (PFM) for semiconductor nanorods, where first-principles-derived interfacial
+energies and diffusion coefficients predicted core–shell morphologies with compositional
+gradients analogous to BCP microphase separation [14]. Similarly, Pacheco et al. revealed
+how cluster integrity in condensed phases depends on the balance between atomic-scale
+
+[Page 3]
+Micromachines 2025, 16, 667
+3 of 19
+interactions and mesoscale reorganization, a paradigm that directly applies to defect anni-
+hilation in BCP systems [15]. Such methodologies exemplify the potential of integrating
+ab initio insights with mesoscale frameworks to optimize BCP composition diversity (e.g.,
+through χ/N tuning) and defect mitigation (e.g., via annealing kinetics), thereby enhancing
+DSA’s precision for semiconductor patterning. Unlike photolithography’s static pattern
+transfer, DSA permits continuous defect annihilation through molecular mobility in the
+melt state. Kinetic studies reveal that over 90% of dislocation and disclination defects
+can be eliminated during optimal annealing cycles, a feature impossible to replicate in
+conventional lithography without multiple exposure and etch steps [16]. This inherent error
+correction, coupled with the ability to generate 10¹¹ features/cm2 in a single processing step,
+positions DSA as both a complementary enhancement and potential replacement for estab-
+lished lithographic techniques in specific applications, such as contact hole multiplication
+and fin formation in advanced transistor architectures [17]. DSA utilizes the inherent phase-
+separation behavior of BCPs to generate periodic nanostructures with adjustable shapes
+like lamellae, cylinders, and spheres. Under equilibrium conditions, BCPs self-assemble
+into nanoscale domains (typically 5–50 nm) dictated by their thermodynamic properties,
+such as Flory–Huggins interaction parameters (χ) and volume fractions. Critically, DSA
+introduces external guidance, including thermal annealing, surface energy modulation, or
+external electric/magnetic fields, to direct the orientation of self-assembled patterns. The
+resulting ordered nanostructures serve as hard masks for pattern transfer, enabling the
+fabrication of high-density semiconductor devices.
+Figure 1. General concept for graphoepitaxy (a) and chemoepitaxy (b) flows. Adapted from [8].
+Compared to EUV or nanoimprint lithography (NIL), DSA eliminates the need for
+expensive light sources, masks, and multi-patterning steps, significantly reducing manufac-
+turing costs while achieving sub-5 nm feature resolution [18]. This fundamental change has
+attracted substantial interest from academia and industry, with leading institutions, such
+as EMD, IBM, IMEC, Intel, TEL, and JSR, pioneering material development [19], process
+optimization, and defect reduction strategies. Concurrently, academic research, including
+works by groups at UC Berkeley, Fudan University, and Dow Chemical, has advanced the
+fundamental understanding of BCP thermodynamics, interfacial interactions, and directed
+alignment mechanisms. As semiconductor nodes approach atomic-scale limits, DSA is
+expected to complement or even replace the traditional top-down approaches, particularly
+in applications requiring ultrahigh-density memory, logic devices, and metamaterials [20].
+2. DSA Process Flow Introduction
+There are two mainstream process strategies for DSA, namely graphoepitaxy [21] and
+chemoepitaxy [22]. Both methods enable BCPs to form highly ordered nanostructures
+over large areas, which has significantly promoted the extensive application of BCPs in
+lithographic patterning. The fundamental distinction lies in the method of generating the
+prepattern template for assembly. In the graphoepitaxy method, the BCP assembly region
+
+[Page 4]
+Micromachines 2025, 16, 667
+4 of 19
+is confined by physical barriers, whereas in the chemoepitaxy method, it is determined by
+chemical modifications in surface energy on the substrate.
+Graphoepitaxy offers advantages such as simple processing, high tolerance, fewer
+defects, and precise pattern alignment. In contrast, chemoepitaxy is not constrained by the
+spatial limitations of guiding templates, which contributes to improved pattern quality.
+However, its limitations lie in the fact that chemical patterning typically requires expensive
+techniques like EUV lithography or electron beam lithography (EBL), and the process of
+chemically modifying the substrate surface is highly complex.
+2.1. Graphoepitaxy Method
+The graphoepitaxy method uses lithography techniques (such as optical lithography,
+EUV lithography, or EBL) to pre-fabricate guiding templates, such as trenches or holes, on
+the substrate. These templates are utilized to guide the self-assembly of BCPs to form highly
+ordered nanostructures. The principle is that the template pattern of the substrate imposes
+structural constraints on the BCPs. The self-assembly of the BCPs is initiated and guided by
+the sidewalls of the template and then propagated to the central region, achieving a high
+degree of order for the nanostructures of the BCPs within the entire template. The template
+pattern width is typically designed as integer multiples of the BCP period.
+The key steps in graphoepitaxy include: (1) guiding pattern fabrication, (2) BCP coating
+and annealing, (3) selective removal of one block of BCPs, and (4) pattern transfer to the
+underlying substrate. For example, Oria L. et al. investigated the process optimization of
+DSA line/space patterning self-assembly using a PS-b-PMMA [23]. The guiding patterns
+was obtained using 193 nm dry lithography. As shown in Figure 2, when a BCP film is
+deposited on a substrate with pre-patterned trenches, the BCP is annealed to allow it to
+separate into two different domains, and the BCP chains tend to align along the trench
+walls, resulting in a well-ordered pattern. Then, the patterns are transferred by means
+of dry plasma etching into an organic hard mask constituted of SiARC and SOC. The
+combination of ArF dry lithography and DSA enables multiple patterning of line/space.
+Graphoepitaxy is particularly suitable for line/space patterns and has been successfully
+demonstrated for pitch multiplication applications.
+Figure 2. DSA integration scheme with graphoepitaxy. Steps 1 to 3: 193 nm dry lithography
+line/space patterns creation into a hard mask, which ends with an optional affinity modification
+process (stripes); steps 4 to 5: BCP coating and self-assembly. Adapted from [23].
+2.2. Chemoepitaxy Method
+An advantage of the chemoepitaxy method is that it requires less space on the wafer
+than the graphoepitaxy flows to create the prepatterns.
+A chemoepitaxy process involves defining two distinct surface energy regions. The
+first, known as the guiding region, exhibits a strong preference for one of the blocks in
+the BCP, serving as a chemical anchor that directs the BCP to phase-segregate into its
+respective domains during annealing. The second region is designed to be neutral, showing
+no preferential affinity for either of the blocks in the BCP. This neutrality ensures that the
+BCP shows perpendicular orientation relative to the substrate surface.
+2.2.1. LiNe Flow
+The LiNe flow begins with the coating of a guiding layer, X-PS (thickness < 10 nm) [24].
+As shown in Figure 3, the guiding layer is first patterned using conventional lithography
+
+[Page 5]
+Micromachines 2025, 16, 667
+5 of 19
+techniques, followed by O2 plasma etching. After removing the photoresist, a neutral layer
+or brush layer (thickness < 10 nm) is coated, then annealed, and the solvent is rinsed to
+remove excess material on the guiding layer. This brush should adhere to the substrate
+rather than the guiding layer, creating two regions with different surface affinities for the
+BCP. Finally, the BCP is coated and thermally annealed to induce the separation of the two
+BCP blocks. When desired, the PMMA domains are removed with O2 plasma. Then, the
+resulting pattern can be transferred to the underlying substrate.
+Figure 3. Schematic diagram of the LiNe flow. Adapted from [24].
+This process utilizes the chemical contrast between the guiding layer and brush layer to
+direct the self-assembly of the BCP, enabling the formation of highly ordered nanostructures
+with precise control over feature size and placement. The LiNe flow process is particularly
+advantageous for achieving a sub-10 nm feature resolution with reduced defect densities,
+making it a promising candidate for advanced semiconductor manufacturing.
+2.2.2. SMART Flow
+As illustrated in Figure 4, the Surface Modification for Advanced Resolution Technol-
+ogy (SMART) process flow is similar to the LiNe flow, but a significant difference is that
+the neutral layer is patterned first, rather than the guiding layer. The SMART process flow
+begins with the deposition of the cross-linkable neutral layer NLD-175 on the substrate, sub-
+sequently patterned via ArF immersion lithography [25]. Then, the photoresist is stripped
+away using a resist stripper. Next, a brush pinning material (as a guiding material) NLD-
+226 is spin-coated onto the patterned neutral layer. Excess pinning material is removed via
+solvent rinsing, leaving behind a monolayer of pinning material adhered exclusively to
+the trenches. The process culminates with BCP deposition, followed by thermal annealing,
+to induce microphase separation and generate well-defined line/space patterns. After
+selectively etching the PMMA block with O2 plasma, the resulting DSA pattern can be
+transferred to the underlying substrate SiARC film through a plasma etching process.
+Figure 4. Schematic of SMART flow. Adapted from [25].
+The SMART™flow offers a refined approach to DSA that synergistically combines
+chemoepitaxy with nanoscale topographic confinement, achieving high-resolution pattern-
+ing with improved defect control and alignment precision.
+
+[Page 6]
+Micromachines 2025, 16, 667
+6 of 19
+2.2.3. Underlayer Surface Treatment Flow
+The underlayer surface treatment (ULST) process flow is described in Figure 5 [26].
+This is achieved by treating the underlayer surface to create a pattern of chemical function-
+ality that can guide the DSA of BCPs. Firstly, a 13 nm silicon nitride (SiN) film is coated
+on a silicon wafer. A 6 nm film of cross-linkable polystyrene (X-PS) is then spin-coated
+onto the wafer. Then, the guiding pattern is printed using EUV lithography techniques. A
+surface treatment is used to oxidize the X-PS in the exposed and developed X-PS regions.
+After removing the remaining photoresist, a BCP of PS-b-PMMA is spin-coated onto the
+surface and annealed in a low-oxygen atmosphere to drive microphase segregation and
+facilitate self-assembly. Then, PMMA blocks of BCP are selectively removed, and the final
+step involves transferring the PS pattern into the 13 nm SiN underlayer by dry etching.
+The schematic illustration for generating hexagonal holes in Figure 6 is similar to that of
+creating a line/space pattern in Figure 5 [27].
+Figure 5. Schematic illustration of the ULST flow for generating L/S patterns. Adapted from [26].
+Figure 6. Schematic illustration of the ULST flow for generating hexagonal hole patterns. Adapted
+from [27].
+Both ULST and SMART flows begin with coating a neutral layer, ensuring non-
+preferential affinity for either of the blocks in the BCP. The key distinction lies in how
+the guide pattern is formed, with the ULST flow creating the guide pattern through surface
+treatment UL and the SMART flow achieving this by applying a guiding layer of brush
+pinning material. Compared to the LiNe and SMART flows, the ULST flow eliminates the
+need for brush material, thereby removing the steps of coating and rinsing the brush layer
+and simplifying the overall process flow.
+The self-assembly process in graphoepitaxy is directed through the physical confine-
+ment of pre-patterned guiding templates, which provides inherent advantages in alignment
+precision and process simplicity.
+Accurate placement of self-assembled patterns at arbitrary wafer positions is enabled
+by the geometric confinement from guiding patterns, using their spatial constraints to guide
+domain orientation, while the confinement effect facilitates the fabrication of complex
+structures. However, the presence of these templates requires sacrificing a portion of
+the wafer’s surface area for template placement, which limits scalability for high-density
+periodic array patterns. In contrast to graphoepitaxy, chemoepitaxy employs substrate-
+selective chemical patterning to guide self-assembly, thereby eliminating spatial limitations
+while improving long-range order through tailored interfacial energy gradients. This
+method avoids the need for physical guiding structures, enabling more flexible and uniform
+patterning. Nevertheless, its limitations include the requirement for expensive techniques
+like EUV or EBL to achieve precise patterning. Additionally, the process of surface chemical
+
+[Page 7]
+Micromachines 2025, 16, 667
+7 of 19
+modification is highly complex, involving multi-step treatments to create and maintain the
+necessary chemical contrast, which complicates scalability and increases production costs.
+3. Materials for DSA Lithography
+3.1. Underlayer (UL) and Neutral Layer (NL) Materials
+3.1.1. Underlayers (ULs)
+ULs serve as the foundational substrate modification layer, engineered to create
+customized surfaces through precise energy tuning. These layers typically comprise
+crosslinked polymer matrices or inorganic dielectrics, each class offering unique advan-
+tages. Two types of ULs have been extensively explored, including polymeric ULs and
+inorganic ULs.
+Polymeric ULs
+The industry-standard, crosslinked polystyrene-random-methyl methacrylate (PS-r-
+MMA, 60-80% styrene) achieves a surface energy (γ) adjustment between 22-28 mN/m
+through monomer ratio variation [28]. The crosslinking density, controlled via UV or
+thermal curing (typically 1-5 J/cm2 UV dose at 254 nm), must balance mechanical stability
+with sufficient chemical functionality for subsequent brush layer grafting [29].
+Inorganic ULs
+Silicon-based materials like SiO2 (γ ≈50 mN/m) and SiNx (γ ≈40 mN/m) require
+surface modification through self-assembled monolayers (SAMs) of alkylsilanes (e.g., oc-
+tadecyltrichlorosilane) or plasma treatments (CF4/O2 mixtures) to reduce surface energy
+into the optimal 20–30 mN/m range [30]. Recent advances employ atomic layer deposition
+(ALD) of AlOx/TiOx nanolaminates (2-5 nm thick) to create gradient surface energies that
+directionally bias BCP domain orientation [31].
+The key to UL performance lies in the suppression of interfacial defects. Excessive
+hydrophobicity (γ < 20 mN/m) induces lateral phase separation, while insufficient mod-
+ulation (γ > 30 mN/m) fails to overcome BCP’s inherent interfacial tension. Advanced
+metrology techniques like X-ray photoelectron spectroscopy (XPS) and contact angle hys-
+teresis analysis (θa/θr < 5◦) are employed to verify UL uniformity at sub-10 nm scales [32].
+3.1.2. Neutral Layers (NLs)
+NLs constitute the chemically neutral interface between ULs and BCP films, ensuring
+equal attraction to either polymer block. Modern NLs use precisely designed random
+copolymer brushes.
+These industry-standard brushes of PS-r-PMMA (Mn = 5–10 kg/mol, PDI < 1.2)
+brushes achieve neutrality through statistical monomer distribution. At a 50:50 PS:PMMA
+molar ratio, the interfacial energy difference (∆γ = |γPS −γPMMA|) is minimized to
+<0.5 mN/m, enabling the perpendicular orientation of lamellar PS-b-PMMA domains with
+<1◦angular deviation [33]. Brush thickness is tightly controlled (3–8 nm) via grafting
+density (σ = 0.1–0.4 chains/nm2), with lower σ values permitting dynamic BCP chain
+rearrangement during annealing [34].
+For high-χ BCPs requiring > 250 ◦C annealing, thermally stable brushes like hydroxyl-
+terminated poly(styrene-stat-2-vinylpyridine) (PS-r-2VP-OH) have been developed. The
+terminal -OH groups (3–5% molar content) form hydrogen bonds with UL surfaces, in-
+creasing decomposition temperatures to 280–300◦C while maintaining ∆γ < 1 mN/m [35].
+Emerging “smart” brushes incorporate pH-responsive monomers (e.g., 4-vinylpyridine)
+that enable post-assembly polarity switching for selective domain removal [29].
+
+[Page 8]
+Micromachines 2025, 16, 667
+8 of 19
+NL performance is quantified through neutron reflectometry (NR) and grazing-
+incidence small-angle X-ray scattering (GISAXS), with state-of-the-art systems achieving
+>99% perpendicular orientation yield across 300 mm wafers. Recent breakthroughs in
+photo-patternable NLs enable the direct optical definition of chemical guiding patterns,
+eliminating the need for separate lithographic steps in DSA flow [36].
+3.2. Brush and Pinning Materials
+Polymer brushes (2–10 nm thick) are covalently grafted via silane (SiO2 substrates) or
+thiol (metal surfaces) coupling chemistry. The grafting density (σ ≈0.1–0.5 chains/nm2)
+plays a critical role in BCP self-assembly. Lower σ (<0.2 chains/nm2) enhances chain
+mobility, whereas higher σ (>0.3 chains/nm2) induces pronounced pinning effects that
+effectively stabilize metastable structures [37].
+DSA employs two primary pinning strategies to control BCP domain orientation.
+Chemical pinning utilizes pre-patterned ULs with alternating hydrophobic/hydrophilic
+(e.g., octadecyltrichlorosilane and polyethylene glycol (PEG) silanes) domains. These
+patterned surfaces create localized energy wells that thermodynamically stabilize BCP
+domains at predefined locations, ensuring the precise registration of nanoscale features [38].
+Topographic pinning exploits nanoimprinted trenches with depths optimized to ~0.5 times
+the BCP’s natural periodicity (L0), where three-dimensional confinement effects energeti-
+cally favor specific domain orientations. To further enhance pattern fidelity, silicon dioxide
+(SiO2) trench sidewalls are functionalized with NL brushes, which reduce interfacial energy
+mismatches and suppress defect formation [24]. These dual strategies of chemical guidance
+through surface energy modulation and physical confinement through topographic tem-
+plates synergistically overcome placement accuracy limitations in complex architectures,
+enabling sub-5 nm lithographic resolutions.
+3.3. BCP Material
+BCPs, particularly di-block copolymers, serve as the foundational material for DSA,
+an emerging next-generation lithography technique. A di-block copolymer consists of two
+chemically distinct polymer blocks (e.g., PS-b-PMMA) linked via a covalent bond at their
+junction. When thermally annealed or exposed to solvent vapor, these polymers undergo
+microphase separation, driven by the thermodynamic incompatibility between the blocks
+quantified by χ.
+In DSA, BCPs are guided by pre-patterned substrates to self-assemble into well-
+ordered nanodomains with minimal defects, enabling high-resolution lithographic pattern-
+ing. Achieving high interfacial energy contrast between the blocks is critical to ensure sharp
+phase separation and reduced line-edge roughness (LER), which directly impacts pattern
+fidelity. However, key challenges remain in synthesizing BCPs with low polydispersity
+indices (PDI < 1.1), high χ values (χ > 0.1), and sufficient etch selectivity, which are critical
+for pattern transfer to substrates. Recent advances focus on developing high-χ BCPs (e.g.,
+silicon-containing polymers) to achieve sub-10 nm features, although balancing χ with
+process compatibility (e.g., annealing kinetics, solvent resistance) remains a significant
+challenge. High-χ materials (χ > 0.2 at 150 ◦C) like PS-b-PDMS enable sub-10 nm features
+but require advanced etch selectivity enhancement techniques (Table 1) [39,40]. Emerging
+material systems, such as poly(ethylene oxide)-block-polybutadiene (PEO-b-PB), have
+demonstrated potential for achieving sub-5 nm resolutions [25].
+As reported by Tokyo Ohka Kogyo (TOK) researchers, a novel series of BCPs has been
+developed that both achieve sub-10 nm and perpendicular orientations under the same
+conditions as PS-b-PMMA. The high chi BCP shows the fingerprint and random hole under
+the same conditions as PS-b-PMMA [35].
+
+[Page 9]
+Micromachines 2025, 16, 667
+9 of 19
+Table 1. Key BCP families and their properties. Data from [39,40].
+Polymer System
+χ Parameter
+Feature Size (L0)
+Applications
+PS-b-PMMA
+0.03–0.05
+15–30 nm
+Lamellae for line/space
+Polystyrene-b-Poly(2-vinylpyridine)
+(PS-b-P2VP)
+0.10–0.15
+8–15 nm
+Metal nanowire templates
+Polystyrene-b-Polydimethylsioxane
+(PS-b-PDMS)
+0.25–0.35
+5–10 nm
+High-χ sub-10 nm patterns
+Poly(t-butyl acrylate)-block-poly(methyl
+methacrylate) (PtBA-b-PMMA)
+0.08–0.12
+10–20 nm
+Solvent-annealed vertical pores
+4. Pattern Transfer Techniques
+One of the biggest challenges in the DSA process is pattern transfer fidelity, where the
+self-assembled BCP pattern is transferred into the underlying substrate layers. Two primary
+methods for pattern transfer are widely used, plasma-based dry etching and solution-phase
+wet etching, both of them demonstrating distinct resolution–etch rate tradeoffs.
+4.1. Dry Etching
+Dry etching, particularly reactive ion etching (RIE), is the most common pattern
+transfer technique in DSA. It involves using plasma to selectively remove one block between
+the two polymer blocks in a BCP. For example, the PS-b-PMMA BCP film self-assembles
+on a substrate [41]. The PMMA block is preferentially selectively removed using O2
+plasma, leaving a PS block. The PS template acts as a hard mask during dry etching. The
+etch selectivity between PS and the underlying material (e.g., silicon nitride) is critical.
+High selectivity ensures that the pattern is transferred accurately without significant mask
+erosion. Key process parameters include plasma composition, ion energy, and chamber
+pressure. Dry etching offers high resolution, excellent anisotropy, and compatibility with
+existing semiconductor manufacturing processes. However, achieving high etch selectivity
+can be difficult, especially for thin BCP films (<20 nm). Additionally, plasma-induced
+damage to the substrate or underlying layers can occur.
+4.2. Wet Etching
+Wet etching involves using chemical solutions to selectively remove materials, offering
+advantages such as high etch selectivity and reduced substrate damage. As shown in
+Figure 7, Wu and Liao demonstrated a wet etch process optimized for DSA patterning in
+advanced DRAM nodes [42]. They developed a novel process, a one-step facile removal of
+PMMA by one chemistry, that will certainly eliminate concern with PS surface damage by
+UV, as well as benefit users with throughput improvement.
+ 
+Figure 7. Schematic illustration of UV-free wet etch processing. Adapted from [42].
+Wet etching offers high selectivity, reducing the risk of mask erosion and substrate
+damage. It is also compatible with batch processing, improving throughput. However,
+isotropic etching can limit the resolution and aspect ratio of patterns, making it less suitable
+
+[Page 10]
+Micromachines 2025, 16, 667
+10 of 19
+for very thin films (<10 nm). Additionally, achieving uniform etching across large areas
+remains a challenge. As DSA technology continuously develops, wet etching is expected to
+play an increasingly important role in next-generation nanofabrication.
+5. DSA Simulation
+As previously discussed, DSA has the potential to generate highly ordered nanoscale
+patterns with sub-10 nm resolutions. DSA simulations are critical to this process, as they
+help predict the intricate nanoscale pattern formation during DSA. These simulations
+are key to optimizing the process, ensuring that the desired patterns are achieved with
+high precision. By utilizing simulations, researchers and engineers can gain a deeper
+understanding of the underlying physical and chemical mechanisms, which is essential for
+reducing development time and costs in practical applications.
+5.1. Core of DSA Simulation Technologies
+5.1.1. SCFT: The Precise Predictor of BCP Phase Behavior
+Self-consistent field theory (SCFT) is a powerful tool for modeling the phase behavior
+of BCPs. SCFT treats the BCP system as a collection of interacting polymer chains in a
+mean-field environment and calculates the self-consistent fields that these chains experi-
+ence, which ultimately determine the equilibrium morphology of the BCP [43]. SCFT has
+proven particularly successful in predicting equilibrium morphologies such as lamellae
+and cylinders. Lamellar structures form when the volume fractions of the two polymer
+blocks in the BCP are approximately equal, while cylindrical structures arise when one
+block has a significantly larger volume fraction than the other [44]. The ability of SCFT to
+accurately predict these morphologies has been demonstrated in numerous studies. For
+instance, SCFT simulations have been used to study the self-assembly of PS-b-PMMA BCPs,
+and the predicted lamellar and cylindrical morphologies showed excellent agreement with
+experimental observations [45]. Furthermore, SCFT’s utility in BCP research has been
+extended to a more accessible framework for material discovery, making it a widely used
+approach for investigating a variety of BCP systems [46].
+5.1.2. MD: The Dynamic Observer of the Microscopic World
+Molecular dynamics (MD) simulation is another important technique for studying
+BCPs. MD simulations track the time evolution of the positions and velocities of individual
+atoms or molecules in a system. In the context of BCPs, MD can be used to simulate the
+intermolecular interactions that drive domain formation and defect dynamics. By applying
+Newton’s equations of motion to each atom in the system, MD simulation provides a
+detailed view of the dynamic processes occurring at the nanoscale [47]. For instance,
+during the formation of BCP domains, MD simulations can show how the polymer chains
+diffuse and reorganize over time to form the characteristic ordered structures. Additionally,
+when it comes to defect dynamics, MD can reveal how defects such as grain boundaries and
+dislocations form, move, and interact with each other. A study in [48] used MD simulations
+to investigate the self-assembly of BCPs on patterned substrates and observed the formation
+and evolution of defects during the process, providing valuable insights into improving
+the quality of DSA-fabricated patterns.
+5.1.3. DFT: Quantum Insights for Polymer Design
+Density functional theory (DFT) provides atomic-scale insights into block copolymer
+(BCP) interactions, complementing coarse-grained methods like SCFT and MD. While
+computationally intensive for large systems, DFT accurately predicts electronic structure,
+interfacial energetics, and substrate–polymer bonding, which are key factors in directed
+
+[Page 11]
+Micromachines 2025, 16, 667
+11 of 19
+self-assembly. For example, DFT reveals preferential adsorption of polymer blocks on
+chemically patterned surfaces, guiding chemoepitaxy optimization. Hybrid DFT/MD
+approaches now bridge quantum-level precision with mesoscale self-assembly behavior,
+aiding the design of next-generation BCPs for nanofabrication.
+5.2. Existing Challenges and Countermeasures
+5.2.1. Strategies to Overcome Computational Challenges in DSA Simulations
+One of the major challenges in DSA simulations is the high computational cost [49].
+Both material simulations, such as SCFT and MD, and lithography simulations often
+require significant computational resources, due to the large number of atoms or grid
+points involved in the models and the complex interactions that need to be calculated.
+The wide variety of materials used in DSA, each with unique physical and chemical
+properties, adds further complexity. For example, different BCPs have varying chain
+lengths, compositions, and interaction parameters, while substrates and additives used in
+DSA processes introduce additional factors that must be accounted for in simulations.
+To address these computational challenges, researchers are exploring several strategies.
+One approach is to develop more efficient algorithms. One effective strategy involves
+the use of high-performance computing platforms such as supercomputers and graphics
+processing units (GPUs). GPUs, with their highly parallel architecture, can significantly
+speed up MD simulations. In this context, the study in [50] proposed a GPU-based open-
+source SCFT framework that accelerates the simulation of BCP phase behavior, showing a
+significant improvement in computational speed and efficiency, compared to traditional
+CPU-based methods.
+Machine learning (ML) has also emerged as a promising tool for accelerating block
+copolymer self-assembly simulations. ML algorithms can rapidly predict the outcomes of
+complex self-assembly processes by training on large datasets from previous simulations.
+This reduction in computational time allows for the exploration of a wider design space
+for process optimization. For example, in the study in [51], researchers applied machine
+learning methods for template design, effectively controlling the self-assembly of block
+copolymers to design complex patterns. Additionally, in the study in [52], machine learning
+models were trained to predict block copolymer self-assembly morphologies, significantly
+shortening the time required for traditional SCFT simulations, enabling rapid identification
+of optimized process conditions. This capability was demonstrated in study [53], where
+the integration of deep neural networks with SCFT simulations was shown to accelerate
+polymer self-assembly simulations and inverse DSA lithography processes, highlighting the
+potential of this method in improving the efficiency and accuracy of polymer self-assembly
+predictions.
+5.2.2. Integrated Simulation of Multiple Domains
+The integration of material and lithography simulations marks a significant advance-
+ment in the design of DSA processes [54,55]. By combining these simulation approaches,
+researchers can achieve a more comprehensive understanding of the entire DSA process.
+Material simulations offer insights into the equilibrium nanostructures formed by BCPs,
+while lithography simulations predict how these nanostructures will be transferred and
+modified during the lithography steps. This integrated approach enables a more effective
+optimization of both material properties and lithography process parameters, leading to
+the production of high-quality patterns with fewer defects.
+For instance, Hannon et al. [56] developed an inverse design algorithm that predicts
+the necessary topographical template to direct the self-assembly of a di-block copolymer to
+produce a given complex target structure. This approach was optimized by varying the
+
+[Page 12]
+Micromachines 2025, 16, 667
+12 of 19
+number of topographical posts, post size, and block copolymer volume fraction to yield a
+template solution that generates the target structure in a reproducible manner. Simulated
+and experimental results showed very good agreement, demonstrating the effectiveness of
+integrating material and lithography simulations in DSA process design.
+The design and optimization of DSA guiding patterns significantly influence the
+quality of subsequent DSA patterns. As elucidated in Shim’s study, the guiding pattern
+formed on the wafer via optical lithography serves as the template for the self-assembly
+process [57]. The precision of its design, involving aspects such as feature size, pitch,
+and shape, directly dictates the formation of the final DSA patterns. For instance, a well-
+optimized feature size can control the initial seed distribution, enabling precise line width
+control and enhanced integration density in high-density storage applications. However, an
+inappropriate pitch between guiding patterns may lead to interference during self-assembly,
+causing pattern misalignment and a decline in chip yield, which is a critical concern in
+semiconductor manufacturing. Moreover, the book by Shim et al. further emphasizes the
+importance of a comprehensive approach to guiding pattern design [58]. It highlights that
+the optimization process should not only focus on geometric parameters but also consider
+the material properties and process conditions. For example, the shape of the guiding
+pattern interacts closely with the self-assembly characteristics of the materials used. Regular-
+shaped guiding patterns tend to produce symmetric DSA patterns, which are suitable for
+applications demanding high regularity and can reduce stress-induced cracking. In contrast,
+irregular-shaped patterns offer the potential to create unique topological structures for
+micro-nano optical devices, yet they require complex algorithms to mitigate distortion
+risks during self-assembly. Through a combination of inverse DSA and inverse lithography
+techniques proposed in [57], along with the physical design principles outlined in [58],
+researchers can iteratively refine the guiding pattern design, thereby enhancing the quality
+and predictability of DSA patterns in practical applications.
+Validating simulation results with experimental data is crucial for ensuring the re-
+liability and accuracy of DSA simulations. However, discrepancies often arise between
+simulations and experiments due to simplifications in the simulation models, experimen-
+tal uncertainties, and unforeseen interactions in real-world systems. To address these
+challenges, researchers are improving simulation models by incorporating more realistic
+physical and chemical effects. At the same time, advanced experimental techniques are
+being developed to provide more precise data for validation. For instance, in situ char-
+acterization methods, such as scanning probe microscopy (SPM) and synchrotron-based
+X-ray scattering, offer real-time insights into the nanoscale self-assembly process. The study
+by Cameron et al. [59] demonstrates how in situ X-ray scattering can be used to track the
+evolution of nanostructures in BCP thin films, validating SCFT simulations and refining
+the models to improve their predictive accuracy.
+Current simulation technologies, encompassing both material and lithography sim-
+ulations, have made considerable advancements in enhancing our understanding and
+prediction of DSA processes. The integration of diverse simulation techniques, coupled
+with the application of machine learning, has significantly augmented the capabilities of
+DSA simulations. Looking ahead, one of the primary research challenges will be reducing
+computational costs without compromising accuracy. Additionally, the development of
+more general and precise models for a wider range of materials will be essential for fur-
+ther progress. Strengthening the connection between simulations and experimental data
+through more effective validation methods will also be pivotal for the successful adoption
+of DSA in industrial applications. With ongoing research and innovation, DSA simulations
+are poised to play an increasingly critical role in advancing next-generation nanoscale
+patterning and lithography technologies.
+
+[Page 13]
+Micromachines 2025, 16, 667
+13 of 19
+6. DSA Industrial Application
+DSA is a cutting-edge nanofabrication technique that combines the intrinsic self-
+assembly properties of BCPs or other molecular systems with external guiding forces to
+create highly ordered nanostructures. After two decades of development, DSA has made
+significant advancements in materials and process technologies and has been recognized
+by IRDS as one of the primary candidate solutions for next-generation lithography.
+Recent advancements highlight DSA’s versatility across silicon (Si)-based and com-
+pound semiconductor applications. In CoFeB-based magnetic storage devices, uniform
+16 nm critical dimension (CD) arrays with a 27 nm pitch have been achieved, enhancing
+bit density [60]. For III–V semiconductor nanoelectronics (e.g., InGaAs), hybrid BCP/NIL
+produced sub-10 nm nanoribbons, enabling multichannel field-effect transistors [61]. For
+Si-based nanoelectronics, sub-10 nm nanoribbons were fabricated via hybrid BCP/NIL,
+enabling multichannel field-effect transistors, and similar approaches have been demon-
+strated for wide-bandgap semiconductors, such as GaN. Sony developed a Si-based back-
+illuminated CMOS image sensor (BI-CIS), representing the first production-grade report
+of an image sensor fabricated using the DSA process [62]. Similar potential exists for InP-
+based photonic devices where DSA enables sub-10 nm photonic crystal patterning. FinFET
+fabrication studies on silicon-on-insulator (SOI) substrates reveal comparable electrical
+performances between DSA and self-aligned quadruple patterning (SAQP) at a 27 nm pitch,
+with DSA reducing mask counts and lithography steps [63,64]. Cost analyses demonstrate a
+17% cost reduction in Si-based front-end-of-line (FEOL) processes through batch-processed
+DSA, driven by reduced thermal annealing times [65]. Currently, research institutions, such
+as IBM, IMEC, Intel, TEL, and CEA-Leti, have established 300 mm wafer DSA pilot lines,
+publishing a series of critical research achievements in process development, integration,
+defect control, and device applications, aiming to achieve industrial implementation in
+production environments.
+6.1. Pattern Rectification (Roughness Improvement)
+As reported by Intel researchers, DSA can be applied for EUV line/space resist rectifi-
+cation; DSA fundamentally improves systematic and random variabilities. The LER/LWR
+of the DSA line/space pattern with a 24 nm pitch is improved by DSA rectification to
+1.70/1.40 from 1.88/2.71, respectively [66]. The roughness of line and space patterns was
+improved by exploring BCP thickness, enhanced UL, adjusting BCP L0, and etch selectivity.
+The work reported by EMD concentrated on improving the LER and LWR using
+high-chi BCPs. Substantial LWR (0.892 nm, ~300%) and LER (1.065 nm, ~175%) im-
+provements were found for PME-3443a (HChi-3a) BCP, compared to EUV (LER/LWR:
+1.884 nm/2.71 nm) [67].
+6.2. Pitch Multiplication for Hexagonal Hole
+DSA technology has emerged as the focus of hole patterning applications, drawing
+considerable attention from the semiconductor industry. As part of the ongoing push
+to commercialize DSA technology, TEL partnered to integrate DSA techniques into hole
+patterning processes. In TEL’s report, 40 nm, 35 nm, and 30 nm pitch hexagonal hole
+patterns were formed by chemical-epitaxy DSA flow with nine multiplications [68]. It
+was confirmed that phase separation is possible up to 30 nm in both systems with a
+multiplication number of nine, which has high stability. Moreover, LCDU and placement
+error have been improved. As shown in Figure 8, the formation of a DSA hexagonal hole
+with a relatively long pitch of 50 nm was confirmed in 2025 [69]. The template pattern
+pitch was 150 nm, and the pitch shrank to 50 nm after the DSA process. The LCDU (3σ)
+and placement error (3σ) were 1.7 nm and 3.2 nm, respectively. Utilizing chemical epitaxy
+
+[Page 14]
+Micromachines 2025, 16, 667
+14 of 19
+processes to create high-density hole patterns presents an effective strategy for lowering
+rising lithography costs.
+Figure 8. SEM pictures of the hexagonal pattern at each step. Adapted from [69].
+6.3. LCDU and PPE Improvement
+Dong-Ook Kim’s study developed a novel high-χ block copolymer (HChi BCP) to
+optimize the DSA rectification process for EUV-defined contact hole (C/H) patterns [70].
+Compared to conventional PS-b-PMMA, the HChi BCP demonstrated significantly im-
+proved local CDU from 1.71 nm to 1.41 nm and reduced pattern placement error (PPE)
+from 3.13 nm to 2.18 nm, compared to PS-b-PMMA baselines.
+Research by Xianfeng Gao developed a series of BCP materials with different chi
+values and modifications [71]. The results demonstrate that first-generation PS-b-PMMA
+BCPs exhibit constrained performance at larger pitch (L0 ~ 50nm) sizes due to their slower
+system kinetics. Moderate chi (MChi)-modified BCPs improve the kinetics of large Mn
+PS-b-PMMA materials. Meanwhile, additives in MChi BCPs can help mitigate the defects
+of DSA. Compared with PS-b-PMMA, the LCDU and PPE of (HChi) materials were reduced
+by 28% and 30% (Figure 9). High-chi (HChi) materials demonstrated improved roughness
+and uniformity. High-chi (HChi) materials hold great promise for small-pitch applications
+in the manufacturing of future DRAM devices.
+Figure 9. Effects of different BCP adjustments on (a) LCDU and (b) pattern placement error values.
+Data from [71].
+7. DSA Challenges
+Despite its potential as a next-generation lithography alternative, DSA faces significant
+technical and industrial obstacles that must be resolved to enable widespread application.
+7.1. BCP Material Complexity
+One primary challenge is the material complexity in BCP engineering. DSA relies on
+precisely engineered BCPs to achieve nanoscale self-assembly, requiring meticulous control
+over polymer composition, molecular weight, and interfacial interactions. Minor deviations
+
+[Page 15]
+Micromachines 2025, 16, 667
+15 of 19
+in material properties, such as polydispersity or contamination, can lead to defects like
+dislocation, bridging, or incomplete phase separation, directly impacting pattern fidelity.
+Additionally, synthesizing BCPs with tailored properties for sub-20 nm node applications
+remains costly and time-consuming, hindering its large-scale application.
+7.2. DSA Defect Formation and Control
+Defect density remains the primary barrier to DSA application, with current bench-
+marks (~10/cm2) far exceeding industry standards (<1/cm2). Figure 10 classifies critical
+DSA defects and the key defect types. (1) Dislocations are unique to DSA, arising from BCP
+phase misalignment and are irreparable during etching. (2) Bridge defects are shared with
+conventional lithography but are persistent due to material and process mismatches.
+Figure 10. Typical defect types in DSA: (a, b) dislocations and (c) bridging in the red square.
+The key factors affecting the occurrence of defects include material and process aspects.
+Material aspects, including BCP purity, molecular weight homogeneity, and interfacial
+energy matching between neutral and guiding layers, significantly influence defect rates,
+where hydrophobicity mismatches in guiding layers directly exacerbate dislocation density
+formation [72,73].
+Thermal annealing parameters (time/temperature) critically govern defect annihila-
+tion kinetics. While extended annealing time reduces dislocation densities, practical time
+limits their efficacy [8]. Additionally, film thickness exhibits a dual role, with thinner BCP
+layers (<35 nm) suppressing bridging defects but enhancing dislocation risks [74].
+Recent advancements reduce defects on the DSA process through two primary strate-
+gies: (1) surface modification of guiding layers via plasma treatment or brush coatings
+enhances interfacial energy matching [72], and (2) optimized guiding layer topography
+minimizes height disparities, thereby reducing bridge formation.
+7.3. DSA Metrology Challenges and Solutions
+DSA metrology faces dual challenges of insufficient chemical contrast during pre-
+etch evaluation and throughput constraints in defect inspection [8]. To resolve these
+limitations, three primary strategies have been adopted: (1) post-etch optical scatterom-
+etry, which boosts dislocation detection sensitivity tenfold through phase-sensitive anal-
+ysis [75]; (2) dark-field microscopy for the precise identification of bridging defects in
+pattern-transferred substrates; and (3) optimized etch depth schemes that magnify defect
+signatures via controlled topography modulation. Although scanning electron microscopy
+(SEM) remains the industry-standard metrology for nanoscale resolution, its restricted
+imaging area (~100 µm2) needs integration with optical techniques for comprehensive
+wafer-scale defect mapping. Recent advancements in hyperspectral scatterometry sys-
+tems now enable rapid, non-destructive quantification of dislocation densities across 300
+mm wafers, achieving <0.1% false detection rates through machine learning-enhanced
+signal processing.
+
+[Page 16]
+Micromachines 2025, 16, 667
+16 of 19
+Despite these challenges, DSA remains recognized as a promising hole patterning
+technology, demonstrating potential to enhance pattern uniformity and to solve patterning
+challenges at sub-30 nm and even sub-20 nm scales.
+8. Conclusions and Outlook
+DSA lithography is an advanced patterning technology that combines "bottom-up"
+self-assembly of BCP thin films with “top-down” lithographic techniques, such as optical
+or EBL, to fabricate high-resolution nanostructures. This review provides a comprehensive
+overview of DSA’s principles, materials, processes, applications, and challenges in indus-
+trialization. DSA offers advantages such as reduced manufacturing costs, CD shrinkage,
+pattern density multiplication (e.g., hole and line patterns), and improved roughness of
+lines and contact holes, thereby overcoming the limitations of conventional lithography.
+Furthermore, when combined with common lithography techniques, including EUV, DUV,
+EBL and NIL, DSA enhances pattern resolution, repairs defects, and improves CDU. These
+capabilities have enabled its widespread application in silicon logic devices, GaN-based
+power memory, Si-based CMOS image sensors, and InP-based photonic devices. However,
+achieving precise control of BCP composition and reducing defect density remain arduous
+challenges. Additionally, there is an urgent need to establish an integrated DSA-based pat-
+terning ecosystem including materials, equipment, processes, computational lithography,
+simulation tools, and electronic design automation (EDA) to promote DSA into full-scale
+industrial production.
+Looking ahead, the future of DSA lies in the development of advanced BCP materials
+with tailored properties, DSA-specific simulation software (e.g., Synopsys S-Litho™, ver-
+sion V-2024.06; siSCFT from Shanghai Institute of Optics and Fine Mechanics, version 1.0),
+novel self-assembly methods, and hybrid strategies combining DSA with next-generation
+lithography. Future DSA advancements must prioritize scale-dependent material–process
+co-optimization, where sub-10 nm patterning demands high-χ BCPs and defect-tolerant
+processes, while scaling beyond 50 nm may require hybrid DSA approaches integrating
+colloidal self-assembly. These innovations will enable precise control over DSA to achieve
+higher-resolution patterns. With the development of the BCP film and DSA, it is poised to
+become one of the most promising advanced lithography techniques, narrowing the gap
+between nanoscale fabrication demands and the limitations of current technologies. By
+facilitating interdisciplinary collaboration across materials science, process engineering,
+and computational modeling, DSA is expected to drive breakthroughs in semiconductor
+manufacturing and beyond, finally reshaping the situation of nanotechnology.
+Author Contributions: Conceptualization, X.C. and M.J.; writing—original draft preparation, X.C.,
+D.L., Y.S., X.L. and J.L.; writing—review and editing, X.C., M.J., Q.C. and J.S.; All authors have read
+and agreed to the published version of the manuscript.
+Funding: This research received no external funding.
+Data Availability Statement: No new data were created in this study.
+Conflicts of Interest: The authors declare no conflicts of interest.
+References
+1.
+van Schoot, J.; van Setten, E.; Kneer, B.; Kürz, P.; Kaiser, W.; Migura, S. EUV lithography: NXE scanner performance overview.
+Proc. SPIE 2017, 10143, 101430D.
+2.
+Levinson, H.J. Principles of Lithography, 4th ed.; SPIE Press: Bellingham, WA, USA, 2021.
+3.
+Mack, C.A. Line edge roughness: Measurement and modeling. J. Vac. Sci. Technol. B 2018, 36, 031601.
+4.
+Segalman, R.A. Directed self-assembly of block copolymers. Mater. Sci. Eng. R 2005, 48, 1–44.
+
+[Page 17]
+Micromachines 2025, 16, 667
+17 of 19
+5.
+International Roadmap for Devices and Systems (IRDS). IEEE International Roadmap for Devices and Systems (IRDS™) 2017
+Edition. 2017. Available online: https://irds.ieee.org/roadmap-2017 (accessed on 24 April 2025).
+6.
+Ruiz, R.; Kang, H.; Detcheverry, F.A.; Dobisz, E.; Kercher, D.S.; Albrecht, T.R.; de Pablo, J.J.; Nealey, P.F. Density Multiplication
+and Improved Lithography via Directed Block Copolymer Assembly. Science 2008, 321, 936–939. [CrossRef]
+7.
+Gueorguiev, G.K.; Stafström, S.; Hultman, L. Nano-wire formation by self-assembly of silicon–metal cage-like molecules. Chem.
+Phys. Lett. 2008, 458, 170–174. [CrossRef]
+8.
+Guerrero, D.J. A lithographer’s Guide to Patterning CMOS Devices with Directed Self-Assembly; SPIE Press: Bellingham, WA, USA,
+2020; Volume SL59, pp. 1–26.
+9.
+Ji, S.; Liu, C.-C.; Liu, G.; Nealey, P.F. Chemical epitaxy: Directed self-assembly of block copolymers via substrate surface chemistry
+engineering. ACS Nano 2016, 10, 11094–11104.
+10.
+Stoykovich, M.P.; Nealey, P.F. Block Copolymers and Conventional Lithography. Mater. Today 2006, 9, 20–29. [CrossRef]
+11.
+Kim, S.O.; Solak, H.H.; Stoykovich, M.P.; Ferrier, N.J.; de Pablo, J.J.; Nealey, P.F. Epitaxial Self-Assembly of Block Copolymers on
+Lithographically Defined Nanopatterned Substrates. Nature 2003, 424, 411–414. [CrossRef]
+12.
+Bencher, C.; Yi, H.; Zhou, H.; Dai, H.; Smith, J.; Mignot, Y. Directed Self-Assembly Defectivity Assessment. Proc. SPIE 2011, 7970,
+797009.
+13.
+Liu, C.-C.; Han, E.; Onses, M.S.; Thode, C.J.; Nealey, P.F. Three-Dimensional Nanofabrication by Block Copolymer Self-Assembly.
+Adv. Mater. 2013, 25, 4538–4543.
+14.
+Filho, M.A.M.; Farmer, W.; Hsiao, C.L.; Santos, R.B.D.; Hultman, L.; Birch, J.; Ankit, K.; Gueorguiev, G.K. Density functional
+theory-fed phase field model for semiconductor nanostructures: The case of self-induced core–shell InAlN nanorods. Cryst.
+Growth Des. 2024, 24, 4717–4727. [CrossRef] [PubMed]
+15.
+Pacheco, J.M.; Gueorguiev, G.K.; Martins, J.L. First-principles study of the possibility of condensed phases of endohedral silicon
+cage clusters. Phys. Rev. B 2002, 66, 033401. [CrossRef]
+16.
+Majewski, P.W.; Yager, K.G. Defect Mitigation in Directed Self-Assembly. Annu. Rev. Chem. Biomol. Eng. 2020, 11, 241–264.
+17.
+Doerk, G.S.; Yager, K.G. Beyond Native Block Copolymer Morphologies. Mol. Syst. Des. Eng. 2018, 3, 223–232. [CrossRef]
+18.
+Yang, J.K.W.; Jung, Y.S.; Chang, J.-B.; Mickiewicz, R.A.; Alexander-Katz, A.; Ross, C.A.; Berggren, K.K. Complex Self-Assembled
+Patterns Using Sparse Commensurate Templates. Nanotechnology 2014, 25, 135301.
+19.
+Delgadillo, P.R.; Miyakawa, M.; Nagahara, S.; Kawakami, T.; Minegishi, S.; Oyama, K.; Somervell, M.; Wallow, T. IBM’s Directed
+Self-Assembly Process Integration Strategy. Proc. SPIE 2016, 9779, 97790C.
+20.
+Li, W.; Liu, G.; Zhou, H.; Wang, X.; Müller, M.; Xiao, S. BCP Alignment Mechanisms in High-χ Systems. Chin. J. Polym. Sci. 2020,
+38, 1043–1053.
+21.
+Cheng, J.Y.; Sanders, D.P.; Truong, H.D.; Harrer, S.; Friz, A.; Stacey, N.A.; Tjio, M.; Rettner, C.T.; Arellano, N.; Hart, M.W. Simple
+and Versatile Methods to Generate Directed Self-Assembly Patterns with Sub-30 nm Features. ACS Nano 2014, 8, 6656–6664.
+22.
+Ji, S.; Wan, L.; Liu, C.-C.; Craig, G.S.W.; Nealey, P.F. Directed Self-Assembly of Block Copolymers via Chemical Epitaxy: A
+Platform for 7 nm FinFET Patterning. ACS Appl. Mater. Interfaces 2016, 8, 27022–27029.
+23.
+Oria, L.; Luzuriaga, A.R.; Chevalier, X.; Alduncin, J.A.; Mecerreyes, D.; Tiron, R.; Gaugiran, S. Directed self-assembly of block
+copolymers for advanced lithography applications. Proc. SPIE 2011, 7970, 79700P.
+24.
+Liu, C.-C.; Han, E.; Onses, M.S.; Thode, C.J.; Nealey, P.F. Fabrication of lithographically defined chemically patterned polymer
+brushes and mats. Macromolecules 2011, 44, 1876–1885. [CrossRef]
+25.
+Kim, J.; Wan, J.X.; Miyazaki, S.; Yin, J.; Cao, Y.; Her, Y.J.; Wu, H.; Shan, J.H.; Shan, J.H.; Kurosawa, K.; et al. The SMART™Process
+for Directed Block Co-Polymer Self-Assembly. J. Photopolym. Sci. Technol. 2013, 26, 573–579. [CrossRef]
+26.
+Van Bela, J.; Verstraete, L.; Suh, H.S.; De Gendt, S.; Bezard, P.; Vandereyken, J.; Li, W.; Beggiato, M.; Tamaddon, A.-H.; Beral, C.;
+et al. EUV lithography line-space pattern rectification using block copolymer directed self-assembly: A roughness and defectivity
+study. Proc. SPIE 2023, 12497, 124970K.
+27.
+Verstraete, L.; Suh, H.S.; Van Bela, J.; Timi, P.H.; Vallat, R.; Bezard, P.; Vandereyken, J.; Beggiato, M.; Tamaddon, A.-H.; Beral, C.;
+et al. Mitigating stochastics in EUV lithography by directed self-assembly. Proc. SPIE 2023, 12497, 124970I.
+28.
+Yoshida, H.; Suh, H.S.; Ramirez-Hernandez, A.; Hur, S.-M.; Segal-Peretz, T.; de Pablo, J.J.; Nealey, P.F. High-Temperature Stable
+Polymer Brushes for Directed Self-Assembly. Chem. Mater. 2020, 32, 2274–2285.
+29.
+Bai, W.; Ross, C.A.; Alexander-Katz, A. pH-Responsive Polymer Brush Systems for Dynamic Control of Block Copolymer
+Self-Assembly. ACS Nano 2021, 15, 12324–12334.
+30.
+Cummins, C.; Ghoshal, T.; Morris, M.A. Advances in Photo-Patternable Materials for Next-Generation Nanolithography. Adv.
+Mater. Technol. 2022, 7, 2100689.
+31.
+Kim, H.S.; Park, W.I.; Lee, J.H. Directional Assembly of Block Copolymers via Atomic Layer Deposition of AlOx/TiOx Nanolami-
+nate Gradients. Adv. Funct. Mater. 2018, 28, 1707586.
+32.
+Stoykovich, M.P.; Kang, H.; Daoulas, K.C.; Liu, G.; Liu, C.-C.; de Pablo, J.J.; Müller, M.; Nealey, P.F. Directed self-assembly of
+block copolymers for nanolithography. Science 2005, 308, 1442–1446. [CrossRef]
+
+[Page 18]
+Micromachines 2025, 16, 667
+18 of 19
+33.
+Han, E.; Cheng, J.Y.; Ross, C.A. Quantitative Criteria for Neutral Surfaces in Directed Self-Assembly of Polystyrene-Block-
+Poly(methyl Methacrylate). Nat. Mater. 2017, 16, 139–146.
+34.
+Sivaniah, E.; Dalnoki-Veress, B.; Limary, S.; Green, P.F.; Kramer, E.J. Effect of Grafting Density on the Orientation of Symmetric
+and Asymmetric Poly(styrene-b-methyl Methacrylate) Copolymers in Thin Films. Macromolecules 2005, 38, 1837–1847. [CrossRef]
+35.
+Iino, S.; Seshimo, T.; Miyagi, K.; Dazai, T.; Sato, K. Advanced strategies for Next-Generation block copolymers. In Proceedings of
+the SPIE Advanced Lithography, San Jose, CA, USA, 23–27 February 2025.
+36.
+Seki, M.; Gronheid, R.; Doise, J. Photo-definable neutral layers for streamlined DSA lithography. ACS Nano 2022, 16, 12345–12356.
+37.
+Xiao, S.; Nealey, P.F.; Alexander-Katz, A. Grafting density effects on the self-assembly of PS-b-PMMA block copolymers.
+Macromolecules 2021, 54, 5678–5689.
+38.
+Claveau, G.; Quemere, P.; Argoud, M.; Hazart, J.; Pimenta Barros, P.; Sarrazin, A.; Posseme, N.; Tiron, R.; Chevalier, X.; Nicolet, C.;
+et al. Surface affinity role in graphoepitaxy of lamellar block copolymers. In Proceedings of the SPIE Advanced Lithography, San
+Jose, CA, USA, 13–17 March 2016.
+39.
+Chen, Y.; Xiong, S. Directed self-assembly of block copolymers for sub-10 nm fabrication. Int. J. Extrem. Manuf. 2020, 2, 032006.
+[CrossRef]
+40.
+Suh, H.S.; Kim, D.H.; Moni, P.; Xiong S., S.; Ocola L., E.; Zaluzec N., J.; Gleason, K.K.; Nealey P., F. Sub-10 nm patterning via
+directed self-assembly of block copolymer films with a vapour-phase deposited topcoat. Nat. Nanotechnol. 2017, 12, 575–581.
+[CrossRef]
+41.
+Verstraete, L.; Suh, H.S.; Bel, J.V.; Bak, B.U.; Kim, S.E.; Vallat, R.; Bezard, P.; Beggiato, M.; Beral, C. Material and Process
+Optimization for EUV Pattern Rectification by Directed Self-Assembly. In Proceedings of the SPIE Advanced Lithography, San
+Jose, CA, USA, 25–29 February 2024.
+42.
+Wu, H.-C.; Liao, M.-C.; Hirahara, E.; Iwaki, T. Wet Etch Process for High-Resolution Directed Self-Assembly Patterning for
+Advanced Node DRAM. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 25 February–1 March 2024;
+Volume 12957, p. 1295721.
+43.
+Fredrickson, G.H.; Helfand, E. Fluctuation effects in the theory of microphase separation in block copolymers. J. Chem. Phys. 1987,
+87, 697–705. [CrossRef]
+44.
+Laachi, N.; Takahashi, H.; Delaney, K.T.; Hur, S.-M.; Shykind, D.; Weinheimer, C.J.; Fredrickson, G.H. Self-consistent field theory
+of directed self-assembly in laterally confined lamellae-forming diblock copolymers. Proc. SPIE 2012, 8323, 83230K.
+45.
+Ahn, H.; Ryu, D.Y.; Kim, Y.; Kwon, K.W.; Lee, J.; Cho, J. Phase Behavior of Polystyrene-b-poly(methyl methacrylate) Diblock
+Copolymer. Macromolecules 2009, 42, 7897–7902. [CrossRef]
+46.
+Arora, A.; Qin, J.; Morse, D.C.; Delaney, K.T.; Fredrickson, G.H.; Bates, F.S.; Dorfman, K.D. Broadly Accessible Self-Consistent
+Field Theory for Block Polymer Materials Discovery. Macromolecules 2016, 49, 4675–4690. [CrossRef]
+47.
+Escobedo, F.A.; de Pablo, J.J. Monte Carlo simulation of branched and crosslinked polymers. J. Chem. Phys. 1996, 104, 4788–4801.
+[CrossRef]
+48.
+Wang, Z.; Liu, Y.; Wu, Z.; Yang, H.; Li, Z. Coarse-grained molecular dynamics model of conformationally asymmetric AB diblock
+copolymers forming lamellar structures. Soft Matter 2013, 9, 2194–2205.
+49.
+Baker, S.D.; Peyman, S.A.; Hultgren, S.; Deng, K.; McGill, M. Simulation techniques for directed self-assembly lithography: An
+overview. Mater. Sci. Eng. R Rep. 2021, 146, 1–22.
+50.
+Koh, C.; Kim, K.; Ross, C.A.; Fredrickson, G.H. Open-source code for self-consistent field theory calculations of block polymer
+phase behavior on graphics processing units. J. Chem. Phys. 2017, 146, 034106.
+51.
+Liu, X.; Chen, M.; Wang, Z.; Li, Y. Template design for complex block copolymer patterns using a machine learning method. J.
+Mater. Chem. C 2020, 8, 8039–8048. [CrossRef]
+52.
+Park, H.; Yu, B.; Park, J.; Sun, G.; Tajkhorshid, E.; de Pablo, J.J.; Schneider, L. Prediction of Diblock Copolymer Morphology via
+Machine Learning. arXiv 2023, arXiv:2308.16886.
+53.
+Wang, H.; Li, S.; Zeng, J.; Zhang, T. Accelerating polymer self-consistent field simulation and inverse DSA-lithography with deep
+neural networks. J. Chem. Phys. 2023, 162, 104105. [CrossRef]
+54.
+Fühner, T.; Welling, U.; Müller, M.; Erdmann, A. Rigorous simulation and optimization of the lithography/directed self-assembly
+co-process. Proc. SPIE 2014, 9052, 90521C.
+55.
+Ler, J.; Müller, M. Kinetic Pathways of Block Copolymer Directed Self-Assembly: Insights from Efficient Continuum Modeling.
+ACS Nano 2020, 14, 13986–13994.
+56.
+Hannon, A.F.; Ding, Y.; Bai, W.; Ross, C.A.; Alexander-Katz, A. Optimizing Topographical Templates for Directed Self-Assembly
+of Block Copolymers via Inverse Design Simulations. Nano Lett. 2014, 14, 3128–3133. [CrossRef]
+57.
+Shim, S.; Shin, Y. Mask optimization for directed self-assembly lithography: Inverse DSA and inverse lithography. In Proceedings
+of the 21st Asia and South Pacific Design Automation Conference (ASP-DAC) 2016, Macao SAR, China, 25–28 January 2016;
+pp. 83–88.
+
+[Page 19]
+Micromachines 2025, 16, 667
+19 of 19
+58.
+Shim, S.; Shin, Y. Physical Design and Mask Synthesis for Directed Self-Assembly Lithography; Springer: Cham, Switzerland, 2018; pp.
+75–130.
+59.
+Shelton, C.K.; Epps, T.H. Block copolymer thin films: Characterizing nanostructure evolution with in situ X-ray and neutron
+scattering. Polymer 2016, 105, 545–561. [CrossRef]
+60.
+Ruiz, R.; Dobisz, E.; Albrecht, T.R. Rectangular Patterns Using Block Copolymer Directed Assembly for High Bit Aspect Ratio
+Patterned Media. ACS Nano 2011, 5, 79–84. [CrossRef] [PubMed]
+61.
+Liang, X.; Wi, S. Transport Characteristics of Multichannel Transistors Made from Densely Aligned Sub-10 nm Half-Pitch
+Graphene Nanoribbons. ACS Nano 2012, 6, 9700–9710. [CrossRef] [PubMed]
+62.
+Oshiyama, I.; Shigetoshi, T.; Mita, I.; Sumitani, N.; Oinoue, T.; Saito, S.; Okawa, T.; Ebiko, Y.; Yokochi, K.; Kitano, Y.; et al.
+Visible Light Sensitivity Enhancement of CMOS Image Sensor with Pseudo High Refractive Index Film Integrated by Directed
+Self-Assembly Process. In Proceedings of the 2021 5th IEEE Electron Devices Technology & Manufacturing Conference, Chengdu,
+China, 8–11 April 2021.
+63.
+Liu, C.-C.; Franke, E.; Lie, F.L.; Sieg, S.; Tsai, H.; Lai, K.; Truong, H.; Farrell, R.; Somervell, M.; Sanders, D.; et al. DSA Patterning
+Options for FinFET Formation at 7nm Node. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 26 February–2
+March 2016; Volume 9777, p. 97770R.
+64.
+Liu, C.-C.; Franke, E.; Mignot, Y.; Xie, R.; Yeung, C.W.; Zhang, J.; Chi, C.; Zhang, C.; Farrell, R.; Lai, K.; et al. Directed Self-Assembly
+of Block Copolymers for 7 Nanometre FinFET Technology and Beyond. Nat. Electron. 2018, 1, 562–569. [CrossRef]
+65.
+Pathangi, H.; Genin, V.R.; Vandepitte, D.; Delgadillo, P.R. Improved cost-effectiveness of the block co-polymer anneal process for
+DSA. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 26 February–2 March 2016; Volume 9777, p. 97771Z.
+66.
+Han, E. DSA Materials and Processes Development for ≤P24 EUV Resist L/S Pattern Rectification. In Proceedings of the SPIE
+Advanced Lithography, San Jose, CA, USA, 25 February–1 March 2024; Volume PC12956, p. PC129560P.
+67.
+EMD. Directed Self-Assembly PS-b-PMMA Materials Readiness and High-Chi Platforms for Extended Geometry Scaling. In
+Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 25 February–1 March 2024; Volume 12956, p. 129560F.
+68.
+Muramatsu, M.; Nishi, T.; Ito, K.; Takahashi, Y.; Hatamura, Y.; Kitano, T.; Iwaki, T. Pattern Fidelity Improvement of DSA Hole
+Patterns. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 26 February–2 March 2023; Volume 12497,
+p. 124970J.
+69.
+Muramatsu, M.; Nishi, T.; Ito, K.; Takahashi, Y.; Hatamura, Y.; Kitano, T.; Iwaki, T. Fidelity Improvement of Hole Patterns by DSA
+Multiplication. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 23–27 February 2025; Volume 13427, pp.
+13427–13431.
+70.
+Kim, D.-O. Improvement of EUV Contact Hole Pattern Rectification Using Novel Directed Self-Assembly Materials. In Proceedings
+of the SPIE Advanced Lithography, San Jose, CA, USA, 23–27 February 2025; Volume 13427, p. 134270E.
+71.
+Gao, X. Directed Self-Assembly of Medium-Chi and High-Chi Block Copolymers for DRAM C/H Patterning. In Proceedings of
+the SPIE Advanced Lithography, San Jose, CA, USA, 23–27 February 2025.
+72.
+Pathangi, H.; Chan, B.T.; Bayana, H.; Vandenbroeck, N.; Van den Heuvel, D.; Van Look, L.; Rincon-Delgadillo, P.A.; Cao, Y.; Kim,
+J.; Lin, G.; et al. Defect Mitigation and Root Cause Studies in 14 nm Half-Pitch Chemo-Epitaxy Self-Assembly LiNe Flow. J.
+Micro/Nanolithogr. MEMS MOEMS 2015, 14, 031204. [CrossRef]
+73.
+Rincon Delgadillo, P.; Suri, M.; Durant, S.; Cross, A.J.; Nagaswami, V.R.; Van den Heuvel, D.; Gronheid, R.; Nealey, F.P. Defect
+Source Analysis of Directed Self-Assembly Process. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 24–28
+February 2013; Volume 8680, p. 86800L.
+74.
+Li, J.; Rincon-Delgadillo, P.; Suh, H.S.; Mannaert, G.; Nealey, P.F. Kinetics of Defect Annihilation in Chemo-Epitaxy Directed
+Self-Assembly. In Proceedings of the SPIE Advanced Lithography, San Jose, CA, USA, 24–28 February 2019; Volume 10960,
+p. 109600V.
+75.
+Gronheid, R.; Van Look, L.; Delgadillo, P.R.; Pollentier, I.; Gao, Y.; Lin, G.; Nealey, P.F. High throughput grating qualification
+for rating directed self-assembly pattern performance using optical metrology. J. Photopolym. Sci. Technol. 2013, 26, 147–152.
+[CrossRef]
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

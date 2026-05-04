@@ -1,0 +1,24 @@
+# Table of Contents: dsa_bcp_2024_tokyo_tech
+
+Chemically tailored block copolymers for highly reliable sub-10-nm patterns by directed self-assembly ... page 1
+  Results ... page 2
+    PS-b-PGM synthesis and post-functionalization ... page 2
+    Bulk morphologies ... page 2
+    Determining the effective Flory–Huggins interaction parameter (χeff) ... page 3
+    Thin-film study ... page 5
+    Directed self-assembly ... page 6
+  Discussion ... page 7
+  Methods ... page 7
+    Materials ... page 7
+    Characterization ... page 7
+    Synthesis of PS-b-PGM10-22 by living anionic polymerization ... page 8
+    Synthesis of PS-b-PGFM10-22 by the thiol–epoxy reaction ... page 8
+    Preparing bulk films ... page 8
+    Preparing thin films ... page 8
+    DSA ... page 8
+  Data availability ... page 8
+  References ... page 9
+  Acknowledgements ... page 10
+  Author contributions ... page 10
+  Competing interests ... page 10
+  Additional information ... page 10

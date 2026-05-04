@@ -1,0 +1,195 @@
+# Table of Contents: cui_2025
+
+Preface ... page 5
+Contents ... page 7
+Chapter 1: Introduction ... page 12
+  1.1 What Is Nanofabrication? ... page 12
+  1.2 Classification of Nanofabrication ... page 14
+  1.3 Purpose of the Book ... page 17
+Chapter 2: Optical Lithography ... page 20
+  2.1 Introduction ... page 20
+  2.2 Principle of Optical Projection Lithography ... page 21
+  2.3 Basics of Photoresists ... page 26
+    2.3.1 Process of Optical Lithography ... page 26
+    2.3.2 Characteristics of Photoresists ... page 28
+  2.4 Optical Lithography at Shorter Wavelengths ... page 32
+    2.4.1 Deep UV ... page 32
+    2.4.2 Extreme UV ... page 33
+      2.4.2.1 EUV Source ... page 34
+      2.4.2.2 EUV Optics ... page 35
+      2.4.2.3 EUV Mask ... page 36
+      2.4.2.4 EUV Resists ... page 37
+    2.4.3 X-Ray ... page 37
+  2.5 Optical Lithography at High NA ... page 39
+  2.6 Immersion Lithography ... page 43
+  2.7 Optical Lithography at Low k1 Factor ... page 45
+    2.7.1 Off-Axis Illumination (OAI) ... page 48
+    2.7.2 Phase-Shifting Mask (PSM) ... page 49
+    2.7.3 Optical Proximity Correction (OPC) ... page 55
+    2.7.4 Photoresists ... page 59
+      2.7.4.1 Sensitivity ... page 60
+      2.7.4.2 Contrast ... page 61
+      2.7.4.3 Line Edge/Linewidth Roughness (LER/LWR) ... page 63
+    2.7.5 Multi-patterning ... page 66
+    2.7.6 Design-Technology Co-optimization (DTCO) ... page 68
+  2.8 Near-Field Optical Lithography ... page 70
+  2.9 Talbot Optical Lithography ... page 74
+  2.10 Interferometric Optical Lithography ... page 76
+  2.11 Maskless Optical Lithography ... page 80
+  2.12 Two-Photon Polymerization Lithography ... page 83
+  References ... page 86
+Chapter 3: Electron Beam Lithography ... page 93
+  3.1 Introduction ... page 93
+  3.2 Principle of Electron Optics ... page 95
+    3.2.1 Electron Lens ... page 95
+    3.2.2 Electron Source ... page 99
+    3.2.3 Aberrations ... page 101
+  3.3 Electron Beam Lithography Systems ... page 105
+    3.3.1 Basic Configuration ... page 105
+    3.3.2 Key Specifications ... page 107
+    3.3.3 Vector and Raster Scanning ... page 108
+    3.3.4 Pattern Fragmentation ... page 109
+    3.3.5 Commercial E-Beam Lithography Systems ... page 111
+  3.4 Scattering and Proximity Effect ... page 112
+    3.4.1 Electron Scattering ... page 113
+    3.4.2 Proximity Effect and Correction ... page 118
+    3.4.3 Effect of Secondary Electrons ... page 124
+    3.4.4 Low Energy E-Beam Lithography ... page 125
+  3.5 Resist Materials and Processes ... page 129
+    3.5.1 Sensitivity ... page 129
+    3.5.2 Contrast ... page 134
+    3.5.3 Resolution Enhancement Processes ... page 136
+  3.6 Ultimate Resolution of E-Beam Lithography ... page 140
+  3.7 High-Throughput E-Beam Lithography ... page 142
+    3.7.1 Variable Shaped Beam Lithography ... page 143
+    3.7.2 Multi-E-Beam Lithography ... page 144
+  References ... page 145
+Chapter 4: Nanofabrication by Focused Ion Beam ... page 150
+  4.1 Introduction ... page 150
+  4.2 Ion Sources ... page 151
+    4.2.1 Liquid Metal Ion Source ... page 151
+    4.2.2 Plasma Ion Source ... page 154
+    4.2.3 Gas Field Ion Source ... page 155
+  4.3 Focused Ion Beam Systems ... page 156
+  4.4 Ion Scattering in Solid Materials ... page 157
+  4.5 Ion Sputtering and Deposition ... page 160
+    4.5.1 Ion Sputtering ... page 160
+    4.5.2 Ion Beam Assisted Deposition ... page 165
+  4.6 Focused Ion Beam Direct Nanofabrication ... page 165
+    4.6.1 Inspecting and Editing Integrated Circuits ... page 166
+    4.6.2 Repairing Defects of Optical Masks ... page 167
+    4.6.3 Preparing TEM/STEM Samples ... page 170
+    4.6.4 Nanostructuring for Scientific Research ... page 171
+  4.7 Focused Ion Beam Lithography ... page 171
+  References ... page 174
+Chapter 5: Tip-Based Nanofabrication ... page 178
+  5.1 Introduction ... page 178
+  5.2 Principles of Scanning Probe Microscopes ... page 179
+  5.3 Exposure of Resists ... page 183
+    5.3.1 Exposure by Electrons ... page 183
+    5.3.2 Exposure by Photons ... page 186
+    5.3.3 Exposure by Heat ... page 188
+  5.4 Surface Modification ... page 189
+    5.4.1 Hydrogen Depassivation ... page 189
+    5.4.2 Field-Induced Oxidation ... page 190
+    5.4.3 Friction-Induced Modification ... page 193
+    5.4.4 Heat-Induced Modification ... page 196
+  5.5 Material Deposition ... page 197
+    5.5.1 Dip-Pen Deposition ... page 197
+    5.5.2 Field-Induced Deposition ... page 200
+  5.6 High-Throughput Scanning Probe Lithography ... page 201
+    5.6.1 High-Speed Scanning ... page 202
+    5.6.2 Massively Parallel Tip Array ... page 204
+  References ... page 206
+Chapter 6: Nanoimprint Lithography ... page 210
+  6.1 Introduction ... page 210
+  6.2 Thermal Nanoimprint ... page 212
+    6.2.1 Nanoimprint Stamps ... page 214
+    6.2.2 Nanoimprint Polymers ... page 216
+    6.2.3 Demolding ... page 220
+    6.2.4 Alignment ... page 223
+  6.3 Room Temperature Nanoimprint ... page 224
+  6.4 UV Cured Nanoimprint ... page 226
+    6.4.1 Transparent Stamps ... page 227
+    6.4.2 UV-Curable Polymers ... page 230
+    6.4.3 Jet and Flash Imprint Lithography (J-FIL) ... page 234
+    6.4.4 Substrate Conformal Imprint Lithography (SCIL) ... page 237
+    6.4.5 Alignment Through Transparent Stamps ... page 239
+  6.5 Reverse Nanoimprint ... page 241
+  6.6 Soft Lithography ... page 244
+    6.6.1 Soft Stamps ... page 245
+    6.6.2 Microcontact Printing ... page 247
+    6.6.3 Replication by Capillary Force ... page 250
+  6.7 Roll-to-Roll Continuous Nanoimprint ... page 254
+  References ... page 259
+Chapter 7: Nanoscale Pattern Transfer by Etching ... page 265
+  7.1 Introduction ... page 265
+  7.2 Wet Chemical Etching ... page 267
+    7.2.1 Wet Isotropic Etching ... page 267
+    7.2.2 Wet Anisotropic Etching ... page 269
+    7.2.3 Metal Assisted Anisotropic Etching ... page 273
+  7.3 Reactive Ion Etching (RIE) ... page 275
+    7.3.1 Principle of RIE ... page 275
+    7.3.2 Process Control in RIE ... page 279
+    7.3.3 RIE by Inductively Coupled Plasma (ICP) ... page 284
+  7.4 Deep Reactive Ion Etching (DRIE) ... page 287
+    7.4.1 Bosch Process ... page 288
+    7.4.2 Cryogenic Process ... page 291
+    7.4.3 Critical Issues in DRIE ... page 291
+      7.4.3.1 Loading Effect ... page 292
+      7.4.3.2 Microtrenching Effect ... page 293
+      7.4.3.3 Notching Effect ... page 294
+      7.4.3.4 Micromasking Effect ... page 296
+      7.4.3.5 Ion Induced Damage Effect ... page 296
+  7.5 Atomic Layer Etching (ALE) ... page 297
+  7.6 Ion Milling ... page 299
+  References ... page 302
+Chapter 8: Nanoscale Pattern Transfer by Deposition ... page 306
+  8.1 Introduction ... page 306
+  8.2 Thin Film Deposition ... page 306
+  8.3 Pattern Transfer by Liftoff ... page 313
+  8.4 Pattern Transfer by Plating ... page 320
+  8.5 Pattern Transfer by Stencil Mask ... page 325
+  8.6 Pattern Formation by Printing ... page 328
+  References ... page 331
+Chapter 9: Indirect Nanofabrication ... page 333
+  9.1 Introduction ... page 333
+  9.2 Sidewall Lithography ... page 334
+  9.3 Dimensional Subtraction ... page 338
+  9.4 Dimensional Addition ... page 343
+  9.5 Indirect Fabrication of Nanogaps ... page 346
+  9.6 Super-resolution Patterning ... page 348
+  References ... page 352
+Chapter 10: Nanofabrication by Self-Assembly ... page 355
+  10.1 Introduction ... page 355
+  10.2 Self-Assembly Processes ... page 356
+  10.3 Self-Assembly of Atoms and Molecules ... page 357
+    10.3.1 Self-Assembled Monolayer ... page 358
+    10.3.2 Self-Assembled Supermolecules ... page 360
+    10.3.3 Evaporation Induced Self-Assembly (EISA) ... page 362
+    10.3.4 Self-Assembly of Metal-Organic Frameworks (MOFs) ... page 363
+  10.4 Self-Assembly of Colloidal Particles ... page 364
+  10.5 Guided Self-Assembly ... page 367
+    10.5.1 Surface Topography ... page 367
+    10.5.2 Surface Energy ... page 369
+    10.5.3 Electrostatic and Magnetic Forces ... page 369
+    10.5.4 DNA Templates ... page 372
+  10.6 Nanosphere Lithography ... page 372
+  10.7 Block Copolymer Lithography ... page 374
+    10.7.1 Directed Microphase Separation ... page 375
+    10.7.2 Directed Self-Assembly for IC Manufacturing ... page 377
+  10.8 Self-Regulated Porous Alumina ... page 379
+  References ... page 383
+Chapter 11: Applications of Nanofabrication ... page 388
+  11.1 Introduction ... page 388
+  11.2 Integrated Circuits ... page 389
+  11.3 Photonics ... page 396
+  11.4 Nanotechnology ... page 400
+    11.4.1 Nanomaterials ... page 401
+    11.4.2 Nanoelectronics ... page 404
+    11.4.3 Nanophotonics ... page 405
+    11.4.4 Nanobiotechnology ... page 406
+  References ... page 408
+Correction to: Electron Beam Lithography ... page 412
+  Correction to: Chapter 3 in: Z. Cui, Nanofabrication, https://doi.org/10.1007/978-3-031-62546-6_3 ... page 412
+Index ... page 413

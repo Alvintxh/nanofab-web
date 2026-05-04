@@ -1,0 +1,1264 @@
+# dsa_bcp_2024_tokyo_tech
+# Extracted from: dsa_bcp_2024_tokyo_tech.pdf
+# Total PDF pages: 11
+# Page numbering: from PDF page labels
+# ============================================================
+
+
+[Page 1]
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Chemically tailored block copolymers for
+highly reliable sub-10-nm patterns by
+directed self-assembly
+Shinsuke Maekawa
+1, Takehiro Seshimo2, Takahiro Dazai2, Kazufumi Sato2,
+Kan Hatakeyama-Sato1, Yuta Nabae
+1 & Teruaki Hayakawa
+1
+While block copolymer (BCP) lithography is theoretically capable of printing
+features smaller than 10 nm, developing practical BCPs for this purpose
+remains challenging. Herein, we report the creation of a chemically tailored,
+highly reliable, and practically applicable block copolymer and sub-10-nm line
+patterns by directed self-assembly. Polystyrene-block-[poly(glycidyl metha-
+crylate)-random-poly(methyl methacrylate)] (PS-b-(PGMA-r-PMMA) or PS-b-
+PGM), which is based on PS-b-PMMA with an appropriate amount of intro-
+duced PGMA (10–33 mol%) is quantitatively post-functionalized with thiols.
+The use of 2,2,2-triﬂuoroethanethiol leads to polymers (PS-b-PGFMs) with
+Flory–Huggins interaction parameters (χ) that are 3.5–4.6-times higher than
+that of PS-b-PMMA and well-deﬁned higher-order structures with domain
+spacings of less than 20 nm. This study leads to the smallest perpendicular
+lamellar domain size of 12.3 nm. Furthermore, thin-ﬁlm lamellar domain
+alignment and vertical orientation are highly reliably and reproducibly
+obtained by directed self-assembly to yield line patterns that correspond to a
+7.6 nm half-pitch size.
+As the performance of electronic devices and artiﬁcial intelligence
+systems advances rapidly, the need for increasingly ﬁner circuit pat-
+terns on semiconductor chips becomes more critical. By 2037, it is
+projected that the required minimum half-pitch for 0.5 nm logic nodes
+will be as small as 8 nm, highlighting a pressing need for advancements
+in lithographic processes1. In response to this challenge, the integra-
+tion of directed self-assembly (DSA) of block copolymers (BCPs) with
+extreme ultraviolet (EUV) lithography emerges as a promising candi-
+date of next-generation lithography. This combination has a potential
+to reduce the pitch-size with reducing line edge roughness.
+Assembled microphase-separated BCPs are attracting increasing
+levels of interest due to their potential use in batteries, solar cells, fuel
+cells, porous materials, and next-generation lithography for the
+semiconductor industry2–5. Perpendicularly oriented microphase-
+separated structures in BCP thin ﬁlms can act as templates for pat-
+tern transfer to any underlying substrate6–8. The morphologies and
+sizes of these nano-assemblies depend on the volume fractions of the
+constituent polymers, levels of incompatibility between blocks
+(Flory–Huggins parameter, χ), and degrees of polymerization (N)9–11.
+Over the past few decades, polystyrene-block-poly(methyl methacry-
+late) (PS-b-PMMA) has received the most academic and industrial
+attention for use in DSA applications12–15 for the following three rea-
+sons: (1) PS and PMMA have almost identical surface free energies
+(SFEs) at the thermal-annealing temperature16, (2) random copolymers
+are available for controlling interfacial interactions17–22, and (3) the
+selective
+removal
+of
+PMMA
+domains
+facilitates
+easy
+pattern
+transfer23–27. Almost identical SFEs of the blocks are necessary for
+perpendicular orientation of microphase-separated structures in BCP
+thin ﬁlms. Unfortunately, the smallest lithographically useful features
+formed in PS-b-PMMA are approximately 11 nm wide due to thermo-
+dynamically driven block mixing when shorter BCP chains are used to
+produce smaller features28,29. In theory, BCPs with χN values of more
+Received: 31 August 2023
+Accepted: 19 June 2024
+Check for updates
+1Department of Materials Science and Engineering, School of Materials and Chemical Technology, Tokyo Institute of Technology, Tokyo 152-8552, Japan.
+2Research & Development Department, Tokyo Ohka Kogyo Co., Ltd., Kanagawa 253-0114, Japan.
+e-mail: hayakawa.t.ac@m.titech.ac.jp
+Nature Communications|   (2024) 15:5671 
+1
+1234567890():,;
+1234567890():,;
+
+[Page 2]
+than 10.5 can potentially be used to produce microphase-separated
+structures9, and BCPs with both low N and high χ values have been
+studied in order to achieve microphase-separated structures with
+periodic lengths of less than 20 nm. High-χ BCP systems are typically
+designed by pairing polymers with very different chemical properties,
+such
+as
+hydrophobic–hydrophilic30,31,
+organic–inorganic32,33,
+or
+ﬂuorine-containing BCPs34,35. However, the segment with the lower SFE
+selectively segregates to the surface, with parallel-oriented structures
+formed in most of the high-χ BCP thin ﬁlms.
+Several approaches have been established to promote perpen-
+dicularly oriented domains in high-χ materials. A typical approach
+aims to achieve segments with equal interfacial energies by introdu-
+cing a neutral top-coat layer that replaces the free air surface36–38.
+Willson et al. reported 5 nm features by a DSA in poly(5-vinyl-1,3-
+benzodioxole-block-pentamethyldisilylstyrene) (PVBD-b-PDSS) thin
+ﬁlms
+with
+a
+top-coat39.
+Solvent-vapor
+annealing
+is
+another
+approach40–42 in which microphases separate in the solvated layer,
+which neutralizes the interfacial energy of the segments at the top of
+the thin ﬁlm. Fleury et al. reported perpendicular lamellae with feature
+size of 7.3 nm in polystyrene-block-poly(2-ﬂuoroethylmethyl acrylate)
+(PS-b-P2FEMA) by solvothermal annealing43. However, top-coat and
+solvent-vapor annealing have issues of higher-cost and low level of
+safety, respectively. An alternative strategy involves designing a
+material with a higher-χ than PS-b-PMMA and blocks with similar SFEs
+that promote the perpendicular orientation during thermal anneal-
+ing; such materials include PS-b-PDLA (L0 = 15.9 nm)44, PS-b-PPC
+(L0 = 16.8 nm)45, PS-b-PI with epoxidized PI (L0 = 14.6 nm)46,47, PSVN-b-
+PMMA (L0 = 20 nm)48, ester–amide PS-b-PMMA exchanged with etha-
+nolamine (L0 = 17 nm)49, P(S-gradient-PFS)-b-PMMA (L0 = 18.2 nm)50,
+and A-b-(B-r-C) type polystyrene-block-poly(glycidyl methacrylate)
+(PS-b-PGMA) derivatives functionalized with two different thiols
+(L0 = 8.0 nm)51. We previously reported, polystyrene-block-poly[2-
+hydroxy-3-(2,2,2-triﬂuoroethylsulfanyl)-propyl methacrylate] (PS-b-
+PHFMA), an original high-χ BCP synthesized from PS-b-PGMA and
+2,2,2-triﬂuoroethanethiol52. PS-b-PHFMA has an effective χ (χeff) value
+of 0.167 at 200 °C and a bulk state with a 9.6-nm lamellar structure. In
+addition, the hydrophobic 2,2,2-triﬂuoroethyl groups oppose the
+hydroxy groups in the PHFMA blocks, which balances the SFEs of the
+two PS-b-PHFMA segments and facilitates the formation of perpen-
+dicular lamellae with L0 of 26 nm in thin ﬁlms during thermal
+annealing. While some of these pioneering studies have created per-
+pendicular lamellae by thermal annealing, creating sub-10 nm fea-
+tures by DSA in absence of a top-coat remains challenging.
+In this study we introduce 2,2,2-triﬂuoroethyl groups into the
+PMMA segments of PS-b-PMMA while maintaining precise control
+over the chemical modiﬁcation rate in order to increase χeff without
+radically changing the desirable surface and interfacial properties of
+PS-b-PMMA. We design two PS-b-PMMA derivatives with higher χ
+values based on this concept, namely polystyrene-block-[poly(-
+glycidyl methacrylate)-random-poly(methyl methacrylate)] (PS-b-
+(PGMA-r-PMMA) or PS-b-PGM) with small amounts of PGMA
+( ≤30 mol% PGMA in the PGM segments) and PS-b-(PGMAF-r-PMMA)
+(PS-b-PGFM) modiﬁed with 2,2,2-triﬂuoroethyl groups by referring to
+PS-b-PHFMA52 (Fig. 1). PS-b-PGFM consists of moderately hydro-
+phobic PS blocks and PGFM blocks containing hydrophilic carboxylic
+esters, hydroxy moieties, and hydrophobic 2,2,2-triﬂuoroethyl
+groups. We optimize the composition of the random PGFM block in
+PS-b-PGFM to increase χeff and simultaneously balance the surface
+afﬁnities of the blocks. Small-angle X-ray scattering (SAXS) analysis is
+used to determine morphology, domain size (d-spacing), and χeff. PS-
+b-PGFM thin ﬁlms form well-ordered perpendicular lamellae, as
+characterized by atomic force microscopy (AFM) and scanning
+electron microscopy (SEM). The PS-b-PGFM polymers are also used
+in the chemo-epitaxial DSA process previously optimized for PS-
+b-PMMA.
+Results
+PS-b-PGM synthesis and post-functionalization
+A series of PS-b-PGMs was successfully synthesized by the sequential
+living anionic polymerization of styrene and a mixture of glycidyl
+methacrylate (GMA) and methyl methacrylate (MMA). The reaction
+was initiated by sec-butyllithium (sec-BuLi) in the presence of excess
+lithium chloride (LiCl) and 1,1-diphenylethylene (DPE) in tetra-
+hydrofuran (THF) at −78 °C under argon (Fig. 2)53–55. The synthesized
+PS-b-PGMs were puriﬁed by Soxhlet extraction using n-hexane,
+cyclohexane, or an n-hexane/cyclohexane mixture to remove small
+amounts of PS homopolymer formed due to water (as a contaminant)
+in the reaction vessel during the polymerization process. The volume
+fraction of PS (fPS) and the PGMA content in the PGM segment were
+determined by 1H NMR spectral integration (Table 1), assuming den-
+sities of 1.04, 0.805, and 1.18 g cm−3 for PS, PGMA, and PMMA,
+respectively. The number-averaged molecular weights (Mn) and dis-
+persities (Ð) of the PS-b-PGMs were determined by size-exclusion
+chromatography (SEC) against PS standards using THF as the eluent.
+Mn values were maintained close to 20, 10, and 5 kg mol−1. PS-b-PGMs
+with various molecular weights (X kg mol−1) were synthesized with
+appropriate PGMA contents (Y = 30, 20, and 10 mol% in the PGM seg-
+ment) to control the afﬁnities of the segments toward air, with pro-
+ducts referred to as “PS-b-PGMX-Y”.
+PS-b-PGMs were functionalized using LiOH-catalyzed epoxide-
+ring-opening chemistry56–59 (thiol–epoxy reaction) with excess 2,2,2-
+triﬂuoroethanethiol, ethanethiol, benzenethiol, 2-phenylethanethiol,
+or cyclohexanethiol in THF, to clarify how repulsions between BCP
+segments are affected by the introduced functional groups; these
+products are referred to as “PS-b-PGFM”, “PS-b-PGHM”, “PS-b-PGPhM”,
+“PS-b-PGC2PhM”, and “PS-b-PGCyM”, respectively (Fig. 2). PGMA-unit
+conversions were determined by integrating the glycidyl peaks in the
+1H NMR spectra (4.26‒4.38, 3.85‒3.75, 3.23, 2.86, and 2.64 ppm)
+(Table 2). The functionalized polymers exhibited lower integrated
+glycidyl-peak intensities compared to the PS-b-PGM precursors. In
+addition, new signals derived from the introduced functional groups
+suggest that the epoxides in the PGMA segments had been ring-
+opened by the thiols. While most PS-b-PGMs reacted quantitatively
+with 2,2,2-triﬂuoroethanethiol, PS-b-PGM19-10 and PS-b-PGM18-11
+reacted with PGMA conversions of 96% and 92%, respectively (Sup-
+plementary Figs. 20 and 21), which was ascribable to low concentra-
+tions of PGMA units in the reaction mixtures at Y ≤11 mol%. Therefore,
+the resultant two polymers were re-reacted under the same conditions
+to consume unreacted PGMA segments and afford PS-b-PGFM19-10
+and PS-b-PGFM18-11. A few 1H NMR peaks that correspond to the gly-
+cidyl groups of PGMA were observed in the spectra of PS-b-PGHM10-
+22, PS-b-PGC2PhM19-23, PS-b-PGCyM19-23, and PS-b-PGCyM10-22, which
+were ascribable to variations in thiol nucleophilicity. 1H NMR spec-
+troscopy and density data (1.04, 1.18, 1.43, 1.23, 1.27, 1.21, and
+1.18 g cm−3 for PS, PMMA, PGMAF
+52, PGMAH
+52, PGMAPh, PGMAC2Ph, and
+PGMACy, respectively) were used to calculate fPS values for the various
+PS-b-PGRMs. Each synthesized PS-b-PGRM exhibited a unimodal, sym-
+metrical, and narrowly dispersed SEC trace (Supplementary Fig. 22),
+consistent with the thiol–epoxy reactions proceeding without any
+competing side reactions. The NMR and SEC data reveal that the PS-b-
+PGM precursors and their derivatives were successfully synthesized by
+combining
+sequential
+living
+anionic
+polymerization
+with
+the
+thiol–epoxy reaction.
+Bulk morphologies
+SAXS and transmission electron microscopy (TEM) were used to ana-
+lyze
+the
+morphologies
+and
+determine
+the
+d-spacings
+of
+the
+microphase-separated structures formed in bulk ﬁlms of the synthe-
+sized BCPs, which were prepared by the slow evaporation of BCP
+solutions in THF followed by thermal annealing at reduced pressure
+and 200 °C for 24 h. SAXS proﬁles were obtained at room temperature
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+2
+
+[Page 3]
+at reduced pressure, and d-spacings were determined from the posi-
+tions (q*) of ﬁrst-order scattering peaks (d-spacing = 2π/q*). Thin sec-
+tions of bulk ﬁlms were prepared by ultramicrotomy, stained with
+ruthenium tetroxide (RuO4), and then observed by TEM.
+We studied bulk PS-b-PGM19-23, PS-b-PGM10-22, and their deri-
+vatives to clarify how the introduced functional groups affect the
+morphology of each microphase-separated structure and its d-spacing
+(Fig. 3a‒c). The SAXS proﬁles of PS-b-PGM19-23 and PS-b-PGRM19-23
+exhibited peaks at integer ratios relative to their ﬁrst-order peaks,
+which suggests that lamellar structures had formed. PS-b-PGFM19-23
+had a d-spacing of 19.5 nm, which was larger than that of its precursor
+(16.5 nm).
+In
+contrast,
+PS-b-PGC2PhM19-23
+and
+PS-b-PGCyM19-23
+exhibited lower d-spacings of 16.2 and 15.0 nm, respectively. Because
+the PS-b-PGRM19-23 BCPs are all derived from the same precursor,
+their molecular chains should all be the same length; consequently,
+their d-spacings only depend on the interfacial thicknesses of their
+microphase-separated structures60. Functionalized PS-b-PGFM19-23
+exhibited a larger d-spacing suggesting narrower interfacial area
+compared to the PS-b-PGM19-23 precursor owing to higher inter-
+segment repulsion. In contrast, PS-b-PGC2PhM19-23 and PS-b-PGCyM19-
+23 exhibited the reverse trend because the introduced functional
+groups promoted segment mixing. PS-b-PGM10-22 (with a molecular
+weight of 10 kg mol−1) displayed a disordered structure while its PS-b-
+PGFM10-22 derivative formed a lamellar structure with a d-spacing of
+12.4 nm (Fig. 3d, e, respectively), which suggests that the χN value of
+PS-b-PGM10-22 was less than 10.5 and introducing the triﬂuoroethyl
+group is a suitable method for increasing the χ value of the BCP to form
+ﬁner phase-separated structures.
+The morphologies of the synthesized PS-b-PGFMs were analyzed
+to investigate the relationship between the primary and higher-order
+structures of the BCPs. With the exception of PS-b-PGFM10-11, the
+SAXS proﬁles of PS-b-PGFMs with Mn ≥10 kg mol−1 exhibited sharp
+peaks at integer ratios relative to their ﬁrst-order peaks, suggestive of
+the formation of well-ordered lamellar structures. In contrast, the
+SAXS proﬁle of PS-b-PGFM10-11 (Mn = 11 kg mol−1, PGMA content = 11
+mol%) exhibited a single broad ﬁrst-order peak indicative of a dis-
+ordered
+structure,
+which
+implies
+that
+inter-segment
+repulsion
+strengthens with increasing PGMA content in the PGFM segment. Bulk
+BCP ﬁlms with low molecular weights (Mn = 5 kg mol−1) also formed
+disordered
+structures.
+Thus, introducing
+10 mol%
+triﬂuoroethyl
+groups into the PMMA block of PS-b-PMMA is expected to produce
+templates with the required properties for use in next-generation
+lithography.
+Determining the effective Flory–Huggins interaction para-
+meter (χeff)
+The segregation strengths of PGFMs with various PGMAF contents
+relative to PS were quantiﬁed using the random-phase approximation
+method52,61–64. Speciﬁcally, segregation strength can be described by
+the effective Flory–Huggins interaction parameter χeff (= α + β/T, where
+α is the entropic contribution and β/T is the enthalpic contribution).
+This method requires SAXS data to be acquired above the mean-ﬁeld
+crossover temperature to avoid the effects of thermal ﬂuctuation. PS-
+b-PGFM5-10, PS-b-PGFM5-22, and PS-b-PGFM5-30 (all of which formed
+disordered structures at room temperature) were ﬁrst subjected to
+temperature-dependent SAXS in 10 °C decrements starting from 230,
+290, and 290 °C, respectively. Imax
+−1‒T−1 plots (Supplementary Fig. 38)
+show discontinuous changes that are attributable to mean-ﬁeld to non-
+mean-ﬁeld transitions of disordered states at 150‒160, 160‒170, and
+180‒190 °C for PS-b-PGFM5-10, PS-b-PGFM5-22, and PS-b-PGFM5-30,
+respectively. The SAXS proﬁle of each mean-ﬁeld-disordered state was
+further analyzed using Leibler’s mean-ﬁeld theory modiﬁed to include
+the effects of molecular weight dispersity and asymmetry in the seg-
+mental volume (Supplementary Fig. 39)52,61–64. A common reference
+volume (v0 = 118 Å3) was used to compare the values of χeff obtained
+with other reported values because χeff depends on the reference
+volume used to calculate N. Figure 4a shows that χeff was well-ﬁtted to
+Fig. 1 | Concept and molecular structure of the target BCP.
+Fig. 2 | Scheme depicting the synthesis of PS-b-(PGMAR-r-PMMA) (PS-b-PGRM) by living anionic polymerization and post-functionalization involving the thiol–epoxy
+reaction.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+3
+
+[Page 4]
+χeff = α + β/T for each sample; ﬁtted values of α and β are listed in
+Supplementary Table 9. PS-b-PGFM5-10, PS-b-PGFM5-22, and PS-b-
+PGFM5-30 were determined to have χeff values of 0.110, 0.133, and
+0.142, respectively, at 200 °C. Interestingly, χeff increased with
+increasing PGMAF content for the PS-b-PGFM series at 200 °C (Fig. 4b);
+PS-b-PGFM with a PGMAF content of 10 mol% exhibited a χeff value 3.5-
+times that of PS-b-PMMA (χeff = 0.03165).
+The sudden rise in the χeff value of the PS-b-PMMA derivative
+could be attributed to the introduction of speciﬁc functional groups
+within its structure. The presence of hydroxy and triﬂuoroethyl groups
+in 10–30 mol% concentrations in PMMA seems to enhance the χeff
+value signiﬁcantly. This increase is likely due to enhanced interactions
+within the polymer blocks, similar to the observed self-interactions in
+PSVN-b-PMMA
+caused
+by
+vinylnaphthalene
+units48
+and
+com-
+plementary hydrogen bonding between adenine and thymine moieties
+in P(VBA-r-VBT)-b-PS66. In this study, hydrogen bonding by hydroxy
+groups introduced into the PMMA block increased intra-block inter-
+actions within PGFM. In addition, the χeff values of A-b-(B-r-C) copoly-
+mers are estimated by ref. 67,68
+χef f = xχAB + 1  x
+ð
+ÞχAC  xð1  xÞχBC
+ð1Þ
+where χAB, χAC, and χBC represent χ parameter between A and B, A and
+C, and B and C, respectively, and x indicates the fraction of B in B-r-C
+block. In the case of χAB > χAC and (χAB‒χAC) > χBC, the χeff value
+increases with increasing x49. The χ values between constituent
+Table 1 | Characterization data for synthesized PS-b-PGMs
+Samplea
+Mn
+b (kg mol−1)
+Ðb
+fPS
+c
+PGMAc (mol%)
+Morphologyd
+d-spacinge (nm)
+PS-b-PGM20-33
+20.2
+1.04
+0.513
+33
+Lamellar
+15.2
+PS-b-PGM19-23
+18.7
+1.03
+0.463
+23
+Lamellar
+16.5
+PS-b-PGM19-10
+19.0
+1.03
+0.499
+10
+Disordered
+‒
+PS-b-PGM18-11
+17.5
+1.04
+0.476
+11
+Disordered
+‒
+PS-b-PGM10-33
+9.63
+1.06
+0.504
+33
+Disordered
+‒
+PS-b-PGM10-22
+10.1
+1.08
+0.532
+22
+Disordered
+‒
+PS-b-PGM10-11
+10.4
+1.09
+0.532
+11
+Disordered
+‒
+PS-b-PGM5-30
+4.83
+1.12
+0.529
+30
+Disordered
+‒
+PS-b-PGM5-22
+4.76
+1.10
+0.500
+22
+Disordered
+‒
+PS-b-PGM5-10
+5.20
+1.14
+0.500
+10
+Disordered
+‒
+aPS-b-PGMX-Y refers to a BCP with Mn = X kg mol−1 and with Y mol% PGMA units in its PGM segment.
+bDetermined by SEC in THF against PS standards.
+cDetermined by 1H NMR spectroscopy in CDCl3.
+dDetermined by SAXS peak ratios and TEM.
+eDetermined by the position of the ﬁrst-order peak in the SAXS proﬁle.
+Table 2 | Characterization data for synthesized PS-b-PGRMs
+Samplea
+Mn
+b (kg mol−1)
+Ðb
+fPS
+c
+PGMA conversionc
+Morphologyd
+d-Spacinge (nm)
+L0
+f (nm)
+PS-b-PGFM20-33
+19.3
+1.04
+0.520
+>99%
+Lamellar
+19.5
+18.6
+PS-b-PGFM19-23
+20.8
+1.03
+0.471
+>99%
+Lamellar
+19.5
+18.5
+PS-b-PGFM19-10
+21.0
+1.03
+0.497
+>99%
+Lamellar
+18.1
+16.8
+PS-b-PGFM18-11
+17.1
+1.04
+0.514
+>99%
+Lamellar
+15.6
+15.1
+PS-b-PGFM10-33
+12.0
+1.05
+0.510
+>99%
+Lamellar
+13.2
+12.5
+PS-b-PGFM10-22
+10.0
+1.09
+0.582
+>99%
+Lamellar
+12.4
+12.3
+PS-b-PGFM10-11
+11.1
+1.08
+0.532
+>99%
+Disordered
+‒
+‒
+PS-b-PGFM5-30
+6.02
+1.09
+0.570
+>99%
+Disordered
+‒
+‒
+PS-b-PGFM5-22
+6.06
+1.08
+0.548
+>99%
+Disordered
+‒
+‒
+PS-b-PGFM5-10
+5.39
+1.13
+0.475
+>99%
+Disordered
+‒
+‒
+PS-b-PGHM19-23
+21.3
+1.03
+0.481
+>99%
+Lamellar
+16.4
+‒
+PS-b-PGHM10-22
+9.67
+1.09
+0.591
+96%
+Disordered
+‒
+‒
+PS-b-PGPhM19-23
+21.7
+1.03
+0.455
+>99%
+Lamellar
+16.4
+‒
+PS-b-PGPhM10-22
+10.1
+1.07
+0.566
+>99%
+Disordered
+‒
+‒
+PS-b-PGC2PhM19-23
+20.0
+1.03
+0.449
+98%
+Lamellar
+16.2
+‒
+PS-b-PGC2PhM10-22
+11.1
+1.09
+0.550
+>99%
+Disordered
+‒
+‒
+PS-b-PGCyM19-23
+19.9
+1.03
+0.472
+89%
+Lamellar
+15.0
+‒
+PS-b-PGCyM10-22
+10.8
+1.08
+0.578
+96%
+Disordered
+‒
+‒
+aPS-b-PGRMX-Y was synthesized from the corresponding PS-b-PGMX-Y, and “R” designate each thiol.
+bDetermined by SEC in THF against PS standards.
+cDetermined by 1H NMR spectroscopy in CDCl3.
+dDetermined by SAXS peak ratios and TEM.
+eDetermined by the position of the ﬁrst-order peak in the SAXS proﬁle.
+fDetermined from the AFM phase image.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+4
+
+[Page 5]
+homopolymers of PS-b-PGFM have been reported58 and meet the
+conditions. Based on the reasons, the χeff value of PS-b-PGFM increases
+with
+increasing
+PGMAF
+content
+and
+the
+parabolic
+trend
+has
+been shown.
+Thin-ﬁlm study
+In order to obtain ultraﬁne perpendicular lamellar structures with
+lamellar domains (L0) of less than 20 nm, PS-b-PGFM (which form
+lamellar structures in their bulk states) thin ﬁlms were fabricated on
+silicon substrates that were grafted with polystyrene-random-poly(-
+methyl methacrylate)-random-poly(2-hydroxyethyl methacrylate) (PS-
+r-PMMA-r-PHEMA) to neutralize polymer/substrate interactions invol-
+ving the segments. A series of PS-r-PMMA-r-PHEMA polymers were
+synthesized by the free-radical polymerization of styrene, MMA, and
+2-hydroxyethylmethacrylate (HEMA) with 2,2’-azobis(isobutyronitrile)
+(AIBN) as the initiator (Supplementary Table 11). The compositions of
+the various substrate-grafted random copolymers and the thickness of
+each BCP thin ﬁlm are summarized in Supplementary Tables 11 and 12.
+Figure 5 shows AFM phase images of PS-b-PGFM thin ﬁlms prepared by
+spin-coating and thermal annealing. The observed ﬁngerprint-like
+patterns suggest the formation of perpendicular lamellar structures on
+the surface-modiﬁed substrates. However, parallel lamellae were also
+observed on the same substrates as the perpendicular lamellae in the
+PS-b-PGFM20-33 and PS-b-PGFM10-33 thin ﬁlms (Fig. 5c, f). These
+results suggest that the segments in PS-b-PGFMs with PGMA contents
+of 23 mol% or less displayed balanced air afﬁnities. The surface free
+energies (SFEs) determined for the PGFMs also suggests that such
+afﬁnities were balanced (Supplementary Table 6). In particular,
+Fig. 3 | Bulk properties of the synthesized BCPs. SAXS proﬁles of bulk a PS-b-PGM, b PS-b-PGRM, and c PS-b-PGFM samples. TEM images of d PS-b-PGM10-22 and e PS-b-
+PGFM10-22. The dark regions correspond to the PS blocks stained with RuO4.
+Fig. 4 | Relationship between χeff and PGMAF content. a χeff values of PS-b-
+PMMA65, PS-b-PGFM5-10, PS-b-PGFM5-22, PS-b-PGFM5-30, and PS-b-PHFMA52 as
+functions of temperature with a reference volume of 118 Å3. b χeff of PS-b-PMMA65,
+PS-b-PGFMs, and PS-b-PHFMA52 at 200 °C as a function of the PGMAF content in the
+PGFM segment. In this study, the instrumental broadening factor was not mea-
+sured. However, the χeff values of PS-b-PMMA65 estimated using the same SAXS
+instrument were in good agreement with the χeff values of earlier studies28,70. In
+addition, the SAXS proﬁles used in this study (Supplementary Fig. 39) were broa-
+dened, so the effect of the instrumental broadening factor to the estimated χeff
+values was considered to be small. Further discussion on the instrumental broad-
+ening factor and estimated χeff values is described in the Supplementary
+Discussion.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+5
+
+[Page 6]
+PGFM9-12 (Mn = 11 kg mol−1, PGMA content = 12 mol%) was determined
+to have an SFE of 40.0 mJ m−2. It should be noted that perpendicular
+lamellae were obtained using high-χ BCPs (χeff = 0.110‒0.142) in this
+study, whereas perpendicular lamellae are typically achieved with low-
+χ BCPs, such as PS-b-PMMA (χeff = 0.03165). The perpendicular lamellae
+were found to have a minimum L0 of 12.3 nm, which is smaller than the
+minimum dimension achievable by PS-b-PMMA (full pitch = 17.5 nm69).
+SEM images of a tilted PS-b-PGFM19-10 thin ﬁlm were acquired to
+examine its internal structure and conﬁrm the formation of perpen-
+dicular lamellae. The ﬁlm was annealed at 200 °C for 30 min, stained
+with RuO4, and then sectioned by cutting in liquid nitrogen. The cross-
+sectional image in Fig. 6 reveals that lamellar domains extend from the
+surface to the substrate, which conﬁrms that perpendicular lamellae
+had formed in this thin ﬁlm.
+Directed self-assembly
+We ﬁnally examined the DSA compatibilities of PS-b-PGFMs for pro-
+ducing large-area line patterns in thin ﬁlms on surface-modiﬁed Si
+substrates using three representative polymers (PS-b-PGFM19-23, PS-b-
+PGFM19-10, and PS-b-PGFM18-11). Si wafers modiﬁed with silicon
+nitride (SiN) layer and PS chemical guides were used as DSA substrates,
+which were further modiﬁed with PS-r-PMMA-r-PHEMA random
+copolymers (Fig. 7a). Thin PS-b-PGFMs ﬁlms were applied onto the
+substrates and annealed at 230 or 240 °C for 5 min. Figure 7b–d shows
+that DSA with 5× or 6× density multiplications were achieved using
+these PS-b-PGFMs on PS chemical patterns with a pitch (Ls) of 84 or
+90 nm.
+PS-b-PGFM19-23
+and
+PS-b-PGFM18-11
+line
+patterns
+self-
+assembled with 5× or 6× multiplications, respectively, over large
+areas on DSA substrates when Ls = 90 nm (Fig. 7b, d), while a PS-b-
+PGFM19-10 line pattern was obtained with a 5× density multiplication
+over a large area when Ls = 84 nm (Fig. 7c). However, structural defects
+were observed in the PS-b-PGFM19-23 thin ﬁlm (Supplementary
+Fig. 40). The smallest feature was 7.6 nm in size; hence, sub-10-nm line
+patterns were obtained in thin ﬁlms of PS-b-PGFMs with PGMA con-
+tents less than 11 mol% in a highly reliable and reproducible manner.
+Although, the line patterns of PS-b-PMMAwith L0 of less than 22 nm are
+Fig. 5 | Orientation control of the lamellae in PS-b-PGFM thin ﬁlms. AFM phase
+images of a PS-b-PGFM19-10, b PS-b-PGFM19-23, c PS-b-PGFM20-33, d PS-b-PGFM18-
+11, e PS-b-PGFM10-22, and f PS-b-PGFM10-33 thin ﬁlms prepared on chemically
+modiﬁed Si wafers and thermally annealed at 200 °C for 30 min. The insets in c and
+f show that both parallel and perpendicular orientations also formed on the same
+substrate in these cases.
+Fig. 6 | Tilted SEM image of a PS-b-PGFM19-10 thin ﬁlm. The 21.1-nm-thick thin ﬁlm on a Si substrate modiﬁed with a PS-r-PMMA-r-PHEMA thin ﬁlm with a PS molar ratio of
+50% (NL50) was annealed at 200 °C for 30 min under nitrogen. Dark regions correspond to PS blocks stained with RuO4.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+6
+
+[Page 7]
+not able to be applied to lithography because of weak contrast
+between PS and PMMA domains29, the ﬁne line pattern of PS-b-PGFM
+with L0 of 15.1 nm has potential to act as a template for pattern transfer
+to semiconductor substrates.
+Discussion
+In this study, we used sequential living anionic polymerization and the
+thiol–epoxy reaction to synthesize PS-b-PGFM block copolymers with
+various percentages of PGMA as PS-b-PMMA derivatives with high
+Flory–Huggins interaction parameters (χ). We investigated the rela-
+tionship between PGMA content, BCP phase-separation behavior, and
+the surface afﬁnity of the PGFM segment, and optimized the primary
+structure of PS-b-PGFM to prepare an ultraﬁne perpendicular lamellar
+structure through simple thermal annealing. PS-b-PGFM bulk ﬁlms
+were analyzed by SAXS and TEM, which revealed well-ordered lamellae
+with a minimum d-spacing of 12.4 nm, which is markedly smaller than
+the lower limit of the pattern size achieved using unmodiﬁed PS-b-
+PMMA. Effective χ (χeff) values of 0.110, 0.133, and 0.142 were deter-
+mined for PS-b-PGFMs with 10, 22, and 30 mol% PGMA at 200 °C,
+respectively, based on the random-phase approximation with a refer-
+ence volume of 118 Å3 used to normalize the degree of polymerization
+over the volume. More importantly, we found that the PS-b-PGFMs
+formed perpendicular lamellar structures with lamellar domains (L0)
+of less than 20 nm in the thin-ﬁlm state after simple thermal annealing.
+Tilted SEM revealed vertical lamellar domains inside the thin ﬁlms. In
+particular, PS-b-PGFM10-22 exhibited the smallest L0 of 12.3 nm in this
+study. Furthermore, PS-b-PGFM polymers with less than 23 mol%PGMA
+were compatible with the DSA process, and 7.6-nm-wide line patterns
+along PS chemical guides were successfully obtained. Introducing
+10–23 mol% 2,2,2-triﬂuoroethyl groups into the PMMA blocks of PS-b-
+PMMA increased the χeff value without signiﬁcantly changing the SFE
+of the PMMA segment. PS-b-PGFM BCPs are promising templates for
+use in BCP lithography because they produce ﬁne patterns in a similar
+DSA process to that used for PS-b-PMMA and have the potential to
+outperform PS-b-PMMA. Studies aimed at optimizing the pattern-
+transfer processes using line patterns in PS-b-PGFM thin ﬁlms as tem-
+plates will be investigated in the future.
+Methods
+Materials
+Styrene (>99%), DPE (>98%), GMA (>95%), and MMA (>99.8%) were
+purchased from the Tokyo Chemical Industry Co., Ltd. GMA was ﬁrst
+passed through an activated alumina column, while styrene, GMA, and
+MMA were distilled over calcium hydride (CaH2) (≥90.0%) under
+reduced pressure. The puriﬁed styrene, GMA, and MMA were degassed
+and further distilled over n-butyl-sec-butylmagnesium (0.7 M in n-
+hexane), CaH2, and trioctylaluminum (25 wt% in n-hexane), respec-
+tively. DPE was degassed and distilled over n-butyllithium (1.6 M in n-
+hexane). All other reagents and solvents were purchased from the
+following sources and used as received: Kanto Chemical Co., Inc.,
+Nacalai Tesque, Inc., Sigma–Aldrich, Tokyo Chemical Industry Co.,
+Ltd., GODO Co., Ltd., Fujiﬁlm Wako Pure Chemical Co., or Koso Che-
+mical Co., Ltd. Cross-linkable polystyrene mats (X-PS) was provided by
+the Tokyo Ohka Kogyo Co., Ltd.
+Characterization
+1H and 13C NMR spectra of the polymers were recorded on a JEOL
+400 MHz instrument at ambient temperature using deuterated
+chloroform as the solvent. The number-averaged and weight-averaged
+molecular weights (Mn and Mw, respectively) were determined by SEC
+against PS standards using a Shimadzu Prominence501 system equip-
+ped with a refractive index detector and two LF-804 columns (Sho-
+dex), with THF as eluent at 40 °C. Fourier-transform infrared (FT-IR)
+spectra were obtained using a JASCO FT/IR-4100 Fourier-transform
+spectrophotometer with potassium bromide as the matrix. Thermo-
+gravimetric
+analysis
+(TGA)
+was
+conducted
+using
+an
+Fig. 7 | Fabricating sub-20-nm line patterns by DSA using PS-b-PGFM.
+a Schematic of the DSA process using a PS-b-PGFM on a chemically patterned Si
+substrate. AFM phase images of a b PS-b-PGFM19-23 ﬁlm on an NL35-modiﬁed DSA
+substrate (Ls = 90 nm) after annealing at 240 °C for 5 min, c PS-b-PGFM19-10 ﬁlm on
+an NL38-modiﬁed DSA substrate (Ls = 84 nm) after annealing at 230 °C for 5 min,
+and d PS-b-PGFM18-11 ﬁlm on an NL38-modiﬁed DSA substrate (Ls = 90 nm) after
+annealing at 230 °C for 5 min. All thin ﬁlms are 19-nm thick and were etched using
+O2 plasma for 10 s prior to AFM.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+7
+
+[Page 8]
+EXSTAR7000 series TG/DTA7300 instrument (Hitachi High Tech)
+between 30 and 550 °C at 10 °C min−1. Differential scanning
+calorimetry (DSC) was carried out using an EXSTAR7000 series
+DSC7020 instrument (Hitachi High Tech) at 5 °C min−1. Water and
+diiodomethane contact angles were measured using a Kyowa DM-
+501YH system. SAXS experiments were carried out using a Bulker
+NanoSTAR instrument (50 kV/50 mA) with a VANTEC-500 detector
+(camera length: 1 m) to investigate the microphase-separated
+structure in the bulk state and the temperature dependence of
+χeff. TEM (H-7650, Hitachi High Tech) was used to examine 80-nm-
+thick thin samples prepared by room-temperature ultramicrotomy
+(EM UC7, Leica) and stained with RuO4. Thin ﬁlm samples were
+prepared using a spin coater (1H-D7, Mikasa), and their thicknesses
+were measured using a Filmetrics F20-EXR ﬁlm thickness mea-
+surement instrument. AFM (NanoWizard Ultra Speed A, JPK) was
+used to observe the surface architecture of annealed BCP thin
+ﬁlms. Tilted cross sections of BCP thin ﬁlms were observed using
+ﬁeld-emission SEM (SU9000, Hitachi High Tech).
+Synthesis of PS-b-PGM10-22 by living anionic polymerization
+All polymerization procedures were conducted after purging with
+argon. LiCl (183 mg, 4.32 mmol, >99.95%) was added to a 300-mL
+Schlenk ﬂask and dried under reduced pressure while heated with a
+heat gun. After cooling to room temperature, THF (90 mL, >99.5%) was
+added to the ﬂask and then cooled to −78 °C using a cooling bath. A
+solution of sec-BuLi in cyclohexane and n-hexane (1.2 M) was added
+until the color changed to yellow, and the mixture was stirred for
+10 min. The ﬂask was removed from the cooling bath and allowed to
+warm to room temperature until the solution became colorless, after
+which it was re-cooled to −78 °C, and sec-BuLi in cyclohexane and n-
+hexane (0.720 mL, 0.600 mmol) was added to initiate the reaction.
+Styrene (3.60 mL, 31.3 mmol) was added and the orange mixture was
+stirred for 30 min. DPE (0.500 mL, 2.86 mmol) was then added and the
+deep-red solution was stirred for a further 30 min. A mixture of GMA
+(0.658 mL, 5.00 mmol) and MMA (2.13 mL, 20.0 mmol) was then added
+and the mixture was stirred for 30 min, during which time it became
+colorless. Degassed methanol (20 mL, >99%) was added to the ﬂask to
+prepare proton-terminated PS-b-PGM10-22. The polymer precipitated
+from MeOH and was collected by ﬁltration. The small amount of PS
+homopolymer produced during polymerization was removed by
+Soxhlet extraction with n-hexane. The remaining solid was dissolved in
+THF, precipitated from MeOH, collected by ﬁltration, and dried under
+reduced pressure at 40 °C to obtain PS-b-PGM10-22 as a white powder
+(5.09 g, 85% yield). 1H NMR (400 MHz, CDCl3, δ, ppm): 0.56‒1.17 (α-
+CH3, PGMA; α-CH3, PMMA), 1.43 (-CH2-CH-, PS), 1.82 (-CH2-CH-, PS;
+-CH2-C(CH3)-, PGMA; -CH2-C(CH3)-, PMMA), 2.64 (-CH2-CH(CH2)-O-,
+PGMA),
+2.86
+(-CH2-CH(CH2)-O-,
+PGMA),
+3.23
+(-CH2-CH(CH2)-O-,
+PGMA), 3.60 (-O-CH3, PMMA), 3.75‒3.85 (-CH2-CH(CH2)-O-, PGMA),
+4.26‒4.38 (-CH2-C H(CH2)-O-, PGMA), 6.26‒6.84 (o-aromatic, PS), 6.84‒
+7.24 (m, p-aromatic, PS). 13C NMR (100 MHz, CDCl3, δ, ppm): 16.6, 18.8,
+40.4, 44.6, 44.9, 48.9, 49.1, 51.9, 54.3, 65.9, 125.6, 125.7, 127.4, 127.5,
+127.7, 128.0, 128.1, 128.3, 145.1, 145.4, 145.7, 146.1, 177.0, 177.2, 177.9,
+178.2. IR (KBr, v, cm-1): 3447, 3103, 3083, 3060, 3026, 3000, 2948, 2925,
+2849, 1943, 1867, 1799, 1733, 1631, 1602, 1493, 1453, 1438, 1388, 1268,
+1241, 1192, 1149, 1065, 1027, 989, 967, 908, 845, 756, 699, 542.
+Synthesis of PS-b-PGFM10-22 by the thiol–epoxy reaction
+General procedure for functionalizing PGM random copolymers and
+PS-b-PGM BCPs using PS-b-PGM10-22 as an example: The reaction
+vessel was charged with PS-b-PGM10-22 (0.308 g, 0.0305 mmol), 2,2,2-
+triﬂuoroethanethiol (0.0370 mL, 0.416 mmol; 1.5 mol-equiv. of PGMA
+repeating units, 95%), and 1 wt% aqueous LiOH·H2O solution (0.0580 g,
+0.0138 mmol; 0.05 mol-equiv. of pre PGMA repeating units). The
+reactants were dissolved in THF (3 mL; 1 mL per 100 mg of PS-b-
+PGM10-22) at ambient temperature. The resulting solution was then
+stirred at 40 °C for 3 h. The polymer was precipitated from MeOH/
+water and collected by ﬁltration. The solid was dissolved in THF, pre-
+cipitated from MeOH/water, and collected by ﬁltration to remove
+residual thiol. The resulting solid was dried under reduced pressure at
+room temperature to obtain PS-b-PGFM10-22 as a white powder
+(0.321 g, 94% yield). 1H NMR (400 MHz, CDCl3, δ, ppm): 0.53‒1.18 (α-
+CH3, PGMA F; α-CH3, PMMA), 1.43 (-CH2-CH-, PS), 1.82 (-CH2-CH-, PS;
+-CH2-C(CH3)-, PGMAF; -CH2-C(CH3)-, PMMA), 2.84 (-CH(OH)-CH2-S-,
+PGMAF), 3.27 (-S-CH2-CF3, PGMAF), 3.60 (-O-CH3, PMMA), 4.07 (-(C = O)
+O-CH2-CH(OH)-, PGMAF), 6.30‒6.84 (o-aromatic, PS), 6.84‒7.24 (m, p-
+aromatic, PS). 13C NMR (100 MHz, CDCl3, δ, ppm): 16.5, 17.3, 18.8, 34.3,
+34.6, 34.9, 35.3, 36.2, 40.3, 44.6, 44.9, 52.0, 54.4, 67.8, 69.1, 124.6, 125.6,
+125.7, 127.4, 127.5, 127.7, 128.0, 145.2, 145.4, 145.8, 146.3, 177.1, 177.3,
+178.0, 178.3. IR (KBr, v, cm-1): 3504, 3103, 3082, 3060, 3026, 3000,
+2947, 2925, 2848, 1940, 1863, 1799, 1731, 1601, 1493, 1453, 1434, 1385,
+1313, 1271, 1244, 1193, 1151, 1125, 1084, 1024, 985, 963, 905, 841, 756,
+699, 636.
+Preparing bulk ﬁlms
+Bulk ﬁlms were prepared by slowly evaporating 10 wt% BCP solutions
+in THF at 25 °C. The prepared BCP ﬁlms were annealed at 200 °C for
+24 h under reduced pressure.
+Preparing thin ﬁlms
+Silicon wafers were cut into 1 × 1 or 1.5 × 1.5 cm pieces and wiped with
+toluene-soaked Kim Wipes. The wafers were then sequentially soni-
+cated in acetone, ethanol (>99.5%), and toluene (>99%) (1 min each),
+dried in a stream of nitrogen, and further dried by heating to 100 °C.
+Random copolymer layers were prepared on the clean wafers by spin-
+coating 1 wt% PS-r-PMMA-r-PHEMA solutions in propylene glycol
+1-monomethyl ether 2-acetate (PGMEA) (>98.0%) at 3000 rpm for 60 s,
+followed by crosslinking at 250 °C for 5 min under nitrogen. Sub-
+sequent rinsing with PGMEA removed the un-crosslinked random
+copolymers to yield PS-r-PMMA-r-PHEMA layers approximately 5‒7-nm
+thick that neutralize the silicon wafers. These modiﬁed substrates were
+sufﬁciently dried by heating at 100 °C for 1 min. Films were then fab-
+ricated by spin-coating BCP solutions of given concentrations in
+PGMEA at various spin rates for 60 s in order to obtain thin ﬁlms of
+various thicknesses. These BCP thin ﬁlms were ﬁrst heated to 90 °C for
+1 min to remove residual PGMEA and then annealed at 200 °C for
+30 min under nitrogen.
+DSA
+SiN ﬁlms with a thickness of 13 nm were deposited on Si substrates
+and crosslinked X-PS patterns were fabricated on the substrates
+(DSA substrates). The DSA substrates were obtained from imec and
+used as received. The DSA substrates were sufﬁciently dried by
+heating at 100 °C. Random copolymer layers were prepared by spin-
+coating 1 wt% PS-r-PMMA-r-PHEMA solutions in PGMEA at 1500 rpm
+for 30 s onto DSA substrates, followed by crosslinking at 250 °C for
+5 min in air. Subsequent rinsing with 7:3 (v/v) PGME/PGMEA removed
+un-crosslinked random copolymers to yield PS-r-PMMA-r-PHEMA
+layers that neutralized the substrates. The modiﬁed substrates were
+sufﬁciently dried by heating at 100 °C for 1 min. BCP solutions of
+speciﬁc
+concentrations
+in
+PGMEA
+were
+then
+spin-coated
+at
+2500 rpm for 30 s to produce 19-nm-thick BCP ﬁlms that were heated
+at 90 °C for 1 min to remove residual PGMEA and then annealed at a
+given temperature for 5 min under nitrogen. The PGFM segments
+were ﬁnally removed by subjecting the thin ﬁlms to oxygen-plasma
+etching.
+Data availability
+All data are available in the main text or supplementary information.
+The data that support the ﬁndings of this study are available from the
+corresponding author on request.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+8
+
+[Page 9]
+References
+1.
+International Roadmap for Devices and SystemsTM 2022 Edition:
+Lithography, https://irds.ieee.org/editions/2022/irds%E2%84%A2-
+2022-lithography (2022).
+2.
+Orilall, M. C. & Wiesner, U. Block copolymer based composition and
+morphology control in nanostructured hybrid materials for energy
+conversion and storage: solar cells, batteries, and fuel cells. Chem.
+Soc. Rev. 40, 520–535 (2011).
+3.
+Gao, T. N. et al. Solvent‐induced self‐assembly strategy to synthe-
+size well‐deﬁned hierarchically porous polymers. Adv. Mater. 31,
+1806254 (2019).
+4.
+Kim, H. C., Park, S. M. & Hinsberg, W. D. Block copolymer based
+nanostructures: materials, processes, and applications to electro-
+nics. Chem. Rev. 110, 146–177 (2010).
+5.
+Bates, C. M., Maher, M. J., Janes, D. W., Ellison, C. J. & Willson, C. G.
+Block copolymer lithography. Macromolecules 47, 2–12 (2014).
+6.
+Mansky, P., Chaikin, P. & Thomas, E. L. Monolayer ﬁlms of diblock
+copolymer microdomains for nanolithographic applications. J.
+Mater. Sci. 30, 1987–1992 (1995).
+7.
+Mansky, P., Harrison, C. K., Chaikin, P. M., Register, R. A. & Yao, N.
+Nanolithographic templates from diblock copolymer thin ﬁlms.
+Appl. Phys. Lett. 68, 2586–2588 (1996).
+8.
+Park, M., Harrison, C., Chaikin, P. M., Register, R. A. & Adamson, D. H.
+Block copolymer lithography: periodic arrays of ~1011 holes in
+1 square centimeter. Science 276, 1401–1404 (1997).
+9.
+Bates, F. S. & Fredrickson, G. H. Block copolymer thermodynamics:
+theory and experiment. Annu. Rev. Phys. Chem. 41, 525–557 (1990).
+10.
+Matsen, M. W. & Bates, F. S. Unifying weak- and strong-segregation
+block copolymer theories. Macromolecules 29, 1091–1098 (1996).
+11.
+Sinturel, C., Bates, F. S. & Hillmyer, M. A. High χ−low N block
+polymers: how far can we go? ACS Macro Lett. 4, 1044–1050 (2015).
+12.
+Morkved, T. L. et al. Local control of microdomain orientation in
+diblock copolymer thin ﬁlms with electric ﬁelds. Science 273,
+931–933 (1996).
+13.
+Rockford, L. et al. Polymers on nanoperiodic, heterogeneous sur-
+faces. Phys. Rev. Lett. 82, 2602–2605 (1999).
+14.
+Kim, S. O. et al. Epitaxial self-assembly of block copolymers on
+lithographically deﬁned nanopatterned substrates. Nature 424,
+411–414 (2003).
+15.
+Stoykovich, M. P. et al. Directed assembly of block copolymer
+blends into nonregular device-oriented structures. Science 308,
+1442–1446 (2005).
+16.
+Mansky, P. et al. Interfacial segregation in disordered block copo-
+lymers: effect of tunable surface potentials. Phys. Rev. Lett. 79,
+237–240 (1997).
+17.
+Mansky, P., Liu, Y., Huang, E., Russell, T. P. & Hawker, C. Controlling
+polymer-surface interactions with random copolymer brushes.
+Science 275, 1458–1460 (1997).
+18.
+Ryu, D. Y., Shin, K., Drockenmuller, E., Hawker, C. J. & Russell, T. P. A
+generalized approach to the modiﬁcation of solid surfaces. Science
+308, 236–239 (2005).
+19.
+In, I., La, Y. H., Park, S. M., Nealey, P. F. & Gopalan, P. Side-chain-
+grafted random copolymer brushes as neutral surfaces for con-
+trolling the orientation of block copolymer microdomains in thin
+ﬁlms. Langmuir 22, 7855–7860 (2006).
+20. Bang, J. et al. Facile routes to patterned surface neutralization layers
+for block copolymer lithography. Adv. Mater. 19, 4552–4557 (2007).
+21.
+Ham, S. et al. Microdomain orientation of PS-b-PMMA by controlled
+interfacial interactions. Macromolecules 41, 6431–6437 (2008).
+22. Han, E., Stuen, K. O., La, Y. H., Nealey, P. F. & Gopalan, P. Effect of
+composition of substrate-modifying random copolymers on the
+orientation of symmetric and asymmetric diblock copolymer
+domains. Macromolecules 41, 9090–9097 (2008).
+23. Thurn-Albrecht, T. et al. Nanoscopic templates from oriented block
+copolymer ﬁlms. Adv. Mater. 12, 787–791 (2000).
+24. Black, C. T. et al. Integration of self-assembled diblock copolymers
+for semiconductor capacitor fabrication. Appl. Phys. Lett. 79,
+409–411 (2001).
+25. Asakawa, K. & Hiraoka, T. Nanopatterning with microdomains of
+block copolymers using reactive-ion etching selectivity. Jpn. J.
+Appl. Phys. 41, 6112–6118 (2002).
+26. Ting, Y. H. et al. Plasma etch removal of poly(methyl methacrylate)
+in block copolymer lithography. J. Vac. Sci. Technol. B 26,
+1684–1689 (2008).
+27.
+Farrell, R. A. et al. Monitoring PMMA elimination by reactive ion
+etching from a lamellar PS-b-PMMA thin ﬁlm by ex situ TEM meth-
+ods. Macromolecules 43, 8651–8655 (2010).
+28. Russell, T. P., Hjelm, R. P. & Seeger, P. A. Temperature dependence
+of the interaction parameter of polystyrene and poly(methyl
+methacrylate). Macromolecules 23, 890–893 (1990).
+29. Wan, L. et al. The limits of lamellae-forming PS-b‑PMMA block
+copolymers for lithography. ACS Nano 9, 7506–7514 (2015).
+30. Sweat, D. P. et al. Rational design of a block copolymer with a high
+interaction parameter. Macromolecules 47, 6687–6696 (2014).
+31.
+Kwak, J. et al. Fabrication of sub-3 nm feature size based on block
+copolymer self-assembly for next-generation nanolithography.
+Macromolecules 50, 6813–6818 (2017).
+32. Nose, T. Coexistence curves of polystyrene/poly(dimethylsiloxane)
+blends. Polymer 36, 2243–2248 (1995).
+33. Son, J. G., Gotrik, K. W. & Ross, C. A. High-aspect-ratio perpendi-
+cular orientation of PS-b-PDMS thin ﬁlms under solvent annealing.
+ACS Macro Lett. 1, 1279–1284 (2012).
+34. Jo, S., Jeon, S., Jun, T., Park, C. & Ryu, D. Y. Fluorine-containing
+styrenic block copolymers toward high χ and perpendicular
+lamellae in thin ﬁlms. Macromolecules 51, 7152–7159 (2018).
+35. Jo, S. et al. Balanced interfacial interactions for ﬂuoroacrylic block
+copolymer ﬁlms and fast electric ﬁeld directed assembly. Chem.
+Mater. 32, 9633–9641 (2020).
+36. Huang, E. et al. Using surface active random copolymers to control
+the domain orientation in diblock copolymer thin ﬁlms. Macro-
+molecules 31, 7641–7650 (1998).
+37. Bates, C. M. et al. Polarity-switching top coats enable orientation of
+sub-10-nm block copolymer domains. Science 338, 775–779 (2012).
+38. Durand, W. J. et al. Design of high-χ block copolymers for litho-
+graphy. J. Polym. Sci. Part A: Polym. Chem. 53, 344–352 (2015).
+39. Lane, A. P. et al. Directed self-assembly and pattern transfer of ﬁve
+nanometer block copolymer lamellae. ACS Nano 11,
+7656–7665 (2017).
+40. Kim, G. & Libera, M. Morphological development in solvent-cast
+polystyrene-polybutadiene-polystyrene (SBS) triblock copolymer
+thin ﬁlms. Macromolecules 31, 2569–2577 (1998).
+41.
+Cushen, J. D. et al. Thin ﬁlm self-assembly of poly(-
+trimethylsilylstyrene-b-D,L‑lactide) with sub-10 nm domains. Mac-
+romolecules 45, 8722–8728 (2012).
+42. Kennemur, J. G., Yao, L., Bates, F. S. & Hillmyer, M. A. Sub-5 nm
+domains in ordered poly(cyclohexylethylene)-block-poly(-
+methylmethacrylate) block polymers for lithography. Macro-
+molecules 47, 1411–1418 (2014).
+43. Cummins, C. et al. Rapid self-assembly and sequential inﬁltration
+synthesis of high χ ﬂuorine-containing block copolymers. Macro-
+molecules 53, 6246–6254 (2020).
+44. Keen, I. et al. Control of the orientation of symmetric poly(styrene)-
+block-poly(D,L‑lactide) block copolymers using statistical copoly-
+mers of dissimilar composition. Langmuir 28, 15876–15888 (2012).
+45. Yang, G. W. et al. Directed self-assembly of polystyrene-b-poly(-
+propylene carbonate) on chemical patterns via thermal annealing
+for next generation lithography. Nano Lett. 17, 1233–1239 (2017).
+46. Kim, S., Nealey, P. F. & Bates, F. S. Decoupling bulk thermodynamics
+and wetting characteristics of block copolymer thin ﬁlms. ACS
+Macro Lett. 1, 11–14 (2012).
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+9
+
+[Page 10]
+47. Kim, S., Nealey, P. F. & Bates, F. S. Directed assembly of lamellae
+forming block copolymer thin ﬁlms near the order-disorder transi-
+tion. Nano Lett. 14, 148–152 (2014).
+48. Zhou, S. X., Janes, D. W., Kim, C. B., Willson, C. G. & Ellison, C. J.
+Designing intrablock attractions to increase the χ parameter of a
+symmetric diblock copolymer. Macromolecules 49,
+8332–8340 (2016).
+49. Yoshida, K. et al. Facile and efﬁcient modiﬁcation of polystyrene-
+block-poly(methyl methacrylate) for achieving sub-10 nm feature
+size. Macromolecules 51, 8064–8072 (2018).
+50. Song, S. W. et al. Universal vertical standing of block copolymer
+microdomains enabled by a gradient block. J. Mater. Chem. C 9,
+14021–14029 (2021).
+51.
+Feng, H. et al. Optimized design of block copolymers with covary-
+ing properties for nanolithography. Nat. Mater. 21,
+1426–1433 (2022).
+52. Yoshimura, Y., Chandra, A., Nabae, Y. & Hayakawa, T. Chemically
+tailored high-χ block copolymers for perpendicular lamellae via
+thermal annealing. Soft Matter 15, 3497–3506 (2019).
+53. Varshney, S. K., Hautekeer, J. P., Fayt, R., Jerome, R. & Teyssie, P.
+Anionic polymerization of (meth)acrylic monomers. 4. Effect of
+lithium salts as ligands on the “living” polymerization of methyl
+methacrylate using monofunctional initiators. Macromolecules 23,
+2618–2622 (1990).
+54. Hild, G., Lamps, J. P. & Rempp, P. Synthesis and characterization of
+anionic 2,3-epoxypropyl methacrylate polymers and of related
+random and block copolymers with methyl methacrylate. Polymer
+34, 2875–2882 (1993).
+55. Hild, G. & Lamps, J. P. Diblock copolymers triblock copolymers, and
+model networks synthesized by sequential anionic polymerization
+of styrene and 2,3-epoxypropyl methacrylate. Polymer 39,
+2637–2649 (1998).
+56. De, S. & Khan, A. Efﬁcient synthesis of multifunctional polymers via
+thiol–epoxy “click” chemistry. Chem. Commun. 48,
+3130–3132 (2012).
+57. Gadwal, I., Stuparu, M. C. & Khan, A. Homopolymer bifunctionali-
+zation through sequential thiol-epoxy and esteriﬁcation reactions:
+an optimization, quantiﬁcation, and structural elucidation study.
+Polym. Chem. 6, 1393–1404 (2015).
+58. Wylie, K., Dong, L., Chandra, A., Nabae, Y. & Hayakawa, T. Modifying
+the interaction parameters of a linear ABC triblock terpolymer by
+functionalizing the short, reactive middle block to induce mor-
+phological change. Macromolecules 53, 1293–1301 (2020).
+59. Dong, L. et al. The role of liquid crystalline side chains for long-
+range ordering in the block copolymer thin ﬁlms. J. Photopolym.
+Sci. Technol. 33, 529–536 (2020).
+60. Chen, X. et al. Ionic liquids as additives to polystyrene-block-
+poly(methyl methacrylate) enabling directed self-assembly of pat-
+terns with sub-10 nm features. ACS Appl. Mater. Interfaces 10,
+16747–16759 (2018).
+61.
+Leibler, L. Theory of microphase separation in block copolymers.
+Macromolecules 13, 1602–1617 (1980).
+62. Sakurai, S., Mori, K., Okawara, A., Kimishima, K. & Hashimoto, T.
+Evaluation of segmental interaction by small-angle X-ray scattering
+based on the random-phase approximation for asymmetric, poly-
+disperse triblock copolymers. Macromolecules 25,
+2679–2691 (1992).
+63. Sakamoto, N. & Hashimoto, T. Order-disorder transition of low
+molecular weight polystyrene-block-polyisoprene. 1. SAXS analysis
+of two characteristic temperatures. Macromolecules 28,
+6825–6834 (1995).
+64. Mori, K., Okawara, A. & Hashimoto, T. Order-disorder transition of
+polystyrene-block-polyisoprene. I. Thermal concentration ﬂuctua-
+tions in single-phase melts and solutions and determination of χ as a
+function of molecular weight and composition. J. Chem. Phys. 104,
+7765–7777 (1996).
+65. Agata, Y., Nabae, Y., Ougizawa, T. & Hayakawa, T. Effect of modiﬁed
+chemical junction of a diblock copolymer on the microphase
+separation behavior. J. Photopolym. Sci. Technol. 35, 17–22 (2022).
+66. Shin, N. et al. Nucleobase-containing block copolymers having a
+high interaction parameter by complementary hydrogen bonding.
+Macromolecules 54, 4564–4570 (2021).
+67. Kambour, R. P., Bendler, J. T. & Bopp, R. C. Phase behavior of
+polystyrene, poly(2,6-dimethyl-1,4-phenylene oxide), and their
+brominated derivatives. Macromolecules 16, 753–757 (1983).
+68. Ten Brinke, G., Karasz, F. E. & MacKnight, W. J. Phase behavior in
+copolymer blends: poly(2,6-dimethyl-1,4-phenylene oxide) and
+halogen-substituted styrene copolymers. Macromolecules 16,
+1827–1832 (1983).
+69. Anastasiadis, S. H., Russell, T. P., Satija, S. K. & Majkrzak, C. F.
+Neutron reﬂectivity studies of the surface-induced ordering
+of diblock copolymer ﬁlms. Phys. Rev. Lett. 62, 1852–1855
+(1989).
+70. Russell, T. P. Changes in polystyrene and poly(methyl methacrylate)
+interactions with isotopic substitution. Macromolecules 26,
+5819–5819 (1993).
+Acknowledgements
+The authors thank Dr. Hyo Seon Suh and Dr. Lander Verstraete of the
+Interuniversity Microelectronics Centre (imec) for providing the DSA
+substrates. The authors also thank Ryohei Kikuchi of the Tokyo Institute
+of Technology Materials Analysis Division, Open Facility Center for TEM
+and SEM support. This work was supported by JSPS KAKENHI Grant
+Number 20H02785 and 24H00052. S.M. was supported by JST SPRING,
+Grant Number JPMJSP2106.
+Author contributions
+T.H. and S.M. conceived the idea and initiated the project. S.M. con-
+ducted the experiments from synthesis and characterization of all
+polymer samples. T.S., T.D., and K.S. discussed the experimental con-
+ditions of DSA. T.H., Y.N., and K.H. provided technical guidance and
+useful suggestions on the material designs, characterization, and clear
+explanations of experiments. S.M., K.H., Y.N., and T.H. co-wrote the
+manuscript. All authors commented on the manuscript. T.H. supervised
+the whole project.
+Competing interests
+T.D. and T.H. are inventors on a patent application (number 7213495,
+Japan), dealing with the use of PS-b-PGFM with 10‒90 mol% PGMAF units
+in the PGFM. The remaining authors declare no competing interests.
+Additional information
+Supplementary information The online version contains
+supplementary material available at
+https://doi.org/10.1038/s41467-024-49839-0.
+Correspondence and requests for materials should be addressed to
+Teruaki Hayakawa.
+Peer review information Nature Communications thanks Zhen-An Qiao,
+and the other, anonymous, reviewer(s) for their contribution to the peer
+review of this work. A peer review ﬁle is available.
+Reprints and permissions information is available at
+http://www.nature.com/reprints
+Publisher’s note Springer Nature remains neutral with regard to
+jurisdictional claims in published maps and institutional afﬁliations.
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+10
+
+[Page 11]
+Open Access This article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons licence, and indicate if
+changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless
+indicated otherwise in a credit line to the material. If material is not
+included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted
+use, you will need to obtain permission directly from the copyright
+holder. To view a copy of this licence, visit http://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2024
+Article
+https://doi.org/10.1038/s41467-024-49839-0
+Nature Communications|   (2024) 15:5671 
+11

@@ -1,0 +1,1992 @@
+# hybrid_bonding_2025_moore_more
+# Extracted from: hybrid_bonding_2025_moore_more.pdf
+# Total PDF pages: 23
+# Page numbering: offset=0 (book_page = pdf_page - 0 + 1)
+# ============================================================
+
+
+[Page 1]
+Vol.:(0123456789)
+Moore and More            (2025) 2:18  
+https://doi.org/10.1007/s44275-025-00036-1
+REVIEW
+Cu–Cu hybrid bonding technology: from physical mechanisms 
+to system integration for 3D ICs
+Bing Jiang1 · Yutong Wu1 · Zhixiang Zhong1 · Kangkai Fan1 · Qiubao Lin2 · Jianbo Liang3 · Hezhou Liu1 · Xinke Liu1 
+Received: 14 May 2025 / Revised: 9 July 2025 / Accepted: 29 July 2025 
+© The Author(s) 2025
+Abstract
+With the rapid development of microelectronic technology toward high-performance and high-density integration, traditional 
+bonding methods face dual challenges of interconnection density and bonding temperature. The Cu–Cu hybrid bonding, 
+leveraging its outstanding benefits in sub-micron interconnection and efficient thermal management, has emerged as an 
+innovative solution to overcome the limitations of traditional packaging. This paper systematically explores the physical 
+mechanisms, integration technologies, key process breakthroughs, and macroscopic applications of Cu–Cu hybrid bonding. 
+The study highlights the revolutionary advantages of hybrid bonding, such as ultra-fine vertical interconnection spacing. A 
+detailed analysis of two major physical mechanisms in key technical pathways is presented. In practical applications, Cu–Cu 
+hybrid bonding has demonstrated success in high-bandwidth memory, three-dimensional heterogeneous integration, and 
+complementary metal–oxide–semiconductor image sensors. A notable example is Sony’s Cu/SiO₂-bonded image sensor, 
+markedly improving imaging quality and integration density. However, challenges such as thermal boundary resistance 
+control, process complexity, and large-scale production costs remain barriers to industrialization. Future advancements, 
+including novel passivation materials and integration with ultra-wide bandgap semiconductors, promise to further propel 
+the performance and reliability of radio frequency (RF) devices, power electronics, and artificial intelligence chips. This 
+review provides a comprehensive framework for both theoretical exploration and practical implementation of Cu–Cu hybrid 
+bonding technology.
+Keywords  Cu–Cu hybrid bonding · 3D integration · Low-temperature bonding · Interfacial reliability · Physical 
+mechanisms
+1  Introduction
+With the rapid development of microelectronics technol-
+ogy, the demand for high-performance, high-density inte-
+grated electronic devices is increasing [1–4]. Against this 
+backdrop, Cu–Cu hybrid bonding (HB) technology, as an 
+advanced interconnect technology, has attracted widespread 
+attention due to its excellent electrical conductivity, ther-
+mal conductivity, and good mechanical stability. In recent 
+years, the rapid development of emerging technologies such 
+as artificial intelligence and autonomous driving [5, 6] has 
+brought unprecedented challenges and opportunities to the 
+packaging and integration of electronic devices [7]. These 
+technologies not only demand higher performance and lower 
+power consumption from electronic devices but also require 
+more complex functional integration within smaller form 
+factors. For instance, artificial intelligence (AI) chips need to 
+process massive amounts of data [8–11], placing extremely 
+high demands on parallel processing capabilities and ther-
+mal management. Meanwhile, autonomous driving systems 
+rely on the fusion of multiple sensors and real-time data 
+transmission, making interconnect density and reliability 
+between chips critical factors. Therefore, traditional pack-
+aging and integration technologies are no longer sufficient 
+ *	 Xinke Liu 
+	
+xkliu@szu.edu.cn
+1	
+College of Materials Science and Engineering, State Key 
+Laboratory of Radio Frequency Heterogeneous Integration, 
+Institute of Power Devices and AI, Energy Monitoring 
+Technology, Shenzhen University, Shenzhen 518060, 
+Guangdong, China
+2	
+College of Science, Jimei University, Xiamen 361021, 
+Fujian, China
+3	
+Engineering Division of Physics and Electronics, Osaka 
+Metropolitan University, Osaka 558‑8585, Japan
+
+[Page 2]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 2 of 23
+to meet these needs [12]. There is an urgent need to develop 
+more advanced technologies such as three-dimensional (3D) 
+integration [13], heterogeneous integration, and low-temper-
+ature bonding [14] to drive the development of electronic 
+devices toward higher performance, higher integration den-
+sity, and higher reliability. The AMD Instinct MI300 [15] 
+series accelerators utilize modular chip packaging technol-
+ogy, specifically designed for high-performance computing 
+(HPC) and AI applications. By integrating data center-level 
+central processing units (CPUs), graphics-processing unit 
+(GPU)-accelerated computing, AMD Infinity Cache, and an 
+8-stacked HBM3 memory system, the MI300 series delivers 
+exceptional performance, particularly with a peak bandwidth 
+exceeding 5 TBps in HBM3. The MI300 series includes 
+two models: MI300X and MI300A, which are optimized 
+for traditional CPU servers and high-density HPC systems, 
+respectively, showcasing AMD’s innovations in chip pack-
+aging and architecture design. NVIDIA [4] will continue to 
+advance AI chip technology innovation in 2025, including a 
+significant performance improvement of the Blackwell Ultra 
+chip (with FP4 computing power reaching 1.1 ExaFLOPS), 
+and will leverage photonic integration technology to address 
+communication bottlenecks in order to optimize data center 
+efficiency.
+Cu–Cu HB technology not only enables high-density 
+interconnects between chips but also offers higher reliabil-
+ity and lower resistance compared to traditional soldering 
+techniques, which is crucial for HPC, high-speed commu-
+nication, and advanced packaging technologies [16]. Cu–Cu 
+HB combines the advantages of metal bonding and dielectric 
+bonding, achieving both electrical and mechanical connec-
+tions by forming stable chemical bonds or physical con-
+nections on the surface of metallic Cu. The advantages of 
+Cu–Cu HB include the following: fine-pitch interconnects, 
+enabling sub-micron-level interconnects to increase chip 
+density and performance; lower parasitic capacitance and 
+resistance, reducing signal transmission delays and power 
+consumption; and thinner packaging thickness. Compared 
+to traditional flip-chip bonding using solder bumps, Cu–Cu 
+HB can achieve a thinner packaging profile with gapless 
+connections between chips.
+The development of this technology has not only pro-
+pelled the progress of chip-scale packaging and 3D inte-
+grated circuit (3D-IC) technologies but has also highlighted 
+the importance of thermocompression bonding (TCB) tech-
+nology. TCB plays a crucial role in achieving the vertical 
+stacking of chips or wafers within 3D integration, offering 
+higher input/output (I/O) density [17, 18] compared to tradi-
+tional soldering methods. Among various TCB techniques, 
+copper-to-copper bonding is favored for its remarkable 
+electrical and thermal qualities, high mechanical stability 
+in bonding sections, and compatibility and cost-effective-
+ness in packaging manufacturing procedures. However, HB 
+technology faces numerous challenges in its development. 
+The most critical issue is the significant difference in bond-
+ing mechanisms between metal-to-metal and dielectric-to-
+dielectric bonds, making it imperative to develop a bonding 
+technology that can accommodate both. In addition, most 
+existing bonding processes rely on high-temperature envi-
+ronments, which can cause thermal damage to devices and 
+trigger a series of thermally related issues. Therefore, devel-
+oping efficient thermal management solutions to mitigate the 
+negative impact of high temperatures on device performance 
+and reliability has become an important issue that needs 
+to be addressed urgently. As device performance continues 
+to advance in accordance with Moore’s law [19], advanced 
+packaging technologies, such as 3D stacking and interposer 
+technology, have become crucial for achieving HPC. These 
+technologies enable smaller form factors, lower internal 
+latency, and reduced power consumption for inter-chip 
+communication through vertical high-density interconnects. 
+Meanwhile, interposer technology facilitates heterogeneous 
+integration of different technologies and materials. In 3D 
+stacking [20, 21] and interposer interconnects, solder-based 
+bumping technology [22] is currently commonly used for 
+assembly. However, when the packaging size is reduced 
+to ≤ 50 μm, solder-based bumping technology faces numer-
+ous challenges [23, 24], such as solder extrusion, bridg-
+ing, and the formation of intermetallic compounds (IMCs). 
+Therefore, eliminating solder has become critically impor-
+tant, which is the key context for introducing Cu–Cu direct 
+bonding technology.
+In this work, as illustrated in Fig. 1, we provide a com-
+prehensive overview of Cu–Cu HB technology, encompass-
+ing its fundamental principles, physical mechanisms, key 
+technologies, and application domains, with a focus on elu-
+cidating the interrelationships and interactions among vari-
+ous factors within this field. Section 2 primarily addresses 
+the physical mechanisms, aiming to explore the advantages, 
+potential, and challenges of Cu–Cu HB technology in power 
+device applications. Section 3 delves into the critical break-
+through directions, elaborating on how these advancements 
+can broaden the applicability of Cu–Cu HB technology 
+across diverse fields. Section 4 discusses the current and 
+emerging application areas of Cu–Cu HB, highlighting both 
+existing implementations and future opportunities.
+Through this study, we propose novel pathways to 
+advance Cu–Cu HB technology, with the goal of fostering 
+its widespread adoption in next-generation power electronic 
+devices while enhancing their performance and reliability.
+Cu–Cu HB is a chip stacking technology that combines 
+Cu–Cu metal bonding and dielectric–dielectric bonding, 
+typically oxide–oxide bonding. This technology embeds 
+metal contacts within dielectric materials and utilizes heat 
+treatment to bond the two materials together. By leveraging 
+
+[Page 3]
+Moore and More            (2025) 2:18 	
+Page 3 of 23 
+   18 
+the atomic diffusion of copper in the solid state, it achieves 
+strong metal–metal bonding.
+2  Traditional bonding faces dual challenges
+To utilize these chips for their intended purposes, wafers 
+need to be diced into individual chips and then connected 
+externally to enable power supply. The method used to con-
+nect wires (the pathways for electrical signals) is called wire 
+bonding. In fact, the use of metal wires to connect circuits 
+is a very traditional approach, and its usage is gradually 
+declining. Recently, flip-chip bonding and through-silicon 
+via (TSV) [25] have emerged as the new mainstream meth-
+ods. Flip-chip bonding, also known as bump bonding [26], is 
+a method that uses solder balls [27] (small bumps) for bond-
+ing. TSV, on the other hand, represents a more advanced 
+approach. To understand the fundamental concepts of bond-
+ing, we will first explore wire bonding [28], which is the 
+traditional method. There are three main methods for con-
+necting metal wires to bonding pads as follows: the ther-
+mocompression method [29], which involves heating and 
+compressing the bonding pad and the capillary tool (a tool 
+similar to a capillary tube that moves metal wires) to form 
+a connection; the ultrasonic method [30], which does not 
+involve heating, and instead, ultrasonic waves are applied to 
+the capillary tool to create the connection; the thermionic 
+method, which is a hybrid approach that combines both heat-
+ing and ultrasonic waves. It has long been the mainstream 
+solution in the field of semiconductor packaging. These tech-
+nologies enable the interconnection of chips to substrates 
+or chips through metal solder joints, which rely on high-
+temperature and high-pressure processes to complete the 
+interface bonding. However, as Moore’s law approaches its 
+physical limits, the requirements for high-density intercon-
+nects, low power consumption, and heterogeneous integra-
+tion of ICs become more stringent, and the limitations of 
+traditional bonding technologies become apparent.
+The primary limitation of traditional bonding technology 
+is its limited integration density, which makes it difficult to 
+meet the requirements of advanced semiconductor devices 
+for the co-packaging of heterogeneous material systems. At 
+the same time, the thermal management issues are addressed 
+through the integration of diamond/copper microchannels 
+to achieve this goal. Lu et al. [31] investigated the ther-
+mal transfer and fluid characteristics of diamond/copper 
+Fig. 1   Overall content and framework of this review article
+
+[Page 4]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 4 of 23
+composite rectangular microchannel heat sinks (MCHS) 
+through numerical simulations and experiments. The study 
+found that the MCHS with a seven-channel structure exhib-
+ited optimal performance at a heat flux of 400 W/cm2 and 
+a flow rate of 0.4 m/s, achieving a Nusselt number of 29.7. 
+The thermal conductivity of the diamond/copper compos-
+ite (564.2 W/(m·K)) significantly outperformed that of 
+pure copper. Experiments showed that it could reduce the 
+temperature of a 100 °C heat source by 40.1 °C, while still 
+maintaining a safe operating temperature for the chip under 
+dual heat source conditions. This study provides an efficient 
+solution for the heat dissipation of high-power electronic 
+devices. With the continuous advancement of semiconduc-
+tor device miniaturization, the interconnect pitch (typically 
+greater than 10 μm) of traditional bonding processes has 
+significantly limited the increase in the number of intercon-
+nect channels per unit area in 3D stacked architectures. The 
+evolution of IC technology continues to follow the trajec-
+tory outlined by Moore’s law. Continuous miniaturization 
+of semiconductor devices has driven substantial improve-
+ments in chip performance [32], yet this scaling process now 
+confronts multifaceted challenges as critical dimensions 
+approach fundamental physical limits. While device size 
+reduction enhances operational capabilities, it simultane-
+ously induces exacerbated leakage currents due to short-
+channel effects, pronounced thermal dissipation issues, and 
+progressive energy efficiency degradation. The advancement 
+to higher process nodes has precipitated exponential cost 
+escalation for per-node technological upgrades. Although 
+the pace of process iteration shows signs of deceleration, 
+the strategic emphasis on high-performance IC development 
+remains unaltered [33].
+Future technological breakthroughs will concentrate on 
+two principal pathways: the first adheres to the core tenets 
+of Moore’s law through critical dimension optimization to 
+enhance circuit efficiency and reduce power consumption, 
+constituting a multi-dimensional extension of scaling prin-
+ciples. The second pathway explores functional diversifi-
+cation beyond dimensional scaling, establishing innovative 
+directions under the “More than Moore” paradigm. Within 
+this framework, 3D heterogeneous integration emerges as a 
+pivotal breakthrough, primarily achieved through two imple-
+mentation modalities: advanced packaging architectures and 
+true 3D circuit integration. The 3D heterogeneous packag-
+ing scheme employing Cu–Cu direct bonding technology 
+enables bump-less inter-chip interconnections [34], as illus-
+trated in the industry roadmap presented in Fig. 2a.
+Progression in semiconductor technology imposes 
+increasingly stringent requirements on packaging method-
+ologies. Conventional flip-chip bonding techniques have 
+become inadequate for meeting the demands of high-density 
+interconnects and enhanced reliability. Cu-based HB, as a 
+cornerstone technology for 3D stacked packaging, signifi-
+cantly improves interconnect density and signal transmis-
+sion performance through elimination of bump structures. 
+Contemporary advanced packaging architectures encom-
+pass multiple configurations, including 2D fan-out (chip-
+first) integration, 2.1-D flip-chip integration, 2.1-D flip-chip 
+with bridge interconnects, 2.1-D fan-out bridge integration, 
+2.3-D fan-out (chip-last) integration, 2.5-D solder bump 
+integration, and 2.5-D micro-bump integration, bump-less 
+3-D IC integration, and bump-less chiplet-based 3-D IC 
+solutions [34, 35]. The comparative performance metrics of 
+these architectures in electrical characteristics and intercon-
+nect density are systematically presented in Fig. 2b. Given 
+its technical superiority, global semiconductor leaders 
+are intensifying research and development (R&D) invest-
+ments in HB, with successful commercialization already 
+Fig. 2   a International semiconductor technology development blueprint. b Illustration of the trend of integration technology
+
+[Page 5]
+Moore and More            (2025) 2:18 	
+Page 5 of 23 
+   18 
+demonstrated in complementary metal–oxide–semiconduc-
+tor (CMOS) image sensors and high-bandwidth memory 
+devices [36, 37]. This technological landscape underscores 
+the obsolescence of conventional bonding approaches in 
+advanced packaging applications, establishing the devel-
+opment of novel Cu-based HB as a critical enabler for 3D 
+heterogeneous integration systems.
+Modern electronic packaging confronts critical thermal 
+management challenges in advanced microelectronics. The 
+persistent escalation of integration density has revealed 
+inherent limitations in conventional interconnection tech-
+nologies under elevated thermal conditions. Current bond-
+ing methodologies exhibit substantial deficiencies in thermal 
+stability, particularly manifesting as substrate deformation 
+induced by thermal gradients during thermocompression 
+processes [38]. When processing temperatures exceed criti-
+cal thresholds (typically 350–400 °C for silicon-based sys-
+tems), plastic deformation and interconnect misalignment 
+in silicon wafers become prevalent, primarily attributed to 
+anisotropic thermal expansion coefficients of constituent 
+materials [39]. Such thermally induced distortions not only 
+compromise interfacial coplanarity but also precipitate reli-
+ability concerns including threshold voltage drift and con-
+tact resistance degradation. Figure 3 illustrates: (i) standard 
+bonding process flow; (ii) interfacial stress concentration 
+from thermal compression; and (iii) surface activation treat-
+ment enabling 50–70 °C reduction in Cu–Cu bonding tem-
+perature thresholds.
+Thermomechanical reliability emerges as a paramount 
+concern in 3D integration architectures. While TSV tech-
+nology demonstrates superior miniaturization and func-
+tional integration capabilities, its structural configuration 
+inherently exacerbates thermal stress challenges. The TSV 
+fabrication sequence—encompassing deep reactive ion etch-
+ing, copper electroplating, and wafer thinning—introduces 
+significant thermomechanical mismatch between copper 
+interconnects (coefficient of thermal expansion (CTE): 
+17 ppm/°C) and silicon substrates (CTE: 2.6 ppm/°C). This 
+CTE disparity generates interfacial shear stresses exceeding 
+80 MPa under thermal cycling conditions (ΔT = 150 °C) for 
+50 μm-diameter TSVs [40, 41], precipitating four primary 
+failure mechanisms: (i) stress-modulated carrier mobil-
+ity reduction (25–40% degradation) causing signal distor-
+tion and propagation delay; (ii) metal–dielectric interfacial 
+delamination leading to dielectric leakage currents > 10 μA/
+cm2; (iii) accelerated electromigration rates (Black’s equa-
+tion exponent n = 2.1–2.5) degrading interconnect longevity; 
+(iv) stress concentration-induced microcrack propagation 
+Fig. 3   Schematic illustration 
+of the a traditional thermal-
+compression bonding technical 
+processes, b thermal-compres-
+sion bonding process, and c 
+differences between thermal-
+compression bonding and direct 
+bonding
+
+[Page 6]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 6 of 23
+(crack growth rate > ­10−9 m/cycle) in silicon substrates. 
+Collective action of these mechanisms reduces mean time 
+to failure (MTTF) by 30–50% compared to conventional 
+packaging architectures.
+In addition, we have studied the bond and temperature 
+of bonding technology in recent years. The optimization 
+of process temperature and the improvement of interfacial 
+adhesion have become the focus of research in the field 
+of microelectronic packaging. Figure 4 shows that the hot 
+pressing temperature of advanced bonding technology has 
+shown a significant downward trend in recent years. The 
+comparison table shows that there are significant differences 
+in the thermodynamic properties of wire bonding, hot press 
+bonding, and Cu–Cu HB: although wire bonding can achieve 
+low-temperature bonding at 200–260 °C, the interfacial 
+shear strength is usually less than 100 MPa; the hot-pressed 
+bonding strength can be increased to 50–150 MPa, but it 
+needs to be implemented at a high temperature of 300–800 
+°C; the surface-modified Cu–Cu HB technology successfully 
+reduced the process temperature to −250 °C at room tem-
+perature while maintaining the bond strength of 200 MPa. 
+Therefore, it is necessary to study low-temperature HB.
+The transition to HB, compared to bump bonding, is 
+driven by a relatively straightforward reason. Both 3D 
+memory stacking and heterogeneous integration (key play-
+ers in the “More than Moore” era) require extremely high 
+interconnect densities. As mentioned, HB can meet this 
+demand. Compared to micro-bumps, which inherently sup-
+port high-density interconnect schemes, HB offers smaller 
+I/O terminals and reduced pitch interconnects. The spacing 
+between chips depends on the height of micro-bumps, but in 
+HB, this distance is nearly zero. As a result, HB interconnect 
+schemes can significantly reduce the overall package thick-
+ness, potentially saving hundreds of micrometers in multi-
+chip stacked packages.
+3  The type of process and physical 
+mechanism
+3.1  DBI (direct bond interconnect) hybrid bonding
+The direct oxide bonding process [49] typically first con-
+tacts the wafers at room temperature and then forms strong 
+covalent bonds. In traditional preparation, the surface of the 
+silicon wafer is mainly in a hydroxyl termination state after 
+water washing. In order to obtain a high-strength bonding 
+interface, it is necessary to promote the formation of hydro-
+gen bonds between hydroxyl groups through heat treatment 
+and initiate a polycondensation reaction, and finally com-
+plete the conversion of silicon–oxygen covalent bonds in 
+the annealing stage. This mechanism, known as hydrophilic 
+bonding, has the significant advantage of exhibiting good 
+compatibility with both silica and copper metal. Experi-
+ments show that under the condition of low-temperature 
+annealing at about 300 °C, two hydrophilic-treated surfaces 
+can form a defect-free high-strength bonding layer. Com-
+bined with the chemical mechanical planarization process, 
+Fig. 4   Illustration of the 
+research trend of Cu–Cu hybrid 
+bonding in recent years [42–48]
+
+[Page 7]
+Moore and More            (2025) 2:18 	
+Page 7 of 23 
+   18 
+the hybrid surface of the copper pad and the silica substrate 
+can be super-flattened, and then the seamless combination 
+of heterogeneous materials can be completed. For example, 
+Wang et al.’s [50] research innovation is mainly reflected 
+in the development of new surface chemical treatment pro-
+cesses. By optimizing the reaction mechanism of the bond-
+ing interface, it not only greatly reduces the process tempera-
+ture requirements, but also effectively inhibits the formation 
+of micropores at the interface, thereby improving the overall 
+bonding quality and reliability. Second, the team’s innova-
+tive use of a grid-like weld cloth array solution resulted in 
+significant optimization of alignment tolerances. On the 
+premise of maintaining the stability of chemical mechani-
+cal polishing process parameters, this arrangement method 
+is successfully compatible with existing high-speed chip 
+assembly equipment, which not only maintains micron-level 
+bonding accuracy, but also realizes the dual improvement of 
+manufacturing efficiency and process adaptability. Finally, 
+through systematic testing and validation, the electrical 
+characteristics of the DBI process under different structural 
+parameters have met expectations. The testing data indicate 
+that the measured resistance values of the interconnect units 
+highly align with the theoretical predictions, demonstrating 
+the practical advantages of this technology in high-density 
+packaging. This groundbreaking advancement provides an 
+innovative processing solution for micro-spacing intercon-
+nects in advanced packaging architectures, with particularly 
+notable potential for industrial promotion in the fields of 3D 
+and heterogeneous ICs.
+3.2  SAB (surface‑activated bonding)‑based hybrid 
+bonding
+The surface of the metal can activate the spontaneous 
+bonding characteristics (surface-activated bonding (SAB)) 
+through ion beam irradiation. This process effectively 
+removes the oxidation layer mechanism, allowing the bond-
+ing process to be completed without high-temperature treat-
+ment. This low-temperature bonding technology breaks the 
+traditional thermal budget limitations and provides critical 
+process support for the manufacturing of 3D integrated 
+devices [51]. The low-temperature mixed bonding process 
+route has garnered significant attention due to its applica-
+tion potential in temperature environments below 200 °C; 
+however, actual engineering implementation still faces con-
+siderable challenges. Research indicates that the vacuum-
+processing stage has become the primary technical bottle-
+neck in achieving the surface activation bonding technology 
+[52]. Although vacuum environment operation has become a 
+standard process in semiconductor manufacturing, the chal-
+lenges of precise alignment remain unresolved. The existing 
+bonding equipment exhibits a significant gap in positioning 
+accuracy under vacuum conditions compared to atmospheric 
+pressure. The thermal cycling that accompanies the switch-
+ing of atmospheric pressure can easily lead to mechanical 
+structural deformation, primarily due to the material stress 
+response under alternating vacuum-atmospheric conditions. 
+The core advantage of this technology lies in its ground-
+breaking non-chemical removal mechanism for the copper 
+oxide layer, allowing the bonding process to be completed 
+without relying on traditional hydrophilic pretreatment, 
+thereby making high-reliability bonding achievable under 
+ambient temperature conditions. Renaud et al. [53] success-
+fully demonstrated for the first time Cu–oxide direct HB 
+at low temperatures (150 °C) and even room temperature. 
+Figure 5 illustrates the fundamental processes involved in 
+the implementation of the SAB process and mechanism 
+of the SAB. This achievement is of great significance for 
+reducing the thermal budget, minimizing thermal stress, and 
+Fig. 5   Schematic diagram of the surface activation process; mechanism of surface-activated bonding
+
+[Page 8]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 8 of 23
+protecting temperature-sensitive chips such as image sen-
+sors, displays, and memory devices.
+Experimental validation indicates that under room tem-
+perature conditions, HB technology based on the princi-
+ple of surface activation can achieve excellent interface 
+performance; however, this process still faces engineering 
+challenges. Specifically, the variation in irradiation energy 
+distribution of the argon ion beam during the SAB surface 
+activation stage can easily lead to a gradient in the etching 
+rate between the edge and core regions of the copper inter-
+connect structure, resulting in a deterioration of the bonding 
+surface uniformity.
+3.3  Cu–Cu bonding physical mechanisms
+Conventional copper interconnects predominantly employ 
+TCB, where applied external pressure combined with 
+controlled thermal exposure facilitates interfacial copper 
+interdiffusion to establish metallic bonds. Jang et al. [54] 
+systematically investigated bonding efficacy under 25 kN 
+compressive load across temperature gradients (300 °C, 
+350 °C, 400 °C). Characterization results demonstrate that 
+elevating process temperature to 400 °C achieves an optimal 
+interfacial bonding energy of 4.93 J/m2, accompanied by 
+complete metallurgical integration verified through trans-
+mission electron microscopy (TEM) analysis. Nevertheless, 
+thermomechanical stress accumulation during thermal ramp-
+ing phases, coupled with prolonged high-temperature expo-
+sure, induces substrate warpage (measured curvature > 2.5 
+μm/mm) and microcrack propagation (crack density ~ ­103 
+­cm−2). These phenomena collectively precipitate interfa-
+cial delamination risks, potentially leading to functional 
+impairment in advanced packaging architectures. Mean-
+while, high-temperature processes also place more stringent 
+demands on equipment performance. To avoid excessive 
+deformation or damage to chips caused by high tempera-
+tures, low-temperature Cu–Cu bonding technology becomes 
+particularly important.
+To address current technological bottlenecks, in-depth 
+investigation of the fundamental physics of the mechanisms 
+of Cu–Cu HB becomes imperative. This study focuses on 
+the synergistic interactions between dielectric and metal-
+lic layers during HB. The ­SiO2–SiO2 bonding process can 
+be categorized into hydrophilic and hydrophobic variants, 
+depending on the surface morphology of the ­SiO2 interfaces. 
+Hydrophilic bonding is achieved by forming –OH groups 
+on ­SiO2 surfaces, typically through pretreatment using SC1 
+­(NH4OH/H2O2/H2O) or SPM ­(H2SO4/H2O2) solutions. 
+The mechanism of hydrophilic bonding primarily relies on 
+condensation reactions between hydroxyl groups (–OH) on 
+mirror-polished silicon wafers [55]. As illustrated in Fig. 6, 
+Tong and Gösele [56] proposed a four-stage mechanistic 
+model for ­SiO2 hydrophilic bonding. Figure 6a illustrates 
+the fundamental process involved in achieving Cu–Cu HB. 
+The initial stage features hydrogen bonding between inter-
+facial water molecules (see Fig. 6b), followed by annealing 
+at 110–150 °C to facilitate covalent Si–O–Si bond forma-
+tion via hydroxyl group dehydration. Residual silanol groups 
+(Si–OH) persist at the bonded interface, contributing to 
+interfacial stress relaxation. A silicon–oxygen–silicon cova-
+lent bond (Si–O–Si) is formed, which finally achieves the 
+binding of the dielectric layer and still retains some silanol 
+groups, and the reaction equation is as follows:
+Fig. 6   Four-stage mechanistic model of hydrophilic bonding. a Sche-
+matic diagram of Cu–SiO2 hybrid bonding and process. b The sili-
+con wafer is bonded to each other by hydrogen bonds between water 
+molecules. c Water molecules are formed and diffuse outward. d Con-
+verted into silicon–oxygen–silicon covalent bonds. e The bonding 
+strength reaches the maximum [56]
+
+[Page 9]
+Moore and More            (2025) 2:18 	
+Page 9 of 23 
+   18 
+Subsequently, at the interface of the silicon, water mol-
+ecules are formed and diffuse outward, as shown in Fig. 6c. 
+At the same time, some of the formed water molecules dif-
+fuse into the wafer through the natural oxide layer and react 
+with the silicon to produce hydrogen:
+During the 150–800 °C heat-activated reaction phase (see 
+Fig. 6d), the silanol group (Si–OH) undergoes a stepwise 
+dehydroxylation process, and its conversion efficiency finally 
+achieves a Si–O–Si covalent bond formation rate of ≥ 98%. 
+The interfacial bonding strength is positively correlated with 
+the wafer contact area, and increasing the contact area from 
+60% to 95% can increase the shear strength from 8 MPa to 
+35 MPa. When the temperature rises above 800 °C to enter 
+the viscoelastic flow phase (see Fig. 6e), the viscoelastic 
+behavior of the material leads to the maximum bond strength 
+due to interfacial reconstruction.
+Plasma activation technology can effectively enhance the 
+dielectric layer bonding performance. He et al. [57] showed 
+that silicon-based Ar plasma treatment has both surface 
+cleaning and silicon enrichment functions. The silicon-rich 
+interface layer formed by this process is rich in Si–Si cova-
+lent bonds and suspended Si bonds (i.e., oxygen vacancy 
+defects), which significantly improves the chemical adsorp-
+tion capacity of hydroxyl groups on the substrate surface. 
+This interfacial reconfiguration led to an increase in the den-
+sity of the silanol group, which in turn increased the bind-
+ing strength to 18.7 MPa. At present, this technology has 
+≡Si −OH + HO −Si ≡→≡Si −O −Si ≡+H2O
+H2O + 2 ≡Si−→≡Si −O −Si ≡+H2
+optimized the annealing temperature of hydrophilic bonding 
+to below 200 °C, which is about 150 °C lower than that of 
+traditional processes.
+After the dielectric layer bonding is realized, the second 
+step mainly involves the process of direct Cu–Cu bonding. 
+Metal interconnects are usually formed spontaneously in 
+heat treatment after the dielectric layer has been bonded. 
+The optimal temperature zone of this process is 200–400 
+°C, and the choice of temperature window is directly related 
+to the characteristics of the thermal expansion coefficient of 
+copper material (CTE = 17 ppm/K) significantly higher than 
+that of silicon dioxide (CTE = 0.5 ppm/K). The thermal mis-
+match effect between the heterogeneous materials causes the 
+copper structure to expand radially when heated, resulting 
+in solid-state diffusion bonding. The schematic microscopic 
+mechanism in Fig. 7a, b reveals that the copper atom breaks 
+through the barrier and spreads to form a continuous metal-
+lic phase under thermally activated conditions. The creep 
+behavior then initiated during the pressurization phase can 
+be equated to a spherical contact model. The following sec-
+tion will focus on the possible physical mechanisms of creep 
+deformation under stress.
+The creep deformation mechanism primarily describes 
+how copper atoms diffuse [59] from high-stress regions to 
+low-stress regions under compressive stress, thereby alter-
+ing the morphology of voids and the bonding fraction [58]. 
+Figure 7c shows the cross-sectional schematic of a section of 
+the bonding interface. Figure 7d shows the view from above 
+of a portion of the bonding interface.
+	 (i)	 Calculation of elastic strain
+Fig. 7   Illustration of the key 
+physical mechanisms; thermal 
+expansion diffusion and Creep 
+deformation mechanism. a 
+Heating process. b Pressuriza-
+tion process. c Cross-sectional 
+schematic of a section of the 
+bonding interface. d View from 
+above of a portion of the bond-
+ing interface [58]
+
+[Page 10]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 10 of 23
+	
+	   The elastic strain (ε) is calculated using the follow-
+ing formula:
+	 	
+ 
+where:
+–	 σ represents the consistent compressive stress;
+–	 Y represents Young’s modulus for copper;
+–	 Δh represents the variation in thickness of the copper 
+film when compressed;
+–	 h is the total thickness of the copper film (1.6 µm).
+	 (ii)	 Calculation of strained volume
+	
+	   The strained volume refers to the volume of the 
+copper film that undergoes deformation under com-
+pressive stress. It can be calculated using the follow-
+ing formula:
+	 	
+ 
+where the contact area (A) is calculated as follows:
+	
+	   Consequently, the volume experiencing strain can 
+be described as follows:
+	
+	   Here:
+–	 l is the mean distance between the center of the con-
+tact area and the center of the void area;
+–	 r refers to the ratio between the void radius and the 
+radius of the contact region (r < 1).
+	 (iii)	 Calculation of void volume change (ΔVvoid)
+	
+	   Based on the change in void radius caused by creep 
+deformation, the void volume change can be calcu-
+lated as follows:
+	 	
+ 
+where lr′ is the new void radius after creep deforma-
+tion. By aligning the strained volume with the change 
+in void volume, we obtain:
+	
+	   Further derivation yields:
+(1)
+휀= 휎
+Y = Δh
+h
+(2)
+Vstrained = A ⋅Δh
+(3)
+A = π ⋅
+(
+l2 −(rl)
+2)
+(4)
+Vstrained = π(1 −r2)l2Δh
+(5)
+ΔVvoid =
+(4π
+3
+)[
+(lr)3 −(lr)3]
+.
+(6)
+π(1 −r2)l2Δh =
+(4휋
+3
+)[
+(lr)3 −(lr)3]
+	 (iv)	 Calculation of bonding fraction (BF)
+	
+	   The BF can be calculated using the formula:
+From the above derivation, it can be seen that as the 
+compressive stress increases, Δh increases, leading to a 
+decrease in r′ and an increase in BF. This explains why 
+higher compressive stress can enhance the BF. Accord-
+ing to Lu et al. [58] this is the first quantitative correla-
+tion between compressive stress parameters and metallic 
+bonding interface quality, providing direct experimental 
+evidence for the optimization of microelectronic packaging 
+processes. Theoretical simulations indicate that implement-
+ing gradient compressive stress field designs could enhance 
+interfacial reliability in 3D heterogeneous integration pack-
+aging by approximately 40%, which holds substantial engi-
+neering significance for enabling wafer-level 3D stacking 
+of sub-5-nm node chips. Furthermore, we also focused on 
+the trends regarding twinned copper. The study by Liu et al. 
+[60] observes that at the nanoscale, copper exhibits the fast-
+est surface diffusion rate on the (111) crystal orientation, 
+which is crucial for achieving low-temperature copper–cop-
+per bonding. By electrochemically depositing nano-twinned 
+copper (nt-Cu) structures, the proportion of (111) oriented 
+grains can be significantly increased, enabling effective 
+copper–copper bonding at temperatures below 250 °C. At 
+the nanoscale, the surface diffusion behavior of copper sig-
+nificantly influences its bonding performance. Research has 
+found that the surface diffusion rate of copper on the (111) 
+crystal orientation is faster compared to other orientations 
+such as (100) and (110). This difference in diffusion rates is 
+primarily attributed to the close arrangement of atoms on the 
+(111) plane and the characteristics of interatomic bonding.
+4  Integration technology
+4.1  Low‑temperature passivation bonding 
+technology
+The use of low-temperature [61] bonding can effectively 
+mitigate issues such as thermal migration, warpage, and 
+alignment deviations caused by thermal stress. Jeon et al. 
+[62] present a low-temperature Cu–Cu direct bonding 
+technology enabled by a ruthenium (Ru) passivation layer, 
+addressing the challenges of high-temperature require-
+ments and copper oxidation in conventional Cu–Cu bond-
+ing. The research team successfully achieved Cu–Cu 
+direct bonding at temperatures as low as 200–300 °C by 
+(7)
+(r)3 = r3 −[3(1 −r2)Δh]
+4l
+(8)
+BF = 1 −r
+
+[Page 11]
+Moore and More            (2025) 2:18 	
+Page 11 of 23 
+   18 
+covering the copper surface with a 6-nm-thick Ru layer. 
+The bonding was validated for high reliability through 
+temperature cycling tests ranging from −45 °C to 125 
+°C. In addition, Tsai et al. [63] conducted research on the 
+procedure for bonding electrochemical copper deposition 
+(ECD) copper pillars to copper pillars using palladium 
+passivation, as illustrated in Fig. 8a. Another research 
+paper explored using silver [44], a cost-effective precious 
+metal, for metal passivation to accomplish chip-scale cop-
+per–copper bonding within 3 min. This study elucidates, 
+for the first time, the interdiffusion mechanism of copper 
+in a low-temperature passivation environment through a 
+grain boundary diffusion model, revealing that the grain 
+refinement of the passivation film significantly promotes 
+the migration of copper atoms by increasing diffusion 
+pathways. Experimental results confirmed that control-
+ling the microstructural features of the silver passivation 
+layer using a sputtering process can effectively enhance 
+the interfacial properties and long-term stability of copper 
+interconnect structures when the grain size is optimized 
+to the sub-micron level. The material characterization 
+results illustrated (see Fig. 8), where transmission electron 
+microscope images correlate with elemental distribution 
+maps, clearly reveal the degree of interfacial fusion and 
+Fig. 8   a Schematic of the process flow for ECD Cu pillars to Cu pil-
+lars bonding with Pd passivation. b The TEM image illustrates the 
+bonding structure with Ag passivation. c The EDX composition pro-
+file from line scanning of the same structure. d The A TEM image 
+illustrates the bonding structure with Ag passivation, accompanied by 
+EDX composition and map scans for e Ti, f Cu, and g Ag [44, 62–64]
+
+[Page 12]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 12 of 23
+the trajectories of elemental diffusion, and Fig. 8b presents 
+the high-resolution TEM (HRTEM) image of the contin-
+uous Cu–Cu bonding interface, showing no gaps at the 
+bonding interface. Figure 8b shows the TEM image illus-
+trating the bonding structure with Ag passivation, while 
+Fig. 8c shows the Energy-dispersive X-ray spectroscopy 
+(EDX) composition profile from line scanning of the same 
+structure.
+Figure 8d shows a TEM image illustrating the bonding 
+structure with Ag passivation, accompanied by EDX com-
+position and map scans for Ti (see Fig. 8e), Cu (see Fig. 8f), 
+and Ag (see Fig. 8g). This work provides a new solution 
+for low-temperature, high-reliability 3D heterogeneous 
+integration (3D HI) technologies, holding significant prac-
+tical value. Moreover, some experts have also proposed the 
+method of using Ti [64] or other metals to deposit passiva-
+tion layers on the surface of copper.
+This paper summarizes various methods used for Cu–Cu 
+bonding in recent years, as well as the comparison of bond-
+ing conditions and bond strengths among these methods, as 
+shown in Table 1. Traditional Cu–Cu TCB can be achieved 
+at 400 °C but faces two major issues: first, high temperatures 
+can easily induce copper diffusion, leading to device failure; 
+second, the bond strength achieved solely through thermo-
+compression is relatively low and insufficient to meet appli-
+cation requirements. Therefore, researchers have begun to 
+explore low-temperature bonding processes. Although many 
+laboratory techniques can achieve low-temperature bonding, 
+most are not suitable for large-scale production. For exam-
+ple, methods such as preparing HD-Cu or nanocrystalline 
+copper to enhance copper diffusion are not only complex 
+and costly but also unsuitable for mass production. Pillar-
+concave bonding can quickly achieve low-temperature bond-
+ing but requires extremely high pressure, which poses high 
+demands on equipment and is prone to damage. The method 
+of injecting formic acid vapor can bond quickly but faces 
+challenges in gas flow control and high equipment require-
+ments during actual production. Methods such as passiva-
+tion layers, self-assembled monolayers, and indirect bond-
+ing introduce additional materials and complex processes, 
+resulting in high costs and low yields. Ultrasonic bonding, 
+although capable of achieving low-temperature bonding in 
+a short time, demands high surface flatness of the wafer and 
+is complicated by the high hardness and rapid oxidation rate 
+of copper, which increase the bonding difficulty.
+4.2  Low‑temperature Cu/SiO2 hybrid bonding 
+technology
+For fine-pitch applications, bump-free Cu/SiO₂ intercon-
+nects are the most promising HB structures, achievable 
+through DBI or hot-pressed bonding (TCB) techniques. This 
+technology was developed by Ziptronix and is suitable for 
+scalable HB processes [49]. The results show that DBI can 
+reduce the interfacial parasitic capacitance by 80% in the 
+spacing range below 20 μm compared with the traditional 
+bumping process. It has been further demonstrated that the 
+interconnect pitch can be scaled to less than 10 μm [70, 71], 
+and the low-temperature HB process consists of two key 
+steps, as shown in Fig. 9a, b. According to the analysis of 
+the physical mechanism above, the direct bonding between 
+SiO₂ at room temperature can be realized by hydrophilic 
+modification of the surface. The copper–inter–copper bond-
+ing is then completed through a batch annealing method at 
+temperatures ranging from 200 °C to 400 °C. The annealing 
+heating rate should be limited to less than 5 °C/min to avoid 
+microcrack defects at the edge of the copper pillar. Although 
+this method has high production efficiency, the interface 
+quality of SiO₂ is easily affected by both residual moisture 
+and copper thermal expansion stress during annealing [72].
+Additionally, another nanotwin Cu structure for potential 
+Cu/SiO2 HB utilizes the excellent diffusion traits of (111) 
+crystalline copper, and the nanotwin copper film can be 
+effectively bonded after 1 h of treatment at 200 °C. Based on 
+this property, Chiu et al. [73] developed a composite struc-
+ture of nanotwin copper and silica for low-temperature HB 
+systems. Three morphologies were prepared and analyzed: 
+nanotwin copper full-coverage films, and disc-shaped and 
+pad-like hybrid structures (see Fig. 9c–j). SAT and scan-
+ning electron microscopy (SEM) characterization confirmed 
+that the nanotwin copper film with 99% (111) preferential 
+orientation can complete high-quality bonding at 250 °C. 
+Table 1   Cu–Cu bonding 
+conditions
+Material
+Tempera-
+ture (°C)
+Pressure
+Time (min)
+Strength
+Method
+Ref.
+Cu–Cu
+400
+25 KN
+30
+4.93 J/m2
+Thermocompression bonding
+[54]
+Cu–Cu
+200
+0.69 MPa
+60
+4.3 MPa
+Thermocompression bonding
+[60]
+Cu–Cu
+200
+100 N
+1
+–
+Pillar-concave structure
+[65]
+Cu–Cu
+260
+0.9 MPa
+60
+62.6 MPa
+Surface-activated bonding
+[66]
+Cu–Cu
+160
+2.5 Bar
+50
+–
+Passivation layer
+[67]
+Cu–Cu
+150
+10 MPa
+60
+15 MPa
+Cu–Cu indirect bonding
+[68]
+Cu–Cu
+250
+20 MPa
+5
+14.4 MPa
+Cu–Cu indirect bonding
+[69]
+
+[Page 13]
+Moore and More            (2025) 2:18 	
+Page 13 of 23 
+   18 
+The orientation ratio of copper grains (111) in the disc and 
+pad mixed structure was 75.1% and 99%, respectively. The 
+results show that the pad-like composite structure shows sig-
+nificant advantages in 250 °C bonding, but the synergistic 
+bonding mechanism of nanotwin copper and silicon dioxide 
+still needs to be further verified.
+4.3  Wafer‑level structure GaN/Si heterogeneous 
+integration
+Ren et al. [74] innovatively combined high-voltage gallium 
+nitride (GaN) high electron mobility transistor (HEMT) 
+devices and low-voltage silicon metal–oxide–semiconduc-
+tor field-effect transistors (MOSFETs) to form a co-source 
+and co-gate topology, and used device-level co-optimization 
+to significantly suppress the parasitic effects of intercon-
+nect. However, this architecture requires a redesign of the 
+process integration, such as ion implantation and annealing 
+steps in the CMOS source-drain region after the comple-
+tion of the GaN epitaxy process, so as to reduce the effect 
+of high-temperature heat treatment on the dopant diffusion 
+depth and concentration gradient. Limited by the integration 
+complexity and density constraints of GaN devices, and the 
+fact that HEMT devices can only realize N-type transistor 
+functions, the device type is simplified, and it is difficult to 
+meet the design requirements of ICs. On the other hand, the 
+compatibility of high-voltage and low-voltage components 
+in the power system needs to be solved urgently.
+In response to the above challenges, Du et  al. [75] 
+took the lead in developing a 20 V GaN/Si CMOS 1P2M 
+monolithic heterogeneous integration technology based on a 
+6-inch (111) silicon substrate, and systematically completed 
+process development and model construction. In this study, 
+the growth of high-quality GaN heterostructures is achieved 
+through the graphical selective epitaxy technology, the 
+problem of GaN/Si-based P-well CMOS process matching 
+is innovatively solved, and the platform-based device archi-
+tecture is constructed, which breaks through the multi-level 
+technical bottleneck in the integration of large-size silicon-
+based CMOS and GaN chips, and successfully develops 
+core components such as high-performance bulk silicon PN 
+diodes, bipolar transistors (PNP/NPN), and AlGaN/GaN 
+HEMT. By solving the key problems such as resistance and 
+capacity (RC)
+parasitic effect and stress coupling mechanism, a new 
+path is opened up for the design of gallium nitride ICs. The 
+research team also built a heterogeneous integrated tech-
+nology verification platform that integrates silicon-based 
+CMOS and gallium nitride processes.
+Ren et al. [76] discussed the use of integrated GaN and 
+Si interconnects to achieve heterogeneous power distribu-
+tion in large-scale chiplet-based systems. By employing 
+a GaN-Si interconnect fabric with sub-10 μm bond pitch, 
+Fig. 10a comprehensively demonstrates the application of 
+the integrated GaN/Si interconnect fabric in a large-chip 
+system and its heterogeneous power delivery capability 
+at less than 10 μm bond pitch through a clear layout and 
+detailed annotation. The system enables efficient power 
+management and heat dispersion to support HPC and 
+high-density integration. Figure 10b also shows the 3D 
+Fig. 9   Illustrative diagram of 
+the DBI technology’s dual-step 
+process. a Oxide bonding at 
+room temperature. b Metal 
+interconnect annealing; electron 
+backscatter diffraction (EBSD) 
+orientation image maps of the 
+c Cu seed layer and d nt-Cu 
+blanket film. e SEM image of 
+dish-shaped nt-Cu fabricated 
+by conformal plating and f 
+pad-shaped nt-Cu post-CMP. 
+g SEM and h EBSD images of 
+the dish-shaped nt-Cu surface. 
+i SEM and j EBSD images of 
+the pad-shaped nt-Cu surface 
+[70, 73]
+
+[Page 14]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 14 of 23
+EM image of GaN/Si CMOS. Figure 10c visually dem-
+onstrates the performance advantages of the co-source 
+co-grid structure in a heterogeneous integrated system 
+by comparing the gain with frequency, which makes full 
+use of the high electron mobility of GaN materials and 
+the mature process of Si CMOS technology to realize 
+the complementary advantages of heterogeneous materi-
+als, and provides strong support for high-performance, 
+low-power RF front-end systems. Through detailed data 
+analysis, the paper demonstrates the significant advan-
+tages of integrated GaN/Si interconnect structures in 
+terms of power distribution efficiency, thermal manage-
+ment, and signal integrity. Experimental results show that 
+the system using this technology can improve the power 
+distribution efficiency by more than 20% while reducing 
+the thermal resistance by 30% compared with the tra-
+ditional method. In addition, the data analysis revealed 
+the critical impact of bond pitch on system performance, 
+pointing out that sub-10 μm bond pitch was a key factor in 
+achieving these improvements. These data not only verify 
+the accuracy of the theoretical model, but also provide 
+an important reference for subsequent system design and 
+optimization.
+4.4  Other integration technologies
+At present, a three-dimensional multilayer bonding tech-
+nology using Cu–Cu hybrid wafer bonding has also been 
+developed. By applying robust Cu–Cu bonding in conjunc-
+tion with the TSV process, a wafer-level multi-stacking 
+structure was successfully demonstrated. This achievement 
+relies on a comprehensive understanding of the bonding 
+interface, TSV, and edge engineering to avoid defects and 
+ensure high yields. Chemical mechanical polishing (CMP) 
+and surface treatment significantly impact the Cu/dielec-
+tric HB surface, particularly the planarization of the wafer 
+back, which is a critical technology for subsequent robust 
+bonding. Moreover, improvements in etching during TSV 
+formation and considerations for integrated edge process-
+ing have optimized engineering aspects, enhancing bond-
+ing quality and reproducibility, leading to a high yield of 
+electrical connections, including those at the wafer edges. 
+This technology can be applied in various fields, includ-
+ing sensors, memory devices, logic devices, and their 
+combinations.
+5  Breakthroughs in hybrid bonding 
+technology
+In Cu–Cu HB manufacturing, the control of the bonding 
+environment is one of the core challenges, and the key to 
+this is to achieve a flat and contamination-free dielectric 
+surface through CMP [77]. In order to reduce the risk of 
+crystal shape and warpage during the bonding process, it is 
+important to develop dielectric materials that are resistant to 
+short-time annealing at low temperatures, as they need to be 
+compatible with lower annealing temperatures and shorter 
+process cycles. In addition, optimization of the ECD process 
+can improve the overall bonding efficiency by adjusting the 
+uniformity of the copper filling (e.g., inhibiting the forma-
+tion of microvoids) and reducing the thermal budget required 
+for annealing.
+Fig. 10   a Illustration of the heterogeneous structure of GaN/Si CMOS. b 3D EM image of GaN/Si CMOS. c Driver and GaN losses vs. load cur-
+rent; efficiency can be improved by using silicon interposer and Cu–Cu bonding
+
+[Page 15]
+Moore and More            (2025) 2:18 	
+Page 15 of 23 
+   18 
+In Cu–Cu HB, achieving flat and clean dielectric sur-
+faces is a crucial step in the manufacturing process. The 
+optimization of CMP technology is essential to meet this 
+requirement [78]. CMP not only removes surface roughness 
+but also achieves sub-nanometer surface planarity, which 
+is vital for high-quality bonding. Research has shown that 
+developing a three-step CMP process can enhance planari-
+zation accuracy, thereby improving the bonding interface 
+quality. For example, Roy et al. [79] have demonstrated that 
+developing a three-step CMP process can enhance planariza-
+tion accuracy, thereby improving the bonding interface qual-
+ity. In the study, a three-step CMP process was employed, 
+which optimized various CMP conditions to achieve precise 
+control over Cu dishing and surface roughness. This process 
+combined high-pressure polishing (HPP) and low-pressure 
+polishing (LPP), and by precisely controlling the polishing 
+time, significantly reduced the dishing of Cu pads. Table 2 
+presents the detailed information of the three process reci-
+pes, namely recipe 1, recipe 2, and recipe 3, each featur-
+ing distinct applied pressures and fixed durations in their 
+respective sub-steps. Figure 11a lustrates the effect of CMP 
+process parameters on the removal characteristics of bonded 
+pad materials by analyzing the Cu removal rate and etch 
+rate (ER) values at different polishing slurry flow rates and 
+pad pressures. This is critical for optimizing the CMP pro-
+cess to achieve high-precision Cu bonding pad and barrier 
+layer patterning. By adjusting these parameters, the removal 
+rate of the barrier layer can be effectively controlled while 
+ensuring the Cu removal efficiency, thereby improving the 
+reliability and yield of the wafer-to-wafer bond. Figure 11b, 
+c shows that the wafer is consistent between the center and 
+edge of the beam using an optimized process 3. Bonded 
+wafers perform well, with more than 90% of the bonded area 
+and no visible voids. This study provides valuable reference 
+and guidance for the development of more advanced CMP 
+processes. In the future, finer Cu bonding pads and smaller-
+pitch CMP processes can be further explored to meet the 
+needs of semiconductor device manufacturing with higher 
+integration.
+For example, in the study by Lee et al. [77], through 
+the optimization of the three-step CMP process, signifi-
+cant improvements in surface planarity and electrical per-
+formance revealed by TSV were achieved, while overall 
+Table 2   CMP process parameters [79]
+CMP chemical mechanical polishing
+No. CMP step
+Process 1
+Process 2
+Process 3
+1
+Bulk planarization
+High-pressure 
+polish 
+(HPP)
+HPP
+HPP
+2
+Barrier polish
+HPP
+HPP
+Low-pressure 
+polish 
+(LPP)
+3
+Barrier over polish 
+(by fixed time)
+HPP (50 s)
+LPP (50 s)
+LPP (10 s)
+Fig. 11   Schematic illustration of the fine-pitch Cu bond pad device under different conditions of CMP. a Process 1. b Process 2. c Process 3 [79]
+
+[Page 16]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 16 of 23
+yield and reliability were enhanced. A significant tech-
+nological advancement is the development of dielectric 
+materials that endure lower annealing temperatures and 
+shorter times to reduce the risk of wafer deformation and 
+warpage during bonding. Traditional Cu–Cu bonding 
+requires relatively high annealing temperatures (typically 
+around 300 °C), which can lead to wafer warpage and 
+stress concentration [78]. By optimizing dielectric mate-
+rials and bonding processes, researchers have successfully 
+reduced the annealing temperature to 150–200 °C while 
+also shortening the annealing time. This low-temperature 
+bonding technology not only reduces thermal stress but 
+also enhances bonding efficiency. After conducting an 
+annealing experiment at 200 °C for 2 hours, researchers 
+shortened the annealing time to 1 hour for several samples 
+and conducted long-term testing at 200 ℃ over several 
+months. These samples were sourced from multiple dif-
+ferent assembly batches. As shown in Table 3, out of the 
+five tested samples, four achieved a perfect electrical test 
+yield on void-free chip-to-wafer pairs, while one sample 
+group reached a 92% yield. This result indicates that the 
+experiment of shortening the annealing time has achieved 
+significant success.
+6  Current application domains
+As semiconductor devices continue to evolve to higher den-
+sity, lower power consumption, and heterogeneous integra-
+tion, advanced packaging technologies (such as 3D ICs and 
+chiplet architectures) have become one of the core paths to 
+break through the bottleneck of Moore’s law. Under this 
+trend, Cu–Cu HB has become a key technology for high-
+bandwidth and low-latency chip system integration due to 
+its ultra-high interconnect density (<1 μm pitch), excellent 
+electrothermal performance, and heterogeneous material 
+compatibility. Especially in the fields of 5G communica-
+tions, HPC, and AI chips, Cu–Cu HB significantly reduces 
+parasitic resistance (<10 mΩ) and thermal resistance by 
+replacing traditional solder bumps with direct copper inter-
+connects, providing physical support for the co-optimization 
+of heterogeneous chips such as logic cells, memories, and 
+optoelectronic devices.
+6.1  Application fields
+6.1.1  High‑bandwidth memory (HBM)
+Cu–Cu hybrid bonding technology is actively developed 
+and adopted in HBM applications. By stacking multiple 
+memory chips and bonding them through Cu–Cu HB, high-
+bandwidth and low-latency memory access is achieved.
+6.1.2  3D chip integration
+Chips with different functions, such as processors, caches, 
+and logic chips, are vertically stacked and interconnected 
+through Cu–Cu HB. This allows for more functional inte-
+gration within limited space, enhancing the overall system 
+performance and energy efficiency.
+6.1.3  CMOS image sensors
+Cu–Cu HB technology is used to bond pixel array chips with 
+signal-processing chips, resulting in a more compact sensor 
+structure. This improves image quality and processing speed 
+while facilitating the miniaturization of camera modules.
+Sony was the first to apply HB technology to contact 
+image sensor (CIS), addressing the challenges of high-den-
+sity pixels and electrical signal processing. In 2016, Sony 
+launched the IMX260 image sensor based on Cu/SiO₂ HB 
+technology [80], which was used in the Samsung Galaxy 
+S7. The process included wafer activation, pre-bonding, two 
+annealing steps, and high-temperature bonding [81], achiev-
+ing excellent electrical reliability and image performance. In 
+the past 2 years, Sony has reduced the interconnect pitch to 
+below 2 μm [82], driving the miniaturization and high-per-
+formance of CIS image sensors. Figure 12 shows Sony’s BI-
+SIC HB process flow: (i) TSV-free 3D CIS and processor IC 
+integration (HB); (ii) SEM image of a 3D CIS mixed bonded 
+to a processor IC; (iii) three-chip stacked (HB) structure. In 
+2018, based on wafer-level Cu/SiO₂ HB technology, com-
+panies such as Teledyne in the United States achieved het-
+erogeneous integration of 250 nm InP heterojunction bipolar 
+transistor (HBT) and 130 nm Si CMOS [83], demonstrat-
+ing high-performance millimeter-wave ICs. The InP HBT 
+wafer was processed with an Au/benzocyclobutene (BCB) 
+interconnect layer and prepared with a SiO₂ surface embed-
+ded with micro-copper blocks. The Si CMOS wafer featured 
+six layers of copper interconnect wiring. After bonding, the 
+CMOS wafer substrate was thinned to 10 μm and electri-
+cally connected through Al pads. Tests showed that the HB 
+process did not affect the performance of the transistors.
+Table 3   Results of electrical testing on design A samples annealed at 
+200 °C for an hour [78]
+Build
+Sample ID
+Annealing tem-
+perature (°C)
+#Die pass/# 
+Die no defect
+% Yield
+1
+#1–1
+200
+24/26
+92
+2
+#2–1
+200
+20/20
+100
+3
+#3–1
+200
+19/19
+100
+3
+#3–2
+200
+13/13
+100
+3
+#3–3
+200
+15/15
+100
+
+[Page 17]
+Moore and More            (2025) 2:18 	
+Page 17 of 23 
+   18 
+Japanese companies such as Toshiba and Mitsubishi have 
+been actively working on improving the interfacial reliability 
+of HB technology by introducing novel auxiliary materials. 
+In 2018, Toshiba developed a HB process based on an ultra-
+thin manganese (Mn) film [84]. This process begins with the 
+deposition of a 300-nm-thick silicon dioxide (SiO₂) layer on 
+the substrate using plasma-enhanced chemical vapor deposi-
+tion (PECVD), followed by the deposition of a 2-nm-thick 
+Mn film via ion plating. After activation treatment with 
+nitrogen (N₂) plasma, the bonding process is carried out at 
+temperatures ranging from 300 °C to 400 °C and a pressure 
+of 2 MPa for 2 hours. Tensile test results indicate that at tem-
+peratures of 350 °C and above, the Mn–Mn interface exhib-
+its sufficient mechanical strength to effectively suppress the 
+diffusion behavior between copper (Cu) and SiO₂, thereby 
+significantly reducing the risk of electromigration. In 2021, 
+Showa Denko Materials Co., Ltd [85] in Japan developed 
+a polymer-to-polymer direct bonding technology based on 
+photosensitive polymers. The process involved spin-coating 
+a 5–10 µm thick layer of polyimide (PI) on a 200 mm silicon 
+wafer, followed by pre-baking, ultraviolet (UV) exposure 
+(300–600 mJ/cm2), and developing in cyclopentanone. The 
+PI was then cured for 2 hours each at 200 °C and 375 °C, 
+and the surface roughness was reduced by CMP. Finally, the 
+wafers were bonded at 350 °C for 1 hour. SEM analysis of 
+the bonded interface revealed no gaps or voids, indicating 
+high-quality bonding. In 2022, the company completed the 
+design and experimental validation of Cu/PI HB samples 
+[86]. The design of Cu protrusions took into account the 
+higher CTE of PI relative to Cu. The surfaces underwent 
+treatment with a 5% citric or ascorbic acid solution, followed 
+by a rinse with deionized water and drying with N₂, before 
+bonding. The bonding took place at 300 °C and 0.8 MPa in 
+a nitrogen/hydrogen environment for 60 min. Focused ion 
+beam (FIB)-SEM observations showed a high-quality bond-
+ing interface, with tests indicating optimal bonding quality 
+at a bonding pressure of 5 MPa.
+Samsung and SK Hynix are actively promoting the appli-
+cation of Cu–Cu hybrid bonding technology in HBM, aiming 
+to achieve higher stacking density, reduce power consump-
+tion, and enhance performance. Samsung’s HBM3 Icebolt 
+features 12 layers of stacked 10 nm class 16 Gb dynamic 
+random access memory (DRAM) chips with a capacity of 
+up to 24 GB and a data transfer rate of 6.4 Gbps, achieving 
+an astonishing bandwidth of 819 GB/s. Compared to tradi-
+tional TSV technology, HB technology significantly reduces 
+power consumption and enhances energy efficiency, leading 
+to a 35% reduction in power consumption. This technology 
+Fig. 12   Sony’s CMOS image sensor manufactured by hybrid bonding. a TSV-free 3D CIS and processor IC integration (hybrid bonding). b 
+SEM image of a 3D CIS mixed bonded to a processor integrated circuit. c Three-chip stacked (hybrid bonding) structure
+
+[Page 18]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 18 of 23
+effectively lowers signal transmission losses through direct 
+copper-to-copper connections and has also shown significant 
+improvements in thermal management.
+Current HB technology demonstrates significant advan-
+tages in improving chip integration density, enhancing data 
+transmission bandwidth, and optimizing thermal manage-
+ment, particularly showing promising application prospects 
+in fields such as HBM, 3D chip integration, and CMOS 
+image sensors. However, several technical bottlenecks 
+remain, including interface reliability, process complex-
+ity, material compatibility, and cost control for large-scale 
+production. Although progress has been made through the 
+introduction of novel auxiliary materials and optimization 
+of process parameters (such as surface treatment and tem-
+perature control), further breakthroughs are still needed to 
+achieve higher precision and lower-cost mass production.
+7  Conclusions
+This review centers on the core theme of “Cu–Cu HB tech-
+nology,” systematically constructing a comprehensive frame-
+work spanning from physical mechanisms to macroscopic 
+applications. It aims to provide a thorough overview of the 
+research progress, critical technological breakthroughs, and 
+future potential of this technology. Adopting a progressive 
+logic of “theory–process–application–trend,” the review 
+establishes a panoramic perspective from microscopic mech-
+anisms to macroscopic industrial applications, emphasizing 
+both technical depth and practical implementation. This 
+approach offers a clear roadmap for subsequent research, 
+presenting a holistic view of Cu–Cu HB technology, deliv-
+ering a systematic summary of its current advancements 
+while charting directions for future breakthroughs. As an 
+advanced interconnect technology, Cu–Cu HB demonstrates 
+significant advantages in HPC, high-speed communication, 
+and advanced packaging. By enabling direct copper-to-
+copper bonding, it achieves sub-micron or even nanoscale 
+interconnect pitches, substantially enhancing chip integra-
+tion density and data transmission bandwidth while reducing 
+signal latency and energy loss. Furthermore, HB drives the 
+development of 2.5D and 3D packaging technologies, facili-
+tating vertical chip stacking to improve system performance 
+and energy efficiency. As shown in Fig. 13, in future Cu–Cu 
+mixed bonding will develop toward low-temperature bond-
+ing and high integration, while being extensively applied 
+in heterogeneous integration and high-bandwidth storage 
+and AI chips to meet the demands for high density and low 
+latency. In summary, Cu–Cu HB technology is poised to 
+continue driving electronic devices toward higher perfor-
+mance, integration density, and reliability, solidifying its 
+role as a cornerstone of next-generation microelectronics.
+Acknowledgements  We would like to thank all authors for their valu-
+able contributions to this research.
+Authors’ contributions  Bing Jiang: writing-original draft; data cura-
+tion; formal analysis; investigation; writing-review and editing. Yutong 
+Wu: data curation; formal analysis; software. Zhixiang Zhong: data 
+curation; formal analysis; investigation. Kangkai Fan: investigation; 
+resource; software. Qiubao Lin: writing-review and editing. Jianbo 
+Liang: writing-review and editing; supervision. Hezhou Liu: writing-
+review and editing; supervision. Xinke Liu: funding acquisition; project 
+administration; writing-original draft; writing-review and editing.
+Funding  This study was financially supported by the National 
+Key Research and Development Program of China (Grant No. 
+2024YFE0205100), Guangdong Major Project of Basic and Applied 
+Basic Research (Grant No. 2023B0303000012), Guangdong Sci-
+ence Foundation for Distinguished Young Scholars (Grant No. 
+2022B1515020073), Shenzhen Science and Technology Program 
+(Grant No. KJZD20240903102738050), State Key Laboratory of Radio 
+Frequency Heterogeneous Integration (Independent Scientific Research 
+Fig. 13   Cu–Cu hybrid bond-
+ing technology will facilitate 
+integrated technology in the 
+future, advancing AI chips and 
+high-bandwidth memory
+
+[Page 19]
+Moore and More            (2025) 2:18 	
+Page 19 of 23 
+   18 
+Program No. 2025007) and the Scientific Instrument Developing Pro-
+ject of ShenZhen University (Grant No. 2024YQ003).
+Data availability  Data sharing not applicable to this article as no data-
+sets were generated or analyzed during the current study.
+Declarations 
+Ethics approval and consent to participate  This manuscript does not 
+involve human or animal research.
+Competing interests  The authors have no conflicts of interest to 
+declare.
+Open Access  This article is licensed under a Creative Commons Attri-
+bution 4.0 International License, which permits use, sharing, adapta-
+tion, distribution and reproduction in any medium or format, as long 
+as you give appropriate credit to the original author(s) and the source, 
+provide a link to the Creative Commons licence, and indicate if changes 
+were made. The images or other third party material in this article are 
+included in the article’s Creative Commons licence, unless indicated 
+otherwise in a credit line to the material. If material is not included in 
+the article’s Creative Commons licence and your intended use is not 
+permitted by statutory regulation or exceeds the permitted use, you will 
+need to obtain permission directly from the copyright holder. To view a 
+copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+References
+	 1.	 Knickerbocker JU, Andry PS, Dang PS, Horton RR, Patel CS, 
+Polastre RJ et al (2008) 3D silicon integration. In: 2008 58th 
+Electronic Components and Technology Conference, Lake Buena 
+Vista, FL, USA, May 2008. IEEE, pp 538–543. https://​doi.​org/​10.​
+1109/​ECTC.​2008.​45500​25
+	 2.	 Behera A (2022) Advanced materials: an introduction to mod-
+ern materials science. Springer International Publishing, Cham. 
+https://​doi.​org/​10.​1007/​978-3-​030-​80359-9
+	 3.	 Wynand L, Saurabh S, Jassem A, Jaco P (2018) Extending 
+Moore’s law through advanced semiconductor design and pro-
+cessing techniques, 1st ed. CRC Press/Taylor & Francis Group, 
+Boca Raton, FL. https://​doi.​org/​10.​1201/​97813​51248​679
+	 4.	 Manley M, Victor A, Park H, Kaul A, Kathaperumal M, Bakir MS 
+(2024) Heterogeneous integration technologies for artificial intel-
+ligence applications. IEEE J Explor Solid-State Comput Devices 
+Circuits 10:89–97. https://​doi.​org/​10.​1109/​JXCDC.​2024.​34849​58
+	 5.	 Yurtsever E, Lambert J, Carballo A, Takeda K (2020) A survey 
+of autonomous driving: common practices and emerging tech-
+nologies. IEEE Access 8:58443–58469. https://​doi.​org/​10.​1109/​
+ACCESS.​2020.​29831​49
+	 6.	 Levinson J, Askeland J, Becker J, Dolson J, Held D, Kammel 
+S et al (2011) Towards fully autonomous driving: systems and 
+algorithms. In: 2011 IEEE Intelligent Vehicles Symposium (IV), 
+Baden-Baden, Germany, June 2011. IEEE, pp 163–168. https://​
+doi.​org/​10.​1109/​IVS.​2011.​59405​62
+	 7.	 Chen KN, Lee SH, Andry PS, Tsang CK, Topol AW, Lin YM 
+et al (2006) Structure, design and process control for Cu bonded 
+interconnects in 3D integrated circuits. In: 2006 International 
+Electron Devices Meeting, San Francisco, CA, USA, December 
+2006. IEEE, pp 1–4. https://​doi.​org/​10.​1109/​IEDM.​2006.​346785
+	 8.	 Viswanathan SM (2020) AI chips: new semiconductor era. Int J 
+Adv Res Sci Eng Technol 7(8):14687–14694
+	 9.	 Li B, Gu J, Jiang W (2019) Artificial intelligence (AI) chip tech-
+nology review. In: 2019 International Conference on Machine 
+Learning, Big Data and Business Intelligence (MLBDBI), Tai-
+yuan, China, November 2019. IEEE, pp 114–117. https://​doi.​org/​
+10.​1109/​MLBDB​I48998.​2019.​00028
+	10.	 Lambrechts JW, Sinha S, Sengupta K, Bimana A, Kadam S, 
+Bhandari S et al (2024) Intelligent integrated circuits and systems 
+for 5G/6G telecommunications. IEEE Access 12:21402–21419. 
+https://​doi.​org/​10.​1109/​ACCESS.​2024.​33616​56
+	11.	 Akarvardar K, Wong HSP (2023) Technology prospects for data-
+intensive computing. Proc IEEE 111(1):92–112. https://​doi.​org/​
+10.​1109/​JPROC.​2022.​32180​57
+	12.	 Liu F, Yu RR, Young AM, Doyle JP, Wang X, Shi L et al (2008) A 
+300-mm wafer-level three-dimensional integration scheme using 
+tungsten through-silicon via and hybrid Cu-adhesive bonding. In: 
+2008 IEEE International Electron Devices Meeting, San Fran-
+cisco, CA, USA, December 2008. IEEE, pp 1–4. https://​doi.​org/​
+10.​1109/​IEDM.​2008.​47967​62
+	13.	 Lau JH (2011) Overview and outlook of through-silicon via (TSV) 
+and 3D integrations. Microelectron Int 28(2):8–22. https://​doi.​org/​
+10.​1108/​13565​36111​11273​04
+	14.	 Shigetou A, Itoh T, Sawada K, Suga T (2008) Bumpless intercon-
+nect of 6-μm-pitch Cu electrodes at room temperature. IEEE Trans 
+Adv Packag 31(3):473–478. https://​doi.​org/​10.​1109/​TADVP.​
+2008.​920644
+	15.	 Smith A, Chapman E, Patel C, Swaminathan R, Wuu J, Huang T 
+et al (2024) 11.1 AMD InstinctTM MI300 series modular chiplet 
+package – HPC and AI accelerator for exa-class systems. In: 2024 
+IEEE International Solid-State Circuits Conference (ISSCC), San 
+Francisco, CA, USA, February 2024. IEEE, pp 490–492. https://​
+doi.​org/​10.​1109/​ISSCC​49657.​2024.​10454​441
+	16.	 Lau JH (2022) Recent advances and trends in advanced packag-
+ing. IEEE Trans Compon Packag Manufact Technol 12(2):228–
+252. https://​doi.​org/​10.​1109/​TCPMT.​2022.​31444​61
+	17.	 Ravichandran S, Yamada S, Park G, Chen HW, Shi T, Buch C 
+et al (2018) 2.5D glass panel embedded (GPE) packages with 
+better I/O density, performance, cost and reliability than current 
+silicon interposers and high-density fan-out packages. In: 2018 
+IEEE 68th Electronic Components and Technology Conference 
+(ECTC), San Diego, CA, May 2018. IEEE, pp 625–630. https://​
+doi.​org/​10.​1109/​ECTC.​2018.​00099
+	18.	 Kumar G, Bandyopadhyay T, Sukumaran V, Sundaram V, Lim 
+SK, Tummala R (2011) Ultra-high I/O density glass/silicon 
+interposers for high bandwidth smart mobile applications. In: 
+2011 IEEE 61st Electronic Components and Technology Con-
+ference (ECTC), Lake Buena Vista, FL, USA, May 2011. IEEE, 
+pp 217–223. https://​doi.​org/​10.​1109/​ECTC.​2011.​58985​16
+	19.	 Bajwa AA, Jangam SC, Pal S, Marathe N, Bai T, Fukushima 
+T et al (2017) Heterogeneous integration at fine pitch (≤ 10 
+µm) using thermal compression bonding. In: 2017 IEEE 67th 
+Electronic Components and Technology Conference (ECTC), 
+Orlando, FL, USA, May 2017. IEEE, pp 1276–1284. https://​doi.​
+org/​10.​1109/​ECTC.​2017.​240
+	20.	 Pei-Siang SL, Rao VS, Yin HW, Ching WL, Kripesh V, Lee C 
+et al (2008) Process development and reliability of microbumps. 
+In: 2008 10th Electronics Packaging Technology Conference, 
+Singapore, December 2008. IEEE, pp 367–372. https://​doi.​org/​
+10.​1109/​EPTC.​2008.​47634​62
+	21.	 Lin J, Chung CK, Lin CF, Liao A, Lu YJ, Chen JS et al (2020) 
+Scalable chiplet package using fan-out embedded bridge. 
+In: 2020 IEEE 70th Electronic Components and Technology 
+Conference (ECTC), Orlando, FL, USA, June 2020. IEEE, pp 
+14–18. https://​doi.​org/​10.​1109/​ECTC3​2862.​2020.​00015
+	22.	 Wong CL, How J (1997) Low cost flip chip bumping technolo-
+gies. In: Proceedings of the 1997 1st Electronic Packaging Tech-
+nology Conference (Cat. No.97TH8307), Singapore, October 
+
+[Page 20]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 20 of 23
+1997. IEEE, pp 244–250. https://​doi.​org/​10.​1109/​EPTC.​1997.​
+723917
+	23.	 Chen Y, Ko T, Ting K, Goel S, Patidar A, Tam K et al (2024) 
+Next generation TSMC-SoIC® platform for ultra-high bandwidth 
+HPC application. In: 2024 IEEE International Electron Devices 
+Meeting (IEDM), San Francisco, CA, USA, pp. 1–4. https://​doi.​
+org/​10.​1109/​IEDM5​0854.​2024.​10873​473
+	24.	 Tsai WS, Huang CY, Chung CK, Yu KH, Lin CF (2017) Genera-
+tional changes of flip chip interconnection technology. In: 2017 
+12th International Microsystems, Packaging, Assembly and Cir-
+cuits Technology Conference (IMPACT), Taipei, October 2017. 
+IEEE, pp 306–310. https://​doi.​org/​10.​1109/​IMPACT.​2017.​82559​
+55
+	25.	 Carson F, Ishibashi K, Yoon SW, Marimuthu PC, Shariff D (2010) 
+Development of super thin TSV PoP. In: 2010 IEEE CPMT Sym-
+posium Japan, Tokyo, Japan, August 2010. IEEE, pp 1–4. https://​
+doi.​org/​10.​1109/​CPMTS​YMPJ.​2010.​56796​52
+	26.	 Tanida K, Umemoto M, Tanaka N, Tomita Y, Takahashi K (2004) 
+Micro Cu bump interconnection on 3D chip stacking technology. 
+Jpn J Appl Phys 43(4S):2264. https://​doi.​org/​10.​1143/​JJAP.​43.​
+2264
+	27.	 Lee B, Park J, Jeon S, Kwon K, Lee H (2010) A study on the 
+bonding process of Cu bump/Sn/Cu bump bonding structure for 
+3D packaging applications. J Electrochem Soc 157(4):H420. 
+https://​doi.​org/​10.​1149/1.​33019​31
+	28.	 Wang Q, Yang X, Zhang Y, Ding Y (2011) A simple thermo-
+compression bonding setup for wire bonding interconnection 
+in pressure sensor silicon chip packaging. Microsyst Technol 
+17(10):1629. https://​doi.​org/​10.​1007/​s00542-​011-​1345-4
+	29.	 Murali S, Srikanth N, Wong YM, Vath CJ (2007) Fundamen-
+tals of thermo-sonic copper wire bonding in microelectronics 
+packaging. J Mater Sci 42(2):615–623. https://​doi.​org/​10.​1007/​
+s10853-​006-​1148-7
+	30.	 Harman G, Albers J (1977) The ultrasonic welding mechanism as 
+applied to aluminum-and gold-wire bonding in microelectronics. 
+IEEE Trans Parts Hybrids Packag 13(4):406–412. https://​doi.​org/​
+10.​1109/​TPHP.​1977.​11352​25
+	31.	 Lu K, Wang C, He H, Fan X, Chen F, Qi F et al (2024) Numerical 
+simulation and experimental investigation on heat transfer and 
+hydraulic characteristics of rectangular microchannel heat sinks 
+using high thermal conductivity diamond/copper composites. 
+Diam Relat Mater 147:111371. https://​doi.​org/​10.​1016/j.​diamo​
+nd.​2024.​111371
+	32.	 Luisier M, Lundstrom M, Antoniadis DA, Bokor J (2011) Ultimate 
+device scaling: intrinsic performance comparisons of carbon-
+based, InGaAs, and Si field-effect transistors for 5 nm gate length. 
+In: 2011 International Electron Devices Meeting, Washington, 
+DC, USA, December 2011. IEEE, pp 11.2.1–11.2.4. https://​doi.​
+org/​10.​1109/​IEDM.​2011.​61315​31
+	33.	 Sharma G, Rao VS, Kumar A, Ying LY, Houe KC, Lim S et al 
+(2011) Design and development of multi-die laterally placed and 
+vertically stacked embedded micro-wafer-level packages. IEEE 
+Trans Compon Packag Manuf Technol 1(1):52–59. https://​doi.​
+org/​10.​1109/​TCPMT.​2010.​21014​70
+	34.	 Robertazzi R, Scheurman M, Wordeman M, Tian S, Tyberg C 
+(2017) Analytical test of 3D integrated circuits. In: 2017 IEEE 
+International Test Conference (ITC), Fort Worth, TX, October 
+2017. IEEE, pp 1–10. https://​doi.​org/​10.​1109/​TEST.​2017.​82420​
+67
+	35.	 Chou RTS, Lau JH, Chen GCF, Huang JYC, Yang CCL, Liu HN 
+et al (2021) Reliability of chiplets heterogeneous integration on 
+2.3D hybrid substrate using solder joint and underfill. Int Sympos 
+Microelectron 2021(1):124–129. https://​doi.​org/​10.​4071/​1085-​
+8024-​2021.1.​000124
+	36.	 Sakakibara M, Ogawa K, Sakai S, Tochigi Y, Honda K, Kikuchi H 
+et al (2018) A 6.9-μm pixel-pitch back-illuminated global shutter 
+CMOS image sensor with pixel-parallel 14-bit subthreshold ADC. 
+IEEE J Solid-State Circuits 53(11):3017–3025. https://​doi.​org/​10.​
+1109/​JSSC.​2018.​28639​47
+	37.	 Sakakibara M, Ogawa K, Sakai S, Tochigi Y, Honda K, Kikuchi 
+H et al (2018) A back-illuminated global-shutter CMOS image 
+sensor with pixel-parallel 14b subthreshold ADC. In: 2018 IEEE 
+International Solid- State Circuits Conference - (ISSCC), San 
+Francisco, CA, February 2018. IEEE, pp 80–82. https://​doi.​org/​
+10.​1109/​ISSCC.​2018.​83101​93
+	38.	 Di Cioccio L, Gueguen P, Taibi R, Landru D, Gaudin G, Chappaz 
+C et al (2010) (Invited) an overview of patterned metal/dielectric 
+surface bonding: mechanism, alignment and characterization. ECS 
+Trans 33(4):3–16. https://​doi.​org/​10.​1149/1.​34834​89
+	39.	 Shie KC, Gusak AM, Tu KN, Chen C (2021) A kinetic model of 
+copper-to-copper direct bonding under thermal compression. J 
+Mater Res Technol 15:2332–2344. https://​doi.​org/​10.​1016/j.​jmrt.​
+2021.​09.​071
+	40.	 Ryu SK, Jiang T, Lu KH, Im J, Son HY, Byun KY et al (2012) 
+Characterization of thermal stresses in through-silicon vias for 
+three-dimensional interconnects by bending beam technique. Appl 
+Phys Lett 100(4):041901. https://​doi.​org/​10.​1063/1.​36780​20
+	41.	 Li J (2011) Study on a cooling system based on thermoelectric 
+cooler for thermal management of high-power LEDs. Microelec-
+tron Reliab 51(12):2210–2215. https://​doi.​org/​10.​1016/j.​micro​rel.​
+2011.​05.​006
+	42.	 Liu D, Chen PC, Chen KN (2020) A novel low-temperature Cu-Cu 
+direct bonding with Cr wetting layer and Au passivation layer. 
+In: 2020 IEEE 70th Electronic Components and Technology 
+Conference (ECTC), Orlando, FL, USA, June 2020. IEEE, pp 
+1322–1327. https://​doi.​org/​10.​1109/​ECTC3​2862.​2020.​00209
+	43.	 Huang YP, Chien YS, Tzeng RN, Chen KN (2015) Demonstra-
+tion and electrical performance of Cu–Cu bonding at 150 °C with 
+Pd passivation. IEEE Trans Electron Devices 62(8):2587–2592. 
+https://​doi.​org/​10.​1109/​TED.​2015.​24465​07
+	44.	 Chou TC, Huang SY, Chen PJ, Hu HW, Liu D, Chang CW et al 
+(2021) Electrical and reliability investigation of Cu-to-Cu bond-
+ing with silver passivation layer in 3-D integration. IEEE Trans 
+Compon Packag Manuf Technol 11(1):36–42. https://​doi.​org/​10.​
+1109/​TCPMT.​2020.​30373​65
+	45.	 Ghosh T, Krushnamurthy K, Panigrahi AK, Dutta A, Subrahman-
+yam C, Vanjari SRK et al (2015) Facile non thermal plasma based 
+desorption of self assembled monolayers for achieving low tem-
+perature and low pressure Cu–Cu thermo-compression bonding. 
+RSC Adv 5(125):103643–103648. https://​doi.​org/​10.​1039/​C5RA1​
+7735A
+	46.	 Kim JW, Jeon SJ, Lee HJ, Hyun S, Park YB (2012) Improvement 
+of wafer-level cu-to-cu bonding quality using wet chemical pre-
+treatment. J Nanosci Nanotechnol 12(4):3577–3581. https://​doi.​
+org/​10.​1166/​jnn.​2012.​5619
+	47.	 Kim YI, Yang KH, Lee WS (2004) Thermal degradation of 
+DRAM retention time: characterization and improving techniques. 
+In: Proceedings of the 2004 IEEE International Reliability Physics 
+Symposium, Phoenix, AZ, USA, April 2004. IEEE, pp 667–668. 
+https://​doi.​org/​10.​1109/​RELPHY.​2004.​13154​42
+	48.	 Hsiao HY, Liu CM, Lin HW, Liu TC, Lu CL, Huang YS et al 
+(2012) Unidirectional growth of microbumps on (111)-oriented 
+and nanotwinned copper. Science 336(6084):1007–1010. https://​
+doi.​org/​10.​1126/​scien​ce.​12165​11
+	49.	 Enquist P, Fountain G, Petteway C, Hollingsworth A, Grady H 
+(2009) Low cost of ownership scalable copper direct bond inter-
+connect 3D IC technology for three dimensional integrated cir-
+cuit applications. In: 2009 IEEE International Conference on 3D 
+
+[Page 21]
+Moore and More            (2025) 2:18 	
+Page 21 of 23 
+   18 
+System Integration, San Francisco, CA, USA, September 2009. 
+IEEE, pp 1–6. https://​doi.​org/​10.​1109/​3DIC.​2009.​53065​33
+	50.	 Wang L, Fountain G, Lee B, Gao G, Uzoh C, McGrath S et al 
+(2017) Direct bond interconnect ­(DBI®) for fine-pitch bonding 
+in 3D and 2.5D integrated circuits. In: 2017 Pan Pacific Micro-
+electronics Symposium (Pan Pacific), Kauai, HI, February 2017. 
+IEEE, pp 1–6.
+	51.	 Suga T, Otsuka K, Wang J (2024) Surface activated bonding for 
+hybrid and all-metal 3D (AM3D) interconnect. In: 2024 IEEE 
+10th Electronics System-Integration Technology Conference 
+(ESTC), Berlin, Germany, September 2024. IEEE, pp 1–4. https://​
+doi.​org/​10.​1109/​ESTC6​0143.​2024.​10712​141
+	52.	 Suga T (2012) Status of bonding technology for hybrid integra-
+tion - a review of the surface activated bonding (SAB). In: IEEE 
+Photonics Conference 2012, Burlingame, CA, USA, September 
+2012. IEEE, pp 749–750. https://​doi.​org/​10.​1109/​IPCon.​2012.​
+63588​39
+	53.	 Renaud P, Abadie K, Fournel F, Dubarry C, Baudin F, Tauzin 
+A (2023) SAB-enabled room temperature hybrid bonding. ECS 
+Trans 112(3):83–94. https://​doi.​org/​10.​1149/​11203.​0083e​cst
+	54.	 Jang EJ, Kim JW, Kim B, Matthias T, Park YB (2011) Anneal-
+ing temperature effect on the Cu-Cu bonding energy for 3D-IC 
+integration. Met Mater Int 17(1):105–109. https://​doi.​org/​10.​1007/​
+s12540-​011-​0214-0
+	55.	 Gösele U, Stenzel H, Martini T, Steinkirchner J, Conrad D, 
+Scheerschmidt K (1995) Self-propagating room-temperature 
+silicon wafer bonding in ultrahigh vacuum. Appl Phys Lett 
+67(24):3614–3616. https://​doi.​org/​10.​1063/1.​115335
+	56.	 Tong QY, Gösele U (1996) A model of low-temperature wafer 
+bonding and its applications. J Electrochem Soc 143(5):1773–
+1779. https://​doi.​org/​10.​1149/1.​18367​15
+	57.	 He R, Fujino M, Yamauchi A, Suga T (2016) Combined surface 
+activated bonding technique for hydrophilic ­SiO2-SiO2 and Cu-Cu 
+bonding. ECS Trans 75(9):117–128. https://​doi.​org/​10.​1149/​
+07509.​0117e​cst
+	58.	 Lu TF, Lee PY, Wu YS (2024) Effect of compressive stress on 
+copper bonding quality and bonding mechanisms in advanced 
+packaging. Materials 17(10):2236. https://​doi.​org/​10.​3390/​ma171​
+02236
+	59.	 Derby B (1984) Wallach ER (1984) Diffusion bonds in copper. 
+J Mater Sci 19(10):3140–3148. https://​doi.​org/​10.​1007/​BF005​
+49797
+	60.	 Liu CM, Lin HW, Huang YS, Chu YC, Chen C, Lyu DR et al 
+(2015) Low-temperature direct copper-to-copper bonding enabled 
+by creep on (111) surfaces of nanotwinned Cu. Sci Rep 5(1):9734. 
+https://​doi.​org/​10.​1038/​srep0​9734
+	61.	 Chen KN (2021) Development of low temperature Cu–Cu bonding 
+and hybrid bonding for three-dimensional integrated circuits (3D 
+IC). Microelectron Reliab 127:114412. https://​doi.​org/​10.​1016/j.​
+micro​rel.​2021.​114412
+	62.	 Jeon C, Kang S, Kim ME, Park J, Kim D, Kim S et al (2024) 
+Ru passivation layer enables Cu–Cu direct bonding at low tem-
+peratures with oxidation inhibition. ACS Appl Mater Interfaces 
+16(36):48481–48487. https://​doi.​org/​10.​1021/​acsami.​4c083​90
+	63.	 Tsai YC, Hu HW, Chen KN (2020) Low temperature copper-
+copper bonding of non-planarized copper pillar with passivation. 
+IEEE Electron Device Lett 41(8):1229–1232. https://​doi.​org/​10.​
+1109/​LED.​2020.​30011​63
+	64.	 Panigrahi AK, Bonam S, Ghosh T, Singh SG, Vanjari SRK (2016) 
+Ultra-thin Ti passivation mediated breakthrough in high quality 
+Cu–Cu bonding at low temperature and pressure. Mater Lett 
+169:269–272. https://​doi.​org/​10.​1016/j.​matlet.​2016.​01.​126
+	65.	 Chou TC, Yang KM, Li JC, Yu TY, Yang YT, Hu HW et al (2020) 
+Investigation of pillar–concave structure for low-temperature Cu–
+Cu direct bonding in 3-D/2.5-D heterogeneous integration. IEEE 
+Trans Compon Packag Manuf Technol 10(8):1296–1303. https://​
+doi.​org/​10.​1109/​TCPMT.​2020.​30049​69
+	66.	 Suga T (2006) Cu–Cu room temperature bonding - current status 
+of surface activated bonding (SAB) -. ECS Trans 3(6):155–163. 
+https://​doi.​org/​10.​1149/1.​23570​65
+	67.	 Bonam S, Panigrahi AK, Kumar CH, Vanjari SRK, Singh SG 
+(2019) Interface and reliability analysis of Au-passivated Cu–Cu 
+fine-pitch thermocompression bonding for 3-D IC applications. 
+IEEE Trans Compon Packag Manuf Technol 9(7):1227–1234. 
+https://​doi.​org/​10.​1109/​TCPMT.​2019.​29128​91
+	68.	 Du L, Shi T, Su L, Tang Z, Liao G (2017) Hydrogen thermal 
+reductive Cu nanowires in low temperature Cu–Cu bonding. J 
+Micromech Microeng 27(7):075019. https://​doi.​org/​10.​1088/​
+1361-​6439/​aa74fb
+	69.	 Liu Z, Cai J, Wang Q, Tan L, Hu Y (2015) Low temperature 
+Cu–Cu bonding using Ag nanostructure for 3D integration. ECS 
+Solid State Lett 4(10):P75–P76. https://​doi.​org/​10.​1149/2.​00615​
+10ssl
+	70.	 Gao G, Mirkarimi L, Fountain G, Wang L, Uzoh C, Workman 
+T et al (2018) Scaling package interconnects below 20µm pitch 
+with hybrid bonding. In: 2018 IEEE 68th Electronic Components 
+and Technology Conference (ECTC), San Diego, CA, May 2018. 
+IEEE, pp 314–322. https://​doi.​org/​10.​1109/​ECTC.​2018.​00055
+	71.	 Agrawal A, Huang S, Gao G, Wang L, DeLaCruz J, Mirkarimi 
+L (2017) Thermal and electrical performance of direct bond 
+interconnect technology for 2.5D and 3D integrated circuits. In: 
+2017 IEEE 67th Electronic Components and Technology Confer-
+ence (ECTC), Orlando, FL, USA, May 2017. IEEE, pp 989–998. 
+https://​doi.​org/​10.​1109/​ECTC.​2017.​341
+	72.	 Ji L, Che FX, Ji HM, Li HY, Kawano M (2020) Wafer-to-wafer 
+hybrid bonding development by advanced finite element modeling 
+for 3-D IC packages. IEEE Trans Compon Packag Manuf Technol 
+10(12):2106–2117. https://​doi.​org/​10.​1109/​TCPMT.​2020.​30356​
+52
+	73.	 Chiu WL, Chou KW, Chang HH (2020) Nanotwinned copper 
+hybrid bonding and wafer-on-wafer integration. In: 2020 IEEE 
+70th Electronic Components and Technology Conference (ECTC), 
+Orlando, FL, USA, June 2020. IEEE, pp 210–215. https://​doi.​org/​
+10.​1109/​ECTC3​2862.​2020.​00045
+	74.	 Ren J, Tang CW, Feng H, Jiang H, Yang W, Zhou X et al (2018) 
+A novel 700 V monolithically integrated Si-GaN cascoded field 
+effect transistor. IEEE Electron Device Lett 39(3):394–396. 
+https://​doi.​org/​10.​1109/​LED.​2018.​27915​86
+	75.	 Du WZ, He HZ, Fan WQ, Wang Z, Yang XD, Liang J et al (2024) 
+6-inch GaN/Si CMOS 1P2M monolithic heterogeneous process 
+and platformed devices. In: 2024 21st China International Forum 
+on Solid State Lighting & 2024 10th International Forum on Wide 
+Bandgap Semiconductors (SSLCHINA: IFWS), Suzhou, China, 
+November 2024. IEEE, pp 230–233. https://​doi.​org/​10.​1109/​
+SSLCH​INAIF​WS646​44.​2024.​10835​261
+	76.	 Ren H, Sahoo K, Guo Z, Pugazhendhi R, Wong Z, Xiang T et al 
+(2023) Heterogeneous power delivery for large chiplet-based 
+systems using integrated GaN/Si-interconnect fabric with sub-10 
+μm bond pitch. In: 2023 International Electron Devices Meeting 
+(IEDM), San Francisco, CA, USA, December 2023. IEEE, pp 1–4. 
+https://​doi.​org/​10.​1109/​IEDM4​5741.​2023.​10413​759
+	77.	 Lee D, Kim D, Han S, Kim J, Park J, Jang B et al (2014) Optimi-
+zation of CMP process for TSV reveal in consideration of critical 
+defect. In: 2014 IEEE 64th Electronic Components and Tech-
+nology Conference (ECTC), Orlando, FL, May 2014. IEEE, pp 
+1816–1821. https://​doi.​org/​10.​1109/​ECTC.​2014.​68975​45
+	78.	 Gao G, Mirkarimi L, Workman T, Fountain G, Theil J, Guevara G 
+et al (2019) Low temperature Cu interconnect with chip to wafer 
+hybrid bonding. In: 2019 IEEE 69th Electronic Components and 
+Technology Conference (ECTC), Las Vegas, NV, USA, May 
+
+[Page 22]
+	
+Moore and More            (2025) 2:18 
+   18  
+Page 22 of 23
+2019. IEEE, pp 628–635. https://​doi.​org/​10.​1109/​ECTC.​2019.​
+00100
+	79.	 Roy SC, Guan CG, Venkataraman N, Lee W, Singh N (2023) 
+Cu and barrier CMP process development with fine 1 μm Cu 
+bond pad and 2.5 μm pitch for wafer-to-wafer hybrid bonding. In: 
+2023 IEEE 25th Electronics Packaging Technology Conference 
+(EPTC), Singapore, December 2023. IEEE, pp 135–138. https://​
+doi.​org/​10.​1109/​EPTC5​9621.​2023.​10457​780
+	80.	 Kagawa Y, Fujii N, Aoyagi K, Kobayashi Y, Nishi S, Todaka N 
+et al (2016) Novel stacked CMOS image sensor with advanced 
+Cu2Cu hybrid bonding. In: 2016 IEEE International Electron 
+Devices Meeting (IEDM), San Francisco, CA, USA, December 
+2016. IEEE, pp 8.4.1–8.4.4. https://​doi.​org/​10.​1109/​IEDM.​2016.​
+78383​75
+	81.	 Kagawa Y, Hashiguchi H, Kamibayashi T, Haneda M, Fujii N, 
+Furuse S et al (2020) Impacts of misalignment on 1μm pitch 
+Cu-Cu hybrid bonding. In: 2020 IEEE international Interconnect 
+Technology Conference (IITC), San Jose, CA, USA, October 
+2020. IEEE, pp 148–150. https://​doi.​org/​10.​1109/​IITC4​7697.​
+2020.​95156​63
+	82.	 Kagawa Y, Kamibayashi T, Yamano Y, Nishio K, Sakamoto A, 
+Yamada T et al (2022) Development of face-to-face and face-to-
+back ultra-fine pitch Cu-Cu hybrid bonding. In: 2022 IEEE 72nd 
+Electronic Components and Technology Conference (ECTC), San 
+Diego, CA, USA, May 2022. IEEE, pp 306–311. https://​doi.​org/​
+10.​1109/​ECTC5​1906.​2022.​00057
+	83.	 Carter AD, Urteaga ME, Griffith ZM, Lee KJ, Roderick J, Rowell 
+P et al (2018) Si/InP heterogeneous integration techniques from 
+the wafer-scale (hybrid wafer bonding) to the discrete transistor 
+(micro-transfer printing). In: 2018 IEEE SOI-3D-Subthreshold 
+Microelectronics Technology Unified Conference (S3S), Burl-
+ingame, CA, USA, October 2018. IEEE, pp 1–4. https://​doi.​org/​
+10.​1109/​S3S.​2018.​86401​96
+	84.	 Uchida K, Tsumura K, Nakamura K, Higashi K, Sugizaki Y, 
+Shibata H (2018) Novel bonding process using ultra-thin Mn 
+for highly robust and reliable Cu/SiO hybrid bonding. In: 2018 
+IEEE International Interconnect Technology Conference (IITC), 
+Santa Clara, CA, June 2018. IEEE, pp 182–184. https://​doi.​org/​
+10.​1109/​IITC.​2018.​84571​24
+	85.	 Yoneda S, Adachi K, Kobayashi K, Matsukawa D, Sasaki M, 
+Itabashi T et al (2021) A novel photosensitive polyimide adhe-
+sive material for hybrid bonding processing. In: 2021 IEEE 71st 
+Electronic Components and Technology Conference (ECTC), 
+San Diego, CA, USA, June 2021. IEEE, pp 680–686. https://​
+doi.​org/​10.​1109/​ECTC3​2696.​2021.​00118
+	86.	 Shirasaka T, Okuda T, Shibata T, Yoneda S, Matsukawa D, 
+Mariappa M et al (2022) Comprehensive study on advanced 
+chip on wafer hybrid bonding with copper/polyimide systems. 
+In: 2022 IEEE 72nd Electronic Components and Technology 
+Conference (ECTC), San Diego, CA, USA, May 2022. IEEE, 
+pp 317–323. https://​doi.​org/​10.​1109/​ECTC5​1906.​2022.​00059
+Publisher’s Note  Springer Nature remains neutral with regard to 
+jurisdictional claims in published maps and institutional affiliations.
+Bing Jiang  received his bachelor’s degree 
+in Materials Science and Engineering from 
+Xihua University, Chengdu, China, in 2024. 
+He is currently pursuing a master’s degree with the College of Material 
+Science and Engineering, Shenzhen University, Shenzhen, China. His 
+main research interests include new semiconductor device structure 
+and GaN power electronic devices.
+Yutong Wu  received his bachelor’s degree 
+in polymer material and engineering from 
+Shenzhen University, Shenzhen, China, in 
+2023. He is currently pursuing a master’s 
+degree at the College of Materials Science 
+and Engineering, Shenzhen University, 
+Shenzhen, China. His main research inter-
+ests include new semiconductor device 
+structure and GaN power electronic devices.
+Zhong Zhixiang  received his bachelor’s 
+degree in Polymer Materials and Engineer-
+ing from East China Jiaotong University in 
+2024. He is currently pursuing a master’s 
+degree at the School of Materials Science 
+and Engineering at Shenzhen University in 
+Shenzhen, China. His main research areas 
+include novel semiconductor device struc-
+tures and GaN power electronic devices.
+Kangkai Fan  received his bachelor’s degree 
+in material forming and control engineer-
+ing from Guangdong University of Petro-
+chemical Technology, Maoming, China, in 
+2022. He is currently pursuing a master’s 
+degree at the College of Material Science 
+and Engineering, Shenzhen University, 
+Shenzhen, China. His main research inter-
+ests include new semiconductor device 
+structure and GaN power electronic 
+devices.
+Qiubao Lin  is supervisor for master’s and 
+doctoral students, executive director of the 
+Fujian Physical Society, and vice chairman 
+of the Xiamen Physical Society. He is also 
+the head of the low-dimensional semicon-
+ductor materials and devices research and 
+development platform at Jimei University. 
+His primary research focuses on computa-
+tional condensed matter physics, special-
+izing in first-principle calculations of mate-
+rial properties (particularly novel 
+nanostructured materials) and the 
+
+[Page 23]
+Moore and More            (2025) 2:18 	
+Page 23 of 23 
+   18 
+theoretical design of new materials. His research includes the magnet-
+ism of transition metal-doped semiconductors, stability, and electronic 
+structural properties of transition metal nanostructures such as clusters, 
+one-dimensional structures, and two-dimensional planar structures, 
+interactions between nanostructures and substrates, and surface 
+properties.
+Jianbo Liang  is professor at Osaka Metro-
+politan University and doctoral advisor, 
+engaged in long-term research on semicon-
+ductor heterogeneous integration technol-
+ogy, advanced packaging technology, and 
+the manufacturing of heterogeneous inte-
+gration equipment, with a primary focus on 
+the heterogeneous integration of semicon-
+ductor materials. Current research direc-
+tions include direct bonding of heterogene-
+ous semiconductor materials such as 
+diamond, gallium nitride (GaN), and silicon carbide (SiC), high ther-
+mal conductivity heterogeneous interfaces, the crystal structure of 
+heterogeneous interfaces, and the development of high-power and high-
+efficiency novel semiconductor devices.
+Hezhou Liu  obtained his BSc in Chemical 
+Engineering from Tsinghua University 
+(THU) in 1988, and a master’s degree in 
+Chemical Reaction Engineering in East 
+China University of Science and Technol-
+ogy (ECUST) in 1991, and a Ph.D. from 
+SJTU in 2001. He was appointed as a Dis-
+tinguished Professor at SJTU in 2014 and 
+a Distinguished Professor at Shenzhen Uni-
+versity (SZU) in 2024. His research focuses 
+on functional polymer-based composites 
+with high performance and energy materials. He has authored or coau-
+thored publications at Advanced Materials, Advanced Functional Mate-
+rials, Chemical Engineering Journal, and more.
+Xinke Liu  (senior member, IEEE) received 
+his B.Appl.Sc. degree (Hons.) in Materi-
+als Science in 2008 and a Ph.D. degree in 
+electrical and computer engineering from 
+the National University of Singapore in 
+2013. He is currently an associate profes-
+sor/research professor with Shenzhen 
+University (SZU), China. He has authored 
+or coauthored more than 150 journal and 
+conference papers, and applied 99 for pat-
+ents with 33 granted. His research is 
+related to novel materials and devices. He 
+was the award recipient of the 2018 Excellent Research Award of SZU, 
+2018 Excellent Teaching Award of SZU, 2019 Chinese Academy of 
+Sciences 100 Plan Scholar, 2022 Guangdong Provincial Science and 
+Technology Progress Award, 2022 Science and Technology Progress 
+Award of China Electronics Society, 2022 Guangdong Distinguished 
+Young Scholars, 2020, 2022, and 2023 Stanford University World’s 
+Top 2% Scientists, and the 2023 Shenzhen Youth Science and Technol-
+ogy Award.
