@@ -359,23 +359,35 @@ const App = {
         document.body.appendChild(tooltip);
 
         let selectedText = '';
+        let selectionTimeout = null;
 
-        document.addEventListener('selectionchange', () => {
-            const selection = window.getSelection();
-            selectedText = selection.toString().trim();
+        container.addEventListener('mouseup', () => {
+            clearTimeout(selectionTimeout);
+            selectionTimeout = setTimeout(() => {
+                const selection = window.getSelection();
+                selectedText = selection.toString().trim();
 
-            if (selectedText.length > 0 && selectedText.length < 500) {
-                const range = selection.getRangeAt(0);
-                const rect = range.getBoundingClientRect();
-                tooltip.style.display = 'block';
-                tooltip.style.left = `${rect.left + rect.width / 2 - 40}px`;
-                tooltip.style.top = `${rect.top - 45 + window.scrollY}px`;
-            } else {
+                if (selectedText.length > 0 && selectedText.length < 500) {
+                    const range = selection.getRangeAt(0);
+                    const rect = range.getBoundingClientRect();
+                    
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+                    tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10 + window.scrollY}px`;
+                } else {
+                    tooltip.style.display = 'none';
+                }
+            }, 10);
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (!tooltip.contains(e.target)) {
                 tooltip.style.display = 'none';
             }
         });
 
-        tooltip.addEventListener('click', () => {
+        tooltip.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (selectedText) {
                 this.showAIExplanation(selectedText);
                 tooltip.style.display = 'none';
