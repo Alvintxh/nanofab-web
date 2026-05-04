@@ -31,3 +31,21 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Large binary files
+*.pdf
+*.zip
+*.tar.gz
+
+# Python virtual environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Book build outputs
+nanofab_knowledge_book_v1/output/
+nanofab_knowledge_book_v1/node_modules/
+
+# Raw source files (too large)
+sources/sources_raw/
