@@ -335,6 +335,16 @@ const App = {
                 .then(html => {
                     contentEl.innerHTML = html;
                     
+                    const isGitHubPages = window.location.hostname.includes('github.io');
+                    if (isGitHubPages) {
+                        contentEl.querySelectorAll('img').forEach(img => {
+                            const src = img.getAttribute('src');
+                            if (src && src.startsWith('../../img/')) {
+                                img.src = '/nanofab-web/img/' + src.replace('../../img/', '');
+                            }
+                        });
+                    }
+                    
                     if (typeof renderMathInElement !== 'undefined') {
                         renderMathInElement(contentEl, {
                             delimiters: [
