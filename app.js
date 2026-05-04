@@ -997,10 +997,13 @@ const App = {
             if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram') || text.startsWith('classDiagram')) {
                 const pre = block.parentElement;
                 const wrapper = document.createElement('div');
-                wrapper.className = 'mermaid';
-                wrapper.textContent = text;
+                wrapper.className = 'mermaid-diagram-container';
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = text;
+                wrapper.appendChild(mermaidDiv);
                 pre.parentNode.replaceChild(wrapper, pre);
-                diagramsToRender.push(wrapper);
+                diagramsToRender.push(mermaidDiv);
             }
         });
 
