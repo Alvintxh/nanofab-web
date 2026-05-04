@@ -119,6 +119,7 @@ const App = {
                 this.state.behaviorData.timeSpent[chapterId] = 
                     (this.state.behaviorData.timeSpent[chapterId] || 0) + timeSpent;
                 this.saveBehaviorData();
+                this.updateBehaviorProfile();
             }
             chapterStartTime = Date.now();
         });
@@ -178,16 +179,32 @@ const App = {
     handleProfileSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const motivations = [];
-        e.target.querySelectorAll('input[name="motivation"]:checked').forEach((cb) => {
-            motivations.push(cb.value);
-        });
+        
+        const getCheckedValues = (name) => {
+            const values = [];
+            e.target.querySelectorAll(`input[name="${name}"]:checked`).forEach((cb) => {
+                values.push(cb.value);
+            });
+            return values;
+        };
 
         const user = {
             name: formData.get('name'),
             background: formData.get('background'),
             level: formData.get('level'),
-            motivation: motivations
+            motivation: getCheckedValues('motivation'),
+            prerequisite: getCheckedValues('prerequisite'),
+            studyPace: formData.get('studyPace'),
+            learningStyle: getCheckedValues('learningStyle'),
+            interestArea: getCheckedValues('interestArea'),
+            behaviorProfile: {
+                weakTopics: [],
+                strongTopics: [],
+                preferredContentTypes: [],
+                avgSessionTime: 0,
+                quizAccuracy: 0,
+                lastUpdated: new Date().toISOString()
+            }
         };
 
         this.saveUser(user);
@@ -454,6 +471,147 @@ const App = {
         });
     },
 
+    buildSystemPrompt(user, context) {
+        const parts = [];
+        
+        parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。');
+        
+        if (user) {
+            parts.push(`用户学习水平：${user.level || '初学者'}`);
+            parts.push(`专业背景：${user.background || '学生'}`);
+            
+            if (user.motivation?.length > 0) {
+                const motivationMap = {
+                    course: '课程学习',
+                    research: '科研需要',
+                    career: '职业发展',
+                    interest: '个人兴趣'
+                };
+                const motivations = user.motivation.map(m => motivationMap[m] || m).join('、');
+                parts.push(`学习动机：${motivations}`);
+            }
+            
+            if (user.prerequisite?.length > 0) {
+                const prereqMap = {
+                    physics: '大学物理',
+                    chemistry: '化学/材料',
+                    electronics: '电子工程',
+                    semiconductor: '半导体器件',
+                    none: '无特定基础'
+                };
+                const prereqs = user.prerequisite.map(p => prereqMap[p] || p).join('、');
+                parts.push(`先修知识：${prereqs}`);
+            }
+            
+            if (user.studyPace) {
+                const paceMap = {
+                    intensive: '集中学习（1-2周）',
+                    moderate: '适中（1-2个月）',
+                    relaxed: '轻松（3个月以上）'
+                };
+                parts.push(`学习节奏：${paceMap[user.studyPace]}`);
+            }
+            
+            if (user.learningStyle?.length > 0) {
+                const styleMap = {
+                    theory: '理论推导',
+                    visual: '图表可视化',
+                    practical: '工艺实践',
+                    case: '案例分析'
+                };
+                const styles = user.learningStyle.map(s => styleMap[s] || s).join('、');
+                parts.push(`偏好学习方式：${styles}`);
+            }
+            
+            if (user.interestArea?.length > 0) {
+                const areaMap = {
+                    semiconductor: '半导体集成电路',
+                    photonics: '光子学/光电子',
+                    biotech: '纳米生物技术',
+                    energy: '能源/电池',
+                    mems: 'MEMS/NEMS',
+                    quantum: '量子计算'
+                };
+                const areas = user.interestArea.map(a => areaMap[a] || a).join('、');
+                parts.push(`感兴趣领域：${areas}`);
+            }
+            
+            if (user.behaviorProfile) {
+                const bp = user.behaviorProfile;
+                if (bp.weakTopics?.length > 0) {
+                    parts.push(`薄弱环节：${bp.weakTopics.join('、')}`);
+                }
+                if (bp.strongTopics?.length > 0) {
+                    parts.push(`擅长领域：${bp.strongTopics.join('、')}`);
+                }
+                if (bp.quizAccuracy > 0) {
+                    parts.push(`Quiz正确率：${Math.round(bp.quizAccuracy * 100)}%`);
+                }
+            }
+        }
+        
+        if (context === 'explanation') {
+            parts.push('请根据用户的完整画像提供个性化解释。');
+            parts.push('- 初学者：多用类比，避免复杂公式，强调直观理解');
+            parts.push('- 中级：引入技术参数，解释物理机制，联系实际工艺');
+            parts.push('- 高级：深入工程细节，讨论优化策略，引用最新进展');
+            parts.push('- 根据学习动机调整侧重点（课程→考试要点，科研→前沿进展，职业→实操技能，兴趣→背景故事）');
+            parts.push('- 根据先修知识决定数学深度');
+            parts.push('- 根据感兴趣领域举例时优先使用相关应用');
+            parts.push('- 根据学习节奏调整内容密度（集中→精简核心，轻松→详细展开）');
+        } else if (context === 'chat') {
+            parts.push('请作为个性化学习助手，根据用户画像回答问题。');
+            parts.push('- 如果用户问基础概念，根据水平调整深度');
+            parts.push('- 如果用户问应用场景，优先提及感兴趣的领域');
+            parts.push('- 如果用户表现出困惑，建议适合的学习方式');
+        }
+        
+        parts.push('使用中文回答，保持专业但友好的语气。');
+        
+        return parts.join('\n');
+    },
+
+    updateBehaviorProfile() {
+        const user = this.state.user;
+        if (!user || !user.behaviorProfile) return;
+        
+        const bp = user.behaviorProfile;
+        const behaviorData = this.state.behaviorData;
+        
+        const quizResults = behaviorData.quizResults || [];
+        if (quizResults.length > 0) {
+            const correctCount = quizResults.filter(r => r.correct).length;
+            bp.quizAccuracy = correctCount / quizResults.length;
+            
+            const weakTopics = new Set();
+            quizResults.filter(r => !r.correct).forEach(r => {
+                if (r.chapterId) weakTopics.add(r.chapterId);
+            });
+            bp.weakTopics = [...weakTopics];
+        }
+        
+        const timeSpent = behaviorData.timeSpent || {};
+        const chapterTimes = Object.entries(timeSpent);
+        if (chapterTimes.length > 0) {
+            const avgTime = chapterTimes.reduce((sum, [, time]) => sum + time, 0) / chapterTimes.length;
+            bp.avgSessionTime = avgTime;
+            
+            const difficultChapters = chapterTimes
+                .filter(([, time]) => time > avgTime * 1.5)
+                .map(([chapter]) => chapter);
+            bp.weakTopics = [...new Set([...bp.weakTopics, ...difficultChapters])];
+        }
+        
+        const scrollDepth = behaviorData.scrollDepth || {};
+        const deepScrollChapters = Object.entries(scrollDepth)
+            .filter(([, depth]) => depth > 80)
+            .map(([chapter]) => chapter);
+        bp.strongTopics = deepScrollChapters;
+        
+        bp.lastUpdated = new Date().toISOString();
+        this.saveUser(user);
+    },
+
     async generateExplanation(text) {
         const user = this.state.user;
         const level = user?.level || 'beginner';
@@ -462,6 +620,8 @@ const App = {
         const apiKey = localStorage.getItem('deepseek_api_key');
         if (apiKey) {
             try {
+                const systemPrompt = this.buildSystemPrompt(user, 'explanation');
+                
                 const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
                     method: 'POST',
                     headers: {
@@ -473,7 +633,7 @@ const App = {
                         messages: [
                             {
                                 role: 'system',
-                                content: `你是一位纳米制造技术专家。用户的学习水平是：${level}，背景是：${background}。请根据用户的背景提供个性化的解释，使用中文回答。`
+                                content: systemPrompt
                             },
                             {
                                 role: 'user',
@@ -481,7 +641,7 @@ const App = {
                             }
                         ],
                         temperature: 0.7,
-                        max_tokens: 1000
+                        max_tokens: 1500
                     })
                 });
 
@@ -834,6 +994,7 @@ const App = {
                         chapter: this.state.currentChapter?.id
                     });
                     this.saveBehaviorData();
+                    this.updateBehaviorProfile();
 
                     this.checkQuizCompletion();
                 });
@@ -1007,10 +1168,11 @@ const App = {
         const apiKey = localStorage.getItem('deepseek_api_key');
         if (apiKey) {
             try {
+                const systemPrompt = this.buildSystemPrompt(user, 'chat');
                 const messages = [
                     {
                         role: 'system',
-                        content: `你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》这本书。用户的学习水平是：${user?.level || '初学者'}，背景是：${user?.background || '学生'}。请用中文回答，提供准确、专业的解释。`
+                        content: systemPrompt
                     }
                 ];
 
