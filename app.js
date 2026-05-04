@@ -133,11 +133,6 @@ const App = {
             profileForm.addEventListener('submit', (e) => this.handleProfileSubmit(e));
         }
 
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        if (sidebarToggle) {
-            sidebarToggle.addEventListener('click', () => this.toggleSidebar());
-        }
-
         const sidebarOverlay = document.getElementById('sidebar-overlay');
         if (sidebarOverlay) {
             sidebarOverlay.addEventListener('click', () => this.closeSidebar());

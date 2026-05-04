@@ -593,18 +593,6 @@ input, select, textarea {
 
 .sidebar-overlay {
     display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 40;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.sidebar-overlay.active {
-    display: block;
-    opacity: 1;
 }
 
 
@@ -1252,6 +1240,7 @@ input, select, textarea {
     .app-footer {
         padding: 20px 24px;
     }
+
 }
 
 @media (max-width: 640px) {
