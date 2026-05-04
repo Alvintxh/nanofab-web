@@ -990,6 +990,8 @@ const App = {
 
     renderMermaidDiagrams(container) {
         const codeBlocks = container.querySelectorAll('pre code');
+        const diagramsToRender = [];
+        
         codeBlocks.forEach(block => {
             const text = block.textContent.trim();
             if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram') || text.startsWith('classDiagram')) {
@@ -998,17 +1000,24 @@ const App = {
                 wrapper.className = 'mermaid';
                 wrapper.textContent = text;
                 pre.parentNode.replaceChild(wrapper, pre);
+                diagramsToRender.push(wrapper);
             }
         });
 
-        if (typeof mermaid !== 'undefined') {
+        if (diagramsToRender.length > 0 && typeof mermaid !== 'undefined') {
             mermaid.initialize({
                 startOnLoad: false,
                 theme: 'default',
                 securityLevel: 'loose'
             });
-            mermaid.run({
-                querySelector: '.mermaid'
+            
+            diagramsToRender.forEach((element, index) => {
+                const id = 'mermaid-' + Date.now() + '-' + index;
+                mermaid.render(id, element.textContent).then(result => {
+                    element.innerHTML = result.svg;
+                }).catch(err => {
+                    console.error('Mermaid render error:', err);
+                });
             });
         }
     }
