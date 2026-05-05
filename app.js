@@ -245,19 +245,6 @@ const App = {
             registerForm.addEventListener('submit', (e) => this.handleRegister(e));
         }
 
-        const verifyForm = document.getElementById('verify-form');
-        if (verifyForm) {
-            verifyForm.addEventListener('submit', (e) => this.handleVerify(e));
-        }
-
-        const resendCode = document.getElementById('resend-code');
-        if (resendCode) {
-            resendCode.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.resendVerificationCode();
-            });
-        }
-
         const profileForm = document.getElementById('profile-form');
         if (profileForm) {
             profileForm.addEventListener('submit', (e) => this.handleProfileSubmit(e));
@@ -364,18 +351,11 @@ const App = {
                     email,
                     password,
                     options: {
-                        data: { name },
-                        emailRedirectTo: window.location.origin
+                        data: { name }
                     }
                 });
 
-                if (error) {
-                    if (error.message.includes('rate limit')) {
-                        alert('发送过于频繁，请稍后再试（约1分钟后）');
-                        return;
-                    }
-                    throw error;
-                }
+                if (error) throw error;
 
                 if (data.user && data.user.identities && data.user.identities.length === 0) {
                     alert('该邮箱已注册，请直接登录');
@@ -383,14 +363,15 @@ const App = {
                     return;
                 }
 
-                localStorage.setItem('pending_email', email);
-                localStorage.setItem('pending_password', password);
                 localStorage.setItem('pending_name', name);
                 
                 document.getElementById('register-form').classList.add('hidden');
-                document.getElementById('verify-form').classList.remove('hidden');
+                document.querySelector('.auth-tabs').classList.add('hidden');
+                document.getElementById('profile-form').classList.remove('hidden');
                 
-                alert('验证码已发送到您的邮箱，请输入验证码完成注册。如果未收到，请检查垃圾邮件文件夹。');
+                document.getElementById('user-name').value = name;
+                
+                alert('注册成功！请完善您的个人资料。');
             } catch (error) {
                 console.error('Registration error:', error);
                 alert('注册失败：' + error.message);
