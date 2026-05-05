@@ -23,10 +23,10 @@ const App = {
 
     init() {
         this.initSupabase();
+        this.bindEvents();
         this.loadUser();
         this.loadProgress();
         this.loadBehaviorData();
-        this.bindEvents();
         this.initBehaviorTracking();
         this.initAIAssistant();
         this.loadChapters().then(() => {
