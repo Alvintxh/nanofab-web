@@ -351,11 +351,18 @@ const App = {
                     email,
                     password,
                     options: {
-                        data: { name }
+                        data: { name },
+                        emailRedirectTo: null
                     }
                 });
 
-                if (error) throw error;
+                if (error) {
+                    if (error.message.includes('rate limit')) {
+                        alert('发送过于频繁，请稍后再试（约1分钟后）');
+                        return;
+                    }
+                    throw error;
+                }
 
                 if (data.user && data.user.identities && data.user.identities.length === 0) {
                     alert('该邮箱已注册，请直接登录');
