@@ -1331,7 +1331,12 @@ const App = {
 
     openProfileModal() {
         const modal = document.getElementById('profile-modal');
-        if (!modal || !this.state.user) return;
+        if (!modal) return;
+        
+        if (!this.state.user) {
+            alert('请先登录或完善资料');
+            return;
+        }
 
         const backgroundMap = {
             student: '在校学生',
