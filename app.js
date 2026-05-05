@@ -81,6 +81,8 @@ const App = {
     initBehaviorTracking() {
         let scrollTimer;
         let maxScrollDepth = 0;
+        let sectionStartTime = Date.now();
+        let currentSection = null;
 
         document.addEventListener('scroll', () => {
             clearTimeout(scrollTimer);
@@ -122,6 +124,35 @@ const App = {
                 this.updateBehaviorProfile();
             }
             chapterStartTime = Date.now();
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (currentSection && currentSection !== entry.target.id) {
+                        const timeSpent = Math.round((Date.now() - sectionStartTime) / 1000);
+                        const chapterId = this.state.currentChapter?.id || 'home';
+                        if (!this.state.behaviorData.sectionTime) {
+                            this.state.behaviorData.sectionTime = {};
+                        }
+                        if (!this.state.behaviorData.sectionTime[chapterId]) {
+                            this.state.behaviorData.sectionTime[chapterId] = {};
+                        }
+                        this.state.behaviorData.sectionTime[chapterId][currentSection] = 
+                            (this.state.behaviorData.sectionTime[chapterId][currentSection] || 0) + timeSpent;
+                        this.saveBehaviorData();
+                    }
+                    currentSection = entry.target.id;
+                    sectionStartTime = Date.now();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('h2, h3').forEach(heading => {
+            if (!heading.id) {
+                heading.id = 'section-' + Math.random().toString(36).substr(2, 9);
+            }
+            observer.observe(heading);
         });
     },
 
@@ -192,6 +223,11 @@ const App = {
             studyPace: formData.get('studyPace'),
             learningStyle: getCheckedValues('learningStyle'),
             interestArea: getCheckedValues('interestArea'),
+            resume: formData.get('resume') || '',
+            scores: formData.get('scores') || '',
+            currentProject: formData.get('currentProject') || '',
+            futureProject: formData.get('futureProject') || '',
+            learningReason: formData.get('learningReason') || '',
             behaviorProfile: {
                 weakTopics: [],
                 strongTopics: [],
@@ -463,7 +499,13 @@ const App = {
             modal.remove();
         });
 
-        this.generateExplanation(text).then(explanation => {
+        const chapter = this.state.currentChapter;
+        const chapterContext = chapter ? `
+当前章节：${chapter.title}
+章节描述：${chapter.description}
+` : '';
+
+        this.generateExplanation(text, chapterContext).then(explanation => {
             const contentDiv = modal.querySelector('.ai-explanation-content');
             const formattedExplanation = this.formatAIResponse(explanation);
             contentDiv.innerHTML = `
@@ -547,6 +589,22 @@ const App = {
                 parts.push(`感兴趣领域：${areas}`);
             }
             
+            if (user.resume) {
+                parts.push(`个人简介：${user.resume}`);
+            }
+            if (user.scores) {
+                parts.push(`相关课程成绩：${user.scores}`);
+            }
+            if (user.currentProject) {
+                parts.push(`当前项目：${user.currentProject}`);
+            }
+            if (user.futureProject) {
+                parts.push(`未来计划：${user.futureProject}`);
+            }
+            if (user.learningReason) {
+                parts.push(`学习原因：${user.learningReason}`);
+            }
+            
             if (user.behaviorProfile) {
                 const bp = user.behaviorProfile;
                 if (bp.weakTopics?.length > 0) {
@@ -570,6 +628,10 @@ const App = {
             parts.push('- 根据先修知识决定数学深度');
             parts.push('- 根据感兴趣领域举例时优先使用相关应用');
             parts.push('- 根据学习节奏调整内容密度（集中→精简核心，轻松→详细展开）');
+            parts.push('- 结合用户当前正在阅读的章节上下文进行解释，不要孤立解释概念');
+            parts.push('- 如果用户在某个章节停留时间较长或多次提问，说明该部分较难，请更详细地解释');
+            parts.push('- 如果用户有进行中的项目，尝试将解释与其实际项目联系起来');
+            parts.push('- 如果用户有未来计划，可以指出该概念如何支持其未来项目');
         } else if (context === 'chat') {
             parts.push('请作为个性化学习助手，根据用户画像回答问题。');
             parts.push('- 如果用户问基础概念，根据水平调整深度');
@@ -623,11 +685,15 @@ const App = {
         this.saveUser(user);
     },
 
-    async generateExplanation(text) {
+    async generateExplanation(text, chapterContext = '') {
         const user = this.state.user;
         const level = user?.level || 'beginner';
         const background = user?.background || 'student';
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
+
+        const userContent = chapterContext 
+            ? `请解释以下纳米制造技术概念："${text}"\n\n${chapterContext}`
+            : `请解释以下纳米制造技术概念："${text}"`;
 
         if (provider === 'zhipu') {
             const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
@@ -648,7 +714,7 @@ const App = {
                             },
                             {
                                 role: 'user',
-                                content: `请解释以下纳米制造技术概念："${text}"`
+                                content: userContent
                             }
                         ],
                         temperature: 0.7,
