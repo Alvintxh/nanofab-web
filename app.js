@@ -245,6 +245,19 @@ const App = {
             registerForm.addEventListener('submit', (e) => this.handleRegister(e));
         }
 
+        const verifyForm = document.getElementById('verify-form');
+        if (verifyForm) {
+            verifyForm.addEventListener('submit', (e) => this.handleVerify(e));
+        }
+
+        const resendCode = document.getElementById('resend-code');
+        if (resendCode) {
+            resendCode.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.resendVerificationCode();
+            });
+        }
+
         const profileForm = document.getElementById('profile-form');
         if (profileForm) {
             profileForm.addEventListener('submit', (e) => this.handleProfileSubmit(e));
@@ -357,20 +370,78 @@ const App = {
 
                 if (error) throw error;
 
+                localStorage.setItem('pending_email', email);
+                localStorage.setItem('pending_password', password);
                 localStorage.setItem('pending_name', name);
                 
                 document.getElementById('register-form').classList.add('hidden');
-                document.querySelector('.auth-tabs').classList.add('hidden');
-                document.getElementById('profile-form').classList.remove('hidden');
+                document.getElementById('verify-form').classList.remove('hidden');
                 
-                document.getElementById('user-name').value = name;
-                
-                alert('注册成功！请完善您的个人资料。');
+                alert('验证码已发送到您的邮箱，请输入验证码完成注册。');
             } catch (error) {
                 alert('注册失败：' + error.message);
             }
         } else {
             alert('Supabase 未初始化');
+        }
+    },
+
+    async handleVerify(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const code = formData.get('code');
+        const email = localStorage.getItem('pending_email');
+        const password = localStorage.getItem('pending_password');
+        const name = localStorage.getItem('pending_name');
+
+        if (this.supabase) {
+            try {
+                const { data, error } = await this.supabase.auth.verifyOtp({
+                    email,
+                    token: code,
+                    type: 'signup'
+                });
+
+                if (error) throw error;
+
+                localStorage.removeItem('pending_email');
+                localStorage.removeItem('pending_password');
+                
+                document.getElementById('verify-form').classList.add('hidden');
+                document.querySelector('.auth-tabs').classList.add('hidden');
+                document.getElementById('profile-form').classList.remove('hidden');
+                
+                document.getElementById('user-name').value = name;
+                
+                alert('验证成功！请完善您的个人资料。');
+            } catch (error) {
+                alert('验证失败：' + error.message);
+            }
+        } else {
+            alert('Supabase 未初始化');
+        }
+    },
+
+    async resendVerificationCode() {
+        const email = localStorage.getItem('pending_email');
+        const password = localStorage.getItem('pending_password');
+        
+        if (!email || !this.supabase) {
+            alert('无法重新发送验证码');
+            return;
+        }
+
+        try {
+            const { error } = await this.supabase.auth.signUp({
+                email,
+                password
+            });
+
+            if (error) throw error;
+
+            alert('验证码已重新发送！');
+        } catch (error) {
+            alert('发送失败：' + error.message);
         }
     },
 

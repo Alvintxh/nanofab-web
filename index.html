@@ -90,6 +90,25 @@
                     <p class="auth-hint">已有账号？<a href="#" class="auth-switch" data-target="login">立即登录</a></p>
                 </form>
 
+                <form id="verify-form" class="auth-form hidden">
+                    <h2 class="card-title">验证邮箱</h2>
+                    <p class="card-description">请输入发送到您邮箱的验证码</p>
+                    
+                    <div class="form-group">
+                        <label for="verify-code">验证码</label>
+                        <input type="text" id="verify-code" name="code" placeholder="请输入6位验证码" required maxlength="6" pattern="[0-9]{6}">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        验证
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    
+                    <p class="auth-hint">没有收到验证码？<a href="#" id="resend-code">重新发送</a></p>
+                </form>
+
                 <form id="profile-form" class="profile-form hidden">
                     <h2 class="card-title">完善资料</h2>
                     <p class="card-description">告诉我们您的背景，以便为您定制最佳学习体验</p>
