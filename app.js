@@ -1,7 +1,4 @@
 
-const SUPABASE_URL = 'https://sbeklofkvwbkwdaokzcy.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiZWtsb2Zrdndia3dkYW9remN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5NzcxMjQsImV4cCI6MjA5MzU1MzEyNH0.w0Lr3IjE4Von74pUmTXbwV5Ad1P3cZgWQ2eKyW08D98';
-
 const App = {
     state: {
         user: null,
