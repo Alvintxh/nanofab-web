@@ -627,41 +627,78 @@ const App = {
         const user = this.state.user;
         const level = user?.level || 'beginner';
         const background = user?.background || 'student';
+        const provider = localStorage.getItem('ai_provider') || 'deepseek';
 
-        const apiKey = localStorage.getItem('deepseek_api_key');
-        if (apiKey) {
-            try {
-                const systemPrompt = this.buildSystemPrompt(user, 'explanation');
-                
-                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: 'deepseek-chat',
-                        messages: [
-                            {
-                                role: 'system',
-                                content: systemPrompt
-                            },
-                            {
-                                role: 'user',
-                                content: `请解释以下纳米制造技术概念："${text}"`
+        if (provider === 'gemini') {
+            const geminiKey = localStorage.getItem('gemini_api_key');
+            if (geminiKey) {
+                try {
+                    const systemPrompt = this.buildSystemPrompt(user, 'explanation');
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            contents: [
+                                {
+                                    role: 'user',
+                                    parts: [
+                                        { text: systemPrompt + '\n\n请解释以下纳米制造技术概念："' + text + '"' }
+                                    ]
+                                }
+                            ],
+                            generationConfig: {
+                                temperature: 0.7,
+                                maxOutputTokens: 1500
                             }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 1500
-                    })
-                });
+                        })
+                    });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.choices[0].message.content;
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.candidates[0].content.parts[0].text;
+                    }
+                } catch (error) {
+                    console.error('Gemini API error:', error);
                 }
-            } catch (error) {
-                console.error('DeepSeek API error:', error);
+            }
+        } else {
+            const apiKey = localStorage.getItem('deepseek_api_key');
+            if (apiKey) {
+                try {
+                    const systemPrompt = this.buildSystemPrompt(user, 'explanation');
+                    
+                    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: 'deepseek-chat',
+                            messages: [
+                                {
+                                    role: 'system',
+                                    content: systemPrompt
+                                },
+                                {
+                                    role: 'user',
+                                    content: `请解释以下纳米制造技术概念："${text}"`
+                                }
+                            ],
+                            temperature: 0.7,
+                            max_tokens: 1500
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.choices[0].message.content;
+                    }
+                } catch (error) {
+                    console.error('DeepSeek API error:', error);
+                }
             }
         }
 
@@ -953,6 +990,9 @@ const App = {
         localStorage.removeItem('nanofab_user');
         localStorage.removeItem('nanofab_progress');
         localStorage.removeItem('nanofab_behavior');
+        localStorage.removeItem('deepseek_api_key');
+        localStorage.removeItem('gemini_api_key');
+        localStorage.removeItem('ai_provider');
         this.state.user = null;
         this.state.completedChapters = new Set();
         this.state.behaviorData = {
@@ -1062,8 +1102,12 @@ const App = {
 
         const settingsToggle = document.getElementById('ai-settings-toggle');
         const settingsPanel = document.getElementById('ai-settings-panel');
-        const apiKeyInput = document.getElementById('deepseek-api-key');
+        const deepseekKeyInput = document.getElementById('deepseek-api-key');
+        const geminiKeyInput = document.getElementById('gemini-api-key');
         const saveApiKeyBtn = document.getElementById('save-api-key');
+        const providerRadios = document.querySelectorAll('input[name="ai-provider"]');
+        const deepseekSettings = document.getElementById('deepseek-settings');
+        const geminiSettings = document.getElementById('gemini-settings');
 
         if (settingsToggle && settingsPanel) {
             settingsToggle.addEventListener('click', () => {
@@ -1071,22 +1115,62 @@ const App = {
             });
         }
 
-        const savedApiKey = localStorage.getItem('deepseek_api_key');
-        if (apiKeyInput && savedApiKey) {
-            apiKeyInput.value = savedApiKey;
+        const savedProvider = localStorage.getItem('ai_provider') || 'deepseek';
+        const savedDeepseekKey = localStorage.getItem('deepseek_api_key');
+        const savedGeminiKey = localStorage.getItem('gemini_api_key');
+        
+        providerRadios.forEach(radio => {
+            if (radio.value === savedProvider) {
+                radio.checked = true;
+            }
+        });
+        
+        if (savedProvider === 'gemini') {
+            if (deepseekSettings) deepseekSettings.classList.add('hidden');
+            if (geminiSettings) geminiSettings.classList.remove('hidden');
+        }
+        
+        if (deepseekKeyInput && savedDeepseekKey) {
+            deepseekKeyInput.value = savedDeepseekKey;
+        }
+        if (geminiKeyInput && savedGeminiKey) {
+            geminiKeyInput.value = savedGeminiKey;
         }
 
-        if (saveApiKeyBtn && apiKeyInput) {
+        providerRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'deepseek') {
+                    if (deepseekSettings) deepseekSettings.classList.remove('hidden');
+                    if (geminiSettings) geminiSettings.classList.add('hidden');
+                } else {
+                    if (deepseekSettings) deepseekSettings.classList.add('hidden');
+                    if (geminiSettings) geminiSettings.classList.remove('hidden');
+                }
+            });
+        });
+
+        if (saveApiKeyBtn) {
             saveApiKeyBtn.addEventListener('click', () => {
-                const key = apiKeyInput.value.trim();
-                if (key) {
-                    localStorage.setItem('deepseek_api_key', key);
-                    alert('API Key 已保存');
-                    if (settingsPanel) settingsPanel.classList.add('hidden');
+                const selectedProvider = document.querySelector('input[name="ai-provider"]:checked')?.value || 'deepseek';
+                localStorage.setItem('ai_provider', selectedProvider);
+                
+                const deepseekKey = deepseekKeyInput?.value.trim();
+                const geminiKey = geminiKeyInput?.value.trim();
+                
+                if (deepseekKey) {
+                    localStorage.setItem('deepseek_api_key', deepseekKey);
                 } else {
                     localStorage.removeItem('deepseek_api_key');
-                    alert('API Key 已清除');
                 }
+                
+                if (geminiKey) {
+                    localStorage.setItem('gemini_api_key', geminiKey);
+                } else {
+                    localStorage.removeItem('gemini_api_key');
+                }
+                
+                alert('设置已保存');
+                if (settingsPanel) settingsPanel.classList.add('hidden');
             });
         }
 
@@ -1177,50 +1261,95 @@ const App = {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
         const user = this.state.user;
+        const provider = localStorage.getItem('ai_provider') || 'deepseek';
 
-        const apiKey = localStorage.getItem('deepseek_api_key');
-        if (apiKey) {
-            try {
-                const systemPrompt = this.buildSystemPrompt(user, 'chat');
-                const messages = [
-                    {
-                        role: 'system',
-                        content: systemPrompt
+        if (provider === 'gemini') {
+            const geminiKey = localStorage.getItem('gemini_api_key');
+            if (geminiKey) {
+                try {
+                    const systemPrompt = this.buildSystemPrompt(user, 'chat');
+                    let promptText = systemPrompt;
+                    
+                    if (chapter) {
+                        promptText += `\n用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`;
                     }
-                ];
+                    
+                    promptText += `\n\n用户问题：${userMessage}`;
 
-                if (chapter) {
-                    messages.push({
-                        role: 'system',
-                        content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            contents: [
+                                {
+                                    role: 'user',
+                                    parts: [
+                                        { text: promptText }
+                                    ]
+                                }
+                            ],
+                            generationConfig: {
+                                temperature: 0.7,
+                                maxOutputTokens: 2000
+                            }
+                        })
                     });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.candidates[0].content.parts[0].text;
+                    }
+                } catch (error) {
+                    console.error('Gemini API error:', error);
                 }
+            }
+        } else {
+            const apiKey = localStorage.getItem('deepseek_api_key');
+            if (apiKey) {
+                try {
+                    const systemPrompt = this.buildSystemPrompt(user, 'chat');
+                    const messages = [
+                        {
+                            role: 'system',
+                            content: systemPrompt
+                        }
+                    ];
 
-                messages.push({
-                    role: 'user',
-                    content: userMessage
-                });
+                    if (chapter) {
+                        messages.push({
+                            role: 'system',
+                            content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+                        });
+                    }
 
-                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: 'deepseek-chat',
-                        messages: messages,
-                        temperature: 0.7,
-                        max_tokens: 2000
-                    })
-                });
+                    messages.push({
+                        role: 'user',
+                        content: userMessage
+                    });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.choices[0].message.content;
+                    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: 'deepseek-chat',
+                            messages: messages,
+                            temperature: 0.7,
+                            max_tokens: 2000
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.choices[0].message.content;
+                    }
+                } catch (error) {
+                    console.error('DeepSeek API error:', error);
                 }
-            } catch (error) {
-                console.error('DeepSeek API error:', error);
             }
         }
 

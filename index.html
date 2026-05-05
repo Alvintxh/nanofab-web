@@ -432,8 +432,28 @@
                 </button>
                 <div id="ai-settings-panel" class="ai-settings-panel hidden">
                     <div class="ai-settings-content">
-                        <label for="deepseek-api-key">DeepSeek API Key:</label>
-                        <input type="password" id="deepseek-api-key" placeholder="输入你的 DeepSeek API Key">
+                        <label>选择 AI 模型：</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="ai-provider" value="deepseek" checked>
+                                <span class="radio-label">DeepSeek</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="ai-provider" value="gemini">
+                                <span class="radio-label">Gemini</span>
+                            </label>
+                        </div>
+                        
+                        <div id="deepseek-settings">
+                            <label for="deepseek-api-key">DeepSeek API Key:</label>
+                            <input type="password" id="deepseek-api-key" placeholder="输入你的 DeepSeek API Key">
+                        </div>
+                        
+                        <div id="gemini-settings" class="hidden">
+                            <label for="gemini-api-key">Gemini API Key:</label>
+                            <input type="password" id="gemini-api-key" placeholder="输入你的 Gemini API Key">
+                        </div>
+                        
                         <p class="ai-settings-hint">API Key 仅存储在本地浏览器中，不会上传到服务器。</p>
                         <button id="save-api-key" class="btn btn-primary btn-sm">保存</button>
                     </div>
