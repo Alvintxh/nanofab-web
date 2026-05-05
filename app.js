@@ -364,11 +364,24 @@ const App = {
                     email,
                     password,
                     options: {
-                        data: { name }
+                        data: { name },
+                        emailRedirectTo: window.location.origin
                     }
                 });
 
-                if (error) throw error;
+                if (error) {
+                    if (error.message.includes('rate limit')) {
+                        alert('发送过于频繁，请稍后再试（约1分钟后）');
+                        return;
+                    }
+                    throw error;
+                }
+
+                if (data.user && data.user.identities && data.user.identities.length === 0) {
+                    alert('该邮箱已注册，请直接登录');
+                    this.switchAuthTab('login');
+                    return;
+                }
 
                 localStorage.setItem('pending_email', email);
                 localStorage.setItem('pending_password', password);
@@ -377,8 +390,9 @@ const App = {
                 document.getElementById('register-form').classList.add('hidden');
                 document.getElementById('verify-form').classList.remove('hidden');
                 
-                alert('验证码已发送到您的邮箱，请输入验证码完成注册。');
+                alert('验证码已发送到您的邮箱，请输入验证码完成注册。如果未收到，请检查垃圾邮件文件夹。');
             } catch (error) {
+                console.error('Registration error:', error);
                 alert('注册失败：' + error.message);
             }
         } else {
@@ -424,7 +438,6 @@ const App = {
 
     async resendVerificationCode() {
         const email = localStorage.getItem('pending_email');
-        const password = localStorage.getItem('pending_password');
         
         if (!email || !this.supabase) {
             alert('无法重新发送验证码');
@@ -432,15 +445,22 @@ const App = {
         }
 
         try {
-            const { error } = await this.supabase.auth.signUp({
-                email,
-                password
+            const { error } = await this.supabase.auth.resend({
+                type: 'signup',
+                email: email
             });
 
-            if (error) throw error;
+            if (error) {
+                if (error.message.includes('rate limit') || error.message.includes('security')) {
+                    alert('发送过于频繁，请稍后再试（约1分钟后）');
+                    return;
+                }
+                throw error;
+            }
 
-            alert('验证码已重新发送！');
+            alert('验证码已重新发送！请检查您的邮箱（包括垃圾邮件文件夹）。');
         } catch (error) {
+            console.error('Resend error:', error);
             alert('发送失败：' + error.message);
         }
     },
