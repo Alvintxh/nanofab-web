@@ -52,11 +52,24 @@ const App = {
         }
     },
 
-    loadUser() {
+    async loadUser() {
         const stored = localStorage.getItem('nanofab_user');
         if (stored) {
             this.state.user = JSON.parse(stored);
             this.showApp();
+            return;
+        }
+
+        if (this.supabase) {
+            try {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    await this.loadUserFromSupabase(session.user);
+                    this.showApp();
+                }
+            } catch (error) {
+                console.error('Failed to check auth session:', error);
+            }
         }
     },
 
@@ -222,10 +235,31 @@ const App = {
     bindEvents() {
         window.addEventListener('hashchange', () => this.handleRoute());
 
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+        }
+
+        const registerForm = document.getElementById('register-form');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => this.handleRegister(e));
+        }
+
         const profileForm = document.getElementById('profile-form');
         if (profileForm) {
             profileForm.addEventListener('submit', (e) => this.handleProfileSubmit(e));
         }
+
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => this.switchAuthTab(tab.dataset.tab));
+        });
+
+        document.querySelectorAll('.auth-switch').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.switchAuthTab(link.dataset.target);
+            });
+        });
 
         const sidebarOverlay = document.getElementById('sidebar-overlay');
         if (sidebarOverlay) {
@@ -263,6 +297,122 @@ const App = {
                 this.closeSidebar();
             }
         });
+    },
+
+    switchAuthTab(tab) {
+        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
+        
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('register-form').classList.add('hidden');
+        
+        if (tab === 'login') {
+            document.getElementById('login-form').classList.remove('hidden');
+        } else if (tab === 'register') {
+            document.getElementById('register-form').classList.remove('hidden');
+        }
+    },
+
+    async handleLogin(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        if (this.supabase) {
+            try {
+                const { data, error } = await this.supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) throw error;
+
+                await this.loadUserFromSupabase(data.user);
+                this.showApp();
+            } catch (error) {
+                alert('登录失败：' + error.message);
+            }
+        } else {
+            alert('Supabase 未初始化');
+        }
+    },
+
+    async handleRegister(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const name = formData.get('name');
+
+        if (this.supabase) {
+            try {
+                const { data, error } = await this.supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { name }
+                    }
+                });
+
+                if (error) throw error;
+
+                localStorage.setItem('pending_name', name);
+                
+                document.getElementById('register-form').classList.add('hidden');
+                document.querySelector('.auth-tabs').classList.add('hidden');
+                document.getElementById('profile-form').classList.remove('hidden');
+                
+                document.getElementById('user-name').value = name;
+                
+                alert('注册成功！请完善您的个人资料。');
+            } catch (error) {
+                alert('注册失败：' + error.message);
+            }
+        } else {
+            alert('Supabase 未初始化');
+        }
+    },
+
+    async loadUserFromSupabase(authUser) {
+        if (!this.supabase || !authUser) return;
+
+        try {
+            const { data: profile } = await this.supabase
+                .from('user_profiles')
+                .select('profile_data')
+                .eq('id', authUser.id)
+                .single();
+
+            if (profile?.profile_data) {
+                this.state.user = profile.profile_data;
+                localStorage.setItem('nanofab_user', JSON.stringify(profile.profile_data));
+            }
+
+            const { data: progress } = await this.supabase
+                .from('user_progress')
+                .select('completed_chapters')
+                .eq('id', authUser.id)
+                .single();
+
+            if (progress?.completed_chapters) {
+                this.state.completedChapters = new Set(progress.completed_chapters);
+                localStorage.setItem('nanofab_progress', JSON.stringify(progress.completed_chapters));
+            }
+
+            const { data: behavior } = await this.supabase
+                .from('user_behavior')
+                .select('behavior_data')
+                .eq('id', authUser.id)
+                .single();
+
+            if (behavior?.behavior_data) {
+                this.state.behaviorData = behavior.behavior_data;
+                localStorage.setItem('nanofab_behavior', JSON.stringify(behavior.behavior_data));
+            }
+        } catch (error) {
+            console.error('Failed to load user data from Supabase:', error);
+        }
     },
 
     handleProfileSubmit(e) {

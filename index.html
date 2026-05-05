@@ -32,10 +32,67 @@
             </div>
 
             <div class="profile-setup-card">
-                <h2 class="card-title">开始学习之前</h2>
-                <p class="card-description">告诉我们您的背景，以便为您定制最佳学习体验</p>
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab active" data-tab="login">登录</button>
+                    <button type="button" class="auth-tab" data-tab="register">注册</button>
+                </div>
 
-                <form id="profile-form" class="profile-form">
+                <form id="login-form" class="auth-form">
+                    <h2 class="card-title">欢迎回来</h2>
+                    <p class="card-description">登录以继续您的学习之旅</p>
+                    
+                    <div class="form-group">
+                        <label for="login-email">邮箱</label>
+                        <input type="email" id="login-email" name="email" placeholder="请输入您的邮箱" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">密码</label>
+                        <input type="password" id="login-password" name="password" placeholder="请输入您的密码" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        登录
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    
+                    <p class="auth-hint">还没有账号？<a href="#" class="auth-switch" data-target="register">立即注册</a></p>
+                </form>
+
+                <form id="register-form" class="auth-form hidden">
+                    <h2 class="card-title">创建账号</h2>
+                    <p class="card-description">注册以开始个性化学习</p>
+                    
+                    <div class="form-group">
+                        <label for="register-email">邮箱</label>
+                        <input type="email" id="register-email" name="email" placeholder="请输入您的邮箱" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">密码</label>
+                        <input type="password" id="register-password" name="password" placeholder="请设置密码（至少6位）" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-name">您的姓名</label>
+                        <input type="text" id="register-name" name="name" placeholder="请输入您的姓名" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        注册
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    
+                    <p class="auth-hint">已有账号？<a href="#" class="auth-switch" data-target="login">立即登录</a></p>
+                </form>
+
+                <form id="profile-form" class="profile-form hidden">
+                    <h2 class="card-title">完善资料</h2>
+                    <p class="card-description">告诉我们您的背景，以便为您定制最佳学习体验</p>
                     <div class="form-group">
                         <label for="user-name">您的姓名</label>
                         <input type="text" id="user-name" name="name" placeholder="请输入您的姓名" required>
