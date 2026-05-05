@@ -435,13 +435,21 @@
                         <label>选择 AI 模型：</label>
                         <div class="radio-group">
                             <label class="radio-option">
-                                <input type="radio" name="ai-provider" value="deepseek" checked>
+                                <input type="radio" name="ai-provider" value="zhipu" checked>
+                                <span class="radio-label">智谱 GLM（默认）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="ai-provider" value="deepseek">
                                 <span class="radio-label">DeepSeek</span>
                             </label>
                             <label class="radio-option">
                                 <input type="radio" name="ai-provider" value="gemini">
                                 <span class="radio-label">Gemini</span>
                             </label>
+                        </div>
+                        
+                        <div id="zhipu-settings" class="hidden">
+                            <p class="ai-settings-hint">智谱 GLM 已内置，无需配置 API Key。</p>
                         </div>
                         
                         <div id="deepseek-settings">

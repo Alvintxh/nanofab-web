@@ -627,9 +627,43 @@ const App = {
         const user = this.state.user;
         const level = user?.level || 'beginner';
         const background = user?.background || 'student';
-        const provider = localStorage.getItem('ai_provider') || 'deepseek';
+        const provider = localStorage.getItem('ai_provider') || 'zhipu';
 
-        if (provider === 'gemini') {
+        if (provider === 'zhipu') {
+            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
+            try {
+                const systemPrompt = this.buildSystemPrompt(user, 'explanation');
+                const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${zhipuKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'glm-4-flash',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: systemPrompt
+                            },
+                            {
+                                role: 'user',
+                                content: `请解释以下纳米制造技术概念："${text}"`
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 1500
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.choices[0].message.content;
+                }
+            } catch (error) {
+                console.error('Zhipu API error:', error);
+            }
+        } else if (provider === 'gemini') {
             const geminiKey = localStorage.getItem('gemini_api_key');
             if (geminiKey) {
                 try {
@@ -1106,6 +1140,7 @@ const App = {
         const geminiKeyInput = document.getElementById('gemini-api-key');
         const saveApiKeyBtn = document.getElementById('save-api-key');
         const providerRadios = document.querySelectorAll('input[name="ai-provider"]');
+        const zhipuSettings = document.getElementById('zhipu-settings');
         const deepseekSettings = document.getElementById('deepseek-settings');
         const geminiSettings = document.getElementById('gemini-settings');
 
@@ -1115,7 +1150,7 @@ const App = {
             });
         }
 
-        const savedProvider = localStorage.getItem('ai_provider') || 'deepseek';
+        const savedProvider = localStorage.getItem('ai_provider') || 'zhipu';
         const savedDeepseekKey = localStorage.getItem('deepseek_api_key');
         const savedGeminiKey = localStorage.getItem('gemini_api_key');
         
@@ -1125,9 +1160,18 @@ const App = {
             }
         });
         
-        if (savedProvider === 'gemini') {
+        if (savedProvider === 'zhipu') {
+            if (zhipuSettings) zhipuSettings.classList.remove('hidden');
+            if (deepseekSettings) deepseekSettings.classList.add('hidden');
+            if (geminiSettings) geminiSettings.classList.add('hidden');
+        } else if (savedProvider === 'gemini') {
+            if (zhipuSettings) zhipuSettings.classList.add('hidden');
             if (deepseekSettings) deepseekSettings.classList.add('hidden');
             if (geminiSettings) geminiSettings.classList.remove('hidden');
+        } else {
+            if (zhipuSettings) zhipuSettings.classList.add('hidden');
+            if (deepseekSettings) deepseekSettings.classList.remove('hidden');
+            if (geminiSettings) geminiSettings.classList.add('hidden');
         }
         
         if (deepseekKeyInput && savedDeepseekKey) {
@@ -1139,10 +1183,16 @@ const App = {
 
         providerRadios.forEach(radio => {
             radio.addEventListener('change', () => {
-                if (radio.value === 'deepseek') {
+                if (radio.value === 'zhipu') {
+                    if (zhipuSettings) zhipuSettings.classList.remove('hidden');
+                    if (deepseekSettings) deepseekSettings.classList.add('hidden');
+                    if (geminiSettings) geminiSettings.classList.add('hidden');
+                } else if (radio.value === 'deepseek') {
+                    if (zhipuSettings) zhipuSettings.classList.add('hidden');
                     if (deepseekSettings) deepseekSettings.classList.remove('hidden');
                     if (geminiSettings) geminiSettings.classList.add('hidden');
                 } else {
+                    if (zhipuSettings) zhipuSettings.classList.add('hidden');
                     if (deepseekSettings) deepseekSettings.classList.add('hidden');
                     if (geminiSettings) geminiSettings.classList.remove('hidden');
                 }
@@ -1151,7 +1201,7 @@ const App = {
 
         if (saveApiKeyBtn) {
             saveApiKeyBtn.addEventListener('click', () => {
-                const selectedProvider = document.querySelector('input[name="ai-provider"]:checked')?.value || 'deepseek';
+                const selectedProvider = document.querySelector('input[name="ai-provider"]:checked')?.value || 'zhipu';
                 localStorage.setItem('ai_provider', selectedProvider);
                 
                 const deepseekKey = deepseekKeyInput?.value.trim();
@@ -1261,9 +1311,53 @@ const App = {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
         const user = this.state.user;
-        const provider = localStorage.getItem('ai_provider') || 'deepseek';
+        const provider = localStorage.getItem('ai_provider') || 'zhipu';
 
-        if (provider === 'gemini') {
+        if (provider === 'zhipu') {
+            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
+            try {
+                const systemPrompt = this.buildSystemPrompt(user, 'chat');
+                const messages = [
+                    {
+                        role: 'system',
+                        content: systemPrompt
+                    }
+                ];
+
+                if (chapter) {
+                    messages.push({
+                        role: 'system',
+                        content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+                    });
+                }
+
+                messages.push({
+                    role: 'user',
+                    content: userMessage
+                });
+
+                const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${zhipuKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'glm-4-flash',
+                        messages: messages,
+                        temperature: 0.7,
+                        max_tokens: 2000
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.choices[0].message.content;
+                }
+            } catch (error) {
+                console.error('Zhipu API error:', error);
+            }
+        } else if (provider === 'gemini') {
             const geminiKey = localStorage.getItem('gemini_api_key');
             if (geminiKey) {
                 try {
