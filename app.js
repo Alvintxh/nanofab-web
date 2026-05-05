@@ -1,4 +1,7 @@
 
+const SUPABASE_URL = 'https://your-project.supabase.co';
+const SUPABASE_ANON_KEY = 'your-anon-key';
+
 const App = {
     state: {
         user: null,
@@ -11,12 +14,15 @@ const App = {
             pageViews: [],
             scrollDepth: {},
             timeSpent: {},
+            sectionTime: {},
             interactions: [],
-            quizResults: []
+            quizResults: [],
+            aiQueries: []
         }
     },
 
     init() {
+        this.initSupabase();
         this.loadUser();
         this.loadProgress();
         this.loadBehaviorData();
@@ -26,6 +32,12 @@ const App = {
         this.loadChapters().then(() => {
             this.handleRoute();
         });
+    },
+
+    initSupabase() {
+        if (typeof supabase !== 'undefined') {
+            this.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
     },
 
     async loadChapters() {
@@ -48,9 +60,26 @@ const App = {
         }
     },
 
-    saveUser(user) {
+    async saveUser(user) {
         this.state.user = user;
         localStorage.setItem('nanofab_user', JSON.stringify(user));
+        
+        if (this.supabase) {
+            try {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    await this.supabase
+                        .from('user_profiles')
+                        .upsert({
+                            id: session.user.id,
+                            profile_data: user,
+                            updated_at: new Date().toISOString()
+                        });
+                }
+            } catch (error) {
+                console.error('Failed to sync user to Supabase:', error);
+            }
+        }
     },
 
     loadProgress() {
@@ -60,11 +89,28 @@ const App = {
         }
     },
 
-    saveProgress() {
+    async saveProgress() {
         localStorage.setItem(
             'nanofab_progress',
             JSON.stringify([...this.state.completedChapters])
         );
+        
+        if (this.supabase) {
+            try {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    await this.supabase
+                        .from('user_progress')
+                        .upsert({
+                            id: session.user.id,
+                            completed_chapters: [...this.state.completedChapters],
+                            updated_at: new Date().toISOString()
+                        });
+                }
+            } catch (error) {
+                console.error('Failed to sync progress to Supabase:', error);
+            }
+        }
     },
 
     loadBehaviorData() {
@@ -74,8 +120,25 @@ const App = {
         }
     },
 
-    saveBehaviorData() {
+    async saveBehaviorData() {
         localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
+        
+        if (this.supabase) {
+            try {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    await this.supabase
+                        .from('user_behavior')
+                        .upsert({
+                            id: session.user.id,
+                            behavior_data: this.state.behaviorData,
+                            updated_at: new Date().toISOString()
+                        });
+                }
+            } catch (error) {
+                console.error('Failed to sync behavior to Supabase:', error);
+            }
+        }
     },
 
     initBehaviorTracking() {
