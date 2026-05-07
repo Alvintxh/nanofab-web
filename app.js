@@ -211,6 +211,41 @@ const App = {
         }
     },
 
+    async syncQuizAnswer(questionEl, selectedValue, correctAnswer, isCorrect) {
+        if (!this.supabase || !this.state.currentChapter) return;
+
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return;
+
+            const questionText = questionEl.querySelector('.question-text')?.textContent?.trim() || '';
+
+            const selectedSpan = questionEl.querySelector(`input[value="${selectedValue}"]`)?.closest('.quiz-option')?.querySelector('span');
+            const selectedText = selectedSpan ? selectedSpan.textContent.replace(/^[A-D][.、]\s*/, '').trim() : selectedValue;
+
+            const correctSpan = questionEl.querySelector(`input[value="${correctAnswer}"]`)?.closest('.quiz-option')?.querySelector('span');
+            const correctText = correctSpan ? correctSpan.textContent.replace(/^[A-D][.、]\s*/, '').trim() : correctAnswer;
+
+            const { error } = await this.supabase
+                .from('quiz_answers')
+                .upsert({
+                    user_id: session.user.id,
+                    chapter_id: this.state.currentChapter.id,
+                    question_id: questionEl.dataset.question,
+                    question_text: questionText,
+                    is_correct: isCorrect,
+                    selected_answer: selectedText,
+                    correct_answer: correctText
+                });
+
+            if (error) {
+                console.error('Failed to sync quiz answer to Supabase:', error);
+            }
+        } catch (error) {
+            console.error('Failed to sync quiz answer to Supabase:', error);
+        }
+    },
+
     loadBehaviorData() {
         const stored = localStorage.getItem('nanofab_behavior');
         if (stored) {
@@ -1675,9 +1710,47 @@ const App = {
                     this.saveBehaviorData();
                     this.updateBehaviorProfile();
 
+                    this.syncQuizAnswer(questionEl, selectedValue, correctAnswer, isCorrect);
+
                     this.checkQuizCompletion();
                 });
             });
+
+            // Handle multi-select checkbox questions
+            const checkboxes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+            if (checkboxes.length > 0) {
+                const checkBtn = document.createElement('button');
+                checkBtn.className = 'btn btn-primary quiz-check-btn';
+                checkBtn.textContent = '确认提交';
+                optionsContainer.parentElement.appendChild(checkBtn);
+
+                checkBtn.addEventListener('click', () => {
+                    const selectedValues = [];
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) selectedValues.push(cb.value);
+                    });
+                    if (selectedValues.length === 0) return;
+
+                    const selected = selectedValues.sort().join('');
+                    const isCorrect = selected === correctAnswer;
+
+                    feedbackEl.classList.remove('hidden', 'show-correct', 'show-incorrect');
+                    feedbackEl.classList.add(isCorrect ? 'show-correct' : 'show-incorrect');
+
+                    this.state.behaviorData.quizResults.push({
+                        question: questionEl.dataset.question,
+                        correct: isCorrect,
+                        timestamp: new Date().toISOString(),
+                        chapter: this.state.currentChapter?.id
+                    });
+                    this.saveBehaviorData();
+                    this.updateBehaviorProfile();
+
+                    this.syncQuizAnswer(questionEl, selected, correctAnswer, isCorrect);
+
+                    this.checkQuizCompletion();
+                });
+            }
         });
 
         document.querySelectorAll('.exercise-hint-btn').forEach(btn => {
