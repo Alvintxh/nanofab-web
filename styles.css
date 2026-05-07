@@ -721,6 +721,56 @@ input, select, textarea {
     color: var(--color-primary);
 }
 
+.ai-learning-path .card-icon {
+    color: #7c3aed;
+    background: #f5f3ff;
+}
+
+.ai-path-loading {
+    color: var(--color-text-tertiary) !important;
+    font-style: italic;
+}
+
+.ai-path-result {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ai-path-section {
+    padding: 12px;
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+}
+
+.ai-path-section.review {
+    border-left-color: var(--color-warning);
+}
+
+.ai-path-section.mastered {
+    border-left-color: var(--color-success);
+}
+
+.ai-path-section h4 {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+}
+
+.ai-path-section p {
+    font-size: 0.8125rem;
+    margin-bottom: 0;
+}
+
+#refresh-ai-path {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 
 .chapter-header {
     margin-bottom: 32px;

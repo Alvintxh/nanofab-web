@@ -845,6 +845,7 @@ const App = {
                 this.showView('view-home');
                 this.updateUserGreeting();
                 this.updateProgress();
+                this.renderAILearningPath();
                 break;
             case 'chapter':
                 if (param) {
@@ -1201,7 +1202,7 @@ const App = {
             
             const weakTopics = new Set();
             quizResults.filter(r => !r.correct).forEach(r => {
-                if (r.chapterId) weakTopics.add(r.chapterId);
+                if (r.chapter) weakTopics.add(r.chapter);
             });
             bp.weakTopics = [...weakTopics];
         }
@@ -1525,6 +1526,199 @@ const App = {
             partEl.appendChild(chaptersContainer);
             nav.appendChild(partEl);
         });
+    },
+
+    renderAILearningPath() {
+        const container = document.getElementById('ai-learning-path-content');
+        const refreshBtn = document.getElementById('refresh-ai-path');
+        if (!container) return;
+
+        const user = this.state.user;
+        if (!user) {
+            container.innerHTML = '<p class="ai-path-loading">请先完成注册和个人资料设置。</p>';
+            return;
+        }
+
+        if (this.state.completedChapters.size === 0) {
+            container.innerHTML = '<p class="ai-path-loading">完成更多章节和测试后，AI 将为您生成个性化学习建议。</p>';
+            if (refreshBtn) refreshBtn.style.display = 'none';
+            return;
+        }
+
+        // Show client-side fallback first
+        const fallback = this.buildLearningPath(user);
+        this.renderPathResult(container, refreshBtn, fallback);
+
+        // Then try AI for better recommendations (silently update)
+        const savedPath = localStorage.getItem('nanofab_ai_path');
+        if (savedPath) {
+            try {
+                const cached = JSON.parse(savedPath);
+                if (cached.timestamp && (Date.now() - cached.timestamp < 3600000)) {
+                    this.renderPathResult(container, refreshBtn, cached.data);
+                    return;
+                }
+            } catch {}
+        }
+
+        this.fetchAILearningPath(user).then(aiPath => {
+            if (aiPath) {
+                localStorage.setItem('nanofab_ai_path', JSON.stringify({
+                    data: aiPath,
+                    timestamp: Date.now()
+                }));
+                this.renderPathResult(container, refreshBtn, aiPath);
+            }
+        });
+    },
+
+    buildLearningPath(user) {
+        const bp = user.behaviorProfile || {};
+        const completed = [...this.state.completedChapters];
+        const all = this.getAllChapters();
+        const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
+
+        const nextChapter = remaining[0];
+        const reviewChapters = (bp.weakTopics || [])
+            .map(id => all.find(c => c.id === id))
+            .filter(Boolean)
+            .map(c => c.title);
+        const masteredChapters = (bp.strongTopics || [])
+            .map(id => all.find(c => c.id === id))
+            .filter(Boolean)
+            .map(c => c.title);
+
+        const tips = [];
+        const style = user.learningStyle || [];
+        const pace = user.studyPace;
+
+        if (style.includes('visual')) tips.push('多关注图表和流程图来加深理解');
+        if (style.includes('theory')) tips.push('深入推导公式背后的物理机制');
+        if (style.includes('practical')) tips.push('结合工艺实践案例理解理论');
+        if (style.includes('case')) tips.push('通过实际应用案例验证所学知识');
+        if (pace === 'intensive') tips.push('保持每天至少一个章节的学习节奏');
+        if (bp.quizAccuracy > 0 && bp.quizAccuracy < 0.6) tips.push('建议先复习薄弱章节再继续新课');
+
+        return {
+            next: nextChapter ? nextChapter.title : '所有章节已完成',
+            review: reviewChapters,
+            mastered: masteredChapters,
+            accuracy: bp.quizAccuracy ? Math.round(bp.quizAccuracy * 100) : 0,
+            tips: tips.length > 0 ? tips : ['继续按照课程顺序学习，完成测试巩固理解']
+        };
+    },
+
+    renderPathResult(container, refreshBtn, path) {
+        const sections = [];
+        if (path.next) {
+            sections.push(`<div class="ai-path-section">
+                <h4>📖 推荐下一步</h4><p>${path.next}</p></div>`);
+        }
+        if (path.review?.length > 0) {
+            sections.push(`<div class="ai-path-section review">
+                <h4>🔁 需要复习</h4><p>${path.review.join('、')}</p></div>`);
+        }
+        if (path.mastered?.length > 0) {
+            sections.push(`<div class="ai-path-section mastered">
+                <h4>✅ 已掌握</h4><p>${path.mastered.join('、')}</p></div>`);
+        }
+        if (path.accuracy > 0) {
+            sections.push(`<p style="font-size:0.8125rem;color:var(--color-text-secondary);margin:0;">测试正确率：${path.accuracy}%</p>`);
+        }
+        if (path.tips?.length > 0) {
+            sections.push(`<div class="ai-path-section">
+                <h4>💡 学习建议</h4><p>${path.tips.join('；')}</p></div>`);
+        }
+
+        container.innerHTML = `<div class="ai-path-result">${sections.join('')}</div>`;
+        if (refreshBtn) {
+            refreshBtn.style.display = 'inline-flex';
+            refreshBtn.onclick = () => {
+                localStorage.removeItem('nanofab_ai_path');
+                this.renderAILearningPath();
+            };
+        }
+    },
+
+    async fetchAILearningPath(user) {
+        const completed = [...this.state.completedChapters];
+        const all = this.getAllChapters();
+        const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
+        const bp = user.behaviorProfile || {};
+
+        const prompt = `你是纳米制造学习顾问。根据以下用户数据，以JSON格式返回个性化学习路线（直接返回JSON，不要其他文字）：
+
+{"next":"推荐下一步学习的章节名称及简短理由（20字内）","review":"需要重点复习的章节（用顿号分隔，无则填无）","mastered":"已掌握的章节（用顿号分隔，无则填无）","tips":["学习策略建议1","建议2"]}
+
+用户数据：水平${user.level}，已学${completed.join('、')}，待学${remaining.map(c=>c.title).join('、')}，弱项${(bp.weakTopics||[]).join('、')}，强项${(bp.strongTopics||[]).join('、')}，正确率${Math.round((bp.quizAccuracy||0)*100)}%，偏好${(user.learningStyle||[]).join('、')}，兴趣${(user.interestArea||[]).join('、')}`;
+
+        try {
+            const response = await this.callAI(prompt, 'chat');
+            const jsonMatch = response.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+                return JSON.parse(jsonMatch[0]);
+            }
+        } catch (error) {
+            console.error('AI learning path generation failed:', error);
+        }
+        return null;
+    },
+
+    async callAI(prompt, context) {
+        const user = this.state.user;
+        const provider = localStorage.getItem('ai_provider') || 'zhipu';
+        const systemPrompt = this.buildSystemPrompt(user, context) + '\n请直接返回用户请求的内容，不要附加额外说明。';
+
+        if (provider === 'zhipu') {
+            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
+            const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${zhipuKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'glm-4-flash',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: prompt }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                return data.choices[0].message.content;
+            }
+        }
+
+        // Fallback to DeepSeek if configured
+        const apiKey = localStorage.getItem('deepseek_api_key');
+        if (apiKey) {
+            const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'deepseek-chat',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: prompt }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                return data.choices[0].message.content;
+            }
+        }
+
+        throw new Error('No AI provider available');
     },
 
     renderQuickNav() {
