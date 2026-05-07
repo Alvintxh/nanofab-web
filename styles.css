@@ -587,9 +587,41 @@ input, select, textarea {
 }
 
 .nav-chapter.active .chapter-id {
-    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.3);
 }
 
+.nav-chapter-row {
+    display: flex;
+    align-items: center;
+}
+
+.nav-chapter-row .nav-chapter {
+    flex: 1;
+}
+
+.nav-chapter-quiz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-tertiary);
+    opacity: 0;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.nav-chapter-row:hover .nav-chapter-quiz,
+.nav-chapter-quiz:hover {
+    opacity: 1;
+}
+
+.nav-chapter-quiz:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
 
 .sidebar-overlay {
     display: none;

@@ -930,6 +930,16 @@ const App = {
                     this.renderMermaidDiagrams(contentEl);
                     this.initTextSelection(contentEl);
                     this.initLearningTools();
+
+                    if (this._pendingQuizJump === chapterId) {
+                        this._pendingQuizJump = null;
+                        setTimeout(() => {
+                            const quizTab = document.querySelector('.tool-tab[data-tab="quiz"]');
+                            if (quizTab) quizTab.click();
+                            const quizContent = document.getElementById('quiz-content');
+                            if (quizContent) quizContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
+                    }
                 })
                 .catch(error => {
                     console.error('Failed to load chapter content:', error);
@@ -1506,6 +1516,9 @@ const App = {
             chaptersContainer.className = 'nav-chapters';
 
             part.chapters.forEach((chapter) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'nav-chapter-row';
+
                 const chapterLink = document.createElement('a');
                 chapterLink.className = 'nav-chapter';
                 chapterLink.href = `#chapter/${chapter.id}`;
@@ -1519,7 +1532,26 @@ const App = {
                     chapterLink.classList.add('completed');
                 }
 
-                chaptersContainer.appendChild(chapterLink);
+                const quizBtn = document.createElement('a');
+                quizBtn.className = 'nav-chapter-quiz';
+                quizBtn.href = `#chapter/${chapter.id}`;
+                quizBtn.title = `跳转到 ${chapter.title} 的测试题`;
+                quizBtn.innerHTML = `
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+                `;
+                quizBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this._pendingQuizJump = chapter.id;
+                    window.location.hash = `#chapter/${chapter.id}`;
+                });
+
+                wrapper.appendChild(chapterLink);
+                wrapper.appendChild(quizBtn);
+                chaptersContainer.appendChild(wrapper);
             });
 
             partEl.appendChild(header);
