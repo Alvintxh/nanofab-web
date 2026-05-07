@@ -1532,17 +1532,11 @@ const App = {
                     chapterLink.classList.add('completed');
                 }
 
-                const quizBtn = document.createElement('a');
-                quizBtn.className = 'nav-chapter-quiz';
-                quizBtn.href = `#chapter/${chapter.id}`;
-                quizBtn.title = `跳转到 ${chapter.title} 的测试题`;
-                quizBtn.innerHTML = `
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 11l3 3L22 4"/>
-                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                    </svg>
-                `;
-                quizBtn.addEventListener('click', (e) => {
+                const quizLink = document.createElement('a');
+                quizLink.className = 'nav-chapter-quiz';
+                quizLink.href = `#chapter/${chapter.id}`;
+                quizLink.textContent = `${chapter.id}-测试题`;
+                quizLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     this._pendingQuizJump = chapter.id;
@@ -1550,7 +1544,7 @@ const App = {
                 });
 
                 wrapper.appendChild(chapterLink);
-                wrapper.appendChild(quizBtn);
+                wrapper.appendChild(quizLink);
                 chaptersContainer.appendChild(wrapper);
             });
 
