@@ -389,16 +389,29 @@ const App = {
     },
 
     switchAuthTab(tab) {
+        console.log('Switching auth tab to:', tab);
+        
         document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-        document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
+        const targetTab = document.querySelector(`.auth-tab[data-tab="${tab}"]`);
+        if (targetTab) {
+            targetTab.classList.add('active');
+            console.log('Activated tab:', tab);
+        } else {
+            console.error('Tab not found:', tab);
+        }
         
-        document.getElementById('login-form').classList.add('hidden');
-        document.getElementById('register-form').classList.add('hidden');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
         
-        if (tab === 'login') {
-            document.getElementById('login-form').classList.remove('hidden');
-        } else if (tab === 'register') {
-            document.getElementById('register-form').classList.remove('hidden');
+        if (loginForm) loginForm.classList.add('hidden');
+        if (registerForm) registerForm.classList.add('hidden');
+        
+        if (tab === 'login' && loginForm) {
+            loginForm.classList.remove('hidden');
+            console.log('Shown login form');
+        } else if (tab === 'register' && registerForm) {
+            registerForm.classList.remove('hidden');
+            console.log('Shown register form');
         }
     },
 
