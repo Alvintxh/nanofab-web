@@ -136,14 +136,13 @@ const App = {
                 if (userId) {
                     console.log('Attempting to save profile with auth method:', authMethod);
                     try {
-                        const { data, error } = await this.supabase
+                        const { error } = await this.supabase
                             .from('user_profiles')
                             .upsert({
                                 id: userId,
                                 profile_data: user,
                                 updated_at: new Date().toISOString()
-                            })
-                            .select();
+                            });
 
                         if (error) {
                             console.error('Failed to sync user to Supabase:', error);
@@ -157,7 +156,7 @@ const App = {
                                 console.warn('RLS Error: Please execute supabase/fix_rls.sql in your Supabase Dashboard');
                             }
                         } else {
-                            console.log('User profile synced to Supabase successfully:', data);
+                            console.log('User profile synced to Supabase successfully');
                             localStorage.removeItem('pending_user_id');
                         }
                     } catch (insertError) {
