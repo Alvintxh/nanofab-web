@@ -31,6 +31,35 @@ const App = {
         });
     },
 
+    showToast(message, type = 'info') {
+        let container = document.querySelector('.toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+        }
+
+        const icons = {
+            success: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>',
+            error: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+            info: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+            warning: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+        };
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `${icons[type] || icons.info}<span>${message}</span>`;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+            if (container.children.length === 0) {
+                container.remove();
+            }
+        }, 4000);
+    },
+
     initSupabase() {
         if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && typeof SUPABASE_ANON_KEY !== 'undefined') {
             this.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -315,7 +344,7 @@ const App = {
 
         document.querySelectorAll('h2, h3').forEach(heading => {
             if (!heading.id) {
-                heading.id = 'section-' + Math.random().toString(36).substr(2, 9);
+                heading.id = 'section-' + Math.random().toString(36).substring(2, 11);
             }
             observer.observe(heading);
         });
@@ -433,10 +462,10 @@ const App = {
                 await this.loadUserFromSupabase(data.user);
                 this.showApp();
             } catch (error) {
-                alert('登录失败：' + error.message);
+                this.showToast('登录失败：' + error.message, 'error');
             }
         } else {
-            alert('Supabase 未初始化');
+                this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -462,15 +491,15 @@ const App = {
                     if (error.message.includes('rate limit') || error.message.includes('security') || error.error_code === 'over_email_send_rate_limit') {
                         console.warn('Rate limit hit:', error);
                         if (error.error_code === 'over_email_send_rate_limit') {
-                            alert('注册成功！但验证邮件发送失败（邮件发送频率限制）。请直接登录，或稍后重试。');
+                            this.showToast('注册成功！但验证邮件发送失败（邮件发送频率限制）。请直接登录，或稍后重试。', 'warning');
                             this.switchAuthTab('login');
                             return;
                         }
-                        alert('发送过于频繁，请稍后再试（约1分钟后）');
+                        this.showToast('发送过于频繁，请稍后再试（约1分钟后）', 'warning');
                         return;
                     }
                     if (error.message.includes('already registered') || error.message.includes('already exists')) {
-                        alert('该邮箱已注册，请直接登录');
+                        this.showToast('该邮箱已注册，请直接登录', 'info');
                         this.switchAuthTab('login');
                         return;
                     }
@@ -478,14 +507,14 @@ const App = {
                 }
 
                 if (data.user && data.user.identities && data.user.identities.length === 0) {
-                    alert('该邮箱已注册，请直接登录');
+                    this.showToast('该邮箱已注册，请直接登录', 'info');
                     this.switchAuthTab('login');
                     return;
                 }
 
                 localStorage.setItem('pending_name', name);
                 localStorage.setItem('pending_email', email);
-                localStorage.setItem('pending_password', password);
+                sessionStorage.setItem('pending_password', password);
 
                 if (data.user) {
                     localStorage.setItem('pending_user_id', data.user.id);
@@ -505,13 +534,13 @@ const App = {
 
                 document.getElementById('user-name').value = name;
 
-                alert('注册成功！请完善您的个人资料。');
+                this.showToast('注册成功！请完善您的个人资料。', 'success');
             } catch (error) {
                 console.error('Registration error:', error);
-                alert('注册失败：' + error.message);
+                this.showToast('注册失败：' + error.message, 'error');
             }
         } else {
-            alert('Supabase 未初始化');
+                this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -520,7 +549,7 @@ const App = {
         const formData = new FormData(e.target);
         const code = formData.get('code');
         const email = localStorage.getItem('pending_email');
-        const password = localStorage.getItem('pending_password');
+        const password = sessionStorage.getItem('pending_password');
         const name = localStorage.getItem('pending_name');
 
         if (this.supabase) {
@@ -534,7 +563,7 @@ const App = {
                 if (error) throw error;
 
                 localStorage.removeItem('pending_email');
-                localStorage.removeItem('pending_password');
+                sessionStorage.removeItem('pending_password');
                 
                 document.getElementById('verify-form').classList.add('hidden');
                 document.querySelector('.auth-tabs').classList.add('hidden');
@@ -542,12 +571,12 @@ const App = {
                 
                 document.getElementById('user-name').value = name;
                 
-                alert('验证成功！请完善您的个人资料。');
+                this.showToast('验证成功！请完善您的个人资料。', 'success');
             } catch (error) {
-                alert('验证失败：' + error.message);
+                this.showToast('验证失败：' + error.message, 'error');
             }
         } else {
-            alert('Supabase 未初始化');
+                this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -555,7 +584,7 @@ const App = {
         const email = localStorage.getItem('pending_email');
         
         if (!email || !this.supabase) {
-            alert('无法重新发送验证码');
+            this.showToast('无法重新发送验证码', 'error');
             return;
         }
 
@@ -567,16 +596,16 @@ const App = {
 
             if (error) {
                 if (error.message.includes('rate limit') || error.message.includes('security')) {
-                    alert('发送过于频繁，请稍后再试（约1分钟后）');
+                    this.showToast('发送过于频繁，请稍后再试（约1分钟后）', 'warning');
                     return;
                 }
                 throw error;
             }
 
-            alert('验证码已重新发送！请检查您的邮箱（包括垃圾邮件文件夹）。');
+            this.showToast('验证码已重新发送！请检查您的邮箱（包括垃圾邮件文件夹）。', 'success');
         } catch (error) {
             console.error('Resend error:', error);
-            alert('发送失败：' + error.message);
+            this.showToast('发送失败：' + error.message, 'error');
         }
     },
 
@@ -651,7 +680,7 @@ const App = {
         }
     },
 
-    handleProfileSubmit(e) {
+    async handleProfileSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         
@@ -701,7 +730,7 @@ const App = {
 
         localStorage.removeItem('pending_name');
         localStorage.removeItem('pending_email');
-        localStorage.removeItem('pending_password');
+        sessionStorage.removeItem('pending_password');
 
         this.showApp();
     },
@@ -1282,6 +1311,7 @@ const App = {
             }
         }
 
+        this.showToast('AI 服务暂时不可用，正在使用本地解释', 'warning');
         await new Promise(resolve => setTimeout(resolve, 1500));
 
         const explanations = {
@@ -1580,7 +1610,7 @@ const App = {
         localStorage.removeItem('ai_provider');
         localStorage.removeItem('pending_name');
         localStorage.removeItem('pending_email');
-        localStorage.removeItem('pending_password');
+        sessionStorage.removeItem('pending_password');
 
         if (this.supabase) {
             try {
@@ -1794,7 +1824,7 @@ const App = {
                     localStorage.removeItem('gemini_api_key');
                 }
                 
-                alert('设置已保存');
+                this.showToast('设置已保存', 'success');
                 if (settingsPanel) settingsPanel.classList.add('hidden');
             });
         }
@@ -2021,6 +2051,8 @@ const App = {
                 }
             }
         }
+
+        this.showToast('AI 服务暂时不可用，使用离线回答', 'warning');
 
         if (lowerMsg.includes('你好') || lowerMsg.includes('hi') || lowerMsg.includes('hello')) {
             return '你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！';
