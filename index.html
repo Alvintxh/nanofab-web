@@ -457,101 +457,138 @@
         </div>
     </div>
 
-    <div id="ai-assistant" class="ai-assistant">
-        <button id="ai-assistant-toggle" class="ai-assistant-toggle" aria-label="AI小助手">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
-            </svg>
-        </button>
-        <div class="ai-assistant-chat" id="ai-assistant-chat">
-            <div class="ai-chat-header">
-                <div class="ai-chat-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <aside id="ai-sidebar" class="ai-sidebar">
+        <div class="ai-sidebar-header">
+            <div class="ai-sidebar-tabs">
+                <button class="ai-sidebar-tab active" data-tab="explanation">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                         <path d="M2 17l10 5 10-5"/>
                         <path d="M2 12l10 5 10-5"/>
                     </svg>
-                    <span>AI 学习助手</span>
-                </div>
-                <button class="ai-chat-close" aria-label="关闭">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    AI解释
+                </button>
+                <button class="ai-sidebar-tab" data-tab="chat">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     </svg>
+                    助手
                 </button>
             </div>
-            <div class="ai-chat-messages" id="ai-chat-messages">
-                <div class="ai-message ai-message-assistant">
-                    <div class="ai-message-avatar">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
+            <button id="ai-sidebar-close" class="ai-sidebar-close" aria-label="关闭面板">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="ai-sidebar-content">
+            <div id="ai-explanation-panel" class="ai-panel active">
+                <div class="ai-panel-empty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <p>选中文本后点击"AI解释"</p>
+                    <p class="ai-panel-empty-hint">即可获取个性化解释</p>
+                </div>
+                <div class="ai-explanation-result hidden">
+                    <div class="selected-text-box">
+                        <strong>选中内容：</strong>
+                        <p class="selected-text-content"></p>
+                    </div>
+                    <div class="ai-explanation-body">
+                        <div class="ai-loading">
+                            <div class="ai-spinner"></div>
+                            <p>正在根据您的背景生成个性化解释...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-chat-panel" class="ai-panel">
+                <div class="ai-chat-messages" id="ai-chat-messages">
+                    <div class="ai-message ai-message-assistant">
+                        <div class="ai-message-avatar">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="ai-message-content">
+                            <p>你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-chat-input-area">
+                    <textarea id="ai-chat-input" placeholder="输入你的问题..." rows="1"></textarea>
+                    <button id="ai-chat-send" class="ai-chat-send" aria-label="发送">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                         </svg>
-                    </div>
-                    <div class="ai-message-content">
-                        <p>你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！</p>
-                    </div>
-                </div>
-            </div>
-            <div class="ai-chat-input-area">
-                <textarea id="ai-chat-input" placeholder="输入你的问题..." rows="1"></textarea>
-                <button id="ai-chat-send" class="ai-chat-send" aria-label="发送">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="22" y1="2" x2="11" y2="13"/>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="ai-api-settings">
-                <button id="ai-settings-toggle" class="ai-settings-toggle" aria-label="API设置">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
-                    <span>API设置</span>
-                </button>
-                <div id="ai-settings-panel" class="ai-settings-panel hidden">
-                    <div class="ai-settings-content">
-                        <label>选择 AI 模型：</label>
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" name="ai-provider" value="zhipu" checked>
-                                <span class="radio-label">智谱 GLM（默认）</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="ai-provider" value="deepseek">
-                                <span class="radio-label">DeepSeek</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="ai-provider" value="gemini">
-                                <span class="radio-label">Gemini</span>
-                            </label>
-                        </div>
-                        
-                        <div id="zhipu-settings" class="hidden">
-                            <p class="ai-settings-hint">智谱 GLM 已内置，无需配置 API Key。</p>
-                        </div>
-                        
-                        <div id="deepseek-settings">
-                            <label for="deepseek-api-key">DeepSeek API Key:</label>
-                            <input type="password" id="deepseek-api-key" placeholder="输入你的 DeepSeek API Key">
-                        </div>
-                        
-                        <div id="gemini-settings" class="hidden">
-                            <label for="gemini-api-key">Gemini API Key:</label>
-                            <input type="password" id="gemini-api-key" placeholder="输入你的 Gemini API Key">
-                        </div>
-                        
-                        <p class="ai-settings-hint">API Key 仅存储在本地浏览器中，不会上传到服务器。</p>
-                        <button id="save-api-key" class="btn btn-primary btn-sm">保存</button>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="ai-sidebar-footer">
+            <button id="ai-settings-toggle" class="ai-settings-toggle" aria-label="API设置">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                <span>API设置</span>
+            </button>
+            <div id="ai-settings-panel" class="ai-settings-panel hidden">
+                <div class="ai-settings-content">
+                    <label>选择 AI 模型：</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="ai-provider" value="zhipu" checked>
+                            <span class="radio-label">智谱 GLM（默认）</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="ai-provider" value="deepseek">
+                            <span class="radio-label">DeepSeek</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="ai-provider" value="gemini">
+                            <span class="radio-label">Gemini</span>
+                        </label>
+                    </div>
+                    
+                    <div id="zhipu-settings" class="hidden">
+                        <p class="ai-settings-hint">智谱 GLM 已内置，无需配置 API Key。</p>
+                    </div>
+                    
+                    <div id="deepseek-settings">
+                        <label for="deepseek-api-key">DeepSeek API Key:</label>
+                        <input type="password" id="deepseek-api-key" placeholder="输入你的 DeepSeek API Key">
+                    </div>
+                    
+                    <div id="gemini-settings" class="hidden">
+                        <label for="gemini-api-key">Gemini API Key:</label>
+                        <input type="password" id="gemini-api-key" placeholder="输入你的 Gemini API Key">
+                    </div>
+                    
+                    <p class="ai-settings-hint">API Key 仅存储在本地浏览器中，不会上传到服务器。</p>
+                    <button id="save-api-key" class="btn btn-primary btn-sm">保存</button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <button id="ai-sidebar-toggle" class="ai-sidebar-toggle" aria-label="打开AI面板">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+        </svg>
+    </button>
 
     <script>
         // Supabase configuration - MUST be defined before app.js

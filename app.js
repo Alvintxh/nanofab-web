@@ -32,8 +32,11 @@ const App = {
     },
 
     initSupabase() {
-        if (typeof supabase !== 'undefined') {
+        if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && typeof SUPABASE_ANON_KEY !== 'undefined') {
             this.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('Supabase initialized successfully');
+        } else {
+            console.warn('Supabase not initialized - missing library or config');
         }
     },
 
@@ -52,9 +55,14 @@ const App = {
     async loadUser() {
         const stored = localStorage.getItem('nanofab_user');
         if (stored) {
-            this.state.user = JSON.parse(stored);
-            this.showApp();
-            return;
+            try {
+                this.state.user = JSON.parse(stored);
+                this.showApp();
+                return;
+            } catch (error) {
+                console.error('Failed to parse stored user:', error);
+                localStorage.removeItem('nanofab_user');
+            }
         }
 
         if (this.supabase) {
@@ -63,6 +71,7 @@ const App = {
                 if (session?.user) {
                     await this.loadUserFromSupabase(session.user);
                     this.showApp();
+                    return;
                 }
             } catch (error) {
                 console.error('Failed to check auth session:', error);
@@ -73,22 +82,69 @@ const App = {
     async saveUser(user) {
         this.state.user = user;
         localStorage.setItem('nanofab_user', JSON.stringify(user));
-        
+
         if (this.supabase) {
             try {
+                let userId = null;
+                let authMethod = 'unknown';
+
                 const { data: { session } } = await this.supabase.auth.getSession();
                 if (session?.user) {
-                    await this.supabase
-                        .from('user_profiles')
-                        .upsert({
-                            id: session.user.id,
-                            profile_data: user,
-                            updated_at: new Date().toISOString()
-                        });
+                    userId = session.user.id;
+                    authMethod = 'session';
+                    console.log('Found active session, userId:', userId);
+                }
+
+                if (!userId) {
+                    const pendingUserId = localStorage.getItem('pending_user_id');
+                    if (pendingUserId) {
+                        userId = pendingUserId;
+                        authMethod = 'pending';
+                        console.log('Using pending userId:', userId);
+                    }
+                }
+
+                if (userId) {
+                    console.log('Attempting to save profile with auth method:', authMethod);
+                    try {
+                        const { data, error } = await this.supabase
+                            .from('user_profiles')
+                            .upsert({
+                                id: userId,
+                                profile_data: user,
+                                updated_at: new Date().toISOString()
+                            })
+                            .select();
+
+                        if (error) {
+                            console.error('Failed to sync user to Supabase:', error);
+                            console.error('Error details:', {
+                                code: error.code,
+                                message: error.message,
+                                details: error.details,
+                                hint: error.hint
+                            });
+                            if (error.message.includes('row-level security')) {
+                                console.warn('RLS Error: Please execute supabase/fix_rls.sql in your Supabase Dashboard');
+                            }
+                        } else {
+                            console.log('User profile synced to Supabase successfully:', data);
+                            localStorage.removeItem('pending_user_id');
+                        }
+                    } catch (insertError) {
+                        console.error('Exception during profile insert:', insertError);
+                    }
+                } else {
+                    console.warn('No user ID found, skipping Supabase sync. Auth state:', {
+                        hasSession: !!(session && session.user),
+                        hasPendingId: !!localStorage.getItem('pending_user_id')
+                    });
                 }
             } catch (error) {
                 console.error('Failed to sync user to Supabase:', error);
             }
+        } else {
+            console.warn('Supabase client not initialized');
         }
     },
 
@@ -104,18 +160,22 @@ const App = {
             'nanofab_progress',
             JSON.stringify([...this.state.completedChapters])
         );
-        
+
         if (this.supabase) {
             try {
                 const { data: { session } } = await this.supabase.auth.getSession();
                 if (session?.user) {
-                    await this.supabase
+                    const { error } = await this.supabase
                         .from('user_progress')
                         .upsert({
                             id: session.user.id,
                             completed_chapters: [...this.state.completedChapters],
                             updated_at: new Date().toISOString()
                         });
+
+                    if (error) {
+                        console.error('Failed to sync progress to Supabase:', error);
+                    }
                 }
             } catch (error) {
                 console.error('Failed to sync progress to Supabase:', error);
@@ -132,23 +192,55 @@ const App = {
 
     async saveBehaviorData() {
         localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
-        
+
         if (this.supabase) {
             try {
+                let userId = null;
                 const { data: { session } } = await this.supabase.auth.getSession();
                 if (session?.user) {
-                    await this.supabase
-                        .from('user_behavior')
+                    userId = session.user.id;
+                }
+                if (!userId) {
+                    const pendingUserId = localStorage.getItem('pending_user_id');
+                    if (pendingUserId) userId = pendingUserId;
+                }
+
+                if (userId) {
+                    const { error: summaryError } = await this.supabase
+                        .from('user_behavior_summary')
                         .upsert({
-                            id: session.user.id,
-                            behavior_data: this.state.behaviorData,
+                            user_id: userId,
+                            total_study_time: this.calculateTotalStudyTime(),
+                            total_interactions: this.state.behaviorData.interactions?.length || 0,
+                            quiz_correct_count: this.state.behaviorData.quizResults?.filter(r => r.correct).length || 0,
+                            quiz_total_count: this.state.behaviorData.quizResults?.length || 0,
+                            avg_scroll_depth: this.calculateAvgScrollDepth(),
+                            weak_topics: this.state.user?.behaviorProfile?.weakTopics || [],
+                            strong_topics: this.state.user?.behaviorProfile?.strongTopics || [],
+                            preferred_content_types: this.state.user?.behaviorProfile?.preferredContentTypes || [],
                             updated_at: new Date().toISOString()
                         });
+
+                    if (summaryError) {
+                        console.error('Failed to sync behavior summary to Supabase:', summaryError);
+                    }
                 }
             } catch (error) {
                 console.error('Failed to sync behavior to Supabase:', error);
             }
         }
+    },
+
+    calculateTotalStudyTime() {
+        const timeSpent = this.state.behaviorData.timeSpent || {};
+        return Object.values(timeSpent).reduce((sum, time) => sum + time, 0);
+    },
+
+    calculateAvgScrollDepth() {
+        const scrollDepth = this.state.behaviorData.scrollDepth || {};
+        const depths = Object.values(scrollDepth);
+        if (depths.length === 0) return 0;
+        return depths.reduce((sum, d) => sum + d, 0) / depths.length;
     },
 
     initBehaviorTracking() {
@@ -354,8 +446,19 @@ const App = {
                 });
 
                 if (error) {
-                    if (error.message.includes('rate limit')) {
+                    if (error.message.includes('rate limit') || error.message.includes('security') || error.error_code === 'over_email_send_rate_limit') {
+                        console.warn('Rate limit hit:', error);
+                        if (error.error_code === 'over_email_send_rate_limit') {
+                            alert('注册成功！但验证邮件发送失败（邮件发送频率限制）。请直接登录，或稍后重试。');
+                            this.switchAuthTab('login');
+                            return;
+                        }
                         alert('发送过于频繁，请稍后再试（约1分钟后）');
+                        return;
+                    }
+                    if (error.message.includes('already registered') || error.message.includes('already exists')) {
+                        alert('该邮箱已注册，请直接登录');
+                        this.switchAuthTab('login');
                         return;
                     }
                     throw error;
@@ -368,13 +471,27 @@ const App = {
                 }
 
                 localStorage.setItem('pending_name', name);
-                
+                localStorage.setItem('pending_email', email);
+                localStorage.setItem('pending_password', password);
+
+                if (data.user) {
+                    localStorage.setItem('pending_user_id', data.user.id);
+                    console.log('Registration successful, user ID:', data.user.id);
+                    console.log('Email confirmed:', data.user.email_confirmed_at ? 'Yes' : 'No');
+                    console.log('Session present:', data.session ? 'Yes' : 'No');
+                    
+                    if (!data.session) {
+                        console.warn('No session after signup - email confirmation may be enabled');
+                        console.warn('Profile will be saved with pending_user_id, but user needs to verify email before login');
+                    }
+                }
+
                 document.getElementById('register-form').classList.add('hidden');
                 document.querySelector('.auth-tabs').classList.add('hidden');
                 document.getElementById('profile-form').classList.remove('hidden');
-                
+
                 document.getElementById('user-name').value = name;
-                
+
                 alert('注册成功！请完善您的个人资料。');
             } catch (error) {
                 console.error('Registration error:', error);
@@ -463,6 +580,28 @@ const App = {
             if (profile?.profile_data) {
                 this.state.user = profile.profile_data;
                 localStorage.setItem('nanofab_user', JSON.stringify(profile.profile_data));
+            } else {
+                const pendingName = localStorage.getItem('pending_name') || authUser.user_metadata?.name || '用户';
+                this.state.user = {
+                    name: pendingName,
+                    email: authUser.email,
+                    background: 'student',
+                    level: 'beginner',
+                    motivation: [],
+                    prerequisite: [],
+                    studyPace: 'moderate',
+                    learningStyle: [],
+                    interestArea: [],
+                    behaviorProfile: {
+                        weakTopics: [],
+                        strongTopics: [],
+                        preferredContentTypes: [],
+                        avgSessionTime: 0,
+                        quizAccuracy: 0,
+                        lastUpdated: new Date().toISOString()
+                    }
+                };
+                localStorage.setItem('nanofab_user', JSON.stringify(this.state.user));
             }
 
             const { data: progress } = await this.supabase
@@ -476,15 +615,23 @@ const App = {
                 localStorage.setItem('nanofab_progress', JSON.stringify(progress.completed_chapters));
             }
 
-            const { data: behavior } = await this.supabase
-                .from('user_behavior')
-                .select('behavior_data')
-                .eq('id', authUser.id)
+            const { data: behaviorSummary } = await this.supabase
+                .from('user_behavior_summary')
+                .select('*')
+                .eq('user_id', authUser.id)
                 .single();
 
-            if (behavior?.behavior_data) {
-                this.state.behaviorData = behavior.behavior_data;
-                localStorage.setItem('nanofab_behavior', JSON.stringify(behavior.behavior_data));
+            if (behaviorSummary) {
+                this.state.behaviorData = {
+                    pageViews: [],
+                    scrollDepth: {},
+                    timeSpent: {},
+                    sectionTime: {},
+                    interactions: [],
+                    quizResults: [],
+                    aiQueries: []
+                };
+                localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
             }
         } catch (error) {
             console.error('Failed to load user data from Supabase:', error);
@@ -527,7 +674,22 @@ const App = {
             }
         };
 
-        this.saveUser(user);
+        const pendingEmail = localStorage.getItem('pending_email');
+        if (pendingEmail) {
+            user.email = pendingEmail;
+        }
+
+        try {
+            await this.saveUser(user);
+            console.log('Profile saved successfully');
+        } catch (saveError) {
+            console.error('Error saving profile:', saveError);
+        }
+
+        localStorage.removeItem('pending_name');
+        localStorage.removeItem('pending_email');
+        localStorage.removeItem('pending_password');
+
         this.showApp();
     },
 
@@ -540,6 +702,16 @@ const App = {
 
         this.updateUserGreeting();
         this.updateProgress();
+    },
+
+    showOnboarding() {
+        const onboarding = document.getElementById('onboarding-screen');
+        const app = document.getElementById('app');
+
+        if (onboarding) onboarding.classList.add('active');
+        if (app) app.style.display = 'none';
+
+        this.switchAuthTab('login');
     },
 
     updateUserGreeting() {
@@ -750,43 +922,25 @@ const App = {
     },
 
     showAIExplanation(text) {
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.id = 'ai-explanation-modal';
-        modal.innerHTML = `
-            <div class="modal-overlay"></div>
-            <div class="modal-content" style="max-width: 600px;">
-                <div class="modal-header">
-                    <h2>AI 个性化解释</h2>
-                    <button class="modal-close" aria-label="关闭">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="selected-text-box">
-                        <strong>选中内容：</strong>
-                        <p>${text}</p>
-                    </div>
-                    <div class="ai-explanation-content">
-                        <div class="ai-loading">
-                            <div class="ai-spinner"></div>
-                            <p>正在根据您的背景生成个性化解释...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
+        this.openAISidebar();
+        this.switchAISidebarTab('explanation');
 
-        modal.querySelector('.modal-close').addEventListener('click', () => {
-            modal.remove();
-        });
-        modal.querySelector('.modal-overlay').addEventListener('click', () => {
-            modal.remove();
-        });
+        const emptyState = document.querySelector('#ai-explanation-panel .ai-panel-empty');
+        const resultState = document.querySelector('#ai-explanation-panel .ai-explanation-result');
+        const selectedTextContent = document.querySelector('#ai-explanation-panel .selected-text-content');
+        const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
+
+        if (emptyState) emptyState.classList.add('hidden');
+        if (resultState) resultState.classList.remove('hidden');
+        if (selectedTextContent) selectedTextContent.textContent = text;
+        if (explanationBody) {
+            explanationBody.innerHTML = `
+                <div class="ai-loading">
+                    <div class="ai-spinner"></div>
+                    <p>正在根据您的背景生成个性化解释...</p>
+                </div>
+            `;
+        }
 
         const chapter = this.state.currentChapter;
         const chapterContext = chapter ? `
@@ -795,21 +949,45 @@ const App = {
 ` : '';
 
         this.generateExplanation(text, chapterContext).then(explanation => {
-            const contentDiv = modal.querySelector('.ai-explanation-content');
-            const formattedExplanation = this.formatAIResponse(explanation);
-            contentDiv.innerHTML = `
-                <div class="explanation-result">
-                    <div class="explanation-header">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
-                        <span>为您定制的解释</span>
+            if (explanationBody) {
+                const formattedExplanation = this.formatAIResponse(explanation);
+                explanationBody.innerHTML = `
+                    <div class="explanation-result">
+                        <div class="explanation-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                            <span>为您定制的解释</span>
+                        </div>
+                        <div class="explanation-body">${formattedExplanation}</div>
                     </div>
-                    <div class="explanation-body">${formattedExplanation}</div>
-                </div>
-            `;
+                `;
+            }
+        });
+    },
+
+    openAISidebar() {
+        const sidebar = document.getElementById('ai-sidebar');
+        const toggle = document.getElementById('ai-sidebar-toggle');
+        if (sidebar) sidebar.classList.add('open');
+        if (toggle) toggle.classList.add('hidden');
+    },
+
+    closeAISidebar() {
+        const sidebar = document.getElementById('ai-sidebar');
+        const toggle = document.getElementById('ai-sidebar-toggle');
+        if (sidebar) sidebar.classList.remove('open');
+        if (toggle) toggle.classList.remove('hidden');
+    },
+
+    switchAISidebarTab(tabId) {
+        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.tab === tabId);
+        });
+        document.querySelectorAll('#ai-sidebar .ai-panel').forEach(panel => {
+            panel.classList.toggle('active', panel.id === `ai-${tabId}-panel`);
         });
     },
 
@@ -1334,7 +1512,7 @@ const App = {
         if (!modal) return;
         
         if (!this.state.user) {
-            alert('请先登录或完善资料');
+            this.showOnboarding();
             return;
         }
 
@@ -1380,13 +1558,25 @@ const App = {
         document.body.style.overflow = '';
     },
 
-    resetProfile() {
+    async resetProfile() {
         localStorage.removeItem('nanofab_user');
         localStorage.removeItem('nanofab_progress');
         localStorage.removeItem('nanofab_behavior');
         localStorage.removeItem('deepseek_api_key');
         localStorage.removeItem('gemini_api_key');
         localStorage.removeItem('ai_provider');
+        localStorage.removeItem('pending_name');
+        localStorage.removeItem('pending_email');
+        localStorage.removeItem('pending_password');
+
+        if (this.supabase) {
+            try {
+                await this.supabase.auth.signOut();
+            } catch (error) {
+                console.error('Failed to sign out:', error);
+            }
+        }
+
         this.state.user = null;
         this.state.completedChapters = new Set();
         this.state.behaviorData = {
@@ -1477,22 +1667,34 @@ const App = {
     },
 
     initAIAssistant() {
-        const toggle = document.getElementById('ai-assistant-toggle');
-        const chat = document.getElementById('ai-assistant-chat');
-        const close = document.querySelector('.ai-chat-close');
+        const sidebarToggle = document.getElementById('ai-sidebar-toggle');
+        const sidebarClose = document.getElementById('ai-sidebar-close');
+        const sidebar = document.getElementById('ai-sidebar');
+
+        if (sidebarToggle && sidebar) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+                sidebarToggle.classList.toggle('hidden', sidebar.classList.contains('open'));
+            });
+        }
+
+        if (sidebarClose && sidebar) {
+            sidebarClose.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                if (sidebarToggle) sidebarToggle.classList.remove('hidden');
+            });
+        }
+
+        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.dataset.tab;
+                this.switchAISidebarTab(tabId);
+            });
+        });
+
         const input = document.getElementById('ai-chat-input');
         const send = document.getElementById('ai-chat-send');
         const messages = document.getElementById('ai-chat-messages');
-
-        if (!toggle || !chat) return;
-
-        toggle.addEventListener('click', () => {
-            chat.classList.toggle('active');
-        });
-
-        close.addEventListener('click', () => {
-            chat.classList.remove('active');
-        });
 
         const settingsToggle = document.getElementById('ai-settings-toggle');
         const settingsPanel = document.getElementById('ai-settings-panel');
