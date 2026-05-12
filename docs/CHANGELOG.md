@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-05-12 - Security hardening & bug fixes
+
+### Security
+- Moved Zhipu API key from client-side JS to Supabase Edge Function (`supabase/functions/ai-proxy/`)
+- Tightened RLS policies: removed anonymous INSERT, now requires authentication for all tables
+- Added unique constraint on `quiz_answers(user_id, chapter_id, question_id)` to prevent duplicates
+
+### Bug Fixes
+- Fixed AI chat messages losing Markdown formatting (assistant responses now render bold, lists, etc.)
+- Fixed behavior data being discarded when loading user from Supabase
+- Fixed `formatAIResponse` not converting Markdown list syntax (`- item`) to HTML `<li>`
+- Fixed Mermaid diagram ID collision risk when multiple diagrams render in same millisecond
+- Fixed inconsistent indentation in `handleLogin`, `handleRegister`, `handleVerify`
+
+### Improvements
+- Extracted unified `callAIProvider` method, eliminating ~150 lines of duplicated AI API call logic
+- Throttled `saveBehaviorData` writes to localStorage/Supabase at 5-second intervals
+  - Exceptions: navigation (hashchange) and quiz submissions save immediately
+
 ## 2026-05-04 - AI personalization & learning tools completed
 
 - Implemented AI text selection feature with floating tooltip

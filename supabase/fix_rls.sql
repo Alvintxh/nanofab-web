@@ -1,6 +1,6 @@
 -- ============================================
 -- Fix RLS Policies for NanoFab Learning Platform
--- 允许注册后匿名用户插入数据
+-- 收紧安全策略 + 添加唯一约束
 -- ============================================
 
 -- 删除旧的 RLS 策略
@@ -10,14 +10,54 @@ DROP POLICY IF EXISTS "Users can manage own behavior events" ON user_behavior_ev
 DROP POLICY IF EXISTS "Users can manage own behavior summary" ON user_behavior_summary;
 DROP POLICY IF EXISTS "Users can manage own quiz answers" ON quiz_answers;
 DROP POLICY IF EXISTS "Users can manage own ai queries" ON ai_queries;
+DROP POLICY IF EXISTS "Allow insert for registration" ON user_profiles;
+DROP POLICY IF EXISTS "Allow insert for registration" ON user_progress;
+DROP POLICY IF EXISTS "Allow insert for tracking" ON user_behavior_events;
+DROP POLICY IF EXISTS "Allow insert for registration" ON user_behavior_summary;
+DROP POLICY IF EXISTS "Allow insert for quiz" ON quiz_answers;
+DROP POLICY IF EXISTS "Allow insert for ai queries" ON ai_queries;
+DROP POLICY IF EXISTS "Users can view own profile" ON user_profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON user_profiles;
+DROP POLICY IF EXISTS "Users can view own progress" ON user_progress;
+DROP POLICY IF EXISTS "Users can update own progress" ON user_progress;
+DROP POLICY IF EXISTS "Users can view own behavior events" ON user_behavior_events;
+DROP POLICY IF EXISTS "Users can view own behavior summary" ON user_behavior_summary;
+DROP POLICY IF EXISTS "Users can update own behavior summary" ON user_behavior_summary;
+DROP POLICY IF EXISTS "Users can view own quiz answers" ON quiz_answers;
+DROP POLICY IF EXISTS "Users can view own ai queries" ON ai_queries;
+
+-- ============================================
+-- quiz_answers 唯一约束（防止重复记录）
+-- ============================================
+
+-- 先删除可能的重复行（保留最新的一条）
+DELETE FROM quiz_answers a
+USING quiz_answers b
+WHERE a.ctid < b.ctid
+  AND a.user_id = b.user_id
+  AND a.chapter_id = b.chapter_id
+  AND a.question_id = b.question_id;
+
+-- 添加唯一约束
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint
+        WHERE conname = 'quiz_answers_user_chapter_question_unique'
+    ) THEN
+        ALTER TABLE quiz_answers
+        ADD CONSTRAINT quiz_answers_user_chapter_question_unique
+        UNIQUE (user_id, chapter_id, question_id);
+    END IF;
+END $$;
 
 -- ============================================
 -- user_profiles 表的新 RLS 策略
 -- ============================================
 
--- 允许匿名和认证用户插入（注册时使用）
+-- 允许认证用户插入自己的数据
 CREATE POLICY "Allow insert for registration"
-ON user_profiles FOR INSERT TO anon, authenticated
+ON user_profiles FOR INSERT TO authenticated
 WITH CHECK (true);
 
 -- 只允许认证用户查看自己的数据
@@ -35,7 +75,7 @@ USING (auth.uid() = id);
 -- ============================================
 
 CREATE POLICY "Allow insert for registration"
-ON user_progress FOR INSERT TO anon, authenticated
+ON user_progress FOR INSERT TO authenticated
 WITH CHECK (true);
 
 CREATE POLICY "Users can view own progress"
@@ -51,7 +91,7 @@ USING (auth.uid() = id);
 -- ============================================
 
 CREATE POLICY "Allow insert for tracking"
-ON user_behavior_events FOR INSERT TO anon, authenticated
+ON user_behavior_events FOR INSERT TO authenticated
 WITH CHECK (true);
 
 CREATE POLICY "Users can view own behavior events"
@@ -63,7 +103,7 @@ USING (auth.uid() = user_id);
 -- ============================================
 
 CREATE POLICY "Allow insert for registration"
-ON user_behavior_summary FOR INSERT TO anon, authenticated
+ON user_behavior_summary FOR INSERT TO authenticated
 WITH CHECK (true);
 
 CREATE POLICY "Users can view own behavior summary"
@@ -79,7 +119,7 @@ USING (auth.uid() = user_id);
 -- ============================================
 
 CREATE POLICY "Allow insert for quiz"
-ON quiz_answers FOR INSERT TO anon, authenticated
+ON quiz_answers FOR INSERT TO authenticated
 WITH CHECK (true);
 
 CREATE POLICY "Users can view own quiz answers"
@@ -91,7 +131,7 @@ USING (auth.uid() = user_id);
 -- ============================================
 
 CREATE POLICY "Allow insert for ai queries"
-ON ai_queries FOR INSERT TO anon, authenticated
+ON ai_queries FOR INSERT TO authenticated
 WITH CHECK (true);
 
 CREATE POLICY "Users can view own ai queries"
@@ -101,4 +141,4 @@ USING (auth.uid() = user_id);
 -- ============================================
 -- 完成
 -- ============================================
-SELECT 'RLS policies updated successfully!' AS status;
+SELECT 'RLS policies updated successfully! Policies now require authentication.' AS status;

@@ -253,7 +253,26 @@ const App = {
         }
     },
 
-    async saveBehaviorData() {
+    async saveBehaviorData(immediate = false) {
+        if (immediate) {
+            return this._flushBehaviorData();
+        }
+
+        if (!this._behaviorDirty) {
+            this._behaviorDirty = true;
+        }
+        clearTimeout(this._behaviorSaveTimer);
+        this._behaviorSaveTimer = setTimeout(() => this._flushBehaviorData(), 5000);
+    },
+
+    async _flushBehaviorData() {
+        if (this._behaviorSaveTimer) {
+            clearTimeout(this._behaviorSaveTimer);
+            this._behaviorSaveTimer = null;
+        }
+        if (!this._behaviorDirty) return;
+        this._behaviorDirty = false;
+
         localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
 
         if (this.supabase) {
@@ -348,7 +367,7 @@ const App = {
                 const timeSpent = Math.round((Date.now() - chapterStartTime) / 1000);
                 this.state.behaviorData.timeSpent[chapterId] = 
                     (this.state.behaviorData.timeSpent[chapterId] || 0) + timeSpent;
-                this.saveBehaviorData();
+                this.saveBehaviorData(true);
                 this.updateBehaviorProfile();
             }
             chapterStartTime = Date.now();
@@ -499,7 +518,7 @@ const App = {
                 this.showToast('登录失败：' + error.message, 'error');
             }
         } else {
-                this.showToast('Supabase 未初始化', 'error');
+            this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -574,7 +593,7 @@ const App = {
                 this.showToast('注册失败：' + error.message, 'error');
             }
         } else {
-                this.showToast('Supabase 未初始化', 'error');
+            this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -610,7 +629,7 @@ const App = {
                 this.showToast('验证失败：' + error.message, 'error');
             }
         } else {
-                this.showToast('Supabase 未初始化', 'error');
+            this.showToast('Supabase 未初始化', 'error');
         }
     },
 
@@ -701,11 +720,14 @@ const App = {
                 this.state.behaviorData = {
                     pageViews: [],
                     scrollDepth: {},
-                    timeSpent: {},
+                    timeSpent: { _restored: behaviorSummary.total_study_time || 0 },
                     sectionTime: {},
                     interactions: [],
                     quizResults: [],
-                    aiQueries: []
+                    aiQueries: [],
+                    _quizCorrect: behaviorSummary.quiz_correct_count || 0,
+                    _quizTotal: behaviorSummary.quiz_total_count || 0,
+                    _avgScrollDepth: behaviorSummary.avg_scroll_depth || 0
                 };
                 localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
             }
@@ -879,7 +901,7 @@ const App = {
             chapterId: chapterId,
             timestamp: new Date().toISOString()
         });
-        this.saveBehaviorData();
+        this.saveBehaviorData(true);
 
         const titleEl = document.getElementById('chapter-title');
         const descEl = document.getElementById('chapter-description');
@@ -1239,121 +1261,106 @@ const App = {
         this.saveUser(user);
     },
 
+    async callAIProvider(provider, model, messages, maxTokens = 1500, temperature = 0.7) {
+        const edgeUrl = SUPABASE_URL + '/functions/v1/ai-proxy';
+
+        // Try Supabase Edge Function first (server-side keys)
+        if (this.supabase) {
+            try {
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_ANON_KEY
+                };
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.access_token) {
+                    headers['Authorization'] = `Bearer ${session.access_token}`;
+                }
+
+                const resp = await fetch(edgeUrl, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ provider, model, messages, temperature, max_tokens: maxTokens })
+                });
+
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data.content) return data.content;
+                    console.warn(`Edge function returned error for ${provider}:`, data.error);
+                }
+            } catch (err) {
+                console.warn(`Edge function unavailable for ${provider}:`, err.message);
+            }
+        }
+
+        // Fallback: user's own API keys (DeepSeek / Gemini only)
+        if (provider === 'deepseek') {
+            const key = localStorage.getItem('deepseek_api_key');
+            if (key) {
+                const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: model || 'deepseek-chat', messages, temperature, max_tokens: maxTokens })
+                });
+                if (resp.ok) {
+                    const data = await resp.json();
+                    return data.choices[0].message.content;
+                }
+            }
+        }
+
+        if (provider === 'gemini') {
+            const key = localStorage.getItem('gemini_api_key');
+            if (key) {
+                const systemMsg = messages.find(m => m.role === 'system');
+                const userMsgs = messages.filter(m => m.role !== 'system');
+                const promptText = (systemMsg ? systemMsg.content + '\n\n' : '') +
+                    userMsgs.map(m => m.content).join('\n');
+
+                const resp = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/${model || 'gemini-2.0-flash'}:generateContent?key=${key}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ role: 'user', parts: [{ text: promptText }] }],
+                            generationConfig: { temperature, maxOutputTokens: maxTokens }
+                        })
+                    }
+                );
+                if (resp.ok) {
+                    const data = await resp.json();
+                    return data.candidates[0].content.parts[0].text;
+                }
+            }
+        }
+
+        if (provider === 'zhipu') {
+            throw new Error('智谱 AI 需要通过 Edge Function 使用。请部署 supabase/functions/ai-proxy 并设置 ZHIPU_API_KEY 环境变量。');
+        }
+
+        throw new Error(`No API key configured for ${provider}`);
+    },
+
     async generateExplanation(text, chapterContext = '') {
         const user = this.state.user;
         const level = user?.level || 'beginner';
-        const background = user?.background || 'student';
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
 
-        const userContent = chapterContext 
+        const userContent = chapterContext
             ? `请解释以下纳米制造技术概念："${text}"\n\n${chapterContext}`
             : `请解释以下纳米制造技术概念："${text}"`;
 
-        if (provider === 'zhipu') {
-            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
-            try {
-                const systemPrompt = this.buildSystemPrompt(user, 'explanation');
-                const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${zhipuKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: 'glm-4-flash',
-                        messages: [
-                            {
-                                role: 'system',
-                                content: systemPrompt
-                            },
-                            {
-                                role: 'user',
-                                content: userContent
-                            }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 1500
-                    })
-                });
+        const systemPrompt = this.buildSystemPrompt(user, 'explanation');
+        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.choices[0].message.content;
-                }
-            } catch (error) {
-                console.error('Zhipu API error:', error);
-            }
-        } else if (provider === 'gemini') {
-            const geminiKey = localStorage.getItem('gemini_api_key');
-            if (geminiKey) {
-                try {
-                    const systemPrompt = this.buildSystemPrompt(user, 'explanation');
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            contents: [
-                                {
-                                    role: 'user',
-                                    parts: [
-                                        { text: systemPrompt + '\n\n请解释以下纳米制造技术概念："' + text + '"' }
-                                    ]
-                                }
-                            ],
-                            generationConfig: {
-                                temperature: 0.7,
-                                maxOutputTokens: 1500
-                            }
-                        })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.candidates[0].content.parts[0].text;
-                    }
-                } catch (error) {
-                    console.error('Gemini API error:', error);
-                }
-            }
-        } else {
-            const apiKey = localStorage.getItem('deepseek_api_key');
-            if (apiKey) {
-                try {
-                    const systemPrompt = this.buildSystemPrompt(user, 'explanation');
-                    
-                    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${apiKey}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            model: 'deepseek-chat',
-                            messages: [
-                                {
-                                    role: 'system',
-                                    content: systemPrompt
-                                },
-                                {
-                                    role: 'user',
-                                    content: `请解释以下纳米制造技术概念："${text}"`
-                                }
-                            ],
-                            temperature: 0.7,
-                            max_tokens: 1500
-                        })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.choices[0].message.content;
-                    }
-                } catch (error) {
-                    console.error('DeepSeek API error:', error);
-                }
-            }
+        try {
+            const response = await this.callAIProvider(provider, model, [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userContent }
+            ], 1500);
+            return response;
+        } catch (error) {
+            console.error('AI explanation error:', error);
         }
 
         this.showToast('AI 服务暂时不可用，正在使用本地解释', 'warning');
@@ -1694,57 +1701,12 @@ const App = {
         const user = this.state.user;
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
         const systemPrompt = this.buildSystemPrompt(user, context) + '\n请直接返回用户请求的内容，不要附加额外说明。';
+        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
-        if (provider === 'zhipu') {
-            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
-            const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${zhipuKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: 'glm-4-flash',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        { role: 'user', content: prompt }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 500
-                })
-            });
-            if (response.ok) {
-                const data = await response.json();
-                return data.choices[0].message.content;
-            }
-        }
-
-        // Fallback to DeepSeek if configured
-        const apiKey = localStorage.getItem('deepseek_api_key');
-        if (apiKey) {
-            const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: 'deepseek-chat',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        { role: 'user', content: prompt }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 500
-                })
-            });
-            if (response.ok) {
-                const data = await response.json();
-                return data.choices[0].message.content;
-            }
-        }
-
-        throw new Error('No AI provider available');
+        return await this.callAIProvider(provider, model, [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: prompt }
+        ], 500);
     },
 
     renderQuickNav() {
@@ -1927,7 +1889,7 @@ const App = {
                         timestamp: new Date().toISOString(),
                         chapter: this.state.currentChapter?.id
                     });
-                    this.saveBehaviorData();
+                    this.saveBehaviorData(true);
                     this.updateBehaviorProfile();
 
                     this.syncQuizAnswer(questionEl, selectedValue, correctAnswer, isCorrect);
@@ -1963,7 +1925,7 @@ const App = {
                         timestamp: new Date().toISOString(),
                         chapter: this.state.currentChapter?.id
                     });
-                    this.saveBehaviorData();
+                    this.saveBehaviorData(true);
                     this.updateBehaviorProfile();
 
                     this.syncQuizAnswer(questionEl, selected, correctAnswer, isCorrect);
@@ -2166,9 +2128,13 @@ const App = {
             ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
             : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
 
+        const bodyContent = role === 'assistant'
+            ? this.formatAIResponse(text)
+            : `<p>${this.escapeHtml(text)}</p>`;
+
         messageDiv.innerHTML = `
             <div class="ai-message-avatar">${avatarSvg}</div>
-            <div class="ai-message-content"><p>${this.escapeHtml(text)}</p></div>
+            <div class="ai-message-content">${bodyContent}</div>
         `;
 
         messages.appendChild(messageDiv);
@@ -2210,138 +2176,24 @@ const App = {
         const user = this.state.user;
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
 
-        if (provider === 'zhipu') {
-            const zhipuKey = '2adcbf8469f84447b2c93b520938ea41.y9SmeVdvWZdekX94';
-            try {
-                const systemPrompt = this.buildSystemPrompt(user, 'chat');
-                const messages = [
-                    {
-                        role: 'system',
-                        content: systemPrompt
-                    }
-                ];
+        const systemPrompt = this.buildSystemPrompt(user, 'chat');
+        const messages = [{ role: 'system', content: systemPrompt }];
 
-                if (chapter) {
-                    messages.push({
-                        role: 'system',
-                        content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
-                    });
-                }
+        if (chapter) {
+            messages.push({
+                role: 'system',
+                content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+            });
+        }
 
-                messages.push({
-                    role: 'user',
-                    content: userMessage
-                });
+        messages.push({ role: 'user', content: userMessage });
 
-                const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${zhipuKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: 'glm-4-flash',
-                        messages: messages,
-                        temperature: 0.7,
-                        max_tokens: 2000
-                    })
-                });
+        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.choices[0].message.content;
-                }
-            } catch (error) {
-                console.error('Zhipu API error:', error);
-            }
-        } else if (provider === 'gemini') {
-            const geminiKey = localStorage.getItem('gemini_api_key');
-            if (geminiKey) {
-                try {
-                    const systemPrompt = this.buildSystemPrompt(user, 'chat');
-                    let promptText = systemPrompt;
-                    
-                    if (chapter) {
-                        promptText += `\n用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`;
-                    }
-                    
-                    promptText += `\n\n用户问题：${userMessage}`;
-
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            contents: [
-                                {
-                                    role: 'user',
-                                    parts: [
-                                        { text: promptText }
-                                    ]
-                                }
-                            ],
-                            generationConfig: {
-                                temperature: 0.7,
-                                maxOutputTokens: 2000
-                            }
-                        })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.candidates[0].content.parts[0].text;
-                    }
-                } catch (error) {
-                    console.error('Gemini API error:', error);
-                }
-            }
-        } else {
-            const apiKey = localStorage.getItem('deepseek_api_key');
-            if (apiKey) {
-                try {
-                    const systemPrompt = this.buildSystemPrompt(user, 'chat');
-                    const messages = [
-                        {
-                            role: 'system',
-                            content: systemPrompt
-                        }
-                    ];
-
-                    if (chapter) {
-                        messages.push({
-                            role: 'system',
-                            content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
-                        });
-                    }
-
-                    messages.push({
-                        role: 'user',
-                        content: userMessage
-                    });
-
-                    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${apiKey}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            model: 'deepseek-chat',
-                            messages: messages,
-                            temperature: 0.7,
-                            max_tokens: 2000
-                        })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.choices[0].message.content;
-                    }
-                } catch (error) {
-                    console.error('DeepSeek API error:', error);
-                }
-            }
+        try {
+            return await this.callAIProvider(provider, model, messages, 2000);
+        } catch (error) {
+            console.error('AI response error:', error);
         }
 
         this.showToast('AI 服务暂时不可用，使用离线回答', 'warning');
@@ -2425,7 +2277,7 @@ const App = {
             });
 
             diagramsToRender.forEach((element, index) => {
-                const id = 'mermaid-' + Date.now() + '-' + index;
+                const id = 'mermaid-' + Date.now() + '-' + index + '-' + Math.random().toString(36).slice(2, 8);
                 try {
                     mermaid.render(id, element.textContent).then(result => {
                         element.innerHTML = result.svg;
@@ -2449,7 +2301,9 @@ const App = {
             .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
             .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
             .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-            .replace(/`(.+?)`/g, '<code>$1</code>');
+            .replace(/`(.+?)`/g, '<code>$1</code>')
+            .replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>')
+            .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>');
 
         const lines = formatted.split('\n');
         let inList = false;

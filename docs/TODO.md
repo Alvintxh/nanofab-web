@@ -18,6 +18,10 @@
 
 ## Up Next
 
+- [ ] 部署 Supabase Edge Function (`supabase functions deploy ai-proxy`)
+- [ ] 设置 Edge Function 环境变量 (`supabase secrets set ZHIPU_API_KEY=...`)
+- [ ] 在 Supabase Dashboard 执行更新后的 `supabase/fix_rls.sql`
+- [ ] 测试AI解释和助手功能（通过 Edge Function）
 - [ ] 测试注册流程端到端
 - [ ] 验证数据库表是否正确创建
 - [ ] 确认RLS策略已生效
@@ -29,31 +33,30 @@
 - [x] 网站基础框架（2026-05-04）
 - [x] AI个性化和学习工具（2026-05-04）
 - [x] 修复登录/注册bug（2026-05-05）
-  - [x] 修复profile modal无响应问题
-  - [x] 修复resetProfile未清除Supabase session
-  - [x] 修复saveUser未使用pending_user_id
-  - [x] 修复handleProfileSubmit未添加email
-  - [x] 修复loadUser JSON解析错误
-  - [x] 修复saveBehaviorData表名错误
 - [x] 实现AI侧边栏（2026-05-05）
-  - [x] 右侧固定面板
-  - [x] 标签切换（AI解释/助手）
-  - [x] 浮动切换按钮
 - [x] 数据库配置（2026-05-05）
-  - [x] 创建完整Schema
-  - [x] 修复RLS策略允许匿名插入
-  - [x] 添加部署文档
+- [x] 安全加固与Bug修复（2026-05-12）
+  - [x] API Key迁移到Supabase Edge Function
+  - [x] 收紧RLS策略（anon → authenticated）
+  - [x] 修复AI聊天Markdown渲染丢失
+  - [x] 修复loadUserFromSupabase行为数据被丢弃
+  - [x] 修复formatAIResponse不解析Markdown列表
+  - [x] 提取统一callAIProvider去重（-146行）
+  - [x] saveBehaviorData节流优化（5秒批量写入）
+  - [x] Mermaid ID碰撞修复
+  - [x] 代码缩进修正
+  - [x] quiz_answers添加唯一约束
 
 ## 已知问题
 
 1. **邮件验证**：Supabase Dashboard中可能找不到"Confirm email"开关，需要确认最新位置
-2. **数据库同步**：即使RLS修复后，如果邮件验证开启，注册后仍无session，导致无法同步数据
+2. **数据库同步**：RLS收紧后，如果邮件验证开启，注册后仍无session，用户数据无法同步
 3. **解决方案**：关闭邮件验证（测试环境）或实现Edge Function自动确认邮箱
 
 ## 下一步行动
 
-1. 在Supabase Dashboard执行 `supabase/fix_rls.sql`
-2. 关闭邮件验证（Authentication → Providers → Email → Confirm email）
-3. 测试新用户注册
-4. 检查浏览器控制台日志
-5. 在Table Editor中验证数据是否写入
+1. 部署Edge Function：`cd supabase && supabase functions deploy ai-proxy`
+2. 设置密钥：`supabase secrets set ZHIPU_API_KEY=your-key`
+3. 在Supabase Dashboard SQL Editor执行 `supabase/fix_rls.sql`
+4. 测试新用户注册（确认RLS收紧后注册流程仍正常）
+5. 测试AI聊天/解释（确认通过Edge Function正常响应）
