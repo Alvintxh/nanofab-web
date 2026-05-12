@@ -25,6 +25,7 @@ DROP POLICY IF EXISTS "Users can view own behavior summary" ON user_behavior_sum
 DROP POLICY IF EXISTS "Users can update own behavior summary" ON user_behavior_summary;
 DROP POLICY IF EXISTS "Users can view own quiz answers" ON quiz_answers;
 DROP POLICY IF EXISTS "Users can view own ai queries" ON ai_queries;
+DROP POLICY IF EXISTS "Users can manage own notes" ON user_notes;
 
 -- ============================================
 -- quiz_answers 唯一约束（防止重复记录）
@@ -55,10 +56,10 @@ END $$;
 -- user_profiles 表的新 RLS 策略
 -- ============================================
 
--- 允许认证用户插入自己的数据
+-- 只允许插入自己的数据
 CREATE POLICY "Allow insert for registration"
 ON user_profiles FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = id);
 
 -- 只允许认证用户查看自己的数据
 CREATE POLICY "Users can view own profile"
@@ -76,7 +77,7 @@ USING (auth.uid() = id);
 
 CREATE POLICY "Allow insert for registration"
 ON user_progress FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = id);
 
 CREATE POLICY "Users can view own progress"
 ON user_progress FOR SELECT TO authenticated
@@ -92,7 +93,7 @@ USING (auth.uid() = id);
 
 CREATE POLICY "Allow insert for tracking"
 ON user_behavior_events FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can view own behavior events"
 ON user_behavior_events FOR SELECT TO authenticated
@@ -104,7 +105,7 @@ USING (auth.uid() = user_id);
 
 CREATE POLICY "Allow insert for registration"
 ON user_behavior_summary FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can view own behavior summary"
 ON user_behavior_summary FOR SELECT TO authenticated
@@ -120,7 +121,11 @@ USING (auth.uid() = user_id);
 
 CREATE POLICY "Allow insert for quiz"
 ON quiz_answers FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own quiz answers"
+ON quiz_answers FOR UPDATE TO authenticated
+USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can view own quiz answers"
 ON quiz_answers FOR SELECT TO authenticated
@@ -132,10 +137,30 @@ USING (auth.uid() = user_id);
 
 CREATE POLICY "Allow insert for ai queries"
 ON ai_queries FOR INSERT TO authenticated
-WITH CHECK (true);
+WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can view own ai queries"
 ON ai_queries FOR SELECT TO authenticated
+USING (auth.uid() = user_id);
+
+-- ============================================
+-- user_notes 表的新 RLS 策略
+-- ============================================
+
+CREATE POLICY "Allow insert for notes"
+ON user_notes FOR INSERT TO authenticated
+WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own notes"
+ON user_notes FOR UPDATE TO authenticated
+USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own notes"
+ON user_notes FOR DELETE TO authenticated
+USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can view own notes"
+ON user_notes FOR SELECT TO authenticated
 USING (auth.uid() = user_id);
 
 -- ============================================

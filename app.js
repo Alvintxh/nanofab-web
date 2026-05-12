@@ -240,6 +240,11 @@ const App = {
 
             if (error) {
                 console.error('Failed to sync quiz answer to Supabase:', error);
+            } else {
+                this._logBehaviorEvent('quiz_answer', this.state.currentChapter.id, {
+                    question_id: questionEl.dataset.question,
+                    is_correct: isCorrect
+                });
             }
         } catch (error) {
             console.error('Failed to sync quiz answer to Supabase:', error);
@@ -325,6 +330,65 @@ const App = {
         return depths.reduce((sum, d) => sum + d, 0) / depths.length;
     },
 
+    async _logBehaviorEvent(eventType, chapterId, eventData = {}) {
+        if (!this.supabase) return;
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return;
+            await this.supabase.from('user_behavior_events').insert({
+                user_id: session.user.id,
+                event_type: eventType,
+                chapter_id: chapterId || null,
+                event_data: eventData
+            });
+        } catch (e) { /* fire-and-forget */ }
+    },
+
+    async _logAIQuery(provider, model, messages, response) {
+        if (!this.supabase || !response) return;
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return;
+            const systemMsgs = messages.filter(m => m.role === 'system');
+            const queryType = systemMsgs.some(m => /解释|解释|explain/i.test(m.content)) ? 'explanation' : 'chat';
+            const userMsg = messages.filter(m => m.role === 'user').map(m => m.content).join('\n');
+            await this.supabase.from('ai_queries').insert({
+                user_id: session.user.id,
+                query_type: queryType,
+                chapter_id: this.state.currentChapter?.id || null,
+                user_message: userMsg.substring(0, 2000),
+                ai_response: response.substring(0, 5000),
+                response_tokens: response.length
+            });
+        } catch (e) { /* fire-and-forget */ }
+    },
+
+    async _syncNoteToSupabase(noteEntry) {
+        if (!this.supabase) return;
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return;
+            await this.supabase.from('user_notes').upsert({
+                id: noteEntry.id,
+                user_id: session.user.id,
+                context: noteEntry.context,
+                content: noteEntry.content,
+                chapter_id: noteEntry.chapter,
+                chapter_title: noteEntry.chapterTitle,
+                created_at: noteEntry.timestamp
+            });
+        } catch (e) { /* fire-and-forget */ }
+    },
+
+    async _deleteNoteFromSupabase(noteId) {
+        if (!this.supabase) return;
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return;
+            await this.supabase.from('user_notes').delete().eq('id', noteId);
+        } catch (e) { /* fire-and-forget */ }
+    },
+
     initBehaviorTracking() {
         let scrollTimer;
         let maxScrollDepth = 0;
@@ -365,10 +429,14 @@ const App = {
             const chapterId = this.state.currentChapter?.id;
             if (chapterId) {
                 const timeSpent = Math.round((Date.now() - chapterStartTime) / 1000);
-                this.state.behaviorData.timeSpent[chapterId] = 
+                this.state.behaviorData.timeSpent[chapterId] =
                     (this.state.behaviorData.timeSpent[chapterId] || 0) + timeSpent;
                 this.saveBehaviorData(true);
                 this.updateBehaviorProfile();
+                this._logBehaviorEvent('page_view', chapterId, {
+                    time_spent: timeSpent,
+                    scroll_depth: this.state.behaviorData.scrollDepth?.[chapterId] || 0
+                });
             }
             chapterStartTime = Date.now();
         });
@@ -736,7 +804,7 @@ const App = {
                 .from('user_behavior_summary')
                 .select('*')
                 .eq('user_id', authUser.id)
-                .single();
+                .maybeSingle();
 
             if (behaviorSummary) {
                 this.state.behaviorData = {
@@ -752,6 +820,25 @@ const App = {
                     _avgScrollDepth: behaviorSummary.avg_scroll_depth || 0
                 };
                 localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
+            }
+
+            // Load notes
+            const { data: notes } = await this.supabase
+                .from('user_notes')
+                .select('*')
+                .eq('user_id', authUser.id)
+                .order('created_at', { ascending: false })
+                .limit(500);
+
+            if (notes?.length) {
+                this.state.behaviorData.notes = notes.map(n => ({
+                    id: n.id,
+                    context: n.context,
+                    content: n.content,
+                    chapter: n.chapter_id,
+                    chapterTitle: n.chapter_title,
+                    timestamp: n.created_at
+                }));
             }
         } catch (error) {
             console.error('Failed to load user data from Supabase:', error);
@@ -1335,7 +1422,10 @@ const App = {
 
                 if (resp.ok) {
                     const data = await resp.json();
-                    if (data.content) return data.content;
+                    if (data.content) {
+                        this._logAIQuery(provider, model, messages, data.content);
+                        return data.content;
+                    }
                     console.warn(`Edge function returned error for ${provider}:`, data.error);
                 }
             } catch (err) {
@@ -1354,7 +1444,9 @@ const App = {
                 });
                 if (resp.ok) {
                     const data = await resp.json();
-                    return data.choices[0].message.content;
+                    const content = data.choices[0].message.content;
+                    this._logAIQuery(provider, model, messages, content);
+                    return content;
                 }
             }
         }
@@ -1380,7 +1472,9 @@ const App = {
                 );
                 if (resp.ok) {
                     const data = await resp.json();
-                    return data.candidates[0].content.parts[0].text;
+                    const content = data.candidates[0].content.parts[0].text;
+                    this._logAIQuery(provider, model, messages, content);
+                    return content;
                 }
             }
         }
@@ -2950,6 +3044,7 @@ const App = {
         this.state.behaviorData.notes.push(noteEntry);
         this.saveHighlight(text, noteId);
         this.saveBehaviorData(true);
+        this._syncNoteToSupabase(noteEntry);
 
         const annotationHTML = `
             <div class="note-annotation-header">
@@ -2967,6 +3062,7 @@ const App = {
                     this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
                         .filter(n => n.id !== noteId);
                     this.saveBehaviorData(true);
+                    this._deleteNoteFromSupabase(noteId);
                     ann.remove();
                     if (hlEl.parentNode) hlEl.replaceWith(document.createTextNode(hlEl.textContent));
                     this.showToast('笔记已删除', 'info');
@@ -3034,39 +3130,195 @@ const App = {
 
     restoreHighlights(contentEl) {
         const notes = this.state.behaviorData.notes || [];
+        const currentChapterId = this.state.currentChapter?.id;
+
         notes.forEach((note) => {
-            const selector = `mark.user-highlight.has-note[data-note-id="${note.id}"], span.user-highlight-mark.has-note[data-note-id="${note.id}"]`;
-            contentEl.querySelectorAll(selector).forEach(mark => {
-                if (contentEl.querySelector(`.note-annotation[data-note-id="${note.id}"]`)) return;
-                const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
-                const ann = document.createElement('div');
-                ann.className = 'note-annotation';
-                ann.dataset.noteId = note.id;
-                ann.innerHTML = `
-                    <div class="note-annotation-header">
-                        <span class="note-annotation-label">📝 笔记</span>
-                        <span class="note-annotation-delete" data-note-id="${note.id}">✕ 删除</span>
-                    </div>
-                    <div class="note-annotation-context">原文："${this.escapeHtml((note.context || '').substring(0, 100))}"</div>
-                    <div class="note-annotation-content">${this.escapeHtml(note.content || '')}</div>
-                `;
-                if (parentP.nextSibling) {
-                    parentP.parentNode.insertBefore(ann, parentP.nextSibling);
-                } else {
-                    parentP.parentNode.appendChild(ann);
+            if (note.chapter && note.chapter !== currentChapterId) return;
+            if (contentEl.querySelector(`.note-annotation[data-note-id="${note.id}"]`)) return;
+
+            const searchText = note.context || note.text || '';
+            if (!searchText || searchText.length < 5) return;
+
+            const mark = this._findAndHighlightText(contentEl, searchText, note.id);
+            if (!mark) return;
+
+            const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
+            const ann = document.createElement('div');
+            ann.className = 'note-annotation';
+            ann.dataset.noteId = note.id;
+            ann.innerHTML = `
+                <div class="note-annotation-header">
+                    <span class="note-annotation-label">📝 笔记</span>
+                    <span class="note-annotation-delete" data-note-id="${note.id}">✕ 删除</span>
+                </div>
+                <div class="note-annotation-context">原文："${this.escapeHtml(searchText.substring(0, 100))}"</div>
+                <div class="note-annotation-content">${this.escapeHtml(note.content || '')}</div>
+            `;
+            if (parentP.nextSibling) {
+                parentP.parentNode.insertBefore(ann, parentP.nextSibling);
+            } else {
+                parentP.parentNode.appendChild(ann);
+            }
+            ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                if (confirm('删除此笔记？关联的高亮也将取消。')) {
+                    this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                        .filter(n => n.id !== note.id);
+                    this.saveBehaviorData(true);
+                    this._deleteNoteFromSupabase(note.id);
+                    ann.remove();
+                    if (mark.parentNode) mark.replaceWith(document.createTextNode(mark.textContent));
+                    this.showToast('笔记已删除', 'info');
                 }
-                ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
-                    ev.stopPropagation();
-                    if (confirm('删除此笔记？关联的高亮也将取消。')) {
-                        this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
-                            .filter(n => n.id !== note.id);
-                        this.saveBehaviorData(true);
-                        ann.remove();
-                        if (mark.parentNode) mark.replaceWith(document.createTextNode(mark.textContent));
-                        this.showToast('笔记已删除', 'info');
-                    }
-                });
             });
+        });
+
+        this._restorePlainHighlights(contentEl);
+    },
+
+    _findAndHighlightText(container, searchText, noteId) {
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => {
+                if (node.parentElement?.closest('mark, .note-annotation, script, style'))
+                    return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        let fullText = '';
+        const nodeMap = [];
+        for (const node of textNodes) {
+            const start = fullText.length;
+            fullText += node.textContent;
+            nodeMap.push({ node, start, end: fullText.length });
+        }
+
+        const searchKey = searchText.substring(0, Math.min(searchText.length, 80));
+        let idx = fullText.indexOf(searchKey);
+        if (idx === -1) {
+            const shortKey = searchText.substring(0, 30);
+            idx = fullText.indexOf(shortKey);
+            if (idx === -1) return null;
+            return this._wrapTextRange(nodeMap, idx, idx + shortKey.length, noteId);
+        }
+        return this._wrapTextRange(nodeMap, idx, idx + searchKey.length, noteId);
+    },
+
+    _wrapTextRange(nodeMap, matchStart, matchEnd, noteId) {
+        let startNode = null, startOffset = 0;
+        let endNode = null, endOffset = 0;
+
+        for (const { node, start, end } of nodeMap) {
+            if (startNode === null && matchStart >= start && matchStart < end) {
+                startNode = node;
+                startOffset = matchStart - start;
+            }
+            if (matchEnd > start && matchEnd <= end) {
+                endNode = node;
+                endOffset = matchEnd - start;
+                break;
+            }
+        }
+
+        if (!startNode || !endNode) return null;
+
+        try {
+            const range = document.createRange();
+            range.setStart(startNode, startOffset);
+            range.setEnd(endNode, endOffset);
+            const mark = document.createElement('mark');
+            mark.className = 'user-highlight has-note';
+            mark.title = '点击查看笔记';
+            mark.dataset.noteId = noteId;
+            range.surroundContents(mark);
+            return mark;
+        } catch (e) {
+            try {
+                const range = document.createRange();
+                range.setStart(startNode, startOffset);
+                range.setEnd(endNode, endOffset);
+                const span = document.createElement('span');
+                span.className = 'user-highlight-mark has-note';
+                span.dataset.noteId = noteId;
+                span.title = '点击查看笔记';
+                range.surroundContents(span);
+                return span;
+            } catch (e2) {
+                return null;
+            }
+        }
+    },
+
+    _restorePlainHighlights(contentEl) {
+        const highlights = this.state.behaviorData.highlights || [];
+        const currentChapterId = this.state.currentChapter?.id;
+
+        highlights.forEach((hl) => {
+            if (!hl.text || hl.noteId) return;
+            if (hl.chapter && hl.chapter !== currentChapterId) return;
+
+            const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, {
+                acceptNode: (node) => {
+                    if (node.parentElement?.closest('mark, .note-annotation, script, style'))
+                        return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            let fullText = '';
+            const nodeMap = [];
+            for (const node of textNodes) {
+                const start = fullText.length;
+                fullText += node.textContent;
+                nodeMap.push({ node, start, end: fullText.length });
+            }
+
+            const searchKey = hl.text.substring(0, 50);
+            const idx = fullText.indexOf(searchKey);
+            if (idx === -1) return;
+
+            const matchEnd = idx + searchKey.length;
+            let startNode = null, startOffset = 0;
+            let endNode = null, endOffset = 0;
+
+            for (const { node, start, end } of nodeMap) {
+                if (startNode === null && idx >= start && idx < end) {
+                    startNode = node;
+                    startOffset = idx - start;
+                }
+                if (matchEnd > start && matchEnd <= end) {
+                    endNode = node;
+                    endOffset = matchEnd - start;
+                    break;
+                }
+            }
+
+            if (!startNode || !endNode) return;
+
+            try {
+                const range = document.createRange();
+                range.setStart(startNode, startOffset);
+                range.setEnd(endNode, endOffset);
+                const mark = document.createElement('mark');
+                mark.className = 'user-highlight';
+                mark.title = '点击取消标记';
+                range.surroundContents(mark);
+            } catch (e) {
+                try {
+                    const range = document.createRange();
+                    range.setStart(startNode, startOffset);
+                    range.setEnd(endNode, endOffset);
+                    const span = document.createElement('span');
+                    span.className = 'user-highlight-mark';
+                    range.surroundContents(span);
+                } catch (e2) { /* skip */ }
+            }
         });
     },
 
@@ -3096,6 +3348,9 @@ const App = {
                     this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
                         .filter((n, i) => (n.id || String(i)) !== noteId);
                     this.saveBehaviorData(true);
+                    if (noteId && noteId.startsWith('note-')) {
+                        this._deleteNoteFromSupabase(noteId);
+                    }
                     this.openNotesModal();
                 });
             });

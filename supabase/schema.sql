@@ -109,6 +109,23 @@ COMMENT ON TABLE ai_queries IS 'AI助手查询历史';
 COMMENT ON COLUMN ai_queries.query_type IS '查询类型: explanation(文本解释), chat(自由对话)';
 
 -- ============================================
+-- 7. 用户笔记表 (User Notes)
+-- ============================================
+CREATE TABLE user_notes (
+    id VARCHAR(30) PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+    context TEXT,
+    content TEXT,
+    chapter_id VARCHAR(20),
+    chapter_title VARCHAR(200),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+COMMENT ON TABLE user_notes IS '用户高亮笔记';
+COMMENT ON COLUMN user_notes.context IS '选中的原文';
+COMMENT ON COLUMN user_notes.content IS '用户写的笔记内容';
+
+-- ============================================
 -- 索引 (Indexes)
 -- ============================================
 
@@ -130,11 +147,16 @@ CREATE INDEX idx_behavior_events_user_created ON user_behavior_events(user_id, c
 CREATE INDEX idx_quiz_user ON quiz_answers(user_id);
 CREATE INDEX idx_quiz_chapter ON quiz_answers(chapter_id);
 CREATE INDEX idx_quiz_created ON quiz_answers(created_at);
+CREATE INDEX idx_quiz_user_chapter_correct ON quiz_answers(user_id, chapter_id, is_correct);
 
 -- ai_queries 索引
 CREATE INDEX idx_ai_queries_user ON ai_queries(user_id);
 CREATE INDEX idx_ai_queries_type ON ai_queries(query_type);
 CREATE INDEX idx_ai_queries_created ON ai_queries(created_at);
+
+-- user_notes 索引
+CREATE INDEX idx_notes_user ON user_notes(user_id);
+CREATE INDEX idx_notes_chapter ON user_notes(chapter_id);
 
 -- ============================================
 -- Row Level Security (RLS) 策略
@@ -147,6 +169,7 @@ ALTER TABLE user_behavior_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_behavior_summary ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_answers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ai_queries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_notes ENABLE ROW LEVEL SECURITY;
 
 -- user_profiles: 用户只能操作自己的数据
 CREATE POLICY "Users can manage own profile"
@@ -181,6 +204,12 @@ WITH CHECK (auth.uid() = user_id);
 -- ai_queries: 用户只能操作自己的查询记录
 CREATE POLICY "Users can manage own ai queries"
 ON ai_queries FOR ALL TO authenticated
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
+
+-- user_notes: 用户只能操作自己的笔记
+CREATE POLICY "Users can manage own notes"
+ON user_notes FOR ALL TO authenticated
 USING (auth.uid() = user_id)
 WITH CHECK (auth.uid() = user_id);
 

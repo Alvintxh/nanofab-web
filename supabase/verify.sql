@@ -12,7 +12,8 @@ FROM (
         ('user_behavior_events'),
         ('user_behavior_summary'),
         ('quiz_answers'),
-        ('ai_queries')
+        ('ai_queries'),
+        ('user_notes')
 ) AS t(table_name);
 
 SELECT
@@ -32,7 +33,7 @@ SELECT
     relname as table_name,
     relrowsecurity as rls_enabled
 FROM pg_class
-WHERE relname IN ('user_profiles', 'user_progress', 'user_behavior_events', 'user_behavior_summary', 'quiz_answers', 'ai_queries')
+WHERE relname IN ('user_profiles', 'user_progress', 'user_behavior_events', 'user_behavior_summary', 'quiz_answers', 'ai_queries', 'user_notes')
 AND relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = 'public');
 
 SELECT COUNT(*) as total_users FROM auth.users;

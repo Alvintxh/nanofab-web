@@ -13,6 +13,29 @@ serve(async (req: Request) => {
   }
 
   try {
+    // Verify authentication
+    const authHeader = req.headers.get("Authorization")?.replace("Bearer ", "");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Missing authorization token" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const supabaseClient = createClient(supabaseUrl, supabaseKey, {
+      auth: { autoRefreshToken: false, persistSession: false },
+      global: { headers: { Authorization: `Bearer ${authHeader}` } },
+    });
+    const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+    if (authError || !user) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const { provider, model, messages, temperature, max_tokens } = await req.json();
 
     if (!provider || !messages?.length) {
@@ -125,7 +148,7 @@ serve(async (req: Request) => {
     });
   } catch (err) {
     return new Response(
-      JSON.stringify({ content: "", error: err.message }),
+      JSON.stringify({ content: "", error: (err as Error).message }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
