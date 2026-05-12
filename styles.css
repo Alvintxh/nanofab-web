@@ -2371,6 +2371,10 @@ input, select, textarea {
 }
 
 /* ===== Mind Map ===== */
+.mindmap-card {
+    grid-column: 1 / -1;
+}
+
 .mindmap-card .card-icon {
     color: #7c3aed;
     background: #f5f3ff;
@@ -2379,12 +2383,13 @@ input, select, textarea {
 .mindmap-container {
     width: 100%;
     overflow-x: auto;
-    padding: 8px 0;
+    padding: 12px 0;
 }
 
 .mindmap-svg {
     width: 100%;
-    max-width: 600px;
+    max-width: 840px;
+    min-width: 480px;
     margin: 0 auto;
     display: block;
 }

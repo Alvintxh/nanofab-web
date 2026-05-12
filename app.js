@@ -2400,36 +2400,103 @@ const App = {
         if (!container || this.state.chapters.length === 0) return;
 
         const colors = ['#004EA1', '#9D0A12', '#0d9488', '#7c3aed'];
-        const colorsLight = ['#e6f0fa', '#fdf2f3', '#f0fdfa', '#f5f3ff'];
+        const colorsLight = ['#e6f0fa', '#fdf2f3', '#ecfdf5', '#f5f3ff'];
+        const colorsDark = ['#003a7a', '#7a080e', '#0a6e63', '#5b21b6'];
 
-        let svg = '<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">';
-        // Center node
-        svg += '<rect x="225" y="170" width="150" height="60" rx="8" fill="#004EA1"/>';
-        svg += '<text x="300" y="205" text-anchor="middle" fill="white" font-size="14" font-weight="600" font-family="Noto Sans SC, sans-serif">纳米制造技术</text>';
+        const w = 840, h = 600;
+        const cx = w / 2, cy = h / 2;
+
+        let svg = `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">`;
+
+        // Background gradient
+        svg += `<defs>
+            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f8fafc"/>
+                <stop offset="100%" stop-color="#f1f5f9"/>
+            </radialGradient>
+            <filter id="shadow-sm">
+                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.1"/>
+            </filter>
+        </defs>`;
+
+        svg += `<rect width="${w}" height="${h}" rx="12" fill="url(#bg-grad)"/>`;
+
+        // Title
+        svg += `<text x="${cx}" y="28" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700" font-family="Noto Sans SC, sans-serif">纳米制造技术 课程知识结构</text>`;
+
+        // Center root node
+        const rootW = 140, rootH = 48;
+        svg += `<rect x="${cx - rootW/2}" y="${cy - rootH/2}" width="${rootW}" height="${rootH}" rx="24" fill="url(#bg-grad)" filter="url(#shadow-sm)"/>`;
+        svg += `<rect x="${cx - rootW/2}" y="${cy - rootH/2}" width="${rootW}" height="${rootH}" rx="24" fill="#004EA1"/>`;
+        svg += `<text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="Noto Sans SC, sans-serif">纳米制造技术</text>`;
+
+        // Layout: 2x2 grid for 4 parts
+        const positions = [
+            { px: cx - 240, py: cy - 140, tx: 0, ty: -1 },    // top-left
+            { px: cx + 240, py: cy - 140, tx: 0, ty: -1 },    // top-right
+            { px: cx - 240, py: cy + 140, tx: 0, ty: 1 },     // bottom-left
+            { px: cx + 240, py: cy + 140, tx: 0, ty: 1 }      // bottom-right
+        ];
 
         this.state.chapters.forEach((part, partIndex) => {
-            const angle = (partIndex / this.state.chapters.length) * Math.PI * 2 - Math.PI / 2;
-            const cx = 300 + Math.cos(angle) * 170;
-            const cy = 200 + Math.sin(angle) * 130;
-            const color = colors[partIndex % colors.length];
-            const lightColor = colorsLight[partIndex % colorsLight.length];
+            const pos = positions[partIndex];
+            const color = colors[partIndex];
+            const lightColor = colorsLight[partIndex];
+            const darkColor = colorsDark[partIndex];
 
-            // Line from center
-            svg += `<line x1="300" y1="200" x2="${cx}" y2="${cy}" stroke="${color}" stroke-width="2" opacity="0.6"/>`;
+            // Connector line from center to part
+            const mx = pos.px, my = pos.py;
+            const sx = cx + (mx - cx) * 0.22;
+            const sy = cy + (my - cy) * 0.22;
+            const ex = mx + (cx - mx) * 0.15;
+            const ey = my + (cy - my) * 0.15;
+            svg += `<path d="M${sx} ${sy} Q${(sx+ex)/2 + (my - cy)*0.08} ${(sy+ey)/2 - (mx - cx)*0.08} ${ex} ${ey}"
+                         stroke="${color}" stroke-width="2.5" fill="none" opacity="0.5"/>`;
 
-            // Part node
-            svg += `<rect x="${cx - 55}" y="${cy - 28}" width="110" height="36" rx="6" fill="${lightColor}" stroke="${color}" stroke-width="1.5"/>`;
-            svg += `<text x="${cx}" y="${cy - 8}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="Noto Sans SC, sans-serif">${part.title.replace('：', '')}</text>`;
-            svg += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans SC, sans-serif">${part.chapters.length}章节</text>`;
+            // Part header
+            const partW = 180, partH = 36;
+            svg += `<rect x="${mx - partW/2}" y="${my - partH/2}" width="${partW}" height="${partH}" rx="8" fill="${lightColor}" stroke="${color}" stroke-width="2" filter="url(#shadow-sm)"/>`;
+            const partLabel = part.title.replace(/^[^：:]*[：:]/, '').replace(/[与和&].*/, '');
+            svg += `<text x="${mx}" y="${my + 4}" text-anchor="middle" fill="${darkColor}" font-size="13" font-weight="700" font-family="Noto Sans SC, sans-serif">${part.title}</text>`;
 
-            // Chapter dots
+            // Chapter nodes
+            const chStartY = my > cy ? my + 50 : my - 50;
+            const chDir = my > cy ? 1 : -1;
+
             part.chapters.forEach((ch, chIndex) => {
-                const dotAngle = angle - 0.3 + (chIndex / (part.chapters.length)) * 0.6;
-                const dx = cx + Math.cos(dotAngle) * 55;
-                const dy = cy + Math.sin(dotAngle) * 22 + 22;
-                svg += `<circle cx="${dx}" cy="${dy}" r="4" fill="${color}" opacity="0.7"/>`;
-                svg += `<text x="${dx + 8}" y="${dy + 3}" fill="#475569" font-size="7" font-family="Noto Sans SC, sans-serif">${ch.id}</text>`;
+                const chY = chStartY + chDir * chIndex * 52;
+                const chW = 160, chH = 32;
+                const chX = mx;
+
+                // Connector from part to chapter
+                svg += `<line x1="${mx}" y1="${my + chDir * partH/2}" x2="${mx}" y2="${chY - chDir * chH/2}"
+                             stroke="${color}" stroke-width="1.2" opacity="0.35"/>`;
+
+                // Chapter node
+                svg += `<rect x="${chX - chW/2}" y="${chY - chH/2}" width="${chW}" height="${chH}" rx="6"
+                             fill="white" stroke="${color}" stroke-width="1.2" opacity="0.9"/>`;
+                svg += `<text x="${chX - chW/2 + 10}" y="${chY + 4}" fill="${darkColor}" font-size="9" font-family="'SF Mono', monospace" opacity="0.7">${ch.id}</text>`;
+                svg += `<text x="${chX - chW/2 + 40}" y="${chY + 4}" fill="#1e293b" font-size="11" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
+
+                // Subtle dot indicators on the outer side
+                const dotX = chX + (chDir > 0 ? chW/2 + 10 : -chW/2 - 10);
+                svg += `<circle cx="${dotX}" cy="${chY}" r="3" fill="${color}" opacity="0.6"/>`;
             });
+        });
+
+        // Legend at bottom
+        const legendY = h - 16;
+        const legendItems = this.state.chapters.map((p, i) => ({
+            label: p.title,
+            color: colors[i],
+            chCount: p.chapters.length
+        }));
+
+        let legendX = cx - (legendItems.length * 180) / 2;
+        legendItems.forEach(item => {
+            svg += `<rect x="${legendX}" y="${legendY - 6}" width="10" height="10" rx="2" fill="${item.color}" opacity="0.8"/>`;
+            svg += `<text x="${legendX + 14}" y="${legendY + 2}" fill="#475569" font-size="9" font-family="Noto Sans SC, sans-serif">${item.label}（${item.chCount}章）</text>`;
+            legendX += 210;
         });
 
         svg += '</svg>';
