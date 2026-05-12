@@ -363,11 +363,40 @@
                                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                             </svg>
                         </div>
-                        <h3>学习进度</h3>
+                        <h3>学习进度与统计</h3>
                         <div class="progress-bar">
                             <div id="dashboard-progress" class="progress-fill" style="width: 0%"></div>
                         </div>
-                        <p><span id="completed-count">0</span> / 12 章节已完成</p>
+                        <p style="margin-bottom:16px;"><span id="completed-count">0</span> / 12 章节已完成</p>
+                        <div class="study-stats-grid">
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-today">0<span style="font-size:0.75rem"> 分钟</span></div>
+                                <div class="study-stat-label">今日学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-week">0<span style="font-size:0.75rem"> 分钟</span></div>
+                                <div class="study-stat-label">本周学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-total">0<span style="font-size:0.75rem"> 分钟</span></div>
+                                <div class="study-stat-label">累计学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-streak">0<span style="font-size:0.75rem"> 天</span></div>
+                                <div class="study-stat-label">连续学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-accuracy">0<span style="font-size:0.75rem">%</span></div>
+                                <div class="study-stat-label">测试正确率</div>
+                            </div>
+                        </div>
+                        <div class="study-stat-bar">
+                            <div class="study-stat-bar-fill" id="stat-weekly-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="study-stat-bar-label">
+                            <span>本周目标进度</span>
+                            <span id="stat-weekly-bar-label">0%</span>
+                        </div>
                     </div>
 
                     <div class="dashboard-card chapter-grid">
@@ -385,6 +414,7 @@
                             </svg>
                         </div>
                         <h3>AI 学习路线</h3>
+                        <p class="ai-path-subtitle">基于您的学习行为和测试表现，AI 为您量身定制学习规划</p>
                         <div id="ai-learning-path-content">
                             <p class="ai-path-loading">完成更多章节和测试后，AI 将为您生成个性化学习建议。</p>
                         </div>
@@ -409,34 +439,6 @@
                         <div class="mindmap-container">
                             <div id="quick-mindmap" class="mindmap-svg"></div>
                         </div>
-                    </div>
-
-                    <div class="dashboard-card study-stats-card">
-                        <div class="card-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                        </div>
-                        <h3>学习统计</h3>
-                        <div class="study-stats-grid">
-                            <div class="study-stat-item">
-                                <div class="study-stat-value" id="stat-today">0<span style="font-size:0.75rem">分钟</span></div>
-                                <div class="study-stat-label">今日学习</div>
-                            </div>
-                            <div class="study-stat-item">
-                                <div class="study-stat-value" id="stat-week">0<span style="font-size:0.75rem">分钟</span></div>
-                                <div class="study-stat-label">本周学习</div>
-                            </div>
-                            <div class="study-stat-item">
-                                <div class="study-stat-value" id="stat-total">0<span style="font-size:0.75rem">分钟</span></div>
-                                <div class="study-stat-label">累计学习</div>
-                            </div>
-                        </div>
-                        <div class="study-stat-bar">
-                            <div class="study-stat-bar-fill" id="stat-weekly-bar" style="width: 0%"></div>
-                        </div>
-                        <p style="font-size:0.75rem;color:var(--color-text-tertiary);margin-top:8px;text-align:center;">进度：<span id="stat-weekly-goal">0%</span> 完成本周目标</p>
                     </div>
 
                     <div class="dashboard-card wrong-answer-book" id="wrong-answer-card">

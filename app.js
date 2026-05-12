@@ -2511,57 +2511,64 @@ const App = {
         const weekStart = new Date(now);
         weekStart.setDate(now.getDate() - now.getDay());
 
-        // Calculate total study time from timeSpent
         const timeSpent = behaviorData.timeSpent || {};
         let totalSeconds = 0;
         Object.values(timeSpent).forEach(t => {
             totalSeconds += (typeof t === 'number' ? t : 0);
         });
 
-        // Daily breakdown (estimate today's time)
         let todaySeconds = 0;
         let weekSeconds = 0;
         const interactions = behaviorData.interactions || [];
         const todayInteractions = interactions.filter(i => {
-            try {
-                const d = new Date(i.timestamp);
-                return d.toDateString() === today;
-            } catch { return false; }
+            try { return new Date(i.timestamp).toDateString() === today; } catch { return false; }
         });
         const weekInteractions = interactions.filter(i => {
-            try {
-                const d = new Date(i.timestamp);
-                return d >= weekStart;
-            } catch { return false; }
+            try { return new Date(i.timestamp) >= weekStart; } catch { return false; }
         });
-        todaySeconds = todayInteractions.length * 45; // ~45 seconds per interaction
+        todaySeconds = todayInteractions.length * 45;
         weekSeconds = weekInteractions.length * 45;
 
+        // Daily streak
+        const activeDays = new Set();
+        interactions.forEach(i => {
+            try { activeDays.add(new Date(i.timestamp).toDateString()); } catch {}
+        });
+        let streak = 0;
+        const checkDate = new Date(now);
+        for (let i = 0; i < 365; i++) {
+            if (activeDays.has(checkDate.toDateString())) {
+                streak++;
+                checkDate.setDate(checkDate.getDate() - 1);
+            } else { break; }
+        }
+
+        // Quiz accuracy
+        const quizResults = behaviorData.quizResults || [];
+        const quizAccuracy = quizResults.length > 0
+            ? Math.round((quizResults.filter(q => q.correct).length / quizResults.length) * 100)
+            : 0;
+
         const user = this.state.user;
-        const weeklyGoal = (user?.weeklyHours || 8) * 3600; // seconds
+        const weeklyGoal = (user?.weeklyHours || 8) * 3600;
         const weeklyPercent = Math.min(100, Math.round((weekSeconds / weeklyGoal) * 100));
 
-        const elToday = document.getElementById('stat-today');
-        const elWeek = document.getElementById('stat-week');
-        const elTotal = document.getElementById('stat-total');
-        const elBar = document.getElementById('stat-weekly-bar');
-        const elGoal = document.getElementById('stat-weekly-goal');
+        const setEl = (id, inner) => { const el = document.getElementById(id); if (el) el.innerHTML = inner; };
+        setEl('stat-today', `${Math.round(todaySeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
+        setEl('stat-week', `${Math.round(weekSeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
 
-        if (elToday) {
-            elToday.innerHTML = `${Math.round(todaySeconds / 60)}<span style="font-size:0.75rem">分钟</span>`;
-        }
-        if (elWeek) {
-            elWeek.innerHTML = `${Math.round(weekSeconds / 60)}<span style="font-size:0.75rem">分钟</span>`;
-        }
-        if (elTotal) {
-            const totalMinutes = Math.round(totalSeconds / 60);
-            const hours = Math.floor(totalMinutes / 60);
-            const mins = totalMinutes % 60;
-            const totalDisplay = hours > 0 ? `${hours}h${mins}m` : `${mins}m`;
-            elTotal.innerHTML = `${totalDisplay}<span style="font-size:0.75rem"></span>`;
-        }
+        const totalMinutes = Math.round(totalSeconds / 60);
+        const hours = Math.floor(totalMinutes / 60);
+        const mins = totalMinutes % 60;
+        const totalDisplay = hours > 0 ? `${hours}<span style="font-size:0.75rem">h </span>${mins}<span style="font-size:0.75rem">m</span>` : `${mins}<span style="font-size:0.75rem"> 分钟</span>`;
+        setEl('stat-total', totalDisplay);
+        setEl('stat-streak', `${streak}<span style="font-size:0.75rem"> 天</span>`);
+        setEl('stat-accuracy', `${quizAccuracy}<span style="font-size:0.75rem">%</span>`);
+
+        const elBar = document.getElementById('stat-weekly-bar');
         if (elBar) elBar.style.width = `${weeklyPercent}%`;
-        if (elGoal) elGoal.textContent = `${weeklyPercent}%`;
+        const elBarLabel = document.getElementById('stat-weekly-bar-label');
+        if (elBarLabel) elBarLabel.textContent = `${weeklyPercent}%`;
     },
 
     // ===== 图片放大 =====
@@ -2729,35 +2736,32 @@ const App = {
         const wrongAnswers = quizResults.filter(r => !r.correct);
 
         if (wrongAnswers.length === 0) {
-            container.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);">恭喜！目前没有错题。</p>';
+            container.innerHTML = '<p style="font-size:0.9375rem;color:var(--color-success);text-align:center;padding:20px 0;">✅ 恭喜！目前没有错题。</p>';
             return;
         }
 
         const allChapters = this.getAllChapters();
-        const wrongByChapter = {};
-        wrongAnswers.forEach(wa => {
-            if (!wrongByChapter[wa.chapter]) {
-                wrongByChapter[wa.chapter] = [];
-            }
-            wrongByChapter[wa.chapter].push(wa);
-        });
+        const quizAccuracy = Math.round((quizResults.filter(q => q.correct).length / quizResults.length) * 100);
 
-        let html = '<div class="wrong-answer-list">';
-        Object.entries(wrongByChapter).forEach(([chapterId, items]) => {
-            const chapter = allChapters.find(c => c.id === chapterId);
-            const chapterName = chapter ? chapter.title : chapterId;
-            html += items.map(item => `
+        let html = `<p style="font-size:0.8125rem;color:var(--color-text-tertiary);margin-bottom:16px;">共 <strong style="color:var(--color-accent);">${wrongAnswers.length}</strong> 道错题 · 整体正确率 <strong style="color:var(--color-success);">${quizAccuracy}%</strong></p>`;
+        html += '<div class="wrong-answer-list">';
+        wrongAnswers.forEach(item => {
+            const chapter = allChapters.find(c => c.id === item.chapter);
+            const chapterName = chapter ? chapter.title : item.chapter;
+            const date = new Date(item.timestamp);
+            const dateStr = date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+            const userAnswer = item.userAnswer || (Array.isArray(item.selected) ? item.selected.join('、') : item.selected) || '未作答';
+            html += `
                 <div class="wrong-answer-item">
-                    <span class="wa-chapter">${chapterId}</span>
-                    <div class="wa-content">
-                        <div style="color:var(--color-text-primary);margin-bottom:2px;"><strong>题目：</strong>${item.question || '测试题'}</div>
-                        <div style="font-size:0.75rem;color:var(--color-text-tertiary);">${new Date(item.timestamp).toLocaleDateString('zh-CN')}</div>
+                    <div class="wa-header">
+                        <span class="wa-chapter">${item.chapter || ''}</span>
+                        <span class="wa-date">${dateStr}</span>
                     </div>
-                </div>
-            `).join('');
+                    <div class="wa-question">${item.question || '测试题'}</div>
+                    <div class="wa-detail">你的答案：<span style="color:var(--color-accent);font-weight:500;">${userAnswer}</span></div>
+                </div>`;
         });
         html += '</div>';
-
         container.innerHTML = html;
     },
 
@@ -2766,10 +2770,13 @@ const App = {
         const contentEl = document.querySelector('.chapter-content');
         if (!contentEl) return;
 
-        // Remove existing button
+        // Remove existing elements
         const existingBtn = document.querySelector('.highlight-note-btn');
         if (existingBtn) existingBtn.remove();
+        const existingPopup = document.querySelector('.note-input-popup');
+        if (existingPopup) existingPopup.remove();
 
+        // Floating toolbar
         const noteBtn = document.createElement('div');
         noteBtn.className = 'highlight-note-btn';
         noteBtn.innerHTML = `
@@ -2780,19 +2787,32 @@ const App = {
         `;
         document.body.appendChild(noteBtn);
 
+        // Note input popup
+        const notePopup = document.createElement('div');
+        notePopup.className = 'note-input-popup';
+        notePopup.innerHTML = `
+            <div class="note-input-context"></div>
+            <textarea placeholder="在此输入你的笔记内容..."></textarea>
+            <div class="note-input-actions">
+                <button class="btn btn-sm btn-cancel cancel-note-btn">取消</button>
+                <button class="btn btn-sm btn-primary save-note-btn">保存笔记</button>
+            </div>
+        `;
+        document.body.appendChild(notePopup);
+
         let selectedText = '';
         let selectedRange = null;
 
         contentEl.addEventListener('mouseup', (e) => {
             setTimeout(() => {
-                const selection = window.getSelection();
-                selectedText = selection.toString().trim();
+                const sel = window.getSelection();
+                selectedText = sel.toString().trim();
 
                 if (selectedText.length > 5 && selectedText.length < 500) {
-                    selectedRange = selection.getRangeAt(0);
+                    selectedRange = sel.getRangeAt(0);
                     const rect = selectedRange.getBoundingClientRect();
                     noteBtn.style.display = 'block';
-                    noteBtn.style.left = `${rect.left + rect.width / 2 - noteBtn.offsetWidth / 2}px`;
+                    noteBtn.style.left = `${Math.max(10, rect.left + rect.width / 2 - noteBtn.offsetWidth / 2)}px`;
                     noteBtn.style.top = `${rect.bottom + 8 + window.scrollY}px`;
                 } else {
                     noteBtn.style.display = 'none';
@@ -2800,100 +2820,254 @@ const App = {
             }, 10);
         });
 
+        // Toolbar actions
         noteBtn.addEventListener('click', (e) => {
             const action = e.target.dataset.action;
             if (!action || !selectedText || !selectedRange) return;
 
             if (action === 'highlight') {
-                this.highlightText(selectedRange, selectedText);
+                this.toggleHighlight(selectedRange, selectedText);
+                noteBtn.style.display = 'none';
+                window.getSelection().removeAllRanges();
             } else if (action === 'note') {
-                this.saveNote(selectedText);
+                const rect = selectedRange.getBoundingClientRect();
+                notePopup.querySelector('.note-input-context').textContent =
+                    `"${selectedText.substring(0, 120)}${selectedText.length > 120 ? '...' : ''}"`;
+                notePopup.querySelector('textarea').value = '';
+                notePopup.style.display = 'block';
+                notePopup.style.left = `${Math.min(rect.right + 12, window.innerWidth - 300)}px`;
+                notePopup.style.top = `${rect.top + window.scrollY}px`;
+                notePopup._text = selectedText;
+                notePopup._range = selectedRange;
+                noteBtn.style.display = 'none';
+                setTimeout(() => notePopup.querySelector('textarea').focus(), 50);
             }
+        });
 
-            noteBtn.style.display = 'none';
+        // Save note
+        notePopup.querySelector('.save-note-btn').addEventListener('click', () => {
+            const noteContent = notePopup.querySelector('textarea').value.trim();
+            const text = notePopup._text;
+            const range = notePopup._range;
+            if (!noteContent || !text) return;
+            if (range) this.highlightAndAnnotate(range, text, noteContent);
+            notePopup.style.display = 'none';
             window.getSelection().removeAllRanges();
         });
 
-        document.addEventListener('mousedown', (e) => {
-            if (!noteBtn.contains(e.target)) {
-                noteBtn.style.display = 'none';
+        // Cancel note
+        notePopup.querySelector('.cancel-note-btn').addEventListener('click', () => {
+            notePopup.style.display = 'none';
+            window.getSelection().removeAllRanges();
+        });
+
+        // Click on existing highlights: toggle plain highlight, or jump to annotation
+        contentEl.addEventListener('click', (e) => {
+            const mark = e.target.closest('mark.user-highlight, span.user-highlight-mark');
+            if (!mark) return;
+
+            if (mark.classList.contains('has-note')) {
+                const noteId = mark.dataset.noteId;
+                if (noteId) {
+                    const ann = document.querySelector(`.note-annotation[data-note-id="${noteId}"]`);
+                    if (ann) {
+                        ann.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        ann.style.boxShadow = '0 0 0 3px rgba(245,158,11,0.3)';
+                        setTimeout(() => ann.style.boxShadow = '', 2000);
+                    }
+                }
+            } else {
+                if (confirm('取消此标记？')) {
+                    const t = mark.textContent;
+                    mark.replaceWith(document.createTextNode(t));
+                    this.removeHighlight(t);
+                    this.showToast('已取消标记', 'info');
+                }
             }
         });
 
-        // Restore highlights and notes from storage
+        // Click outside dismisses toolbar, and popup if empty
+        document.addEventListener('mousedown', (e) => {
+            if (!noteBtn.contains(e.target) && !notePopup.contains(e.target)) {
+                noteBtn.style.display = 'none';
+                if (!notePopup.querySelector('textarea').value.trim()) {
+                    notePopup.style.display = 'none';
+                }
+            }
+        });
+
         this.restoreHighlights(contentEl);
     },
 
-    highlightText(range, text) {
+    toggleHighlight(range, text) {
+        // If selection is inside an existing plain highlight, toggle it off
+        const existing = range.startContainer.parentElement?.closest('mark.user-highlight:not(.has-note), span.user-highlight-mark:not(.has-note)');
+        if (existing) {
+            const t = existing.textContent;
+            existing.replaceWith(document.createTextNode(t));
+            this.removeHighlight(t);
+            this.showToast('已取消标记', 'info');
+            return;
+        }
+
         try {
             const mark = document.createElement('mark');
             mark.className = 'user-highlight';
-            mark.title = '点击查看笔记';
-            mark.dataset.highlighted = 'true';
-            mark.dataset.text = text.substring(0, 100);
-
-            // Save to behavior data
-            if (!this.state.behaviorData.highlights) {
-                this.state.behaviorData.highlights = [];
-            }
-            this.state.behaviorData.highlights.push({
-                text: text.substring(0, 200),
-                chapter: this.state.currentChapter?.id,
-                timestamp: new Date().toISOString()
-            });
-            this.saveBehaviorData(true);
-
+            mark.title = '点击取消标记';
+            this.saveHighlight(text);
             range.surroundContents(mark);
             this.showToast('已标记重点 ✨', 'success');
         } catch (e) {
-            // Can't highlight across element boundaries; create a simpler approach
             const sel = window.getSelection();
             if (sel.rangeCount > 0) {
                 const r = sel.getRangeAt(0);
                 const span = document.createElement('span');
                 span.className = 'user-highlight-mark';
-                span.style.cssText = 'background:#fef08a;border-radius:2px;padding:0 2px;';
-
-                if (!this.state.behaviorData.highlights) {
-                    this.state.behaviorData.highlights = [];
-                }
-                this.state.behaviorData.highlights.push({
-                    text: text.substring(0, 200),
-                    chapter: this.state.currentChapter?.id,
-                    timestamp: new Date().toISOString()
-                });
-                this.saveBehaviorData(true);
-
+                this.saveHighlight(text);
                 try {
                     r.surroundContents(span);
                     this.showToast('已标记重点 ✨', 'success');
                 } catch {
-                    this.showToast('无法标记此区域（跨元素选择）', 'warning');
+                    this.showToast('无法标记此区域', 'warning');
                 }
             }
         }
     },
 
-    saveNote(text) {
+    highlightAndAnnotate(range, text, noteContent) {
+        const noteId = 'note-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6);
         const chapter = this.state.currentChapter;
-        if (!this.state.behaviorData.notes) {
-            this.state.behaviorData.notes = [];
-        }
-        this.state.behaviorData.notes.push({
-            text: text.substring(0, 500),
+        const noteEntry = {
+            id: noteId,
+            context: text.substring(0, 300),
+            content: noteContent,
             chapter: chapter?.id,
             chapterTitle: chapter?.title,
             timestamp: new Date().toISOString()
-        });
+        };
+
+        if (!this.state.behaviorData.notes) this.state.behaviorData.notes = [];
+        this.state.behaviorData.notes.push(noteEntry);
+        this.saveHighlight(text, noteId);
         this.saveBehaviorData(true);
-        this.showToast('笔记已保存 📝', 'success');
+
+        const annotationHTML = `
+            <div class="note-annotation-header">
+                <span class="note-annotation-label">📝 笔记</span>
+                <span class="note-annotation-delete" data-note-id="${noteId}">✕ 删除</span>
+            </div>
+            <div class="note-annotation-context">原文："${this.escapeHtml(text.substring(0, 100))}${text.length > 100 ? '...' : ''}"</div>
+            <div class="note-annotation-content">${this.escapeHtml(noteContent)}</div>
+        `;
+
+        const bindAnnotationDelete = (ann, hlEl) => {
+            ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                if (confirm('删除此笔记？关联的高亮也将取消。')) {
+                    this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                        .filter(n => n.id !== noteId);
+                    this.saveBehaviorData(true);
+                    ann.remove();
+                    if (hlEl.parentNode) hlEl.replaceWith(document.createTextNode(hlEl.textContent));
+                    this.showToast('笔记已删除', 'info');
+                }
+            });
+        };
+
+        const insertAnnotation = (hlEl) => {
+            const parentP = hlEl.closest('p, li, h2, h3, h4, blockquote, td') || hlEl.parentElement;
+            const ann = document.createElement('div');
+            ann.className = 'note-annotation';
+            ann.dataset.noteId = noteId;
+            ann.innerHTML = annotationHTML;
+            if (parentP.nextSibling) {
+                parentP.parentNode.insertBefore(ann, parentP.nextSibling);
+            } else {
+                parentP.parentNode.appendChild(ann);
+            }
+            bindAnnotationDelete(ann, hlEl);
+        };
+
+        try {
+            const mark = document.createElement('mark');
+            mark.className = 'user-highlight has-note';
+            mark.title = '点击查看笔记';
+            mark.dataset.noteId = noteId;
+            range.surroundContents(mark);
+            insertAnnotation(mark);
+            this.showToast('笔记已保存 📝', 'success');
+        } catch (e) {
+            const sel = window.getSelection();
+            if (sel.rangeCount > 0) {
+                const r = sel.getRangeAt(0);
+                const span = document.createElement('span');
+                span.className = 'user-highlight-mark has-note';
+                span.dataset.noteId = noteId;
+                span.title = '点击查看笔记';
+                try {
+                    r.surroundContents(span);
+                    insertAnnotation(span);
+                    this.showToast('笔记已保存 📝', 'success');
+                } catch {
+                    this.showToast('无法在此区域添加笔记', 'warning');
+                }
+            }
+        }
+    },
+
+    saveHighlight(text, noteId) {
+        if (!this.state.behaviorData.highlights) this.state.behaviorData.highlights = [];
+        this.state.behaviorData.highlights.push({
+            text: text.substring(0, 200),
+            noteId: noteId || null,
+            chapter: this.state.currentChapter?.id,
+            timestamp: new Date().toISOString()
+        });
+    },
+
+    removeHighlight(text) {
+        if (!this.state.behaviorData.highlights) return;
+        this.state.behaviorData.highlights = this.state.behaviorData.highlights
+            .filter(h => h.text.substring(0, 50) !== text.substring(0, 50));
+        this.saveBehaviorData(true);
     },
 
     restoreHighlights(contentEl) {
-        // Restore saved highlights from localStorage
-        const highlights = this.state.behaviorData.highlights || [];
-        // Highlights are ephemeral — we just note they exist
-        // Actual DOM restoration requires text matching which is fragile
+        const notes = this.state.behaviorData.notes || [];
+        notes.forEach((note) => {
+            const selector = `mark.user-highlight.has-note[data-note-id="${note.id}"], span.user-highlight-mark.has-note[data-note-id="${note.id}"]`;
+            contentEl.querySelectorAll(selector).forEach(mark => {
+                if (contentEl.querySelector(`.note-annotation[data-note-id="${note.id}"]`)) return;
+                const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
+                const ann = document.createElement('div');
+                ann.className = 'note-annotation';
+                ann.dataset.noteId = note.id;
+                ann.innerHTML = `
+                    <div class="note-annotation-header">
+                        <span class="note-annotation-label">📝 笔记</span>
+                        <span class="note-annotation-delete" data-note-id="${note.id}">✕ 删除</span>
+                    </div>
+                    <div class="note-annotation-context">原文："${this.escapeHtml((note.context || '').substring(0, 100))}"</div>
+                    <div class="note-annotation-content">${this.escapeHtml(note.content || '')}</div>
+                `;
+                if (parentP.nextSibling) {
+                    parentP.parentNode.insertBefore(ann, parentP.nextSibling);
+                } else {
+                    parentP.parentNode.appendChild(ann);
+                }
+                ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    if (confirm('删除此笔记？关联的高亮也将取消。')) {
+                        this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                            .filter(n => n.id !== note.id);
+                        this.saveBehaviorData(true);
+                        ann.remove();
+                        if (mark.parentNode) mark.replaceWith(document.createTextNode(mark.textContent));
+                        this.showToast('笔记已删除', 'info');
+                    }
+                });
+            });
+        });
     },
 
     openNotesModal() {
@@ -2903,44 +3077,32 @@ const App = {
 
         const notes = this.state.behaviorData.notes || [];
         if (notes.length === 0) {
-            notesList.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"📝 记笔记"开始记录。</p>';
+            notesList.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"📝 记笔记"并写入内容即可创建笔记。</p>';
         } else {
-            const allChapters = this.getAllChapters();
-            notesList.innerHTML = '<div class="notes-list">' + notes.map((note, i) => `
+            notesList.innerHTML = notes.map((note, i) => `
                 <div class="note-item">
-                    <div class="note-text">"${this.escapeHtml(note.text.substring(0, 200))}"</div>
-                    <div class="note-meta">
-                        <span class="note-chapter">${note.chapterTitle || note.chapter || '未知章节'}</span>
-                        <span>${new Date(note.timestamp).toLocaleDateString('zh-CN')} <span class="note-delete" data-note-index="${i}">删除</span></span>
+                    <div class="note-context" style="font-size:0.8rem;color:var(--color-text-tertiary);margin-bottom:6px;font-style:italic;">原文："${this.escapeHtml((note.context || note.text || '').substring(0, 150))}"</div>
+                    <div class="note-text" style="color:var(--color-text-primary);line-height:1.6;">${this.escapeHtml(note.content || note.text || '')}</div>
+                    <div class="note-meta" style="font-size:0.75rem;color:var(--color-text-tertiary);margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                        <span>${note.chapterTitle || note.chapter || '未知章节'} · ${new Date(note.timestamp).toLocaleDateString('zh-CN')}</span>
+                        <span class="note-delete" data-note-id="${note.id || i}" style="color:var(--color-accent);cursor:pointer;font-size:0.75rem;">删除</span>
                     </div>
                 </div>
-            `).join('') + '</div>';
+            `).join('');
 
-            // Bind delete
             notesList.querySelectorAll('.note-delete').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const idx = parseInt(e.target.dataset.noteIndex);
-                    if (idx >= 0 && this.state.behaviorData.notes) {
-                        this.state.behaviorData.notes.splice(idx, 1);
-                        this.saveBehaviorData(true);
-                        this.openNotesModal(); // Refresh
-                    }
+                    const noteId = e.target.dataset.noteId;
+                    this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                        .filter((n, i) => (n.id || String(i)) !== noteId);
+                    this.saveBehaviorData(true);
+                    this.openNotesModal();
                 });
             });
         }
 
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-
-        // Close handlers
-        const closeBtn = modal.querySelector('.modal-close');
-        const overlay = modal.querySelector('.modal-overlay');
-        const closeModal = () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        if (closeBtn) closeBtn.onclick = closeModal;
-        if (overlay) overlay.onclick = closeModal;
     }
 };
 
