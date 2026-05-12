@@ -452,6 +452,27 @@ const App = {
             modalOverlay.addEventListener('click', () => this.closeProfileModal());
         }
 
+        const viewNotesBtn = document.getElementById('view-notes-btn');
+        if (viewNotesBtn) {
+            viewNotesBtn.addEventListener('click', () => this.openNotesModal());
+        }
+
+        const notesModalClose = document.querySelector('#notes-modal .modal-close');
+        if (notesModalClose) {
+            notesModalClose.addEventListener('click', () => {
+                document.getElementById('notes-modal').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        const notesModalOverlay = document.querySelector('#notes-modal .modal-overlay');
+        if (notesModalOverlay) {
+            notesModalOverlay.addEventListener('click', () => {
+                document.getElementById('notes-modal').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
         const resetProfile = document.getElementById('reset-profile');
         if (resetProfile) {
             resetProfile.addEventListener('click', () => this.resetProfile());
@@ -687,6 +708,7 @@ const App = {
                     studyPace: 'moderate',
                     learningStyle: [],
                     interestArea: [],
+                    weeklyHours: 8,
                     behaviorProfile: {
                         weakTopics: [],
                         strongTopics: [],
@@ -739,7 +761,7 @@ const App = {
     async handleProfileSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
-        
+
         const getCheckedValues = (name) => {
             const values = [];
             e.target.querySelectorAll(`input[name="${name}"]:checked`).forEach((cb) => {
@@ -757,6 +779,7 @@ const App = {
             studyPace: formData.get('studyPace'),
             learningStyle: getCheckedValues('learningStyle'),
             interestArea: getCheckedValues('interestArea'),
+            weeklyHours: parseInt(formData.get('weeklyHours')) || 8,
             resume: formData.get('resume') || '',
             scores: formData.get('scores') || '',
             currentProject: formData.get('currentProject') || '',
@@ -868,6 +891,9 @@ const App = {
                 this.updateUserGreeting();
                 this.updateProgress();
                 this.renderAILearningPath();
+                this.renderMindMap();
+                this.updateStudyStats();
+                this.updateWrongAnswerBook();
                 break;
             case 'chapter':
                 if (param) {
@@ -952,6 +978,12 @@ const App = {
                     this.renderMermaidDiagrams(contentEl);
                     this.initTextSelection(contentEl);
                     this.initLearningTools();
+                    this.renderLearningObjectives(contentEl);
+                    setTimeout(() => {
+                        this.renderSubHeadings(contentEl);
+                        this.initImageLightbox();
+                        this.initHighlightNotes();
+                    }, 500);
 
                     if (this._pendingQuizJump === chapterId) {
                         this._pendingQuizJump = null;
@@ -972,6 +1004,15 @@ const App = {
         this.updateChapterNav(chapterId);
         this.updateActiveNavItem(chapterId);
         this.showView('view-chapter');
+        this.showChapterSummary(chapter);
+    },
+
+    showChapterSummary(chapter) {
+        // Show a TL;DR summary box at the chapter header
+        const descEl = document.getElementById('chapter-description');
+        if (descEl && chapter.description) {
+            descEl.innerHTML = `📖 <strong>本章速览：</strong>${chapter.description}`;
+        }
     },
 
     initTextSelection(container) {
@@ -1102,13 +1143,18 @@ const App = {
 
     buildSystemPrompt(user, context) {
         const parts = [];
-        
+
         parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。请使用Markdown格式输出，包括标题、列表、粗体等，让内容结构清晰易读。');
-        
+
         if (user) {
-            parts.push(`用户学习水平：${user.level || '初学者'}`);
+            const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
+            parts.push(`用户学习水平：${levelMap[user.level] || user.level || '初学者'}`);
             parts.push(`专业背景：${user.background || '学生'}`);
-            
+
+            if (user.weeklyHours) {
+                parts.push(`每周学习时间：${user.weeklyHours}小时`);
+            }
+
             if (user.motivation?.length > 0) {
                 const motivationMap = {
                     course: '课程学习',
@@ -1119,19 +1165,20 @@ const App = {
                 const motivations = user.motivation.map(m => motivationMap[m] || m).join('、');
                 parts.push(`学习动机：${motivations}`);
             }
-            
+
             if (user.prerequisite?.length > 0) {
                 const prereqMap = {
                     physics: '大学物理',
                     chemistry: '化学/材料',
                     electronics: '电子工程',
                     semiconductor: '半导体器件',
-                    none: '无特定基础'
+                    none: '无特定基础',
+                    zero: '毫无基础'
                 };
                 const prereqs = user.prerequisite.map(p => prereqMap[p] || p).join('、');
                 parts.push(`先修知识：${prereqs}`);
             }
-            
+
             if (user.studyPace) {
                 const paceMap = {
                     intensive: '集中学习（1-2周）',
@@ -1140,7 +1187,7 @@ const App = {
                 };
                 parts.push(`学习节奏：${paceMap[user.studyPace]}`);
             }
-            
+
             if (user.learningStyle?.length > 0) {
                 const styleMap = {
                     theory: '理论推导',
@@ -1151,7 +1198,7 @@ const App = {
                 const styles = user.learningStyle.map(s => styleMap[s] || s).join('、');
                 parts.push(`偏好学习方式：${styles}`);
             }
-            
+
             if (user.interestArea?.length > 0) {
                 const areaMap = {
                     semiconductor: '半导体集成电路',
@@ -1164,7 +1211,7 @@ const App = {
                 const areas = user.interestArea.map(a => areaMap[a] || a).join('、');
                 parts.push(`感兴趣领域：${areas}`);
             }
-            
+
             if (user.resume) {
                 parts.push(`个人简介：${user.resume}`);
             }
@@ -1180,7 +1227,7 @@ const App = {
             if (user.learningReason) {
                 parts.push(`学习原因：${user.learningReason}`);
             }
-            
+
             if (user.behaviorProfile) {
                 const bp = user.behaviorProfile;
                 if (bp.weakTopics?.length > 0) {
@@ -1192,31 +1239,35 @@ const App = {
                 if (bp.quizAccuracy > 0) {
                     parts.push(`Quiz正确率：${Math.round(bp.quizAccuracy * 100)}%`);
                 }
+                if (bp.avgSessionTime > 0) {
+                    parts.push(`平均学习时长：${Math.round(bp.avgSessionTime / 60)}分钟`);
+                }
             }
         }
-        
+
         if (context === 'explanation') {
             parts.push('请根据用户的完整画像提供个性化解释。');
+            parts.push('- 毫无基础：用最简单的生活类比，避免任何术语，解释为什么这个概念重要');
             parts.push('- 初学者：多用类比，避免复杂公式，强调直观理解');
             parts.push('- 中级：引入技术参数，解释物理机制，联系实际工艺');
             parts.push('- 高级：深入工程细节，讨论优化策略，引用最新进展');
             parts.push('- 根据学习动机调整侧重点（课程→考试要点，科研→前沿进展，职业→实操技能，兴趣→背景故事）');
             parts.push('- 根据先修知识决定数学深度');
             parts.push('- 根据感兴趣领域举例时优先使用相关应用');
-            parts.push('- 根据学习节奏调整内容密度（集中→精简核心，轻松→详细展开）');
+            parts.push('- 根据学习节奏和每周学习时间调整内容密度');
             parts.push('- 结合用户当前正在阅读的章节上下文进行解释，不要孤立解释概念');
             parts.push('- 如果用户在某个章节停留时间较长或多次提问，说明该部分较难，请更详细地解释');
             parts.push('- 如果用户有进行中的项目，尝试将解释与其实际项目联系起来');
-            parts.push('- 如果用户有未来计划，可以指出该概念如何支持其未来项目');
         } else if (context === 'chat') {
             parts.push('请作为个性化学习助手，根据用户画像回答问题。');
             parts.push('- 如果用户问基础概念，根据水平调整深度');
             parts.push('- 如果用户问应用场景，优先提及感兴趣的领域');
             parts.push('- 如果用户表现出困惑，建议适合的学习方式');
+            parts.push('- 根据用户的学习行为数据（薄弱环节、停留时间等），主动提供针对性的学习建议');
         }
-        
+
         parts.push('使用中文回答，保持专业但友好的语气。');
-        
+
         return parts.join('\n');
     },
 
@@ -1783,6 +1834,7 @@ const App = {
         };
 
         const levelMap = {
+            zero: '毫无基础',
             beginner: '初学者',
             intermediate: '中级',
             advanced: '高级'
@@ -1960,6 +2012,7 @@ const App = {
                 summary.classList.remove('hidden');
                 summary.querySelector('.score-number').textContent = correctCount;
             }
+            this.updateWrongAnswerBook();
         }
     },
 
@@ -2339,6 +2392,488 @@ const App = {
         }
 
         return result.join('\n');
+    },
+
+    // ===== 思维导图 =====
+    renderMindMap() {
+        const container = document.getElementById('quick-mindmap');
+        if (!container || this.state.chapters.length === 0) return;
+
+        const colors = ['#004EA1', '#9D0A12', '#0d9488', '#7c3aed'];
+        const colorsLight = ['#e6f0fa', '#fdf2f3', '#f0fdfa', '#f5f3ff'];
+
+        let svg = '<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">';
+        // Center node
+        svg += '<rect x="225" y="170" width="150" height="60" rx="8" fill="#004EA1"/>';
+        svg += '<text x="300" y="205" text-anchor="middle" fill="white" font-size="14" font-weight="600" font-family="Noto Sans SC, sans-serif">纳米制造技术</text>';
+
+        this.state.chapters.forEach((part, partIndex) => {
+            const angle = (partIndex / this.state.chapters.length) * Math.PI * 2 - Math.PI / 2;
+            const cx = 300 + Math.cos(angle) * 170;
+            const cy = 200 + Math.sin(angle) * 130;
+            const color = colors[partIndex % colors.length];
+            const lightColor = colorsLight[partIndex % colorsLight.length];
+
+            // Line from center
+            svg += `<line x1="300" y1="200" x2="${cx}" y2="${cy}" stroke="${color}" stroke-width="2" opacity="0.6"/>`;
+
+            // Part node
+            svg += `<rect x="${cx - 55}" y="${cy - 28}" width="110" height="36" rx="6" fill="${lightColor}" stroke="${color}" stroke-width="1.5"/>`;
+            svg += `<text x="${cx}" y="${cy - 8}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="Noto Sans SC, sans-serif">${part.title.replace('：', '')}</text>`;
+            svg += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans SC, sans-serif">${part.chapters.length}章节</text>`;
+
+            // Chapter dots
+            part.chapters.forEach((ch, chIndex) => {
+                const dotAngle = angle - 0.3 + (chIndex / (part.chapters.length)) * 0.6;
+                const dx = cx + Math.cos(dotAngle) * 55;
+                const dy = cy + Math.sin(dotAngle) * 22 + 22;
+                svg += `<circle cx="${dx}" cy="${dy}" r="4" fill="${color}" opacity="0.7"/>`;
+                svg += `<text x="${dx + 8}" y="${dy + 3}" fill="#475569" font-size="7" font-family="Noto Sans SC, sans-serif">${ch.id}</text>`;
+            });
+        });
+
+        svg += '</svg>';
+        container.innerHTML = svg;
+    },
+
+    // ===== 学习统计 =====
+    updateStudyStats() {
+        const behaviorData = this.state.behaviorData;
+        const now = new Date();
+        const today = now.toDateString();
+        const weekStart = new Date(now);
+        weekStart.setDate(now.getDate() - now.getDay());
+
+        // Calculate total study time from timeSpent
+        const timeSpent = behaviorData.timeSpent || {};
+        let totalSeconds = 0;
+        Object.values(timeSpent).forEach(t => {
+            totalSeconds += (typeof t === 'number' ? t : 0);
+        });
+
+        // Daily breakdown (estimate today's time)
+        let todaySeconds = 0;
+        let weekSeconds = 0;
+        const interactions = behaviorData.interactions || [];
+        const todayInteractions = interactions.filter(i => {
+            try {
+                const d = new Date(i.timestamp);
+                return d.toDateString() === today;
+            } catch { return false; }
+        });
+        const weekInteractions = interactions.filter(i => {
+            try {
+                const d = new Date(i.timestamp);
+                return d >= weekStart;
+            } catch { return false; }
+        });
+        todaySeconds = todayInteractions.length * 45; // ~45 seconds per interaction
+        weekSeconds = weekInteractions.length * 45;
+
+        const user = this.state.user;
+        const weeklyGoal = (user?.weeklyHours || 8) * 3600; // seconds
+        const weeklyPercent = Math.min(100, Math.round((weekSeconds / weeklyGoal) * 100));
+
+        const elToday = document.getElementById('stat-today');
+        const elWeek = document.getElementById('stat-week');
+        const elTotal = document.getElementById('stat-total');
+        const elBar = document.getElementById('stat-weekly-bar');
+        const elGoal = document.getElementById('stat-weekly-goal');
+
+        if (elToday) {
+            elToday.innerHTML = `${Math.round(todaySeconds / 60)}<span style="font-size:0.75rem">分钟</span>`;
+        }
+        if (elWeek) {
+            elWeek.innerHTML = `${Math.round(weekSeconds / 60)}<span style="font-size:0.75rem">分钟</span>`;
+        }
+        if (elTotal) {
+            const totalMinutes = Math.round(totalSeconds / 60);
+            const hours = Math.floor(totalMinutes / 60);
+            const mins = totalMinutes % 60;
+            const totalDisplay = hours > 0 ? `${hours}h${mins}m` : `${mins}m`;
+            elTotal.innerHTML = `${totalDisplay}<span style="font-size:0.75rem"></span>`;
+        }
+        if (elBar) elBar.style.width = `${weeklyPercent}%`;
+        if (elGoal) elGoal.textContent = `${weeklyPercent}%`;
+    },
+
+    // ===== 图片放大 =====
+    initImageLightbox() {
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = document.getElementById('image-lightbox-img');
+        if (!lightbox || !lightboxImg) return;
+
+        const closeBtn = lightbox.querySelector('.image-lightbox-close');
+
+        const openLightbox = (src) => {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            lightboxImg.src = '';
+        };
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Attach click handlers to chapter content images
+        const contentEl = document.querySelector('.chapter-content');
+        if (contentEl) {
+            contentEl.querySelectorAll('img').forEach(img => {
+                if (!img.dataset.lightboxReady) {
+                    img.dataset.lightboxReady = '1';
+                    img.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (img.closest('.mermaid-diagram-container')) return;
+                        openLightbox(img.src);
+                    });
+                }
+            });
+        }
+    },
+
+    // ===== 侧边栏二级标题 =====
+    renderSubHeadings(chapterContentEl) {
+        if (!chapterContentEl) return;
+
+        const headings = chapterContentEl.querySelectorAll('h2, h3');
+        const chapterId = this.state.currentChapter?.id;
+        if (!chapterId) return;
+
+        // Find the matching nav-chapter-row
+        const chapterRow = document.querySelector(`.nav-chapter[data-chapter-id="${chapterId}"]`)?.closest('.nav-chapter-row');
+        if (!chapterRow) return;
+
+        // Remove existing sub-headings
+        const existing = chapterRow.querySelector('.nav-subheadings');
+        if (existing) existing.remove();
+
+        if (headings.length === 0) return;
+
+        const subContainer = document.createElement('div');
+        subContainer.className = 'nav-subheadings';
+
+        headings.forEach((h, i) => {
+            if (!h.id) {
+                h.id = 'section-' + chapterId + '-' + i + '-' + Math.random().toString(36).slice(2, 6);
+            }
+            const link = document.createElement('a');
+            link.className = 'nav-subheading';
+            link.href = `#${h.id}`;
+            link.textContent = (h.tagName === 'H3' ? '  ∘ ' : '') + h.textContent.trim().substring(0, 30);
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            subContainer.appendChild(link);
+        });
+
+        chapterRow.appendChild(subContainer);
+        chapterRow.classList.add('expanded-sub');
+    },
+
+    // ===== 学习目标 =====
+    renderLearningObjectives(chapterContentEl) {
+        if (!chapterContentEl) return;
+
+        // Remove existing objectives
+        const existing = chapterContentEl.querySelector('.learning-objectives');
+        if (existing) existing.remove();
+
+        const chapter = this.state.currentChapter;
+        if (!chapter) return;
+
+        // Generate objectives based on chapter metadata and user level
+        const user = this.state.user;
+        const level = user?.level || 'beginner';
+
+        const objectives = {
+            basic: [
+                `理解${chapter.title}的基本概念和核心原理`,
+                `掌握${chapter.title}的主要术语和关键参数`,
+                `了解${chapter.title}的常见应用场景`
+            ],
+            advanced: [
+                `深入分析${chapter.title}的技术细节和工艺限制`,
+                `比较不同${chapter.title}方法的优劣势和适用场景`,
+                `将${chapter.title}知识与实际工艺问题相结合`
+            ]
+        };
+
+        if (level === 'zero' || level === 'beginner') {
+            objectives.basic = objectives.basic;
+        }
+        if (level === 'advanced') {
+            objectives.basic = objectives.basic.slice(0, 1);
+            objectives.advanced = objectives.advanced;
+        }
+
+        const objHTML = `
+            <div class="learning-objectives">
+                <div class="learning-objectives-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                    <h4>学习目标</h4>
+                </div>
+                <div class="learning-objectives-list">
+                    ${objectives.basic.map(o => `
+                        <div class="learning-objective-item">
+                            <span class="obj-badge basic">基础</span>
+                            <span>${o}</span>
+                        </div>
+                    `).join('')}
+                    ${objectives.advanced.map(o => `
+                        <div class="learning-objective-item">
+                            <span class="obj-badge advanced">进阶</span>
+                            <span>${o}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        // Insert at the top of chapter content (after the first heading)
+        const firstHeading = chapterContentEl.querySelector('h1');
+        if (firstHeading) {
+            firstHeading.insertAdjacentHTML('afterend', objHTML);
+        } else {
+            chapterContentEl.insertAdjacentHTML('afterbegin', objHTML);
+        }
+    },
+
+    // ===== 错题本 =====
+    updateWrongAnswerBook() {
+        const container = document.getElementById('wrong-answer-content');
+        if (!container) return;
+
+        const quizResults = this.state.behaviorData.quizResults || [];
+        const wrongAnswers = quizResults.filter(r => !r.correct);
+
+        if (wrongAnswers.length === 0) {
+            container.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);">恭喜！目前没有错题。</p>';
+            return;
+        }
+
+        const allChapters = this.getAllChapters();
+        const wrongByChapter = {};
+        wrongAnswers.forEach(wa => {
+            if (!wrongByChapter[wa.chapter]) {
+                wrongByChapter[wa.chapter] = [];
+            }
+            wrongByChapter[wa.chapter].push(wa);
+        });
+
+        let html = '<div class="wrong-answer-list">';
+        Object.entries(wrongByChapter).forEach(([chapterId, items]) => {
+            const chapter = allChapters.find(c => c.id === chapterId);
+            const chapterName = chapter ? chapter.title : chapterId;
+            html += items.map(item => `
+                <div class="wrong-answer-item">
+                    <span class="wa-chapter">${chapterId}</span>
+                    <div class="wa-content">
+                        <div style="color:var(--color-text-primary);margin-bottom:2px;"><strong>题目：</strong>${item.question || '测试题'}</div>
+                        <div style="font-size:0.75rem;color:var(--color-text-tertiary);">${new Date(item.timestamp).toLocaleDateString('zh-CN')}</div>
+                    </div>
+                </div>
+            `).join('');
+        });
+        html += '</div>';
+
+        container.innerHTML = html;
+    },
+
+    // ===== 高亮和笔记 =====
+    initHighlightNotes() {
+        const contentEl = document.querySelector('.chapter-content');
+        if (!contentEl) return;
+
+        // Remove existing button
+        const existingBtn = document.querySelector('.highlight-note-btn');
+        if (existingBtn) existingBtn.remove();
+
+        const noteBtn = document.createElement('div');
+        noteBtn.className = 'highlight-note-btn';
+        noteBtn.innerHTML = `
+            <div class="sub-options">
+                <span class="sub-option" data-action="highlight">✨ 标记重点</span>
+                <span class="sub-option" data-action="note">📝 记笔记</span>
+            </div>
+        `;
+        document.body.appendChild(noteBtn);
+
+        let selectedText = '';
+        let selectedRange = null;
+
+        contentEl.addEventListener('mouseup', (e) => {
+            setTimeout(() => {
+                const selection = window.getSelection();
+                selectedText = selection.toString().trim();
+
+                if (selectedText.length > 5 && selectedText.length < 500) {
+                    selectedRange = selection.getRangeAt(0);
+                    const rect = selectedRange.getBoundingClientRect();
+                    noteBtn.style.display = 'block';
+                    noteBtn.style.left = `${rect.left + rect.width / 2 - noteBtn.offsetWidth / 2}px`;
+                    noteBtn.style.top = `${rect.bottom + 8 + window.scrollY}px`;
+                } else {
+                    noteBtn.style.display = 'none';
+                }
+            }, 10);
+        });
+
+        noteBtn.addEventListener('click', (e) => {
+            const action = e.target.dataset.action;
+            if (!action || !selectedText || !selectedRange) return;
+
+            if (action === 'highlight') {
+                this.highlightText(selectedRange, selectedText);
+            } else if (action === 'note') {
+                this.saveNote(selectedText);
+            }
+
+            noteBtn.style.display = 'none';
+            window.getSelection().removeAllRanges();
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (!noteBtn.contains(e.target)) {
+                noteBtn.style.display = 'none';
+            }
+        });
+
+        // Restore highlights and notes from storage
+        this.restoreHighlights(contentEl);
+    },
+
+    highlightText(range, text) {
+        try {
+            const mark = document.createElement('mark');
+            mark.className = 'user-highlight';
+            mark.title = '点击查看笔记';
+            mark.dataset.highlighted = 'true';
+            mark.dataset.text = text.substring(0, 100);
+
+            // Save to behavior data
+            if (!this.state.behaviorData.highlights) {
+                this.state.behaviorData.highlights = [];
+            }
+            this.state.behaviorData.highlights.push({
+                text: text.substring(0, 200),
+                chapter: this.state.currentChapter?.id,
+                timestamp: new Date().toISOString()
+            });
+            this.saveBehaviorData(true);
+
+            range.surroundContents(mark);
+            this.showToast('已标记重点 ✨', 'success');
+        } catch (e) {
+            // Can't highlight across element boundaries; create a simpler approach
+            const sel = window.getSelection();
+            if (sel.rangeCount > 0) {
+                const r = sel.getRangeAt(0);
+                const span = document.createElement('span');
+                span.className = 'user-highlight-mark';
+                span.style.cssText = 'background:#fef08a;border-radius:2px;padding:0 2px;';
+
+                if (!this.state.behaviorData.highlights) {
+                    this.state.behaviorData.highlights = [];
+                }
+                this.state.behaviorData.highlights.push({
+                    text: text.substring(0, 200),
+                    chapter: this.state.currentChapter?.id,
+                    timestamp: new Date().toISOString()
+                });
+                this.saveBehaviorData(true);
+
+                try {
+                    r.surroundContents(span);
+                    this.showToast('已标记重点 ✨', 'success');
+                } catch {
+                    this.showToast('无法标记此区域（跨元素选择）', 'warning');
+                }
+            }
+        }
+    },
+
+    saveNote(text) {
+        const chapter = this.state.currentChapter;
+        if (!this.state.behaviorData.notes) {
+            this.state.behaviorData.notes = [];
+        }
+        this.state.behaviorData.notes.push({
+            text: text.substring(0, 500),
+            chapter: chapter?.id,
+            chapterTitle: chapter?.title,
+            timestamp: new Date().toISOString()
+        });
+        this.saveBehaviorData(true);
+        this.showToast('笔记已保存 📝', 'success');
+    },
+
+    restoreHighlights(contentEl) {
+        // Restore saved highlights from localStorage
+        const highlights = this.state.behaviorData.highlights || [];
+        // Highlights are ephemeral — we just note they exist
+        // Actual DOM restoration requires text matching which is fragile
+    },
+
+    openNotesModal() {
+        const modal = document.getElementById('notes-modal');
+        const notesList = document.getElementById('notes-list');
+        if (!modal || !notesList) return;
+
+        const notes = this.state.behaviorData.notes || [];
+        if (notes.length === 0) {
+            notesList.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"📝 记笔记"开始记录。</p>';
+        } else {
+            const allChapters = this.getAllChapters();
+            notesList.innerHTML = '<div class="notes-list">' + notes.map((note, i) => `
+                <div class="note-item">
+                    <div class="note-text">"${this.escapeHtml(note.text.substring(0, 200))}"</div>
+                    <div class="note-meta">
+                        <span class="note-chapter">${note.chapterTitle || note.chapter || '未知章节'}</span>
+                        <span>${new Date(note.timestamp).toLocaleDateString('zh-CN')} <span class="note-delete" data-note-index="${i}">删除</span></span>
+                    </div>
+                </div>
+            `).join('') + '</div>';
+
+            // Bind delete
+            notesList.querySelectorAll('.note-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.target.dataset.noteIndex);
+                    if (idx >= 0 && this.state.behaviorData.notes) {
+                        this.state.behaviorData.notes.splice(idx, 1);
+                        this.saveBehaviorData(true);
+                        this.openNotesModal(); // Refresh
+                    }
+                });
+            });
+        }
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Close handlers
+        const closeBtn = modal.querySelector('.modal-close');
+        const overlay = modal.querySelector('.modal-overlay');
+        const closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        if (closeBtn) closeBtn.onclick = closeModal;
+        if (overlay) overlay.onclick = closeModal;
     }
 };
 

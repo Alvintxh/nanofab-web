@@ -1,6 +1,34 @@
 # Changelog
 
-## 2026-05-12 - Security hardening & bug fixes
+## 2026-05-12 (PM) - UI enhancements & learning tools (teacher feedback)
+
+### Layout & Design
+- Expanded desktop layout: main content area 900px→1100px, onboarding form 560px→780px
+- Unified font families across chapter content and UI components
+- Wider radio/checkbox option buttons for better readability
+
+### New Features
+- Added mind map visualization on homepage showing course structure
+- Added study statistics dashboard (today/week/total study time with weekly goal)
+- Added image lightbox: click any image in chapter content to zoom
+- Added sidebar sub-headings: h2/h3 from chapter content shown in navigation
+- Added per-chapter learning objectives (basic + advanced levels)
+- Added wrong answer book collecting incorrect quiz answers
+- Added text highlighting and note-taking functionality
+- Added "我的笔记" button in profile modal to view saved notes
+- Chapters now show TL;DR summary box at top
+
+### User Profile
+- Added "毫无基础" option to knowledge level and prerequisites
+- Added "每周预计学习时间" (weekly study hours) field to profile form
+- Added purpose description explaining why information is collected
+
+### AI Personalization
+- Enhanced `buildSystemPrompt` with weekly study time and behavior data
+- AI now tailors explanations for "毫无基础" users with simplest analogies
+- System prompt now suggests study advice based on behavior patterns
+
+## 2026-05-12 (AM) - Security hardening & bug fixes
 
 ### Security
 - Moved Zhipu API key from client-side JS to Supabase Edge Function (`supabase/functions/ai-proxy/`)

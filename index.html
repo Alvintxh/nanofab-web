@@ -92,7 +92,7 @@
 
                 <form id="profile-form" class="profile-form hidden">
                     <h2 class="card-title">完善资料</h2>
-                    <p class="card-description">告诉我们您的背景，以便为您定制最佳学习体验</p>
+                    <p class="card-description">以下信息将帮助 AI 为您定制个性化学习内容和解释深度，让学习更高效</p>
                     <div class="form-group">
                         <label for="user-name">您的姓名</label>
                         <input type="text" id="user-name" name="name" placeholder="请输入您的姓名" required>
@@ -164,6 +164,10 @@
                             <label class="checkbox-option">
                                 <input type="checkbox" name="prerequisite" value="none">
                                 <span class="checkbox-label">无特定基础</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="prerequisite" value="zero">
+                                <span class="checkbox-label">毫无基础</span>
                             </label>
                         </div>
                     </div>
@@ -241,10 +245,16 @@
                     <div class="form-group">
                         <label for="user-level">当前知识水平</label>
                         <select id="user-level" name="level">
+                            <option value="zero">毫无基础 - 从未接触过相关领域</option>
                             <option value="beginner">初学者 - 对纳米制造了解较少</option>
                             <option value="intermediate">中级 - 有一定理论基础</option>
                             <option value="advanced">高级 - 具备实践经验</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weekly-hours">每周预计学习时间（小时）</label>
+                        <input type="number" id="weekly-hours" name="weeklyHours" placeholder="例如：10" min="1" max="40" value="8">
                     </div>
 
                     <div class="form-group">
@@ -386,6 +396,64 @@
                             刷新路线
                         </button>
                     </div>
+
+                    <div class="dashboard-card mindmap-card">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3>课程结构</h3>
+                        <div class="mindmap-container">
+                            <div id="quick-mindmap" class="mindmap-svg"></div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card study-stats-card">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <h3>学习统计</h3>
+                        <div class="study-stats-grid">
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-today">0<span style="font-size:0.75rem">分钟</span></div>
+                                <div class="study-stat-label">今日学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-week">0<span style="font-size:0.75rem">分钟</span></div>
+                                <div class="study-stat-label">本周学习</div>
+                            </div>
+                            <div class="study-stat-item">
+                                <div class="study-stat-value" id="stat-total">0<span style="font-size:0.75rem">分钟</span></div>
+                                <div class="study-stat-label">累计学习</div>
+                            </div>
+                        </div>
+                        <div class="study-stat-bar">
+                            <div class="study-stat-bar-fill" id="stat-weekly-bar" style="width: 0%"></div>
+                        </div>
+                        <p style="font-size:0.75rem;color:var(--color-text-tertiary);margin-top:8px;text-align:center;">进度：<span id="stat-weekly-goal">0%</span> 完成本周目标</p>
+                    </div>
+
+                    <div class="dashboard-card wrong-answer-book" id="wrong-answer-card">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <h3>错题本</h3>
+                        <div id="wrong-answer-content">
+                            <p style="font-size:0.875rem;color:var(--color-text-tertiary);">完成章节测试后，错题将显示在这里。</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -472,6 +540,7 @@
                     </div>
                 </div>
                 <div class="profile-actions">
+                    <button id="view-notes-btn" class="btn btn-secondary">我的笔记</button>
                     <button id="reset-profile" class="btn btn-secondary">重新设置资料</button>
                 </div>
             </div>
@@ -610,6 +679,36 @@
             <path d="M2 12l10 5 10-5"/>
         </svg>
     </button>
+
+    <div id="image-lightbox" class="image-lightbox">
+        <button class="image-lightbox-close" aria-label="关闭">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <img id="image-lightbox-img" src="" alt="放大查看" />
+    </div>
+
+    <div id="notes-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content notes-modal">
+            <div class="modal-header">
+                <h2>我的笔记</h2>
+                <button class="modal-close" aria-label="关闭">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="notes-list" class="notes-list">
+                    <p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"记笔记"开始记录。</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Supabase configuration - MUST be defined before app.js
