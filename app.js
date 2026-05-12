@@ -21,7 +21,9 @@ const App = {
     init() {
         this.initSupabase();
         this.bindEvents();
-        this.loadUser();
+        this.checkRecoveryFlow().then(isRecovery => {
+            if (!isRecovery) this.loadUser();
+        });
         this.loadProgress();
         this.loadBehaviorData();
         this.initBehaviorTracking();
@@ -551,6 +553,20 @@ const App = {
             markComplete.addEventListener('click', () => this.markChapterComplete());
         }
 
+        const verifyForm = document.getElementById('verify-form');
+        if (verifyForm) verifyForm.addEventListener('submit', (e) => this.handleVerify(e));
+
+        const resendBtn = document.getElementById('resend-code-btn');
+        if (resendBtn) resendBtn.addEventListener('click', () => this.resendVerificationCode());
+
+        const forgotForm = document.getElementById('forgot-password-form');
+        if (forgotForm) forgotForm.addEventListener('submit', (e) => this.handleForgotPassword(e));
+
+        const resetForm = document.getElementById('reset-password-form');
+        if (resetForm) resetForm.addEventListener('submit', (e) => this.handleResetPassword(e));
+
+        this._bindAuthSwitchLinks();
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.closeProfileModal();
@@ -560,59 +576,137 @@ const App = {
     },
 
     switchAuthTab(tab) {
-        console.log('Switching auth tab to:', tab);
-        
-        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-        const targetTab = document.querySelector(`.auth-tab[data-tab="${tab}"]`);
-        if (targetTab) {
-            targetTab.classList.add('active');
-            console.log('Activated tab:', tab);
+        const formId = tab === 'login' ? 'login-form' : 'register-form';
+        this.showAuthForm(formId);
+    },
+
+    showAuthForm(formId) {
+        const allForms = ['login-form', 'register-form', 'verify-form', 'forgot-password-form', 'reset-password-form', 'profile-form'];
+        const tabsEl = document.querySelector('.auth-tabs');
+
+        allForms.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        });
+
+        const tabForms = ['login-form', 'register-form'];
+        if (tabForms.includes(formId)) {
+            if (tabsEl) tabsEl.classList.remove('hidden');
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            const tabName = formId === 'login-form' ? 'login' : 'register';
+            const targetTab = document.querySelector(`.auth-tab[data-tab="${tabName}"]`);
+            if (targetTab) targetTab.classList.add('active');
         } else {
-            console.error('Tab not found:', tab);
+            if (tabsEl) tabsEl.classList.add('hidden');
         }
-        
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        
-        if (loginForm) loginForm.classList.add('hidden');
-        if (registerForm) registerForm.classList.add('hidden');
-        
-        if (tab === 'login' && loginForm) {
-            loginForm.classList.remove('hidden');
-            console.log('Shown login form');
-        } else if (tab === 'register' && registerForm) {
-            registerForm.classList.remove('hidden');
-            console.log('Shown register form');
+
+        const targetForm = document.getElementById(formId);
+        if (targetForm) targetForm.classList.remove('hidden');
+
+        if (formId === 'verify-form') {
+            const pendingEmail = localStorage.getItem('pending_email');
+            const emailDisplay = document.getElementById('verify-email-display');
+            if (emailDisplay && pendingEmail) emailDisplay.textContent = pendingEmail;
         }
+
+        if (formId === 'forgot-password-form') {
+            const el = document.getElementById('forgot-email');
+            if (el) el.value = '';
+        }
+    },
+
+    _getAuthErrorMessage(error) {
+        const msg = (error?.message || error?.toString() || '');
+        if (/invalid login|invalid.*credentials/i.test(msg)) return '邮箱或密码错误';
+        if (/email not confirmed/i.test(msg)) return '邮箱尚未验证，请先完成邮箱验证';
+        if (/rate limit|security|over_email_send_rate_limit/i.test(msg)) return '操作过于频繁，请稍后再试';
+        if (/already registered|already exists/i.test(msg)) return '该邮箱已注册';
+        if (/token.*expired|expired/i.test(msg)) return '验证码已过期，请重新发送';
+        if (/invalid.*token|token.*invalid/i.test(msg)) return '验证码无效，请检查后重新输入';
+        if (/password.*should/i.test(msg)) return '密码长度至少为6位';
+        if (/network|fetch/i.test(msg)) return '网络连接失败，请检查网络后重试';
+        if (/user not found/i.test(msg)) return '该邮箱尚未注册';
+        return msg;
+    },
+
+    _setButtonLoading(btn, loading) {
+        if (!btn) return;
+        if (loading) {
+            btn.disabled = true;
+            btn.classList.add('btn-loading');
+            if (!btn.dataset.originalText) btn.dataset.originalText = btn.innerHTML;
+        } else {
+            btn.disabled = false;
+            btn.classList.remove('btn-loading');
+            if (btn.dataset.originalText) {
+                btn.innerHTML = btn.dataset.originalText;
+                delete btn.dataset.originalText;
+            }
+        }
+    },
+
+    _bindAuthSwitchLinks() {
+        document.querySelectorAll('.auth-switch').forEach(link => {
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+        });
+        document.querySelectorAll('.auth-switch').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.dataset.target;
+                const formMap = {
+                    'login': 'login-form',
+                    'register': 'register-form',
+                    'forgot-password': 'forgot-password-form'
+                };
+                const formId = formMap[target] || target;
+                this.showAuthForm(formId);
+            });
+        });
+    },
+
+    async checkRecoveryFlow() {
+        if (!this.supabase) return false;
+        try {
+            const hash = window.location.hash.substring(1);
+            const hashParams = new URLSearchParams(hash);
+            if (hashParams.get('type') === 'recovery') {
+                this.showAuthForm('reset-password-form');
+                return true;
+            }
+        } catch (e) { /* ignore */ }
+        return false;
     },
 
     async handleLogin(e) {
         e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        this._setButtonLoading(submitBtn, true);
+
         const formData = new FormData(e.target);
         const email = formData.get('email');
         const password = formData.get('password');
 
         if (this.supabase) {
             try {
-                const { data, error } = await this.supabase.auth.signInWithPassword({
-                    email,
-                    password
-                });
-
+                const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-
                 await this.loadUserFromSupabase(data.user);
                 this.showApp();
             } catch (error) {
-                this.showToast('登录失败：' + error.message, 'error');
+                this.showToast('登录失败：' + this._getAuthErrorMessage(error), 'error');
             }
         } else {
-            this.showToast('Supabase 未初始化', 'error');
+            this.showToast('系统未初始化，请刷新页面后重试', 'error');
         }
+        this._setButtonLoading(submitBtn, false);
     },
 
     async handleRegister(e) {
         e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        this._setButtonLoading(submitBtn, true);
+
         const formData = new FormData(e.target);
         const email = formData.get('email');
         const password = formData.get('password');
@@ -621,20 +715,15 @@ const App = {
         if (this.supabase) {
             try {
                 const { data, error } = await this.supabase.auth.signUp({
-                    email,
-                    password,
-                    options: {
-                        data: { name },
-                        emailRedirectTo: null
-                    }
+                    email, password,
+                    options: { data: { name } }
                 });
 
                 if (error) {
-                    if (error.message.includes('rate limit') || error.message.includes('security') || error.error_code === 'over_email_send_rate_limit') {
-                        console.warn('Rate limit hit:', error);
+                    if (error.message.includes('rate limit') || error.error_code === 'over_email_send_rate_limit') {
                         if (error.error_code === 'over_email_send_rate_limit') {
-                            this.showToast('注册成功！但验证邮件发送失败（邮件发送频率限制）。请直接登录，或稍后重试。', 'warning');
-                            this.switchAuthTab('login');
+                            this.showToast('验证邮件发送失败（频率限制），请稍后重试或直接登录。', 'warning');
+                            this.showAuthForm('login-form');
                             return;
                         }
                         this.showToast('发送过于频繁，请稍后再试（约1分钟后）', 'warning');
@@ -642,7 +731,7 @@ const App = {
                     }
                     if (error.message.includes('already registered') || error.message.includes('already exists')) {
                         this.showToast('该邮箱已注册，请直接登录', 'info');
-                        this.switchAuthTab('login');
+                        this.showAuthForm('login-form');
                         return;
                     }
                     throw error;
@@ -650,7 +739,7 @@ const App = {
 
                 if (data.user && data.user.identities && data.user.identities.length === 0) {
                     this.showToast('该邮箱已注册，请直接登录', 'info');
-                    this.switchAuthTab('login');
+                    this.showAuthForm('login-form');
                     return;
                 }
 
@@ -660,82 +749,80 @@ const App = {
 
                 if (data.user) {
                     localStorage.setItem('pending_user_id', data.user.id);
-                    console.log('Registration successful, user ID:', data.user.id);
-                    console.log('Email confirmed:', data.user.email_confirmed_at ? 'Yes' : 'No');
-                    console.log('Session present:', data.session ? 'Yes' : 'No');
-                    
-                    if (!data.session) {
-                        console.warn('No session after signup - email confirmation may be enabled');
-                        console.warn('Profile will be saved with pending_user_id, but user needs to verify email before login');
+
+                    if (data.session) {
+                        this.showAuthForm('profile-form');
+                        document.getElementById('user-name').value = name;
+                        this.showToast('注册成功！请完善您的个人资料。', 'success');
+                    } else {
+                        this.showAuthForm('verify-form');
+                        this.showToast('验证邮件已发送，请检查邮箱（包括垃圾邮件文件夹）。', 'info');
                     }
                 }
-
-                document.getElementById('register-form').classList.add('hidden');
-                document.querySelector('.auth-tabs').classList.add('hidden');
-                document.getElementById('profile-form').classList.remove('hidden');
-
-                document.getElementById('user-name').value = name;
-
-                this.showToast('注册成功！请完善您的个人资料。', 'success');
             } catch (error) {
-                console.error('Registration error:', error);
-                this.showToast('注册失败：' + error.message, 'error');
+                this.showToast('注册失败：' + this._getAuthErrorMessage(error), 'error');
             }
         } else {
-            this.showToast('Supabase 未初始化', 'error');
+            this.showToast('系统未初始化，请刷新页面后重试', 'error');
         }
+        this._setButtonLoading(submitBtn, false);
     },
 
     async handleVerify(e) {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const code = formData.get('code');
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        this._setButtonLoading(submitBtn, true);
+
+        const code = document.getElementById('verify-code').value.trim();
         const email = localStorage.getItem('pending_email');
-        const password = sessionStorage.getItem('pending_password');
-        const name = localStorage.getItem('pending_name');
+
+        if (!email) {
+            this.showToast('验证信息已过期，请重新注册', 'error');
+            this.showAuthForm('register-form');
+            return;
+        }
+
+        if (code.length !== 6) {
+            this.showToast('请输入6位验证码', 'warning');
+            this._setButtonLoading(submitBtn, false);
+            return;
+        }
 
         if (this.supabase) {
             try {
                 const { data, error } = await this.supabase.auth.verifyOtp({
-                    email,
-                    token: code,
-                    type: 'signup'
+                    email, token: code, type: 'signup'
                 });
-
                 if (error) throw error;
 
-                localStorage.removeItem('pending_email');
-                sessionStorage.removeItem('pending_password');
-                
-                document.getElementById('verify-form').classList.add('hidden');
-                document.querySelector('.auth-tabs').classList.add('hidden');
-                document.getElementById('profile-form').classList.remove('hidden');
-                
-                document.getElementById('user-name').value = name;
-                
+                this.showAuthForm('profile-form');
+                const name = localStorage.getItem('pending_name');
+                document.getElementById('user-name').value = name || '';
                 this.showToast('验证成功！请完善您的个人资料。', 'success');
             } catch (error) {
-                this.showToast('验证失败：' + error.message, 'error');
+                this.showToast('验证失败：' + this._getAuthErrorMessage(error), 'error');
             }
-        } else {
-            this.showToast('Supabase 未初始化', 'error');
         }
+        this._setButtonLoading(submitBtn, false);
     },
 
     async resendVerificationCode() {
         const email = localStorage.getItem('pending_email');
-        
         if (!email || !this.supabase) {
             this.showToast('无法重新发送验证码', 'error');
             return;
         }
 
-        try {
-            const { error } = await this.supabase.auth.resend({
-                type: 'signup',
-                email: email
-            });
+        const resendBtn = document.getElementById('resend-code-btn');
+        if (this._resendCooldown) {
+            this.showToast(`请等待 ${this._resendCooldown} 秒后再试`, 'warning');
+            return;
+        }
 
+        if (resendBtn) resendBtn.disabled = true;
+
+        try {
+            const { error } = await this.supabase.auth.resend({ type: 'signup', email });
             if (error) {
                 if (error.message.includes('rate limit') || error.message.includes('security')) {
                     this.showToast('发送过于频繁，请稍后再试（约1分钟后）', 'warning');
@@ -743,12 +830,92 @@ const App = {
                 }
                 throw error;
             }
+            this.showToast('验证码已重新发送，请检查邮箱。', 'success');
 
-            this.showToast('验证码已重新发送！请检查您的邮箱（包括垃圾邮件文件夹）。', 'success');
+            this._resendCooldown = 60;
+            this._resendTimer = setInterval(() => {
+                this._resendCooldown--;
+                if (resendBtn) resendBtn.textContent = `重新发送 (${this._resendCooldown}s)`;
+                if (this._resendCooldown <= 0) {
+                    clearInterval(this._resendTimer);
+                    this._resendCooldown = null;
+                    if (resendBtn) {
+                        resendBtn.disabled = false;
+                        resendBtn.textContent = '重新发送验证码';
+                    }
+                }
+            }, 1000);
         } catch (error) {
-            console.error('Resend error:', error);
-            this.showToast('发送失败：' + error.message, 'error');
+            this.showToast('发送失败：' + this._getAuthErrorMessage(error), 'error');
+            if (resendBtn) resendBtn.disabled = false;
         }
+    },
+
+    async handleForgotPassword(e) {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        this._setButtonLoading(submitBtn, true);
+
+        const email = document.getElementById('forgot-email').value.trim();
+
+        if (this.supabase) {
+            try {
+                const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin + window.location.pathname
+                });
+                if (error) throw error;
+
+                const form = document.getElementById('forgot-password-form');
+                form.innerHTML = `
+                    <div class="auth-success-message">
+                        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h2 class="card-title">邮件已发送</h2>
+                        <p>我们已向 <strong>${email}</strong> 发送了密码重置链接，请检查您的邮箱（包括垃圾邮件文件夹）。</p>
+                    </div>
+                    <p class="auth-hint"><a href="#" class="auth-switch" data-target="login">返回登录</a></p>
+                `;
+                this._bindAuthSwitchLinks();
+            } catch (error) {
+                this.showToast('发送失败：' + this._getAuthErrorMessage(error), 'error');
+            }
+        }
+        this._setButtonLoading(submitBtn, false);
+    },
+
+    async handleResetPassword(e) {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+
+        const password = document.getElementById('reset-password').value;
+        const passwordConfirm = document.getElementById('reset-password-confirm').value;
+
+        if (password !== passwordConfirm) {
+            this.showToast('两次输入的密码不一致', 'warning');
+            return;
+        }
+        if (password.length < 6) {
+            this.showToast('密码长度至少为6位', 'warning');
+            return;
+        }
+
+        this._setButtonLoading(submitBtn, true);
+
+        if (this.supabase) {
+            try {
+                const { error } = await this.supabase.auth.updateUser({ password });
+                if (error) throw error;
+
+                this.showToast('密码重置成功！请登录。', 'success');
+                window.history.replaceState(null, '', window.location.pathname);
+                this.showAuthForm('login-form');
+            } catch (error) {
+                this.showToast('密码重置失败：' + this._getAuthErrorMessage(error), 'error');
+            }
+        }
+        this._setButtonLoading(submitBtn, false);
     },
 
     async loadUserFromSupabase(authUser) {
@@ -919,7 +1086,7 @@ const App = {
         if (onboarding) onboarding.classList.add('active');
         if (app) app.style.display = 'none';
 
-        this.switchAuthTab('login');
+        this.showAuthForm('login-form');
     },
 
     updateUserGreeting() {

@@ -192,7 +192,11 @@ input, select, textarea {
 }
 
 .form-group input[type="text"],
-.form-group select {
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
     padding: 12px 16px;
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -202,7 +206,11 @@ input, select, textarea {
 }
 
 .form-group input[type="text"]:focus,
-.form-group select:focus {
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(0, 78, 161, 0.1);
@@ -2978,6 +2986,142 @@ input, select, textarea {
 
 .auth-hint a:hover {
     text-decoration: underline;
+}
+
+/* ===== Auth Forgot Link ===== */
+.auth-forgot {
+    text-align: right;
+    font-size: 0.8125rem;
+    margin-top: -10px;
+}
+
+.auth-forgot a {
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.auth-forgot a:hover {
+    color: var(--color-primary);
+}
+
+/* ===== Auth Form Footer ===== */
+.auth-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.auth-footer-separator {
+    color: var(--color-border);
+}
+
+/* ===== Verify Code Input ===== */
+.verify-code-input {
+    text-align: center;
+    font-size: 1.5rem !important;
+    letter-spacing: 8px;
+    font-weight: 600;
+}
+
+.verify-code-input::placeholder {
+    letter-spacing: 2px;
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+
+/* ===== Form Error ===== */
+.form-error {
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    margin-top: 4px;
+    display: none;
+}
+
+.form-error.visible {
+    display: block;
+}
+
+/* ===== Button Variants ===== */
+.btn-text {
+    color: var(--color-primary);
+    padding: 4px 8px;
+    font-size: 0.875rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.btn-text:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+.btn-text:disabled {
+    color: var(--color-text-tertiary);
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+/* ===== Button Loading State ===== */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Auth Form Transition ===== */
+.auth-form,
+.profile-form {
+    animation: form-fade-in 0.25s ease;
+}
+
+@keyframes form-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Auth Success Message ===== */
+.auth-success-message {
+    text-align: center;
+    padding: 24px 0;
+}
+
+.auth-success-message .success-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    color: #16a34a;
+}
+
+.auth-success-message p {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
 }
 
 /* ===== Toast Notifications ===== */

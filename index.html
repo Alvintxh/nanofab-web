@@ -57,7 +57,8 @@
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </button>
-                    
+
+                    <p class="auth-forgot"><a href="#" class="auth-switch" data-target="forgot-password">忘记密码？</a></p>
                     <p class="auth-hint">还没有账号？<a href="#" class="auth-switch" data-target="register">立即注册</a></p>
                 </form>
 
@@ -88,6 +89,60 @@
                     </button>
                     
                     <p class="auth-hint">已有账号？<a href="#" class="auth-switch" data-target="login">立即登录</a></p>
+                </form>
+
+                <!-- 邮箱验证码 -->
+                <form id="verify-form" class="auth-form hidden">
+                    <h2 class="card-title">验证邮箱</h2>
+                    <p class="card-description">我们已向 <strong id="verify-email-display"></strong> 发送了验证码，请输入6位验证码完成注册。</p>
+
+                    <div class="form-group">
+                        <label for="verify-code">验证码</label>
+                        <input type="text" id="verify-code" name="code" placeholder="请输入6位验证码" required maxlength="6" inputmode="numeric" autocomplete="one-time-code" class="verify-code-input">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">验证邮箱</button>
+
+                    <div class="auth-form-footer">
+                        <button type="button" id="resend-code-btn" class="btn btn-text">重新发送验证码</button>
+                        <span class="auth-footer-separator">|</span>
+                        <a href="#" class="auth-switch" data-target="login">返回登录</a>
+                    </div>
+                </form>
+
+                <!-- 找回密码 -->
+                <form id="forgot-password-form" class="auth-form hidden">
+                    <h2 class="card-title">找回密码</h2>
+                    <p class="card-description">请输入您的注册邮箱，我们将向您发送密码重置链接。</p>
+
+                    <div class="form-group">
+                        <label for="forgot-email">邮箱</label>
+                        <input type="email" id="forgot-email" name="email" placeholder="请输入您的注册邮箱" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">发送重置链接</button>
+
+                    <p class="auth-hint"><a href="#" class="auth-switch" data-target="login">返回登录</a></p>
+                </form>
+
+                <!-- 设置新密码 -->
+                <form id="reset-password-form" class="auth-form hidden">
+                    <h2 class="card-title">设置新密码</h2>
+                    <p class="card-description">请输入您的新密码。</p>
+
+                    <div class="form-group">
+                        <label for="reset-password">新密码</label>
+                        <input type="password" id="reset-password" name="password" placeholder="请设置新密码（至少6位）" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reset-password-confirm">确认新密码</label>
+                        <input type="password" id="reset-password-confirm" name="passwordConfirm" placeholder="请再次输入新密码" required minlength="6">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">设置密码并登录</button>
+
+                    <p class="auth-hint"><a href="#" class="auth-switch" data-target="login">返回登录</a></p>
                 </form>
 
                 <form id="profile-form" class="profile-form hidden">
