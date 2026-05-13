@@ -750,122 +750,152 @@ const App = {
 
         const colors = ['#004EA1', '#9D0A12', '#0d9488', '#7c3aed'];
         const colorsLight = ['#e8f1fb', '#fdf0f1', '#e6faf7', '#f2eeff'];
-        const colorsDark = ['#003a7a', '#7a080e', '#0a6e63', '#5b21b6'];
+        const gradPairs = [
+            ['#004EA1', '#0070d6'],
+            ['#9D0A12', '#c41020'],
+            ['#0d9488', '#14b8a6'],
+            ['#7c3aed', '#9b6dff']
+        ];
 
-        const w = 960, h = 430;
-        const rootX = w / 2, rootY = 56;
+        const w = 960, h = 520;
+        const numParts = this.state.chapters.length;
+        const totalWidth = 780;
+        const partSpacing = totalWidth / (numParts + 1);
+        const marginLeft = (w - totalWidth) / 2 + partSpacing;
 
         let svg = `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">`;
 
         // ====== Defs ======
-        svg += `<defs>
-            <filter id="shadow-sm">
-                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
-            </filter>
-            <filter id="shadow-md">
-                <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.10"/>
-            </filter>
-            <filter id="glow">
-                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#004EA1" flood-opacity="0.20"/>
-            </filter>`;
+        svg += `<defs>`;
 
-        // Subtle background dots pattern
-        svg += `<pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-            <circle cx="12" cy="12" r="0.8" fill="#cbd5e1" opacity="0.5"/>
+        gradPairs.forEach(([c1, c2], i) => {
+            svg += `<linearGradient id="mm-grad-${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="${c1}" stop-opacity="0.14"/>
+                <stop offset="100%" stop-color="${c2}" stop-opacity="0.06"/>
+            </linearGradient>`;
+            svg += `<linearGradient id="mm-grad-bar-${i}" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="${c1}"/>
+                <stop offset="100%" stop-color="${c2}"/>
+            </linearGradient>`;
+        });
+
+        svg += `<filter id="mm-glow-root">
+            <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#004EA1" flood-opacity="0.25"/>
+        </filter>
+        <filter id="mm-shadow-card">
+            <feDropShadow dx="0" dy="1.5" stdDeviation="3" flood-opacity="0.06"/>
+        </filter>
+        <filter id="mm-shadow-part">
+            <feDropShadow dx="0" dy="2" stdDeviation="5" flood-opacity="0.07"/>
+        </filter>
+
+        <pattern id="mm-grid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+            <circle cx="16" cy="16" r="0.5" fill="#cbd5e1" opacity="0.35"/>
         </pattern>`;
+
         svg += `</defs>`;
 
         // ====== Background ======
-        svg += `<rect width="${w}" height="${h}" rx="14" fill="#fafbfc"/>`;
-        svg += `<rect width="${w}" height="${h}" rx="14" fill="url(#dots)"/>`;
+        svg += `<rect width="${w}" height="${h}" rx="16" fill="#fafbfc"/>`;
+        svg += `<rect width="${w}" height="${h}" rx="16" fill="url(#mm-grid)"/>`;
 
         // ====== Title ======
-        svg += `<text x="${rootX}" y="26" text-anchor="middle" fill="#1e293b" font-size="15" font-weight="700" font-family="Noto Sans SC, sans-serif" letter-spacing="1">纳米制造技术 · 课程知识结构</text>`;
-        svg += `<line x1="${rootX - 80}" y1="36" x2="${rootX + 80}" y2="36" stroke="#e2e8f0" stroke-width="1"/>`;
+        svg += `<text x="${w/2}" y="26" text-anchor="middle" fill="#1e293b" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'STSong', serif" letter-spacing="1.5">纳米制造技术 · 课程知识结构</text>`;
+        svg += `<line x1="${w/2 - 65}" y1="36" x2="${w/2 + 65}" y2="36" stroke="#e2e8f0" stroke-width="1"/>`;
 
         // ====== Root node ======
-        const rootW = 150, rootH = 40;
-        svg += `<rect x="${rootX - rootW/2}" y="${rootY - rootH/2}" width="${rootW}" height="${rootH}" rx="20" fill="#004EA1" filter="url(#glow)"/>`;
-        svg += `<rect x="${rootX - rootW/2 + 3}" y="${rootY - rootH/2 + 3}" width="${rootW - 6}" height="${rootH/2 - 3}" rx="17" fill="white" opacity="0.1"/>`;
-        svg += `<text x="${rootX}" y="${rootY + 4}" text-anchor="middle" fill="white" font-size="13.5" font-weight="700" font-family="Noto Sans SC, sans-serif" letter-spacing="2">纳米制造技术</text>`;
+        const rootX = w / 2, rootY = 54;
+        const rootW = 170, rootH = 44;
+        svg += `<ellipse cx="${rootX}" cy="${rootY + rootH/2 + 3}" rx="${rootW/2 - 6}" ry="6" fill="#004EA1" opacity="0.10"/>`;
+        svg += `<rect x="${rootX - rootW/2}" y="${rootY - rootH/2}" width="${rootW}" height="${rootH}" rx="22" fill="url(#mm-grad-bar-0)" filter="url(#mm-glow-root)"/>`;
+        svg += `<rect x="${rootX - rootW/2 + 4}" y="${rootY - rootH/2 + 3}" width="${rootW - 8}" height="${rootH/2 - 4}" rx="19" fill="white" opacity="0.10"/>`;
+        svg += `<circle cx="${rootX - rootW/2 + 30}" cy="${rootY}" r="13" fill="white" opacity="0.15"/>`;
+        svg += `<text x="${rootX - rootW/2 + 30}" y="${rootY + 5}" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="'SF Mono', 'Menlo', monospace">N</text>`;
+        svg += `<text x="${rootX - rootW/2 + 52}" y="${rootY + 5}" fill="white" font-size="14" font-weight="700" font-family="'Noto Sans SC', sans-serif" letter-spacing="3">纳米制造技术</text>`;
 
-        // ====== Trunk line from root downward ======
+        // ====== Branch structure ======
         const trunkY1 = rootY + rootH/2;
-        const trunkY2 = 118;
-        svg += `<line x1="${rootX}" y1="${trunkY1}" x2="${rootX}" y2="${trunkY2}" stroke="#94a3b8" stroke-width="2" opacity="0.5"/>`;
+        const branchMidY = trunkY1 + 54;
+        const partY = branchMidY + 20;
 
-        // ====== Horizontal branch bar ======
-        const barY = trunkY2;
-        const numParts = this.state.chapters.length;
-        const colGap = w / numParts;
-        const partCenters = this.state.chapters.map((_, i) => colGap * i + colGap / 2);
+        const partCenters = [];
+        for (let i = 0; i < numParts; i++) {
+            partCenters.push(marginLeft + i * partSpacing);
+        }
 
-        svg += `<line x1="${partCenters[0]}" y1="${barY}" x2="${partCenters[numParts - 1]}" y2="${barY}" stroke="#94a3b8" stroke-width="1.5" opacity="0.4"/>`;
-        // Vertical drops from bar to each part
-        partCenters.forEach((px, i) => {
-            svg += `<line x1="${px}" y1="${barY}" x2="${px}" y2="${barY + 16}" stroke="${colors[i]}" stroke-width="1.5" opacity="0.5"/>`;
+        // Main vertical trunk
+        svg += `<line x1="${rootX}" y1="${trunkY1}" x2="${rootX}" y2="${branchMidY - 8}" stroke="#94a3b8" stroke-width="2" opacity="0.30"/>`;
+        // Horizontal distribution bar
+        svg += `<line x1="${partCenters[0]}" y1="${branchMidY}" x2="${partCenters[numParts - 1]}" y2="${branchMidY}" stroke="#94a3b8" stroke-width="1.5" opacity="0.18"/>`;
+
+        // Curved branches from root to each part
+        const cpOffset = 0.3;
+        partCenters.forEach((pcx, i) => {
+            const dx = pcx - rootX;
+            const cp1x = rootX + dx * cpOffset;
+            const cp2x = rootX + dx * (1 - cpOffset);
+            const cy = branchMidY;
+            svg += `<path d="M${rootX},${trunkY1} C${cp1x},${cy} ${cp2x},${cy} ${pcx},${partY - 24}"
+                stroke="${colors[i]}" stroke-width="1.6" fill="none" opacity="0.22" stroke-dasharray="5,4"/>`;
+            svg += `<line x1="${pcx}" y1="${partY - 24}" x2="${pcx}" y2="${partY - 10}" stroke="${colors[i]}" stroke-width="1.6" opacity="0.40"/>`;
         });
 
-        // ====== Part cards and chapter trees ======
-        const partY = barY + 16 + 22;
-        const partW = 192, partH = 38;
+        // ====== Part cards ======
+        const partW = 196, partH = 46;
 
         this.state.chapters.forEach((part, partIndex) => {
             const pcx = partCenters[partIndex];
             const color = colors[partIndex];
             const lightColor = colorsLight[partIndex];
-            const darkColor = colorsDark[partIndex];
-
-            // Part card
             const px = pcx - partW/2, py = partY - partH/2;
-            svg += `<rect x="${px}" y="${py}" width="${partW}" height="${partH}" rx="9" fill="${lightColor}" stroke="${color}" stroke-width="1.8" filter="url(#shadow-sm)"/>`;
-            // Accent line on top
-            svg += `<rect x="${px + 8}" y="${py}" width="${partW - 16}" height="3" rx="1.5" fill="${color}" opacity="0.5"/>`;
-            // Part number
-            const numStr = `0${partIndex + 1}`;
-            svg += `<text x="${px + 18}" y="${py + partH/2 + 4}" fill="${color}" font-size="11" font-weight="700" font-family="'SF Mono', monospace" opacity="0.7">${numStr}</text>`;
-            // Part title
-            svg += `<text x="${px + 40}" y="${py + partH/2 + 4}" fill="${darkColor}" font-size="13" font-weight="700" font-family="Noto Sans SC, sans-serif">${part.title}</text>`;
 
-            // Chapters below part
+            // Card background
+            svg += `<rect x="${px}" y="${py}" width="${partW}" height="${partH}" rx="12" fill="white" stroke="${color}" stroke-width="1.4" filter="url(#mm-shadow-part)" opacity="0.97"/>`;
+            // Gradient accent bar at top
+            svg += `<rect x="${px + 10}" y="${py + 1}" width="${partW - 20}" height="3.5" rx="1.75" fill="url(#mm-grad-bar-${partIndex})" opacity="0.65"/>`;
+            // Number badge circle
+            svg += `<circle cx="${px + 26}" cy="${py + partH/2}" r="11.5" fill="${lightColor}" stroke="${color}" stroke-width="1.2" opacity="0.9"/>`;
+            svg += `<text x="${px + 26}" y="${py + partH/2 + 4.5}" text-anchor="middle" fill="${color}" font-size="11" font-weight="700" font-family="'SF Mono', 'Menlo', monospace">${partIndex + 1}</text>`;
+            // Title
+            svg += `<text x="${px + 46}" y="${py + partH/2 + 4.5}" fill="${color}" font-size="13.5" font-weight="700" font-family="'Noto Sans SC', sans-serif">${part.title}</text>`;
+            // Chapter count pill
+            const countW = part.chapters.length * 7 + 16;
+            svg += `<rect x="${px + partW - countW - 12}" y="${py + partH/2 - 7.5}" width="${countW}" height="15" rx="7.5" fill="${color}" opacity="0.10"/>`;
+            svg += `<text x="${px + partW - countW/2 - 12}" y="${py + partH/2 + 3.5}" text-anchor="middle" fill="${color}" font-size="9.5" font-weight="600" font-family="'SF Mono', monospace" opacity="0.8">${part.chapters.length}章</text>`;
+
+            // ====== Chapter nodes ======
             const chStartY = partY + partH/2 + 22;
-            const chW = 182, chH = 34;
-            const chSpacing = 46;
+            const chW = 188, chH = 38;
+            const chGap = 48;
 
             part.chapters.forEach((ch, chIndex) => {
-                const chY = chStartY + chIndex * chSpacing + chH/2;
-                const chX = pcx;
+                const chY = chStartY + chIndex * chGap + chH/2;
+                const crx = pcx - chW/2, cry = chY - chH/2;
 
-                // Stem from part to chapter
-                const stemStartY = chIndex === 0 ? py + partH/2 : chY - chSpacing + chH/2;
-                const stemEndY = chY - chH/2;
-                svg += `<line x1="${pcx}" y1="${stemStartY}" x2="${pcx}" y2="${stemEndY}" stroke="${color}" stroke-width="1.2" opacity="0.3"/>`;
+                // Vertical stem
+                const stemTop = chIndex === 0 ? py + partH/2 : chStartY + (chIndex - 1) * chGap + chH/2;
+                svg += `<line x1="${pcx}" y1="${stemTop}" x2="${pcx}" y2="${chY - chH/2}" stroke="${color}" stroke-width="1" opacity="0.16"/>`;
+                // Small dot at connection point
+                svg += `<circle cx="${pcx}" cy="${chY - chH/2}" r="2" fill="${color}" opacity="0.25"/>`;
 
-                // Chapter node
-                const crx = chX - chW/2, cry = chY - chH/2;
-                // Background
-                svg += `<rect x="${crx}" y="${cry}" width="${chW}" height="${chH}" rx="7" fill="white" stroke="${color}" stroke-width="1.2" opacity="0.90" filter="url(#shadow-sm)"/>`;
-                // Side accent dot
-                svg += `<circle cx="${crx + 14}" cy="${chY}" r="5" fill="${color}" opacity="0.15"/>`;
-                svg += `<circle cx="${crx + 14}" cy="${chY}" r="2.5" fill="${color}" opacity="0.6"/>`;
+                // Chapter card
+                svg += `<rect x="${crx}" y="${cry}" width="${chW}" height="${chH}" rx="9" fill="white" stroke="${color}" stroke-width="1" opacity="0.88" filter="url(#mm-shadow-card)"/>`;
+                // Left accent bar
+                svg += `<rect x="${crx + 1}" y="${cry + 7}" width="3.5" height="${chH - 14}" rx="1.75" fill="${color}" opacity="0.22"/>`;
                 // Chapter ID
-                svg += `<text x="${crx + 30}" y="${chY + 3.5}" fill="${color}" font-size="10" font-weight="700" font-family="'SF Mono', monospace" opacity="0.8">${ch.id}</text>`;
+                svg += `<text x="${crx + 16}" y="${chY + 4.5}" fill="${color}" font-size="10.5" font-weight="700" font-family="'SF Mono', 'Menlo', monospace" opacity="0.85">${ch.id}</text>`;
                 // Chapter title
-                const titleSize = ch.title.length > 8 ? 10.5 : 11.5;
-                svg += `<text x="${crx + 66}" y="${chY + 3.5}" fill="#334155" font-size="${titleSize}" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
+                const titleSize = ch.title.length > 9 ? 10 : 11;
+                svg += `<text x="${crx + 58}" y="${chY + 4.5}" fill="#334155" font-size="${titleSize}" font-weight="500" font-family="'Noto Sans SC', sans-serif">${ch.title}</text>`;
+                // Completion dot
+                const dotX = crx + chW - 20;
+                svg += `<circle cx="${dotX}" cy="${chY}" r="5" fill="${color}" opacity="0.10"/>`;
+                svg += `<circle cx="${dotX}" cy="${chY}" r="2.5" fill="${color}" opacity="0.45"/>`;
             });
         });
 
-        // ====== Legend ======
-        const legendY = h - 18;
-        const legendTotalW = numParts * 200;
-        let legendX = rootX - legendTotalW / 2 + 60;
-        svg += `<line x1="${partCenters[0]}" y1="${legendY - 10}" x2="${partCenters[numParts - 1]}" y2="${legendY - 10}" stroke="#e2e8f0" stroke-width="1"/>`;
-        this.state.chapters.forEach((part, i) => {
-            svg += `<rect x="${legendX - 60}" y="${legendY - 5}" width="8" height="8" rx="2" fill="${colors[i]}" opacity="0.8"/>`;
-            svg += `<text x="${legendX - 46}" y="${legendY + 2}" fill="#64748b" font-size="9.5" font-family="Noto Sans SC, sans-serif">${part.title} · ${part.chapters.length}章</text>`;
-            legendX += 200;
-        });
+        // ====== Bottom decoration ======
+        svg += `<line x1="${w * 0.25}" y1="${h - 12}" x2="${w * 0.75}" y2="${h - 12}" stroke="#e2e8f0" stroke-width="0.5"/>`;
 
         svg += '</svg>';
         container.innerHTML = svg;
