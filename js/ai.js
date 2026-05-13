@@ -152,45 +152,53 @@ const AIModule = {
         // Close sidebar so user can see the annotation
         this.closeAISidebar();
 
-        // Highlight original text and insert annotation in chapter content
+        const renderedContent = this.formatAIResponse(explanation);
+
+        const insertAnnotation = (ann, insertAfter) => {
+            if (insertAfter.nextSibling) {
+                insertAfter.parentNode.insertBefore(ann, insertAfter.nextSibling);
+            } else {
+                insertAfter.parentNode.appendChild(ann);
+            }
+            setTimeout(() => ann.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+        };
+
+        const bindDelete = (ann, markEl) => {
+            ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                if (confirm('删除此笔记？关联的高亮也将取消。')) {
+                    this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                        .filter(n => n.id !== noteId);
+                    this.saveBehaviorData(true);
+                    this._deleteNoteFromSupabase(noteId);
+                    ann.remove();
+                    if (markEl) {
+                        if (markEl.parentNode) markEl.replaceWith(document.createTextNode(markEl.textContent));
+                    }
+                    this.showToast('笔记已删除', 'info');
+                }
+            });
+        };
+
         const contentEl = document.querySelector('.chapter-content');
         if (contentEl) {
             const mark = this._findAndHighlightText(contentEl, selectedText, noteId);
-            if (mark) {
-                const renderedContent = this.formatAIResponse(explanation);
-                const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
-                const ann = document.createElement('div');
-                ann.className = 'note-annotation';
-                ann.dataset.noteId = noteId;
-                ann.innerHTML = `
-                    <div class="note-annotation-header">
-                        <span class="note-annotation-label">🤖 AI 笔记</span>
-                        <span class="note-annotation-delete" data-note-id="${noteId}">✕ 删除</span>
-                    </div>
-                    <div class="note-annotation-content">${renderedContent}</div>
-                `;
-                if (parentP.nextSibling) {
-                    parentP.parentNode.insertBefore(ann, parentP.nextSibling);
-                } else {
-                    parentP.parentNode.appendChild(ann);
-                }
-                // Scroll annotation into view
-                setTimeout(() => ann.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+            const insertAfter = mark
+                ? (mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement)
+                : contentEl.lastElementChild || contentEl;
 
-                // Bind delete handler
-                ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
-                    ev.stopPropagation();
-                    if (confirm('删除此笔记？关联的高亮也将取消。')) {
-                        this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
-                            .filter(n => n.id !== noteId);
-                        this.saveBehaviorData(true);
-                        this._deleteNoteFromSupabase(noteId);
-                        ann.remove();
-                        if (mark.parentNode) mark.replaceWith(document.createTextNode(mark.textContent));
-                        this.showToast('笔记已删除', 'info');
-                    }
-                });
-            }
+            const ann = document.createElement('div');
+            ann.className = 'note-annotation';
+            ann.dataset.noteId = noteId;
+            ann.innerHTML = `
+                <div class="note-annotation-header">
+                    <span class="note-annotation-label">🤖 AI 笔记</span>
+                    <span class="note-annotation-delete" data-note-id="${noteId}">✕ 删除</span>
+                </div>
+                <div class="note-annotation-content">${renderedContent}</div>
+            `;
+            insertAnnotation(ann, insertAfter);
+            bindDelete(ann, mark);
         }
 
         this.showToast('AI 解释已保存为笔记', 'success');
