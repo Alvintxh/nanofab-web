@@ -993,6 +993,28 @@ const App = {
                 .maybeSingle();
 
             if (behaviorSummary) {
+                // 从 behavior summary 回填 behaviorProfile（确保 AI 拿到真实行为画像）
+                if (!this.state.user.behaviorProfile) {
+                    this.state.user.behaviorProfile = {
+                        weakTopics: [],
+                        strongTopics: [],
+                        preferredContentTypes: [],
+                        avgSessionTime: 0,
+                        quizAccuracy: 0,
+                        lastUpdated: new Date().toISOString()
+                    };
+                }
+                const bp = this.state.user.behaviorProfile;
+                bp.weakTopics = behaviorSummary.weak_topics || [];
+                bp.strongTopics = behaviorSummary.strong_topics || [];
+                bp.preferredContentTypes = behaviorSummary.preferred_content_types || [];
+                bp.quizAccuracy = behaviorSummary.quiz_total_count > 0
+                    ? behaviorSummary.quiz_correct_count / behaviorSummary.quiz_total_count
+                    : 0;
+                bp.avgSessionTime = behaviorSummary.total_study_time || 0;
+                bp.lastUpdated = behaviorSummary.updated_at || new Date().toISOString();
+                localStorage.setItem('nanofab_user', JSON.stringify(this.state.user));
+
                 this.state.behaviorData = {
                     pageViews: [],
                     scrollDepth: {},
