@@ -149,11 +149,15 @@ const AIModule = {
         this.saveBehaviorData(true);
         this._syncNoteToSupabase(noteEntry);
 
-        // Also highlight the original text in the chapter content and insert annotation
+        // Close sidebar so user can see the annotation
+        this.closeAISidebar();
+
+        // Highlight original text and insert annotation in chapter content
         const contentEl = document.querySelector('.chapter-content');
         if (contentEl) {
             const mark = this._findAndHighlightText(contentEl, selectedText, noteId);
             if (mark) {
+                const renderedContent = this.formatAIResponse(explanation);
                 const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
                 const ann = document.createElement('div');
                 ann.className = 'note-annotation';
@@ -163,14 +167,16 @@ const AIModule = {
                         <span class="note-annotation-label">🤖 AI 笔记</span>
                         <span class="note-annotation-delete" data-note-id="${noteId}">✕ 删除</span>
                     </div>
-                    <div class="note-annotation-context">原文："${this.escapeHtml(selectedText.substring(0, 100))}${selectedText.length > 100 ? '...' : ''}"</div>
-                    <div class="note-annotation-content">${this.escapeHtml(explanation)}</div>
+                    <div class="note-annotation-content">${renderedContent}</div>
                 `;
                 if (parentP.nextSibling) {
                     parentP.parentNode.insertBefore(ann, parentP.nextSibling);
                 } else {
                     parentP.parentNode.appendChild(ann);
                 }
+                // Scroll annotation into view
+                setTimeout(() => ann.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+
                 // Bind delete handler
                 ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
                     ev.stopPropagation();

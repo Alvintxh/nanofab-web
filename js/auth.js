@@ -823,16 +823,23 @@ const AuthModule = {
         if (notes.length === 0) {
             notesList.innerHTML = '<p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"📝 记笔记"并写入内容即可创建笔记。</p>';
         } else {
-            notesList.innerHTML = notes.map((note, i) => `
+            notesList.innerHTML = notes.map((note, i) => {
+                const isAiNote = note.content && (note.content.startsWith('#') || note.content.startsWith('**') || note.content.includes('\n'));
+                const renderedContent = isAiNote ? this.formatAIResponse(note.content) : `<p>${this.escapeHtml(note.content || note.text || '')}</p>`;
+                const label = isAiNote ? '🤖 AI 笔记' : '📝 笔记';
+                return `
                 <div class="note-item">
-                    <div class="note-context" style="font-size:0.8rem;color:var(--color-text-tertiary);margin-bottom:6px;font-style:italic;">原文："${this.escapeHtml((note.context || note.text || '').substring(0, 150))}"</div>
-                    <div class="note-text" style="color:var(--color-text-primary);line-height:1.6;">${this.escapeHtml(note.content || note.text || '')}</div>
+                    <div class="note-context" style="font-size:0.8rem;color:var(--color-text-tertiary);margin-bottom:6px;font-style:italic;">
+                        <span style="font-weight:600;margin-right:4px;">${label}</span>
+                        原文："${this.escapeHtml((note.context || note.text || '').substring(0, 150))}"
+                    </div>
+                    <div class="note-text" style="color:var(--color-text-primary);line-height:1.6;">${renderedContent}</div>
                     <div class="note-meta" style="font-size:0.75rem;color:var(--color-text-tertiary);margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
                         <span>${note.chapterTitle || note.chapter || '未知章节'} · ${new Date(note.timestamp).toLocaleDateString('zh-CN')}</span>
                         <span class="note-delete" data-note-id="${note.id || i}" style="color:var(--color-accent);cursor:pointer;font-size:0.75rem;">删除</span>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
 
             notesList.querySelectorAll('.note-delete').forEach(btn => {
                 btn.addEventListener('click', (e) => {

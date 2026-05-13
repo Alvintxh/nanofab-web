@@ -1221,6 +1221,7 @@ const App = {
                 parentP.parentNode.appendChild(ann);
             }
             bindAnnotationDelete(ann, hlEl);
+            setTimeout(() => ann.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         };
 
         try {
