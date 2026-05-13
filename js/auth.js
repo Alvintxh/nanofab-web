@@ -727,6 +727,27 @@ const AuthModule = {
         this.showAuthForm('login-form');
     },
 
+    showWelcomePage() {
+        const onboarding = document.getElementById('onboarding-screen');
+        const app = document.getElementById('app');
+        const welcomeSection = document.getElementById('welcome-section');
+        const authSection = document.getElementById('onboarding-auth');
+        const aiToggle = document.getElementById('ai-sidebar-toggle');
+
+        if (onboarding) onboarding.classList.add('active');
+        if (app) app.style.display = 'none';
+        if (welcomeSection) welcomeSection.classList.remove('hidden');
+        if (authSection) authSection.classList.add('hidden');
+        if (aiToggle) aiToggle.classList.add('hidden');
+
+        localStorage.removeItem('nanofab_welcome_seen');
+
+        // Re-trigger scroll reveal for detail sections
+        if (typeof App !== 'undefined' && App._initScrollReveal) {
+            App._initScrollReveal();
+        }
+    },
+
     updateUserGreeting() {
         const greeting = document.getElementById('user-greeting');
         if (greeting && this.state.user) {

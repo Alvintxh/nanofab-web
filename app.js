@@ -91,6 +91,24 @@ const App = {
             });
         }
 
+        // Back to welcome from auth page
+        const authBackWelcome = document.getElementById('auth-back-welcome');
+        if (authBackWelcome) {
+            authBackWelcome.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showWelcomePage();
+            });
+        }
+
+        // Back to welcome from app header
+        const headerBackWelcome = document.getElementById('header-back-welcome');
+        if (headerBackWelcome) {
+            headerBackWelcome.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showWelcomePage();
+            });
+        }
+
         // Feature card click → scroll to detail section
         document.querySelectorAll('.welcome-feature-card[data-feature]').forEach(card => {
             card.addEventListener('click', () => {

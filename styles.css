@@ -1073,6 +1073,28 @@ input, select, textarea {
     gap: 12px;
 }
 
+.header-back-welcome {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    font-size: 0.8125rem;
+    color: var(--color-text-tertiary);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.header-back-welcome:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    border-color: rgba(0, 78, 161, 0.1);
+}
+
+.header-back-welcome svg {
+    flex-shrink: 0;
+}
+
 .progress-summary {
     display: flex;
     align-items: center;
@@ -2216,6 +2238,14 @@ input, select, textarea {
 
     .header-logo .logo-text {
         display: none;
+    }
+
+    .header-back-welcome span {
+        display: none;
+    }
+
+    .header-back-welcome {
+        padding: 6px 8px;
     }
 }
 
@@ -3919,6 +3949,25 @@ input, select, textarea {
 
 .form-error.visible {
     display: block;
+}
+
+/* ===== Auth Back to Welcome Link ===== */
+.auth-back-link {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.auth-back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    transition: color var(--transition-fast);
+}
+
+.auth-back-link a:hover {
+    color: var(--color-primary);
 }
 
 /* ===== Button Variants ===== */
