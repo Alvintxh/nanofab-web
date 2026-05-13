@@ -346,10 +346,13 @@ const AIModule = {
             parts.push('- 如果用户有进行中的项目，尝试将解释与其实际项目联系起来');
         } else if (context === 'chat') {
             parts.push('请作为个性化学习助手，根据用户画像回答问题。');
-            parts.push('- 如果用户问基础概念，根据水平调整深度');
-            parts.push('- 如果用户问应用场景，优先提及感兴趣的领域');
-            parts.push('- 如果用户表现出困惑，建议适合的学习方式');
-            parts.push('- 根据用户的学习行为数据（薄弱环节、停留时间等），主动提供针对性的学习建议');
+            parts.push('你会在每次对话中收到用户的个人学习数据（笔记、答题记录、学习进度、学习时长分布、行为画像、最近操作等）。');
+            parts.push('请在每次回答中自然地引用这些数据，使回答真正个性化。例如：');
+            parts.push('- 回答概念问题时，提及用户笔记中相关的记录或用户做错的题目');
+            parts.push('- 用户问"怎么办"时，结合学习进度和薄弱环节给出具体建议');
+            parts.push('- 用户问"下一步学什么"时，根据已完成的章节和弱项推荐下一步');
+            parts.push('- 如果用户某一章节停留时间很长，主动解释该章节的难点');
+            parts.push('- 如果用户要求列出具体内容（笔记、错题等），从数据中逐一提取，不要遗漏');
         }
 
         parts.push('使用中文回答，保持专业但友好的语气。');
@@ -853,97 +856,101 @@ const AIModule = {
         if (typing) typing.remove();
     },
 
-    _buildDataContext(userMessage) {
-        const lowerMsg = userMessage.toLowerCase();
-        const contexts = [];
+    _buildDataContext() {
+        const behaviorData = this.state.behaviorData || {};
+        const sections = [];
 
-        // Detect: notes / 笔记
-        if (/笔记|note|列出.*笔记|我的.*笔记/.test(lowerMsg)) {
-            const notes = this.state.behaviorData.notes || [];
-            if (notes.length > 0) {
-                const allChapters = this.getAllChapters();
-                const notesText = notes.map((n, i) => {
-                    const ch = allChapters.find(c => c.id === n.chapter);
-                    const chName = ch ? ch.title : (n.chapterTitle || '未知章节');
-                    const ctx = (n.context || '').substring(0, 80);
-                    const content = (n.content || '').substring(0, 200);
-                    return `${i + 1}. [${chName}] 原文："${ctx}"\n   笔记内容：${content}`;
-                }).join('\n');
-                contexts.push(`以下是用户的所有笔记（共 ${notes.length} 条）：\n${notesText}`);
-            } else {
-                contexts.push('用户当前没有任何笔记。');
-            }
+        // ── Notes ──
+        const notes = behaviorData.notes || [];
+        if (notes.length > 0) {
+            const allChapters = this.getAllChapters();
+            const notesText = notes.map((n, i) => {
+                const ch = allChapters.find(c => c.id === n.chapter);
+                const chName = ch ? ch.title : (n.chapterTitle || '未知章节');
+                const ctx = (n.context || '').substring(0, 80);
+                const content = (n.content || '').substring(0, 200);
+                return `${i + 1}. [${chName}] 原文："${ctx}"\n   笔记：${content}`;
+            }).join('\n');
+            sections.push(`【笔记】共 ${notes.length} 条：\n${notesText}`);
         }
 
-        // Detect: wrong answers / 错题 / quiz results
-        if (/错题|错题本|wrong.*answer|答错|做错|quiz.*result|测试.*结果|答题.*情况/.test(lowerMsg)) {
-            const quizResults = this.state.behaviorData.quizResults || [];
+        // ── Quiz results ──
+        const quizResults = behaviorData.quizResults || [];
+        if (quizResults.length > 0) {
+            const correctCount = quizResults.filter(r => r.correct).length;
             const wrongAnswers = quizResults.filter(r => !r.correct);
+            const accuracy = Math.round((correctCount / quizResults.length) * 100);
+            let quizText = `【答题记录】共 ${quizResults.length} 题，正确 ${correctCount} 题，正确率 ${accuracy}%。`;
             if (wrongAnswers.length > 0) {
                 const allChapters = this.getAllChapters();
-                const correctCount = quizResults.filter(r => r.correct).length;
-                const accuracy = Math.round((correctCount / quizResults.length) * 100);
                 const wrongText = wrongAnswers.map((w, i) => {
                     const ch = allChapters.find(c => c.id === w.chapter);
                     const chName = ch ? ch.title : (w.chapter || '未知章节');
                     const question = w.question || '未知题目';
                     const userAnswer = w.userAnswer || w.selected || '未作答';
-                    return `${i + 1}. [${chName}] ${question}\n   你的答案：${userAnswer}`;
+                    return `${i + 1}. [${chName}] ${question}\n   用户答案：${userAnswer}`;
                 }).join('\n');
-                contexts.push(`以下是用户的答题数据：\n- 总答题数：${quizResults.length}\n- 正确数：${correctCount}\n- 正确率：${accuracy}%\n- 错题列表（共 ${wrongAnswers.length} 道）：\n${wrongText}`);
-            } else if (quizResults.length > 0) {
-                contexts.push('用户目前没有错题，所有答题均正确。');
-            } else {
-                contexts.push('用户目前还没有答题记录。');
+                quizText += `\n错题列表（${wrongAnswers.length} 道）：\n${wrongText}`;
             }
+            sections.push(quizText);
         }
 
-        // Detect: study advice / 学习建议 (often combined with wrong answers)
-        if (/学习建议|学习计划|怎么学|如何.*学|建议.*学|recommend|suggestion|advice/.test(lowerMsg)) {
-            const bp = this.state.user?.behaviorProfile || {};
-            const weakTopics = bp.weakTopics || [];
-            const strongTopics = bp.strongTopics || [];
-            const completed = [...this.state.completedChapters];
-            const all = this.getAllChapters();
-            const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
-
-            let adviceContext = '以下是用户的学习状态数据，请据此给出个性化建议：\n';
-            adviceContext += `- 已完成章节：${completed.length > 0 ? completed.join('、') : '无'}\n`;
-            adviceContext += `- 待学习章节：${remaining.length > 0 ? remaining.map(c => c.title).join('、') : '全部完成'}\n`;
-            if (weakTopics.length > 0) adviceContext += `- 薄弱环节：${weakTopics.join('、')}\n`;
-            if (strongTopics.length > 0) adviceContext += `- 擅长领域：${strongTopics.join('、')}\n`;
-            if (bp.quizAccuracy > 0) adviceContext += `- Quiz正确率：${Math.round(bp.quizAccuracy * 100)}%\n`;
-            if (bp.avgSessionTime > 0) adviceContext += `- 平均学习时长：${Math.round(bp.avgSessionTime / 60)}分钟\n`;
-            contexts.push(adviceContext);
-        }
-
-        // Detect: progress / 进度
-        if (/进度|progress|完成.*多少|学了.*多少/.test(lowerMsg)) {
-            const completed = [...this.state.completedChapters];
-            const all = this.getAllChapters();
-            const total = all.length;
-            const done = completed.length;
-            const percent = Math.round((done / total) * 100);
+        // ── Study progress ──
+        const completed = [...this.state.completedChapters];
+        const all = this.getAllChapters();
+        const total = all.length;
+        const done = completed.length;
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
+        let progressText = `【学习进度】已完成 ${done}/${total}（${percent}%）。`;
+        if (completed.length > 0) {
             const completedNames = completed.map(id => {
                 const ch = all.find(c => c.id === id);
                 return ch ? ch.title : id;
             });
-            contexts.push(`用户学习进度：已完成 ${done}/${total}（${percent}%）\n已完成的章节：${completedNames.length > 0 ? completedNames.join('、') : '无'}`);
+            progressText += `\n已完成章节：${completedNames.join('、')}`;
+        }
+        if (remaining.length > 0) {
+            progressText += `\n待学习章节：${remaining.map(c => c.title).join('、')}`;
+        }
+        sections.push(progressText);
+
+        // ── Time spent per chapter ──
+        const timeSpent = behaviorData.timeSpent || {};
+        const timeEntries = Object.entries(timeSpent).filter(([, t]) => typeof t === 'number' && t > 0);
+        if (timeEntries.length > 0) {
+            const totalSeconds = timeEntries.reduce((sum, [, t]) => sum + t, 0);
+            const sorted = timeEntries.sort(([, a], [, b]) => b - a);
+            const timeText = sorted.map(([chId, sec]) => {
+                const ch = all.find(c => c.id === chId);
+                const name = ch ? ch.title : chId;
+                return `  ${name}：${Math.round(sec / 60)}分钟`;
+            }).join('\n');
+            sections.push(`【学习时长分布】总计 ${Math.round(totalSeconds / 60)} 分钟：\n${timeText}`);
         }
 
-        // Detect: behavior stats / 学习统计
-        if (/学习统计|学习.*数据|行为.*数据|statistics|behavior.*data|学习.*时间/.test(lowerMsg)) {
-            const behaviorData = this.state.behaviorData;
-            const timeSpent = behaviorData.timeSpent || {};
-            const totalSeconds = Object.values(timeSpent).reduce((sum, t) => sum + (typeof t === 'number' ? t : 0), 0);
-            const interactions = behaviorData.interactions?.length || 0;
-            const quizResults = behaviorData.quizResults || [];
-            const correctCount = quizResults.filter(r => r.correct).length;
-            const accuracy = quizResults.length > 0 ? Math.round((correctCount / quizResults.length) * 100) : 0;
-            contexts.push(`用户学习统计数据：\n- 总学习时间：${Math.round(totalSeconds / 60)}分钟\n- 总交互次数：${interactions}\n- 答题正确率：${accuracy}%（${correctCount}/${quizResults.length}）`);
+        // ── Behavior profile (from user object, supplementing systemPrompt) ──
+        const bp = this.state.user?.behaviorProfile;
+        if (bp) {
+            const bpParts = [];
+            if (bp.weakTopics?.length > 0) bpParts.push(`薄弱环节：${bp.weakTopics.join('、')}`);
+            if (bp.strongTopics?.length > 0) bpParts.push(`擅长领域：${bp.strongTopics.join('、')}`);
+            if (bp.preferredContentTypes?.length > 0) bpParts.push(`偏好内容类型：${bp.preferredContentTypes.join('、')}`);
+            if (bpParts.length > 0) sections.push(`【行为画像】\n${bpParts.join('\n')}`);
         }
 
-        return contexts.length > 0 ? contexts.join('\n\n---\n\n') : null;
+        // ── Latest interactions (recent context) ──
+        const interactions = behaviorData.interactions || [];
+        if (interactions.length > 0) {
+            const recent = interactions.slice(-10).reverse();
+            const recentText = recent.map(i => {
+                const time = i.timestamp ? new Date(i.timestamp).toLocaleString('zh-CN') : '未知时间';
+                return `  ${time} | ${i.type} | ${i.text || ''}`;
+            }).join('\n');
+            sections.push(`【最近操作】最近 ${recent.length} 条：\n${recentText}`);
+        }
+
+        return sections.join('\n\n');
     },
 
     async generateAIResponse(userMessage) {
@@ -962,12 +969,12 @@ const AIModule = {
             });
         }
 
-        // Inject user data context when relevant (notes, wrong answers, progress, etc.)
-        const dataContext = this._buildDataContext(userMessage);
+        // Always inject full user data context for personalized responses
+        const dataContext = this._buildDataContext();
         if (dataContext) {
             messages.push({
                 role: 'system',
-                content: `以下是用户的个人数据，请基于这些数据精确回答用户的问题。如果用户要求列出内容，请逐一列出不要省略。\n\n${dataContext}`
+                content: `以下是用户在本学习平台上的个人数据。请在所有回答中结合这些数据，使回答个性化、有针对性。例如：引用用户的笔记内容、提及用户的学习进度、针对错题给出建议、根据学习时长分布推荐学习策略。如果用户要求列出具体内容（如笔记、错题），请逐一列出不要省略。\n\n${dataContext}`
             });
         }
 
