@@ -1351,13 +1351,38 @@ input, select, textarea {
 .page-header h1 {
     font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     letter-spacing: -0.02em;
+    font-family: var(--font-display);
 }
 
 .page-subtitle {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    color: var(--color-text-tertiary);
+}
+
+.continue-learning .btn {
+    margin-top: 4px;
+}
+
+.continue-learning p {
+    min-height: 2.4em;
+}
+
+/* Card icon color overrides */
+.continue-learning .card-icon {
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.progress-overview .card-icon {
+    color: var(--color-success);
+    background: var(--color-success-light);
+}
+
+.chapter-grid .card-icon {
+    color: #d97706;
+    background: #fffbeb;
 }
 
 
@@ -1374,6 +1399,20 @@ input, select, textarea {
     border: 1px solid var(--color-border-light);
     box-shadow: var(--shadow-card);
     transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transition: background var(--transition-base);
 }
 
 .dashboard-card:hover {
@@ -1381,6 +1420,13 @@ input, select, textarea {
     transform: translateY(-1px);
     border-color: var(--color-border);
 }
+
+.continue-learning::before { background: linear-gradient(90deg, var(--color-primary), #2575d0); }
+.progress-overview::before { background: linear-gradient(90deg, var(--color-success), #14b8a6); }
+.chapter-grid::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.ai-learning-path::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.mindmap-card::before { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+.wrong-answer-book::before { background: linear-gradient(90deg, var(--color-accent), #c41020); }
 
 .dashboard-card h3 {
     font-size: 1.0625rem;
@@ -1410,11 +1456,6 @@ input, select, textarea {
 .card-icon svg {
     width: 22px;
     height: 22px;
-}
-
-.progress-overview .card-icon {
-    color: var(--color-success);
-    background: var(--color-success-light);
 }
 
 .progress-bar {
@@ -1447,8 +1488,21 @@ input, select, textarea {
 
 .quick-chapters {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+
+.quick-part-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 6px 4px 2px 4px;
+    font-family: var(--font-body);
+    grid-column: 1 / -1;
+}
+
+.quick-part-label:first-child {
+    padding-top: 0;
 }
 
 .quick-chapter-link {
@@ -1475,9 +1529,10 @@ input, select, textarea {
 .quick-chapter-link .chapter-number {
     font-size: 0.6875rem;
     font-weight: 600;
-    color: var(--color-text-tertiary);
+    color: var(--part-color, var(--color-text-tertiary));
     min-width: 28px;
     font-family: 'SF Mono', monospace;
+    transition: color var(--transition-fast);
 }
 
 .quick-chapter-link:hover .chapter-number {
@@ -3408,16 +3463,19 @@ input, select, textarea {
 
 .study-stat-item {
     text-align: center;
-    padding: 12px 6px;
+    padding: 14px 8px 12px;
     background: var(--color-bg);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border-light);
     transition: all var(--transition-base);
+    position: relative;
 }
 
 .study-stat-item:hover {
     background: var(--color-primary-light);
     border-color: rgba(0, 78, 161, 0.12);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .study-stat-value {
@@ -3435,6 +3493,12 @@ input, select, textarea {
     font-weight: 500;
 }
 
+.study-stat-item:nth-child(1) .study-stat-value { color: var(--color-primary); }
+.study-stat-item:nth-child(2) .study-stat-value { color: #0d9488; }
+.study-stat-item:nth-child(3) .study-stat-value { color: #7c3aed; }
+.study-stat-item:nth-child(4) .study-stat-value { color: var(--color-accent); }
+.study-stat-item:nth-child(5) .study-stat-value { color: #f59e0b; }
+
 .study-stat-bar {
     height: 6px;
     background: var(--color-border-light);
@@ -3445,9 +3509,21 @@ input, select, textarea {
 
 .study-stat-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #0d9488, #14b8a6);
+    background: linear-gradient(90deg, var(--color-primary), #0d9488);
     border-radius: 3px;
     transition: width 0.5s ease;
+    position: relative;
+}
+
+.study-stat-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+    border-radius: 3px;
 }
 
 .study-stat-bar-label {

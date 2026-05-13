@@ -547,13 +547,22 @@ const App = {
         const quickNav = document.getElementById('quick-nav');
         if (!quickNav) return;
 
+        const partColors = ['var(--color-primary)', 'var(--color-accent)', '#0d9488', '#7c3aed'];
+
         quickNav.innerHTML = '';
 
-        this.state.chapters.forEach((part) => {
+        this.state.chapters.forEach((part, partIndex) => {
+            const label = document.createElement('div');
+            label.className = 'quick-part-label';
+            label.textContent = part.title;
+            label.style.color = partColors[partIndex];
+            quickNav.appendChild(label);
+
             part.chapters.forEach((chapter) => {
                 const link = document.createElement('a');
                 link.className = 'quick-chapter-link';
                 link.href = `#chapter/${chapter.id}`;
+                link.style.setProperty('--part-color', partColors[partIndex]);
                 link.innerHTML = `
                     <span class="chapter-number">${chapter.id}</span>
                     <span class="chapter-title">${chapter.title}</span>
