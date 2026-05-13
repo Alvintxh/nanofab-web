@@ -674,6 +674,19 @@ const App = {
                 this.showAuthForm('reset-password-form');
                 return true;
             }
+            if (hashParams.get('type') === 'signup' || hashParams.get('access_token')) {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    await this.loadUserFromSupabase(session.user);
+                    this.showApp();
+                    localStorage.removeItem('pending_name');
+                    localStorage.removeItem('pending_email');
+                    localStorage.removeItem('pending_user_id');
+                    sessionStorage.removeItem('pending_password');
+                    window.location.hash = '#home';
+                    return true;
+                }
+            }
         } catch (e) { /* ignore */ }
         return false;
     },
@@ -716,7 +729,10 @@ const App = {
             try {
                 const { data, error } = await this.supabase.auth.signUp({
                     email, password,
-                    options: { data: { name } }
+                    options: {
+                        data: { name },
+                        emailRedirectTo: window.location.origin + window.location.pathname
+                    }
                 });
 
                 if (error) {
