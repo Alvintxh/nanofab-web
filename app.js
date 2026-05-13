@@ -74,265 +74,6 @@ const App = {
         }
     },
 
-    async syncQuizAnswer(questionEl, selectedValue, correctAnswer, isCorrect) {
-        if (!this.supabase || !this.state.currentChapter) return;
-
-        try {
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (!session?.user) return;
-
-            const questionText = questionEl.querySelector('.question-text')?.textContent?.trim() || '';
-
-            const selectedSpan = questionEl.querySelector(`input[value="${selectedValue}"]`)?.closest('.quiz-option')?.querySelector('span');
-            const selectedText = selectedSpan ? selectedSpan.textContent.replace(/^[A-D][.、]\s*/, '').trim() : selectedValue;
-
-            const correctSpan = questionEl.querySelector(`input[value="${correctAnswer}"]`)?.closest('.quiz-option')?.querySelector('span');
-            const correctText = correctSpan ? correctSpan.textContent.replace(/^[A-D][.、]\s*/, '').trim() : correctAnswer;
-
-            const { error } = await this.supabase
-                .from('quiz_answers')
-                .upsert({
-                    user_id: session.user.id,
-                    chapter_id: this.state.currentChapter.id,
-                    question_id: questionEl.dataset.question,
-                    question_text: questionText,
-                    is_correct: isCorrect,
-                    selected_answer: selectedText,
-                    correct_answer: correctText
-                });
-
-            if (error) {
-                console.error('Failed to sync quiz answer to Supabase:', error);
-            } else {
-                this._logBehaviorEvent('quiz_answer', this.state.currentChapter.id, {
-                    question_id: questionEl.dataset.question,
-                    is_correct: isCorrect
-                });
-            }
-        } catch (error) {
-            console.error('Failed to sync quiz answer to Supabase:', error);
-        }
-    },
-
-    loadBehaviorData() {
-        const stored = localStorage.getItem('nanofab_behavior');
-        if (stored) {
-            this.state.behaviorData = JSON.parse(stored);
-        }
-    },
-
-    async saveBehaviorData(immediate = false) {
-        if (immediate) {
-            return this._flushBehaviorData();
-        }
-
-        if (!this._behaviorDirty) {
-            this._behaviorDirty = true;
-        }
-        clearTimeout(this._behaviorSaveTimer);
-        this._behaviorSaveTimer = setTimeout(() => this._flushBehaviorData(), 5000);
-    },
-
-    async _flushBehaviorData() {
-        if (this._behaviorSaveTimer) {
-            clearTimeout(this._behaviorSaveTimer);
-            this._behaviorSaveTimer = null;
-        }
-        if (!this._behaviorDirty) return;
-        this._behaviorDirty = false;
-
-        localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
-
-        if (this.supabase) {
-            try {
-                let userId = null;
-                const { data: { session } } = await this.supabase.auth.getSession();
-                if (session?.user) {
-                    userId = session.user.id;
-                }
-                if (!userId) {
-                    const pendingUserId = localStorage.getItem('pending_user_id');
-                    if (pendingUserId) userId = pendingUserId;
-                }
-
-                if (userId) {
-                    const { error: summaryError } = await this.supabase
-                        .from('user_behavior_summary')
-                        .upsert({
-                            user_id: userId,
-                            total_study_time: this.calculateTotalStudyTime(),
-                            total_interactions: this.state.behaviorData.interactions?.length || 0,
-                            quiz_correct_count: this.state.behaviorData.quizResults?.filter(r => r.correct).length || 0,
-                            quiz_total_count: this.state.behaviorData.quizResults?.length || 0,
-                            avg_scroll_depth: this.calculateAvgScrollDepth(),
-                            weak_topics: this.state.user?.behaviorProfile?.weakTopics || [],
-                            strong_topics: this.state.user?.behaviorProfile?.strongTopics || [],
-                            preferred_content_types: this.state.user?.behaviorProfile?.preferredContentTypes || [],
-                            updated_at: new Date().toISOString()
-                        });
-
-                    if (summaryError) {
-                        console.error('Failed to sync behavior summary to Supabase:', summaryError);
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to sync behavior to Supabase:', error);
-            }
-        }
-    },
-
-    calculateTotalStudyTime() {
-        const timeSpent = this.state.behaviorData.timeSpent || {};
-        return Object.values(timeSpent).reduce((sum, time) => sum + time, 0);
-    },
-
-    calculateAvgScrollDepth() {
-        const scrollDepth = this.state.behaviorData.scrollDepth || {};
-        const depths = Object.values(scrollDepth);
-        if (depths.length === 0) return 0;
-        return depths.reduce((sum, d) => sum + d, 0) / depths.length;
-    },
-
-    async _logBehaviorEvent(eventType, chapterId, eventData = {}) {
-        if (!this.supabase) return;
-        try {
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (!session?.user) return;
-            await this.supabase.from('user_behavior_events').insert({
-                user_id: session.user.id,
-                event_type: eventType,
-                chapter_id: chapterId || null,
-                event_data: eventData
-            });
-        } catch (e) { /* fire-and-forget */ }
-    },
-
-    async _logAIQuery(provider, model, messages, response) {
-        if (!this.supabase || !response) return;
-        try {
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (!session?.user) return;
-            const systemMsgs = messages.filter(m => m.role === 'system');
-            const queryType = systemMsgs.some(m => /解释|解释|explain/i.test(m.content)) ? 'explanation' : 'chat';
-            const userMsg = messages.filter(m => m.role === 'user').map(m => m.content).join('\n');
-            await this.supabase.from('ai_queries').insert({
-                user_id: session.user.id,
-                query_type: queryType,
-                chapter_id: this.state.currentChapter?.id || null,
-                user_message: userMsg.substring(0, 2000),
-                ai_response: response.substring(0, 5000),
-                response_tokens: response.length
-            });
-        } catch (e) { /* fire-and-forget */ }
-    },
-
-    async _syncNoteToSupabase(noteEntry) {
-        if (!this.supabase) return;
-        try {
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (!session?.user) return;
-            await this.supabase.from('user_notes').upsert({
-                id: noteEntry.id,
-                user_id: session.user.id,
-                context: noteEntry.context,
-                content: noteEntry.content,
-                chapter_id: noteEntry.chapter,
-                chapter_title: noteEntry.chapterTitle,
-                created_at: noteEntry.timestamp
-            });
-        } catch (e) { /* fire-and-forget */ }
-    },
-
-    async _deleteNoteFromSupabase(noteId) {
-        if (!this.supabase) return;
-        try {
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (!session?.user) return;
-            await this.supabase.from('user_notes').delete().eq('id', noteId);
-        } catch (e) { /* fire-and-forget */ }
-    },
-
-    initBehaviorTracking() {
-        let scrollTimer;
-        let maxScrollDepth = 0;
-        let sectionStartTime = Date.now();
-        let currentSection = null;
-
-        document.addEventListener('scroll', () => {
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(() => {
-                const scrollPercent = Math.round(
-                    (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-                );
-                if (scrollPercent > maxScrollDepth) {
-                    maxScrollDepth = scrollPercent;
-                    const chapterId = this.state.currentChapter?.id || 'home';
-                    this.state.behaviorData.scrollDepth[chapterId] = maxScrollDepth;
-                    this.saveBehaviorData();
-                }
-            }, 500);
-        });
-
-        document.addEventListener('click', (e) => {
-            const target = e.target.closest('a, button, .nav-chapter');
-            if (target) {
-                this.state.behaviorData.interactions.push({
-                    type: 'click',
-                    element: target.tagName.toLowerCase(),
-                    text: target.textContent?.substring(0, 50) || '',
-                    timestamp: new Date().toISOString(),
-                    chapter: this.state.currentChapter?.id || 'home'
-                });
-                this.saveBehaviorData();
-            }
-        });
-
-        let chapterStartTime = Date.now();
-        window.addEventListener('hashchange', () => {
-            const chapterId = this.state.currentChapter?.id;
-            if (chapterId) {
-                const timeSpent = Math.round((Date.now() - chapterStartTime) / 1000);
-                this.state.behaviorData.timeSpent[chapterId] =
-                    (this.state.behaviorData.timeSpent[chapterId] || 0) + timeSpent;
-                this.saveBehaviorData(true);
-                this.updateBehaviorProfile();
-                this._logBehaviorEvent('page_view', chapterId, {
-                    time_spent: timeSpent,
-                    scroll_depth: this.state.behaviorData.scrollDepth?.[chapterId] || 0
-                });
-            }
-            chapterStartTime = Date.now();
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (currentSection && currentSection !== entry.target.id) {
-                        const timeSpent = Math.round((Date.now() - sectionStartTime) / 1000);
-                        const chapterId = this.state.currentChapter?.id || 'home';
-                        if (!this.state.behaviorData.sectionTime) {
-                            this.state.behaviorData.sectionTime = {};
-                        }
-                        if (!this.state.behaviorData.sectionTime[chapterId]) {
-                            this.state.behaviorData.sectionTime[chapterId] = {};
-                        }
-                        this.state.behaviorData.sectionTime[chapterId][currentSection] = 
-                            (this.state.behaviorData.sectionTime[chapterId][currentSection] || 0) + timeSpent;
-                        this.saveBehaviorData();
-                    }
-                    currentSection = entry.target.id;
-                    sectionStartTime = Date.now();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('h2, h3').forEach(heading => {
-            if (!heading.id) {
-                heading.id = 'section-' + Math.random().toString(36).substring(2, 11);
-            }
-            observer.observe(heading);
-        });
-    },
 
     bindEvents() {
         window.addEventListener('hashchange', () => this.handleRoute());
@@ -587,443 +328,7 @@ const App = {
         }
     },
 
-    initTextSelection(container) {
-        const existingTooltip = document.querySelector('.ai-tooltip');
-        if (existingTooltip) existingTooltip.remove();
 
-        const tooltip = document.createElement('div');
-        tooltip.className = 'ai-tooltip';
-        tooltip.innerHTML = `
-            <div class="ai-tooltip-content">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
-                </svg>
-                <span>AI解释</span>
-            </div>
-        `;
-        document.body.appendChild(tooltip);
-
-        let selectedText = '';
-        let selectionTimeout = null;
-
-        container.addEventListener('mouseup', () => {
-            clearTimeout(selectionTimeout);
-            selectionTimeout = setTimeout(() => {
-                const selection = window.getSelection();
-                selectedText = selection.toString().trim();
-
-                if (selectedText.length > 0 && selectedText.length < 500) {
-                    const range = selection.getRangeAt(0);
-                    const rect = range.getBoundingClientRect();
-                    
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-                    tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10 + window.scrollY}px`;
-                } else {
-                    tooltip.style.display = 'none';
-                }
-            }, 10);
-        });
-
-        document.addEventListener('mousedown', (e) => {
-            if (!tooltip.contains(e.target)) {
-                tooltip.style.display = 'none';
-            }
-        });
-
-        tooltip.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (selectedText) {
-                this.showAIExplanation(selectedText);
-                tooltip.style.display = 'none';
-                window.getSelection().removeAllRanges();
-            }
-        });
-    },
-
-    showAIExplanation(text) {
-        this.openAISidebar();
-        this.switchAISidebarTab('explanation');
-
-        const emptyState = document.querySelector('#ai-explanation-panel .ai-panel-empty');
-        const resultState = document.querySelector('#ai-explanation-panel .ai-explanation-result');
-        const selectedTextContent = document.querySelector('#ai-explanation-panel .selected-text-content');
-        const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
-
-        if (emptyState) emptyState.classList.add('hidden');
-        if (resultState) resultState.classList.remove('hidden');
-        if (selectedTextContent) selectedTextContent.textContent = text;
-        if (explanationBody) {
-            explanationBody.innerHTML = `
-                <div class="ai-loading">
-                    <div class="ai-spinner"></div>
-                    <p>正在根据您的背景生成个性化解释...</p>
-                </div>
-            `;
-        }
-
-        const chapter = this.state.currentChapter;
-        const chapterContext = chapter ? `
-当前章节：${chapter.title}
-章节描述：${chapter.description}
-` : '';
-
-        this.generateExplanation(text, chapterContext).then(explanation => {
-            if (explanationBody) {
-                const formattedExplanation = this.formatAIResponse(explanation);
-                explanationBody.innerHTML = `
-                    <div class="explanation-result">
-                        <div class="explanation-header">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
-                            <span>为您定制的解释</span>
-                        </div>
-                        <div class="explanation-body">${formattedExplanation}</div>
-                    </div>
-                `;
-            }
-        });
-    },
-
-    openAISidebar() {
-        const sidebar = document.getElementById('ai-sidebar');
-        const toggle = document.getElementById('ai-sidebar-toggle');
-        if (sidebar) sidebar.classList.add('open');
-        if (toggle) toggle.classList.add('hidden');
-    },
-
-    closeAISidebar() {
-        const sidebar = document.getElementById('ai-sidebar');
-        const toggle = document.getElementById('ai-sidebar-toggle');
-        if (sidebar) sidebar.classList.remove('open');
-        if (toggle) toggle.classList.remove('hidden');
-    },
-
-    switchAISidebarTab(tabId) {
-        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.tab === tabId);
-        });
-        document.querySelectorAll('#ai-sidebar .ai-panel').forEach(panel => {
-            panel.classList.toggle('active', panel.id === `ai-${tabId}-panel`);
-        });
-    },
-
-    buildSystemPrompt(user, context) {
-        const parts = [];
-
-        parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。请使用Markdown格式输出，包括标题、列表、粗体等，让内容结构清晰易读。');
-
-        if (user) {
-            const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
-            parts.push(`用户学习水平：${levelMap[user.level] || user.level || '初学者'}`);
-            parts.push(`专业背景：${user.background || '学生'}`);
-
-            if (user.weeklyHours) {
-                parts.push(`每周学习时间：${user.weeklyHours}小时`);
-            }
-
-            if (user.motivation?.length > 0) {
-                const motivationMap = {
-                    course: '课程学习',
-                    research: '科研需要',
-                    career: '职业发展',
-                    interest: '个人兴趣'
-                };
-                const motivations = user.motivation.map(m => motivationMap[m] || m).join('、');
-                parts.push(`学习动机：${motivations}`);
-            }
-
-            if (user.prerequisite?.length > 0) {
-                const prereqMap = {
-                    physics: '大学物理',
-                    chemistry: '化学/材料',
-                    electronics: '电子工程',
-                    semiconductor: '半导体器件',
-                    none: '无特定基础',
-                    zero: '毫无基础'
-                };
-                const prereqs = user.prerequisite.map(p => prereqMap[p] || p).join('、');
-                parts.push(`先修知识：${prereqs}`);
-            }
-
-            if (user.studyPace) {
-                const paceMap = {
-                    intensive: '集中学习（1-2周）',
-                    moderate: '适中（1-2个月）',
-                    relaxed: '轻松（3个月以上）'
-                };
-                parts.push(`学习节奏：${paceMap[user.studyPace]}`);
-            }
-
-            if (user.learningStyle?.length > 0) {
-                const styleMap = {
-                    theory: '理论推导',
-                    visual: '图表可视化',
-                    practical: '工艺实践',
-                    case: '案例分析'
-                };
-                const styles = user.learningStyle.map(s => styleMap[s] || s).join('、');
-                parts.push(`偏好学习方式：${styles}`);
-            }
-
-            if (user.interestArea?.length > 0) {
-                const areaMap = {
-                    semiconductor: '半导体集成电路',
-                    photonics: '光子学/光电子',
-                    biotech: '纳米生物技术',
-                    energy: '能源/电池',
-                    mems: 'MEMS/NEMS',
-                    quantum: '量子计算'
-                };
-                const areas = user.interestArea.map(a => areaMap[a] || a).join('、');
-                parts.push(`感兴趣领域：${areas}`);
-            }
-
-            if (user.resume) {
-                parts.push(`个人简介：${user.resume}`);
-            }
-            if (user.scores) {
-                parts.push(`相关课程成绩：${user.scores}`);
-            }
-            if (user.currentProject) {
-                parts.push(`当前项目：${user.currentProject}`);
-            }
-            if (user.futureProject) {
-                parts.push(`未来计划：${user.futureProject}`);
-            }
-            if (user.learningReason) {
-                parts.push(`学习原因：${user.learningReason}`);
-            }
-
-            if (user.behaviorProfile) {
-                const bp = user.behaviorProfile;
-                if (bp.weakTopics?.length > 0) {
-                    parts.push(`薄弱环节：${bp.weakTopics.join('、')}`);
-                }
-                if (bp.strongTopics?.length > 0) {
-                    parts.push(`擅长领域：${bp.strongTopics.join('、')}`);
-                }
-                if (bp.quizAccuracy > 0) {
-                    parts.push(`Quiz正确率：${Math.round(bp.quizAccuracy * 100)}%`);
-                }
-                if (bp.avgSessionTime > 0) {
-                    parts.push(`平均学习时长：${Math.round(bp.avgSessionTime / 60)}分钟`);
-                }
-            }
-        }
-
-        if (context === 'explanation') {
-            parts.push('请根据用户的完整画像提供个性化解释。');
-            parts.push('- 毫无基础：用最简单的生活类比，避免任何术语，解释为什么这个概念重要');
-            parts.push('- 初学者：多用类比，避免复杂公式，强调直观理解');
-            parts.push('- 中级：引入技术参数，解释物理机制，联系实际工艺');
-            parts.push('- 高级：深入工程细节，讨论优化策略，引用最新进展');
-            parts.push('- 根据学习动机调整侧重点（课程→考试要点，科研→前沿进展，职业→实操技能，兴趣→背景故事）');
-            parts.push('- 根据先修知识决定数学深度');
-            parts.push('- 根据感兴趣领域举例时优先使用相关应用');
-            parts.push('- 根据学习节奏和每周学习时间调整内容密度');
-            parts.push('- 结合用户当前正在阅读的章节上下文进行解释，不要孤立解释概念');
-            parts.push('- 如果用户在某个章节停留时间较长或多次提问，说明该部分较难，请更详细地解释');
-            parts.push('- 如果用户有进行中的项目，尝试将解释与其实际项目联系起来');
-        } else if (context === 'chat') {
-            parts.push('请作为个性化学习助手，根据用户画像回答问题。');
-            parts.push('- 如果用户问基础概念，根据水平调整深度');
-            parts.push('- 如果用户问应用场景，优先提及感兴趣的领域');
-            parts.push('- 如果用户表现出困惑，建议适合的学习方式');
-            parts.push('- 根据用户的学习行为数据（薄弱环节、停留时间等），主动提供针对性的学习建议');
-        }
-
-        parts.push('使用中文回答，保持专业但友好的语气。');
-
-        return parts.join('\n');
-    },
-
-    updateBehaviorProfile() {
-        const user = this.state.user;
-        if (!user || !user.behaviorProfile) return;
-        
-        const bp = user.behaviorProfile;
-        const behaviorData = this.state.behaviorData;
-        
-        const quizResults = behaviorData.quizResults || [];
-        if (quizResults.length > 0) {
-            const correctCount = quizResults.filter(r => r.correct).length;
-            bp.quizAccuracy = correctCount / quizResults.length;
-            
-            const weakTopics = new Set();
-            quizResults.filter(r => !r.correct).forEach(r => {
-                if (r.chapter) weakTopics.add(r.chapter);
-            });
-            bp.weakTopics = [...weakTopics];
-        }
-        
-        const timeSpent = behaviorData.timeSpent || {};
-        const chapterTimes = Object.entries(timeSpent);
-        if (chapterTimes.length > 0) {
-            const avgTime = chapterTimes.reduce((sum, [, time]) => sum + time, 0) / chapterTimes.length;
-            bp.avgSessionTime = avgTime;
-            
-            const difficultChapters = chapterTimes
-                .filter(([, time]) => time > avgTime * 1.5)
-                .map(([chapter]) => chapter);
-            bp.weakTopics = [...new Set([...bp.weakTopics, ...difficultChapters])];
-        }
-        
-        const scrollDepth = behaviorData.scrollDepth || {};
-        const deepScrollChapters = Object.entries(scrollDepth)
-            .filter(([, depth]) => depth > 80)
-            .map(([chapter]) => chapter);
-        bp.strongTopics = deepScrollChapters;
-        
-        bp.lastUpdated = new Date().toISOString();
-        this.saveUser(user);
-    },
-
-    async callAIProvider(provider, model, messages, maxTokens = 1500, temperature = 0.7) {
-        const edgeUrl = SUPABASE_URL + '/functions/v1/ai-proxy';
-
-        // Try Supabase Edge Function first (server-side keys)
-        if (this.supabase) {
-            try {
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'apikey': SUPABASE_ANON_KEY
-                };
-                const { data: { session } } = await this.supabase.auth.getSession();
-                if (session?.access_token) {
-                    headers['Authorization'] = `Bearer ${session.access_token}`;
-                }
-
-                const resp = await fetch(edgeUrl, {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({ provider, model, messages, temperature, max_tokens: maxTokens })
-                });
-
-                if (resp.ok) {
-                    const data = await resp.json();
-                    if (data.content) {
-                        this._logAIQuery(provider, model, messages, data.content);
-                        return data.content;
-                    }
-                    console.warn(`Edge function returned error for ${provider}:`, data.error);
-                }
-            } catch (err) {
-                console.warn(`Edge function unavailable for ${provider}:`, err.message);
-            }
-        }
-
-        // Fallback: user's own API keys (DeepSeek / Gemini only)
-        if (provider === 'deepseek') {
-            const key = localStorage.getItem('deepseek_api_key');
-            if (key) {
-                const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model: model || 'deepseek-chat', messages, temperature, max_tokens: maxTokens })
-                });
-                if (resp.ok) {
-                    const data = await resp.json();
-                    const content = data.choices[0].message.content;
-                    this._logAIQuery(provider, model, messages, content);
-                    return content;
-                }
-            }
-        }
-
-        if (provider === 'gemini') {
-            const key = localStorage.getItem('gemini_api_key');
-            if (key) {
-                const systemMsg = messages.find(m => m.role === 'system');
-                const userMsgs = messages.filter(m => m.role !== 'system');
-                const promptText = (systemMsg ? systemMsg.content + '\n\n' : '') +
-                    userMsgs.map(m => m.content).join('\n');
-
-                const resp = await fetch(
-                    `https://generativelanguage.googleapis.com/v1beta/models/${model || 'gemini-2.0-flash'}:generateContent?key=${key}`,
-                    {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ role: 'user', parts: [{ text: promptText }] }],
-                            generationConfig: { temperature, maxOutputTokens: maxTokens }
-                        })
-                    }
-                );
-                if (resp.ok) {
-                    const data = await resp.json();
-                    const content = data.candidates[0].content.parts[0].text;
-                    this._logAIQuery(provider, model, messages, content);
-                    return content;
-                }
-            }
-        }
-
-        if (provider === 'zhipu') {
-            throw new Error('智谱 AI 需要通过 Edge Function 使用。请部署 supabase/functions/ai-proxy 并设置 ZHIPU_API_KEY 环境变量。');
-        }
-
-        throw new Error(`No API key configured for ${provider}`);
-    },
-
-    async generateExplanation(text, chapterContext = '') {
-        const user = this.state.user;
-        const level = user?.level || 'beginner';
-        const provider = localStorage.getItem('ai_provider') || 'zhipu';
-
-        const userContent = chapterContext
-            ? `请解释以下纳米制造技术概念："${text}"\n\n${chapterContext}`
-            : `请解释以下纳米制造技术概念："${text}"`;
-
-        const systemPrompt = this.buildSystemPrompt(user, 'explanation');
-        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
-
-        try {
-            const response = await this.callAIProvider(provider, model, [
-                { role: 'system', content: systemPrompt },
-                { role: 'user', content: userContent }
-            ], 1500);
-            return response;
-        } catch (error) {
-            console.error('AI explanation error:', error);
-        }
-
-        this.showToast('AI 服务暂时不可用，正在使用本地解释', 'warning');
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        const explanations = {
-            beginner: `基于您的初学者背景，这里为您详细解释：<strong>"${text}"</strong><br><br>
-                这个概念是纳米制造的基础知识。简单来说，它涉及到如何在极小的尺度上（比头发丝还要细数千倍）制造精密的结构。<br><br>
-                对于初学者，建议重点关注：<br>
-                1. 理解基本概念和术语<br>
-                2. 了解这项技术为什么重要<br>
-                3. 记住关键参数和数值<br><br>
-                如果您觉得内容太抽象，建议结合后面的实际应用案例来理解。`,
-
-            intermediate: `基于您的中级背景，这里为您深入解释：<strong>"${text}"</strong><br><br>
-                您已经具备了一定的理论基础，所以我们可以从技术细节的角度来分析这个概念。<br><br>
-                关键点在于理解其物理机制和工艺限制。建议您：<br>
-                1. 关注技术参数之间的相互关系<br>
-                2. 思考不同工艺条件的权衡<br>
-                3. 联系您已有的知识框架<br><br>
-                这个概念与后续章节的工艺实践密切相关。`,
-
-            advanced: `基于您的高级背景，这里为您提供专业级分析：<strong>"${text}"</strong><br><br>
-                从工程实践的角度，这个概念的核心在于优化工艺窗口和良率控制。<br><br>
-                建议您关注：<br>
-                1. 工艺参数的敏感性和容差分析<br>
-                2. 与其他工艺步骤的集成问题<br>
-                3. 实际生产中的挑战和解决方案<br><br>
-                这部分内容与第十一章的工艺配方手册有直接关联。`
-        };
-
-        return explanations[level] || explanations.beginner;
-    },
 
     updateChapterNav(currentId) {
         const allChapters = this.getAllChapters();
@@ -1189,154 +494,6 @@ const App = {
             partEl.appendChild(chaptersContainer);
             nav.appendChild(partEl);
         });
-    },
-
-    renderAILearningPath() {
-        const container = document.getElementById('ai-learning-path-content');
-        const refreshBtn = document.getElementById('refresh-ai-path');
-        if (!container) return;
-
-        const user = this.state.user;
-        if (!user) {
-            container.innerHTML = '<p class="ai-path-loading">请先完成注册和个人资料设置。</p>';
-            return;
-        }
-
-        if (this.state.completedChapters.size === 0) {
-            container.innerHTML = '<p class="ai-path-loading">完成更多章节和测试后，AI 将为您生成个性化学习建议。</p>';
-            if (refreshBtn) refreshBtn.style.display = 'none';
-            return;
-        }
-
-        // Show client-side fallback first
-        const fallback = this.buildLearningPath(user);
-        this.renderPathResult(container, refreshBtn, fallback);
-
-        // Then try AI for better recommendations (silently update)
-        const savedPath = localStorage.getItem('nanofab_ai_path');
-        if (savedPath) {
-            try {
-                const cached = JSON.parse(savedPath);
-                if (cached.timestamp && (Date.now() - cached.timestamp < 3600000)) {
-                    this.renderPathResult(container, refreshBtn, cached.data);
-                    return;
-                }
-            } catch {}
-        }
-
-        this.fetchAILearningPath(user).then(aiPath => {
-            if (aiPath) {
-                localStorage.setItem('nanofab_ai_path', JSON.stringify({
-                    data: aiPath,
-                    timestamp: Date.now()
-                }));
-                this.renderPathResult(container, refreshBtn, aiPath);
-            }
-        });
-    },
-
-    buildLearningPath(user) {
-        const bp = user.behaviorProfile || {};
-        const completed = [...this.state.completedChapters];
-        const all = this.getAllChapters();
-        const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
-
-        const nextChapter = remaining[0];
-        const reviewChapters = (bp.weakTopics || [])
-            .map(id => all.find(c => c.id === id))
-            .filter(Boolean)
-            .map(c => c.title);
-        const masteredChapters = (bp.strongTopics || [])
-            .map(id => all.find(c => c.id === id))
-            .filter(Boolean)
-            .map(c => c.title);
-
-        const tips = [];
-        const style = user.learningStyle || [];
-        const pace = user.studyPace;
-
-        if (style.includes('visual')) tips.push('多关注图表和流程图来加深理解');
-        if (style.includes('theory')) tips.push('深入推导公式背后的物理机制');
-        if (style.includes('practical')) tips.push('结合工艺实践案例理解理论');
-        if (style.includes('case')) tips.push('通过实际应用案例验证所学知识');
-        if (pace === 'intensive') tips.push('保持每天至少一个章节的学习节奏');
-        if (bp.quizAccuracy > 0 && bp.quizAccuracy < 0.6) tips.push('建议先复习薄弱章节再继续新课');
-
-        return {
-            next: nextChapter ? nextChapter.title : '所有章节已完成',
-            review: reviewChapters,
-            mastered: masteredChapters,
-            accuracy: bp.quizAccuracy ? Math.round(bp.quizAccuracy * 100) : 0,
-            tips: tips.length > 0 ? tips : ['继续按照课程顺序学习，完成测试巩固理解']
-        };
-    },
-
-    renderPathResult(container, refreshBtn, path) {
-        const sections = [];
-        if (path.next) {
-            sections.push(`<div class="ai-path-section">
-                <h4>📖 推荐下一步</h4><p>${path.next}</p></div>`);
-        }
-        if (path.review?.length > 0) {
-            sections.push(`<div class="ai-path-section review">
-                <h4>🔁 需要复习</h4><p>${path.review.join('、')}</p></div>`);
-        }
-        if (path.mastered?.length > 0) {
-            sections.push(`<div class="ai-path-section mastered">
-                <h4>✅ 已掌握</h4><p>${path.mastered.join('、')}</p></div>`);
-        }
-        if (path.accuracy > 0) {
-            sections.push(`<p style="font-size:0.8125rem;color:var(--color-text-secondary);margin:0;">测试正确率：${path.accuracy}%</p>`);
-        }
-        if (path.tips?.length > 0) {
-            sections.push(`<div class="ai-path-section">
-                <h4>💡 学习建议</h4><p>${path.tips.join('；')}</p></div>`);
-        }
-
-        container.innerHTML = `<div class="ai-path-result">${sections.join('')}</div>`;
-        if (refreshBtn) {
-            refreshBtn.style.display = 'inline-flex';
-            refreshBtn.onclick = () => {
-                localStorage.removeItem('nanofab_ai_path');
-                this.renderAILearningPath();
-            };
-        }
-    },
-
-    async fetchAILearningPath(user) {
-        const completed = [...this.state.completedChapters];
-        const all = this.getAllChapters();
-        const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
-        const bp = user.behaviorProfile || {};
-
-        const prompt = `你是纳米制造学习顾问。根据以下用户数据，以JSON格式返回个性化学习路线（直接返回JSON，不要其他文字）：
-
-{"next":"推荐下一步学习的章节名称及简短理由（20字内）","review":"需要重点复习的章节（用顿号分隔，无则填无）","mastered":"已掌握的章节（用顿号分隔，无则填无）","tips":["学习策略建议1","建议2"]}
-
-用户数据：水平${user.level}，已学${completed.join('、')}，待学${remaining.map(c=>c.title).join('、')}，弱项${(bp.weakTopics||[]).join('、')}，强项${(bp.strongTopics||[]).join('、')}，正确率${Math.round((bp.quizAccuracy||0)*100)}%，偏好${(user.learningStyle||[]).join('、')}，兴趣${(user.interestArea||[]).join('、')}`;
-
-        try {
-            const response = await this.callAI(prompt, 'chat');
-            const jsonMatch = response.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-                return JSON.parse(jsonMatch[0]);
-            }
-        } catch (error) {
-            console.error('AI learning path generation failed:', error);
-        }
-        return null;
-    },
-
-    async callAI(prompt, context) {
-        const user = this.state.user;
-        const provider = localStorage.getItem('ai_provider') || 'zhipu';
-        const systemPrompt = this.buildSystemPrompt(user, context) + '\n请直接返回用户请求的内容，不要附加额外说明。';
-        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
-
-        return await this.callAIProvider(provider, model, [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: prompt }
-        ], 500);
     },
 
     renderQuickNav() {
@@ -1514,292 +671,6 @@ const App = {
         }
     },
 
-    initAIAssistant() {
-        const sidebarToggle = document.getElementById('ai-sidebar-toggle');
-        const sidebarClose = document.getElementById('ai-sidebar-close');
-        const sidebar = document.getElementById('ai-sidebar');
-
-        if (sidebarToggle && sidebar) {
-            sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-                sidebarToggle.classList.toggle('hidden', sidebar.classList.contains('open'));
-            });
-        }
-
-        if (sidebarClose && sidebar) {
-            sidebarClose.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                if (sidebarToggle) sidebarToggle.classList.remove('hidden');
-            });
-        }
-
-        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.dataset.tab;
-                this.switchAISidebarTab(tabId);
-            });
-        });
-
-        const input = document.getElementById('ai-chat-input');
-        const send = document.getElementById('ai-chat-send');
-        const messages = document.getElementById('ai-chat-messages');
-
-        const settingsToggle = document.getElementById('ai-settings-toggle');
-        const settingsPanel = document.getElementById('ai-settings-panel');
-        const deepseekKeyInput = document.getElementById('deepseek-api-key');
-        const geminiKeyInput = document.getElementById('gemini-api-key');
-        const saveApiKeyBtn = document.getElementById('save-api-key');
-        const providerRadios = document.querySelectorAll('input[name="ai-provider"]');
-        const zhipuSettings = document.getElementById('zhipu-settings');
-        const deepseekSettings = document.getElementById('deepseek-settings');
-        const geminiSettings = document.getElementById('gemini-settings');
-
-        if (settingsToggle && settingsPanel) {
-            settingsToggle.addEventListener('click', () => {
-                settingsPanel.classList.toggle('hidden');
-            });
-        }
-
-        const savedProvider = localStorage.getItem('ai_provider') || 'zhipu';
-        const savedDeepseekKey = localStorage.getItem('deepseek_api_key');
-        const savedGeminiKey = localStorage.getItem('gemini_api_key');
-        
-        providerRadios.forEach(radio => {
-            if (radio.value === savedProvider) {
-                radio.checked = true;
-            }
-        });
-        
-        if (savedProvider === 'zhipu') {
-            if (zhipuSettings) zhipuSettings.classList.remove('hidden');
-            if (deepseekSettings) deepseekSettings.classList.add('hidden');
-            if (geminiSettings) geminiSettings.classList.add('hidden');
-        } else if (savedProvider === 'gemini') {
-            if (zhipuSettings) zhipuSettings.classList.add('hidden');
-            if (deepseekSettings) deepseekSettings.classList.add('hidden');
-            if (geminiSettings) geminiSettings.classList.remove('hidden');
-        } else {
-            if (zhipuSettings) zhipuSettings.classList.add('hidden');
-            if (deepseekSettings) deepseekSettings.classList.remove('hidden');
-            if (geminiSettings) geminiSettings.classList.add('hidden');
-        }
-        
-        if (deepseekKeyInput && savedDeepseekKey) {
-            deepseekKeyInput.value = savedDeepseekKey;
-        }
-        if (geminiKeyInput && savedGeminiKey) {
-            geminiKeyInput.value = savedGeminiKey;
-        }
-
-        providerRadios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (radio.value === 'zhipu') {
-                    if (zhipuSettings) zhipuSettings.classList.remove('hidden');
-                    if (deepseekSettings) deepseekSettings.classList.add('hidden');
-                    if (geminiSettings) geminiSettings.classList.add('hidden');
-                } else if (radio.value === 'deepseek') {
-                    if (zhipuSettings) zhipuSettings.classList.add('hidden');
-                    if (deepseekSettings) deepseekSettings.classList.remove('hidden');
-                    if (geminiSettings) geminiSettings.classList.add('hidden');
-                } else {
-                    if (zhipuSettings) zhipuSettings.classList.add('hidden');
-                    if (deepseekSettings) deepseekSettings.classList.add('hidden');
-                    if (geminiSettings) geminiSettings.classList.remove('hidden');
-                }
-            });
-        });
-
-        if (saveApiKeyBtn) {
-            saveApiKeyBtn.addEventListener('click', () => {
-                const selectedProvider = document.querySelector('input[name="ai-provider"]:checked')?.value || 'zhipu';
-                localStorage.setItem('ai_provider', selectedProvider);
-                
-                const deepseekKey = deepseekKeyInput?.value.trim();
-                const geminiKey = geminiKeyInput?.value.trim();
-                
-                if (deepseekKey) {
-                    localStorage.setItem('deepseek_api_key', deepseekKey);
-                } else {
-                    localStorage.removeItem('deepseek_api_key');
-                }
-                
-                if (geminiKey) {
-                    localStorage.setItem('gemini_api_key', geminiKey);
-                } else {
-                    localStorage.removeItem('gemini_api_key');
-                }
-                
-                this.showToast('设置已保存', 'success');
-                if (settingsPanel) settingsPanel.classList.add('hidden');
-            });
-        }
-
-        const sendMessage = async () => {
-            const text = input.value.trim();
-            if (!text) return;
-
-            this.addChatMessage(text, 'user');
-            input.value = '';
-            input.style.height = 'auto';
-
-            this.showTypingIndicator();
-
-            try {
-                const response = await this.generateAIResponse(text);
-                this.removeTypingIndicator();
-                this.addChatMessage(response, 'assistant');
-            } catch (error) {
-                this.removeTypingIndicator();
-                this.addChatMessage('抱歉，处理你的问题时出现了错误。请稍后重试。', 'assistant');
-            }
-        };
-
-        send.addEventListener('click', sendMessage);
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-
-        input.addEventListener('input', () => {
-            input.style.height = 'auto';
-            input.style.height = Math.min(input.scrollHeight, 100) + 'px';
-        });
-    },
-
-    addChatMessage(text, role) {
-        const messages = document.getElementById('ai-chat-messages');
-        if (!messages) return;
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `ai-message ai-message-${role}`;
-
-        const avatarSvg = role === 'user'
-            ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
-            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
-
-        const bodyContent = role === 'assistant'
-            ? this.formatAIResponse(text)
-            : `<p>${this.escapeHtml(text)}</p>`;
-
-        messageDiv.innerHTML = `
-            <div class="ai-message-avatar">${avatarSvg}</div>
-            <div class="ai-message-content">${bodyContent}</div>
-        `;
-
-        messages.appendChild(messageDiv);
-        messages.scrollTop = messages.scrollHeight;
-    },
-
-    showTypingIndicator() {
-        const messages = document.getElementById('ai-chat-messages');
-        if (!messages) return;
-
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'ai-message ai-message-assistant ai-typing';
-        typingDiv.innerHTML = `
-            <div class="ai-message-avatar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
-                </svg>
-            </div>
-            <div class="ai-typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        `;
-        messages.appendChild(typingDiv);
-        messages.scrollTop = messages.scrollHeight;
-    },
-
-    removeTypingIndicator() {
-        const typing = document.querySelector('.ai-typing');
-        if (typing) typing.remove();
-    },
-
-    async generateAIResponse(userMessage) {
-        const lowerMsg = userMessage.toLowerCase();
-        const chapter = this.state.currentChapter;
-        const user = this.state.user;
-        const provider = localStorage.getItem('ai_provider') || 'zhipu';
-
-        const systemPrompt = this.buildSystemPrompt(user, 'chat');
-        const messages = [{ role: 'system', content: systemPrompt }];
-
-        if (chapter) {
-            messages.push({
-                role: 'system',
-                content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
-            });
-        }
-
-        messages.push({ role: 'user', content: userMessage });
-
-        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
-
-        try {
-            return await this.callAIProvider(provider, model, messages, 2000);
-        } catch (error) {
-            console.error('AI response error:', error);
-        }
-
-        this.showToast('AI 服务暂时不可用，使用离线回答', 'warning');
-
-        if (lowerMsg.includes('你好') || lowerMsg.includes('hi') || lowerMsg.includes('hello')) {
-            return '你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！';
-        }
-
-        if (lowerMsg.includes('测试') || lowerMsg.includes('quiz') || lowerMsg.includes('题目')) {
-            return '每个章节结束后都有小测试，包含10道题目。你可以通过点击"小测试"标签来查看和完成这些题目。';
-        }
-
-        if (lowerMsg.includes('进度') || lowerMsg.includes('完成')) {
-            const completed = this.state.completedChapters.size;
-            return `你目前已完成 ${completed} / 12 个章节。继续加油！`;
-        }
-
-        if (chapter) {
-            if (lowerMsg.includes('本章') || lowerMsg.includes('这章') || lowerMsg.includes('章节')) {
-                return `你当前正在学习「${chapter.title}」。这一章主要讲解${chapter.description}。有什么具体的问题吗？`;
-            }
-
-            if (lowerMsg.includes('不懂') || lowerMsg.includes('不明白') || lowerMsg.includes('解释')) {
-                return `关于「${chapter.title}」的内容，我可以帮你解释。请告诉我具体是哪个概念或术语让你困惑？`;
-            }
-        }
-
-        if (lowerMsg.includes('纳米制造') || lowerMsg.includes('nanofab')) {
-            return '纳米制造是制造特征尺寸在100纳米以下的结构和器件的技术总称。它包括自上而下（如光刻、刻蚀）和自下而上（如自组装）两大类方法。你想了解哪方面的更多细节？';
-        }
-
-        if (lowerMsg.includes('光刻') || lowerMsg.includes('lithography')) {
-            return '光刻是纳米制造的核心技术，通过将掩模图案转移到光刻胶上形成图形。主要类型包括光学光刻、电子束光刻、离子束光刻等。你想了解哪种光刻技术？';
-        }
-
-        if (lowerMsg.includes('刻蚀') || lowerMsg.includes('etch')) {
-            return '刻蚀是将光刻胶图案转移到基底材料中的关键工艺。主要分为湿法刻蚀（化学溶液）和干法刻蚀（等离子体）。干法刻蚀中的RIE和ICP是最常用的技术。';
-        }
-
-        if (lowerMsg.includes('沉积') || lowerMsg.includes('deposition')) {
-            return '薄膜沉积是在基底表面生长薄膜材料的技术。主要方法包括物理气相沉积（PVD，如溅射、蒸发）和化学气相沉积（CVD，如PECVD、LPCVD）。ALD可以实现原子层级的厚度控制。';
-        }
-
-        if (user && user.level === 'beginner') {
-            return '我理解你的问题。作为初学者，建议你先掌握基本概念，然后再深入技术细节。你可以先阅读要点卡片，完成小测试来检验理解程度。有什么具体概念需要我详细解释吗？';
-        }
-
-        return '这是一个很好的问题！基于当前章节的内容，建议你可以：\n1. 回顾本章的要点卡片\n2. 尝试完成小测试检验理解\n3. 如果还有疑问，可以高亮具体文本获取AI解释\n\n你能告诉我更具体的问题吗？这样我可以给你更准确的回答。';
-    },
-
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    },
 
     renderMermaidDiagrams(container) {
         const codeBlocks = container.querySelectorAll('pre code');
@@ -1842,55 +713,6 @@ const App = {
         }
     },
 
-    formatAIResponse(text) {
-        if (!text) return '';
-
-        let formatted = text
-            .replace(/\*\*\*(.+?)\*\*\*/g, '<h3>$1</h3>')
-            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.+?)\*/g, '<em>$1</em>')
-            .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
-            .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
-            .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-            .replace(/`(.+?)`/g, '<code>$1</code>')
-            .replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>')
-            .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>');
-
-        const lines = formatted.split('\n');
-        let inList = false;
-        let result = [];
-
-        lines.forEach(line => {
-            const trimmed = line.trim();
-
-            if (trimmed.startsWith('<li>')) {
-                if (!inList) {
-                    result.push('<ul>');
-                    inList = true;
-                }
-                result.push(trimmed);
-            } else if (inList && trimmed === '') {
-                result.push('</ul>');
-                inList = false;
-            } else if (trimmed !== '') {
-                if (inList) {
-                    result.push('</ul>');
-                    inList = false;
-                }
-                if (!trimmed.startsWith('<h')) {
-                    result.push(`<p>${trimmed}</p>`);
-                } else {
-                    result.push(trimmed);
-                }
-            }
-        });
-
-        if (inList) {
-            result.push('</ul>');
-        }
-
-        return result.join('\n');
-    },
 
     // ===== 思维导图 =====
     renderMindMap() {
@@ -1898,175 +720,126 @@ const App = {
         if (!container || this.state.chapters.length === 0) return;
 
         const colors = ['#004EA1', '#9D0A12', '#0d9488', '#7c3aed'];
-        const colorsLight = ['#e6f0fa', '#fdf2f3', '#ecfdf5', '#f5f3ff'];
+        const colorsLight = ['#e8f1fb', '#fdf0f1', '#e6faf7', '#f2eeff'];
         const colorsDark = ['#003a7a', '#7a080e', '#0a6e63', '#5b21b6'];
 
-        const w = 840, h = 600;
-        const cx = w / 2, cy = h / 2;
+        const w = 960, h = 430;
+        const rootX = w / 2, rootY = 56;
 
         let svg = `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">`;
 
-        // Background gradient
+        // ====== Defs ======
         svg += `<defs>
-            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#f8fafc"/>
-                <stop offset="100%" stop-color="#f1f5f9"/>
-            </radialGradient>
             <filter id="shadow-sm">
-                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.1"/>
+                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
             </filter>
-        </defs>`;
+            <filter id="shadow-md">
+                <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.10"/>
+            </filter>
+            <filter id="glow">
+                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#004EA1" flood-opacity="0.20"/>
+            </filter>`;
 
-        svg += `<rect width="${w}" height="${h}" rx="12" fill="url(#bg-grad)"/>`;
+        // Subtle background dots pattern
+        svg += `<pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+            <circle cx="12" cy="12" r="0.8" fill="#cbd5e1" opacity="0.5"/>
+        </pattern>`;
+        svg += `</defs>`;
 
-        // Title
-        svg += `<text x="${cx}" y="28" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700" font-family="Noto Sans SC, sans-serif">纳米制造技术 课程知识结构</text>`;
+        // ====== Background ======
+        svg += `<rect width="${w}" height="${h}" rx="14" fill="#fafbfc"/>`;
+        svg += `<rect width="${w}" height="${h}" rx="14" fill="url(#dots)"/>`;
 
-        // Center root node
-        const rootW = 140, rootH = 48;
-        svg += `<rect x="${cx - rootW/2}" y="${cy - rootH/2}" width="${rootW}" height="${rootH}" rx="24" fill="url(#bg-grad)" filter="url(#shadow-sm)"/>`;
-        svg += `<rect x="${cx - rootW/2}" y="${cy - rootH/2}" width="${rootW}" height="${rootH}" rx="24" fill="#004EA1"/>`;
-        svg += `<text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="Noto Sans SC, sans-serif">纳米制造技术</text>`;
+        // ====== Title ======
+        svg += `<text x="${rootX}" y="26" text-anchor="middle" fill="#1e293b" font-size="15" font-weight="700" font-family="Noto Sans SC, sans-serif" letter-spacing="1">纳米制造技术 · 课程知识结构</text>`;
+        svg += `<line x1="${rootX - 80}" y1="36" x2="${rootX + 80}" y2="36" stroke="#e2e8f0" stroke-width="1"/>`;
 
-        // Layout: 2x2 grid for 4 parts
-        const positions = [
-            { px: cx - 240, py: cy - 140, tx: 0, ty: -1 },    // top-left
-            { px: cx + 240, py: cy - 140, tx: 0, ty: -1 },    // top-right
-            { px: cx - 240, py: cy + 140, tx: 0, ty: 1 },     // bottom-left
-            { px: cx + 240, py: cy + 140, tx: 0, ty: 1 }      // bottom-right
-        ];
+        // ====== Root node ======
+        const rootW = 150, rootH = 40;
+        svg += `<rect x="${rootX - rootW/2}" y="${rootY - rootH/2}" width="${rootW}" height="${rootH}" rx="20" fill="#004EA1" filter="url(#glow)"/>`;
+        svg += `<rect x="${rootX - rootW/2 + 3}" y="${rootY - rootH/2 + 3}" width="${rootW - 6}" height="${rootH/2 - 3}" rx="17" fill="white" opacity="0.1"/>`;
+        svg += `<text x="${rootX}" y="${rootY + 4}" text-anchor="middle" fill="white" font-size="13.5" font-weight="700" font-family="Noto Sans SC, sans-serif" letter-spacing="2">纳米制造技术</text>`;
+
+        // ====== Trunk line from root downward ======
+        const trunkY1 = rootY + rootH/2;
+        const trunkY2 = 118;
+        svg += `<line x1="${rootX}" y1="${trunkY1}" x2="${rootX}" y2="${trunkY2}" stroke="#94a3b8" stroke-width="2" opacity="0.5"/>`;
+
+        // ====== Horizontal branch bar ======
+        const barY = trunkY2;
+        const numParts = this.state.chapters.length;
+        const colGap = w / numParts;
+        const partCenters = this.state.chapters.map((_, i) => colGap * i + colGap / 2);
+
+        svg += `<line x1="${partCenters[0]}" y1="${barY}" x2="${partCenters[numParts - 1]}" y2="${barY}" stroke="#94a3b8" stroke-width="1.5" opacity="0.4"/>`;
+        // Vertical drops from bar to each part
+        partCenters.forEach((px, i) => {
+            svg += `<line x1="${px}" y1="${barY}" x2="${px}" y2="${barY + 16}" stroke="${colors[i]}" stroke-width="1.5" opacity="0.5"/>`;
+        });
+
+        // ====== Part cards and chapter trees ======
+        const partY = barY + 16 + 22;
+        const partW = 192, partH = 38;
 
         this.state.chapters.forEach((part, partIndex) => {
-            const pos = positions[partIndex];
+            const pcx = partCenters[partIndex];
             const color = colors[partIndex];
             const lightColor = colorsLight[partIndex];
             const darkColor = colorsDark[partIndex];
 
-            // Connector line from center to part
-            const mx = pos.px, my = pos.py;
-            const sx = cx + (mx - cx) * 0.22;
-            const sy = cy + (my - cy) * 0.22;
-            const ex = mx + (cx - mx) * 0.15;
-            const ey = my + (cy - my) * 0.15;
-            svg += `<path d="M${sx} ${sy} Q${(sx+ex)/2 + (my - cy)*0.08} ${(sy+ey)/2 - (mx - cx)*0.08} ${ex} ${ey}"
-                         stroke="${color}" stroke-width="2.5" fill="none" opacity="0.5"/>`;
+            // Part card
+            const px = pcx - partW/2, py = partY - partH/2;
+            svg += `<rect x="${px}" y="${py}" width="${partW}" height="${partH}" rx="9" fill="${lightColor}" stroke="${color}" stroke-width="1.8" filter="url(#shadow-sm)"/>`;
+            // Accent line on top
+            svg += `<rect x="${px + 8}" y="${py}" width="${partW - 16}" height="3" rx="1.5" fill="${color}" opacity="0.5"/>`;
+            // Part number
+            const numStr = `0${partIndex + 1}`;
+            svg += `<text x="${px + 18}" y="${py + partH/2 + 4}" fill="${color}" font-size="11" font-weight="700" font-family="'SF Mono', monospace" opacity="0.7">${numStr}</text>`;
+            // Part title
+            svg += `<text x="${px + 40}" y="${py + partH/2 + 4}" fill="${darkColor}" font-size="13" font-weight="700" font-family="Noto Sans SC, sans-serif">${part.title}</text>`;
 
-            // Part header
-            const partW = 180, partH = 36;
-            svg += `<rect x="${mx - partW/2}" y="${my - partH/2}" width="${partW}" height="${partH}" rx="8" fill="${lightColor}" stroke="${color}" stroke-width="2" filter="url(#shadow-sm)"/>`;
-            const partLabel = part.title.replace(/^[^：:]*[：:]/, '').replace(/[与和&].*/, '');
-            svg += `<text x="${mx}" y="${my + 4}" text-anchor="middle" fill="${darkColor}" font-size="13" font-weight="700" font-family="Noto Sans SC, sans-serif">${part.title}</text>`;
-
-            // Chapter nodes
-            const chStartY = my > cy ? my + 50 : my - 50;
-            const chDir = my > cy ? 1 : -1;
+            // Chapters below part
+            const chStartY = partY + partH/2 + 22;
+            const chW = 182, chH = 34;
+            const chSpacing = 46;
 
             part.chapters.forEach((ch, chIndex) => {
-                const chY = chStartY + chDir * chIndex * 52;
-                const chW = 160, chH = 32;
-                const chX = mx;
+                const chY = chStartY + chIndex * chSpacing + chH/2;
+                const chX = pcx;
 
-                // Connector from part to chapter
-                svg += `<line x1="${mx}" y1="${my + chDir * partH/2}" x2="${mx}" y2="${chY - chDir * chH/2}"
-                             stroke="${color}" stroke-width="1.2" opacity="0.35"/>`;
+                // Stem from part to chapter
+                const stemStartY = chIndex === 0 ? py + partH/2 : chY - chSpacing + chH/2;
+                const stemEndY = chY - chH/2;
+                svg += `<line x1="${pcx}" y1="${stemStartY}" x2="${pcx}" y2="${stemEndY}" stroke="${color}" stroke-width="1.2" opacity="0.3"/>`;
 
                 // Chapter node
-                svg += `<rect x="${chX - chW/2}" y="${chY - chH/2}" width="${chW}" height="${chH}" rx="6"
-                             fill="white" stroke="${color}" stroke-width="1.2" opacity="0.9"/>`;
-                svg += `<text x="${chX - chW/2 + 10}" y="${chY + 4}" fill="${darkColor}" font-size="9" font-family="'SF Mono', monospace" opacity="0.7">${ch.id}</text>`;
-                svg += `<text x="${chX - chW/2 + 40}" y="${chY + 4}" fill="#1e293b" font-size="11" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
-
-                // Subtle dot indicators on the outer side
-                const dotX = chX + (chDir > 0 ? chW/2 + 10 : -chW/2 - 10);
-                svg += `<circle cx="${dotX}" cy="${chY}" r="3" fill="${color}" opacity="0.6"/>`;
+                const crx = chX - chW/2, cry = chY - chH/2;
+                // Background
+                svg += `<rect x="${crx}" y="${cry}" width="${chW}" height="${chH}" rx="7" fill="white" stroke="${color}" stroke-width="1.2" opacity="0.90" filter="url(#shadow-sm)"/>`;
+                // Side accent dot
+                svg += `<circle cx="${crx + 14}" cy="${chY}" r="5" fill="${color}" opacity="0.15"/>`;
+                svg += `<circle cx="${crx + 14}" cy="${chY}" r="2.5" fill="${color}" opacity="0.6"/>`;
+                // Chapter ID
+                svg += `<text x="${crx + 28}" y="${chY + 3.5}" fill="${color}" font-size="10" font-weight="700" font-family="'SF Mono', monospace" opacity="0.8">${ch.id}</text>`;
+                // Chapter title
+                const titleSize = ch.title.length > 8 ? 10.5 : 11.5;
+                svg += `<text x="${crx + 78}" y="${chY + 3.5}" text-anchor="middle" fill="#334155" font-size="${titleSize}" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
             });
         });
 
-        // Legend at bottom
-        const legendY = h - 16;
-        const legendItems = this.state.chapters.map((p, i) => ({
-            label: p.title,
-            color: colors[i],
-            chCount: p.chapters.length
-        }));
-
-        let legendX = cx - (legendItems.length * 180) / 2;
-        legendItems.forEach(item => {
-            svg += `<rect x="${legendX}" y="${legendY - 6}" width="10" height="10" rx="2" fill="${item.color}" opacity="0.8"/>`;
-            svg += `<text x="${legendX + 14}" y="${legendY + 2}" fill="#475569" font-size="9" font-family="Noto Sans SC, sans-serif">${item.label}（${item.chCount}章）</text>`;
-            legendX += 210;
+        // ====== Legend ======
+        const legendY = h - 18;
+        const legendTotalW = numParts * 200;
+        let legendX = rootX - legendTotalW / 2 + 60;
+        svg += `<line x1="${partCenters[0]}" y1="${legendY - 10}" x2="${partCenters[numParts - 1]}" y2="${legendY - 10}" stroke="#e2e8f0" stroke-width="1"/>`;
+        this.state.chapters.forEach((part, i) => {
+            svg += `<rect x="${legendX - 60}" y="${legendY - 5}" width="8" height="8" rx="2" fill="${colors[i]}" opacity="0.8"/>`;
+            svg += `<text x="${legendX - 46}" y="${legendY + 2}" fill="#64748b" font-size="9.5" font-family="Noto Sans SC, sans-serif">${part.title} · ${part.chapters.length}章</text>`;
+            legendX += 200;
         });
 
         svg += '</svg>';
         container.innerHTML = svg;
-    },
-
-    // ===== 学习统计 =====
-    updateStudyStats() {
-        const behaviorData = this.state.behaviorData;
-        const now = new Date();
-        const today = now.toDateString();
-        const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - now.getDay());
-
-        const timeSpent = behaviorData.timeSpent || {};
-        let totalSeconds = 0;
-        Object.values(timeSpent).forEach(t => {
-            totalSeconds += (typeof t === 'number' ? t : 0);
-        });
-
-        let todaySeconds = 0;
-        let weekSeconds = 0;
-        const interactions = behaviorData.interactions || [];
-        const todayInteractions = interactions.filter(i => {
-            try { return new Date(i.timestamp).toDateString() === today; } catch { return false; }
-        });
-        const weekInteractions = interactions.filter(i => {
-            try { return new Date(i.timestamp) >= weekStart; } catch { return false; }
-        });
-        todaySeconds = todayInteractions.length * 45;
-        weekSeconds = weekInteractions.length * 45;
-
-        // Daily streak
-        const activeDays = new Set();
-        interactions.forEach(i => {
-            try { activeDays.add(new Date(i.timestamp).toDateString()); } catch {}
-        });
-        let streak = 0;
-        const checkDate = new Date(now);
-        for (let i = 0; i < 365; i++) {
-            if (activeDays.has(checkDate.toDateString())) {
-                streak++;
-                checkDate.setDate(checkDate.getDate() - 1);
-            } else { break; }
-        }
-
-        // Quiz accuracy
-        const quizResults = behaviorData.quizResults || [];
-        const quizAccuracy = quizResults.length > 0
-            ? Math.round((quizResults.filter(q => q.correct).length / quizResults.length) * 100)
-            : 0;
-
-        const user = this.state.user;
-        const weeklyGoal = (user?.weeklyHours || 8) * 3600;
-        const weeklyPercent = Math.min(100, Math.round((weekSeconds / weeklyGoal) * 100));
-
-        const setEl = (id, inner) => { const el = document.getElementById(id); if (el) el.innerHTML = inner; };
-        setEl('stat-today', `${Math.round(todaySeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
-        setEl('stat-week', `${Math.round(weekSeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
-
-        const totalMinutes = Math.round(totalSeconds / 60);
-        const hours = Math.floor(totalMinutes / 60);
-        const mins = totalMinutes % 60;
-        const totalDisplay = hours > 0 ? `${hours}<span style="font-size:0.75rem">h </span>${mins}<span style="font-size:0.75rem">m</span>` : `${mins}<span style="font-size:0.75rem"> 分钟</span>`;
-        setEl('stat-total', totalDisplay);
-        setEl('stat-streak', `${streak}<span style="font-size:0.75rem"> 天</span>`);
-        setEl('stat-accuracy', `${quizAccuracy}<span style="font-size:0.75rem">%</span>`);
-
-        const elBar = document.getElementById('stat-weekly-bar');
-        if (elBar) elBar.style.width = `${weeklyPercent}%`;
-        const elBarLabel = document.getElementById('stat-weekly-bar-label');
-        if (elBarLabel) elBarLabel.textContent = `${weeklyPercent}%`;
     },
 
     // ===== 图片放大 =====
@@ -2223,44 +996,6 @@ const App = {
         } else {
             chapterContentEl.insertAdjacentHTML('afterbegin', objHTML);
         }
-    },
-
-    // ===== 错题本 =====
-    updateWrongAnswerBook() {
-        const container = document.getElementById('wrong-answer-content');
-        if (!container) return;
-
-        const quizResults = this.state.behaviorData.quizResults || [];
-        const wrongAnswers = quizResults.filter(r => !r.correct);
-
-        if (wrongAnswers.length === 0) {
-            container.innerHTML = '<p style="font-size:0.9375rem;color:var(--color-success);text-align:center;padding:20px 0;">✅ 恭喜！目前没有错题。</p>';
-            return;
-        }
-
-        const allChapters = this.getAllChapters();
-        const quizAccuracy = Math.round((quizResults.filter(q => q.correct).length / quizResults.length) * 100);
-
-        let html = `<p style="font-size:0.8125rem;color:var(--color-text-tertiary);margin-bottom:16px;">共 <strong style="color:var(--color-accent);">${wrongAnswers.length}</strong> 道错题 · 整体正确率 <strong style="color:var(--color-success);">${quizAccuracy}%</strong></p>`;
-        html += '<div class="wrong-answer-list">';
-        wrongAnswers.forEach(item => {
-            const chapter = allChapters.find(c => c.id === item.chapter);
-            const chapterName = chapter ? chapter.title : item.chapter;
-            const date = new Date(item.timestamp);
-            const dateStr = date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
-            const userAnswer = item.userAnswer || (Array.isArray(item.selected) ? item.selected.join('、') : item.selected) || '未作答';
-            html += `
-                <div class="wrong-answer-item">
-                    <div class="wa-header">
-                        <span class="wa-chapter">${item.chapter || ''}</span>
-                        <span class="wa-date">${dateStr}</span>
-                    </div>
-                    <div class="wa-question">${item.question || '测试题'}</div>
-                    <div class="wa-detail">你的答案：<span style="color:var(--color-accent);font-weight:500;">${userAnswer}</span></div>
-                </div>`;
-        });
-        html += '</div>';
-        container.innerHTML = html;
     },
 
     // ===== 高亮和笔记 =====
@@ -2730,6 +1465,8 @@ const App = {
 
 
 // Auth methods mixed in from js/auth.js
+Object.assign(App, BehaviorModule);
+Object.assign(App, AIModule);
 Object.assign(App, AuthModule);
 
 document.addEventListener('DOMContentLoaded', () => {

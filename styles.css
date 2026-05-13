@@ -2569,7 +2569,7 @@ input, select, textarea {
 
 .mindmap-svg {
     width: 100%;
-    max-width: 840px;
+    max-width: 960px;
     min-width: 480px;
     margin: 0 auto;
     display: block;
