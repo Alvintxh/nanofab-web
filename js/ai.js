@@ -148,6 +148,45 @@ const AIModule = {
         this.state.behaviorData.notes.push(noteEntry);
         this.saveBehaviorData(true);
         this._syncNoteToSupabase(noteEntry);
+
+        // Also highlight the original text in the chapter content and insert annotation
+        const contentEl = document.querySelector('.chapter-content');
+        if (contentEl) {
+            const mark = this._findAndHighlightText(contentEl, selectedText, noteId);
+            if (mark) {
+                const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
+                const ann = document.createElement('div');
+                ann.className = 'note-annotation';
+                ann.dataset.noteId = noteId;
+                ann.innerHTML = `
+                    <div class="note-annotation-header">
+                        <span class="note-annotation-label">🤖 AI 笔记</span>
+                        <span class="note-annotation-delete" data-note-id="${noteId}">✕ 删除</span>
+                    </div>
+                    <div class="note-annotation-context">原文："${this.escapeHtml(selectedText.substring(0, 100))}${selectedText.length > 100 ? '...' : ''}"</div>
+                    <div class="note-annotation-content">${this.escapeHtml(explanation)}</div>
+                `;
+                if (parentP.nextSibling) {
+                    parentP.parentNode.insertBefore(ann, parentP.nextSibling);
+                } else {
+                    parentP.parentNode.appendChild(ann);
+                }
+                // Bind delete handler
+                ann.querySelector('.note-annotation-delete').addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    if (confirm('删除此笔记？关联的高亮也将取消。')) {
+                        this.state.behaviorData.notes = (this.state.behaviorData.notes || [])
+                            .filter(n => n.id !== noteId);
+                        this.saveBehaviorData(true);
+                        this._deleteNoteFromSupabase(noteId);
+                        ann.remove();
+                        if (mark.parentNode) mark.replaceWith(document.createTextNode(mark.textContent));
+                        this.showToast('笔记已删除', 'info');
+                    }
+                });
+            }
+        }
+
         this.showToast('AI 解释已保存为笔记', 'success');
     },
 
