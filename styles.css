@@ -93,11 +93,15 @@ input, select, textarea {
 
 .screen {
     display: none;
-    min-height: 100vh;
 }
 
 .screen.active {
     display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    background: var(--color-bg);
 }
 
 .hidden {
