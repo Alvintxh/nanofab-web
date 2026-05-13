@@ -1476,7 +1476,8 @@ const App = {
             return '$$' + inner.replace(/<[^>]+>/g, '') + '$$';
         });
         // Strip/replace HTML tags inside $...$ inline math blocks
-        html = html.replace(/(?<!\$)\$(?!\$)([^$]+?)\$(?!\$)/g, (match, inner) => {
+        // Avoid matching $$ by using a two-step approach
+        html = html.replace(/(^|[^$])\$([^$]+?)\$([^$]|$)/g, (match, before, inner, after) => {
             const cleaned = inner
                 .replace(/<em>/g, '_')
                 .replace(/<\/em>/g, '_')
@@ -1488,7 +1489,7 @@ const App = {
                 .replace(/&lt;/g, '<')
                 .replace(/&gt;/g, '>')
                 .replace(/<[^>]+>/g, '');
-            return '$' + cleaned + '$';
+            return before + '$' + cleaned + '$' + after;
         });
         return html;
     },
