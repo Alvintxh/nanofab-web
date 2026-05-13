@@ -214,13 +214,18 @@ input, select, textarea {
     flex-direction: column;
     gap: 12px;
     transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
-    cursor: default;
+    cursor: pointer;
 }
 
 .welcome-feature-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-2px);
     border-color: var(--color-primary-light);
+    cursor: pointer;
+}
+
+.welcome-feature-card:active {
+    transform: translateY(0);
 }
 
 .welcome-feature-icon {
@@ -292,6 +297,125 @@ input, select, textarea {
 
 .welcome-section.hidden {
     display: none;
+}
+
+/* Feature Detail Modal */
+.feature-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: form-fade-in 0.2s ease;
+}
+
+.feature-modal.hidden {
+    display: none;
+}
+
+.feature-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.feature-modal-card {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    max-width: 560px;
+    width: calc(100% - 48px);
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    z-index: 1;
+    animation: form-fade-in 0.3s ease 0.1s both;
+}
+
+.feature-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: var(--color-text-tertiary);
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.feature-modal-close:hover {
+    background: var(--color-border-light);
+    color: var(--color-text-primary);
+}
+
+.feature-modal-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    margin-bottom: 16px;
+}
+
+.feature-modal-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.feature-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.feature-modal-subtitle {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.feature-modal-body h4 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin: 20px 0 8px;
+    color: var(--color-text-primary);
+}
+
+.feature-modal-body h4:first-child {
+    margin-top: 0;
+}
+
+.feature-modal-body p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0 0 4px;
+}
+
+.feature-modal-body ul {
+    margin: 4px 0 12px;
+    padding-left: 20px;
+}
+
+.feature-modal-body li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+    line-height: 1.6;
+}
+
+.feature-modal-body li strong {
+    color: var(--color-text-primary);
 }
 
 /* Responsive: 2 cols on tablet, 1 col on mobile */

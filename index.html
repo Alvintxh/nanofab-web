@@ -35,42 +35,42 @@
                 </div>
 
                 <div class="welcome-features">
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="explanation">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.3 0-2.5.4-3.5 1.1L4.2 6.8C3.4 7.3 3 8.1 3 9v6c0 .9.4 1.7 1.2 2.2l4.3 2.7c1 .6 2.2.6 3.5.6s2.5-.2 3.5-.6l4.3-2.7c.8-.5 1.2-1.3 1.2-2.2V9c0-.9-.4-1.7-1.2-2.2l-4.3-2.7C14.5 3.4 13.3 3 12 3z"/><circle cx="12" cy="12" r="3"/></svg>
                         </div>
                         <h3>AI 智能解释</h3>
                         <p>选中任意文本，AI 根据你的知识水平提供个性化解释，支持多轮追问。</p>
                     </div>
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="assistant">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
                         </div>
                         <h3>AI 学习助手</h3>
                         <p>侧边栏聊天机器人，结合你的笔记、错题、学习进度提供精准回答。</p>
                     </div>
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="path">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                         </div>
                         <h3>AI 学习路线</h3>
                         <p>基于你的画像和学习进度，自动生成个性化推荐学习路径。</p>
                     </div>
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="notes">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                         </div>
                         <h3>AI 智能笔记</h3>
                         <p>AI 解释内容可一键保存为笔记，原文自动高亮标注，支持随时回顾。</p>
                     </div>
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="quiz">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
                         </div>
                         <h3>交互式测验</h3>
                         <p>每章 10 道测试题（单选/多选/判断），即时反馈，错题自动收录。</p>
                     </div>
-                    <div class="welcome-feature-card">
+                    <div class="welcome-feature-card" data-feature="tracking">
                         <div class="welcome-feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                         </div>
@@ -87,6 +87,18 @@
                 </button>
 
                 <p class="welcome-footer-note">已有账号？<a href="#" id="welcome-login-link">直接登录</a></p>
+
+                <!-- Feature Detail Modal -->
+                <div id="feature-modal" class="feature-modal hidden">
+                    <div class="feature-modal-overlay"></div>
+                    <div class="feature-modal-card">
+                        <button class="feature-modal-close" aria-label="关闭">&times;</button>
+                        <div class="feature-modal-icon"></div>
+                        <h2 class="feature-modal-title"></h2>
+                        <p class="feature-modal-subtitle"></p>
+                        <div class="feature-modal-body"></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Auth Section (hidden by default, shown after CTA) -->

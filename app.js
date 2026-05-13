@@ -91,6 +91,24 @@ const App = {
             });
         }
 
+        // Feature card click → detail modal
+        document.querySelectorAll('.welcome-feature-card[data-feature]').forEach(card => {
+            card.addEventListener('click', () => {
+                this.openFeatureDetail(card.dataset.feature);
+            });
+        });
+
+        // Feature modal close
+        const featureModal = document.getElementById('feature-modal');
+        if (featureModal) {
+            featureModal.querySelector('.feature-modal-overlay')?.addEventListener('click', () => {
+                this.closeFeatureDetail();
+            });
+            featureModal.querySelector('.feature-modal-close')?.addEventListener('click', () => {
+                this.closeFeatureDetail();
+            });
+        }
+
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => this.handleLogin(e));
@@ -186,6 +204,7 @@ const App = {
             if (e.key === 'Escape') {
                 this.closeProfileModal();
                 this.closeSidebar();
+                this.closeFeatureDetail();
             }
         });
     },

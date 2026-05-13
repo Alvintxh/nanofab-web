@@ -727,6 +727,78 @@ const AuthModule = {
         this.showAuthForm('login-form');
     },
 
+    _featureDetails: {
+        explanation: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.3 0-2.5.4-3.5 1.1L4.2 6.8C3.4 7.3 3 8.1 3 9v6c0 .9.4 1.7 1.2 2.2l4.3 2.7c1 .6 2.2.6 3.5.6s2.5-.2 3.5-.6l4.3-2.7c.8-.5 1.2-1.3 1.2-2.2V9c0-.9-.4-1.7-1.2-2.2l-4.3-2.7C14.5 3.4 13.3 3 12 3z"/><circle cx="12" cy="12" r="3"/></svg>',
+            iconBg: 'var(--color-primary-light)',
+            iconColor: 'var(--color-primary)',
+            title: 'AI 智能解释',
+            subtitle: '选中文本，AI 根据你的知识水平提供个性化解释',
+            body: '<h4>如何使用</h4><p>在章节阅读中<strong>选中任意文本</strong> → 点击浮出的"AI 解释"按钮 → 输入你的问题（可选）→ AI 根据你的知识水平个性化回答。</p><h4>特色</h4><ul><li>支持<strong>多轮追问</strong>，保持对话上下文不丢失</li><li>解释深度<strong>自动匹配用户水平</strong>：零基础用类比，高级深入工程细节</li><li>根据学习动机调整侧重点（考试、科研、职业、兴趣）</li></ul><h4>数据来源</h4><p>AI 参考你的学习水平、专业背景、先修知识、当前章节内容，确保解释贴合你的需求。</p>'
+        },
+        assistant: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>',
+            iconBg: 'var(--color-accent-light)',
+            iconColor: 'var(--color-accent)',
+            title: 'AI 学习助手',
+            subtitle: '侧边栏聊天机器人，结合学习数据提供精准回答',
+            body: '<h4>如何使用</h4><p>点击右上角 AI 图标打开侧边栏 → 直接输入任何学习相关问题 → AI 结合你的学习数据个性化回答。</p><h4>特色</h4><ul><li>每次对话<strong>自动注入完整学习数据</strong>（笔记、错题、进度、时长）</li><li>回答针对<strong>个人薄弱环节</strong>给出具体建议</li><li>支持对笔记、错题等数据的<strong>查询和操作</strong></li><li>回复使用 Markdown 格式（标题、列表、粗体等）</li></ul><h4>数据来源</h4><p>笔记、答题记录、学习进度、学习时长分布、行为画像、最近操作记录。</p>'
+        },
+        path: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+            iconBg: 'var(--color-primary-light)',
+            iconColor: 'var(--color-primary)',
+            title: 'AI 学习路线',
+            subtitle: '基于画像和进度自动生成个性化学习路径',
+            body: '<h4>如何使用</h4><p>首页仪表盘自动展示推荐路线 → 点击刷新可重新生成。</p><h4>特色</h4><ul><li>基于<strong>已完成章节和薄弱环节</strong>推荐下一步学习方向</li><li>考虑<strong>学习节奏和感兴趣领域</strong>制定时间计划</li><li>兼顾<strong>擅长领域巩固和短板补齐</strong></li></ul><h4>数据来源</h4><p>学习进度、薄弱环节、擅长领域、学习节奏偏好、感兴趣领域。</p>'
+        },
+        notes: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+            iconBg: 'var(--color-accent-light)',
+            iconColor: 'var(--color-accent)',
+            title: 'AI 智能笔记',
+            subtitle: 'AI 解释一键保存，原文自动高亮标注',
+            body: '<h4>如何使用</h4><p><strong>AI 笔记</strong>：AI 解释结果 → 点击"保存全部对话为笔记" → 原文自动高亮 → 点击高亮查看笔记。</p><p><strong>手动笔记</strong>：选中文本 → 点击浮动工具栏的笔图标 → 输入笔记内容 → 保存。</p><h4>特色</h4><ul><li>一键保存<strong>完整对话上下文</strong>为单条笔记</li><li>原文<strong>高亮标注</strong>，点击即可查看内联注解</li><li>笔记自动同步到 Supabase 数据库</li></ul><h4>数据来源</h4><p>笔记保存在浏览器本地存储和 Supabase 数据库，登录后自动同步。</p>'
+        },
+        quiz: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>',
+            iconBg: 'var(--color-primary-light)',
+            iconColor: 'var(--color-primary)',
+            title: '交互式测验',
+            subtitle: '每章 10 题，即时反馈，错题自动收录',
+            body: '<h4>如何使用</h4><p>每章底部"测验"标签 → 10 道题（单选/多选/判断）→ 提交后即时显示对错和正确答案。</p><h4>特色</h4><ul><li>三种题型：<strong>单选、多选、判断</strong></li><li>答错自动<strong>收录到错题本</strong>，可在首页复习</li><li>测验结果同步到 Supabase，AI 用于<strong>分析薄弱环节</strong></li><li>即时反馈，每道题显示正确答案</li></ul><h4>数据来源</h4><p>测验结果存储在浏览器本地和 Supabase quiz_answers 表。</p>'
+        },
+        tracking: {
+            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+            iconBg: 'var(--color-accent-light)',
+            iconColor: 'var(--color-accent)',
+            title: '学习数据追踪',
+            subtitle: '全方位学习行为追踪，AI 据此定制策略',
+            body: '<h4>如何使用</h4><p>自动后台追踪，无需手动操作。首页"学习统计"卡片查看数据。</p><h4>追踪内容</h4><ul><li><strong>学习时长</strong>：今日/本周/总计，每章停留时间</li><li><strong>测验表现</strong>：正确率、薄弱环节、擅长领域</li><li><strong>连续学习</strong>：连续学习天数统计</li><li><strong>周目标</strong>：进度环显示每周学习时间达成情况</li><li><strong>行为分析</strong>：互动类型、频率、偏好内容类型</li></ul><h4>数据用途</h4><p>这些数据反馈给 AI 系统，用于个性化推荐、解释深度调整和学习策略建议。</p>'
+        }
+    },
+
+    openFeatureDetail(featureId) {
+        const detail = this._featureDetails[featureId];
+        if (!detail) return;
+
+        const modal = document.getElementById('feature-modal');
+        if (!modal) return;
+
+        modal.querySelector('.feature-modal-icon').innerHTML = detail.icon;
+        modal.querySelector('.feature-modal-icon').style.background = detail.iconBg;
+        modal.querySelector('.feature-modal-icon').style.color = detail.iconColor;
+        modal.querySelector('.feature-modal-title').textContent = detail.title;
+        modal.querySelector('.feature-modal-subtitle').textContent = detail.subtitle;
+        modal.querySelector('.feature-modal-body').innerHTML = detail.body;
+        modal.classList.remove('hidden');
+    },
+
+    closeFeatureDetail() {
+        const modal = document.getElementById('feature-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
     updateUserGreeting() {
         const greeting = document.getElementById('user-greeting');
         if (greeting && this.state.user) {
