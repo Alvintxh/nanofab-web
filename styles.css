@@ -153,6 +153,171 @@ input, select, textarea {
     line-height: 1.6;
 }
 
+/* ==================== Welcome / Feature Showcase ==================== */
+
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 24px 0;
+    animation: form-fade-in 0.5s ease;
+}
+
+.welcome-hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.welcome-logo {
+    width: 96px;
+    height: 96px;
+}
+
+.welcome-title {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+}
+
+.welcome-tagline {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: 1.7;
+}
+
+/* Feature Cards Grid */
+.welcome-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 780px;
+}
+
+.welcome-feature-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+    cursor: default;
+}
+
+.welcome-feature-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--color-primary-light);
+}
+
+.welcome-feature-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
+    color: var(--color-primary);
+}
+
+.welcome-feature-card:nth-child(even) .welcome-feature-icon {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+}
+
+.welcome-feature-card h3 {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.welcome-feature-card p {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* CTA Button */
+.welcome-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 4px 14px rgba(0, 78, 161, 0.35);
+}
+
+.welcome-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 78, 161, 0.45);
+}
+
+.welcome-cta:active {
+    transform: translateY(0);
+}
+
+.welcome-footer-note {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+}
+
+.welcome-footer-note a {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.welcome-section.hidden {
+    display: none;
+}
+
+/* Responsive: 2 cols on tablet, 1 col on mobile */
+@media (max-width: 768px) {
+    .welcome-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .welcome-title {
+        font-size: 1.75rem;
+    }
+    .welcome-tagline {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-features {
+        grid-template-columns: 1fr;
+    }
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+    .welcome-section {
+        gap: 32px;
+        padding: 16px 0;
+    }
+}
+
+/* ==================== Profile Card ==================== */
+
 .profile-setup-card {
     background: var(--color-surface);
     border-radius: var(--radius-xl);

@@ -697,6 +697,27 @@ const AuthModule = {
         if (onboarding) onboarding.classList.add('active');
         if (app) app.style.display = 'none';
 
+        // Show welcome page on first visit, login directly on return visits
+        const welcomeSeen = localStorage.getItem('nanofab_welcome_seen');
+        const welcomeSection = document.getElementById('welcome-section');
+        const authSection = document.getElementById('onboarding-auth');
+
+        if (!welcomeSeen && welcomeSection && authSection) {
+            welcomeSection.classList.remove('hidden');
+            authSection.classList.add('hidden');
+        } else {
+            if (welcomeSection) welcomeSection.classList.add('hidden');
+            if (authSection) authSection.classList.remove('hidden');
+            this.showAuthForm('login-form');
+        }
+    },
+
+    showAuthSection() {
+        const welcomeSection = document.getElementById('welcome-section');
+        const authSection = document.getElementById('onboarding-auth');
+        if (welcomeSection) welcomeSection.classList.add('hidden');
+        if (authSection) authSection.classList.remove('hidden');
+        localStorage.setItem('nanofab_welcome_seen', '1');
         this.showAuthForm('login-form');
     },
 

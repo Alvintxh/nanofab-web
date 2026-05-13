@@ -78,6 +78,19 @@ const App = {
     bindEvents() {
         window.addEventListener('hashchange', () => this.handleRoute());
 
+        // Welcome page CTA
+        const welcomeCta = document.getElementById('welcome-cta');
+        if (welcomeCta) {
+            welcomeCta.addEventListener('click', () => this.showAuthSection());
+        }
+        const welcomeLoginLink = document.getElementById('welcome-login-link');
+        if (welcomeLoginLink) {
+            welcomeLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showAuthSection();
+            });
+        }
+
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => this.handleLogin(e));
