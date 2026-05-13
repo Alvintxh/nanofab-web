@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "command": "bash .claude/hooks/check-changelog.sh"
+      }
+    ]
+  }
+}
