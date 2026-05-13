@@ -318,6 +318,14 @@ input, select, textarea {
 .welcome-stat-label {
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.welcome-stat-desc {
+    font-size: 0.7rem;
+    color: var(--color-text-tertiary);
+    margin-top: 2px;
+    line-height: 1.3;
 }
 
 .welcome-stat-divider {
