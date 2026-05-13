@@ -1282,17 +1282,23 @@ const App = {
             const mark = this._findAndHighlightText(contentEl, searchText, note.id);
             if (!mark) return;
 
+            const noteContent = note.content || '';
+            const isAiNote = /(\*\*|##|###|`|^\- |^\d+\. )/m.test(noteContent);
+            const renderedContent = isAiNote ? this.formatAIResponse(noteContent) : `<p>${this.escapeHtml(noteContent)}</p>`;
+            const label = isAiNote ? '🤖 AI 笔记' : '📝 笔记';
+            const contextHtml = isAiNote ? '' : `<div class="note-annotation-context">原文："${this.escapeHtml(searchText.substring(0, 100))}"</div>`;
+
             const parentP = mark.closest('p, li, h2, h3, h4, blockquote, td') || mark.parentElement;
             const ann = document.createElement('div');
             ann.className = 'note-annotation';
             ann.dataset.noteId = note.id;
             ann.innerHTML = `
                 <div class="note-annotation-header">
-                    <span class="note-annotation-label">📝 笔记</span>
+                    <span class="note-annotation-label">${label}</span>
                     <span class="note-annotation-delete" data-note-id="${note.id}">✕ 删除</span>
                 </div>
-                <div class="note-annotation-context">原文："${this.escapeHtml(searchText.substring(0, 100))}"</div>
-                <div class="note-annotation-content">${this.escapeHtml(note.content || '')}</div>
+                ${contextHtml}
+                <div class="note-annotation-content">${renderedContent}</div>
             `;
             if (parentP.nextSibling) {
                 parentP.parentNode.insertBefore(ann, parentP.nextSibling);
