@@ -56,7 +56,6 @@ const AIModule = {
     },
 
     showAIExplanation(text) {
-        console.log('[AI] showAIExplanation v2 with question input');
         this._explanationConv = null; // Reset conversation for new selected text
         this.openAISidebar();
         this.switchAISidebarTab('explanation');
@@ -240,10 +239,7 @@ const AIModule = {
         const qaList = this._explanationConv?.qaList || [];
         if (qaList.length === 0) return '';
         return qaList.map((qa, i) => {
-            const raw = qa.answer || '';
-            console.log('[QA] raw answer preview:', raw.substring(0, 100));
-            const formattedAnswer = this.formatAIResponse(raw);
-            console.log('[QA] formatted preview:', formattedAnswer.substring(0, 100));
+            const formattedAnswer = this.formatAIResponse(qa.answer);
             return `
                 <div class="explanation-qa-item">
                     <div class="explanation-qa-question">
