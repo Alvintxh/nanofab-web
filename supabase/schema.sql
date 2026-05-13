@@ -160,6 +160,7 @@ CREATE INDEX idx_notes_chapter ON user_notes(chapter_id);
 
 -- ============================================
 -- Row Level Security (RLS) 策略
+-- 注意: 详细的策略定义见 schema_v2.sql
 -- ============================================
 
 -- 启用 RLS
@@ -170,48 +171,6 @@ ALTER TABLE user_behavior_summary ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_answers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ai_queries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_notes ENABLE ROW LEVEL SECURITY;
-
--- user_profiles: 用户只能操作自己的数据
-CREATE POLICY "Users can manage own profile"
-ON user_profiles FOR ALL TO authenticated
-USING (auth.uid() = id)
-WITH CHECK (auth.uid() = id);
-
--- user_progress: 用户只能操作自己的进度
-CREATE POLICY "Users can manage own progress"
-ON user_progress FOR ALL TO authenticated
-USING (auth.uid() = id)
-WITH CHECK (auth.uid() = id);
-
--- user_behavior_events: 用户只能操作自己的事件
-CREATE POLICY "Users can manage own behavior events"
-ON user_behavior_events FOR ALL TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-
--- user_behavior_summary: 用户只能操作自己的汇总
-CREATE POLICY "Users can manage own behavior summary"
-ON user_behavior_summary FOR ALL TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-
--- quiz_answers: 用户只能操作自己的答题记录
-CREATE POLICY "Users can manage own quiz answers"
-ON quiz_answers FOR ALL TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-
--- ai_queries: 用户只能操作自己的查询记录
-CREATE POLICY "Users can manage own ai queries"
-ON ai_queries FOR ALL TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-
--- user_notes: 用户只能操作自己的笔记
-CREATE POLICY "Users can manage own notes"
-ON user_notes FOR ALL TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
 
 -- ============================================
 -- 触发器 (Triggers)
