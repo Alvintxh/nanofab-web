@@ -853,6 +853,99 @@ const AIModule = {
         if (typing) typing.remove();
     },
 
+    _buildDataContext(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const contexts = [];
+
+        // Detect: notes / 笔记
+        if (/笔记|note|列出.*笔记|我的.*笔记/.test(lowerMsg)) {
+            const notes = this.state.behaviorData.notes || [];
+            if (notes.length > 0) {
+                const allChapters = this.getAllChapters();
+                const notesText = notes.map((n, i) => {
+                    const ch = allChapters.find(c => c.id === n.chapter);
+                    const chName = ch ? ch.title : (n.chapterTitle || '未知章节');
+                    const ctx = (n.context || '').substring(0, 80);
+                    const content = (n.content || '').substring(0, 200);
+                    return `${i + 1}. [${chName}] 原文："${ctx}"\n   笔记内容：${content}`;
+                }).join('\n');
+                contexts.push(`以下是用户的所有笔记（共 ${notes.length} 条）：\n${notesText}`);
+            } else {
+                contexts.push('用户当前没有任何笔记。');
+            }
+        }
+
+        // Detect: wrong answers / 错题 / quiz results
+        if (/错题|错题本|wrong.*answer|答错|做错|quiz.*result|测试.*结果|答题.*情况/.test(lowerMsg)) {
+            const quizResults = this.state.behaviorData.quizResults || [];
+            const wrongAnswers = quizResults.filter(r => !r.correct);
+            if (wrongAnswers.length > 0) {
+                const allChapters = this.getAllChapters();
+                const correctCount = quizResults.filter(r => r.correct).length;
+                const accuracy = Math.round((correctCount / quizResults.length) * 100);
+                const wrongText = wrongAnswers.map((w, i) => {
+                    const ch = allChapters.find(c => c.id === w.chapter);
+                    const chName = ch ? ch.title : (w.chapter || '未知章节');
+                    const question = w.question || '未知题目';
+                    const userAnswer = w.userAnswer || w.selected || '未作答';
+                    return `${i + 1}. [${chName}] ${question}\n   你的答案：${userAnswer}`;
+                }).join('\n');
+                contexts.push(`以下是用户的答题数据：\n- 总答题数：${quizResults.length}\n- 正确数：${correctCount}\n- 正确率：${accuracy}%\n- 错题列表（共 ${wrongAnswers.length} 道）：\n${wrongText}`);
+            } else if (quizResults.length > 0) {
+                contexts.push('用户目前没有错题，所有答题均正确。');
+            } else {
+                contexts.push('用户目前还没有答题记录。');
+            }
+        }
+
+        // Detect: study advice / 学习建议 (often combined with wrong answers)
+        if (/学习建议|学习计划|怎么学|如何.*学|建议.*学|recommend|suggestion|advice/.test(lowerMsg)) {
+            const bp = this.state.user?.behaviorProfile || {};
+            const weakTopics = bp.weakTopics || [];
+            const strongTopics = bp.strongTopics || [];
+            const completed = [...this.state.completedChapters];
+            const all = this.getAllChapters();
+            const remaining = all.filter(c => !this.state.completedChapters.has(c.id));
+
+            let adviceContext = '以下是用户的学习状态数据，请据此给出个性化建议：\n';
+            adviceContext += `- 已完成章节：${completed.length > 0 ? completed.join('、') : '无'}\n`;
+            adviceContext += `- 待学习章节：${remaining.length > 0 ? remaining.map(c => c.title).join('、') : '全部完成'}\n`;
+            if (weakTopics.length > 0) adviceContext += `- 薄弱环节：${weakTopics.join('、')}\n`;
+            if (strongTopics.length > 0) adviceContext += `- 擅长领域：${strongTopics.join('、')}\n`;
+            if (bp.quizAccuracy > 0) adviceContext += `- Quiz正确率：${Math.round(bp.quizAccuracy * 100)}%\n`;
+            if (bp.avgSessionTime > 0) adviceContext += `- 平均学习时长：${Math.round(bp.avgSessionTime / 60)}分钟\n`;
+            contexts.push(adviceContext);
+        }
+
+        // Detect: progress / 进度
+        if (/进度|progress|完成.*多少|学了.*多少/.test(lowerMsg)) {
+            const completed = [...this.state.completedChapters];
+            const all = this.getAllChapters();
+            const total = all.length;
+            const done = completed.length;
+            const percent = Math.round((done / total) * 100);
+            const completedNames = completed.map(id => {
+                const ch = all.find(c => c.id === id);
+                return ch ? ch.title : id;
+            });
+            contexts.push(`用户学习进度：已完成 ${done}/${total}（${percent}%）\n已完成的章节：${completedNames.length > 0 ? completedNames.join('、') : '无'}`);
+        }
+
+        // Detect: behavior stats / 学习统计
+        if (/学习统计|学习.*数据|行为.*数据|statistics|behavior.*data|学习.*时间/.test(lowerMsg)) {
+            const behaviorData = this.state.behaviorData;
+            const timeSpent = behaviorData.timeSpent || {};
+            const totalSeconds = Object.values(timeSpent).reduce((sum, t) => sum + (typeof t === 'number' ? t : 0), 0);
+            const interactions = behaviorData.interactions?.length || 0;
+            const quizResults = behaviorData.quizResults || [];
+            const correctCount = quizResults.filter(r => r.correct).length;
+            const accuracy = quizResults.length > 0 ? Math.round((correctCount / quizResults.length) * 100) : 0;
+            contexts.push(`用户学习统计数据：\n- 总学习时间：${Math.round(totalSeconds / 60)}分钟\n- 总交互次数：${interactions}\n- 答题正确率：${accuracy}%（${correctCount}/${quizResults.length}）`);
+        }
+
+        return contexts.length > 0 ? contexts.join('\n\n---\n\n') : null;
+    },
+
     async generateAIResponse(userMessage) {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
@@ -866,6 +959,15 @@ const AIModule = {
             messages.push({
                 role: 'system',
                 content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+            });
+        }
+
+        // Inject user data context when relevant (notes, wrong answers, progress, etc.)
+        const dataContext = this._buildDataContext(userMessage);
+        if (dataContext) {
+            messages.push({
+                role: 'system',
+                content: `以下是用户的个人数据，请基于这些数据精确回答用户的问题。如果用户要求列出内容，请逐一列出不要省略。\n\n${dataContext}`
             });
         }
 
