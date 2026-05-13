@@ -717,6 +717,10 @@ const App = {
 
     async handleRegister(e) {
         e.preventDefault();
+
+        if (this._registering) return;
+        this._registering = true;
+
         const submitBtn = e.target.querySelector('button[type="submit"]');
         this._setButtonLoading(submitBtn, true);
 
@@ -736,18 +740,13 @@ const App = {
                 });
 
                 if (error) {
-                    if (error.message.includes('rate limit') || error.error_code === 'over_email_send_rate_limit') {
-                        if (error.error_code === 'over_email_send_rate_limit') {
-                            this.showToast('验证邮件发送失败（频率限制），请稍后重试或直接登录。', 'warning');
-                            this.showAuthForm('login-form');
-                            return;
-                        }
-                        this.showToast('发送过于频繁，请稍后再试（约1分钟后）', 'warning');
-                        return;
-                    }
                     if (error.message.includes('already registered') || error.message.includes('already exists')) {
                         this.showToast('该邮箱已注册，请直接登录', 'info');
                         this.showAuthForm('login-form');
+                        return;
+                    }
+                    if (error.message.includes('rate limit') || error.error_code === 'over_email_send_rate_limit') {
+                        this.showToast('操作过于频繁，请等待约1分钟后再试', 'warning');
                         return;
                     }
                     throw error;
@@ -782,6 +781,7 @@ const App = {
             this.showToast('系统未初始化，请刷新页面后重试', 'error');
         }
         this._setButtonLoading(submitBtn, false);
+        this._registering = false;
     },
 
     async handleVerify(e) {
@@ -795,6 +795,7 @@ const App = {
         if (!email) {
             this.showToast('验证信息已过期，请重新注册', 'error');
             this.showAuthForm('register-form');
+            this._setButtonLoading(submitBtn, false);
             return;
         }
 
