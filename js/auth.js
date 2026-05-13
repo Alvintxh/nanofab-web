@@ -686,6 +686,9 @@ const AuthModule = {
         if (onboarding) onboarding.classList.remove('active');
         if (app) app.style.display = 'grid';
 
+        const aiToggle = document.getElementById('ai-sidebar-toggle');
+        if (aiToggle) aiToggle.classList.remove('hidden');
+
         this.updateUserGreeting();
         this.updateProgress();
     },
@@ -696,6 +699,9 @@ const AuthModule = {
 
         if (onboarding) onboarding.classList.add('active');
         if (app) app.style.display = 'none';
+
+        const aiToggle = document.getElementById('ai-sidebar-toggle');
+        if (aiToggle) aiToggle.classList.add('hidden');
 
         // Show welcome page on first visit, login directly on return visits
         const welcomeSeen = localStorage.getItem('nanofab_welcome_seen');
