@@ -1,3 +1,130 @@
 # NanoFab Learning Platform
 
-基于《纳米制造技术：原理、工艺与实践》的AI驱动个性化学习网站
+基于《纳米制造技术：原理、工艺与实践》的 AI 驱动个性化学习平台。
+
+## 功能特性
+
+### 学习系统
+- **12 章结构化课程**：覆盖光刻、刻蚀、沉积、纳米测量等核心主题，分为 4 个部分
+- **个性化学习路径**：基于用户画像（知识水平、学习动机、背景专业）定制内容推荐
+- **进度追踪**：章节完成标记、学习进度环、每周学习目标
+- **要点卡片**：每章核心知识点提炼，帮助快速把握重点
+- **交互式测验**：每章 10 道测试题，支持单选、多选、判断题，即时反馈
+- **思考练习**：开放式问题，附带可展开的提示
+
+### AI 辅助
+- **AI 文本解释**：选中任意文本即可获取个性化解释，支持多轮追问
+- **AI 学习助手**：侧边栏聊天机器人，结合用户学习数据提供精准回答
+- **AI 学习路线**：基于用户画像和进度生成推荐学习路径
+- **个性化解释**：根据用户知识水平调整解释深度和风格
+
+### 学习工具
+- **笔记系统**：选中文本添加笔记，自动高亮并显示内联注释
+- **错题本**：自动收集错题，支持复习回顾
+- **学习统计**：今日/本周/总计学习时长、答题正确率、连续学习天数
+- **思维导图**：首页课程结构可视化
+- **图片灯箱**：点击章节图片可放大查看
+
+### 用户画像
+- 知识水平（毫无基础~高级）、专业背景、学习动机
+- 每周学习时间、学习节奏偏好、感兴趣领域
+- 行为分析：薄弱环节识别、擅长领域、学习时长分布
+
+## 技术栈
+
+| 层 | 技术 |
+|---|------|
+| 前端 | 原生 HTML/CSS/JS（SPA，无需构建工具） |
+| 数学渲染 | KaTeX |
+| 图表 | Mermaid |
+| AI 接口 | 智谱 GLM-4-Flash / DeepSeek / Gemini（通过 Supabase Edge Function 代理） |
+| 后端服务 | Supabase（认证、数据库、Edge Functions） |
+| 内容格式 | Markdown → HTML |
+| 部署 | GitHub Pages |
+
+## 项目结构
+
+```
+nanofab-web/
+├── index.html              # 主入口，含用户画像收集表单
+├── app.js                  # 核心应用逻辑（路由、状态管理、内容渲染）
+├── styles.css              # 全局样式
+├── js/
+│   ├── auth.js             # 认证模块（注册、登录、资料管理）
+│   ├── behavior.js         # 行为追踪模块（学习数据收集与同步）
+│   └── ai.js               # AI 模块（解释、聊天、路线推荐、笔记）
+├── content/
+│   ├── chapters.json       # 章节元数据（标题、描述、所属部分）
+│   └── chapters/           # 12 章 HTML 内容文件
+├── img/                    # SVG 插图
+├── supabase/
+│   ├── schema.sql          # 数据库结构
+│   ├── schema_v2.sql       # 数据库结构 v2（含用户画像）
+│   ├── fix_rls.sql         # RLS 安全策略
+│   └── functions/
+│       └── ai-proxy/       # Supabase Edge Function（AI API 代理）
+├── docs/
+│   ├── ARCHITECTURE.md     # 系统架构设计
+│   ├── CHANGELOG.md        # 变更日志
+│   ├── TODO.md             # 当前任务状态
+│   └── DEPLOYMENT.md       # 部署指南
+├── sources/                # 参考资料来源
+└── nanofab_knowledge_book_v1/  # 原始知识书（Markdown）
+```
+
+## 快速开始
+
+### 本地开发
+
+```bash
+# 启动本地服务器
+python3 -m http.server 8080
+
+# 访问 http://localhost:8080
+```
+
+无需安装依赖，纯静态文件。如需 Supabase 后端功能（认证、数据库同步、AI 代理），需要配置 Supabase 项目。
+
+### Supabase 配置
+
+1. 在 [supabase.com](https://supabase.com) 创建项目
+2. 执行 `supabase/schema.sql` 和 `supabase/schema_v2.sql` 创建数据表
+3. 执行 `supabase/fix_rls.sql` 配置安全策略
+4. 部署 `supabase/functions/ai-proxy/` Edge Function
+5. 在 `index.html` 中更新 Supabase 项目 URL 和 Anon Key
+
+### AI 提供商
+
+支持三种 AI 提供商，用户可在侧边栏设置中切换：
+
+| 提供商 | 默认模型 | API Key 要求 |
+|--------|---------|-------------|
+| 智谱 AI | GLM-4-Flash | 服务端配置（Edge Function） |
+| DeepSeek | deepseek-chat | 用户自行填入 |
+| Gemini | gemini-2.0-flash | 用户自行填入 |
+
+## 数据库表
+
+| 表名 | 用途 |
+|------|------|
+| `user_profiles` | 用户画像（水平、背景、动机等） |
+| `user_behavior_summary` | 行为聚合数据（学习时长、正确率等） |
+| `user_behavior_events` | 原始行为事件（页面浏览、点击等） |
+| `quiz_answers` | 答题记录（章节、题目、是否正确） |
+| `user_notes` | 用户笔记（内容、关联章节） |
+| `ai_queries` | AI 请求记录（问题、回答、类型） |
+
+## 配色方案
+
+| 颜色 | 用途 |
+|------|------|
+| `#004EA1` 上科大蓝 | 主色调、链接、强调 |
+| `#9D0A12` 上科大红 | 辅色调、警示、重点 |
+| `#0f172a` 深灰 | 正文文字 |
+| `#475569` 中灰 | 次要文字 |
+| `#94a3b8` 浅灰 | 辅助文字 |
+| `#fafbfc` 浅灰白 | 页面背景 |
+
+## License
+
+MIT
