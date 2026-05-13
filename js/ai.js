@@ -57,6 +57,7 @@ const AIModule = {
 
     showAIExplanation(text) {
         console.log('[AI] showAIExplanation v2 with question input');
+        this._explanationConv = null; // Reset conversation for new selected text
         this.openAISidebar();
         this.switchAISidebarTab('explanation');
 
@@ -113,58 +114,156 @@ const AIModule = {
 
     async _renderExplanation(selectedText, question, chapter, chapterContext) {
         const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
-        const explanation = await this.generateExplanation(selectedText, chapterContext, question);
         if (!explanationBody) return;
 
+        // Initialize conversation history on first call
+        const isFirstQuestion = !this._explanationConv;
+        if (isFirstQuestion) {
+            this._explanationConv = { selectedText, chapter, chapterContext, qaList: [] };
+        }
+
+        // Build context with full conversation history
+        let fullContext = chapterContext;
+        const conv = this._explanationConv;
+        let convPrompt = `用户选中了以下文本："${selectedText}"\n\n`;
+        conv.qaList.forEach((qa, i) => {
+            convPrompt += `---\n第${i + 1}轮：\n用户问：${qa.question}\nAI答：${qa.answer}\n`;
+        });
+        if (question) {
+            convPrompt += `---\n用户的最新问题：${question}\n\n请结合选中的文本和之前的对话历史，回答用户的最新问题。`;
+            fullContext = convPrompt + (chapterContext ? '\n\n' + chapterContext : '');
+        } else if (conv.qaList.length > 0) {
+            // Follow-up with empty question (shouldn't normally happen)
+            fullContext = convPrompt + (chapterContext ? '\n\n' + chapterContext : '');
+        }
+
+        const explanation = await this.generateExplanation(selectedText, fullContext, question);
+        if (!explanationBody) return;
+
+        // Store in conversation history
+        const displayQuestion = question || '解释选中文本';
+        this._explanationConv.qaList.push({ question: displayQuestion, answer: explanation });
+
         const formattedExplanation = this.formatAIResponse(explanation);
-        const questionHtml = question
-            ? `<div class="explanation-question-display">你的问题：${this.escapeHtml(question)}</div>`
-            : '';
 
-        explanationBody.innerHTML = `
-            <div class="explanation-result">
-                <div class="explanation-header">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
-                    <span>为您定制的解释</span>
+        if (isFirstQuestion) {
+            // Initial render: show selected text hint + Q&A list + follow-up input
+            explanationBody.innerHTML = `
+                <div class="explanation-conversation">
+                    ${this._buildExplanationQAList()}
+                    <div class="explanation-followup">
+                        <input type="text" class="explanation-question-input followup-input"
+                            placeholder="继续追问，例如：能举个实际应用的例子吗？">
+                        <button class="btn btn-sm btn-primary explanation-question-send followup-send">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            追问
+                        </button>
+                    </div>
                 </div>
-                ${questionHtml}
-                <div class="explanation-body">${formattedExplanation}</div>
-                <div class="explanation-actions">
-                    <button class="btn btn-sm btn-outline save-explanation-note" title="将此解释保存为笔记">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                        保存为笔记
-                    </button>
-                </div>
-            </div>
-        `;
+            `;
+        } else {
+            // Follow-up: refresh the Q&A list and reset follow-up input
+            const conv = explanationBody.querySelector('.explanation-conversation');
+            if (conv) {
+                conv.innerHTML = `
+                    ${this._buildExplanationQAList()}
+                    <div class="explanation-followup">
+                        <input type="text" class="explanation-question-input followup-input"
+                            placeholder="继续追问，例如：能举个实际应用的例子吗？">
+                        <button class="btn btn-sm btn-primary explanation-question-send followup-send">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            追问
+                        </button>
+                    </div>
+                `;
+            }
+            // Scroll to latest answer
+            const lastQA = explanationBody.querySelector('.explanation-qa-item:last-child');
+            if (lastQA) lastQA.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
-        const saveBtn = explanationBody.querySelector('.save-explanation-note');
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => {
-                this._saveExplanationAsNote(selectedText, explanation, chapter);
-                saveBtn.textContent = '已保存 ✓';
-                saveBtn.classList.add('saved');
-                saveBtn.disabled = true;
+        // Bind follow-up input
+        const followupInput = explanationBody.querySelector('.followup-input');
+        const followupSend = explanationBody.querySelector('.followup-send');
+        const bindFollowup = () => {
+            const q = followupInput.value.trim();
+            if (!q) return;
+            followupInput.disabled = true;
+            followupSend.disabled = true;
+            followupSend.textContent = '...';
+            // Show typing indicator
+            const followup = explanationBody.querySelector('.explanation-followup');
+            if (followup) followup.insertAdjacentHTML('beforebegin',
+                '<div class="ai-loading" style="padding:12px 0"><div class="ai-spinner"></div><p>正在生成回答...</p></div>');
+            this._renderExplanation(selectedText, q, chapter, chapterContext);
+        };
+        followupSend.addEventListener('click', bindFollowup);
+        followupInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') bindFollowup();
+        });
+        setTimeout(() => followupInput.focus(), 100);
+
+        // Bind save button for each answer
+        explanationBody.querySelectorAll('.save-explanation-note').forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                const qa = this._explanationConv.qaList[i];
+                if (qa) {
+                    this._saveExplanationAsNote(selectedText, `Q: ${qa.question}\nA: ${qa.answer}`, chapter);
+                } else {
+                    this._saveExplanationAsNote(selectedText, explanation, chapter);
+                }
+                btn.textContent = '已保存 ✓';
+                btn.classList.add('saved');
+                btn.disabled = true;
                 setTimeout(() => {
-                    saveBtn.innerHTML = `
+                    btn.innerHTML = `
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                         </svg>
                         保存为笔记
                     `;
-                    saveBtn.classList.remove('saved');
-                    saveBtn.disabled = false;
+                    btn.classList.remove('saved');
+                    btn.disabled = false;
                 }, 2000);
             });
-        }
+        });
+    },
+
+    _buildExplanationQAList() {
+        const qaList = this._explanationConv?.qaList || [];
+        if (qaList.length === 0) return '';
+        return qaList.map((qa, i) => {
+            const formattedAnswer = this.formatAIResponse(qa.answer);
+            return `
+                <div class="explanation-qa-item">
+                    <div class="explanation-qa-question">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        ${this.escapeHtml(qa.question)}
+                    </div>
+                    <div class="explanation-qa-answer">${formattedAnswer}</div>
+                    <div class="explanation-actions">
+                        <button class="btn btn-sm btn-outline save-explanation-note" title="保存为笔记">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            保存为笔记
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
     },
 
     _saveExplanationAsNote(selectedText, explanation, chapter) {
