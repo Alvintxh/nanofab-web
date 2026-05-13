@@ -169,16 +169,130 @@
                     <p class="welcome-footer-note">已有账号？<a href="#" id="welcome-login-link">直接登录</a></p>
                 </div>
 
-                <!-- Feature Detail Modal -->
-                <div id="feature-modal" class="feature-modal hidden">
-                    <div class="feature-modal-overlay"></div>
-                    <div class="feature-modal-card">
-                        <button class="feature-modal-close" aria-label="关闭">&times;</button>
-                        <div class="feature-modal-icon"></div>
-                        <h2 class="feature-modal-title"></h2>
-                        <p class="feature-modal-subtitle"></p>
-                        <div class="feature-modal-body"></div>
+                <!-- Feature Detail Sections (scroll-reveal) -->
+                <div class="welcome-section-label">功能详情</div>
+                <div class="welcome-details">
+
+                    <div class="welcome-detail" id="detail-explanation" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-primary-light); color: var(--color-primary);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.3 0-2.5.4-3.5 1.1L4.2 6.8C3.4 7.3 3 8.1 3 9v6c0 .9.4 1.7 1.2 2.2l4.3 2.7c1 .6 2.2.6 3.5.6s2.5-.2 3.5-.6l4.3-2.7c.8-.5 1.2-1.3 1.2-2.2V9c0-.9-.4-1.7-1.2-2.2l-4.3-2.7C14.5 3.4 13.3 3 12 3z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>AI 智能解释</h3>
+                            <p class="welcome-detail-subtitle">选中文本，AI 根据你的知识水平提供个性化解释</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>在章节阅读中<strong>选中任意文本</strong> → 点击浮出的"AI 解释"按钮 → 输入你的问题（可选）→ AI 根据你的知识水平个性化回答。</p>
+                                <h4>特色</h4>
+                                <ul>
+                                    <li>支持<strong>多轮追问</strong>，保持对话上下文不丢失</li>
+                                    <li>解释深度<strong>自动匹配用户水平</strong>：零基础用类比，高级深入工程细节</li>
+                                    <li>根据学习动机调整侧重点（考试、科研、职业、兴趣）</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="welcome-detail" id="detail-assistant" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-accent-light); color: var(--color-accent);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>AI 学习助手</h3>
+                            <p class="welcome-detail-subtitle">侧边栏聊天机器人，结合学习数据提供精准回答</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>点击右上角 AI 图标打开侧边栏 → 直接输入任何学习相关问题 → AI 结合你的学习数据个性化回答。</p>
+                                <h4>特色</h4>
+                                <ul>
+                                    <li>每次对话<strong>自动注入完整学习数据</strong>（笔记、错题、进度、时长）</li>
+                                    <li>回答针对<strong>个人薄弱环节</strong>给出具体建议</li>
+                                    <li>支持对笔记、错题等数据的<strong>查询和操作</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-detail" id="detail-notes" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-primary-light); color: var(--color-primary);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>AI 智能笔记</h3>
+                            <p class="welcome-detail-subtitle">AI 解释一键保存，原文自动高亮标注</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>AI 解释结果 → 点击"保存全部对话为笔记" → 原文自动高亮 → 点击高亮查看笔记。也可选中文本手动添加笔记。</p>
+                                <h4>特色</h4>
+                                <ul>
+                                    <li>一键保存<strong>完整对话上下文</strong>为单条笔记</li>
+                                    <li>原文<strong>高亮标注</strong>，点击即可查看内联注解</li>
+                                    <li>笔记自动同步到 Supabase 数据库</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-detail" id="detail-path" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-accent-light); color: var(--color-accent);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>AI 学习路线</h3>
+                            <p class="welcome-detail-subtitle">基于画像和进度自动生成个性化学习路径</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>首页仪表盘自动展示推荐路线，点击刷新可重新生成。</p>
+                                <h4>特色</h4>
+                                <ul>
+                                    <li>基于<strong>已完成章节和薄弱环节</strong>推荐下一步学习方向</li>
+                                    <li>考虑<strong>学习节奏和感兴趣领域</strong>制定时间计划</li>
+                                    <li>兼顾擅长领域巩固和短板补齐</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-detail" id="detail-quiz" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-primary-light); color: var(--color-primary);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>交互式测验</h3>
+                            <p class="welcome-detail-subtitle">每章 10 题即时反馈，错题自动收录</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>每章底部"测验"标签 → 10 道题（单选/多选/判断）→ 提交后即时显示对错和正确答案。</p>
+                                <h4>特色</h4>
+                                <ul>
+                                    <li>三种题型：<strong>单选、多选、判断</strong></li>
+                                    <li>答错自动<strong>收录到错题本</strong>，可在首页复习</li>
+                                    <li>测验结果同步 Supabase，AI 用于分析薄弱环节</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-detail" id="detail-tracking" data-reveal>
+                        <div class="welcome-detail-icon" style="background: var(--color-accent-light); color: var(--color-accent);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div class="welcome-detail-body">
+                            <h3>学习数据追踪</h3>
+                            <p class="welcome-detail-subtitle">全方位学习行为追踪，AI 据此定制策略</p>
+                            <div class="welcome-detail-content">
+                                <h4>如何使用</h4>
+                                <p>自动后台追踪，无需手动操作。首页"学习统计"卡片查看数据。</p>
+                                <h4>追踪内容</h4>
+                                <ul>
+                                    <li><strong>学习时长</strong>：今日/本周/总计，每章停留时间</li>
+                                    <li><strong>测验表现</strong>：正确率、薄弱环节、擅长领域</li>
+                                    <li><strong>连续学习</strong>：连续学习天数、周目标进度环</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

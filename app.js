@@ -91,23 +91,19 @@ const App = {
             });
         }
 
-        // Feature card click → detail modal
+        // Feature card click → scroll to detail section
         document.querySelectorAll('.welcome-feature-card[data-feature]').forEach(card => {
             card.addEventListener('click', () => {
-                this.openFeatureDetail(card.dataset.feature);
+                const detailId = 'detail-' + card.dataset.feature;
+                const detailEl = document.getElementById(detailId);
+                if (detailEl) {
+                    detailEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             });
         });
 
-        // Feature modal close
-        const featureModal = document.getElementById('feature-modal');
-        if (featureModal) {
-            featureModal.querySelector('.feature-modal-overlay')?.addEventListener('click', () => {
-                this.closeFeatureDetail();
-            });
-            featureModal.querySelector('.feature-modal-close')?.addEventListener('click', () => {
-                this.closeFeatureDetail();
-            });
-        }
+        // Scroll-reveal observer
+        this._initScrollReveal();
 
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
@@ -204,7 +200,6 @@ const App = {
             if (e.key === 'Escape') {
                 this.closeProfileModal();
                 this.closeSidebar();
-                this.closeFeatureDetail();
             }
         });
     },
@@ -1524,6 +1519,21 @@ const App = {
             return before + '$' + cleaned + '$' + after;
         });
         return html;
+    },
+
+    _initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            observer.observe(el);
+        });
     },
 
 };
