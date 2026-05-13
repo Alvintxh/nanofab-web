@@ -820,10 +820,10 @@ const App = {
                 svg += `<circle cx="${crx + 14}" cy="${chY}" r="5" fill="${color}" opacity="0.15"/>`;
                 svg += `<circle cx="${crx + 14}" cy="${chY}" r="2.5" fill="${color}" opacity="0.6"/>`;
                 // Chapter ID
-                svg += `<text x="${crx + 28}" y="${chY + 3.5}" fill="${color}" font-size="10" font-weight="700" font-family="'SF Mono', monospace" opacity="0.8">${ch.id}</text>`;
+                svg += `<text x="${crx + 30}" y="${chY + 3.5}" fill="${color}" font-size="10" font-weight="700" font-family="'SF Mono', monospace" opacity="0.8">${ch.id}</text>`;
                 // Chapter title
                 const titleSize = ch.title.length > 8 ? 10.5 : 11.5;
-                svg += `<text x="${crx + 78}" y="${chY + 3.5}" text-anchor="middle" fill="#334155" font-size="${titleSize}" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
+                svg += `<text x="${crx + 66}" y="${chY + 3.5}" fill="#334155" font-size="${titleSize}" font-weight="500" font-family="Noto Sans SC, sans-serif">${ch.title}</text>`;
             });
         });
 
