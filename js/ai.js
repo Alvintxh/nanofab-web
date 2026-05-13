@@ -96,10 +96,59 @@ const AIModule = {
                             <span>为您定制的解释</span>
                         </div>
                         <div class="explanation-body">${formattedExplanation}</div>
+                        <div class="explanation-actions">
+                            <button class="btn btn-sm btn-outline save-explanation-note" title="将此解释保存为笔记">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                                保存为笔记
+                            </button>
+                        </div>
                     </div>
                 `;
+
+                // Bind save-to-note button
+                const saveBtn = explanationBody.querySelector('.save-explanation-note');
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', () => {
+                        this._saveExplanationAsNote(text, explanation, chapter);
+                        saveBtn.textContent = '已保存 ✓';
+                        saveBtn.classList.add('saved');
+                        saveBtn.disabled = true;
+                        setTimeout(() => {
+                            saveBtn.innerHTML = `
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                                保存为笔记
+                            `;
+                            saveBtn.classList.remove('saved');
+                            saveBtn.disabled = false;
+                        }, 2000);
+                    });
+                }
             }
         });
+    },
+
+    _saveExplanationAsNote(selectedText, explanation, chapter) {
+        const noteId = 'note-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6);
+        const noteEntry = {
+            id: noteId,
+            context: selectedText.substring(0, 300),
+            content: explanation,
+            chapter: chapter?.id,
+            chapterTitle: chapter?.title,
+            timestamp: new Date().toISOString()
+        };
+
+        if (!this.state.behaviorData.notes) this.state.behaviorData.notes = [];
+        this.state.behaviorData.notes.push(noteEntry);
+        this.saveBehaviorData(true);
+        this._syncNoteToSupabase(noteEntry);
+        this.showToast('AI 解释已保存为笔记', 'success');
     },
 
     openAISidebar() {
