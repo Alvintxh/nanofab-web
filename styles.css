@@ -2183,6 +2183,13 @@ input, select, textarea {
     color: var(--color-accent);
 }
 
+.explanation-save-all {
+    margin-top: 0;
+    padding-top: 8px;
+    border-top: 1px dashed var(--color-border);
+    justify-content: flex-end;
+}
+
 .explanation-followup {
     display: flex;
     gap: 8px;

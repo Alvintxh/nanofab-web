@@ -143,8 +143,6 @@ const AIModule = {
         const displayQuestion = question || '解释选中文本';
         this._explanationConv.qaList.push({ question: displayQuestion, answer: explanation });
 
-        const formattedExplanation = this.formatAIResponse(explanation);
-
         if (isFirstQuestion) {
             // Initial render: show selected text hint + Q&A list + follow-up input
             explanationBody.innerHTML = `
@@ -208,37 +206,39 @@ const AIModule = {
         });
         setTimeout(() => followupInput.focus(), 100);
 
-        // Bind save button for each answer
-        explanationBody.querySelectorAll('.save-explanation-note').forEach((btn, i) => {
-            btn.addEventListener('click', () => {
-                const qa = this._explanationConv.qaList[i];
-                if (qa) {
-                    this._saveExplanationAsNote(selectedText, `Q: ${qa.question}\nA: ${qa.answer}`, chapter);
-                } else {
-                    this._saveExplanationAsNote(selectedText, explanation, chapter);
-                }
-                btn.textContent = '已保存 ✓';
-                btn.classList.add('saved');
-                btn.disabled = true;
+        // Bind save-all button — saves entire conversation as a single note
+        const saveAllBtn = explanationBody.querySelector('.save-explanation-all');
+        if (saveAllBtn) {
+            saveAllBtn.addEventListener('click', () => {
+                const conv = this._explanationConv;
+                if (!conv || conv.qaList.length === 0) return;
+                const selectedText = conv.selectedText;
+                const markdown = conv.qaList.map((qa, i) =>
+                    `## Q${i + 1}: ${qa.question}\n\n${qa.answer}`
+                ).join('\n\n---\n\n');
+                this._saveExplanationAsNote(selectedText, markdown, conv.chapter);
+                saveAllBtn.textContent = '已保存 ✓';
+                saveAllBtn.classList.add('saved');
+                saveAllBtn.disabled = true;
                 setTimeout(() => {
-                    btn.innerHTML = `
+                    saveAllBtn.innerHTML = `
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                         </svg>
-                        保存为笔记
+                        保存全部对话为笔记
                     `;
-                    btn.classList.remove('saved');
-                    btn.disabled = false;
+                    saveAllBtn.classList.remove('saved');
+                    saveAllBtn.disabled = false;
                 }, 2000);
             });
-        });
+        }
     },
 
     _buildExplanationQAList() {
         const qaList = this._explanationConv?.qaList || [];
         if (qaList.length === 0) return '';
-        return qaList.map((qa, i) => {
+        let html = qaList.map((qa, i) => {
             const formattedAnswer = this.formatAIResponse(qa.answer);
             return `
                 <div class="explanation-qa-item">
@@ -251,18 +251,21 @@ const AIModule = {
                         ${this.escapeHtml(qa.question)}
                     </div>
                     <div class="explanation-qa-answer">${formattedAnswer}</div>
-                    <div class="explanation-actions">
-                        <button class="btn btn-sm btn-outline save-explanation-note" title="保存为笔记">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                            </svg>
-                            保存为笔记
-                        </button>
-                    </div>
                 </div>
             `;
         }).join('');
+        // Single save-all button below Q&A list
+        html += `
+            <div class="explanation-actions explanation-save-all">
+                <button class="btn btn-sm btn-outline save-explanation-all" title="将所有问答保存为一条笔记">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    保存全部对话为笔记
+                </button>
+            </div>`;
+        return html;
     },
 
     _saveExplanationAsNote(selectedText, explanation, chapter) {
