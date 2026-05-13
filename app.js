@@ -280,6 +280,8 @@ const App = {
                     }
                     
                     if (typeof renderMathInElement !== 'undefined') {
+                        // Sanitize HTML tags inside math delimiters caused by Markdown conversion
+                        contentEl.innerHTML = this._sanitizeMathHTML(contentEl.innerHTML);
                         renderMathInElement(contentEl, {
                             delimiters: [
                                 {left: '$$', right: '$$', display: true},
@@ -1466,6 +1468,29 @@ const App = {
                 } catch (e2) { /* skip */ }
             }
         });
+    },
+
+    _sanitizeMathHTML(html) {
+        // Strip HTML tags inside $$...$$ display math blocks
+        html = html.replace(/\$\$([^$]+?)\$\$/g, (match, inner) => {
+            return '$$' + inner.replace(/<[^>]+>/g, '') + '$$';
+        });
+        // Strip/replace HTML tags inside $...$ inline math blocks
+        html = html.replace(/(?<!\$)\$(?!\$)([^$]+?)\$(?!\$)/g, (match, inner) => {
+            const cleaned = inner
+                .replace(/<em>/g, '_')
+                .replace(/<\/em>/g, '_')
+                .replace(/<sub>/g, '_')
+                .replace(/<\/sub>/g, '')
+                .replace(/<sup>/g, '^')
+                .replace(/<\/sup>/g, '')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/<[^>]+>/g, '');
+            return '$' + cleaned + '$';
+        });
+        return html;
     },
 
 };
