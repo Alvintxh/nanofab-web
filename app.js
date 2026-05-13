@@ -724,64 +724,66 @@ const App = {
         const submitBtn = e.target.querySelector('button[type="submit"]');
         this._setButtonLoading(submitBtn, true);
 
-        const formData = new FormData(e.target);
-        const email = formData.get('email');
-        const password = formData.get('password');
-        const name = formData.get('name');
+        try {
+            const formData = new FormData(e.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const name = formData.get('name');
 
-        if (this.supabase) {
-            try {
-                const { data, error } = await this.supabase.auth.signUp({
-                    email, password,
-                    options: {
-                        data: { name },
-                        emailRedirectTo: window.location.origin + window.location.pathname
-                    }
-                });
+            if (!this.supabase) {
+                this.showToast('系统未初始化，请刷新页面后重试', 'error');
+                return;
+            }
 
-                if (error) {
-                    if (error.message.includes('already registered') || error.message.includes('already exists')) {
-                        this.showToast('该邮箱已注册，请直接登录', 'info');
-                        this.showAuthForm('login-form');
-                        return;
-                    }
-                    if (error.message.includes('rate limit') || error.error_code === 'over_email_send_rate_limit') {
-                        this.showToast('操作过于频繁，请等待约1分钟后再试', 'warning');
-                        return;
-                    }
-                    throw error;
+            const { data, error } = await this.supabase.auth.signUp({
+                email, password,
+                options: {
+                    data: { name },
+                    emailRedirectTo: window.location.origin + window.location.pathname
                 }
+            });
 
-                if (data.user && data.user.identities && data.user.identities.length === 0) {
+            if (error) {
+                if (error.message.includes('already registered') || error.message.includes('already exists')) {
                     this.showToast('该邮箱已注册，请直接登录', 'info');
                     this.showAuthForm('login-form');
                     return;
                 }
-
-                localStorage.setItem('pending_name', name);
-                localStorage.setItem('pending_email', email);
-                sessionStorage.setItem('pending_password', password);
-
-                if (data.user) {
-                    localStorage.setItem('pending_user_id', data.user.id);
-
-                    if (data.session) {
-                        this.showAuthForm('profile-form');
-                        document.getElementById('user-name').value = name;
-                        this.showToast('注册成功！请完善您的个人资料。', 'success');
-                    } else {
-                        this.showAuthForm('verify-form');
-                        this.showToast('验证邮件已发送，请检查邮箱（包括垃圾邮件文件夹）。', 'info');
-                    }
+                if (error.message.includes('rate limit') || error.error_code === 'over_email_send_rate_limit') {
+                    this.showToast('操作过于频繁，请等待约1分钟后再试', 'warning');
+                    return;
                 }
-            } catch (error) {
-                this.showToast('注册失败：' + this._getAuthErrorMessage(error), 'error');
+                throw error;
             }
-        } else {
-            this.showToast('系统未初始化，请刷新页面后重试', 'error');
+
+            if (data.user && data.user.identities && data.user.identities.length === 0) {
+                this.showToast('该邮箱已注册，请直接登录', 'info');
+                this.showAuthForm('login-form');
+                return;
+            }
+
+            localStorage.setItem('pending_name', name);
+            localStorage.setItem('pending_email', email);
+            sessionStorage.setItem('pending_password', password);
+
+            if (data.user) {
+                localStorage.setItem('pending_user_id', data.user.id);
+
+                if (data.session) {
+                    this.showAuthForm('profile-form');
+                    document.getElementById('user-name').value = name;
+                    this.showToast('注册成功！请完善您的个人资料。', 'success');
+                } else {
+                    this.showAuthForm('verify-form');
+                    this.showToast('验证邮件已发送，请检查邮箱（包括垃圾邮件文件夹）。', 'info');
+                }
+            }
+        } catch (error) {
+            this.showToast('注册失败：' + this._getAuthErrorMessage(error), 'error');
+        } finally {
+            this._setButtonLoading(submitBtn, false);
+            this._registering = false;
         }
-        this._setButtonLoading(submitBtn, false);
-        this._registering = false;
     },
 
     async handleVerify(e) {
