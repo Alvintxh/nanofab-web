@@ -2059,6 +2059,56 @@ input, select, textarea {
     justify-content: flex-end;
 }
 
+.explanation-question-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 0;
+    animation: form-fade-in 0.3s ease;
+}
+
+.explanation-question-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background: var(--color-surface);
+    color: var(--color-text);
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.explanation-question-input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 78, 161, 0.15);
+}
+
+.explanation-question-input::placeholder {
+    color: var(--color-text-tertiary);
+    font-size: 0.8125rem;
+}
+
+.explanation-question-send {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.explanation-question-display {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #f0f6fc;
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+}
+
 .btn-outline {
     display: inline-flex;
     align-items: center;

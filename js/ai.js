@@ -67,70 +67,103 @@ const AIModule = {
         if (emptyState) emptyState.classList.add('hidden');
         if (resultState) resultState.classList.remove('hidden');
         if (selectedTextContent) selectedTextContent.textContent = text;
-        if (explanationBody) {
-            explanationBody.innerHTML = `
-                <div class="ai-loading">
-                    <div class="ai-spinner"></div>
-                    <p>正在根据您的背景生成个性化解释...</p>
-                </div>
-            `;
-        }
 
         const chapter = this.state.currentChapter;
         const chapterContext = chapter ? `
-当前章节：${chapter.title}
-章节描述：${chapter.description}
-` : '';
+	当前章节：${chapter.title}
+	章节描述：${chapter.description}
+	` : '';
 
-        this.generateExplanation(text, chapterContext).then(explanation => {
-            if (explanationBody) {
-                const formattedExplanation = this.formatAIResponse(explanation);
+        if (explanationBody) {
+            explanationBody.innerHTML = `
+                <div class="explanation-question-area">
+                    <input type="text" class="explanation-question-input" placeholder="提出具体问题（可选），例如：这个工艺的物理原理是什么？">
+                    <button class="btn btn-sm btn-primary explanation-question-send">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        发送
+                    </button>
+                </div>
+            `;
+
+            const sendBtn = explanationBody.querySelector('.explanation-question-send');
+            const input = explanationBody.querySelector('.explanation-question-input');
+
+            const doSend = () => {
+                const question = input.value.trim();
                 explanationBody.innerHTML = `
-                    <div class="explanation-result">
-                        <div class="explanation-header">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
-                            <span>为您定制的解释</span>
-                        </div>
-                        <div class="explanation-body">${formattedExplanation}</div>
-                        <div class="explanation-actions">
-                            <button class="btn btn-sm btn-outline save-explanation-note" title="将此解释保存为笔记">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                </svg>
-                                保存为笔记
-                            </button>
-                        </div>
+                    <div class="ai-loading">
+                        <div class="ai-spinner"></div>
+                        <p>正在根据您的背景生成个性化解释...</p>
                     </div>
                 `;
+                this._renderExplanation(text, question, chapter, chapterContext);
+            };
 
-                // Bind save-to-note button
-                const saveBtn = explanationBody.querySelector('.save-explanation-note');
-                if (saveBtn) {
-                    saveBtn.addEventListener('click', () => {
-                        this._saveExplanationAsNote(text, explanation, chapter);
-                        saveBtn.textContent = '已保存 ✓';
-                        saveBtn.classList.add('saved');
-                        saveBtn.disabled = true;
-                        setTimeout(() => {
-                            saveBtn.innerHTML = `
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                </svg>
-                                保存为笔记
-                            `;
-                            saveBtn.classList.remove('saved');
-                            saveBtn.disabled = false;
-                        }, 2000);
-                    });
-                }
-            }
-        });
+            sendBtn.addEventListener('click', doSend);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') doSend();
+            });
+            setTimeout(() => input.focus(), 100);
+        }
+    },
+
+    async _renderExplanation(selectedText, question, chapter, chapterContext) {
+        const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
+        const explanation = await this.generateExplanation(selectedText, chapterContext, question);
+        if (!explanationBody) return;
+
+        const formattedExplanation = this.formatAIResponse(explanation);
+        const questionHtml = question
+            ? `<div class="explanation-question-display">你的问题：${this.escapeHtml(question)}</div>`
+            : '';
+
+        explanationBody.innerHTML = `
+            <div class="explanation-result">
+                <div class="explanation-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>为您定制的解释</span>
+                </div>
+                ${questionHtml}
+                <div class="explanation-body">${formattedExplanation}</div>
+                <div class="explanation-actions">
+                    <button class="btn btn-sm btn-outline save-explanation-note" title="将此解释保存为笔记">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        保存为笔记
+                    </button>
+                </div>
+            </div>
+        `;
+
+        const saveBtn = explanationBody.querySelector('.save-explanation-note');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
+                this._saveExplanationAsNote(selectedText, explanation, chapter);
+                saveBtn.textContent = '已保存 ✓';
+                saveBtn.classList.add('saved');
+                saveBtn.disabled = true;
+                setTimeout(() => {
+                    saveBtn.innerHTML = `
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        保存为笔记
+                    `;
+                    saveBtn.classList.remove('saved');
+                    saveBtn.disabled = false;
+                }, 2000);
+            });
+        }
     },
 
     _saveExplanationAsNote(selectedText, explanation, chapter) {
@@ -447,14 +480,21 @@ const AIModule = {
         throw new Error(`No API key configured for ${provider}`);
     },
 
-    async generateExplanation(text, chapterContext = '') {
+    async generateExplanation(text, chapterContext = '', question = '') {
         const user = this.state.user;
         const level = user?.level || 'beginner';
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
 
-        const userContent = chapterContext
-            ? `请解释以下纳米制造技术概念："${text}"\n\n${chapterContext}`
-            : `请解释以下纳米制造技术概念："${text}"`;
+        let userContent;
+        if (question) {
+            userContent = `用户选中了以下文本："${text}"\n\n用户提出的问题：${question}`;
+            if (chapterContext) userContent += `\n\n${chapterContext}`;
+            userContent += `\n\n请针对用户的问题进行解释，结合选中的文本内容进行回答。`;
+        } else if (chapterContext) {
+            userContent = `请解释以下纳米制造技术概念："${text}"\n\n${chapterContext}`;
+        } else {
+            userContent = `请解释以下纳米制造技术概念："${text}"`;
+        }
 
         const systemPrompt = this.buildSystemPrompt(user, 'explanation');
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
