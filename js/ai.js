@@ -56,6 +56,7 @@ const AIModule = {
     },
 
     showAIExplanation(text) {
+        console.log('[AI] showAIExplanation v2 with question input');
         this.openAISidebar();
         this.switchAISidebarTab('explanation');
 
