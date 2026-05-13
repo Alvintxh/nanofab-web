@@ -1,3 +1,6 @@
+-- ⚠️ 已废弃 / DEPRECATED — 被 schema_v2.sql 取代
+-- 新项目请执行 schema.sql（建表）→ schema_v2.sql（迁移）
+-- 本文件保留仅供历史参考
 -- ============================================
 -- Fix RLS Policies for NanoFab Learning Platform
 -- 收紧安全策略 + 添加唯一约束
