@@ -39,18 +39,19 @@ const ComicModule = {
             if (!panels?.length) throw new Error('分镜脚本生成失败');
 
             // 3. 逐格生成图像（串行，避免并发限流）
+            this._imageModel = 'cogview-4'; // 每次生成从最优模型开始，余额不足自动降级
             let consecutiveFails = 0;
             for (let i = 0; i < panels.length; i++) {
                 this._setComicStatus(`正在绘制第 ${i + 1} / ${panels.length} 格…`);
                 try {
-                    panels[i].image = await this._generateComicImage(panels[i].scene);
+                    panels[i].image = await this._drawPanel(panels[i].scene);
                     consecutiveFails = 0;
                 } catch (e) {
                     // 重试一次（应对偶发限流 / 超时）
                     console.warn(`第 ${i + 1} 格出图失败，重试一次：`, e.message);
                     try {
                         await new Promise(r => setTimeout(r, 1500));
-                        panels[i].image = await this._generateComicImage(panels[i].scene);
+                        panels[i].image = await this._drawPanel(panels[i].scene);
                         consecutiveFails = 0;
                     } catch (e2) {
                         panels[i].image = null;
@@ -119,22 +120,46 @@ const ComicModule = {
         return (parsed.panels || []).slice(0, this._COMIC_PANELS);
     },
 
-    async _generateComicImage(scene) {
+    // 出图模型降级链：cogview-4(付费) → cogview-3-flash(免费)。
+    // 记住当前可用模型，避免每格都重复试已失败的付费模型。
+    async _drawPanel(scene) {
+        const chain = this._imageModel === 'cogview-3-flash'
+            ? ['cogview-3-flash']
+            : ['cogview-4', 'cogview-3-flash'];
+        let lastErr;
+        for (const model of chain) {
+            try {
+                const url = await this._generateComicImage(scene, model);
+                if (this._imageModel !== model) {
+                    console.warn(`出图模型切换为 ${model}`);
+                    this._imageModel = model;
+                }
+                return url;
+            } catch (e) {
+                lastErr = e;
+                // 仅在付费/授权类错误时降级；其他错误（限流等）直接抛出由上层重试
+                if (!/1113|余额|资源包|1211|1261|模型|权限|授权/.test(e.message)) throw e;
+                console.warn(`${model} 不可用（${e.message}），尝试降级`);
+            }
+        }
+        throw lastErr;
+    },
+
+    async _generateComicImage(scene, model = 'cogview-4') {
         const edgeUrl = SUPABASE_URL + '/functions/v1/ai-proxy';
         const headers = { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY };
         const { data: { session } } = await this.supabase.auth.getSession();
         if (session?.access_token) headers['Authorization'] = `Bearer ${session.access_token}`;
 
+        // cogview-3-flash prompt 上限约 224 tokens，需精简场景与画风
+        const prompt = model === 'cogview-3-flash'
+            ? `${scene.slice(0, 130)}。扁平科普插画风格，蓝青配色，画面干净专业，不要出现文字`
+            : `${scene}。${this._COMIC_STYLE}`;
+
         const resp = await fetch(edgeUrl, {
             method: 'POST',
             headers,
-            body: JSON.stringify({
-                task: 'image',
-                model: 'cogview-4',
-                // 场景描述在前（CogView 对靠前内容权重更高），画风约束在后
-                prompt: `${scene}。${this._COMIC_STYLE}`,
-                size: '1024x1024'
-            })
+            body: JSON.stringify({ task: 'image', model, prompt, size: '1024x1024' })
         });
         const data = await resp.json().catch(() => ({}));
         if (!resp.ok || !data.url) {
