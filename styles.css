@@ -114,7 +114,7 @@ input, select, textarea {
 
 .onboarding-container {
     width: 100%;
-    max-width: 1040px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 48px 24px;
     display: flex;
@@ -193,7 +193,7 @@ input, select, textarea {
     box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 20px rgba(0,78,161,0.04);
 }
 .welcome-nav-inner {
-    max-width: 920px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 12px 20px;
     display: flex;
@@ -410,7 +410,7 @@ input, select, textarea {
     color: #0a1628;
     letter-spacing: -0.04em;
     line-height: 1.2;
-    max-width: 700px;
+    max-width: 920px;
 }
 
 .welcome-title-highlight {
@@ -525,6 +525,9 @@ input, select, textarea {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     position: relative;
     z-index: 1;
 }
@@ -669,7 +672,7 @@ input, select, textarea {
     display: flex;
     align-items: stretch;
     gap: 0;
-    max-width: 920px;
+    max-width: 1100px;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -887,7 +890,7 @@ input, select, textarea {
     display: flex;
     flex-direction: column;
     gap: 36px;
-    max-width: 900px;
+    max-width: 1080px;
     width: 100%;
     position: relative;
     z-index: 1;
