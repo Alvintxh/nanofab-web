@@ -9,6 +9,12 @@ const ComicModule = {
 
     _COMIC_PANELS: 12,
 
+    // 缓存键按用户隔离：漫画已按画像个性化，避免同浏览器换账号看到他人版本
+    _comicCacheKey(chapterId) {
+        const uid = this.state.user?.id || 'anon';
+        return `nanofab_comic_v3_${uid}_${chapterId}`;
+    },
+
     async generateChapterComic() {
         const chapter = this.state.currentChapter;
         if (!chapter) {
@@ -16,7 +22,7 @@ const ComicModule = {
             return;
         }
 
-        const cacheKey = `nanofab_comic_v3_${chapter.id}`;
+        const cacheKey = this._comicCacheKey(chapter.id);
         const cached = localStorage.getItem(cacheKey);
         if (cached) {
             try {
@@ -93,7 +99,10 @@ const ComicModule = {
 3. 每格的 dialogue 要讲清楚一个**具体**的知识点：它是什么、为什么、怎么做，必要时用类比帮助理解。每格 1~3 句、可到 60 字，要有真实信息量，杜绝空话套话。
 4. 公式和复杂示意图不要试图画出来，用通俗语言和类比表达其含义。
 5. 每格的 scene 是给文生图模型的**中文画面描述**，必须紧扣该格正在讲的知识点：先描述这只蓝白机器人猫向导和/或学生男孩在做什么、什么表情，再描述能直观体现该知识点的画面元素（相关设备、材料、晶圆、原子/分子结构、工艺流程步骤、对比示意等），让角色与之互动。画面里不要出现任何文字。
-6. 严格只输出 JSON：{"panels":[{"scene":"中文画面描述","speaker":"讲解员/学生/旁白","dialogue":"中文对白"}]}，不要任何额外说明或代码块标记。`;
+6. 根据下面的【用户画像】和【个性化讲解要求】定制每格讲解的深浅、侧重和举例，让这份漫画真正贴合这位用户。
+7. 严格只输出 JSON：{"panels":[{"scene":"中文画面描述","speaker":"讲解员/学生/旁白","dialogue":"中文对白"}]}，不要任何额外说明或代码块标记。`
+            + this._buildComicPersonalization()
+            + `\n\n再次强调：只输出上述 JSON，不要任何解释或代码块标记。`;
 
         const userMsg = `章节标题：${title}\n\n章节内容：\n${text}`;
         let raw = '', lastErr = null;
@@ -119,6 +128,49 @@ const ComicModule = {
         const match = jsonStr.match(/\{[\s\S]*\}/);
         const parsed = JSON.parse(match ? match[0] : jsonStr);
         return (parsed.panels || []).slice(0, this._COMIC_PANELS);
+    },
+
+    // 根据用户画像 + 行为数据，生成个性化讲解要求，注入脚本提示词
+    _buildComicPersonalization() {
+        const user = this.state.user;
+        if (!user) return '';
+
+        const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
+        const motivationMap = { course: '课程考试', research: '科研需要', career: '职业发展', interest: '个人兴趣' };
+        const prereqMap = { physics: '大学物理', chemistry: '化学/材料', electronics: '电子工程', semiconductor: '半导体器件', none: '无特定基础', zero: '毫无基础' };
+        const areaMap = { semiconductor: '半导体集成电路', photonics: '光子学/光电子', biotech: '纳米生物技术', energy: '能源/电池', mems: 'MEMS/NEMS', quantum: '量子计算' };
+
+        // 画像
+        const profile = [`学习水平：${levelMap[user.level] || '初学者'}`];
+        if (user.background) profile.push(`专业背景：${user.background}`);
+        if (user.motivation?.length) profile.push(`学习动机：${user.motivation.map(x => motivationMap[x] || x).join('、')}`);
+        if (user.prerequisite?.length) profile.push(`先修知识：${user.prerequisite.map(x => prereqMap[x] || x).join('、')}`);
+        if (user.interestArea?.length) profile.push(`兴趣领域：${user.interestArea.map(x => areaMap[x] || x).join('、')}`);
+
+        const bp = user.behaviorProfile || {};
+        if (bp.weakTopics?.length) profile.push(`薄弱环节：${bp.weakTopics.join('、')}`);
+        if (bp.strongTopics?.length) profile.push(`擅长领域：${bp.strongTopics.join('、')}`);
+        if (bp.quizAccuracy > 0) profile.push(`测验正确率：${Math.round(bp.quizAccuracy * 100)}%`);
+
+        // 个性化讲解要求
+        const depthByLevel = {
+            zero: '用户毫无基础：全程用最简单的生活类比，完全避免专业术语和公式，每格先点明"这个概念解决什么问题、为什么重要"。',
+            beginner: '用户是初学者：多用类比和直观比喻，避免复杂公式，重在建立整体直觉。',
+            intermediate: '用户是中级水平：可引入关键技术参数和物理机制，并联系实际工艺，不必停留在最浅层。',
+            advanced: '用户是高级水平：深入工程细节、优化权衡与前沿进展，类比点到为止，可讨论参数与机理。'
+        };
+        const instr = [depthByLevel[user.level] || depthByLevel.beginner];
+        if (user.motivation?.includes('course')) instr.push('用户以考试为目标：突出考点、易错点和关键结论。');
+        if (user.motivation?.includes('research')) instr.push('用户偏科研：适当点出原理深度与研究前沿。');
+        if (user.motivation?.includes('career')) instr.push('用户偏职业发展：强调实际工艺操作与工程应用价值。');
+        if (user.interestArea?.length) instr.push(`举例时优先结合用户感兴趣的领域（${user.interestArea.map(x => areaMap[x] || x).join('、')}）。`);
+
+        // 当前章节是否命中薄弱环节
+        const ch = this.state.currentChapter;
+        const isWeak = ch && bp.weakTopics?.some(t => ch.title.includes(t) || t.includes(ch.title));
+        if (isWeak) instr.push('本章属于用户的薄弱环节：相关知识点讲得更细致、放慢节奏、多给正例与反例。');
+
+        return `\n\n【用户画像】\n${profile.join('；')}\n\n【个性化讲解要求】\n- ${instr.join('\n- ')}`;
     },
 
     // 出图模型降级链：cogview-4(付费) → cogview-3-flash(免费)。
@@ -195,7 +247,7 @@ const ComicModule = {
             modal.querySelector('#comic-regenerate').addEventListener('click', () => {
                 const ch = this.state.currentChapter;
                 if (ch) {
-                    localStorage.removeItem(`nanofab_comic_v3_${ch.id}`);
+                    localStorage.removeItem(this._comicCacheKey(ch.id));
                     this.generateChapterComic();
                 }
             });
