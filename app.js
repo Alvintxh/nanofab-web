@@ -120,8 +120,18 @@ const App = {
             });
         });
 
+        // Welcome 顶部锚点导航：平滑滚动 + 高亮当前区
+        document.querySelectorAll('.welcome-nav [data-scroll]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.getElementById(el.dataset.scroll);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
         // Scroll-reveal observer
         this._initScrollReveal();
+        this._initWelcomeNavSpy();
 
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
@@ -1595,6 +1605,28 @@ const App = {
 
         document.querySelectorAll('[data-reveal]').forEach(el => {
             observer.observe(el);
+        });
+    },
+
+    _initWelcomeNavSpy() {
+        const links = document.querySelectorAll('.welcome-nav-link[data-scroll]');
+        if (!links.length || this._navSpyInited) return;
+        this._navSpyInited = true;
+
+        const linkFor = (id) => document.querySelector(`.welcome-nav-link[data-scroll="${id}"]`);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    links.forEach(l => l.classList.remove('active'));
+                    const active = linkFor(entry.target.id);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+        ['w-features', 'w-compare', 'w-details', 'w-cta'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
         });
     },
 

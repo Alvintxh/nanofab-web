@@ -167,8 +167,90 @@ input, select, textarea {
     flex-direction: column;
     align-items: center;
     gap: 100px;
-    padding: 60px 0 80px;
+    padding: 0 0 80px;
     position: relative;
+    scroll-behavior: smooth;
+}
+
+/* ==================== STICKY ANCHOR NAV ==================== */
+.welcome-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    margin-bottom: -64px; /* 抵消 welcome-section 的 100px gap，使其下方留白合理 */
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0,78,161,0.10);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 20px rgba(0,78,161,0.04);
+}
+.welcome-nav-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.welcome-nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display, sans-serif);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #0a1628;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.welcome-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.welcome-nav-links::-webkit-scrollbar { display: none; }
+.welcome-nav-link {
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-secondary, #475569);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+.welcome-nav-link:hover {
+    color: var(--color-primary, #004EA1);
+    background: rgba(0,78,161,0.06);
+}
+.welcome-nav-link.active {
+    color: var(--color-primary, #004EA1);
+    background: rgba(0,78,161,0.09);
+}
+.welcome-nav-cta {
+    color: #fff !important;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #0070d6 100%);
+    box-shadow: 0 2px 10px rgba(0,78,161,0.28);
+}
+.welcome-nav-cta:hover {
+    background: linear-gradient(135deg, #003a7a 0%, #005bb8 100%) !important;
+    color: #fff !important;
+}
+
+/* 锚点目标避开吸顶导航 */
+#w-hero, #w-features, #w-compare, #w-details, #w-cta {
+    scroll-margin-top: 76px;
+}
+
+@media (max-width: 600px) {
+    .welcome-nav-brand span { display: none; }
+    .welcome-nav-inner { padding: 10px 14px; }
+    .welcome-nav-link { padding: 6px 11px; font-size: 0.82rem; }
 }
 
 /* ==================== BACKGROUND ==================== */

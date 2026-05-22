@@ -32,8 +32,30 @@
                     <div class="welcome-bg-noise"></div>
                 </div>
 
+                <!-- Sticky anchor navigation -->
+                <nav class="welcome-nav">
+                    <div class="welcome-nav-inner">
+                        <a class="welcome-nav-brand" data-scroll="w-hero">
+                            <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+                                <rect x="8" y="8" width="48" height="48" rx="4" fill="none" stroke="var(--color-primary)" stroke-width="3"/>
+                                <circle cx="24" cy="24" r="5" fill="var(--color-primary)"/>
+                                <circle cx="40" cy="24" r="5" fill="var(--color-accent)"/>
+                                <circle cx="24" cy="40" r="5" fill="var(--color-accent)"/>
+                                <circle cx="40" cy="40" r="5" fill="var(--color-primary)"/>
+                            </svg>
+                            <span>NanoFab</span>
+                        </a>
+                        <div class="welcome-nav-links">
+                            <a class="welcome-nav-link" data-scroll="w-features">核心功能</a>
+                            <a class="welcome-nav-link" data-scroll="w-compare">为什么选 AI</a>
+                            <a class="welcome-nav-link" data-scroll="w-details">功能详情</a>
+                            <a class="welcome-nav-link welcome-nav-cta" data-scroll="w-cta">开始使用</a>
+                        </div>
+                    </div>
+                </nav>
+
                 <!-- Hero -->
-                <div class="welcome-hero">
+                <div class="welcome-hero" id="w-hero">
                     <div class="welcome-hero-badge">
                         <span class="welcome-hero-badge-dot"></span>
                         基于《纳米制造技术：原理、工艺与实践》
@@ -67,7 +89,7 @@
                 </div>
 
                 <!-- Feature Cards -->
-                <div class="welcome-section-label">核心功能</div>
+                <div class="welcome-section-label" id="w-features">核心功能</div>
                 <div class="welcome-features">
                     <div class="welcome-feature-card" data-feature="explanation" style="--delay: 0">
                         <div class="welcome-feature-icon">
@@ -142,7 +164,7 @@
                 </div>
 
                 <!-- Comparison -->
-                <div class="welcome-section-label">为什么选择 AI 驱动学习</div>
+                <div class="welcome-section-label" id="w-compare">为什么选择 AI 驱动学习</div>
                 <div class="welcome-compare">
                     <div class="welcome-compare-card welcome-compare-old">
                         <div class="welcome-compare-header">
@@ -176,7 +198,7 @@
                 </div>
 
                 <!-- CTA -->
-                <div class="welcome-cta-section">
+                <div class="welcome-cta-section" id="w-cta">
                     <h2>准备好开始你的学习之旅了吗？</h2>
                     <p>免费注册，即刻体验 AI 驱动的个性化学习。</p>
                     <button id="welcome-cta" class="welcome-cta">
@@ -189,7 +211,7 @@
                 </div>
 
                 <!-- Feature Detail Sections (scroll-reveal) -->
-                <div class="welcome-section-label">功能详情</div>
+                <div class="welcome-section-label" id="w-details">功能详情</div>
                 <div class="welcome-details">
 
                     <div class="welcome-detail" id="detail-explanation" data-reveal>
