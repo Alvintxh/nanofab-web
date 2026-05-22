@@ -200,6 +200,11 @@ const App = {
             markComplete.addEventListener('click', () => this.markChapterComplete());
         }
 
+        const comicBtn = document.getElementById('generate-comic-btn');
+        if (comicBtn) {
+            comicBtn.addEventListener('click', () => this.generateChapterComic());
+        }
+
         const verifyForm = document.getElementById('verify-form');
         if (verifyForm) verifyForm.addEventListener('submit', (e) => this.handleVerify(e));
 
@@ -1600,6 +1605,7 @@ const App = {
 Object.assign(App, BehaviorModule);
 Object.assign(App, AIModule);
 Object.assign(App, AuthModule);
+Object.assign(App, ComicModule);
 
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
