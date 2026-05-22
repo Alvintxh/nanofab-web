@@ -3,9 +3,9 @@
 
 const ComicModule = {
     // 画风后缀：放在具体场景之后，避免淹没画面主体（CogView 对靠前的描述权重更高）
-    _COMIC_STYLE: '整体风格：扁平现代科普插画，简洁矢量线条，蓝色(#004EA1)与青色为主色调，' +
-        '画面干净专业；若出现人物则统一为同一位短发、穿白大褂的年轻女科学家讲解员。' +
-        '画面中不要出现任何文字、字母或数字。',
+    _COMIC_STYLE: '整体风格：可爱的日系科普漫画卡通风，明亮活泼的色彩，圆润造型，干净的粗描边线条；' +
+        '固定角色为一只圆滚滚、友善的蓝白色机器人猫咪向导（大眼睛、表情生动）和一个好奇的学生男孩，' +
+        '让这两个角色出现在场景里与知识点互动。画面中不要出现任何文字、字母或数字。',
 
     _COMIC_PANELS: 12,
 
@@ -16,7 +16,7 @@ const ComicModule = {
             return;
         }
 
-        const cacheKey = `nanofab_comic_v2_${chapter.id}`;
+        const cacheKey = `nanofab_comic_v3_${chapter.id}`;
         const cached = localStorage.getItem(cacheKey);
         if (cached) {
             try {
@@ -89,10 +89,11 @@ const ComicModule = {
 
 要求：
 1. 先在心里梳理本章的核心知识点（基本原理、关键工艺、重要概念、典型应用），按"由浅入深、循序渐进"的教学逻辑铺满 ${this._COMIC_PANELS} 格，确保覆盖本章主要知识点，不要泛泛而谈或重复。
-2. 每格的 dialogue 要讲清楚一个**具体**的知识点：它是什么、为什么、怎么做，必要时用类比帮助理解。每格 1~3 句、可到 60 字，要有真实信息量，杜绝空话套话。以"讲解员"主讲，"学生"适时提问推进节奏。
-3. 公式和复杂示意图不要试图画出来，用通俗语言和类比表达其含义。
-4. 每格的 scene 是给文生图模型的**中文画面描述**，必须紧扣该格正在讲的知识点：描述能直观体现这个概念的具体画面（相关设备、材料、晶圆、原子/分子结构、工艺流程步骤、对比示意等），可让讲解员角色出现在场景中与之互动。画面里不要出现任何文字。
-5. 严格只输出 JSON：{"panels":[{"scene":"中文画面描述","speaker":"讲解员/学生/旁白","dialogue":"中文对白"}]}，不要任何额外说明或代码块标记。`;
+2. 角色设定：主讲是一只可爱友善的蓝白色机器人猫咪向导（称"讲解员"），搭档是一个好奇爱提问的学生男孩（称"学生"）。讲解员主讲知识点，学生适时提问推进节奏。
+3. 每格的 dialogue 要讲清楚一个**具体**的知识点：它是什么、为什么、怎么做，必要时用类比帮助理解。每格 1~3 句、可到 60 字，要有真实信息量，杜绝空话套话。
+4. 公式和复杂示意图不要试图画出来，用通俗语言和类比表达其含义。
+5. 每格的 scene 是给文生图模型的**中文画面描述**，必须紧扣该格正在讲的知识点：先描述这只蓝白机器人猫向导和/或学生男孩在做什么、什么表情，再描述能直观体现该知识点的画面元素（相关设备、材料、晶圆、原子/分子结构、工艺流程步骤、对比示意等），让角色与之互动。画面里不要出现任何文字。
+6. 严格只输出 JSON：{"panels":[{"scene":"中文画面描述","speaker":"讲解员/学生/旁白","dialogue":"中文对白"}]}，不要任何额外说明或代码块标记。`;
 
         const userMsg = `章节标题：${title}\n\n章节内容：\n${text}`;
         let raw = '', lastErr = null;
@@ -153,7 +154,7 @@ const ComicModule = {
 
         // cogview-3-flash prompt 上限约 224 tokens，需精简场景与画风
         const prompt = model === 'cogview-3-flash'
-            ? `${scene.slice(0, 130)}。扁平科普插画风格，蓝青配色，画面干净专业，不要出现文字`
+            ? `${scene.slice(0, 100)}。可爱日系卡通科普漫画，圆润蓝白机器人猫向导与学生男孩，明亮干净，不要文字`
             : `${scene}。${this._COMIC_STYLE}`;
 
         const resp = await fetch(edgeUrl, {
@@ -194,7 +195,7 @@ const ComicModule = {
             modal.querySelector('#comic-regenerate').addEventListener('click', () => {
                 const ch = this.state.currentChapter;
                 if (ch) {
-                    localStorage.removeItem(`nanofab_comic_v2_${ch.id}`);
+                    localStorage.removeItem(`nanofab_comic_v3_${ch.id}`);
                     this.generateChapterComic();
                 }
             });
@@ -225,21 +226,32 @@ const ComicModule = {
         if (titleEl) titleEl.textContent = `《${chapter.title}》漫画版`;
 
         const body = document.getElementById('comic-body');
-        const speakerClass = (s) => s === '学生' ? 'left' : s === '旁白' ? 'narration' : 'right';
+        const sideClass = (s) => s === '学生' ? 'left' : s === '旁白' ? 'narration' : 'right';
 
-        body.innerHTML = panels.map((p, i) => `
-            <div class="comic-panel">
-                <div class="comic-panel-img">
+        const frames = panels.map((p, i) => `
+            <div class="comic-frame">
+                <div class="comic-frame-img">
                     ${p.image
                         ? `<img src="${p.image}" alt="第${i + 1}格" loading="lazy">`
                         : `<div class="comic-img-placeholder">🖼️ 第 ${i + 1} 格出图失败${p.imageError ? `<br><span class="comic-img-err">${p.imageError}</span>` : ''}</div>`}
                     <span class="comic-panel-num">${i + 1}</span>
                 </div>
-                ${p.dialogue ? `<div class="comic-bubble comic-bubble-${speakerClass(p.speaker)}">
+                ${p.dialogue ? `<div class="comic-bubble comic-bubble-${sideClass(p.speaker)}">
                     <span class="comic-speaker">${p.speaker || ''}</span>
                     <p>${p.dialogue}</p>
                 </div>` : ''}
             </div>
-        `).join('') + `<p class="comic-footnote">由 AI 根据章节内容生成，仅供概念理解辅助，细节以正文为准。</p>`;
+        `).join('');
+
+        body.innerHTML = `
+            <div class="comic-page">
+                <div class="comic-banner">
+                    <span class="comic-banner-tag">科普漫画</span>
+                    <h3>${chapter.title}</h3>
+                    <span class="comic-banner-sub">和机器人猫向导一起学纳米制造</span>
+                </div>
+                <div class="comic-strip">${frames}</div>
+                <p class="comic-footnote">由 AI 根据章节内容生成，仅供概念理解辅助，细节以正文为准。</p>
+            </div>`;
     }
 };
