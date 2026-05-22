@@ -114,12 +114,19 @@ input, select, textarea {
 
 .onboarding-container {
     width: 100%;
-    max-width: 780px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 48px 24px;
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+/* 登录/注册表单保持窄居中，不随欢迎页一起撑宽 */
+#onboarding-auth {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .onboarding-hero {
@@ -437,6 +444,9 @@ input, select, textarea {
     align-items: center;
     gap: 64px;
     padding: 36px 72px;
+    max-width: 760px;
+    width: 100%;
+    justify-content: center;
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
