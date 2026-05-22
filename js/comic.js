@@ -58,9 +58,10 @@ const ComicModule = {
     },
 
     async _buildComicScript(title, text) {
-        // 漫画功能基于智谱（出图用 CogView），脚本统一用智谱最强文本模型 glm-4-plus
+        // 漫画功能基于智谱（出图用 CogView）。脚本优先用最强模型，不可用则自动降级，
+        // 保证即使账号未开通 glm-4-plus / 余额不足也能正常生成。
         const provider = 'zhipu';
-        const model = 'glm-4-plus';
+        const modelChain = ['glm-4-plus', 'glm-4-air', 'glm-4-flash'];
 
         const sys = `你是顶尖的科普漫画编剧，擅长把复杂的纳米制造技术讲解得准确、生动、循序渐进。
 
@@ -73,10 +74,24 @@ const ComicModule = {
 4. 每格的 scene 是给文生图模型的**中文画面描述**，必须紧扣该格正在讲的知识点：描述能直观体现这个概念的具体画面（相关设备、材料、晶圆、原子/分子结构、工艺流程步骤、对比示意等），可让讲解员角色出现在场景中与之互动。画面里不要出现任何文字。
 5. 严格只输出 JSON：{"panels":[{"scene":"中文画面描述","speaker":"讲解员/学生/旁白","dialogue":"中文对白"}]}，不要任何额外说明或代码块标记。`;
 
-        const raw = await this.callAIProvider(provider, model, [
-            { role: 'system', content: sys },
-            { role: 'user', content: `章节标题：${title}\n\n章节内容：\n${text}` }
-        ], 4096, 0.8);
+        const userMsg = `章节标题：${title}\n\n章节内容：\n${text}`;
+        let raw = '', lastErr = null;
+        for (const model of modelChain) {
+            try {
+                raw = await this.callAIProvider(provider, model, [
+                    { role: 'system', content: sys },
+                    { role: 'user', content: userMsg }
+                ], 4096, 0.8);
+                if (raw) {
+                    console.info(`漫画脚本由 ${model} 生成`);
+                    break;
+                }
+            } catch (e) {
+                lastErr = e;
+                console.warn(`脚本模型 ${model} 不可用，尝试降级：`, e.message);
+            }
+        }
+        if (!raw) throw lastErr || new Error('脚本生成失败');
 
         // 容错解析：去掉可能的 ```json 包裹
         const jsonStr = raw.replace(/```json\s*|\s*```/g, '').trim();
