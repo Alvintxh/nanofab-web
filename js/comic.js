@@ -39,13 +39,32 @@ const ComicModule = {
             if (!panels?.length) throw new Error('分镜脚本生成失败');
 
             // 3. 逐格生成图像（串行，避免并发限流）
+            let consecutiveFails = 0;
             for (let i = 0; i < panels.length; i++) {
                 this._setComicStatus(`正在绘制第 ${i + 1} / ${panels.length} 格…`);
                 try {
                     panels[i].image = await this._generateComicImage(panels[i].scene);
+                    consecutiveFails = 0;
                 } catch (e) {
-                    console.warn('Panel image failed:', e.message);
-                    panels[i].image = null; // 出图失败用占位
+                    // 重试一次（应对偶发限流 / 超时）
+                    console.warn(`第 ${i + 1} 格出图失败，重试一次：`, e.message);
+                    try {
+                        await new Promise(r => setTimeout(r, 1500));
+                        panels[i].image = await this._generateComicImage(panels[i].scene);
+                        consecutiveFails = 0;
+                    } catch (e2) {
+                        panels[i].image = null;
+                        panels[i].imageError = e2.message; // 真实错误，渲染时显示
+                        consecutiveFails++;
+                        // 连续两格失败视为系统性问题，提前中止以免烧光出图额度
+                        if (consecutiveFails >= 2) {
+                            for (let j = i + 1; j < panels.length; j++) {
+                                panels[j].image = null;
+                                panels[j].imageError = '已跳过（前面连续出图失败）';
+                            }
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -117,8 +136,10 @@ const ComicModule = {
                 size: '1024x1024'
             })
         });
-        const data = await resp.json();
-        if (!resp.ok || !data.url) throw new Error(data.error || '图像生成失败');
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok || !data.url) {
+            throw new Error(data.error || `HTTP ${resp.status}`);
+        }
         return data.url;
     },
 
@@ -186,7 +207,7 @@ const ComicModule = {
                 <div class="comic-panel-img">
                     ${p.image
                         ? `<img src="${p.image}" alt="第${i + 1}格" loading="lazy">`
-                        : `<div class="comic-img-placeholder">🖼️ 第 ${i + 1} 格出图失败</div>`}
+                        : `<div class="comic-img-placeholder">🖼️ 第 ${i + 1} 格出图失败${p.imageError ? `<br><span class="comic-img-err">${p.imageError}</span>` : ''}</div>`}
                     <span class="comic-panel-num">${i + 1}</span>
                 </div>
                 ${p.dialogue ? `<div class="comic-bubble comic-bubble-${speakerClass(p.speaker)}">

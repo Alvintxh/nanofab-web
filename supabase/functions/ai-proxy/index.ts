@@ -65,8 +65,11 @@ serve(async (req: Request) => {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
+      // Surface the real CogView error (code + message) for debugging
+      const errCode = data.error?.code ? `[${data.error.code}] ` : "";
+      const errMsg = data.error?.message || JSON.stringify(data).slice(0, 200);
       return new Response(
-        JSON.stringify({ error: data.error?.message || "CogView image generation failed" }),
+        JSON.stringify({ error: `CogView: ${errCode}${errMsg}` }),
         { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

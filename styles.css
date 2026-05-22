@@ -4571,3 +4571,11 @@ input, select, textarea {
 @media (max-width: 640px) {
     .comic-modal-content { margin: 0; height: 100vh; border-radius: 0; max-width: 100%; }
 }
+.comic-img-err {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    color: var(--color-accent, #9D0A12);
+    word-break: break-all;
+    max-width: 90%;
+}
