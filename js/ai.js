@@ -421,6 +421,7 @@ const AIModule = {
         const parts = [];
 
         parts.push('你是一位纳米制造技术专家，正在帮助用户学习《纳米制造技术：原理、工艺与实践》。请使用Markdown格式输出，包括标题、列表、粗体等，让内容结构清晰易读。');
+        parts.push('所有数学公式必须使用 LaTeX 语法：行内公式用 $...$ 包裹，独立成行的公式用 $$...$$ 包裹。绝对不要用方括号 [ ] 或圆括号 ( ) 来包裹公式。例如：行内写 $N_A$、$\\Delta\\lambda$，独立公式写 $$\\Delta\\lambda = \\frac{1.22\\lambda}{N_A}$$。');
 
         if (user) {
             const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
@@ -1270,11 +1271,25 @@ const AIModule = {
     formatAIResponse(text) {
         if (!text) return '';
 
-        // 优先用 marked 做完整 Markdown 渲染（表格、代码块、引用、嵌套列表等）
+        // 1) 统一数学定界符：\[ \] → $$ , \( \) → $
+        text = text
+            .replace(/\\\[/g, '$$$$').replace(/\\\]/g, '$$$$')
+            .replace(/\\\(/g, '$').replace(/\\\)/g, '$');
+
+        // 2) 保护数学片段，避免被 Markdown 解析破坏（下划线、星号、反斜杠等）
+        const mathChunks = [];
+        const stash = (m) => { mathChunks.push(m); return `@@MATH${mathChunks.length - 1}@@`; };
+        text = text
+            .replace(/\$\$([\s\S]+?)\$\$/g, (m) => stash(m))
+            .replace(/\$([^\$\n]+?)\$/g, (m) => stash(m));
+
+        const restore = (html) => html.replace(/@@MATH(\d+)@@/g, (_, i) => mathChunks[+i] || '');
+
+        // 3) 用 marked 渲染 Markdown（表格、代码块、引用、嵌套列表等）
         if (typeof marked !== 'undefined') {
             try {
                 const parse = marked.parse || (marked.marked && marked.marked.parse) || marked;
-                return parse(text, { breaks: true, gfm: true });
+                return restore(parse(text, { breaks: true, gfm: true }));
             } catch (e) { /* 解析失败则回退到下方简易渲染 */ }
         }
 
@@ -1322,6 +1337,6 @@ const AIModule = {
             result.push('</ul>');
         }
 
-        return result.join('\n');
+        return restore(result.join('\n'));
     }
 };
