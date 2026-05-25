@@ -512,7 +512,9 @@ const App = {
             const header = document.createElement('button');
             header.className = 'nav-part-header';
             header.innerHTML = `
-                <span>${part.title}</span>
+                <span class="nav-part-index">${partIndex + 1}</span>
+                <span class="nav-part-title">${part.title}</span>
+                <span class="nav-part-count">${part.chapters.length}</span>
                 <span class="nav-part-toggle">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9 18 15 12 9 6"/>
@@ -601,6 +603,11 @@ const App = {
             el.classList.remove('active');
             if (el.dataset.chapterId === chapterId) {
                 el.classList.add('active');
+                // 自动展开当前章节所在的部分
+                const part = el.closest('.nav-part');
+                if (part && !part.classList.contains('expanded')) {
+                    part.classList.add('expanded');
+                }
             }
         });
     },

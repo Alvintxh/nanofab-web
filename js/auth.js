@@ -693,6 +693,12 @@ const AuthModule = {
         if (aiToggle) aiToggle.classList.add('hidden');
         if (app) app.classList.add('ai-open');
 
+        // 目录默认收起（桌面端），AI 面板随之加宽
+        if (app && window.innerWidth > 1024) {
+            app.classList.add('toc-collapsed');
+            if (aiSidebar) aiSidebar.classList.add('ai-wide');
+        }
+
         this.updateUserGreeting();
         this.updateProgress();
     },
