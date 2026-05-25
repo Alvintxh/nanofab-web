@@ -2882,7 +2882,7 @@ input, select, textarea {
     position: fixed;
     top: var(--header-height);
     right: 0;
-    width: 480px;
+    width: 478px;
     max-width: 92vw;
     height: calc(100vh - var(--header-height));
     background: var(--color-surface);
