@@ -221,6 +221,20 @@ const AIModule = {
             <div class="ai-message-content">${body}${actions}</div>
         `;
         messages.appendChild(div);
+        // 渲染回答中的 LaTeX 公式（与正文一致）
+        if (role === 'assistant' && typeof renderMathInElement !== 'undefined') {
+            try {
+                renderMathInElement(div.querySelector('.ai-message-content'), {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                        { left: '\\(', right: '\\)', display: false },
+                        { left: '\\[', right: '\\]', display: true }
+                    ],
+                    throwOnError: false
+                });
+            } catch (e) { /* 公式渲染失败不影响文本 */ }
+        }
         messages.scrollTop = messages.scrollHeight;
         if (canSave) {
             const saveBtn = div.querySelector('.ai-msg-save');
@@ -1054,6 +1068,39 @@ const AIModule = {
         return sections.join('\n\n');
     },
 
+    // 从数据库读取该用户最近的 AI 问答记录（带 30s 缓存），用于回喂给 AI
+    async _fetchRecentAIQueries(limit = 6) {
+        if (!this.supabase) return '';
+        const now = Date.now();
+        if (this._aiHistoryCache && now - this._aiHistoryCache.ts < 30000) {
+            return this._aiHistoryCache.text;
+        }
+        try {
+            const { data: { session } } = await this.supabase.auth.getSession();
+            if (!session?.user) return '';
+            const { data, error } = await this.supabase
+                .from('ai_queries')
+                .select('query_type, user_message, ai_response, created_at')
+                .eq('user_id', session.user.id)
+                .order('created_at', { ascending: false })
+                .limit(limit);
+            if (error || !data?.length) {
+                this._aiHistoryCache = { ts: now, text: '' };
+                return '';
+            }
+            const text = data.reverse().map(q => {
+                const t = q.created_at ? new Date(q.created_at).toLocaleDateString('zh-CN') : '';
+                const ask = (q.user_message || '').replace(/\s+/g, ' ').slice(0, 80);
+                const ans = (q.ai_response || '').replace(/\s+/g, ' ').slice(0, 100);
+                return `- [${t}] 问：${ask} ｜ 答(摘要)：${ans}`;
+            }).join('\n');
+            this._aiHistoryCache = { ts: now, text };
+            return text;
+        } catch (e) {
+            return '';
+        }
+    },
+
     async generateAIResponse(userMessage) {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
@@ -1076,6 +1123,15 @@ const AIModule = {
             messages.push({
                 role: 'system',
                 content: `以下是用户在本学习平台上的个人数据。请在所有回答中结合这些数据，使回答个性化、有针对性。例如：引用用户的笔记内容、提及用户的学习进度、针对错题给出建议、根据学习时长分布推荐学习策略。如果用户要求列出具体内容（如笔记、错题），请逐一列出不要省略。\n\n${dataContext}`
+            });
+        }
+
+        // 注入用户跨会话的历史 AI 问答（从数据库读取），让 AI 了解用户长期关注点与盲区
+        const aiHistory = await this._fetchRecentAIQueries();
+        if (aiHistory) {
+            messages.push({
+                role: 'system',
+                content: `【该用户以往向 AI 提过的问题与回答摘要】（用于理解用户的长期关注点和反复出现的知识盲区。请据此让回答更有针对性、避免重复啰嗦、可在已有基础上进一步深入）：\n${aiHistory}`
             });
         }
 
@@ -1152,6 +1208,14 @@ const AIModule = {
 
     formatAIResponse(text) {
         if (!text) return '';
+
+        // 优先用 marked 做完整 Markdown 渲染（表格、代码块、引用、嵌套列表等）
+        if (typeof marked !== 'undefined') {
+            try {
+                const parse = marked.parse || (marked.marked && marked.marked.parse) || marked;
+                return parse(text, { breaks: true, gfm: true });
+            } catch (e) { /* 解析失败则回退到下方简易渲染 */ }
+        }
 
         let formatted = text
             .replace(/\*\*\*(.+?)\*\*\*/g, '<h3>$1</h3>')
