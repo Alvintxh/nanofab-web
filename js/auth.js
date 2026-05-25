@@ -686,8 +686,11 @@ const AuthModule = {
         if (onboarding) onboarding.classList.remove('active');
         if (app) app.style.display = 'grid';
 
+        // AI 侧边栏默认打开（关闭后才显示打开按钮）
+        const aiSidebar = document.getElementById('ai-sidebar');
         const aiToggle = document.getElementById('ai-sidebar-toggle');
-        if (aiToggle) aiToggle.classList.remove('hidden');
+        if (aiSidebar) aiSidebar.classList.add('open');
+        if (aiToggle) aiToggle.classList.add('hidden');
 
         this.updateUserGreeting();
         this.updateProgress();
@@ -702,6 +705,8 @@ const AuthModule = {
 
         const aiToggle = document.getElementById('ai-sidebar-toggle');
         if (aiToggle) aiToggle.classList.add('hidden');
+        const aiSidebar = document.getElementById('ai-sidebar');
+        if (aiSidebar) aiSidebar.classList.remove('open');
 
         // Show welcome page on first visit, login directly on return visits
         const welcomeSeen = localStorage.getItem('nanofab_welcome_seen');
@@ -739,6 +744,8 @@ const AuthModule = {
         if (welcomeSection) welcomeSection.classList.remove('hidden');
         if (authSection) authSection.classList.add('hidden');
         if (aiToggle) aiToggle.classList.add('hidden');
+        const aiSidebarW = document.getElementById('ai-sidebar');
+        if (aiSidebarW) aiSidebarW.classList.remove('open');
 
         localStorage.removeItem('nanofab_welcome_seen');
 
