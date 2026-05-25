@@ -28,8 +28,78 @@ const App = {
         this.loadBehaviorData();
         this.initBehaviorTracking();
         this.initAIAssistant();
+        this.initResizers();
         this.loadChapters().then(() => {
             this.handleRoute();
+        });
+    },
+
+    // ===== 侧边栏拖动调宽 =====
+    initResizers() {
+        const root = document.documentElement;
+        // 恢复用户保存的宽度
+        const savedToc = parseInt(localStorage.getItem('nanofab_toc_width'), 10);
+        if (savedToc) root.style.setProperty('--sidebar-width', savedToc + 'px');
+        const savedAi = parseInt(localStorage.getItem('nanofab_ai_width'), 10);
+        if (savedAi) {
+            root.style.setProperty('--ai-width', savedAi + 'px');
+            root.style.setProperty('--ai-width-wide', savedAi + 'px');
+        }
+
+        this._makeResizer({
+            target: document.getElementById('sidebar'),
+            handleClass: 'toc-resize-handle',
+            cssVars: ['--sidebar-width'],
+            storageKey: 'nanofab_toc_width',
+            min: 200, max: 480,
+            compute: (e) => e.clientX,
+            enabled: () => window.innerWidth > 1024 &&
+                !document.getElementById('app')?.classList.contains('toc-collapsed')
+        });
+
+        this._makeResizer({
+            target: document.getElementById('ai-sidebar'),
+            handleClass: 'ai-resize-handle',
+            // 同步设置普通/加宽两个变量，避免与目录收起时的自动加宽冲突
+            cssVars: ['--ai-width', '--ai-width-wide'],
+            storageKey: 'nanofab_ai_width',
+            min: 340, max: 760,
+            compute: (e) => window.innerWidth - e.clientX,
+            enabled: () => window.innerWidth > 1024
+        });
+    },
+
+    _makeResizer({ target, handleClass, cssVars, storageKey, min, max, compute, enabled }) {
+        if (!target) return;
+        let handle = target.querySelector('.' + handleClass);
+        if (!handle) {
+            handle = document.createElement('div');
+            handle.className = 'resize-handle ' + handleClass;
+            target.appendChild(handle);
+        }
+        const root = document.documentElement;
+        let dragging = false;
+        const onMove = (e) => {
+            if (!dragging) return;
+            const w = Math.max(min, Math.min(max, Math.round(compute(e))));
+            cssVars.forEach(v => root.style.setProperty(v, w + 'px'));
+        };
+        const onUp = () => {
+            if (!dragging) return;
+            dragging = false;
+            document.body.classList.remove('resizing');
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            const val = parseInt(getComputedStyle(root).getPropertyValue(cssVars[0]), 10);
+            if (val) localStorage.setItem(storageKey, val);
+        };
+        handle.addEventListener('mousedown', (e) => {
+            if (enabled && !enabled()) return;
+            e.preventDefault();
+            dragging = true;
+            document.body.classList.add('resizing');
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
         });
     },
 
@@ -1043,6 +1113,21 @@ const App = {
 
         chapterRow.appendChild(subContainer);
         chapterRow.classList.add('expanded-sub');
+
+        // 给章节加一个展开/收起子标题的小箭头
+        const chapterLink = chapterRow.querySelector('.nav-chapter');
+        if (chapterLink && !chapterLink.querySelector('.nav-sub-toggle')) {
+            const caret = document.createElement('span');
+            caret.className = 'nav-sub-toggle';
+            caret.title = '展开/收起小节';
+            caret.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`;
+            caret.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                chapterRow.classList.toggle('expanded-sub');
+            });
+            chapterLink.appendChild(caret);
+        }
     },
 
     // ===== 学习目标 =====

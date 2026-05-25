@@ -1644,6 +1644,40 @@ input, select, textarea {
     display: none;
 }
 
+/* ===== 侧边栏拖动手柄 ===== */
+.resize-handle {
+    position: absolute;
+    top: 0;
+    width: 7px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 60;
+}
+.toc-resize-handle { right: -3px; }
+.ai-resize-handle { left: -3px; }
+.resize-handle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: transparent;
+    transition: background var(--transition-fast);
+}
+.resize-handle:hover::after {
+    background: var(--color-primary);
+}
+body.resizing {
+    cursor: col-resize;
+    user-select: none;
+}
+/* 拖动时隐藏目录手柄（收起态）*/
+@media (max-width: 1024px) {
+    .resize-handle { display: none; }
+}
+
 
 .main-content {
     grid-area: main;
@@ -4227,6 +4261,26 @@ input, select, textarea {
 }
 
 /* ===== Sidebar Sub-headings ===== */
+.nav-sub-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-left: 2px;
+    border-radius: 4px;
+    color: var(--color-text-tertiary);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+.nav-sub-toggle:hover {
+    background: rgba(0, 78, 161, 0.1);
+    color: var(--color-primary);
+}
+.nav-chapter-row.expanded-sub .nav-sub-toggle {
+    transform: rotate(180deg);
+}
+
 .nav-subheadings {
     display: none;
     flex-direction: column;
