@@ -168,7 +168,9 @@ const App = {
         if (tocToggle) {
             tocToggle.addEventListener('click', () => {
                 if (window.innerWidth > 1024) {
-                    document.getElementById('app')?.classList.toggle('toc-collapsed');
+                    const app = document.getElementById('app');
+                    const collapsed = app?.classList.toggle('toc-collapsed');
+                    document.getElementById('ai-sidebar')?.classList.toggle('ai-wide', !!collapsed);
                 } else {
                     this.toggleSidebar();
                 }

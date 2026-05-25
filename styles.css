@@ -41,7 +41,8 @@
     --sidebar-width: 280px;
     --header-height: 64px;
     --footer-height: 80px;
-    --ai-width: 420px;
+    --ai-width: 460px;
+    --ai-width-wide: 560px;
 }
 
 *, *::before, *::after {
@@ -1438,11 +1439,17 @@ input, select, textarea {
     }
     .app-container.toc-collapsed {
         grid-template-columns: 0 1fr;
+        /* 目录收起后，AI 预留空间用更宽的值（main-content 的 padding 读取此变量）*/
+        --ai-width: var(--ai-width-wide);
     }
     .app-container.toc-collapsed .sidebar {
         width: 0;
         overflow: hidden;
         border-right: none;
+    }
+    /* 目录收起时 AI 面板本体也加宽（面板在 #app 外部，用类驱动）*/
+    .ai-sidebar.ai-wide {
+        width: var(--ai-width-wide);
     }
 }
 
