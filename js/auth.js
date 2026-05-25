@@ -691,6 +691,7 @@ const AuthModule = {
         const aiToggle = document.getElementById('ai-sidebar-toggle');
         if (aiSidebar) aiSidebar.classList.add('open');
         if (aiToggle) aiToggle.classList.add('hidden');
+        if (app) app.classList.add('ai-open');
 
         this.updateUserGreeting();
         this.updateProgress();

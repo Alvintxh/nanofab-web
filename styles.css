@@ -41,6 +41,7 @@
     --sidebar-width: 280px;
     --header-height: 64px;
     --footer-height: 80px;
+    --ai-width: 380px;
 }
 
 *, *::before, *::after {
@@ -1603,7 +1604,27 @@ input, select, textarea {
 .main-content {
     grid-area: main;
     padding: 32px 40px;
-    max-width: 1100px;
+    width: 100%;
+}
+
+/* 阅读区限宽居中，保证中文长文行长舒适 */
+#view-chapter {
+    max-width: 880px;
+    margin-inline: auto;
+}
+/* 仪表盘（首页）居中，避免宽屏过度拉伸 */
+#view-home {
+    max-width: 1160px;
+    margin-inline: auto;
+}
+
+/* AI 侧边打开时，为其预留空间（仅桌面端），正文不被遮挡 */
+@media (min-width: 1024px) {
+    .app-container.ai-open .main-content,
+    .app-container.ai-open .app-footer {
+        padding-right: calc(var(--ai-width) + 40px);
+        transition: padding-right var(--transition-base);
+    }
 }
 
 .page-header {
@@ -2882,7 +2903,7 @@ input, select, textarea {
     position: fixed;
     top: var(--header-height);
     right: 0;
-    width: 460px;
+    width: var(--ai-width);
     max-width: 92vw;
     height: calc(100vh - var(--header-height));
     background: var(--color-surface);

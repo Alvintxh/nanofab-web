@@ -402,15 +402,19 @@ const AIModule = {
     openAISidebar() {
         const sidebar = document.getElementById('ai-sidebar');
         const toggle = document.getElementById('ai-sidebar-toggle');
+        const app = document.getElementById('app');
         if (sidebar) sidebar.classList.add('open');
         if (toggle) toggle.classList.add('hidden');
+        if (app) app.classList.add('ai-open');
     },
 
     closeAISidebar() {
         const sidebar = document.getElementById('ai-sidebar');
         const toggle = document.getElementById('ai-sidebar-toggle');
+        const app = document.getElementById('app');
         if (sidebar) sidebar.classList.remove('open');
         if (toggle) toggle.classList.remove('hidden');
+        if (app) app.classList.remove('ai-open');
     },
 
     buildSystemPrompt(user, context) {
@@ -849,16 +853,13 @@ const AIModule = {
 
         if (sidebarToggle && sidebar) {
             sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-                sidebarToggle.classList.toggle('hidden', sidebar.classList.contains('open'));
+                if (sidebar.classList.contains('open')) this.closeAISidebar();
+                else this.openAISidebar();
             });
         }
 
         if (sidebarClose && sidebar) {
-            sidebarClose.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                if (sidebarToggle) sidebarToggle.classList.remove('hidden');
-            });
+            sidebarClose.addEventListener('click', () => this.closeAISidebar());
         }
 
         // 会话：历史抽屉 + 新建
