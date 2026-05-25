@@ -36,43 +36,7 @@ serve(async (req: Request) => {
       );
     }
 
-    const body = await req.json();
-    const { task, provider, model, messages, temperature, max_tokens, prompt, size } = body;
-
-    // ===== Image generation task (CogView-4) =====
-    if (task === "image") {
-      const key = Deno.env.get("ZHIPU_API_KEY");
-      if (!key) {
-        return new Response(
-          JSON.stringify({ error: "Zhipu API key not configured" }),
-          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      if (!prompt) {
-        return new Response(
-          JSON.stringify({ error: "Missing prompt for image task" }),
-          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      const resp = await fetch("https://open.bigmodel.cn/api/paas/v4/images/generations", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${key}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ model: model || "cogview-4", prompt, size: size || "1024x1024" }),
-      });
-      const data = await resp.json();
-      if (resp.ok && data.data?.[0]?.url) {
-        return new Response(JSON.stringify({ url: data.data[0].url }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      // Surface the real CogView error (code + message) for debugging
-      const errCode = data.error?.code ? `[${data.error.code}] ` : "";
-      const errMsg = data.error?.message || JSON.stringify(data).slice(0, 200);
-      return new Response(
-        JSON.stringify({ error: `CogView: ${errCode}${errMsg}` }),
-        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    const { provider, model, messages, temperature, max_tokens } = await req.json();
 
     if (!provider || !messages?.length) {
       return new Response(

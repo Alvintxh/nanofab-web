@@ -1,0 +1,1068 @@
+* commit 7e34be2f1155fc48fd37d7182891373d91c1d63e
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 21:27:14 2026 +0800
+| 
+|     feat: scale up welcome page for greater visual impact
+|     
+|     - Hero title: 3.25rem → 4.25rem, larger underline accent
+|     - Stats bar: bigger numbers (3rem), more padding, wider spacing
+|     - Feature cards: larger icons (52px), bigger text, wider layout (920px)
+|     - Comparison cards: more padding, increased font sizes, wider (920px)
+|     - CTA: oversized title (2.25rem), bigger button with more padding
+|     - Detail sections: larger icons (60px), more generous padding (44px)
+|     - Background: bigger orbs and crystal shapes for more presence
+|     - Updated responsive breakpoints proportionally
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit a075584afcf31292b01257a09c0cd02c647e14cf
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 21:18:12 2026 +0800
+| 
+|     feat: redesign welcome page with crystalline precision aesthetic
+|     
+|     - Replace orbs with crystal shapes (clip-path polygons), hexagonal lattice SVG pattern, and noise texture
+|     - Oversized hero typography (3.25rem) with gradient accent underline
+|     - Glass morphism stats bar with backdrop-filter blur
+|     - Feature cards with staggered card-rise animation and radial glow hover
+|     - VS circle badge with proper wrapper structure
+|     - CTA button with animated pulse ring effect
+|     - Enhanced detail sections with blue ::marker styling
+|     - Floating crystal-drift keyframe animation
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 6cca8553c82c68ce9c4e162ba31a09f802f2e02a
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 21:04:38 2026 +0800
+| 
+|     feat: enhance dashboard UI with card accents, color-coded nav, improved stats
+|     
+|     - Added gradient top-border accents to all dashboard cards for visual differentiation
+|     - Quick navigation now shows part labels with color-coded chapter IDs
+|     - Study stats items have unique value colors and hover lift effect
+|     - Progress bar and weekly goal bar with gradient + top shine overlay
+|     - Refined page header typography and card icon color overrides
+|     - Card overflow hidden for accent border without bleed
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 7226a12b5711627308124c31e096646d6de67528
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:57:22 2026 +0800
+| 
+|     fix: add explanatory subtitles to welcome page stat numbers (12, 4, 6)
+|     
+|     - 12 结构化章节 → added "4 大模块 · 各 3 章"
+|     - 4 AI 引擎驱动 → renamed to "AI 核心功能" + "解释 · 助手 · 路线 · 笔记"
+|     - 6 学习数据类型 → renamed to "学习数据维度" + "笔记 · 测验 · 时长 · 正确率 · 进度 · 连续性"
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit b1e02f5181d8759d5eb677925c560c6c5bf47e57
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:52:41 2026 +0800
+| 
+|     feat: add back-to-welcome links on auth page and app header
+|     
+|     - Auth page: "← 返回欢迎页" link below profile-setup-card
+|     - App header: icon + "欢迎页" link in header-right area
+|     - Mobile: hide text label, show icon-only on small screens
+|     - showWelcomePage() method clears flag so welcome page always shows
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 27f421da977ff56ac8cbc48626754ee851bbf093
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:46:18 2026 +0800
+| 
+|     fix: add flex-direction column to screen.active and remove overflow hidden from welcome-section
+|     
+|     The screen.active used flex-direction: row (default), which combined with
+|     overflow: hidden on welcome-section prevented proper vertical scrolling on
+|     the welcome page. Fixed by:
+|     - Adding flex-direction: column to .screen.active
+|     - Removing overflow: hidden from .welcome-section (already on .welcome-bg)
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 189fd20768e1a7c5538c2ff273218f5d7e1a09bd
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:40:41 2026 +0800
+| 
+|     feat: redesign mind map SVG and modernize overall UI
+|     
+|     - Redesigned mind map with bezier curve branches, gradient cards,
+|       numbered badges, chapter count pills, and refined shadow filters
+|     - Expanded SVG viewport from 960x430 to 960x520 for better spacing
+|     - Added --shadow-card and --shadow-card-hover CSS variables
+|     - Updated dashboard cards with softer shadows and subtle hover effects
+|     - Added glassmorphism header with backdrop-filter blur
+|     - Refined buttons with shadow accents and active press states
+|     - Improved form inputs with enhanced focus rings and font consistency
+|     - Added hover lift effects on quiz options, radio options, nav links
+|     - Progress bar now has a subtle top-highlight shine effect
+|     - Better sidebar and study stat item styling
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 314dc6eddfb7335f40ec143f9d857cf751a10b8f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:25:15 2026 +0800
+| 
+|     refactor: convert welcome feature cards from modals to scroll-reveal with click-to-jump
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 463a5a3fbd8d12fa8bceec520c555b266a337815
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:13:14 2026 +0800
+| 
+|     feat: redesign welcome page for visual impact and promotion
+|     
+|     - Hero with gradient text, badge, and animated background orbs
+|     - Stats row (12 chapters, 4 AI engines, 6 data types)
+|     - Feature cards redesigned: horizontal layout, hover arrows, staggered reveal animation
+|     - Comparison section: Traditional vs AI-powered learning
+|     - Enhanced CTA with glow effect on hover
+|     - Grid background with radial mask for depth
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 174d8a565134aeee16816fc59970566ac60ec78e
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 20:01:12 2026 +0800
+| 
+|     feat: make welcome feature cards clickable with detail modals
+|     
+|     Each of the 6 feature cards opens a modal with:
+|     - How to use (step-by-step)
+|     - Key features (bullet points)
+|     - Data sources (what data AI uses)
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 711c90074b7915d2585eb325a09cd9d0cd69eb6f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:53:07 2026 +0800
+| 
+|     fix: hide AI toggle button by default in HTML to prevent flash on welcome page
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 45ba304593c8197031673c6d3affe7ca55d3a9a7
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:51:28 2026 +0800
+| 
+|     fix: hide AI sidebar toggle button on welcome/onboarding screens
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit eefc37c2d9ae9514f9c7d4f9d4ff33c44eed7698
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:48:19 2026 +0800
+| 
+|     fix: make onboarding screen fixed full-viewport to prevent scroll-leak
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit dfdfe93d54853143f80cbc75f7ab64f07d6a3498
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:42:25 2026 +0800
+| 
+|     feat: add welcome page and user manual
+|     
+|     - Welcome page with AI feature showcase cards (6 features)
+|     - Feature cards grid with hover effects and staggered icons
+|     - CTA button with gradient and "already have account" link
+|     - Welcome page shown on first visit, skipped on return (localStorage)
+|     - docs/MANUAL.md: comprehensive user guide covering all features
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 7f1360acaf465b93e6cdc405a32fc84781abd783
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:33:24 2026 +0800
+| 
+|     docs: add AI personalization data section to README
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit f4c61dd0afc989a298f1ad150d17bffac1425623
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:22:09 2026 +0800
+| 
+|     feat: add AI-powered CHANGELOG automation
+|     
+|     - scripts/gen-changelog.sh: extracts git history into structured prompt for AI
+|     - .claude/hooks/check-changelog.sh: detects unreported commits and reminds Claude
+|     - .claude/settings.json: hooks configuration for project
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 59f01620971c40c1afe803e01747cf02bf0c33cb
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:17:09 2026 +0800
+| 
+|     docs: update CHANGELOG with 2026-05-13 AI integration and system refactoring
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 0a34b897237e42ea30917377c8a52fb41f1de713
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:05:21 2026 +0800
+| 
+|     docs: remove color scheme section from README
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 25759c5afaa46473c520c81600dc3d49772e49fc
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 19:04:55 2026 +0800
+| 
+|     docs: rewrite README with comprehensive project documentation
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 996c92527afd5cdcdd59d7626281aed8f4513277
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:51:26 2026 +0800
+| 
+|     fix: replace lookbehind regex with compatible alternative for Safari
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 9b26ffd64d9fa70c22defac1b4bcfb029e06a2d3
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:50:10 2026 +0800
+| 
+|     fix: sanitize HTML tags inside LaTeX math delimiters before KaTeX rendering
+|     
+|     Markdown-to-HTML conversion was turning LaTeX subscripts (_) into <em> tags
+|     inside $...$ delimiters (e.g., $k_1$ became $k<em>1$), breaking KaTeX
+|     rendering. Added _sanitizeMathHTML to strip/restore tags before renderMathInElement.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 841d9250fdae179e83f5e3478ae5022f21c58494
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:34:24 2026 +0800
+| 
+|     refactor: save all Q&A pairs as a single note instead of individual notes
+|     
+|     Removed per-item save buttons from explanation Q&A items. Added a single
+|     "保存全部对话为笔记" button below the Q&A list that saves the entire
+|     conversation (all questions and answers) as one consolidated note.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 0195c111c2af97f4ad3c68683bb69d346d6c97c4
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:23:18 2026 +0800
+| 
+|     chore: remove debug console.log statements
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit a8a7735041b7fa9fadbc332fe412d095b8ff72f2
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:21:05 2026 +0800
+| 
+|     debug: add console.log to trace markdown rendering in Q&A list
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 5b5117d7c813ba771cd511a44535ea420e093173
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:13:14 2026 +0800
+| 
+|     feat: support multi-turn follow-up questions in AI explanation
+|     
+|     After the initial explanation, a follow-up question input remains at the
+|     bottom of the conversation. Users can ask multiple follow-ups about the
+|     same selected text - conversation history is sent to the AI for context.
+|     Each Q&A pair gets its own save-to-note button.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 2d141fd02d0acd5dafcfeed77db7bb7b7d80a46a
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 18:06:53 2026 +0800
+| 
+|     debug: add console.log marker to verify new showAIExplanation runs
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit d17ce8ea14253f64ed6fca3867f73b0602a64b31
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 16:09:54 2026 +0800
+| 
+|     feat: add question input for AI text explanations
+|     
+|     When a user selects text and clicks "AI解释", the explanation panel now
+|     shows a question input field before generating the response. Users can
+|     type a specific question (e.g., "这个工艺的物理原理是什么?") alongside
+|     the selected text, or leave it empty for a general explanation.
+|     
+|     Flow: select text → question input → send → loading → result with question echo.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit b3880540a04cd5eafe35bcddb868b19ef285c953
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:59:08 2026 +0800
+| 
+|     refactor: always inject full user data context into AI chat, not just on keywords
+|     
+|     Removed keyword-gated detection from _buildDataContext. The AI assistant now
+|     receives the user's complete personal data (notes, quiz results, study progress,
+|     time distribution, behavior profile, recent interactions) in every conversation.
+|     This enables truly personalized responses for any question, not just a few
+|     pre-defined query types.
+|     
+|     Also enhanced the chat system prompt to instruct the AI to naturally reference
+|     user data in every answer.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 4d1dec2fd3cfdd77c3907820616a35109db6a6d9
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:47:39 2026 +0800
+| 
+|     feat: add AI assistant data-awareness for notes, wrong answers, progress queries
+|     
+|     Inject personal data context (notes, quiz results, behavior stats, study
+|     progress) into AI system prompt when user asks data-aware questions, so the
+|     AI can give precise, personalized answers.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit bcf39d64363167767a8ae112287eccd579a9e9ab
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:39:17 2026 +0800
+| 
+|     fix: always insert AI note annotation even if text highlight fails
+|     
+|     - Fallback: if selected text can't be found in DOM, annotation still
+|       appears at end of chapter content
+|     - Extracted insertAnnotation / bindDelete helpers to reduce duplication
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 363a43125154893c6ed6d4758119d062aa1fbb9d
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:37:44 2026 +0800
+| 
+|     fix: detect AI notes in restoreHighlights and render markdown
+|     
+|     restoreHighlights now detects AI-generated notes (markdown patterns) and
+|     renders them with formatAIResponse instead of escapeHtml. Also uses
+|     appropriate label (🤖 AI 笔记 vs 📝 笔记) and skips context line for AI notes.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 4d776a92dc708587e6eb454f6f97c9a5d369f984
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:30:28 2026 +0800
+| 
+|     fix: render markdown in AI notes, scroll to annotation, remove raw context
+|     
+|     - AI note cards now render markdown via formatAIResponse instead of showing raw MD
+|     - Removed "原文" context line from AI note annotation cards
+|     - Auto-close sidebar + scroll to annotation after saving AI notes
+|     - Manual notes now also scroll to annotation on save
+|     - Notes modal renders markdown for AI-generated notes
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 607643d3db5443e3583dbb669de6e015e928afd9
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:22:18 2026 +0800
+| 
+|     feat: AI-saved notes now highlight original text and show annotation in chapter
+|     
+|     Like manual notes, AI explanation notes appear inline beside the selected text
+|     with an "AI 笔记" label, supporting delete.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 9fd820e41c9dee0a8c83ac00f210d6c68b946d1b
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:17:42 2026 +0800
+| 
+|     feat: add "save as note" button to AI explanation results
+|     
+|     One-click to save AI-generated explanations as user notes with context.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 078ad75f5628824ae357318fb053ca8307c7249c
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:11:59 2026 +0800
+| 
+|     fix: prevent chapter ID and title overlap in mind map
+|     
+|     Left-align both ID and title with fixed gap instead of centering title.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 9ab581c628e076a351749c6f4589544e7c83dd17
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 15:09:20 2026 +0800
+| 
+|     refactor: extract behavior + AI modules from app.js, redesign mind map
+|     
+|     - Extract 14 behavior methods (406 lines) → js/behavior.js
+|     - Extract 20 AI methods (883 lines) → js/ai.js
+|     - app.js: 2737 → 1455 lines
+|     - Redesign mind map: radial → contained top-down tree (960×430)
+|     - Fix mind map clipping issue with proper column layout
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 9b6b7ec6b825a59abd5833b804a8151e7bc80243
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 14:11:10 2026 +0800
+| 
+|     refactor: modularize app.js — extract auth module (841 lines) to js/auth.js
+|     
+|     - js/auth.js: 25 auth methods (~855 lines) covering login, register, verify,
+|       forgot/reset password, profile, onboarding, and Supabase user operations
+|     - app.js: reduced from 3574 to 2736 lines (-23%) via Object.assign mixin
+|     - Mark supabase/fix_rls.sql as deprecated (superseded by schema_v2.sql)
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit c407730159afc68d1351d0aaa0dae6c2ed2ea140
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:49:48 2026 +0800
+| 
+|     fix: backfill behaviorProfile from user_behavior_summary on user load
+|     
+|     Previously behaviorProfile (weakTopics, strongTopics, quizAccuracy, avgSessionTime)
+|     was only populated during the current session and lost on page refresh.
+|     Now loadUserFromSupabase merges behavior_summary data back into behaviorProfile,
+|     ensuring the AI system prompt always receives real behavioral data.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 6143c9dd25af9c761497ff2d521bb952f2343b8e
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:43:33 2026 +0800
+| 
+|     feat: optimize database schema v2
+|     
+|     - Add user_behavior_summary to auto-create trigger + created_at column
+|     - Make total_chapters nullable (auto-selects 12 when NULL)
+|     - Unify RLS policies: granular INSERT/SELECT/UPDATE/DELETE per table
+|     - Create missing user_notes table with indexes and RLS
+|     - Remove deprecated FOR ALL policies from schema.sql
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 26316e23136f58d6523b721cae6a5db6ee628666
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:38:58 2026 +0800
+| 
+|     fix: also backfill user_progress rows on signup trigger
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 22ff136ce8bb6290a6da7dcb8625f96804849e8d
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:34:54 2026 +0800
+| 
+|     fix: add trigger to auto-create user_profiles on signup and backfill missing profiles
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 38fd704876cce2033c4da93eb0c99ff0101d5f03
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:18:14 2026 +0800
+| 
+|     fix: use try/finally in handleRegister to always reset _registering flag
+|     
+|     The _registering guard flag was not cleared on error return paths, causing
+|     subsequent register attempts to be silently blocked until page refresh.
+|     Wrapped the entire handler body in try/finally to guarantee cleanup.
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit efbba762fc1d5952516c1d9026cbeb58a0cb88bb
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 13:11:35 2026 +0800
+| 
+|     fix: prevent double-submit on register and fix button loading state leaks
+|     
+|     - Add _registering guard to block concurrent signUp calls
+|     - Reorder error checks: "already registered" before "rate limit" (more actionable)
+|     - Reset button loading on all early-return paths in handleRegister and handleVerify
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 7a590521800f31ce6f1f4ffb6ae3e179a312891f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 12:43:03 2026 +0800
+| 
+|     fix: add signup confirmation link redirect and emailRedirectTo
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 478fa9e08b88e788641b07fa40640f17c2472b08
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Wed May 13 00:12:30 2026 +0800
+| 
+|     feat: complete auth system — login, register, email verify, forgot/reset password
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 6e5767e7706af64c6af554bed83af9b08048a9dc
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 12 19:35:06 2026 +0800
+| 
+|     feat: add database optimizations and persist notes to Supabase
+|     
+|     - Add JWT auth verification to Edge Function (prevent API key abuse)
+|     - Add UPDATE policy for quiz_answers (fix upsert silently failing)
+|     - Tighten all INSERT RLS policies from WITH CHECK (true) to auth.uid() = id
+|     - Add user_notes table with full RLS for persistent note storage
+|     - Write behavior events (page_view, quiz_answer) to user_behavior_events
+|     - Log AI queries to ai_queries table
+|     - Add composite index idx_quiz_user_chapter_correct for wrong-answer queries
+|     - Fix notes disappearing on refresh: restoreHighlights now searches text nodes
+|     - Sync notes to Supabase on create/delete, load from Supabase on login
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit eaa6049ab1c0359a8b18ca117cfe1d91dd28dad2
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 12 19:07:16 2026 +0800
+| 
+|     feat: redesign dashboard to 3-column grid, merge stats into progress card, add Word-comment-style note annotations
+|     
+|     - Restructure dashboard to 3-column grid with full-width AI learning path and wrong-answer book cards
+|     - Merge study statistics (today/week/total/streak/accuracy) into progress overview card
+|     - Rewrite note-taking: select text → write own note → annotation card appears next to paragraph
+|     - Add toggle for plain highlights (click to cancel)
+|     - Enrich AI learning path with detailed analysis, weekly plan, and study recommendations
+|     - Add .btn-sm and .btn-cancel utility classes
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 7605d42f4779420257b210567533ce9232564006
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 12 17:44:47 2026 +0800
+| 
+|     feat: enhance mind map with detailed chapter tree and full-width card
+|     
+|     - Redesign SVG mind map (840x600) showing all 4 parts and 12 chapters with names
+|     - Use tree layout with color-coded branches, connector lines, and legend
+|     - Mind map card now spans full dashboard width (grid-column: 1 / -1)
+|     - Add background gradient, shadows, and polished typography
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 5881206ef2baed798c03763d7298e082415bb3cd
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 12 17:37:02 2026 +0800
+| 
+|     feat: implement 13 teacher feedback items - layout, learning tools, and personalization
+|     
+|     - Expand desktop layout (content 900→1100px, onboarding 560→780px)
+|     - Add "毫无基础" option to knowledge level and prerequisites
+|     - Add purpose description to registration form
+|     - Add weekly study hours field to profile
+|     - Add study stats dashboard (today/week/total time with weekly goal)
+|     - Enhance AI personalization with behavior data and weeklyHours
+|     - Add chapter TL;DR summary box at top
+|     - Add sidebar sub-headings (h2/h3) with click navigation
+|     - Add SVG mind map visualization on homepage
+|     - Unify fonts across chapter content and UI
+|     - Add image lightbox (click to zoom, ESC to close)
+|     - Add per-chapter learning objectives (basic + advanced)
+|     - Add wrong answer book and text highlight/note-taking
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 884a3715f4ce4cfa1896f50ea2e9a1aac32646b7
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 12 16:46:08 2026 +0800
+| 
+|     security: add Supabase Edge Function AI proxy, tighten RLS, and fix multiple bugs
+|     
+|     - Move Zhipu/DeepSeek/Gemini API keys from client JS to Edge Function
+|     - Tighten all RLS INSERT policies from anon+authenticated to authenticated only
+|     - Fix AI chat Markdown rendering (assistant messages now use formatAIResponse)
+|     - Fix behavior data being discarded when loading user from Supabase
+|     - Fix formatAIResponse not converting Markdown list syntax to HTML <li>
+|     - Extract unified callAIProvider method, eliminating ~150 lines of duplication
+|     - Throttle saveBehaviorData writes to 5-second intervals
+|     - Fix Mermaid diagram ID collision with random suffix
+|     - Fix inconsistent indentation in handleLogin/handleRegister/handleVerify
+|     - Add unique constraint on quiz_answers(user_id, chapter_id, question_id)
+|     - Replace AGENTS.md with CLAUDE.md for project instructions
+|     
+|     Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+| 
+* commit 4147bfa57ec43a21758779c1066d9243a9042031
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 11:24:32 2026 +0800
+| 
+|     refactor: change quiz quick-jump to text link below chapter title
+|     
+|     - Replace hover-icon with always-visible 'ch01-测试题' text link below each chapter
+|     
+|     - Styled as subtle secondary text, turns primary blue on hover
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 95c8cec82370473ba8aaad3c4568c6ae3ab7228d
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 11:21:25 2026 +0800
+| 
+|     feat: add quiz quick-jump icon next to each chapter in sidebar
+|     
+|     - Add quiz icon (checkmark) next to each chapter link in navigation sidebar
+|     
+|     - Clicking icon navigates to chapter and auto-switches to quiz tab + scrolls to it
+|     
+|     - Icon only shows on hover to keep sidebar clean
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 87f6856da7f8b5872fa31f0b4949bcefc7019ded
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 11:16:32 2026 +0800
+| 
+|     feat: add AI learning path card on homepage and fix behavior tracking bug
+|     
+|     - Fix r.chapterId -> r.chapter field mismatch in updateBehaviorProfile (weakTopics was always empty)
+|     
+|     - Add AI learning path card with client-side fallback + AI-enhanced recommendations
+|     
+|     - Card shows next chapter, review topics, mastered topics, accuracy, and study tips
+|     
+|     - AI recommendations cached in localStorage for 1 hour, refresh button to regenerate
+|     
+|     - Add callAI() reusable method for lightweight AI API calls
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 3b4b26f9ea9343a387410b72768c494ff8d1b430
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 11:03:08 2026 +0800
+| 
+|     feat: sync quiz answers to Supabase and add multi-select support
+|     
+|     - Add syncQuizAnswer() to upsert answers to quiz_answers table on submit
+|     
+|     - Add checkbox handler for multi-select questions with confirm button
+|     
+|     - Quiz answers now persist to both localStorage and Supabase
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 8baf61b677a181a88062b1234f2a40ff881ceeb3
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 10:45:08 2026 +0800
+| 
+|     fix: remove .select() from saveUser upsert to bypass RLS for anon users
+|     
+|     When email confirmation is enabled, new users are anon after signUp. The upsert().select() chain required SELECT permission, but fix_rls.sql only grants SELECT to authenticated. Removing .select() allows the INSERT to succeed for anon users.
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 11e5fce64c2fa766834ff0342ab2889d83e8c854
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 10:30:45 2026 +0800
+| 
+|     feat: add toast notification system, improve error handling and security
+|     
+|     - Replace 17 alert() calls with non-blocking toast notifications (4 types: success/error/warning/info)
+|     
+|     - Add user-visible toast warning when AI API calls fail and fallback is used
+|     
+|     - Fix missing async keyword on handleProfileSubmit (was causing SyntaxError)
+|     
+|     - Replace deprecated substr() with substring()
+|     
+|     - Move temporary password storage from localStorage to sessionStorage
+|     
+|     Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>
+| 
+* commit 710c1bff2cb8b440ad6a603c881628af019646ee
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 09:24:38 2026 +0800
+| 
+|     fix: add debug logging to switchAuthTab to diagnose registration tab issue
+| 
+* commit d7d25ed122c1ebea8900c804a45f6091a8e099bd
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Thu May 7 09:02:15 2026 +0800
+| 
+|     fix: add database schema, RLS policies, and enhanced error logging for auth flow
+|     
+|     - Add Supabase database schema (schema.sql) with 6 tables
+|     - Add RLS fix (fix_rls.sql) to allow anonymous INSERT during registration
+|     - Add verification script (verify.sql) to check database configuration
+|     - Enhance app.js with detailed error logging and auth state tracking
+|     - Add deployment documentation (DEPLOYMENT.md)
+|     - Update TODO.md with completed tasks
+|     - Fix initSupabase to check for SUPABASE_URL and SUPABASE_ANON_KEY
+|     - Add try-catch around profile save operations
+|     - Log auth method (session vs pending_user_id) for debugging
+| 
+* commit 84408678e5f50471393074b11ac3ba655532c966
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:46:20 2026 +0800
+| 
+|     fix: show alert when user clicks profile but not logged in
+| 
+* commit 5951631b77c3655d6fda0c46f6e84f14f128ceda
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:36:03 2026 +0800
+| 
+|     fix: reorder scripts - define Supabase config before app.js loads
+| 
+* commit 12b93dc64886e5d01ba7a6a84c248974b88b74d6
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:25:38 2026 +0800
+| 
+|     fix: revert script order - define Supabase config in HTML before app.js
+| 
+* commit d8552dab40dd4389692ce635b5328b0f7ef9c8c3
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:21:26 2026 +0800
+| 
+|     fix: bind events before loading user to ensure auth forms work
+| 
+* commit 561a97db77ce9e1ac61f12e8568f6fd1c2f59d58
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:16:47 2026 +0800
+| 
+|     fix: move Supabase config before app.js to ensure proper initialization
+| 
+* commit b4df6cc13b623af9958df2eda9eb8147286c1385
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:12:03 2026 +0800
+| 
+|     fix: set emailRedirectTo to null to prevent rate limit
+| 
+* commit 4c63aa4f6a188933ffeb8ca093f97f81a46a0c25
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:09:38 2026 +0800
+| 
+|     fix: update Supabase anon key to correct JWT format
+| 
+* commit 08d13a80f243b27cf03eccb7630b802892e50163
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:07:43 2026 +0800
+| 
+|     feat: disable email verification for registration
+| 
+* commit e3fec660d992cf05ee597bfdf5fcea7972842837
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 21:02:25 2026 +0800
+| 
+|     fix: handle rate limit and improve email verification
+| 
+* commit 5c7f050325e3f6647262abb0bf9e9d9fac8f753f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:59:23 2026 +0800
+| 
+|     feat: add email verification code for registration
+| 
+* commit 671e9a2183ea83140c0942b3987b904ff7bca30b
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:50:08 2026 +0800
+| 
+|     feat: add user registration and login with Supabase Auth
+| 
+* commit 9640256cda79a3867354b825f986096d32ab5735
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:41:26 2026 +0800
+| 
+|     config: update Supabase credentials
+| 
+* commit 61fda406d8bfa2b9cef524454316b90695372bc4
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:34:36 2026 +0800
+| 
+|     feat: add Supabase backend integration for user data persistence
+| 
+* commit 4eebe770e6168607bc094cc2c35bc53c611a112b
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:32:20 2026 +0800
+| 
+|     feat: enhance user profile and behavior tracking for AI personalization
+| 
+* commit 6c02e86819a706862a5b39e34cd0f370cd5d9574
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 20:27:41 2026 +0800
+| 
+|     feat: add Zhipu GLM as default AI provider with built-in API key
+| 
+* commit 7f72a400c6c1ec12666e7b627134a5827dd299a4
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Tue May 5 11:58:48 2026 +0800
+| 
+|     feat: add Gemini API support alongside DeepSeek
+| 
+* commit 04ab5fae8d7f2230f18b4e9c3eed5cfc2e345c05
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:59:49 2026 +0800
+| 
+|     feat: remove sidebar toggle button, make sidebar permanently visible
+| 
+* commit 2890e2e1e8365b163864d7e8a06ce567ecaf8416
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:56:21 2026 +0800
+| 
+|     fix: prevent event bubbling on nav part toggle to allow proper sidebar close
+| 
+* commit 1b4397e3c5c0f737ef5cc9b6c8dfe9ea08a6da0f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:55:43 2026 +0800
+| 
+|     fix: add explicit width to sidebar for consistent toggle behavior
+| 
+* commit 3ab03061ed6017a5420ae4bcc74d1ee37d3cda76
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:48:18 2026 +0800
+| 
+|     fix: escape ampersands in ch06 SVG for XML compliance
+| 
+* commit efe47b9e5323260da9b6d8c3289a449a74beed2a
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:47:08 2026 +0800
+| 
+|     fix: improve image path rewriting for nested paths
+| 
+* commit 70cc415c1e5317c7b862cdef0fa93640bf3efc4c
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:46:36 2026 +0800
+| 
+|     chore: remove backup file
+| 
+* commit 522a5ddec83d2b42dab319410a2721c272129dbc
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:46:24 2026 +0800
+| 
+|     fix: restore original ch06 SVG from source
+| 
+* commit ba7fe59f65440d085887e8538dfc52c14498bbe6
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:34:28 2026 +0800
+| 
+|     Debug: Add console.log for image path rewriting
+|     
+|     - Add console.log to verify image path rewriting is executing
+|     - Log original path and new path for debugging
+| 
+* commit a600b44f47c58d5c58951603b48f0e30b7de301f
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:30:31 2026 +0800
+| 
+|     Fix: More robust image path detection for GitHub Pages
+|     
+|     - Use includes('/img/') instead of startsWith('../../img/')
+|     - Extract filename from any path containing /img/
+|     - Handle edge cases in path resolution
+| 
+* commit 3421101703d8a5f727c3981b5ff2cc2e11b840d5
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:27:10 2026 +0800
+| 
+|     Fix: Rewrite image paths for GitHub Pages deployment
+|     
+|     - Detect GitHub Pages environment by checking hostname
+|     - Rewrite ../../img/ paths to absolute /nanofab-web/img/ paths
+|     - This fixes the relative path issue when content is loaded dynamically
+| 
+* commit 70d92c2eadd85c8785294e85fe6e33eb46f29e17
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:20:37 2026 +0800
+| 
+|     Fix: Formula rendering issues in ch07, ch08, ch10
+|     
+|     - ch07 line 12: Add $ delimiters and fix subscripts R_L/R_V
+|     - ch08 lines 18-20: Add 43545 delimiters and fix P_s, P_c, P_e subscripts
+|     - ch10 line 27: Replace Unicode ρ with LaTeX \rho
+|     - ch10 line 58: Replace Unicode δ with LaTeX \delta
+|     - ch10 line 116: Fix double backslashes and use English labels in \text{}
+| 
+* commit 3051adcd77efd0dd80bc9b5a82ed2d20f11a820d
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:17:02 2026 +0800
+| 
+|     Fix: Move images to img folder for proper GitHub Pages serving
+|     
+|     - Create img/ directory in project root
+|     - Copy all 11 SVG images from nanofab_knowledge_book_v1/images/
+|     - Update all chapter HTML paths: ../../nanofab_knowledge_book_v1/images/ -> ../../img/
+|     - Remove dynamic path rewriting from app.js
+|     - Images now served from /nanofab-web/img/ on GitHub Pages
+| 
+* commit ed0cdc4485139214103b49ceb429017c5508b65e
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:13:20 2026 +0800
+| 
+|     Fix: Dynamic image path resolution for GitHub Pages
+|     
+|     - Add JavaScript to rewrite image paths after chapter content loads
+|     - Detect GitHub Pages environment and prepend /nanofab-web/ prefix
+|     - Fix relative path issues: ../../nanofab_knowledge_book_v1/images/ -> /nanofab-web/nanofab_knowledge_book_v1/images/
+| 
+* commit 400dd3b4c40ad90d7a102676ffb5e2ad4c990f08
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 14:08:28 2026 +0800
+| 
+|     Fix: ch10 formula rendering with proper LaTeX syntax
+|     
+|     - Fix all formulas with broken subscripts using <em> tags
+|     - Convert chemical equations to proper LaTeX: \text{Si(固)} + \text{O}_2\text{(气)}
+|     - Fix subscripts: C_s, C_l, C_0, t_{ox}, k_s, h_g, etc.
+|     - Fix superscripts: D^o, D^-, D^=, D^+
+|     - Fix Greek letters and special symbols
+|     - Fix all inline formulas with proper $ delimiters
+|     - Total: 14 display formulas + 10 inline formulas fixed
+| 
+* commit f6fc36c994231fd371e6dc30aebac3b31d95a4c3
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:55:48 2026 +0800
+| 
+|     Fix: Formula rendering and AI response formatting
+|     
+|     - Fix ch10.html table formula split across two th elements
+|     - Remove numbered list formatting from formatAIResponse to prevent conflicts
+|     - Only format bullet lists with - or • prefix
+|     - Keep formulas intact in ch01, ch02, ch03, ch10
+| 
+* commit 61372cb0b7e4f236922a124c041cedc4d2e9e9d3
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:48:10 2026 +0800
+| 
+|     Enhance: Format AI response with Markdown rendering
+|     
+|     - Add formatAIResponse() method to parse Markdown syntax
+|     - Support headers (###, ##, #), bold (**), italic (*), lists, code
+|     - Wrap list items in <ul> tags for proper formatting
+|     - Add CSS styles for formatted content (headers, lists, paragraphs, code)
+|     - Update system prompt to instruct AI to use Markdown format
+| 
+* commit ddf33b3b9599502983aeb5da5d5dc8bb9516326b
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:42:32 2026 +0800
+| 
+|     Enhance: Comprehensive personalization system
+|     
+|     1. Expand user profile with 4 new dimensions:
+|        - Prerequisite knowledge (physics, chemistry, electronics, etc.)
+|        - Study pace (intensive, moderate, relaxed)
+|        - Learning style (theory, visual, practical, case)
+|        - Interest areas (semiconductor, photonics, biotech, etc.)
+|     
+|     2. Build dynamic system prompt using all profile dimensions:
+|        - Motivation-based content focus
+|        - Prerequisite-based depth adjustment
+|        - Learning style-based presentation
+|        - Interest area-based examples
+|     
+|     3. Add behavior tracking analysis:
+|        - Auto-identify weak topics from quiz mistakes
+|        - Detect difficult chapters from time spent
+|        - Track strong topics from scroll depth
+|        - Update user profile dynamically
+|     
+|     4. Integrate behavior profile into AI prompts for real-time personalization
+| 
+* commit 9fde1b3ba0cbca46af2c247ac6bbbbfb86c55c08
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:35:07 2026 +0800
+| 
+|     Fix: Improve Mermaid rendering and add DeepSeek AI integration
+|     
+|     - Add try-catch around mermaid.render for better error handling
+|     - Integrate DeepSeek API for AI explanations and chat
+|     - Add API key settings UI in chat widget
+|     - Support fallback to mock responses when no API key
+|     - Add CSS styles for API settings panel
+| 
+* commit 4629ee67a156d9e005463a1ea25b0f4804854714
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:19:56 2026 +0800
+| 
+|     Fix: Wrap mermaid diagrams in container div to prevent CSS conflicts
+|     
+|     - Add wrapper div with class 'mermaid-diagram-container'
+|     - Keep inner div with class 'mermaid' for mermaid.js targeting
+|     - Prevent potential CSS conflicts with other elements
+| 
+* commit 76e31dd62040acea9b7d6fad227cd235b6174d53
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:17:27 2026 +0800
+| 
+|     Fix: Use mermaid.render() API for better diagram rendering
+|     
+|     - Replace mermaid.run() with individual mermaid.render() calls
+|     - Generate unique IDs for each diagram to avoid conflicts
+|     - Add error handling for render failures
+| 
+* commit 51133dba9bb853f333f3f75e8e0c0c5c32677702
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:04:47 2026 +0800
+| 
+|     Fix: Add Mermaid.js support for flowchart rendering
+|     
+|     - Add Mermaid.js CDN to index.html
+|     - Add renderMermaidDiagrams() method to app.js
+|     - Call renderMermaidDiagrams after loading chapter content
+|     - Add CSS styling for Mermaid diagrams
+|     - Support graph TB, graph LR, graph TD, flowchart, sequenceDiagram, classDiagram
+| 
+* commit 7a20504a5bbafbcd5cecb13adeef92ffd605cefd
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 13:00:14 2026 +0800
+| 
+|     Fix: SVG image paths and AI text selection tooltip
+|     
+|     - Update 11 SVG image references from relative 'images/' to '../../nanofab_knowledge_book_v1/images/'
+|     - Fix AI text selection: replace selectionchange event with mouseup for better UX
+|     - Add click-outside-to-hide behavior for AI tooltip
+|     - Center tooltip above selected text with dynamic positioning
+| 
+* commit 5627ee98a4f2141a494a1e7c84fee705e803f36c
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 12:51:49 2026 +0800
+| 
+|     Fix: Initialize AI assistant on app startup
+| 
+* commit 2c2445d32b811d64db2d0dd44a91f551d0ee582e
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 12:46:45 2026 +0800
+| 
+|     Expand all 12 chapters with 10 quiz questions each
+| 
+* commit 09993e40e338a20e993ada6d6f34c0b45d23f507
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 12:28:51 2026 +0800
+| 
+|     Add AI assistant chat widget and expand ch01 quiz to 10 questions
+| 
+* commit 481e9a0246261e534f94cff8c4e30deb6dc79b59
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 12:14:26 2026 +0800
+| 
+|     Remove ShanghaiTech copyright from footer
+| 
+* commit dc8e0b3c00fa473a25375f0a591450fd0e4c4c28
+| Author: Alvintxh <alvin2003tian@outlook.com>
+| Date:   Mon May 4 12:03:46 2026 +0800
+| 
+|     Initial commit: NanoFab Learning Platform v1.0
+| 
+* commit 11d44ab623e4c0946c7e5f9bfecb2c6df4c5481b
+  Author: Alvintxh <alvin2003tian@outlook.com>
+  Date:   Mon May 4 12:03:05 2026 +0800
+  
+      Initial commit: NanoFab Learning Platform v1.0

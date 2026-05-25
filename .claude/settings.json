@@ -3,7 +3,12 @@
     "UserPromptSubmit": [
       {
         "matcher": "",
-        "command": "bash .claude/hooks/check-changelog.sh"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-changelog.sh"
+          }
+        ]
       }
     ]
   }
