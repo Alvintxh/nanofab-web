@@ -164,6 +164,17 @@ const App = {
             sidebarOverlay.addEventListener('click', () => this.closeSidebar());
         }
 
+        const tocToggle = document.getElementById('toc-toggle');
+        if (tocToggle) {
+            tocToggle.addEventListener('click', () => {
+                if (window.innerWidth > 1024) {
+                    document.getElementById('app')?.classList.toggle('toc-collapsed');
+                } else {
+                    this.toggleSidebar();
+                }
+            });
+        }
+
         const userProfileBtn = document.getElementById('user-profile-btn');
         if (userProfileBtn) {
             userProfileBtn.addEventListener('click', () => this.openProfileModal());
