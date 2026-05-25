@@ -252,7 +252,8 @@ const AIModule = {
         const div = document.createElement('div');
         div.className = `ai-message ai-message-${role}`;
         const body = role === 'assistant' ? this.formatAIResponse(text) : `<p>${this.escapeHtml(text)}</p>`;
-        const canSave = role === 'assistant' && !opts.greeting;
+        // 仅当回答是针对"选中的正文段落"（带 context）时才提供保存为笔记
+        const canSave = role === 'assistant' && !opts.greeting && !!opts.context;
         const actions = canSave
             ? `<div class="ai-msg-actions"><button class="ai-msg-save" title="保存这条回答为笔记">
                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -280,7 +281,7 @@ const AIModule = {
         messages.scrollTop = messages.scrollHeight;
         if (canSave) {
             const saveBtn = div.querySelector('.ai-msg-save');
-            const ctx = opts.context || opts.prevUser || 'AI 对话';
+            const ctx = opts.context;
             saveBtn.addEventListener('click', () => {
                 this._saveExplanationAsNote(ctx, text, this.state.currentChapter);
                 saveBtn.classList.add('saved');
