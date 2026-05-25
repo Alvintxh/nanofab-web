@@ -926,22 +926,17 @@
 
     <aside id="ai-sidebar" class="ai-sidebar">
         <div class="ai-sidebar-header">
-            <div class="ai-sidebar-tabs">
-                <button class="ai-sidebar-tab active" data-tab="explanation">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
-                    AI解释
-                </button>
-                <button class="ai-sidebar-tab" data-tab="chat">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    助手
-                </button>
-            </div>
+            <button id="ai-sessions-toggle" class="ai-icon-btn" aria-label="历史会话" title="历史会话">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div class="ai-session-title" id="ai-session-title" title="">AI 学习助手</div>
+            <button id="ai-new-session" class="ai-icon-btn" aria-label="新建对话" title="新建对话">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+                </svg>
+            </button>
             <button id="ai-sidebar-close" class="ai-sidebar-close" aria-label="关闭面板">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"/>
@@ -950,48 +945,20 @@
             </button>
         </div>
 
-        <div class="ai-sidebar-content">
-            <div id="ai-explanation-panel" class="ai-panel active">
-                <div class="ai-panel-empty">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
-                    <p>选中文本后点击"AI解释"</p>
-                    <p class="ai-panel-empty-hint">即可获取个性化解释</p>
-                </div>
-                <div class="ai-explanation-result hidden">
-                    <div class="selected-text-box">
-                        <strong>选中内容：</strong>
-                        <p class="selected-text-content"></p>
-                    </div>
-                    <div class="ai-explanation-body">
-                        <div class="ai-loading">
-                            <div class="ai-spinner"></div>
-                            <p>正在根据您的背景生成个性化解释...</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- 历史会话抽屉 -->
+        <div id="ai-sessions-drawer" class="ai-sessions-drawer hidden">
+            <div class="ai-sessions-drawer-head">
+                <span>历史会话</span>
+                <button id="ai-new-session-2" class="btn btn-sm btn-primary">+ 新对话</button>
             </div>
+            <div id="ai-sessions-list" class="ai-sessions-list"></div>
+        </div>
 
-            <div id="ai-chat-panel" class="ai-panel">
-                <div class="ai-chat-messages" id="ai-chat-messages">
-                    <div class="ai-message ai-message-assistant">
-                        <div class="ai-message-avatar">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
-                        </div>
-                        <div class="ai-message-content">
-                            <p>你好！我是你的AI学习助手。在学习纳米制造技术的过程中有任何问题，都可以随时问我！</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="ai-sidebar-content">
+            <div id="ai-chat-panel" class="ai-panel active">
+                <div class="ai-chat-messages" id="ai-chat-messages"></div>
                 <div class="ai-chat-input-area">
-                    <textarea id="ai-chat-input" placeholder="输入你的问题..." rows="1"></textarea>
+                    <textarea id="ai-chat-input" placeholder="输入你的问题，或选中正文点击「AI解释」..." rows="1"></textarea>
                     <button id="ai-chat-send" class="ai-chat-send" aria-label="发送">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="22" y1="2" x2="11" y2="13"/>

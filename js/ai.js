@@ -55,250 +55,213 @@ const AIModule = {
         });
     },
 
+    // ===== 统一对话入口：选中文本 → 注入当前会话 =====
     showAIExplanation(text) {
-        this._explanationConv = null; // Reset conversation for new selected text
+        if (!text || !text.trim()) return;
         this.openAISidebar();
-        this.switchAISidebarTab('explanation');
-
-        const emptyState = document.querySelector('#ai-explanation-panel .ai-panel-empty');
-        const resultState = document.querySelector('#ai-explanation-panel .ai-explanation-result');
-        const selectedTextContent = document.querySelector('#ai-explanation-panel .selected-text-content');
-        const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
-
-        if (emptyState) emptyState.classList.add('hidden');
-        if (resultState) resultState.classList.remove('hidden');
-        if (selectedTextContent) selectedTextContent.textContent = text;
-
-        const chapter = this.state.currentChapter;
-        const chapterContext = chapter ? `
-	当前章节：${chapter.title}
-	章节描述：${chapter.description}
-	` : '';
-
-        if (explanationBody) {
-            explanationBody.innerHTML = `
-                <div class="explanation-question-area">
-                    <input type="text" class="explanation-question-input" placeholder="提出具体问题（可选），例如：这个工艺的物理原理是什么？">
-                    <button class="btn btn-sm btn-primary explanation-question-send">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                        </svg>
-                        发送
-                    </button>
-                </div>
-            `;
-
-            const sendBtn = explanationBody.querySelector('.explanation-question-send');
-            const input = explanationBody.querySelector('.explanation-question-input');
-
-            const doSend = () => {
-                const question = input.value.trim();
-                explanationBody.innerHTML = `
-                    <div class="ai-loading">
-                        <div class="ai-spinner"></div>
-                        <p>正在根据您的背景生成个性化解释...</p>
-                    </div>
-                `;
-                this._renderExplanation(text, question, chapter, chapterContext);
-            };
-
-            sendBtn.addEventListener('click', doSend);
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') doSend();
-            });
-            setTimeout(() => input.focus(), 100);
-        }
+        this._ensureActiveSession();
+        this.renderActiveSession();
+        const msg = `请解释这段内容：「${text.trim()}」`;
+        this._sendChatMessage(msg, { context: text.trim() });
     },
 
-    async _renderExplanation(selectedText, question, chapter, chapterContext) {
-        const explanationBody = document.querySelector('#ai-explanation-panel .ai-explanation-body');
-        if (!explanationBody) return;
+    // ===== 会话管理（按用户隔离，持久化到 localStorage）=====
+    _chatUid() { return this.state.user?.id || 'anon'; },
+    _chatSessionsKey() { return `nanofab_chat_sessions_v1_${this._chatUid()}`; },
+    _chatActiveKey() { return `nanofab_chat_active_v1_${this._chatUid()}`; },
 
-        // Initialize conversation history on first call
-        const isFirstQuestion = !this._explanationConv;
-        if (isFirstQuestion) {
-            this._explanationConv = { selectedText, chapter, chapterContext, qaList: [] };
-        }
-
-        // Build context with full conversation history
-        let fullContext = chapterContext;
-        const conv = this._explanationConv;
-        let convPrompt = `用户选中了以下文本："${selectedText}"\n\n`;
-        conv.qaList.forEach((qa, i) => {
-            convPrompt += `---\n第${i + 1}轮：\n用户问：${qa.question}\nAI答：${qa.answer}\n`;
-        });
-        if (question) {
-            convPrompt += `---\n用户的最新问题：${question}\n\n请结合选中的文本和之前的对话历史，回答用户的最新问题。`;
-            fullContext = convPrompt + (chapterContext ? '\n\n' + chapterContext : '');
-        } else if (conv.qaList.length > 0) {
-            // Follow-up with empty question (shouldn't normally happen)
-            fullContext = convPrompt + (chapterContext ? '\n\n' + chapterContext : '');
-        }
-
-        const explanation = await this.generateExplanation(selectedText, fullContext, question);
-        if (!explanationBody) return;
-
-        // Store in conversation history
-        const displayQuestion = question || '解释选中文本';
-        this._explanationConv.qaList.push({ question: displayQuestion, answer: explanation });
-
-        if (isFirstQuestion) {
-            // Initial render: show selected text hint + Q&A list + follow-up input
-            explanationBody.innerHTML = `
-                <div class="explanation-conversation">
-                    ${this._buildExplanationQAList()}
-                    <div class="explanation-followup">
-                        <input type="text" class="explanation-question-input followup-input"
-                            placeholder="继续追问，例如：能举个实际应用的例子吗？">
-                        <button class="btn btn-sm btn-primary explanation-question-send followup-send">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                            </svg>
-                            追问
-                        </button>
-                    </div>
-                </div>
-            `;
-        } else {
-            // Follow-up: refresh the Q&A list and reset follow-up input
-            const conv = explanationBody.querySelector('.explanation-conversation');
-            if (conv) {
-                conv.innerHTML = `
-                    ${this._buildExplanationQAList()}
-                    <div class="explanation-followup">
-                        <input type="text" class="explanation-question-input followup-input"
-                            placeholder="继续追问，例如：能举个实际应用的例子吗？">
-                        <button class="btn btn-sm btn-primary explanation-question-send followup-send">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                            </svg>
-                            追问
-                        </button>
-                    </div>
-                `;
-            }
-            // Scroll to latest answer
-            const lastQA = explanationBody.querySelector('.explanation-qa-item:last-child');
-            if (lastQA) lastQA.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Bind follow-up input
-        const followupInput = explanationBody.querySelector('.followup-input');
-        const followupSend = explanationBody.querySelector('.followup-send');
-        const bindFollowup = () => {
-            const q = followupInput.value.trim();
-            if (!q) return;
-            followupInput.disabled = true;
-            followupSend.disabled = true;
-            followupSend.textContent = '...';
-            // Show typing indicator
-            const followup = explanationBody.querySelector('.explanation-followup');
-            if (followup) followup.insertAdjacentHTML('beforebegin',
-                '<div class="ai-loading" style="padding:12px 0"><div class="ai-spinner"></div><p>正在生成回答...</p></div>');
-            this._renderExplanation(selectedText, q, chapter, chapterContext);
+    _loadSessions() {
+        try { return JSON.parse(localStorage.getItem(this._chatSessionsKey())) || []; }
+        catch (e) { return []; }
+    },
+    _saveSessions(list) {
+        localStorage.setItem(this._chatSessionsKey(), JSON.stringify(list));
+    },
+    _getActiveSession() {
+        const list = this._loadSessions();
+        const activeId = localStorage.getItem(this._chatActiveKey());
+        return list.find(s => s.id === activeId) || null;
+    },
+    _ensureActiveSession() {
+        let s = this._getActiveSession();
+        if (!s) s = this.createChatSession(false);
+        return s;
+    },
+    createChatSession(render = true) {
+        const list = this._loadSessions();
+        const session = {
+            id: 'sess-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+            title: '新对话',
+            messages: [],
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         };
-        followupSend.addEventListener('click', bindFollowup);
-        followupInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') bindFollowup();
-        });
-        setTimeout(() => followupInput.focus(), 100);
-
-        // Select-all toggle
-        const selectAll = explanationBody.querySelector('.qa-select-all');
-        const itemChecks = () => explanationBody.querySelectorAll('.qa-select');
-        if (selectAll) {
-            selectAll.addEventListener('change', () => {
-                itemChecks().forEach(cb => { cb.checked = selectAll.checked; });
-            });
-            // Keep "全选" in sync when individual items change
-            explanationBody.querySelectorAll('.qa-select').forEach(cb => {
-                cb.addEventListener('change', () => {
-                    const all = itemChecks();
-                    selectAll.checked = all.length > 0 && [...all].every(c => c.checked);
-                });
-            });
+        list.unshift(session);
+        this._saveSessions(list);
+        localStorage.setItem(this._chatActiveKey(), session.id);
+        if (render) {
+            this.renderActiveSession();
+            this.renderSessionsList();
+            this._closeSessionsDrawer();
         }
-
-        // Bind save button — saves only the selected Q&A as a single note
-        const saveBtn = explanationBody.querySelector('.save-explanation-selected');
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => {
-                const conv = this._explanationConv;
-                if (!conv || conv.qaList.length === 0) return;
-
-                const indices = [...itemChecks()]
-                    .filter(cb => cb.checked)
-                    .map(cb => parseInt(cb.dataset.qaIndex, 10));
-
-                if (indices.length === 0) {
-                    this.showToast('请先勾选要保存的对话', 'warning');
-                    return;
-                }
-
-                const markdown = indices.map((idx, n) => {
-                    const qa = conv.qaList[idx];
-                    return `## Q${n + 1}: ${qa.question}\n\n${qa.answer}`;
-                }).join('\n\n---\n\n');
-                this._saveExplanationAsNote(conv.selectedText, markdown, conv.chapter);
-
-                saveBtn.textContent = `已保存 ${indices.length} 条 ✓`;
-                saveBtn.classList.add('saved');
-                saveBtn.disabled = true;
-                setTimeout(() => {
-                    saveBtn.innerHTML = `
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                        保存选中对话为笔记
-                    `;
-                    saveBtn.classList.remove('saved');
-                    saveBtn.disabled = false;
-                }, 2000);
-            });
+        return session;
+    },
+    switchChatSession(id) {
+        localStorage.setItem(this._chatActiveKey(), id);
+        this.renderActiveSession();
+        this.renderSessionsList();
+        this._closeSessionsDrawer();
+    },
+    deleteChatSession(id) {
+        const list = this._loadSessions().filter(s => s.id !== id);
+        this._saveSessions(list);
+        const activeId = localStorage.getItem(this._chatActiveKey());
+        if (activeId === id) {
+            if (list.length) localStorage.setItem(this._chatActiveKey(), list[0].id);
+            else localStorage.removeItem(this._chatActiveKey());
         }
+        this.renderActiveSession();
+        this.renderSessionsList();
+    },
+    _updateActiveSession(mutator) {
+        const list = this._loadSessions();
+        const activeId = localStorage.getItem(this._chatActiveKey());
+        const s = list.find(x => x.id === activeId);
+        if (!s) return;
+        mutator(s);
+        s.updatedAt = new Date().toISOString();
+        this._saveSessions(list);
+    },
+    _closeSessionsDrawer() {
+        const drawer = document.getElementById('ai-sessions-drawer');
+        if (drawer) drawer.classList.add('hidden');
     },
 
-    _buildExplanationQAList() {
-        const qaList = this._explanationConv?.qaList || [];
-        if (qaList.length === 0) return '';
-        let html = qaList.map((qa, i) => {
-            const formattedAnswer = this.formatAIResponse(qa.answer);
-            return `
-                <div class="explanation-qa-item">
-                    <label class="explanation-qa-check" title="勾选以保存这条对话">
-                        <input type="checkbox" class="qa-select" data-qa-index="${i}">
-                    </label>
-                    <div class="explanation-qa-question">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                        ${this.escapeHtml(qa.question)}
-                    </div>
-                    <div class="explanation-qa-answer">${formattedAnswer}</div>
+    _sessionGreeting() {
+        return '你好！我是你的 AI 学习助手。直接提问，或在正文中选中文本点击「AI解释」，我都会结合你的学习数据来回答。';
+    },
+
+    renderActiveSession() {
+        const messages = document.getElementById('ai-chat-messages');
+        const titleEl = document.getElementById('ai-session-title');
+        if (!messages) return;
+        const s = this._getActiveSession();
+        messages.innerHTML = '';
+        if (titleEl) {
+            titleEl.textContent = s?.title || 'AI 学习助手';
+            titleEl.title = s?.title || '';
+        }
+        if (!s || s.messages.length === 0) {
+            this._appendMessageDOM(this._sessionGreeting(), 'assistant', { greeting: true });
+            return;
+        }
+        s.messages.forEach((m, i) => {
+            const prevUser = (m.role === 'assistant' && s.messages[i - 1]?.role === 'user')
+                ? s.messages[i - 1].content : null;
+            this._appendMessageDOM(m.content, m.role, { context: m.context, prevUser });
+        });
+    },
+
+    renderSessionsList() {
+        const list = document.getElementById('ai-sessions-list');
+        if (!list) return;
+        const sessions = this._loadSessions();
+        const activeId = localStorage.getItem(this._chatActiveKey());
+        if (!sessions.length) {
+            list.innerHTML = '<p class="ai-sessions-empty">还没有历史会话</p>';
+            return;
+        }
+        list.innerHTML = sessions.map(s => `
+            <div class="ai-session-item ${s.id === activeId ? 'active' : ''}" data-session-id="${s.id}">
+                <div class="ai-session-item-main">
+                    <div class="ai-session-item-title">${this.escapeHtml(s.title || '新对话')}</div>
+                    <div class="ai-session-item-time">${this._fmtSessionTime(s.updatedAt)} · ${s.messages.length} 条</div>
                 </div>
-            `;
-        }).join('');
-        // Save selected Q&A as a note (select all by default)
-        html += `
-            <div class="explanation-actions explanation-save-all">
-                <label class="qa-select-all-label" title="全选 / 取消全选">
-                    <input type="checkbox" class="qa-select-all"> 全选
-                </label>
-                <button class="btn btn-sm btn-outline save-explanation-selected" title="将勾选的问答保存为一条笔记">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                    </svg>
-                    保存选中对话为笔记
-                </button>
-            </div>`;
-        return html;
+                <button class="ai-session-del" data-session-id="${s.id}" title="删除会话">✕</button>
+            </div>`).join('');
+        list.querySelectorAll('.ai-session-item').forEach(el => {
+            el.addEventListener('click', (e) => {
+                if (e.target.closest('.ai-session-del')) return;
+                this.switchChatSession(el.dataset.sessionId);
+            });
+        });
+        list.querySelectorAll('.ai-session-del').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (confirm('删除此会话？此操作不可撤销。')) this.deleteChatSession(btn.dataset.sessionId);
+            });
+        });
+    },
+
+    _fmtSessionTime(iso) {
+        const d = new Date(iso);
+        const now = new Date();
+        if (d.toDateString() === now.toDateString()) {
+            return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        }
+        return d.toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' });
+    },
+
+    _appendMessageDOM(text, role, opts = {}) {
+        const messages = document.getElementById('ai-chat-messages');
+        if (!messages) return null;
+        const userSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+        const botSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
+        const div = document.createElement('div');
+        div.className = `ai-message ai-message-${role}`;
+        const body = role === 'assistant' ? this.formatAIResponse(text) : `<p>${this.escapeHtml(text)}</p>`;
+        const canSave = role === 'assistant' && !opts.greeting;
+        const actions = canSave
+            ? `<div class="ai-msg-actions"><button class="ai-msg-save" title="保存这条回答为笔记">
+                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                   存为笔记</button></div>`
+            : '';
+        div.innerHTML = `
+            <div class="ai-message-avatar">${role === 'user' ? userSvg : botSvg}</div>
+            <div class="ai-message-content">${body}${actions}</div>
+        `;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        if (canSave) {
+            const saveBtn = div.querySelector('.ai-msg-save');
+            const ctx = opts.context || opts.prevUser || 'AI 对话';
+            saveBtn.addEventListener('click', () => {
+                this._saveExplanationAsNote(ctx, text, this.state.currentChapter);
+                saveBtn.classList.add('saved');
+                saveBtn.innerHTML = '已保存 ✓';
+            });
+        }
+        return div;
+    },
+
+    async _sendChatMessage(text, opts = {}) {
+        if (!text || !text.trim()) return;
+        text = text.trim();
+        this._ensureActiveSession();
+
+        this._appendMessageDOM(text, 'user', { context: opts.context });
+        this._updateActiveSession(s => {
+            s.messages.push({ role: 'user', content: text, context: opts.context });
+            if (!s.title || s.title === '新对话') {
+                s.title = (opts.context || text).slice(0, 24);
+            }
+        });
+        const titleEl = document.getElementById('ai-session-title');
+        const active = this._getActiveSession();
+        if (titleEl && active) { titleEl.textContent = active.title; titleEl.title = active.title; }
+        this.renderSessionsList();
+
+        this.showTypingIndicator();
+        try {
+            const reply = await this.generateAIResponse(text);
+            this.removeTypingIndicator();
+            this._appendMessageDOM(reply, 'assistant', { context: opts.context });
+            this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context }));
+            this.renderSessionsList();
+        } catch (error) {
+            this.removeTypingIndicator();
+            this._appendMessageDOM('抱歉，处理你的问题时出现了错误。请稍后重试。', 'assistant', { greeting: true });
+        }
     },
 
     _saveExplanationAsNote(selectedText, explanation, chapter) {
@@ -384,15 +347,6 @@ const AIModule = {
         const toggle = document.getElementById('ai-sidebar-toggle');
         if (sidebar) sidebar.classList.remove('open');
         if (toggle) toggle.classList.remove('hidden');
-    },
-
-    switchAISidebarTab(tabId) {
-        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.tab === tabId);
-        });
-        document.querySelectorAll('#ai-sidebar .ai-panel').forEach(panel => {
-            panel.classList.toggle('active', panel.id === `ai-${tabId}-panel`);
-        });
     },
 
     buildSystemPrompt(user, context) {
@@ -843,12 +797,20 @@ const AIModule = {
             });
         }
 
-        document.querySelectorAll('.ai-sidebar-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.dataset.tab;
-                this.switchAISidebarTab(tabId);
+        // 会话：历史抽屉 + 新建
+        const sessionsToggle = document.getElementById('ai-sessions-toggle');
+        const sessionsDrawer = document.getElementById('ai-sessions-drawer');
+        if (sessionsToggle && sessionsDrawer) {
+            sessionsToggle.addEventListener('click', () => {
+                sessionsDrawer.classList.toggle('hidden');
+                if (!sessionsDrawer.classList.contains('hidden')) this.renderSessionsList();
             });
-        });
+        }
+        document.getElementById('ai-new-session')?.addEventListener('click', () => this.createChatSession(true));
+        document.getElementById('ai-new-session-2')?.addEventListener('click', () => this.createChatSession(true));
+
+        // 渲染当前会话（无会话则显示问候语）
+        this.renderActiveSession();
 
         const input = document.getElementById('ai-chat-input');
         const send = document.getElementById('ai-chat-send');
@@ -947,21 +909,9 @@ const AIModule = {
         const sendMessage = async () => {
             const text = input.value.trim();
             if (!text) return;
-
-            this.addChatMessage(text, 'user');
             input.value = '';
             input.style.height = 'auto';
-
-            this.showTypingIndicator();
-
-            try {
-                const response = await this.generateAIResponse(text);
-                this.removeTypingIndicator();
-                this.addChatMessage(response, 'assistant');
-            } catch (error) {
-                this.removeTypingIndicator();
-                this.addChatMessage('抱歉，处理你的问题时出现了错误。请稍后重试。', 'assistant');
-            }
+            this._sendChatMessage(text);
         };
 
         send.addEventListener('click', sendMessage);
@@ -976,30 +926,6 @@ const AIModule = {
             input.style.height = 'auto';
             input.style.height = Math.min(input.scrollHeight, 100) + 'px';
         });
-    },
-
-    addChatMessage(text, role) {
-        const messages = document.getElementById('ai-chat-messages');
-        if (!messages) return;
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `ai-message ai-message-${role}`;
-
-        const avatarSvg = role === 'user'
-            ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
-            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
-
-        const bodyContent = role === 'assistant'
-            ? this.formatAIResponse(text)
-            : `<p>${this.escapeHtml(text)}</p>`;
-
-        messageDiv.innerHTML = `
-            <div class="ai-message-avatar">${avatarSvg}</div>
-            <div class="ai-message-content">${bodyContent}</div>
-        `;
-
-        messages.appendChild(messageDiv);
-        messages.scrollTop = messages.scrollHeight;
     },
 
     showTypingIndicator() {
@@ -1153,7 +1079,14 @@ const AIModule = {
             });
         }
 
-        messages.push({ role: 'user', content: userMessage });
+        // 注入当前会话的多轮上下文（_sendChatMessage 已将本条 user 消息写入会话）
+        const session = this._getActiveSession();
+        const history = (session?.messages || []).slice(-12);
+        if (history.length) {
+            history.forEach(m => messages.push({ role: m.role, content: m.content }));
+        } else {
+            messages.push({ role: 'user', content: userMessage });
+        }
 
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
