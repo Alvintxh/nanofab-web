@@ -2093,58 +2093,116 @@ body.resizing {
 }
 
 .chapter-header h1 {
-    font-size: 1.875rem;
+    font-family: var(--font-display);
+    font-size: 2.4rem;
     font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+}
+
+.chapter-header h1::before {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    margin-bottom: 18px;
 }
 
 .chapter-header p {
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--color-text-secondary);
+    line-height: 1.7;
 }
 
 .chapter-content {
     min-height: 400px;
     margin-bottom: 40px;
-    line-height: 1.8;
+    line-height: 1.85;
+    font-size: 1.0rem;
+    color: #1f2937;
 }
 
 .chapter-content h1 {
-    font-size: 2rem;
+    font-family: var(--font-display);
+    font-size: 1.9rem;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin: 8px 0 28px;
     color: var(--color-text-primary);
+    letter-spacing: -0.01em;
 }
 
 .chapter-content h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 32px;
-    margin-bottom: 16px;
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary-light);
-    padding-bottom: 8px;
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    padding: 0 0 12px 18px;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+}
+
+.chapter-content h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 16px;
+    width: 4px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
 }
 
 .chapter-content h3 {
-    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.22rem;
     font-weight: 600;
-    margin-top: 24px;
+    margin-top: 30px;
     margin-bottom: 12px;
-    color: var(--color-text-primary);
+    color: var(--color-primary);
 }
 
 .chapter-content p {
-    margin-bottom: 16px;
-    text-align: justify;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.chapter-content strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.chapter-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+}
+
+.chapter-content blockquote {
+    margin: 22px 0;
+    padding: 4px 20px;
+    border-left: 3px solid var(--color-primary);
+    color: var(--color-text-secondary);
+    font-style: italic;
+    background: var(--color-primary-light);
+    border-radius: 0 10px 10px 0;
 }
 
 .chapter-content table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 24px 0;
     font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
 }
 
 .chapter-content th,
@@ -2158,10 +2216,20 @@ body.resizing {
     background: var(--color-primary-light);
     font-weight: 600;
     color: var(--color-primary);
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
 }
 
-.chapter-content tr:hover {
+.chapter-content tbody tr:nth-child(even) {
     background: var(--color-bg);
+}
+
+.chapter-content tbody tr:hover {
+    background: var(--color-primary-light);
+}
+
+.chapter-content tr:last-child td {
+    border-bottom: none;
 }
 
 .chapter-content ul,
@@ -2181,20 +2249,35 @@ body.resizing {
 }
 
 .chapter-content .chapter-summary {
-    background: var(--color-primary-light);
+    background: linear-gradient(135deg, var(--color-primary-light), rgba(0, 78, 161, 0.03));
     border: 1px solid rgba(0, 78, 161, 0.12);
-    border-radius: var(--radius-lg);
-    padding: 28px;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: 24px 28px;
     margin: 32px 0;
     box-shadow: var(--shadow-sm);
 }
 
 .chapter-content .summary-title {
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--color-primary);
-    margin-bottom: 16px;
-    text-align: center;
+    margin-bottom: 14px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chapter-content .summary-title::before {
+    content: '§';
+    font-size: 1.2em;
+    opacity: 0.5;
+}
+
+.chapter-content .figure-caption {
+    font-style: italic;
 }
 
 .chapter-content .figure {
