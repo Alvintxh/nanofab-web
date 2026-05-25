@@ -206,30 +206,57 @@ const AIModule = {
         });
         setTimeout(() => followupInput.focus(), 100);
 
-        // Bind save-all button — saves entire conversation as a single note
-        const saveAllBtn = explanationBody.querySelector('.save-explanation-all');
-        if (saveAllBtn) {
-            saveAllBtn.addEventListener('click', () => {
+        // Select-all toggle
+        const selectAll = explanationBody.querySelector('.qa-select-all');
+        const itemChecks = () => explanationBody.querySelectorAll('.qa-select');
+        if (selectAll) {
+            selectAll.addEventListener('change', () => {
+                itemChecks().forEach(cb => { cb.checked = selectAll.checked; });
+            });
+            // Keep "全选" in sync when individual items change
+            explanationBody.querySelectorAll('.qa-select').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const all = itemChecks();
+                    selectAll.checked = all.length > 0 && [...all].every(c => c.checked);
+                });
+            });
+        }
+
+        // Bind save button — saves only the selected Q&A as a single note
+        const saveBtn = explanationBody.querySelector('.save-explanation-selected');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
                 const conv = this._explanationConv;
                 if (!conv || conv.qaList.length === 0) return;
-                const selectedText = conv.selectedText;
-                const markdown = conv.qaList.map((qa, i) =>
-                    `## Q${i + 1}: ${qa.question}\n\n${qa.answer}`
-                ).join('\n\n---\n\n');
-                this._saveExplanationAsNote(selectedText, markdown, conv.chapter);
-                saveAllBtn.textContent = '已保存 ✓';
-                saveAllBtn.classList.add('saved');
-                saveAllBtn.disabled = true;
+
+                const indices = [...itemChecks()]
+                    .filter(cb => cb.checked)
+                    .map(cb => parseInt(cb.dataset.qaIndex, 10));
+
+                if (indices.length === 0) {
+                    this.showToast('请先勾选要保存的对话', 'warning');
+                    return;
+                }
+
+                const markdown = indices.map((idx, n) => {
+                    const qa = conv.qaList[idx];
+                    return `## Q${n + 1}: ${qa.question}\n\n${qa.answer}`;
+                }).join('\n\n---\n\n');
+                this._saveExplanationAsNote(conv.selectedText, markdown, conv.chapter);
+
+                saveBtn.textContent = `已保存 ${indices.length} 条 ✓`;
+                saveBtn.classList.add('saved');
+                saveBtn.disabled = true;
                 setTimeout(() => {
-                    saveAllBtn.innerHTML = `
+                    saveBtn.innerHTML = `
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                         </svg>
-                        保存全部对话为笔记
+                        保存选中对话为笔记
                     `;
-                    saveAllBtn.classList.remove('saved');
-                    saveAllBtn.disabled = false;
+                    saveBtn.classList.remove('saved');
+                    saveBtn.disabled = false;
                 }, 2000);
             });
         }
@@ -242,6 +269,9 @@ const AIModule = {
             const formattedAnswer = this.formatAIResponse(qa.answer);
             return `
                 <div class="explanation-qa-item">
+                    <label class="explanation-qa-check" title="勾选以保存这条对话">
+                        <input type="checkbox" class="qa-select" data-qa-index="${i}">
+                    </label>
                     <div class="explanation-qa-question">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -254,15 +284,18 @@ const AIModule = {
                 </div>
             `;
         }).join('');
-        // Single save-all button below Q&A list
+        // Save selected Q&A as a note (select all by default)
         html += `
             <div class="explanation-actions explanation-save-all">
-                <button class="btn btn-sm btn-outline save-explanation-all" title="将所有问答保存为一条笔记">
+                <label class="qa-select-all-label" title="全选 / 取消全选">
+                    <input type="checkbox" class="qa-select-all"> 全选
+                </label>
+                <button class="btn btn-sm btn-outline save-explanation-selected" title="将勾选的问答保存为一条笔记">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                     </svg>
-                    保存全部对话为笔记
+                    保存选中对话为笔记
                 </button>
             </div>`;
         return html;

@@ -3165,17 +3165,40 @@ input, select, textarea {
 }
 
 .explanation-qa-item {
+    position: relative;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     overflow: hidden;
     animation: fadeIn 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Highlight an item when its checkbox is selected */
+.explanation-qa-item:has(.qa-select:checked) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.explanation-qa-check {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    z-index: 1;
+    display: inline-flex;
+    cursor: pointer;
+}
+.explanation-qa-check input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
 }
 
 .explanation-qa-question {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    padding: 10px 14px;
+    padding: 10px 36px 10px 14px;
     background: #fef7f0;
     font-size: 0.875rem;
     font-weight: 500;
@@ -3233,10 +3256,29 @@ input, select, textarea {
 }
 
 .explanation-save-all {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-top: 0;
     padding-top: 8px;
     border-top: 1px dashed var(--color-border);
     justify-content: flex-end;
+}
+
+.qa-select-all-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    margin-right: auto;
+}
+.qa-select-all-label input {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
 }
 
 .explanation-followup {
