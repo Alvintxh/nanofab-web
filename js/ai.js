@@ -873,12 +873,14 @@ const AIModule = {
         document.getElementById('ai-new-session')?.addEventListener('click', () => this.createChatSession(true));
         document.getElementById('ai-new-session-2')?.addEventListener('click', () => this.createChatSession(true));
 
-        // 点标题返回首页
+        // 返回 AI 首页（按钮 + 点标题）
+        const goHome = () => { this._closeSessionsDrawer(); this.renderChatHome(); };
+        document.getElementById('ai-home-btn')?.addEventListener('click', goHome);
         const titleEl = document.getElementById('ai-session-title');
         if (titleEl) {
             titleEl.style.cursor = 'pointer';
             titleEl.title = '返回 AI 首页';
-            titleEl.addEventListener('click', () => { this._closeSessionsDrawer(); this.renderChatHome(); });
+            titleEl.addEventListener('click', goHome);
         }
 
         // 进入侧边栏默认展示首页（不直接进入上次会话）
