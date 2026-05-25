@@ -173,8 +173,22 @@ const BehaviorModule = {
         try {
             const { data: { session } } = await this.supabase.auth.getSession();
             if (!session?.user) return;
-            await this.supabase.from('user_notes').delete().eq('id', noteId);
-        } catch (e) { /* fire-and-forget */ }
+            const { error, count } = await this.supabase
+                .from('user_notes')
+                .delete({ count: 'exact' })
+                .eq('id', noteId)
+                .eq('user_id', session.user.id);
+            if (error) {
+                console.error('删除云端笔记失败:', error.message);
+                this.showToast('云端删除失败，刷新后可能重现', 'warning');
+            } else if (count === 0) {
+                // 删除成功返回但 0 行：通常是数据库缺少 DELETE 的 RLS 策略
+                console.warn('云端未删除任何笔记行（user_notes 可能缺少 DELETE 权限策略）');
+                this.showToast('云端未能删除该笔记（数据库缺少删除权限）', 'warning');
+            }
+        } catch (e) {
+            console.error('删除云端笔记异常:', e);
+        }
     },
 
     initBehaviorTracking() {
