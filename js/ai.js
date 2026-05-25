@@ -55,12 +55,10 @@ const AIModule = {
         });
     },
 
-    // ===== 统一对话入口：选中文本 → 注入当前会话 =====
+    // ===== 统一对话入口：选中文本 → 注入对话 =====
     showAIExplanation(text) {
         if (!text || !text.trim()) return;
         this.openAISidebar();
-        this._ensureActiveSession();
-        this.renderActiveSession();
         const msg = `请解释这段内容：「${text.trim()}」`;
         this._sendChatMessage(msg, { context: text.trim() });
     },
@@ -141,9 +139,53 @@ const AIModule = {
         return '你好！我是你的 AI 学习助手。直接提问，或在正文中选中文本点击「AI解释」，我都会结合你的学习数据来回答。';
     },
 
-    renderActiveSession() {
+    // 首页：进入侧边栏先展示落地页（新对话 + 最近会话），不直接进上次会话
+    renderChatHome() {
+        this._chatHome = true;
         const messages = document.getElementById('ai-chat-messages');
         const titleEl = document.getElementById('ai-session-title');
+        const panel = document.getElementById('ai-chat-panel');
+        if (panel) panel.classList.add('chat-home');
+        if (titleEl) { titleEl.textContent = 'AI 学习助手'; titleEl.title = ''; }
+        if (!messages) return;
+
+        const sessions = this._loadSessions();
+        const recent = sessions.slice(0, 6);
+        const recentHtml = recent.length ? `
+            <div class="chat-home-recent">
+                <div class="chat-home-recent-title">继续最近的对话</div>
+                ${recent.map(s => `
+                    <button class="chat-home-session" data-session-id="${s.id}">
+                        <span class="chat-home-session-title">${this.escapeHtml(s.title || '新对话')}</span>
+                        <span class="chat-home-session-time">${this._fmtSessionTime(s.updatedAt)} · ${s.messages.length} 条</span>
+                    </button>`).join('')}
+            </div>` : '';
+
+        messages.innerHTML = `
+            <div class="chat-home">
+                <div class="chat-home-hero">
+                    <div class="chat-home-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>AI 学习助手</h3>
+                    <p>结合你的学习数据，为你解释概念、随时答疑、定制学习建议。</p>
+                    <button class="chat-home-new btn btn-primary">＋ 开始新对话</button>
+                </div>
+                ${recentHtml}
+            </div>`;
+
+        messages.querySelector('.chat-home-new')?.addEventListener('click', () => this.createChatSession(true));
+        messages.querySelectorAll('.chat-home-session').forEach(btn => {
+            btn.addEventListener('click', () => this.switchChatSession(btn.dataset.sessionId));
+        });
+    },
+
+    renderActiveSession() {
+        this._chatHome = false;
+        const messages = document.getElementById('ai-chat-messages');
+        const titleEl = document.getElementById('ai-session-title');
+        const panel = document.getElementById('ai-chat-panel');
+        if (panel) panel.classList.remove('chat-home');
         if (!messages) return;
         const s = this._getActiveSession();
         messages.innerHTML = '';
@@ -251,7 +293,14 @@ const AIModule = {
     async _sendChatMessage(text, opts = {}) {
         if (!text || !text.trim()) return;
         text = text.trim();
-        this._ensureActiveSession();
+
+        // 在首页发消息 → 新开一个会话（不接续上次的会话）
+        if (this._chatHome) {
+            this.createChatSession(false);
+            this.renderActiveSession();
+        } else {
+            this._ensureActiveSession();
+        }
 
         this._appendMessageDOM(text, 'user', { context: opts.context });
         this._updateActiveSession(s => {
@@ -823,8 +872,16 @@ const AIModule = {
         document.getElementById('ai-new-session')?.addEventListener('click', () => this.createChatSession(true));
         document.getElementById('ai-new-session-2')?.addEventListener('click', () => this.createChatSession(true));
 
-        // 渲染当前会话（无会话则显示问候语）
-        this.renderActiveSession();
+        // 点标题返回首页
+        const titleEl = document.getElementById('ai-session-title');
+        if (titleEl) {
+            titleEl.style.cursor = 'pointer';
+            titleEl.title = '返回 AI 首页';
+            titleEl.addEventListener('click', () => { this._closeSessionsDrawer(); this.renderChatHome(); });
+        }
+
+        // 进入侧边栏默认展示首页（不直接进入上次会话）
+        this.renderChatHome();
 
         const input = document.getElementById('ai-chat-input');
         const send = document.getElementById('ai-chat-send');
