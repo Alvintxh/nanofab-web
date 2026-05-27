@@ -31,6 +31,8 @@ const App = {
         this.initResizers();
         this.loadChapters().then(() => {
             this.handleRoute();
+            // 后台预建内容索引，供 AI 检索教材原文并标注来源（④）
+            if (this.buildContentIndex) this.buildContentIndex().catch(() => {});
         });
     },
 
@@ -459,6 +461,32 @@ const App = {
         this.updateActiveNavItem(chapterId);
         this.showView('view-chapter');
         this.showChapterSummary(chapter);
+    },
+
+    // 引用角标/参考来源点击 → 跳到对应章节的小节（复用 scroll-margin 避开吸顶导航）
+    jumpToSection(chapterId, heading) {
+        if (!chapterId) return;
+        const scrollToHeading = () => {
+            const content = document.querySelector('.chapter-content');
+            if (!content || content.querySelector('.content-loading')) return false;
+            if (!heading) { content.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+            const els = content.querySelectorAll('h1, h2, h3, h4');
+            for (const el of els) {
+                if (el.textContent.trim() === heading) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+            }
+            const key = heading.slice(0, 8);
+            for (const el of els) {
+                if (el.textContent.trim().includes(key)) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+            }
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return true;
+        };
+        if (this.state.currentChapter?.id === chapterId) { scrollToHeading(); return; }
+        window.location.hash = `#chapter/${chapterId}`;
+        let tries = 0;
+        const timer = setInterval(() => {
+            if (scrollToHeading() || ++tries > 30) clearInterval(timer);
+        }, 150);
     },
 
     showChapterSummary(chapter) {

@@ -227,7 +227,7 @@ const AIModule = {
         s.messages.forEach((m, i) => {
             const prevUser = (m.role === 'assistant' && s.messages[i - 1]?.role === 'user')
                 ? s.messages[i - 1].content : null;
-            this._appendMessageDOM(m.content, m.role, { context: m.context, prevUser });
+            this._appendMessageDOM(m.content, m.role, { context: m.context, prevUser, sources: m.sources });
         });
     },
 
@@ -305,6 +305,10 @@ const AIModule = {
                 });
             } catch (e) { /* 公式渲染失败不影响文本 */ }
         }
+        // ④ 引用来源：把 [[标记]] 渲染成可点角标，并在末尾列出参考小节
+        if (role === 'assistant') {
+            this._renderCitations(div.querySelector('.ai-message-content'), opts.sources || []);
+        }
         messages.scrollTop = messages.scrollHeight;
         if (canSave) {
             const saveBtn = div.querySelector('.ai-msg-save');
@@ -316,6 +320,63 @@ const AIModule = {
             });
         }
         return div;
+    },
+
+    // 把回答中的 [[来源标记]] 替换成可点角标，并在末尾追加“参考来源”小节
+    _renderCitations(container, sources) {
+        if (!container) return;
+        const map = {};
+        (sources || []).forEach(s => { if (s && s.token) map[s.token] = s; });
+        const re = /\[\[\s*([a-zA-Z0-9]+-s\d+)\s*\]\]/g;
+        const used = new Set();
+
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+        const targets = [];
+        let n;
+        while ((n = walker.nextNode())) { re.lastIndex = 0; if (re.test(n.nodeValue)) targets.push(n); }
+
+        targets.forEach(textNode => {
+            const str = textNode.nodeValue;
+            const frag = document.createDocumentFragment();
+            let last = 0, m;
+            re.lastIndex = 0;
+            while ((m = re.exec(str))) {
+                if (m.index > last) frag.appendChild(document.createTextNode(str.slice(last, m.index)));
+                const token = m[1];
+                const ref = map[token];
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'ai-cite';
+                const chapterId = ref ? ref.chapterId : token.split('-')[0];
+                const heading = ref ? ref.heading : '';
+                chip.dataset.chapter = chapterId;
+                if (heading) chip.dataset.heading = heading;
+                chip.textContent = this._chapterNum(chapterId);
+                chip.title = ref ? `${ref.chapterTitle} · ${ref.heading}` : '跳转到来源章节';
+                chip.addEventListener('click', () => this.jumpToSection(chapterId, heading));
+                frag.appendChild(chip);
+                used.add(token);
+                last = re.lastIndex;
+            }
+            if (last < str.length) frag.appendChild(document.createTextNode(str.slice(last)));
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
+
+        // 末尾“参考来源”：列出本回答实际检索/依据的小节，确保来源始终可见
+        if (sources && sources.length) {
+            const footer = document.createElement('div');
+            footer.className = 'ai-sources';
+            const items = sources.map(s =>
+                `<button type="button" class="ai-source-item" data-chapter="${s.chapterId}" data-heading="${this.escapeHtml(s.heading)}">
+                    <span class="ai-source-ch">${this._chapterNum(s.chapterId)}</span>${this.escapeHtml(s.heading)}
+                 </button>`
+            ).join('');
+            footer.innerHTML = `<div class="ai-sources-label">参考来源 · 基于本平台教材</div><div class="ai-sources-list">${items}</div>`;
+            container.appendChild(footer);
+            footer.querySelectorAll('.ai-source-item').forEach(btn => {
+                btn.addEventListener('click', () => this.jumpToSection(btn.dataset.chapter, btn.dataset.heading));
+            });
+        }
     },
 
     async _sendChatMessage(text, opts = {}) {
@@ -344,10 +405,12 @@ const AIModule = {
 
         this.showTypingIndicator();
         try {
-            const reply = await this.generateAIResponse(text);
+            const refs = await this._retrieveSections(opts.context || text, this.state.currentChapter?.id);
+            const reply = await this.generateAIResponse(text, refs);
             this.removeTypingIndicator();
-            this._appendMessageDOM(reply, 'assistant', { context: opts.context });
-            this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context }));
+            const sources = refs.map(r => ({ token: r.token, chapterId: r.chapterId, chapterTitle: r.chapterTitle, heading: r.heading }));
+            this._appendMessageDOM(reply, 'assistant', { context: opts.context, sources });
+            this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context, sources }));
             this.renderSessionsList();
         } catch (error) {
             this.removeTypingIndicator();
@@ -1174,7 +1237,92 @@ const AIModule = {
         }
     },
 
-    async generateAIResponse(userMessage) {
+    // ===== ④ 内容索引与检索：让回答出自本书并可标注来源 =====
+    async buildContentIndex() {
+        if (this._contentIndex) return this._contentIndex;
+        if (this._contentIndexPromise) return this._contentIndexPromise;
+        this._contentIndexPromise = (async () => {
+            const chapters = this.getAllChapters();
+            const sections = [];
+            await Promise.all(chapters.map(async (ch) => {
+                try {
+                    const resp = await fetch(`./content/chapters/${ch.id}.html`);
+                    if (!resp.ok) return;
+                    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+                    const root = doc.querySelector('.chapter-content') || doc.body;
+                    let cur = null, idx = 0;
+                    const flush = () => { if (cur && cur.text.trim()) sections.push(cur); cur = null; };
+                    const start = (heading, level) => ({
+                        chapterId: ch.id, chapterTitle: ch.title, heading, level,
+                        token: `${ch.id}-s${idx++}`, text: '', insights: []
+                    });
+                    root.childNodes.forEach((node) => {
+                        if (node.nodeType !== 1) return;
+                        const tag = node.tagName;
+                        if (tag === 'H1') return;
+                        if (tag === 'H2' || tag === 'H3') { flush(); cur = start(node.textContent.trim(), tag); return; }
+                        if (!cur) cur = start(ch.title, 'H1');
+                        const t = node.textContent.replace(/\s+/g, ' ').trim();
+                        if (t) cur.text += t + '\n';
+                        node.querySelectorAll && node.querySelectorAll('.key-insight').forEach(k => cur.insights.push(k.textContent.trim()));
+                    });
+                    flush();
+                } catch (e) { /* 单章解析失败不影响其余 */ }
+            }));
+            this._contentIndex = sections;
+            return sections;
+        })();
+        return this._contentIndexPromise;
+    },
+
+    _grams(str, n = 2) {
+        const clean = (str || '').replace(/[\s，。、；：？！…（）()【】「」""''·,.;:?!\d]/g, '');
+        const set = new Set();
+        for (let i = 0; i + n <= clean.length; i++) set.add(clean.slice(i, i + n));
+        return set;
+    },
+
+    async _retrieveSections(query, currentChapterId, maxSections = 4, charBudget = 7000) {
+        let sections;
+        try { sections = await this.buildContentIndex(); } catch (e) { return []; }
+        if (!sections || !sections.length) return [];
+        const q = (query || '').replace(/请解释这段内容|关于这段内容|我的问题|[「」：:]/g, ' ');
+        const qg = this._grams(q, 2);
+        if (qg.size === 0) return [];
+        const scored = sections.map(s => {
+            const hg = this._grams(s.heading), ig = this._grams(s.insights.join(' ')), tg = this._grams(s.text.slice(0, 1500));
+            let score = 0;
+            qg.forEach(g => { if (hg.has(g)) score += 5; if (ig.has(g)) score += 3; if (tg.has(g)) score += 1; });
+            if (s.chapterId === currentChapterId) score *= 1.5;
+            return { s, score };
+        }).filter(x => x.score >= 3).sort((a, b) => b.score - a.score);
+        const picked = [];
+        let used = 0;
+        for (const { s } of scored) {
+            if (picked.length >= maxSections) break;
+            const snippet = s.text.slice(0, 2200).trim();
+            if (used + snippet.length > charBudget && picked.length) break;
+            picked.push({ ...s, snippet });
+            used += snippet.length;
+        }
+        return picked;
+    },
+
+    _buildReferenceBlock(refs) {
+        if (!refs.length) return '';
+        const lines = refs.map((r, i) => {
+            const ins = r.insights.length ? `\n要点：${r.insights.join('；')}` : '';
+            return `【参考资料 ${i + 1}】来源标记：${r.token} ｜ ${r.chapterTitle} · ${r.heading}${ins}\n${r.snippet}`;
+        });
+        return `以下是从本平台教材中检索到的相关原文，请**优先依据这些材料**回答用户的问题：\n\n${lines.join('\n\n---\n\n')}`;
+    },
+
+    _chapterNum(chapterId) {
+        const n = parseInt(String(chapterId).replace(/\D/g, ''), 10);
+        return Number.isFinite(n) ? `第${n}章` : '教材';
+    },
+
+    async generateAIResponse(userMessage, refs = []) {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
         const user = this.state.user;
@@ -1187,6 +1335,21 @@ const AIModule = {
             messages.push({
                 role: 'system',
                 content: `用户当前正在学习章节：${chapter.title}。章节描述：${chapter.description}`
+            });
+        }
+
+        // ④ 注入检索到的教材原文 + 引用规则，让回答有据可查
+        if (refs && refs.length) {
+            messages.push({ role: 'system', content: this._buildReferenceBlock(refs) });
+            messages.push({
+                role: 'system',
+                content: [
+                    '【引用来源规则】',
+                    '1. 优先依据上面的【参考资料】回答，确保结论与教材一致。',
+                    '2. 当某句话依据了某条资料时，在该句末尾标注其"来源标记"，格式为双方括号包裹，如 [[' + refs[0].token + ']]。务必使用资料中给出的来源标记原文，不要自己编造标记或写章节号。',
+                    '3. 若参考资料不足以回答，可补充通用专业知识，但要明确说明"教材未直接涵盖此点"，且不要为这部分编造来源标记。',
+                    '4. 不要把"参考资料""来源标记"这些字样或资料编号直接写进正文，只用 [[标记]] 形式引用。'
+                ].join('\n')
             });
         }
 
