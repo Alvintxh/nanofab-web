@@ -4115,6 +4115,13 @@ body.resizing {
     font-family: var(--font-display);
 }
 
+/* 目录/子标题跳转时，让标题行避开吸顶导航，不被遮住 */
+.chapter-header,
+.chapter-content h1, .chapter-content h2, .chapter-content h3,
+.chapter-content h4, .chapter-content h5, .chapter-content h6 {
+    scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
 .chapter-content table {
     font-family: var(--font-body);
 }
