@@ -227,7 +227,7 @@ const AIModule = {
         s.messages.forEach((m, i) => {
             const prevUser = (m.role === 'assistant' && s.messages[i - 1]?.role === 'user')
                 ? s.messages[i - 1].content : null;
-            this._appendMessageDOM(m.content, m.role, { context: m.context, prevUser, sources: m.sources });
+            this._appendMessageDOM(m.content, m.role, { context: m.context, prevUser, sources: m.sources, webRefs: m.webRefs });
         });
     },
 
@@ -305,9 +305,9 @@ const AIModule = {
                 });
             } catch (e) { /* 公式渲染失败不影响文本 */ }
         }
-        // ④ 引用来源：把 [[标记]] 渲染成可点角标，并在末尾列出参考小节
+        // ④ 引用来源：把 [[标记]] 渲染成可点角标，并在末尾列出参考小节 + 外部来源
         if (role === 'assistant') {
-            this._renderCitations(div.querySelector('.ai-message-content'), opts.sources || []);
+            this._renderCitations(div.querySelector('.ai-message-content'), opts.sources || [], opts.webRefs || []);
         }
         messages.scrollTop = messages.scrollHeight;
         if (canSave) {
@@ -323,7 +323,7 @@ const AIModule = {
     },
 
     // 把回答中的 [[来源标记]] 替换成可点角标，并在末尾追加“参考来源”小节
-    _renderCitations(container, sources) {
+    _renderCitations(container, sources, webRefs) {
         if (!container) return;
         const map = {};
         (sources || []).forEach(s => { if (s && s.token) map[s.token] = s; });
@@ -377,6 +377,23 @@ const AIModule = {
                 btn.addEventListener('click', () => this.jumpToSection(btn.dataset.chapter, btn.dataset.heading));
             });
         }
+
+        // 外部参考来源：来自联网搜索的真实网页/论文链接
+        if (webRefs && webRefs.length) {
+            const ext = document.createElement('div');
+            ext.className = 'ai-sources ai-sources-web';
+            const items = webRefs.filter(r => r && r.link).map(r => {
+                const title = this.escapeHtml(r.title || r.link);
+                let host = '';
+                try { host = new URL(r.link).hostname.replace(/^www\./, ''); } catch (e) { host = r.media || ''; }
+                return `<a class="ai-source-item ai-source-web" href="${this.escapeHtml(r.link)}" target="_blank" rel="noopener noreferrer">
+                    <span class="ai-source-web-icon">↗</span>
+                    <span class="ai-source-web-body"><span class="ai-source-web-title">${title}</span>${host ? `<span class="ai-source-web-host">${this.escapeHtml(host)}</span>` : ''}</span>
+                 </a>`;
+            }).join('');
+            ext.innerHTML = `<div class="ai-sources-label">外部参考 · 联网搜索（请自行核实）</div><div class="ai-sources-list">${items}</div>`;
+            container.appendChild(ext);
+        }
     },
 
     async _sendChatMessage(text, opts = {}) {
@@ -409,8 +426,9 @@ const AIModule = {
             const reply = await this.generateAIResponse(text, refs);
             this.removeTypingIndicator();
             const sources = refs.map(r => ({ token: r.token, chapterId: r.chapterId, chapterTitle: r.chapterTitle, heading: r.heading }));
-            this._appendMessageDOM(reply, 'assistant', { context: opts.context, sources });
-            this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context, sources }));
+            const webRefs = (this._lastSearchResults || []).slice(0, 5);
+            this._appendMessageDOM(reply, 'assistant', { context: opts.context, sources, webRefs });
+            this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context, sources, webRefs }));
             this.renderSessionsList();
         } catch (error) {
             this.removeTypingIndicator();
@@ -627,8 +645,9 @@ const AIModule = {
         return parts.join('\n');
     },
 
-    async callAIProvider(provider, model, messages, maxTokens = 1500, temperature = 0.7) {
+    async callAIProvider(provider, model, messages, maxTokens = 1500, temperature = 0.7, opts = {}) {
         const edgeUrl = SUPABASE_URL + '/functions/v1/ai-proxy';
+        this._lastSearchResults = null;
 
         // Try Supabase Edge Function first (server-side keys)
         if (this.supabase) {
@@ -642,15 +661,18 @@ const AIModule = {
                     headers['Authorization'] = `Bearer ${session.access_token}`;
                 }
 
+                const body = { provider, model, messages, temperature, max_tokens: maxTokens };
+                if (opts.webSearch) body.web_search = true;
                 const resp = await fetch(edgeUrl, {
                     method: 'POST',
                     headers,
-                    body: JSON.stringify({ provider, model, messages, temperature, max_tokens: maxTokens })
+                    body: JSON.stringify(body)
                 });
 
                 if (resp.ok) {
                     const data = await resp.json();
                     if (data.content) {
+                        if (Array.isArray(data.search) && data.search.length) this._lastSearchResults = data.search;
                         this._logAIQuery(provider, model, messages, data.content);
                         return data.content;
                     }
@@ -1512,7 +1534,9 @@ const AIModule = {
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
         try {
-            return await this.callAIProvider(provider, model, messages, 2000);
+            // 智谱开启联网搜索，补充教材之外的真实外部参考（论文/网页）
+            const useSearch = provider === 'zhipu';
+            return await this.callAIProvider(provider, model, messages, 2000, 0.7, { webSearch: useSearch });
         } catch (error) {
             console.error('AI response error:', error);
         }

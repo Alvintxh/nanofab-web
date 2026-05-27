@@ -36,7 +36,7 @@ serve(async (req: Request) => {
       );
     }
 
-    const { provider, model, messages, temperature, max_tokens } = await req.json();
+    const { provider, model, messages, temperature, max_tokens, web_search } = await req.json();
 
     if (!provider || !messages?.length) {
       return new Response(
@@ -45,7 +45,7 @@ serve(async (req: Request) => {
       );
     }
 
-    let result: { content: string; error?: string };
+    let result: { content: string; error?: string; search?: any[] };
 
     switch (provider) {
       case "zhipu": {
@@ -54,22 +54,34 @@ serve(async (req: Request) => {
           result = { content: "", error: "Zhipu API key not configured" };
           break;
         }
+        const body: Record<string, unknown> = {
+          model: model || "glm-4-flash",
+          messages,
+          temperature: temperature ?? 0.7,
+          max_tokens: max_tokens ?? 1500,
+        };
+        // 开启联网搜索：返回真实网页/论文等外部参考来源
+        if (web_search) {
+          body.tools = [{ type: "web_search", web_search: { enable: true, search_result: true } }];
+        }
         const resp = await fetch("https://open.bigmodel.cn/api/paas/v4/chat/completions", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${key}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            model: model || "glm-4-flash",
-            messages,
-            temperature: temperature ?? 0.7,
-            max_tokens: max_tokens ?? 1500,
-          }),
+          body: JSON.stringify(body),
         });
         const data = await resp.json();
         if (resp.ok && data.choices?.[0]?.message?.content) {
           result = { content: data.choices[0].message.content };
+          if (Array.isArray(data.web_search) && data.web_search.length) {
+            result.search = data.web_search.map((r: any) => ({
+              title: r.title || "",
+              link: r.link || r.url || "",
+              media: r.media || "",
+            })).filter((r: any) => r.link);
+          }
         } else {
           result = { content: "", error: data.error?.message || "Zhipu API error" };
         }
