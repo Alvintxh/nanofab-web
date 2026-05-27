@@ -703,6 +703,25 @@
                     <p class="page-subtitle">继续您的纳米制造技术学习之旅</p>
                 </div>
 
+                <div class="dashboard-card goal-card">
+                    <div class="goal-card-head">
+                        <div class="goal-card-icon">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>目标导向学习路径</h3>
+                            <p class="goal-subtitle">告诉 AI 你想达成的目标，它会从整本教材中筛出你真正需要的<strong>最小知识子集</strong>，并排出学习顺序。</p>
+                        </div>
+                    </div>
+                    <div class="goal-input-row">
+                        <input id="goal-input" type="text" maxlength="120" placeholder="例如：我想做 X 射线光栅 / 搭建一套电子束光刻工艺 / 理解 EUV 为何能做到 7nm">
+                        <button id="goal-generate" class="btn btn-primary">生成学习路径</button>
+                    </div>
+                    <div id="goal-path-result" class="goal-path-result"></div>
+                </div>
+
                 <div class="dashboard-grid">
                     <div class="dashboard-card continue-learning">
                         <div class="card-icon">

@@ -344,6 +344,8 @@ const App = {
                 this.showView('view-home');
                 this.updateUserGreeting();
                 this.updateProgress();
+                this.bindGoalUI();
+                this.restoreGoalPath();
                 this.renderAILearningPath();
                 this.renderMindMap();
                 this.updateStudyStats();

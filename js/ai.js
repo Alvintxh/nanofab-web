@@ -921,6 +921,135 @@ const AIModule = {
         ], 500);
     },
 
+    // ===== ⑤ 目标驱动动态知识书：目标 → 最小知识子集 + 学习路径 =====
+    _goalKey() { return `nanofab_goal_path_v1_${this._chatUid()}`; },
+    _loadGoalPath() { try { return JSON.parse(localStorage.getItem(this._goalKey())); } catch (e) { return null; } },
+    _saveGoalPath(o) { try { localStorage.setItem(this._goalKey(), JSON.stringify(o)); } catch (e) { /* ignore */ } },
+
+    // 把内容索引压缩成带“来源标记”的紧凑目录，供 AI 规划时选取小节
+    async _buildSectionOutline() {
+        const sections = await this.buildContentIndex();
+        const byCh = {};
+        sections.forEach(s => {
+            (byCh[s.chapterId] = byCh[s.chapterId] || []).push({
+                token: s.token, heading: s.heading,
+                insight: s.insights[0] ? s.insights[0].slice(0, 36) : ''
+            });
+        });
+        const lines = [];
+        this.getAllChapters().forEach(ch => {
+            const items = byCh[ch.id];
+            if (!items) return;
+            lines.push(`${this._chapterNum(ch.id)} ${ch.title}`);
+            items.forEach(it => lines.push(`  - [${it.token}] ${it.heading}${it.insight ? '（' + it.insight + '）' : ''}`));
+        });
+        return lines.join('\n');
+    },
+
+    async generateGoalPath(goal) {
+        const outline = await this._buildSectionOutline();
+        if (!outline) throw new Error('content index empty');
+        const user = this.state.user;
+        const profile = user ? `用户背景：水平${user.level || '初学者'}，先修${(user.prerequisite || []).join('、') || '未知'}，兴趣${(user.interestArea || []).join('、') || '未知'}。请据此微调讲解深度，但路径只依据教材目录。` : '';
+        const system = [
+            '你是纳米制造技术领域的学习规划专家。下面会给你《纳米制造技术：原理、工艺与实践》整本教材的“章节—小节”目录，每个小节带一个唯一的方括号“来源标记”。',
+            '用户会给出一个具体的学习或工程目标。请从教材中筛选出实现该目标所需的【最小知识子集】，并排出最合理的学习先后顺序——只保留真正必要的小节，不要堆砌。',
+            '严格只能使用目录中已存在的小节，并用其“来源标记”引用，绝不可虚构小节或标记。',
+            profile,
+            '只输出一个 JSON 对象（不要任何额外文字、不要 Markdown 代码块），格式：',
+            '{"goal":"复述用户目标","scope":"一句话说明这条路径覆盖什么、不覆盖什么","steps":[{"token":"来源标记","why":"为达成该目标为何需要这一节（20-40字）","focus":"在这一节里要重点掌握什么（20-40字）"}]}',
+            'steps 数量控制在 4-10 个，按学习先后排序。'
+        ].filter(Boolean).join('\n');
+        const provider = localStorage.getItem('ai_provider') || 'zhipu';
+        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
+        const raw = await this.callAIProvider(provider, model, [
+            { role: 'system', content: system },
+            { role: 'system', content: '教材目录：\n' + outline },
+            { role: 'user', content: `我的目标：${goal}` }
+        ], 2200, 0.4);
+        const match = (raw || '').match(/\{[\s\S]*\}/);
+        if (!match) throw new Error('no json');
+        return JSON.parse(match[0]);
+    },
+
+    renderGoalPath(data, goal) {
+        const box = document.getElementById('goal-path-result');
+        if (!box) return;
+        if (!data || !Array.isArray(data.steps) || !data.steps.length) {
+            box.innerHTML = '<p class="goal-empty">未能生成有效路径，请把目标描述得更具体些再试。</p>';
+            return;
+        }
+        const tokenMap = {};
+        (this._contentIndex || []).forEach(s => { tokenMap[s.token] = s; });
+        const steps = data.steps.map((st, i) => {
+            const ref = tokenMap[st.token];
+            const ch = ref ? ref.chapterId : String(st.token || '').split('-')[0];
+            const heading = ref ? ref.heading : (st.heading || '相关小节');
+            return `<li class="goal-step">
+                <div class="goal-step-no">${i + 1}</div>
+                <div class="goal-step-body">
+                    <div class="goal-step-head">
+                        <span class="goal-step-ch">${this._chapterNum(ch)}</span>
+                        <span class="goal-step-title">${this.escapeHtml(heading)}</span>
+                    </div>
+                    ${st.why ? `<p class="goal-step-line"><strong>为何需要：</strong>${this.escapeHtml(st.why)}</p>` : ''}
+                    ${st.focus ? `<p class="goal-step-line"><strong>重点掌握：</strong>${this.escapeHtml(st.focus)}</p>` : ''}
+                    <button class="goal-step-go" data-chapter="${ch}" data-heading="${this.escapeHtml(heading)}">去学习 →</button>
+                </div>
+            </li>`;
+        }).join('');
+        box.innerHTML = `
+            <div class="goal-result-head">
+                <div class="goal-result-title">为「${this.escapeHtml(data.goal || goal)}」定制的学习路径</div>
+                ${data.scope ? `<p class="goal-scope">${this.escapeHtml(data.scope)}</p>` : ''}
+            </div>
+            <ol class="goal-steps">${steps}</ol>
+            <p class="goal-foot">共 ${data.steps.length} 个学习单元 · 从整本教材中筛选</p>`;
+        box.querySelectorAll('.goal-step-go').forEach(b =>
+            b.addEventListener('click', () => this.jumpToSection(b.dataset.chapter, b.dataset.heading)));
+    },
+
+    bindGoalUI() {
+        const btn = document.getElementById('goal-generate');
+        const input = document.getElementById('goal-input');
+        if (!btn || !input || btn._bound) return;
+        btn._bound = true;
+        const run = async () => {
+            const goal = input.value.trim();
+            if (!goal) { input.focus(); return; }
+            const box = document.getElementById('goal-path-result');
+            const old = btn.textContent;
+            btn.disabled = true; btn.textContent = '规划中…';
+            if (box) box.innerHTML = '<p class="goal-loading">AI 正在从整本教材中筛选你需要的知识并排序…</p>';
+            try {
+                const data = await this.generateGoalPath(goal);
+                this.renderGoalPath(data, goal);
+                this._saveGoalPath({ goal, data, ts: Date.now() });
+                if (this.state.user && this.state.user.currentGoal !== goal) {
+                    this.state.user.currentGoal = goal;
+                    this.saveUser && this.saveUser(this.state.user);
+                }
+            } catch (e) {
+                console.error('goal path failed:', e);
+                if (box) box.innerHTML = '<p class="goal-empty">生成失败，请稍后重试或换个目标描述。</p>';
+            } finally {
+                btn.disabled = false; btn.textContent = old;
+            }
+        };
+        btn.addEventListener('click', run);
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); run(); } });
+    },
+
+    async restoreGoalPath() {
+        const saved = this._loadGoalPath();
+        if (!saved) return;
+        const input = document.getElementById('goal-input');
+        if (input && !input.value) input.value = saved.goal || '';
+        // 等索引就绪，确保小节标题能从 token 解析出来
+        await this.buildContentIndex().catch(() => {});
+        this.renderGoalPath(saved.data, saved.goal);
+    },
+
     initAIAssistant() {
         const sidebarToggle = document.getElementById('ai-sidebar-toggle');
         const sidebarClose = document.getElementById('ai-sidebar-close');
