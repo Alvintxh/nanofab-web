@@ -462,10 +462,6 @@ const AIModule = {
             parts.push(`用户学习水平：${levelMap[user.level] || user.level || '初学者'}`);
             parts.push(`专业背景：${user.background || '学生'}`);
 
-            if (user.weeklyHours) {
-                parts.push(`每周学习时间：${user.weeklyHours}小时`);
-            }
-
             if (user.motivation?.length > 0) {
                 const motivationMap = {
                     course: '课程学习',
@@ -488,15 +484,6 @@ const AIModule = {
                 };
                 const prereqs = user.prerequisite.map(p => prereqMap[p] || p).join('、');
                 parts.push(`先修知识：${prereqs}`);
-            }
-
-            if (user.studyPace) {
-                const paceMap = {
-                    intensive: '集中学习（1-2周）',
-                    moderate: '适中（1-2个月）',
-                    relaxed: '轻松（3个月以上）'
-                };
-                parts.push(`学习节奏：${paceMap[user.studyPace]}`);
             }
 
             if (user.learningStyle?.length > 0) {
@@ -787,13 +774,11 @@ const AIModule = {
 
         const tips = [];
         const style = user.learningStyle || [];
-        const pace = user.studyPace;
 
         if (style.includes('visual')) tips.push('多关注图表和流程图来加深理解');
         if (style.includes('theory')) tips.push('深入推导公式背后的物理机制');
         if (style.includes('practical')) tips.push('结合工艺实践案例理解理论');
         if (style.includes('case')) tips.push('通过实际应用案例验证所学知识');
-        if (pace === 'intensive') tips.push('保持每天至少一个章节的学习节奏');
         if (bp.quizAccuracy > 0 && bp.quizAccuracy < 0.6) tips.push('建议先复习薄弱章节再继续新课');
 
         return {
@@ -801,7 +786,7 @@ const AIModule = {
             review: reviewChapters,
             mastered: masteredChapters,
             accuracy: bp.quizAccuracy ? Math.round(bp.quizAccuracy * 100) : 0,
-            tips: tips.length > 0 ? tips : ['继续按照课程顺序学习，完成测试巩固理解']
+            tips: tips.length > 0 ? tips : ['继续按章节顺序学习，完成测试巩固理解']
         };
     },
 

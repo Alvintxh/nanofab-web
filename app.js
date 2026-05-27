@@ -928,7 +928,7 @@ const App = {
         svg += `<rect width="${w}" height="${h}" rx="16" fill="url(#mm-grid)"/>`;
 
         // ====== Title ======
-        svg += `<text x="${w/2}" y="26" text-anchor="middle" fill="#1e293b" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'STSong', serif" letter-spacing="1.5">纳米制造技术 · 课程知识结构</text>`;
+        svg += `<text x="${w/2}" y="26" text-anchor="middle" fill="#1e293b" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'STSong', serif" letter-spacing="1.5">纳米制造技术 · 知识结构</text>`;
         svg += `<line x1="${w/2 - 65}" y1="36" x2="${w/2 + 65}" y2="36" stroke="#e2e8f0" stroke-width="1"/>`;
 
         // ====== Root node ======

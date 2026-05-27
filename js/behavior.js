@@ -359,10 +359,6 @@ const BehaviorModule = {
             ? Math.round((quizResults.filter(q => q.correct).length / quizResults.length) * 100)
             : 0;
 
-        const user = this.state.user;
-        const weeklyGoal = (user?.weeklyHours || 8) * 3600;
-        const weeklyPercent = Math.min(100, Math.round((weekSeconds / weeklyGoal) * 100));
-
         const setEl = (id, inner) => { const el = document.getElementById(id); if (el) el.innerHTML = inner; };
         setEl('stat-today', `${Math.round(todaySeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
         setEl('stat-week', `${Math.round(weekSeconds / 60)}<span style="font-size:0.75rem"> 分钟</span>`);
@@ -374,11 +370,6 @@ const BehaviorModule = {
         setEl('stat-total', totalDisplay);
         setEl('stat-streak', `${streak}<span style="font-size:0.75rem"> 天</span>`);
         setEl('stat-accuracy', `${quizAccuracy}<span style="font-size:0.75rem">%</span>`);
-
-        const elBar = document.getElementById('stat-weekly-bar');
-        if (elBar) elBar.style.width = `${weeklyPercent}%`;
-        const elBarLabel = document.getElementById('stat-weekly-bar-label');
-        if (elBarLabel) elBarLabel.textContent = `${weeklyPercent}%`;
     },
 
     updateWrongAnswerBook() {
