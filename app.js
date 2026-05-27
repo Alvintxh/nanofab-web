@@ -220,6 +220,17 @@ const App = {
             profileForm.addEventListener('submit', (e) => this.handleProfileSubmit(e));
         }
 
+        // ① 简历/成绩/附件上传 → AI 提取
+        const uploadBtn = document.getElementById('profile-upload-btn');
+        const fileInput = document.getElementById('profile-files');
+        if (uploadBtn && fileInput) {
+            uploadBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', () => {
+                this.handleProfileUpload(fileInput.files);
+                fileInput.value = '';
+            });
+        }
+
         document.querySelectorAll('.auth-tab').forEach(tab => {
             tab.addEventListener('click', () => this.switchAuthTab(tab.dataset.tab));
         });

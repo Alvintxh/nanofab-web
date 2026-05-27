@@ -621,6 +621,88 @@ const AuthModule = {
         }
     },
 
+    // ① 上传简历/成绩/附件 → 提取文字 → AI 结构化 → 自动填表
+    async _extractPdfText(arrayBuffer) {
+        const lib = window.pdfjsLib;
+        if (!lib) throw new Error('PDF 解析库未加载');
+        lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const pdf = await lib.getDocument({ data: arrayBuffer }).promise;
+        const maxPages = Math.min(pdf.numPages, 15);
+        let text = '';
+        for (let i = 1; i <= maxPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            text += content.items.map(it => it.str).join(' ') + '\n';
+        }
+        return text;
+    },
+
+    async _distillProfile(rawText) {
+        const provider = localStorage.getItem('ai_provider') || 'zhipu';
+        const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
+        const system = '你是信息提取助手。用户会粘贴其简历、成绩单或相关材料的文字。请提炼出用于学习个性化的信息，只输出一个 JSON 对象（不要代码块、不要多余文字）：{"resume":"教育背景、研究方向、专业技能、工作或科研经历的简洁摘要(150字内)","scores":"与纳米制造/半导体/材料/物理/化学相关的课程成绩，用顿号分隔，无则空字符串","currentProject":"正在进行的项目，无则空字符串"}';
+        const raw = await this.callAIProvider(provider, model, [
+            { role: 'system', content: system },
+            { role: 'user', content: rawText.slice(0, 12000) }
+        ], 800, 0.2);
+        const m = (raw || '').match(/\{[\s\S]*\}/);
+        return m ? JSON.parse(m[0]) : null;
+    },
+
+    async handleProfileUpload(files) {
+        if (!files || !files.length) return;
+        const list = document.getElementById('profile-upload-list');
+        const addRow = (name) => {
+            const row = document.createElement('div');
+            row.className = 'profile-file-row';
+            row.innerHTML = `<span class="profile-file-name">${this.escapeHtml(name)}</span><span class="profile-file-status">解析中…</span>`;
+            list && list.appendChild(row);
+            return row.querySelector('.profile-file-status');
+        };
+
+        let combined = '';
+        for (const file of Array.from(files)) {
+            const status = addRow(file.name);
+            try {
+                let text = '';
+                if (file.name.toLowerCase().endsWith('.pdf')) {
+                    text = await this._extractPdfText(await file.arrayBuffer());
+                } else {
+                    text = await file.text();
+                }
+                text = (text || '').replace(/\s+/g, ' ').trim();
+                if (!text) { if (status) { status.textContent = '未提取到文字'; status.className = 'profile-file-status warn'; } continue; }
+                combined += `\n[文件：${file.name}]\n${text.slice(0, 6000)}\n`;
+                if (status) { status.textContent = '已读取 ✓'; status.className = 'profile-file-status ok'; }
+            } catch (err) {
+                console.error('file parse failed:', err);
+                if (status) { status.textContent = '解析失败'; status.className = 'profile-file-status err'; }
+            }
+        }
+        if (!combined.trim()) return;
+
+        const distill = document.createElement('div');
+        distill.className = 'profile-distill';
+        distill.textContent = 'AI 正在提取关键信息…';
+        list && list.appendChild(distill);
+        try {
+            const data = await this._distillProfile(combined);
+            if (!data) throw new Error('no data');
+            const resumeEl = document.getElementById('user-resume');
+            const scoresEl = document.getElementById('user-scores');
+            const projEl = document.getElementById('user-current-project');
+            if (data.resume && resumeEl) resumeEl.value = data.resume;
+            if (data.scores && scoresEl) scoresEl.value = data.scores;
+            if (data.currentProject && projEl && !projEl.value) projEl.value = data.currentProject;
+            distill.textContent = '已自动填入下方简介与成绩，可手动修改 ✓';
+            distill.className = 'profile-distill ok';
+        } catch (err) {
+            console.error('distill failed:', err);
+            distill.textContent = 'AI 提取失败，请手动填写下方字段';
+            distill.className = 'profile-distill err';
+        }
+    },
+
     async handleProfileSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
