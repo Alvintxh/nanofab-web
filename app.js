@@ -476,22 +476,31 @@ const App = {
         this.showChapterSummary(chapter);
     },
 
-    // 引用角标/参考来源点击 → 跳到对应章节的小节（复用 scroll-margin 避开吸顶导航）
+    // 统一：滚动到某元素，手动扣除吸顶导航高度，保证标题行完整露出
+    scrollToElementBelowHeader(el) {
+        if (!el) return;
+        const root = getComputedStyle(document.documentElement);
+        const headerH = parseInt(root.getPropertyValue('--header-height'), 10) || 64;
+        const y = el.getBoundingClientRect().top + window.scrollY - headerH - 24;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    },
+
+    // 引用角标/参考来源点击 → 跳到对应章节的小节
     jumpToSection(chapterId, heading) {
         if (!chapterId) return;
         const scrollToHeading = () => {
             const content = document.querySelector('.chapter-content');
             if (!content || content.querySelector('.content-loading')) return false;
-            if (!heading) { content.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+            if (!heading) { this.scrollToElementBelowHeader(content); return true; }
             const els = content.querySelectorAll('h1, h2, h3, h4');
             for (const el of els) {
-                if (el.textContent.trim() === heading) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+                if (el.textContent.trim() === heading) { this.scrollToElementBelowHeader(el); return true; }
             }
             const key = heading.slice(0, 8);
             for (const el of els) {
-                if (el.textContent.trim().includes(key)) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+                if (el.textContent.trim().includes(key)) { this.scrollToElementBelowHeader(el); return true; }
             }
-            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            this.scrollToElementBelowHeader(content);
             return true;
         };
         if (this.state.currentChapter?.id === chapterId) { scrollToHeading(); return; }
@@ -1147,7 +1156,7 @@ const App = {
             link.textContent = (h.tagName === 'H3' ? '  ∘ ' : '') + h.textContent.trim().substring(0, 30);
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                this.scrollToElementBelowHeader(h);
             });
             subContainer.appendChild(link);
         });
