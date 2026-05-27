@@ -6,61 +6,88 @@ const AIModule = {
         const tooltip = document.createElement('div');
         tooltip.className = 'ai-tooltip';
         tooltip.innerHTML = `
-            <div class="ai-tooltip-content">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="ai-tooltip-explain" type="button">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                     <path d="M2 17l10 5 10-5"/>
                     <path d="M2 12l10 5 10-5"/>
                 </svg>
-                <span>AI解释</span>
+                <span>解释这段</span>
+            </button>
+            <div class="ai-tooltip-ask">
+                <input class="ai-tooltip-input" type="text" placeholder="或对这段内容提问，回车发送…" maxlength="200">
+                <button class="ai-tooltip-send" type="button" aria-label="发送提问">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
+                </button>
             </div>
         `;
         document.body.appendChild(tooltip);
 
+        const input = tooltip.querySelector('.ai-tooltip-input');
         let selectedText = '';
         let selectionTimeout = null;
+
+        const hide = () => { tooltip.style.display = 'none'; input.value = ''; };
+        const fire = (question) => {
+            if (!selectedText) return;
+            this.showAIExplanation(selectedText, question);
+            hide();
+            window.getSelection().removeAllRanges();
+        };
 
         container.addEventListener('mouseup', () => {
             clearTimeout(selectionTimeout);
             selectionTimeout = setTimeout(() => {
                 const selection = window.getSelection();
-                selectedText = selection.toString().trim();
+                const text = selection.toString().trim();
+                // 在 tooltip 内部操作（如点输入框）不重置
+                if (tooltip.style.display === 'block' && input === document.activeElement) return;
 
-                if (selectedText.length > 0 && selectedText.length < 500) {
-                    const range = selection.getRangeAt(0);
-                    const rect = range.getBoundingClientRect();
-                    
+                if (text.length > 0 && text.length < 500) {
+                    selectedText = text;
+                    input.value = '';
+                    const rect = selection.getRangeAt(0).getBoundingClientRect();
                     tooltip.style.display = 'block';
-                    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+                    tooltip.style.left = `${Math.max(8, rect.left + rect.width / 2 - tooltip.offsetWidth / 2)}px`;
                     tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10 + window.scrollY}px`;
                 } else {
-                    tooltip.style.display = 'none';
+                    hide();
                 }
             }, 10);
         });
 
         document.addEventListener('mousedown', (e) => {
-            if (!tooltip.contains(e.target)) {
-                tooltip.style.display = 'none';
-            }
+            if (!tooltip.contains(e.target)) hide();
         });
 
-        tooltip.addEventListener('click', (e) => {
+        tooltip.querySelector('.ai-tooltip-explain').addEventListener('click', (e) => {
             e.stopPropagation();
-            if (selectedText) {
-                this.showAIExplanation(selectedText);
-                tooltip.style.display = 'none';
-                window.getSelection().removeAllRanges();
-            }
+            fire('');
+        });
+        tooltip.querySelector('.ai-tooltip-send').addEventListener('click', (e) => {
+            e.stopPropagation();
+            fire(input.value.trim());
+        });
+        input.addEventListener('keydown', (e) => {
+            e.stopPropagation();
+            if (e.key === 'Enter') { e.preventDefault(); fire(input.value.trim()); }
+            else if (e.key === 'Escape') hide();
         });
     },
 
-    // ===== 统一对话入口：选中文本 → 注入对话 =====
-    showAIExplanation(text) {
+    // ===== 统一对话入口：选中文本 → 注入对话（可带具体问题）=====
+    showAIExplanation(text, question = '') {
         if (!text || !text.trim()) return;
+        text = text.trim();
+        question = (question || '').trim();
         this.openAISidebar();
-        const msg = `请解释这段内容：「${text.trim()}」`;
-        this._sendChatMessage(msg, { context: text.trim() });
+        // 选中的原文直接嵌在可见消息里：用户能看到「喂给 AI 的到底是什么」
+        const msg = question
+            ? `关于这段内容：「${text}」\n\n我的问题：${question}`
+            : `请解释这段内容：「${text}」`;
+        this._sendChatMessage(msg, { context: text });
     },
 
     // ===== 会话管理（按用户隔离，持久化到 localStorage）=====
@@ -136,7 +163,7 @@ const AIModule = {
     },
 
     _sessionGreeting() {
-        return '你好！我是你的 AI 学习助手。直接提问，或在正文中选中文本点击「AI解释」，我都会结合你的学习数据来回答。';
+        return '你好！我是你的 AI 学习助手。直接提问，或在正文中选中一段文字——可以点「解释这段」，也可以直接对它提出你的具体问题。';
     },
 
     // 首页：进入侧边栏先展示落地页（新对话 + 最近会话），不直接进上次会话
@@ -168,7 +195,7 @@ const AIModule = {
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                     </div>
                     <h3>AI 学习助手</h3>
-                    <p>结合你的学习数据，为你解释概念、随时答疑、定制学习建议。</p>
+                    <p>解释概念、随时答疑。选中正文即可针对那段内容提问。</p>
                     <button class="chat-home-new btn btn-primary">＋ 开始新对话</button>
                 </div>
                 ${recentHtml}
