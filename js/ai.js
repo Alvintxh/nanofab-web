@@ -91,7 +91,7 @@ const AIModule = {
     },
 
     // ===== 会话管理（按用户隔离，持久化到 localStorage）=====
-    _chatUid() { return this.state.user?.id || 'anon'; },
+    _chatUid() { return this._uid ? this._uid() : (this.state.authUserId || 'anon'); },
     _chatSessionsKey() { return `nanofab_chat_sessions_v1_${this._chatUid()}`; },
     _chatActiveKey() { return `nanofab_chat_active_v1_${this._chatUid()}`; },
 

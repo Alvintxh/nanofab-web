@@ -12,28 +12,33 @@ const AuthModule = {
 
 
     async loadUser() {
+        // 以 Supabase 会话为准，避免读到上一个用户残留的本地资料（数据隔离）
+        if (this.supabase) {
+            try {
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
+                    this._setAuthUser(session.user.id);
+                    await this.loadUserFromSupabase(session.user);
+                    this.showApp();
+                    return;
+                }
+                // 无有效会话 → 清掉可能残留的本地身份，进入登录引导
+                this._setAuthUser(null);
+                localStorage.removeItem('nanofab_user');
+                return;
+            } catch (error) {
+                console.error('Failed to check auth session:', error);
+            }
+        }
+
+        // 仅在无后端（纯离线）时回退到本地缓存
         const stored = localStorage.getItem('nanofab_user');
         if (stored) {
             try {
                 this.state.user = JSON.parse(stored);
                 this.showApp();
-                return;
             } catch (error) {
-                console.error('Failed to parse stored user:', error);
                 localStorage.removeItem('nanofab_user');
-            }
-        }
-
-        if (this.supabase) {
-            try {
-                const { data: { session } } = await this.supabase.auth.getSession();
-                if (session?.user) {
-                    await this.loadUserFromSupabase(session.user);
-                    this.showApp();
-                    return;
-                }
-            } catch (error) {
-                console.error('Failed to check auth session:', error);
             }
         }
     },
@@ -63,6 +68,9 @@ const AuthModule = {
                         console.log('Using pending userId:', userId);
                     }
                 }
+
+                // 绑定认证用户 id，保证本地数据按此用户隔离
+                if (userId) this._setAuthUser(userId);
 
                 if (userId) {
                     console.log('Attempting to save profile with auth method:', authMethod);
@@ -108,8 +116,29 @@ const AuthModule = {
     },
 
 
+    // ===== 用户数据隔离：所有本地数据按认证用户 id 分桶 =====
+    _uid() { return this.state.authUserId || localStorage.getItem('nanofab_auth_uid') || 'anon'; },
+    _setAuthUser(id) {
+        this.state.authUserId = id || null;
+        if (id) localStorage.setItem('nanofab_auth_uid', id);
+        else localStorage.removeItem('nanofab_auth_uid');
+    },
+    _resetUserScopedState() {
+        this.state.completedChapters = new Set();
+        this.state.behaviorData = {
+            pageViews: [], scrollDepth: {}, timeSpent: {}, sectionTime: {},
+            interactions: [], quizResults: [], aiQueries: [], notes: []
+        };
+    },
+    // 旧版本用全局/匿名 key 存储 behaviorData / progress / 聊天会话，会跨用户泄漏，一次性清除
+    _migrateLegacyStorage() {
+        ['nanofab_behavior', 'nanofab_progress', 'nanofab_ai_path',
+         'nanofab_chat_sessions_v1_anon', 'nanofab_chat_active_v1_anon',
+         'nanofab_goal_path_v1_anon'].forEach(k => localStorage.removeItem(k));
+    },
+
     loadProgress() {
-        const stored = localStorage.getItem('nanofab_progress');
+        const stored = localStorage.getItem(`nanofab_progress_${this._uid()}`);
         if (stored) {
             this.state.completedChapters = new Set(JSON.parse(stored));
         }
@@ -118,7 +147,7 @@ const AuthModule = {
 
     async saveProgress() {
         localStorage.setItem(
-            'nanofab_progress',
+            `nanofab_progress_${this._uid()}`,
             JSON.stringify([...this.state.completedChapters])
         );
 
@@ -510,6 +539,10 @@ const AuthModule = {
     async loadUserFromSupabase(authUser) {
         if (!this.supabase || !authUser) return;
 
+        // 切换/载入用户前，先清空内存中上一个用户的数据，杜绝跨用户泄漏
+        this._setAuthUser(authUser.id);
+        this._resetUserScopedState();
+
         try {
             const { data: profile } = await this.supabase
                 .from('user_profiles')
@@ -551,7 +584,7 @@ const AuthModule = {
 
             if (progress?.completed_chapters) {
                 this.state.completedChapters = new Set(progress.completed_chapters);
-                localStorage.setItem('nanofab_progress', JSON.stringify(progress.completed_chapters));
+                localStorage.setItem(`nanofab_progress_${this._uid()}`, JSON.stringify(progress.completed_chapters));
             }
 
             const { data: behaviorSummary } = await this.supabase
@@ -595,7 +628,7 @@ const AuthModule = {
                     _quizTotal: behaviorSummary.quiz_total_count || 0,
                     _avgScrollDepth: behaviorSummary.avg_scroll_depth || 0
                 };
-                localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
+                localStorage.setItem(`nanofab_behavior_${this._uid()}`, JSON.stringify(this.state.behaviorData));
             }
 
             // Load notes
@@ -923,6 +956,12 @@ const AuthModule = {
     },
 
     async resetProfile() {
+        // 清除当前用户的所有本地数据（按 uid 分桶），避免残留泄漏给下一个用户
+        const uid = this._uid();
+        [`nanofab_progress_${uid}`, `nanofab_behavior_${uid}`,
+         `nanofab_chat_sessions_v1_${uid}`, `nanofab_chat_active_v1_${uid}`,
+         `nanofab_goal_path_v1_${uid}`].forEach(k => localStorage.removeItem(k));
+        localStorage.removeItem('nanofab_auth_uid');
         localStorage.removeItem('nanofab_user');
         localStorage.removeItem('nanofab_progress');
         localStorage.removeItem('nanofab_behavior');
@@ -931,6 +970,7 @@ const AuthModule = {
         localStorage.removeItem('ai_provider');
         localStorage.removeItem('pending_name');
         localStorage.removeItem('pending_email');
+        localStorage.removeItem('pending_user_id');
         sessionStorage.removeItem('pending_password');
 
         if (this.supabase) {
@@ -942,14 +982,8 @@ const AuthModule = {
         }
 
         this.state.user = null;
-        this.state.completedChapters = new Set();
-        this.state.behaviorData = {
-            pageViews: [],
-            scrollDepth: {},
-            timeSpent: {},
-            interactions: [],
-            quizResults: []
-        };
+        this._setAuthUser(null);
+        this._resetUserScopedState();
         this.closeProfileModal();
         location.reload();
     },

@@ -40,7 +40,7 @@ const BehaviorModule = {
     },
 
     loadBehaviorData() {
-        const stored = localStorage.getItem('nanofab_behavior');
+        const stored = localStorage.getItem(`nanofab_behavior_${this._uid()}`);
         if (stored) {
             this.state.behaviorData = JSON.parse(stored);
         }
@@ -66,7 +66,7 @@ const BehaviorModule = {
         if (!this._behaviorDirty) return;
         this._behaviorDirty = false;
 
-        localStorage.setItem('nanofab_behavior', JSON.stringify(this.state.behaviorData));
+        localStorage.setItem(`nanofab_behavior_${this._uid()}`, JSON.stringify(this.state.behaviorData));
 
         if (this.supabase) {
             try {

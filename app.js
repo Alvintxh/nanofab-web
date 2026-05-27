@@ -2,6 +2,7 @@
 const App = {
     state: {
         user: null,
+        authUserId: null,
         chapters: [],
         currentChapter: null,
         completedChapters: new Set(),
@@ -20,6 +21,7 @@ const App = {
 
     init() {
         this.initSupabase();
+        this._migrateLegacyStorage();
         this.bindEvents();
         this.checkRecoveryFlow().then(isRecovery => {
             if (!isRecovery) this.loadUser();

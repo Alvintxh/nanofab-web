@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-05-27 - 修复严重隐私 bug：新用户能看到其他用户的笔记与 AI 会话
+
+**根因**：
+1. 用户 profile 对象没有 `id` 字段，`_chatUid()` 用 `state.user?.id` 永远取不到 → 所有用户的聊天会话都落到同一个 `anon` 桶
+2. `behaviorData`（含笔记/高亮/答题）用全局 key `nanofab_behavior` 存储，不分用户
+3. 登录/登出时未重置内存数据，且 `loadUserFromSupabase` 仅在有 behaviorSummary 时才重置 behaviorData，新用户会沿用上一个用户的本地数据
+
+**修复**：
+- 引入认证用户 id 作为隔离键 `state.authUserId`（来自 Supabase 会话，持久化到 `nanofab_auth_uid`）
+- `behaviorData`、`progress`、聊天会话、目标路径全部改为按 `uid` 分桶存储
+- `loadUser` 改为以 Supabase 会话为准，不再信任可能过期的本地资料；无会话即进入登录引导
+- 载入/切换用户前先 `_resetUserScopedState()` 清空内存数据，杜绝跨用户残留
+- 启动时一次性清除旧版泄漏的全局/匿名 key（`nanofab_behavior`、`nanofab_progress`、`*_anon` 等）
+- 登出时清除当前用户分桶数据与认证绑定
+
 ## 2026-05-27 - ⑤ 学习路径个性化增强：扣住目标 + 结合画像/轨迹
 
 针对"为何需要"过于泛泛、未结合目标与用户数据的问题：
