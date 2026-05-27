@@ -949,13 +949,15 @@ const AIModule = {
     _saveGoalPath(o) { try { localStorage.setItem(this._goalKey(), JSON.stringify(o)); } catch (e) { /* ignore */ } },
 
     // 把内容索引压缩成带“来源标记”的紧凑目录，供 AI 规划时选取小节
+    // 每节附上要点 + 正文首句，给 AI 足够线索判断它与目标的关系
     async _buildSectionOutline() {
         const sections = await this.buildContentIndex();
         const byCh = {};
         sections.forEach(s => {
+            let hint = (s.insights || []).join('；');
+            if (!hint) hint = (s.text || '').replace(/\s+/g, '').slice(0, 50);
             (byCh[s.chapterId] = byCh[s.chapterId] || []).push({
-                token: s.token, heading: s.heading,
-                insight: s.insights[0] ? s.insights[0].slice(0, 36) : ''
+                token: s.token, heading: s.heading, hint: hint.slice(0, 70)
             });
         });
         const lines = [];
@@ -963,32 +965,65 @@ const AIModule = {
             const items = byCh[ch.id];
             if (!items) return;
             lines.push(`${this._chapterNum(ch.id)} ${ch.title}`);
-            items.forEach(it => lines.push(`  - [${it.token}] ${it.heading}${it.insight ? '（' + it.insight + '）' : ''}`));
+            items.forEach(it => lines.push(`  - [${it.token}] ${it.heading}${it.hint ? '｜' + it.hint : ''}`));
         });
+        return lines.join('\n');
+    },
+
+    // 为目标规划构造用户画像 + 学习轨迹的简明上下文
+    _buildGoalUserContext() {
+        const u = this.state.user;
+        if (!u) return '';
+        const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
+        const prereqMap = { physics: '大学物理', chemistry: '化学/材料', electronics: '电子工程', semiconductor: '半导体器件', none: '无特定基础', zero: '毫无基础' };
+        const areaMap = { semiconductor: '半导体集成电路', photonics: '光子学/光电子', biotech: '纳米生物技术', energy: '能源/电池', mems: 'MEMS/NEMS', quantum: '量子计算' };
+        const lines = [];
+        lines.push(`学习水平：${levelMap[u.level] || u.level || '初学者'}`);
+        if (u.prerequisite?.length) lines.push(`先修知识：${u.prerequisite.map(p => prereqMap[p] || p).join('、')}`);
+        if (u.interestArea?.length) lines.push(`感兴趣领域：${u.interestArea.map(a => areaMap[a] || a).join('、')}`);
+        if (u.resume) lines.push(`个人背景：${u.resume.slice(0, 150)}`);
+        if (u.currentProject) lines.push(`当前在研项目：${u.currentProject}`);
+        const bp = u.behaviorProfile || {};
+        const completed = [...(this.state.completedChapters || [])].map(id => this.getChapterById?.(id)?.title).filter(Boolean);
+        if (completed.length) lines.push(`已学过的章节（可一笔带过/快速回顾）：${completed.join('、')}`);
+        if (bp.weakTopics?.length) lines.push(`薄弱环节（需更详细引导）：${bp.weakTopics.join('、')}`);
+        if (typeof bp.quizAccuracy === 'number' && bp.quizAccuracy > 0) lines.push(`测验正确率：${Math.round(bp.quizAccuracy * 100)}%`);
         return lines.join('\n');
     },
 
     async generateGoalPath(goal) {
         const outline = await this._buildSectionOutline();
         if (!outline) throw new Error('content index empty');
-        const user = this.state.user;
-        const profile = user ? `用户背景：水平${user.level || '初学者'}，先修${(user.prerequisite || []).join('、') || '未知'}，兴趣${(user.interestArea || []).join('、') || '未知'}。请据此微调讲解深度，但路径只依据教材目录。` : '';
+        const userContext = this._buildGoalUserContext();
         const system = [
-            '你是纳米制造技术领域的学习规划专家。下面会给你《纳米制造技术：原理、工艺与实践》整本教材的“章节—小节”目录，每个小节带一个唯一的方括号“来源标记”。',
-            '用户会给出一个具体的学习或工程目标。请从教材中筛选出实现该目标所需的【最小知识子集】，并排出最合理的学习先后顺序——只保留真正必要的小节，不要堆砌。',
+            '你是纳米制造技术领域的学习规划专家。下面会给你《纳米制造技术：原理、工艺与实践》整本教材的“章节—小节”目录（每节带方括号“来源标记”和内容线索），以及用户的画像与学习轨迹。',
+            `用户的目标是：「${goal}」。请从教材中筛选出实现这个**具体目标**所需的【最小知识子集】，并排出最合理的学习先后顺序——只保留真正必要的小节，不要堆砌通用内容。`,
             '严格只能使用目录中已存在的小节，并用其“来源标记”引用，绝不可虚构小节或标记。',
-            profile,
+            '',
+            '【关键要求——“为何需要”必须紧扣目标】',
+            `每一步的 why 必须具体说明“这一节的知识在实现【${goal}】时起什么作用”，要点到目标的具体技术环节，绝不能写成对小节内容的泛泛概括。`,
+            `反例（不合格）：“了解纳米制造的定义和范畴，为后续学习打下基础。”——这是泛泛概括，没扣住目标。`,
+            `正例（合格）：“X射线光栅是典型的高深宽比纳米周期结构，先界定纳米制造范畴才能判断它该走自上而下还是自下而上的工艺路线。”`,
+            'focus 也要写“针对这个目标，这一节里最该掌握的点”，而非泛泛的学习要点。',
+            '',
+            '【结合用户画像与轨迹做个性化】',
+            '- 若某节属于用户“已学过的章节”，why 里点明可快速回顾、说明它与目标的衔接即可；',
+            '- 若涉及用户“薄弱环节”，在 focus 里给更具体的提醒；',
+            '- 若与用户的“在研项目/兴趣领域/个人背景”相关，自然地点出联系，让路径贴合这个人。',
+            '- 不要在输出里复述“根据你的画像”这类话，把个性化体现在内容里即可。',
+            userContext ? `\n用户画像与学习轨迹：\n${userContext}` : '',
+            '',
             '只输出一个 JSON 对象（不要任何额外文字、不要 Markdown 代码块），格式：',
-            '{"goal":"复述用户目标","scope":"一句话说明这条路径覆盖什么、不覆盖什么","steps":[{"token":"来源标记","why":"为达成该目标为何需要这一节（20-40字）","focus":"在这一节里要重点掌握什么（20-40字）"}]}',
+            '{"goal":"复述用户目标","scope":"一句话说明这条路径覆盖什么、不覆盖什么","steps":[{"token":"来源标记","why":"扣住目标说明为何需要这一节（30-50字）","focus":"针对该目标在这一节要重点掌握什么（20-40字）"}]}',
             'steps 数量控制在 4-10 个，按学习先后排序。'
-        ].filter(Boolean).join('\n');
+        ].filter(s => s !== undefined).join('\n');
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
         const raw = await this.callAIProvider(provider, model, [
             { role: 'system', content: system },
             { role: 'system', content: '教材目录：\n' + outline },
-            { role: 'user', content: `我的目标：${goal}` }
-        ], 2200, 0.4);
+            { role: 'user', content: `我的目标：${goal}。请按要求给出紧扣这个目标、并结合我画像的学习路径。` }
+        ], 2600, 0.5);
         const match = (raw || '').match(/\{[\s\S]*\}/);
         if (!match) throw new Error('no json');
         return JSON.parse(match[0]);
