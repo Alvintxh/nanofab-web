@@ -670,6 +670,34 @@ const AuthModule = {
         return text;
     },
 
+    // 把图片缩到 ≤1600px 长边并转 JPEG base64，控制请求体大小
+    async _imageToCompressedDataURL(file) {
+        const bitmap = await createImageBitmap(file);
+        const maxEdge = 1600;
+        const scale = Math.min(1, maxEdge / Math.max(bitmap.width, bitmap.height));
+        const w = Math.max(1, Math.round(bitmap.width * scale));
+        const h = Math.max(1, Math.round(bitmap.height * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(bitmap, 0, 0, w, h);
+        bitmap.close && bitmap.close();
+        return canvas.toDataURL('image/jpeg', 0.85);
+    },
+
+    // 通过智谱 GLM-4V-Flash 视觉模型转写图片上的文字（成绩单/简历照片或扫描件）
+    async _extractImageText(file) {
+        const dataUrl = await this._imageToCompressedDataURL(file);
+        const messages = [{
+            role: 'user',
+            content: [
+                { type: 'text', text: '请把图片中的所有文字按原版面顺序完整、准确地转写出来。直接输出文字，不要解释，不要总结。课程成绩等数字务必精确。' },
+                { type: 'image_url', image_url: { url: dataUrl } }
+            ]
+        }];
+        // 视觉模型只走智谱，使用 temperature=0 求稳；max_tokens 放宽给长成绩单留余地
+        return await this.callAIProvider('zhipu', 'glm-4v-flash', messages, 4000, 0);
+    },
+
     async _distillProfile(rawText) {
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
@@ -696,17 +724,26 @@ const AuthModule = {
         let combined = '';
         for (const file of Array.from(files)) {
             const status = addRow(file.name);
+            const lower = file.name.toLowerCase();
+            const isImage = /^image\//.test(file.type) || /\.(jpe?g|png|webp|gif|bmp)$/i.test(lower);
+            const isPdf = lower.endsWith('.pdf');
             try {
                 let text = '';
-                if (file.name.toLowerCase().endsWith('.pdf')) {
+                if (isPdf) {
                     text = await this._extractPdfText(await file.arrayBuffer());
+                } else if (isImage) {
+                    if (status) status.textContent = '识别图片中…';
+                    text = await this._extractImageText(file);
                 } else {
                     text = await file.text();
                 }
                 text = (text || '').replace(/\s+/g, ' ').trim();
                 if (!text) { if (status) { status.textContent = '未提取到文字'; status.className = 'profile-file-status warn'; } continue; }
                 combined += `\n[文件：${file.name}]\n${text.slice(0, 6000)}\n`;
-                if (status) { status.textContent = '已读取 ✓'; status.className = 'profile-file-status ok'; }
+                if (status) {
+                    status.textContent = isImage ? '已识别 ✓' : '已读取 ✓';
+                    status.className = 'profile-file-status ok';
+                }
             } catch (err) {
                 console.error('file parse failed:', err);
                 if (status) { status.textContent = '解析失败'; status.className = 'profile-file-status err'; }

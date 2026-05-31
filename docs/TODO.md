@@ -43,18 +43,15 @@
 - [x] ⑤ 目标驱动动态知识书：输入目标 → AI 规划最小知识子集 + 学习路径
 - [x] ① 简历/成绩支持上传文件（PDF/文本），AI 提取并自动填表
 - [x] ⑥ 引入更强的用户画像（目标已入画像；简历/成绩经 AI 结构化提取）
-- [ ] （增强）图片/扫描件成绩单 OCR：需接入多模态视觉模型（ai-proxy 扩展）
+- [x] 图片/扫描件成绩单 OCR：智谱 GLM-4V-Flash（2026-05-31，复用现有 ai-proxy 多模态透传，无需后端改动）
 
 ## Up Next
 
-- [ ] 部署 Supabase Edge Function (`supabase functions deploy ai-proxy`)
-- [ ] 设置 Edge Function 环境变量 (`supabase secrets set ZHIPU_API_KEY=...`)
-- [ ] 在 Supabase Dashboard 执行更新后的 `supabase/fix_rls.sql`
-- [ ] 测试AI解释和助手功能（通过 Edge Function）
-- [ ] 测试注册流程端到端
-- [ ] 验证数据库表是否正确创建
-- [ ] 确认RLS策略已生效
-- [ ] 检查邮件验证设置
+- [x] 部署 Supabase Edge Function（ai-proxy v6 ACTIVE, 2026-05-27）
+- [x] 设置 ZHIPU_API_KEY（已配）
+- [x] 应用最新 RLS（`schema_v2.sql` + `migrations/20260525_user_notes_delete_policy`，`fix_rls.sql` 已废弃）
+- [ ] **仅需用户手动确认**：邮件验证设置（Supabase Dashboard → Authentication → Sign In/Up → Confirm email）
+- [ ] **仅需用户手动确认**：邮件模板 / 站点 URL（用于密码重置回跳）
 
 ## Completed
 
@@ -78,14 +75,5 @@
 
 ## 已知问题
 
-1. **邮件验证**：Supabase Dashboard中可能找不到"Confirm email"开关，需要确认最新位置
-2. **数据库同步**：RLS收紧后，如果邮件验证开启，注册后仍无session，用户数据无法同步
-3. **解决方案**：关闭邮件验证（测试环境）或实现Edge Function自动确认邮箱
-
-## 下一步行动
-
-1. 部署Edge Function：`cd supabase && supabase functions deploy ai-proxy`
-2. 设置密钥：`supabase secrets set ZHIPU_API_KEY=your-key`
-3. 在Supabase Dashboard SQL Editor执行 `supabase/fix_rls.sql`
-4. 测试新用户注册（确认RLS收紧后注册流程仍正常）
-5. 测试AI聊天/解释（确认通过Edge Function正常响应）
+1. **邮件验证**：若 Supabase 开启 Confirm email，注册后无即时 session，需走 OTP/链接验证流程（前端已支持 verify-form + recovery flow）
+2. **DeepSeek / Gemini secrets 未配**：当前仅 ZHIPU_API_KEY 在服务端，用户切到 DeepSeek/Gemini 必须自带 key（前端已提示）

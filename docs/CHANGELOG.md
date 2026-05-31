@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-05-31 - 简历/成绩上传增强：支持照片/扫描件 OCR
+
+补齐 2026-05-26 老师反馈 ① 的最后一块：图片格式的成绩单/简历可直接上传识别。
+
+- `index.html`：上传 input 的 `accept` 增加 `image/jpeg,png,webp`；提示文字说明可传"成绩单照片、扫描件"
+- `js/auth.js` 新增 `_imageToCompressedDataURL`：图片在浏览器端先缩到 ≤1600px 长边再 JPEG 0.85 编码，避免请求体过大
+- `js/auth.js` 新增 `_extractImageText`：用智谱 **GLM-4V-Flash**（免费视觉模型）转写图片上的所有文字，`temperature=0` 保持数字精确
+- `handleProfileUpload` 按文件扩展名 / MIME 类型路由：PDF→pdf.js / 图片→视觉 OCR / 其他→`file.text()`；识别结果与其它来源合并后交现有 `_distillProfile` 结构化填表
+- `js/behavior.js` `_logAIQuery` 兼容多模态 content 数组（数组场景把 image_url 折叠为 `[图片]` 标记后再入库），不再因 array.content 写入异常
+- **无需重新部署 ai-proxy**：现有 zhipu 分支已 pass-through messages，多模态格式天然透传
+
 ## 2026-05-27 - 修复严重隐私 bug：新用户能看到其他用户的笔记与 AI 会话
 
 **根因**：

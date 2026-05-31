@@ -137,9 +137,15 @@ const BehaviorModule = {
         try {
             const { data: { session } } = await this.supabase.auth.getSession();
             if (!session?.user) return;
+            // 多模态 content 可能是数组（[{type:'text',...},{type:'image_url',...}]），转成纯文本摘要再入库
+            const asText = (c) => {
+                if (typeof c === 'string') return c;
+                if (Array.isArray(c)) return c.map(p => p?.type === 'text' ? p.text : (p?.type === 'image_url' ? '[图片]' : '')).join(' ');
+                return '';
+            };
             const systemMsgs = messages.filter(m => m.role === 'system');
-            const queryType = systemMsgs.some(m => /解释|解释|explain/i.test(m.content)) ? 'explanation' : 'chat';
-            const userMsg = messages.filter(m => m.role === 'user').map(m => m.content).join('\n');
+            const queryType = systemMsgs.some(m => /解释|explain/i.test(asText(m.content))) ? 'explanation' : 'chat';
+            const userMsg = messages.filter(m => m.role === 'user').map(m => asText(m.content)).join('\n');
             await this.supabase.from('ai_queries').insert({
                 user_id: session.user.id,
                 query_type: queryType,
