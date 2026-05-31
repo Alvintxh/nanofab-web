@@ -925,6 +925,7 @@
                 </div>
                 <div class="profile-actions">
                     <button id="view-notes-btn" class="btn btn-secondary">我的笔记</button>
+                    <button id="export-report-btn" class="btn btn-secondary">导出学习报告</button>
                     <button id="reset-profile" class="btn btn-secondary">重新设置资料</button>
                 </div>
             </div>
@@ -1062,6 +1063,28 @@
                 <div id="notes-list" class="notes-list">
                     <p style="font-size:0.875rem;color:var(--color-text-tertiary);text-align:center;">暂无笔记，选中文本后点击"记笔记"开始记录。</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 学习报告（可打印 / 保存 PDF） -->
+    <div id="report-modal" class="modal report-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content report-modal-content">
+            <div class="modal-header report-modal-header">
+                <h2>学习报告预览</h2>
+                <div class="report-modal-actions">
+                    <button id="report-print-btn" class="btn btn-primary">下载 / 打印 PDF</button>
+                    <button class="modal-close" aria-label="关闭">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body report-modal-body">
+                <article id="report-content" class="report-page"></article>
             </div>
         </div>
     </div>

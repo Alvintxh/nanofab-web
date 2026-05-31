@@ -413,5 +413,261 @@ const BehaviorModule = {
         });
         html += '</div>';
         container.innerHTML = html;
+    },
+
+    // ===== 学习报告导出（一键预览 + 浏览器原生 Save as PDF） =====
+    openReportModal() {
+        const modal = document.getElementById('report-modal');
+        const content = document.getElementById('report-content');
+        if (!modal || !content) return;
+        content.innerHTML = this._buildReportHTML();
+        // 切回主页面，否则当前章节 currentChapter 状态可能影响其他元素显示；只是预览，无需路由
+        this.closeProfileModal && this.closeProfileModal();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    },
+
+    closeReportModal() {
+        const modal = document.getElementById('report-modal');
+        if (!modal) return;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    },
+
+    printReport() {
+        // 让 @media print 单独排版，无需切换 DOM；浏览器原生对话框支持保存 PDF
+        document.body.classList.add('printing-report');
+        const cleanup = () => {
+            document.body.classList.remove('printing-report');
+            window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+        // 兜底：1.5s 后若未触发 afterprint（部分浏览器异常），主动清理
+        setTimeout(cleanup, 1500);
+        window.print();
+    },
+
+    _buildReportHTML() {
+        const esc = (s) => this.escapeHtml ? this.escapeHtml(String(s ?? '')) : String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        const user = this.state.user || {};
+        const parts = this.state.chapters || [];
+        const allChapters = this.getAllChapters();
+        const completed = this.state.completedChapters || new Set();
+        const bd = this.state.behaviorData || {};
+        const notes = bd.notes || [];
+        const quizResults = bd.quizResults || [];
+        const timeSpent = bd.timeSpent || {};
+
+        const levelMap = { zero: '毫无基础', beginner: '初学者', intermediate: '中级', advanced: '高级' };
+        const bgMap = { student: '在校学生', researcher: '科研人员', engineer: '工程师', other: '其他' };
+        const motivMap = { course: '课程学习', research: '科研需要', career: '职业发展', interest: '个人兴趣' };
+
+        // ----- 综览数据 -----
+        const totalSeconds = Object.values(timeSpent).reduce((s, t) => s + (typeof t === 'number' ? t : 0), 0);
+        const totalMinutes = Math.round(totalSeconds / 60);
+        const timeDisplay = totalMinutes >= 60
+            ? `${Math.floor(totalMinutes / 60)} 小时 ${totalMinutes % 60} 分钟`
+            : `${totalMinutes} 分钟`;
+        const correctCount = quizResults.filter(q => q.correct).length;
+        const accuracy = quizResults.length > 0 ? Math.round(correctCount / quizResults.length * 100) : null;
+        // 连续学习天数：与 updateStudyStats 同口径
+        const activeDays = new Set();
+        (bd.interactions || []).forEach(i => { try { activeDays.add(new Date(i.timestamp).toDateString()); } catch {} });
+        let streak = 0;
+        const today = new Date();
+        for (let i = 0; i < 365; i++) {
+            if (activeDays.has(today.toDateString())) { streak++; today.setDate(today.getDate() - 1); } else break;
+        }
+
+        const now = new Date();
+        const genDate = now.toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+
+        // ----- 头部 -----
+        const headerHTML = `
+            <header class="report-header">
+                <div class="report-header-top">
+                    <div class="report-brand">
+                        <div class="report-brand-mark">
+                            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                                <rect x="8" y="8" width="48" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+                                <circle cx="24" cy="24" r="5" fill="currentColor"/>
+                                <circle cx="40" cy="24" r="5" fill="currentColor" opacity="0.55"/>
+                                <circle cx="24" cy="40" r="5" fill="currentColor" opacity="0.55"/>
+                                <circle cx="40" cy="40" r="5" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="report-brand-name">NanoFab Learning Platform</div>
+                            <div class="report-brand-sub">基于《纳米制造技术：原理、工艺与实践》</div>
+                        </div>
+                    </div>
+                    <div class="report-meta">
+                        <div class="report-meta-label">生成于</div>
+                        <div class="report-meta-value">${esc(genDate)}</div>
+                    </div>
+                </div>
+                <h1 class="report-title">学习报告</h1>
+                <div class="report-subject">
+                    <div class="report-subject-row"><span class="report-subject-k">学生</span><span class="report-subject-v">${esc(user.name || '未填写')}</span></div>
+                    ${user.email ? `<div class="report-subject-row"><span class="report-subject-k">邮箱</span><span class="report-subject-v">${esc(user.email)}</span></div>` : ''}
+                    <div class="report-subject-row"><span class="report-subject-k">当前水平</span><span class="report-subject-v">${esc(levelMap[user.level] || user.level || '—')}</span></div>
+                    ${user.background ? `<div class="report-subject-row"><span class="report-subject-k">背景</span><span class="report-subject-v">${esc(bgMap[user.background] || user.background)}</span></div>` : ''}
+                    ${(user.motivation && user.motivation.length) ? `<div class="report-subject-row"><span class="report-subject-k">学习动机</span><span class="report-subject-v">${esc(user.motivation.map(m => motivMap[m] || m).join('、'))}</span></div>` : ''}
+                </div>
+            </header>`;
+
+        // ----- 综览卡片 -----
+        const overviewHTML = `
+            <section class="report-section">
+                <h2 class="report-section-title">学习概览</h2>
+                <div class="report-overview">
+                    <div class="report-overview-cell">
+                        <div class="report-overview-num">${completed.size}<span class="report-overview-unit">/ ${allChapters.length}</span></div>
+                        <div class="report-overview-label">章节完成</div>
+                    </div>
+                    <div class="report-overview-cell">
+                        <div class="report-overview-num">${timeDisplay}</div>
+                        <div class="report-overview-label">累计学习时长</div>
+                    </div>
+                    <div class="report-overview-cell">
+                        <div class="report-overview-num">${accuracy !== null ? accuracy + '%' : '—'}</div>
+                        <div class="report-overview-label">答题正确率<span class="report-overview-sub">${quizResults.length ? `（${correctCount}/${quizResults.length} 题）` : ''}</span></div>
+                    </div>
+                    <div class="report-overview-cell">
+                        <div class="report-overview-num">${streak}<span class="report-overview-unit"> 天</span></div>
+                        <div class="report-overview-label">连续学习</div>
+                    </div>
+                </div>
+            </section>`;
+
+        // ----- 章节进度 -----
+        const progressHTML = parts.length ? `
+            <section class="report-section">
+                <h2 class="report-section-title">章节进度</h2>
+                ${parts.map(part => `
+                    <div class="report-part">
+                        <h3 class="report-part-title">${esc(part.title)}</h3>
+                        <ul class="report-chapter-list">
+                            ${(part.chapters || []).map(ch => {
+                                const done = completed.has(ch.id);
+                                const mins = Math.round((timeSpent[ch.id] || 0) / 60);
+                                return `<li class="report-chapter-item ${done ? 'done' : ''}">
+                                    <span class="report-chapter-mark" aria-hidden="true">${done ? '✓' : '○'}</span>
+                                    <span class="report-chapter-title">${esc(ch.title)}</span>
+                                    <span class="report-chapter-meta">${done ? '已完成' : '未完成'}${mins > 0 ? ` · 学习 ${mins} 分钟` : ''}</span>
+                                </li>`;
+                            }).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            </section>` : '';
+
+        // ----- AI 学习目标路径 -----
+        let goalHTML = '';
+        if (typeof this._loadGoalPath === 'function') {
+            const saved = this._loadGoalPath();
+            if (saved && saved.data && Array.isArray(saved.data.steps) && saved.data.steps.length) {
+                const stepsHTML = saved.data.steps.map((st, i) => `
+                    <li class="report-goal-step">
+                        <div class="report-goal-no">${i + 1}</div>
+                        <div class="report-goal-body">
+                            <div class="report-goal-head"><strong>[${esc(st.token || '')}]</strong> ${esc(st.heading || '相关小节')}</div>
+                            ${st.why ? `<div class="report-goal-line"><span class="k">为何需要：</span>${esc(st.why)}</div>` : ''}
+                            ${st.focus ? `<div class="report-goal-line"><span class="k">重点掌握：</span>${esc(st.focus)}</div>` : ''}
+                        </div>
+                    </li>
+                `).join('');
+                goalHTML = `
+                    <section class="report-section">
+                        <h2 class="report-section-title">AI 学习路径</h2>
+                        <div class="report-goal-meta">
+                            <div><span class="k">目标：</span>${esc(saved.goal || saved.data.goal || '')}</div>
+                            ${saved.data.scope ? `<div><span class="k">覆盖范围：</span>${esc(saved.data.scope)}</div>` : ''}
+                        </div>
+                        <ol class="report-goal-list">${stepsHTML}</ol>
+                    </section>`;
+            }
+        }
+
+        // ----- 笔记 -----
+        let notesHTML = '';
+        if (notes.length) {
+            const byCh = {};
+            notes.forEach(n => {
+                const k = n.chapterTitle || n.chapter || '未分组';
+                (byCh[k] = byCh[k] || []).push(n);
+            });
+            const groups = Object.keys(byCh).map(title => `
+                <div class="report-notes-group">
+                    <h3 class="report-notes-chapter">${esc(title)}</h3>
+                    ${byCh[title].map(n => {
+                        const d = n.timestamp ? new Date(n.timestamp).toLocaleDateString('zh-CN') : '';
+                        const isAi = n.content && (n.content.includes('\n') || n.content.startsWith('#') || n.content.startsWith('**'));
+                        const noteText = isAi ? (n.content.replace(/\s+/g, ' ').slice(0, 600) + (n.content.length > 600 ? '…' : '')) : (n.content || '');
+                        return `<div class="report-note">
+                            ${n.context ? `<div class="report-note-context">原文："${esc(n.context.slice(0, 220))}${n.context.length > 220 ? '…' : ''}"</div>` : ''}
+                            <div class="report-note-body">${isAi ? '🤖 ' : '📝 '}${esc(noteText)}</div>
+                            ${d ? `<div class="report-note-date">${esc(d)}</div>` : ''}
+                        </div>`;
+                    }).join('')}
+                </div>
+            `).join('');
+            notesHTML = `
+                <section class="report-section">
+                    <h2 class="report-section-title">学习笔记 <span class="report-section-count">共 ${notes.length} 条</span></h2>
+                    ${groups}
+                </section>`;
+        }
+
+        // ----- 答题记录 -----
+        let quizHTML = '';
+        if (quizResults.length) {
+            const wrong = quizResults.filter(q => !q.correct);
+            const recent = quizResults.slice(-30).reverse();
+            const ua = (item) => item.userAnswer || (Array.isArray(item.selected) ? item.selected.join('、') : item.selected) || '未作答';
+            const ca = (item) => item.correctAnswer || item.answer || '';
+            quizHTML = `
+                <section class="report-section">
+                    <h2 class="report-section-title">答题记录 <span class="report-section-count">共 ${quizResults.length} 题 · 正确 ${correctCount} · 错误 ${wrong.length}</span></h2>
+                    ${wrong.length ? `<div class="report-quiz-sub">错题（按时间倒序）</div>
+                    <ul class="report-quiz-list">
+                        ${wrong.slice(0, 30).reverse().map(item => {
+                            const chapter = allChapters.find(c => c.id === item.chapter);
+                            const chName = chapter ? chapter.title : (item.chapter || '');
+                            const d = item.timestamp ? new Date(item.timestamp).toLocaleDateString('zh-CN') : '';
+                            return `<li class="report-quiz-item wrong">
+                                <div class="report-quiz-meta">${esc(chName)}${d ? ' · ' + esc(d) : ''}</div>
+                                <div class="report-quiz-q">${esc(item.question || '测试题')}</div>
+                                <div class="report-quiz-a"><span class="k">你的答案：</span><span class="v wrong">${esc(ua(item))}</span></div>
+                                ${ca(item) ? `<div class="report-quiz-a"><span class="k">正确答案：</span><span class="v right">${esc(ca(item))}</span></div>` : ''}
+                            </li>`;
+                        }).join('')}
+                    </ul>` : '<p class="report-empty">暂无错题，继续保持！</p>'}
+                </section>`;
+        }
+
+        // ----- 画像 -----
+        const bp = user.behaviorProfile || {};
+        const titleOf = (id) => { const c = allChapters.find(x => x.id === id); return c ? c.title : id; };
+        const profileHTML = (bp.strongTopics?.length || bp.weakTopics?.length || user.interestArea?.length || user.currentProject) ? `
+            <section class="report-section">
+                <h2 class="report-section-title">学习画像</h2>
+                <dl class="report-profile">
+                    ${bp.strongTopics?.length ? `<div class="report-profile-row"><dt>擅长主题</dt><dd>${bp.strongTopics.map(t => esc(titleOf(t))).join('、')}</dd></div>` : ''}
+                    ${bp.weakTopics?.length ? `<div class="report-profile-row"><dt>需加强主题</dt><dd>${bp.weakTopics.map(t => esc(titleOf(t))).join('、')}</dd></div>` : ''}
+                    ${user.interestArea?.length ? `<div class="report-profile-row"><dt>兴趣领域</dt><dd>${esc(user.interestArea.join('、'))}</dd></div>` : ''}
+                    ${user.currentProject ? `<div class="report-profile-row"><dt>当前在研</dt><dd>${esc(user.currentProject)}</dd></div>` : ''}
+                </dl>
+            </section>` : '';
+
+        // ----- 页脚 -----
+        const footerHTML = `
+            <footer class="report-footer">
+                <span>本报告由 NanoFab Learning Platform 自动生成</span>
+                <span>·</span>
+                <span>仅基于您在本平台的学习行为聚合，不含原始事件流水</span>
+            </footer>`;
+
+        return headerHTML + overviewHTML + progressHTML + goalHTML + notesHTML + quizHTML + profileHTML + footerHTML;
     }
 };

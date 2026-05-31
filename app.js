@@ -303,6 +303,26 @@ const App = {
             resetProfile.addEventListener('click', () => this.resetProfile());
         }
 
+        const exportReportBtn = document.getElementById('export-report-btn');
+        if (exportReportBtn) {
+            exportReportBtn.addEventListener('click', () => this.openReportModal());
+        }
+
+        const reportPrintBtn = document.getElementById('report-print-btn');
+        if (reportPrintBtn) {
+            reportPrintBtn.addEventListener('click', () => this.printReport());
+        }
+
+        const reportModalClose = document.querySelector('#report-modal .modal-close');
+        if (reportModalClose) {
+            reportModalClose.addEventListener('click', () => this.closeReportModal());
+        }
+
+        const reportModalOverlay = document.querySelector('#report-modal .modal-overlay');
+        if (reportModalOverlay) {
+            reportModalOverlay.addEventListener('click', () => this.closeReportModal());
+        }
+
         const markComplete = document.getElementById('mark-complete');
         if (markComplete) {
             markComplete.addEventListener('click', () => this.markChapterComplete());

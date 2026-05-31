@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-05-31 - 学习报告：一键预览 + 浏览器原生 Save as PDF
+
+学生入口：用户资料弹窗 → 「导出学习报告」 → 预览 → 「下载/打印 PDF」（走浏览器原生打印对话框，可保存 PDF / 直接打印）。无需任何 PDF 库，Noto Serif/Sans SC 字体直接矢量打印。
+
+报告内容：
+- 头部：姓名、邮箱、当前水平、背景、动机、生成时间
+- 概览：章节完成 / 累计时长 / 答题正确率 / 连续天数
+- 章节进度：按 4 个 part 分组，已完成 ✓、未完成 ○，附该章学习时长
+- AI 学习路径（若已生成）：目标、覆盖范围、各步骤为何需要 / 重点掌握
+- 学习笔记：按章节分组，含原文上下文、笔记内容、日期，AI 笔记带 🤖 标记
+- 答题记录：总览（正确/错误数）+ 错题列表（题目、你的答案、正确答案）
+- 学习画像：擅长 / 需加强主题、兴趣领域、在研项目
+- 页脚：声明仅基于平台聚合行为、不含原始事件
+
+实现要点：
+- `js/behavior.js` 新增 `openReportModal` / `closeReportModal` / `printReport` / `_buildReportHTML`，复用已有的 chapters/behaviorData/notes/goalPath 状态
+- `index.html`：profile 弹窗加 「导出学习报告」按钮；新增 `#report-modal` 预览
+- `app.js` `bindEvents`：绑定导出按钮、打印按钮、modal 关闭与遮罩
+- `styles.css`：屏幕侧 paper-like 学术风排版（Noto Serif SC 标题 + 主题蓝细节）；`@media print` 用 `body.printing-report` 类隐藏其他一切，A4 18/16mm 边距，分页避让规则避免标题孤行
+
 ## 2026-05-31 - 简历/成绩上传增强：支持照片/扫描件 OCR
 
 补齐 2026-05-26 老师反馈 ① 的最后一块：图片格式的成绩单/简历可直接上传识别。
