@@ -1,5 +1,11 @@
 {
+  "type": "module",
   "dependencies": {
-    "@supabase/supabase-js": "^2.105.3"
+    "@huggingface/transformers": "^3.3.0",
+    "node-html-parser": "^6.1.13"
+  },
+  "scripts": {
+    "build:embeddings": "node scripts/build-embeddings.mjs",
+    "ingest:papers": "node scripts/ingest-papers.mjs"
   }
 }

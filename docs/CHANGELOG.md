@@ -1,5 +1,80 @@
 # Changelog
 
+## 2026-06-14 - 收尾：动态出题/论文接入客户端 RAG + 拆除 pgvector 云端设施
+
+承接客户端 hybrid 检索，按 2→3→1 完成迁移与清理：
+
+**2 动态出题脱离 pgvector**
+- `generate-quiz` 改为从请求体读 `material`（教材原文），移除 `knowledge_chunks` 查询（仍保留鉴权）
+- `js/quiz.js` 新增 `_buildQuizMaterial`：从 `knowledge_index.json` 取该章小节拼接接地，索引缺失时回退当前章 DOM 正文
+
+**3 每周论文接入客户端索引**
+- `scripts/lib/local-embed.mjs`：共享本地 bge 嵌入(Transformers.js + 镜像)；`build-embeddings.mjs` 一并复用，单一模型源
+- `scripts/ingest-papers.mjs` 重写：本地 bge 嵌入、按 token 去重累积、写 `content/papers_index.json`（不再用 Supabase）；实测抓取→嵌入→落盘打通
+- `.github/workflows/ingest-papers.yml`：本地嵌入 + 提交 `papers_index.json` 回仓库（`contents: write`），去掉 Supabase 依赖
+- `js/retriever.js`：同时加载教材 + 论文索引并融合进 BM25/dense；refs 带 `url`/`sourceType`，论文引用渲染为外链角标
+
+**1 拆除闲置云端设施**
+- 删函数 `knowledge-search`、`ingest-admin`；删 secret `EMBEDDING_*`、`ADMIN_INGEST_SECRET`（保留 `ZHIPU_API_KEY` 供 chat/出题/论文摘要）
+- migration `20260614020000_drop_knowledge_vectors.sql`：drop `knowledge_chunks` 表与 `match_knowledge`（已应用）
+- 删除闲置脚本/文件：`ingest-textbook.mjs`、`post-ingest.mjs`、`lib/store.mjs`、`lib/embed.mjs`、`_shared/embed.ts`；package.json 去掉 `@supabase/supabase-js` 与 `ingest:textbook`
+- 现存云端：仅 `ai-proxy`(chat) + `generate-quiz`(出题)；检索/嵌入 100% 客户端、免费、零 key
+
+
+## 2026-06-14 - 检索改为纯客户端 Hybrid（BM25 + 本地 bge），零 API/零成本
+
+借鉴课程 RAG 方法论，把检索从"付费/需 key 的云端嵌入(智谱/Gemini + pgvector)"改为**全部浏览器端、免费、无需任何 key**：
+
+- `scripts/build-embeddings.mjs`：用本地 sentence-transformers **bge-small-zh-v1.5**(Transformers.js) 把 236 节教材嵌入，产出静态 `content/knowledge_index.json`(1.1MB, 512 维)。国内默认走 `hf-mirror.com` 镜像(`HF_ENDPOINT` 可覆盖)
+- `js/retriever.js`(新模块)：客户端 **Hybrid 检索** = BM25(Intl.Segmenter 分词，立即可用) + bge 稠密(Transformers.js 浏览器端嵌入) → **RRF 融合**；模型懒加载/预热，未就绪时自动只用 BM25
+- `js/ai.js`：`_retrieveSections` 改为 hybrid 优先、bigram 兜底；删除 edge-function 语义检索路径；`search_knowledge` 工具与开 sidebar 预热同步改造
+- 生成仍用免费 `glm-4-flash`（nanofab 不受"禁商用 API"约束）
+- 验证：`scripts/test-retrieval.mjs` 实测——"lithography 分辨率极限"(中英混)正确召回"分辨率记录/光学衍射极限/半节距与k1极限"，"为什么芯片越做越小越难"召回摩尔定律/光刻路线图，证明语义检索生效（旧 bigram 在中英混用上完全失效）
+- 影响：pgvector/knowledge-search/嵌入 secret 检索侧已不再使用（待清理）；generate-quiz 仍依赖 pgvector 接地(空表→回退静态题)，每周爬取写入暂未接入客户端索引——均列入后续迁移
+
+
+## 2026-06-14 - RAG 向量库 + AI Agent（四步）
+
+把固定的"语义=bigram 字面检索 + 静态题"升级为"向量 RAG + 动态出题 + tool-use 对话 + 每周自动入库"。部署步骤见 `docs/RAG_AGENT_SETUP.md`。
+
+**① 向量底座（RAG）**
+- `supabase/migrations/20260614000000_knowledge_vectors.sql`：pgvector `knowledge_chunks` 表（教材小节 + 论文同库）、HNSW 余弦索引、RLS、`match_knowledge()` RPC
+- `supabase/functions/_shared/embed.ts` + `scripts/lib/embed.mjs`：统一嵌入助手，模型可配置（默认智谱 embedding-3@1024），入库/查询一致
+- `supabase/functions/knowledge-search/`：鉴权→嵌入查询→向量检索→带出处返回
+- `scripts/ingest-textbook.mjs`：教材按小节(token 与前端一致)嵌入入库
+- `js/ai.js`：`_retrieveSections` 改为语义检索优先、bigram 兜底（修复换说法/中英混用检索不到的问题）
+
+**② 每周爬取前沿（GitHub Actions）**
+- `.github/workflows/ingest-papers.yml`：每周一 cron
+- `scripts/ingest-papers.mjs`：arXiv + OpenAlex（仅元数据+摘要，避开版权全文）→去重→LLM 中文摘要打标→嵌入入库
+- `scripts/lib/llm.mjs` / `scripts/lib/store.mjs`：摘要与入库助手
+
+**③ AI 动态出题**
+- `supabase/functions/generate-quiz/`：基于该章入库原文(RAG 接地) + 画像/弱项/错题生成单选题，服务端校验结构
+- `js/quiz.js`（新模块，混入 App）：按 用户+章节+画像版本 缓存、「换一批」、渲染进现有 quiz 结构、复用评分绑定
+- `app.js`：`initLearningTools` 抽出 `bindQuizQuestions(scope)`（可重绑动态题）；章节加载后触发 `loadDynamicQuiz`
+
+**④ 对话 tool-use（轻量 agent）**
+- `supabase/functions/ai-proxy/`：新增 tools 透传与 `tool_calls` 返回（智谱/DeepSeek）；`_shared/chat.ts` 共享 chat 助手
+- `js/ai.js`：工具 `search_knowledge` / `get_user_trajectory` / `save_note`，`_runToolLoop` 多轮工具回合，来源合并去重渲染引用
+- Gemini 与异常自动回退原路径；`nanofab_ai_tools` / `nanofab_dynamic_quiz` 可关闭
+
+**收尾**
+- `js/ai.js` `_renderCitations`：论文来源(`arxiv:`/`openalex:` token)渲染为外部链接角标(📄)，参考来源区分"教材小节(可跳转)"与"前沿论文(外链)"；styles.css 加 `.ai-cite-paper`
+- 设置面板新增「AI 动态出题」「AI 工具/Agent」开关(index.html + ai.js)，写入 `nanofab_dynamic_quiz` / `nanofab_ai_tools`
+
+**部署状态（已通过 Supabase CLI 执行到生产 sbeklofkvwbkwdaokzcy）**
+- ✅ migration `20260614000000` 已应用（pgvector 表 + RPC，本地/远端一致）
+- ✅ Edge Functions 已部署：knowledge-search、generate-quiz、ai-proxy(更新)
+- ✅ 复用既有 `ZHIPU_API_KEY` 项目密钥；嵌入默认 embedding-3@1024 与表维度一致
+- ⏳ 待办：`npm run ingest:textbook` 灌教材(需 service_role + zhipu key)；GitHub Actions 配 Secrets 后启用每周爬取
+
+**改用免费 Gemini 嵌入（智谱 embedding 需充值，改走零成本路径）**
+- migration `20260614010000_embedding_dim_768.sql`：嵌入维度 1024→768，重建列/HNSW 索引/`match_knowledge`(已应用)
+- secret 设为 `EMBEDDING_PROVIDER=gemini` `EMBEDDING_MODEL=text-embedding-004` `EMBEDDING_DIM=768`
+- 新增服务端一次性灌入：`supabase/functions/ingest-admin/`(共享密钥保护)+ `scripts/post-ingest.mjs` + `scripts/lib/parse-textbook.mjs`(本地解析 236 节、服务端嵌入入库，本地免密钥)
+- 灌入路径已验证打通；仅差 `GEMINI_API_KEY`(免费)未配，配后重跑即可灌满
+
 ## 2026-05-31 - 学习报告：一键预览 + 浏览器原生 Save as PDF
 
 学生入口：用户资料弹窗 → 「导出学习报告」 → 预览 → 「下载/打印 PDF」（走浏览器原生打印对话框，可保存 PDF / 直接打印）。无需任何 PDF 库，Noto Serif/Sans SC 字体直接矢量打印。

@@ -36,7 +36,7 @@ serve(async (req: Request) => {
       );
     }
 
-    const { provider, model, messages, temperature, max_tokens, web_search } = await req.json();
+    const { provider, model, messages, temperature, max_tokens, web_search, tools } = await req.json();
 
     if (!provider || !messages?.length) {
       return new Response(
@@ -45,7 +45,7 @@ serve(async (req: Request) => {
       );
     }
 
-    let result: { content: string; error?: string; search?: any[] };
+    let result: { content: string; error?: string; search?: any[]; tool_calls?: any[] };
 
     switch (provider) {
       case "zhipu": {
@@ -60,10 +60,12 @@ serve(async (req: Request) => {
           temperature: temperature ?? 0.7,
           max_tokens: max_tokens ?? 1500,
         };
-        // 开启联网搜索：返回真实网页/论文等外部参考来源
-        if (web_search) {
-          body.tools = [{ type: "web_search", web_search: { enable: true, search_result: true } }];
-        }
+        // 联网搜索 + 函数工具(tool-use) 都通过 tools 数组传入
+        const toolList: unknown[] = [];
+        if (web_search) toolList.push({ type: "web_search", web_search: { enable: true, search_result: true } });
+        if (Array.isArray(tools)) toolList.push(...tools);
+        if (toolList.length) body.tools = toolList;
+
         const resp = await fetch("https://open.bigmodel.cn/api/paas/v4/chat/completions", {
           method: "POST",
           headers: {
@@ -73,8 +75,10 @@ serve(async (req: Request) => {
           body: JSON.stringify(body),
         });
         const data = await resp.json();
-        if (resp.ok && data.choices?.[0]?.message?.content) {
-          result = { content: data.choices[0].message.content };
+        const msg = data.choices?.[0]?.message;
+        if (resp.ok && msg) {
+          result = { content: msg.content || "" };
+          if (Array.isArray(msg.tool_calls) && msg.tool_calls.length) result.tool_calls = msg.tool_calls;
           if (Array.isArray(data.web_search) && data.web_search.length) {
             result.search = data.web_search.map((r: any) => ({
               title: r.title || "",
@@ -105,11 +109,14 @@ serve(async (req: Request) => {
             messages,
             temperature: temperature ?? 0.7,
             max_tokens: max_tokens ?? 1500,
+            ...(Array.isArray(tools) && tools.length ? { tools } : {}),
           }),
         });
         const data = await resp.json();
-        if (resp.ok && data.choices?.[0]?.message?.content) {
-          result = { content: data.choices[0].message.content };
+        const dsMsg = data.choices?.[0]?.message;
+        if (resp.ok && dsMsg) {
+          result = { content: dsMsg.content || "" };
+          if (Array.isArray(dsMsg.tool_calls) && dsMsg.tool_calls.length) result.tool_calls = dsMsg.tool_calls;
         } else {
           result = { content: "", error: data.error?.message || "DeepSeek API error" };
         }

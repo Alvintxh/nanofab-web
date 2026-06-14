@@ -800,7 +800,32 @@ const App = {
             });
         });
 
-        document.querySelectorAll('.quiz-options').forEach(optionsContainer => {
+        this.bindQuizQuestions(document);
+
+        document.querySelectorAll('.exercise-hint-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const hint = btn.nextElementSibling;
+                if (hint.classList.contains('hidden')) {
+                    hint.classList.remove('hidden');
+                    btn.textContent = '隐藏提示';
+                } else {
+                    hint.classList.add('hidden');
+                    btn.textContent = '查看提示';
+                }
+            });
+        });
+
+        // 章节内容已就绪 → 尝试用 AI 按画像/轨迹生成动态题目（带缓存，失败则保留静态题）
+        if (this.state.currentChapter) {
+            this.loadDynamicQuiz(this.state.currentChapter.id);
+        }
+    },
+
+    // 绑定 quiz 评分逻辑（可对动态注入的新题重复调用；dataset.bound 防重复）
+    bindQuizQuestions(scope) {
+        (scope || document).querySelectorAll('.quiz-options').forEach(optionsContainer => {
+            if (optionsContainer.dataset.bound === '1') return;
+            optionsContainer.dataset.bound = '1';
             const questionEl = optionsContainer.closest('.quiz-question');
             const feedbackEl = questionEl.querySelector('.quiz-feedback');
             const correctAnswer = feedbackEl.dataset.correct;
@@ -869,19 +894,6 @@ const App = {
                     this.checkQuizCompletion();
                 });
             }
-        });
-
-        document.querySelectorAll('.exercise-hint-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const hint = btn.nextElementSibling;
-                if (hint.classList.contains('hidden')) {
-                    hint.classList.remove('hidden');
-                    btn.textContent = '隐藏提示';
-                } else {
-                    hint.classList.add('hidden');
-                    btn.textContent = '查看提示';
-                }
-            });
         });
     },
 
@@ -1810,6 +1822,8 @@ const App = {
 Object.assign(App, BehaviorModule);
 Object.assign(App, AIModule);
 Object.assign(App, AuthModule);
+Object.assign(App, QuizModule);
+Object.assign(App, RetrieverModule);
 
 document.addEventListener('DOMContentLoaded', () => {
     App.init();

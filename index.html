@@ -1023,6 +1023,18 @@
                     </div>
                     
                     <p class="ai-settings-hint">API Key 仅存储在本地浏览器中，不会上传到服务器。</p>
+
+                    <div class="ai-settings-toggles" style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+                        <label class="ai-toggle-row" style="display:flex;align-items:center;gap:8px;font-size:0.875rem;cursor:pointer;">
+                            <input type="checkbox" id="toggle-dynamic-quiz" checked>
+                            <span>AI 动态出题（按你的画像/轨迹每章生成题目）</span>
+                        </label>
+                        <label class="ai-toggle-row" style="display:flex;align-items:center;gap:8px;font-size:0.875rem;cursor:pointer;">
+                            <input type="checkbox" id="toggle-ai-tools" checked>
+                            <span>AI 工具 / Agent（让 AI 自主检索资料、读取学习轨迹、记笔记）</span>
+                        </label>
+                    </div>
+
                     <button id="save-api-key" class="btn btn-primary btn-sm">保存</button>
                 </div>
             </div>
@@ -1097,6 +1109,8 @@
     <script src="js/auth.js"></script>
     <script src="js/behavior.js"></script>
     <script src="js/ai.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/retriever.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

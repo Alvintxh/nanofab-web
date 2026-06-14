@@ -327,7 +327,10 @@ const AIModule = {
         if (!container) return;
         const map = {};
         (sources || []).forEach(s => { if (s && s.token) map[s.token] = s; });
-        const re = /\[\[\s*([a-zA-Z0-9]+-s\d+)\s*\]\]/g;
+        const isPaper = (ref, token) => (ref && (ref.sourceType === 'paper' || (ref.url && !ref.chapterId)))
+            || /^(arxiv|openalex):/i.test(token || '');
+        // 同时匹配教材 token(chXX-sN) 与论文 token(arxiv:xxx / openalex:xxx)
+        const re = /\[\[\s*([A-Za-z0-9][\w.:/-]*)\s*\]\]/g;
         const used = new Set();
 
         const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
@@ -344,17 +347,29 @@ const AIModule = {
                 if (m.index > last) frag.appendChild(document.createTextNode(str.slice(last, m.index)));
                 const token = m[1];
                 const ref = map[token];
-                const chip = document.createElement('button');
-                chip.type = 'button';
-                chip.className = 'ai-cite';
-                const chapterId = ref ? ref.chapterId : token.split('-')[0];
-                const heading = ref ? ref.heading : '';
-                chip.dataset.chapter = chapterId;
-                if (heading) chip.dataset.heading = heading;
-                chip.textContent = this._chapterNum(chapterId);
-                chip.title = ref ? `${ref.chapterTitle} · ${ref.heading}` : '跳转到来源章节';
-                chip.addEventListener('click', () => this.jumpToSection(chapterId, heading));
-                frag.appendChild(chip);
+                if (isPaper(ref, token)) {
+                    // 论文来源 → 外部链接角标，新窗口打开
+                    const a = document.createElement('a');
+                    a.className = 'ai-cite ai-cite-paper';
+                    a.textContent = '📄';
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    if (ref?.url) a.href = ref.url;
+                    a.title = ref ? `${ref.chapterTitle || '论文'} · ${ref.heading || ''}` : '外部论文来源';
+                    frag.appendChild(a);
+                } else {
+                    const chip = document.createElement('button');
+                    chip.type = 'button';
+                    chip.className = 'ai-cite';
+                    const chapterId = ref ? ref.chapterId : token.split('-')[0];
+                    const heading = ref ? ref.heading : '';
+                    chip.dataset.chapter = chapterId;
+                    if (heading) chip.dataset.heading = heading;
+                    chip.textContent = this._chapterNum(chapterId);
+                    chip.title = ref ? `${ref.chapterTitle} · ${ref.heading}` : '跳转到来源章节';
+                    chip.addEventListener('click', () => this.jumpToSection(chapterId, heading));
+                    frag.appendChild(chip);
+                }
                 used.add(token);
                 last = re.lastIndex;
             }
@@ -362,11 +377,14 @@ const AIModule = {
             textNode.parentNode.replaceChild(frag, textNode);
         });
 
-        // 末尾“参考来源”：列出本回答实际检索/依据的小节，确保来源始终可见
-        if (sources && sources.length) {
+        // 末尾“参考来源”：教材小节(可跳转) 与 前沿论文(外部链接) 分组列出
+        const bookSources = (sources || []).filter(s => !isPaper(s, s.token));
+        const paperSources = (sources || []).filter(s => isPaper(s, s.token));
+
+        if (bookSources.length) {
             const footer = document.createElement('div');
             footer.className = 'ai-sources';
-            const items = sources.map(s =>
+            const items = bookSources.map(s =>
                 `<button type="button" class="ai-source-item" data-chapter="${s.chapterId}" data-heading="${this.escapeHtml(s.heading)}">
                     <span class="ai-source-ch">${this._chapterNum(s.chapterId)}</span>${this.escapeHtml(s.heading)}
                  </button>`
@@ -376,6 +394,21 @@ const AIModule = {
             footer.querySelectorAll('.ai-source-item').forEach(btn => {
                 btn.addEventListener('click', () => this.jumpToSection(btn.dataset.chapter, btn.dataset.heading));
             });
+        }
+
+        if (paperSources.length) {
+            const pf = document.createElement('div');
+            pf.className = 'ai-sources ai-sources-web';
+            const items = paperSources.map(s => {
+                const title = this.escapeHtml(s.heading || s.chapterTitle || '论文');
+                const venue = this.escapeHtml(s.chapterTitle || '');
+                return `<a class="ai-source-item ai-source-web" href="${this.escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
+                    <span class="ai-source-web-icon">📄</span>
+                    <span class="ai-source-web-body"><span class="ai-source-web-title">${title}</span>${venue ? `<span class="ai-source-web-host">${venue}</span>` : ''}</span>
+                 </a>`;
+            }).join('');
+            pf.innerHTML = `<div class="ai-sources-label">前沿论文 · 知识库收录（请自行核实）</div><div class="ai-sources-list">${items}</div>`;
+            container.appendChild(pf);
         }
 
         // 外部参考来源：来自联网搜索的真实网页/论文链接
@@ -425,7 +458,12 @@ const AIModule = {
             const refs = await this._retrieveSections(opts.context || text, this.state.currentChapter?.id);
             const reply = await this.generateAIResponse(text, refs);
             this.removeTypingIndicator();
-            const sources = refs.map(r => ({ token: r.token, chapterId: r.chapterId, chapterTitle: r.chapterTitle, heading: r.heading }));
+            // 预检索 refs + AI 在 tool-use 中自主检索到的来源，合并去重后作为引用
+            const allRefs = [...refs, ...(this._toolSources || [])];
+            const seenTokens = new Set();
+            const sources = allRefs
+                .filter(r => r && r.token && !seenTokens.has(r.token) && seenTokens.add(r.token))
+                .map(r => ({ token: r.token, chapterId: r.chapterId, chapterTitle: r.chapterTitle, heading: r.heading, url: r.url, sourceType: r.sourceType }));
             const webRefs = (this._lastSearchResults || []).slice(0, 5);
             this._appendMessageDOM(reply, 'assistant', { context: opts.context, sources, webRefs });
             this._updateActiveSession(s => s.messages.push({ role: 'assistant', content: reply, context: opts.context, sources, webRefs }));
@@ -514,6 +552,8 @@ const AIModule = {
         if (sidebar) sidebar.classList.add('open');
         if (toggle) toggle.classList.add('hidden');
         if (app) app.classList.add('ai-open');
+        // 用户有意聊天 → 预热本地嵌入模型与索引，提升首问的稠密检索
+        this.preloadEmbedder && this.preloadEmbedder();
     },
 
     closeAISidebar() {
@@ -1236,11 +1276,23 @@ const AIModule = {
                 } else {
                     localStorage.removeItem('gemini_api_key');
                 }
-                
+
+                // 功能开关：动态出题 / AI 工具(Agent)
+                const dq = document.getElementById('toggle-dynamic-quiz');
+                const at = document.getElementById('toggle-ai-tools');
+                if (dq) localStorage.setItem('nanofab_dynamic_quiz', dq.checked ? '1' : '0');
+                if (at) localStorage.setItem('nanofab_ai_tools', at.checked ? '1' : '0');
+
                 this.showToast('设置已保存', 'success');
                 if (settingsPanel) settingsPanel.classList.add('hidden');
             });
         }
+
+        // 同步功能开关的初始勾选状态
+        const dqToggle = document.getElementById('toggle-dynamic-quiz');
+        const atToggle = document.getElementById('toggle-ai-tools');
+        if (dqToggle) dqToggle.checked = localStorage.getItem('nanofab_dynamic_quiz') !== '0';
+        if (atToggle) atToggle.checked = localStorage.getItem('nanofab_ai_tools') !== '0';
 
         const sendMessage = async () => {
             const text = input.value.trim();
@@ -1468,7 +1520,18 @@ const AIModule = {
         return set;
     },
 
+    // Hybrid 本地检索（BM25 + bge 稠密，全部浏览器端，零 API key）优先；失败回退 bigram
     async _retrieveSections(query, currentChapterId, maxSections = 4, charBudget = 7000) {
+        try {
+            const refs = await this._hybridRetrieve(query, maxSections, charBudget);
+            if (refs && refs.length) return refs;
+        } catch (e) {
+            console.warn('hybrid retrieval unavailable, fallback to lexical:', e.message);
+        }
+        return this._retrieveSectionsLexical(query, currentChapterId, maxSections, charBudget);
+    },
+
+    async _retrieveSectionsLexical(query, currentChapterId, maxSections = 4, charBudget = 7000) {
         let sections;
         try { sections = await this.buildContentIndex(); } catch (e) { return []; }
         if (!sections || !sections.length) return [];
@@ -1508,11 +1571,118 @@ const AIModule = {
         return Number.isFinite(n) ? `第${n}章` : '教材';
     },
 
+    // ===== 对话 tool-use（轻量 agent）：仅 OpenAI 兼容 provider（智谱/DeepSeek）=====
+    _toolsOn() { return localStorage.getItem('nanofab_ai_tools') !== '0'; },
+
+    _chatTools() {
+        return [
+            { type: 'function', function: {
+                name: 'search_knowledge',
+                description: '在课程教材与每周更新的前沿论文向量库中检索与问题相关的资料。当需要教材的具体内容、最新研究进展、或对答案不确定时调用。',
+                parameters: { type: 'object', properties: {
+                    query: { type: 'string', description: '检索用的关键词或问题' }
+                }, required: ['query'] } } },
+            { type: 'function', function: {
+                name: 'get_user_trajectory',
+                description: '获取当前用户的学习轨迹数据（笔记、错题、学习进度）。当用户询问自身学习情况、需要个性化建议、或要求列出其笔记/错题时调用。',
+                parameters: { type: 'object', properties: {
+                    scope: { type: 'string', enum: ['notes', 'wrong_answers', 'progress', 'all'], description: '要获取的数据范围' }
+                }, required: ['scope'] } } },
+            { type: 'function', function: {
+                name: 'save_note',
+                description: '把一段内容保存为用户的学习笔记。仅当用户明确要求记笔记/保存时调用。',
+                parameters: { type: 'object', properties: {
+                    content: { type: 'string', description: '笔记内容' },
+                    context: { type: 'string', description: '相关原文或主题，可选' }
+                }, required: ['content'] } } },
+        ];
+    },
+
+    async _executeChatTool(name, args) {
+        if (name === 'search_knowledge') {
+            const query = (args.query || '').trim();
+            if (!query) return '未提供检索词';
+            const refs = await this._retrieveSections(query, this.state.currentChapter?.id, 5).catch(() => []);
+            if (!refs.length) return '未检索到相关资料。';
+            // 记录为本轮来源，供回答后渲染引用角标
+            (this._toolSources = this._toolSources || []).push(...refs);
+            return this._buildReferenceBlock(refs);
+        }
+        if (name === 'get_user_trajectory') {
+            const ctx = this._buildDataContext();
+            return ctx || '暂无学习轨迹数据。';
+        }
+        if (name === 'save_note') {
+            const content = (args.content || '').trim();
+            if (!content) return '笔记内容为空，未保存。';
+            const note = {
+                id: 'note-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+                context: (args.context || '').slice(0, 300),
+                content,
+                chapter: this.state.currentChapter?.id,
+                chapterTitle: this.state.currentChapter?.title,
+                timestamp: new Date().toISOString(),
+            };
+            if (!this.state.behaviorData.notes) this.state.behaviorData.notes = [];
+            this.state.behaviorData.notes.push(note);
+            this.saveBehaviorData(true);
+            this._syncNoteToSupabase && this._syncNoteToSupabase(note);
+            return '已为用户保存为笔记。';
+        }
+        return `未知工具：${name}`;
+    },
+
+    // 直接命中 ai-proxy 的底层调用，返回完整结果（含 tool_calls）
+    async _callEdgeChat(provider, model, messages, opts = {}) {
+        const headers = { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY };
+        const { data: { session } } = await this.supabase.auth.getSession();
+        if (session?.access_token) headers['Authorization'] = `Bearer ${session.access_token}`;
+        const body = {
+            provider, model, messages,
+            temperature: opts.temperature ?? 0.7,
+            max_tokens: opts.maxTokens ?? 1500,
+        };
+        if (opts.tools) body.tools = opts.tools;
+        const resp = await fetch(SUPABASE_URL + '/functions/v1/ai-proxy', {
+            method: 'POST', headers, body: JSON.stringify(body),
+        });
+        if (!resp.ok) throw new Error('ai-proxy http ' + resp.status);
+        return await resp.json();
+    },
+
+    async _runToolLoop(baseMessages, provider, model) {
+        const tools = this._chatTools();
+        const working = baseMessages.slice();
+        for (let round = 0; round < 4; round++) {
+            const data = await this._callEdgeChat(provider, model, working, { tools, maxTokens: 2000, temperature: 0.7 });
+            if (data.error) throw new Error(data.error);
+            const toolCalls = data.tool_calls;
+            if (!toolCalls || !toolCalls.length) {
+                this._logAIQuery(provider, model, working, data.content);
+                return data.content;
+            }
+            working.push({ role: 'assistant', content: data.content || '', tool_calls: toolCalls });
+            for (const tc of toolCalls) {
+                let parsed = {};
+                try { parsed = JSON.parse(tc.function?.arguments || '{}'); } catch (e) { /* 容错 */ }
+                let out;
+                try { out = await this._executeChatTool(tc.function?.name, parsed); }
+                catch (e) { out = '工具执行失败：' + e.message; }
+                working.push({ role: 'tool', tool_call_id: tc.id, content: String(out).slice(0, 6000) });
+            }
+        }
+        // 超过最大轮数 → 去掉工具强制收口
+        const final = await this._callEdgeChat(provider, model, working, { maxTokens: 2000, temperature: 0.7 });
+        this._logAIQuery(provider, model, working, final.content);
+        return final.content || '';
+    },
+
     async generateAIResponse(userMessage, refs = []) {
         const lowerMsg = userMessage.toLowerCase();
         const chapter = this.state.currentChapter;
         const user = this.state.user;
         const provider = localStorage.getItem('ai_provider') || 'zhipu';
+        this._toolSources = [];
 
         const systemPrompt = this.buildSystemPrompt(user, 'chat');
         const messages = [{ role: 'system', content: systemPrompt }];
@@ -1569,6 +1739,10 @@ const AIModule = {
         const model = provider === 'zhipu' ? 'glm-4-flash' : provider === 'gemini' ? 'gemini-2.0-flash' : 'deepseek-chat';
 
         try {
+            // tool-use（智谱/DeepSeek）：让 AI 自主检索向量库 + 按需读轨迹 + 记笔记
+            if (this._toolsOn() && (provider === 'zhipu' || provider === 'deepseek')) {
+                return await this._runToolLoop(messages, provider, model);
+            }
             // 智谱开启联网搜索，补充教材之外的真实外部参考（论文/网页）
             const useSearch = provider === 'zhipu';
             return await this.callAIProvider(provider, model, messages, 2000, 0.7, { webSearch: useSearch });

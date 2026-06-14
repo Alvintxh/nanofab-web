@@ -3571,6 +3571,10 @@ body.resizing {
 }
 .ai-cite::before { content: "§"; margin-right: 2px; opacity: 0.6; }
 .ai-cite:hover { background: var(--color-primary); color: #fff; }
+/* 论文来源角标：外部链接，无 § 前缀 */
+.ai-cite-paper { text-decoration: none; border-color: rgba(157,10,18,0.28); background: rgba(157,10,18,0.07); color: var(--color-accent, #9D0A12); }
+.ai-cite-paper::before { content: none; }
+.ai-cite-paper:hover { background: var(--color-accent, #9D0A12); color: #fff; }
 
 .ai-sources {
     margin-top: 12px;

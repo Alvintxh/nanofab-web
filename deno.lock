@@ -20,7 +20,9 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@supabase/supabase-js@^2.105.3"
+        "npm:@huggingface/transformers@^3.3.0",
+        "npm:@supabase/supabase-js@^2.105.3",
+        "npm:node-html-parser@^6.1.13"
       ]
     }
   }
