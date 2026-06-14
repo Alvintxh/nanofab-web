@@ -1,0 +1,45 @@
+name: 每周抓取微纳制造前沿论文（本地嵌入，写入站点索引）
+
+on:
+  schedule:
+    # 每周一 01:00 UTC（北京时间 09:00）
+    - cron: '0 1 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # 允许把更新后的 papers_index.json 提交回仓库
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 抓取 + 本地 bge 嵌入 → papers_index.json
+        env:
+          # 国内/被墙环境从镜像拉模型；GitHub runner 可直连 huggingface.co，留空即可
+          HF_ENDPOINT: ${{ vars.HF_ENDPOINT }}
+          # 论文中文摘要用免费 glm-4-flash；不配则回退英文原摘要
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'zhipu' }}
+          OPENALEX_MAILTO: ${{ vars.OPENALEX_MAILTO }}
+        run: npm run ingest:papers
+
+      - name: 提交更新
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain content/papers_index.json)" ]]; then
+            git add content/papers_index.json
+            git commit -m "chore: 每周前沿论文索引更新 [skip ci]"
+            git push
+          else
+            echo "无新增论文，跳过提交"
+          fi
